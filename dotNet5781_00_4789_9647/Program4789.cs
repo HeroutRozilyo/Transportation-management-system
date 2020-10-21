@@ -25,6 +25,7 @@ namespace dotNet5781_00_4789_9647
             Console.Write("{0}, welcome to my first console application", name);
         }
         static partial void Welcome9647();
+
     }
     
 }
