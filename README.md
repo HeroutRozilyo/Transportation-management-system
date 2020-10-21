@@ -2,6 +2,6 @@
 <<<<<<< HEAD
 #first student change 9647 
 =======
-Hellow World
+Hellow dog
 >>>>>>> 90e811a027945499dfaa4f5f97522075581bf964
 #try again
