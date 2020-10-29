@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace dotNet5781_01_9647_4789
 {
-    class Enums
+   public enum ACTION
     {
+        ADD_BUS, PICK_BUS, MAINTENANCE, REFUELLING, EXIT = -1
     }
 }
