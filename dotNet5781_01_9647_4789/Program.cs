@@ -76,5 +76,20 @@ namespace dotNet5781_01_9647_4789
     foreach (Bus bus in buses)
     {
          Console.WriteLine(bus);
-            }
-        }
+    }
+  }
+
+  private static Bus findBuses(List<Bus> buses, string registration)
+  { 
+      registration = registration.Replace("-", string.Empty);
+
+       Bus bus = null;
+       foreach (Bus item in buses)
+       {
+          if (item.Registration == registration)
+          {
+                 bus = item;
+          }
+       }
+      return bus;
+  }
