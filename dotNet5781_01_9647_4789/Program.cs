@@ -8,7 +8,7 @@ namespace dotNet5781_01_9647_4789
 {
    class Program
     {
-        static void Main(string[] args)mmmmm
+        static void Main(string[] args)
         {
             List<Bus> buses = new List<Bus>();
             ACTION action;
@@ -16,7 +16,7 @@ namespace dotNet5781_01_9647_4789
             SartEgged(buses, out action, out success);
         }
 
-        private static void SartEgged(List<Bus> buses, out ACTION action, out bool success)
+        //private static void SartEgged(List<Bus> buses, out ACTION action, out bool success)
         {
             do
             {
@@ -93,4 +93,3 @@ namespace dotNet5781_01_9647_4789
        }
       return bus;
   }
-//good luck
