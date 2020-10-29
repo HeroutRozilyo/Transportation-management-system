@@ -52,15 +52,17 @@ namespace dotNet5781_01_9647_4789
                         {
                             printall(buses);
                             string registration = Console.ReadLine();
-                            Bus bus = findBuses(buses, registration);
-                            if (bus != null)
-                            {
-                                Console.WriteLine("the bus is {0} ", bus);
-                            }
-                            else
-                            {
-                                Console.WriteLine("ein kaze!!!");
-                            }
+
+
+                            //Bus bus = findBuses(buses, registration);
+                            //if (bus != null)
+                            //{
+                            //    Console.WriteLine("the bus is {0} ", bus);
+                            //}
+                            //else
+                            //{
+                            //    Console.WriteLine("ein kaze!!!");
+                            //}
                         }
 
                         break;
