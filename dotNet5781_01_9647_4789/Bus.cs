@@ -66,6 +66,8 @@ namespace dotNet5781_01_9647_4789
             }
         }
 
+        public string Registration { get; internal set; }
+
         public Bus()
         {
             Console.WriteLine("give Starting date");

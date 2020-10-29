@@ -1,4 +1,5 @@
-﻿using System;
+﻿using dotNet5781_01_9647_4789;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -30,32 +31,38 @@ namespace dotNet5781_01_9647_4789
                 switch (action)
                 {
                     case ACTION.ADD_BUS:
-                        try
                         {
-                            buses.Add(new Bus());
+                            try
+                            {
+                                buses.Add(new Bus());
+                            }
+                            catch (Exception exception)
+                            {
+                                Console.WriteLine(exception.Message);
+                            }
+                            //print all buses
+                            foreach (Bus bus in buses)
+                            {
+                                Console.WriteLine(bus);
+                            }
                         }
-                        catch (Exception exception)
-                        {
-                            Console.WriteLine(exception.Message);
-                        }
-                        //print all buses
-                        foreach (Bus bus in buses)
-                        {
-                            Console.WriteLine(bus);
-                        }
+               
                         break;
                     case ACTION.PICK_BUS:
-                        printall(buses);
-                        string registration = Console.ReadLine();
-                        //Bus bus = findBuses(buses, registration);
-                        //if (bus != null)
-                        //{
-                        //    Console.WriteLine("the bus is {0} ", bus);
-                        //}
-                        //else
-                        //{
-                        //    Console.WriteLine("ein kaze!!!");
-                        //}
+                        {
+                            printall(buses);
+                            string registration = Console.ReadLine();
+                            Bus bus = findBuses(buses, registration);
+                            if (bus != null)
+                            {
+                                Console.WriteLine("the bus is {0} ", bus);
+                            }
+                            else
+                            {
+                                Console.WriteLine("ein kaze!!!");
+                            }
+                        }
+
                         break;
                     case ACTION.MAINTENANCE:
                         break;
@@ -76,22 +83,23 @@ namespace dotNet5781_01_9647_4789
                 Console.WriteLine(bus);
             }
         }
+
+        private static Bus findBuses(List<Bus> buses, string registration)
+        {
+            registration = registration.Replace("-", string.Empty);
+
+            Bus bus = null;
+            foreach (Bus item in buses)
+            {
+                if (item.Registration == registration)
+                {
+                    bus = item;
+                }
+            }
+            return bus;
+        }
+
     }
 }
 
 
-
-//private static Bus findBuses(List<Bus> buses, string registration)
-//{ 
-//    registration = registration.Replace("-", string.Empty);
-
-//     Bus bus = null;
-//     foreach (Bus item in buses)
-//     {
-//        if (item.Registration == registration)
-//        {
-//               bus = item;
-//        }
-//     }
-//    return bus;
-//}
