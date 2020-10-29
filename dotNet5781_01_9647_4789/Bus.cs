@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace dotNet5781_01_9647_4789
 {
-      public class Bus
+      public class Bus 
     {
         static public int GlobalKM { get; private set; }
         private const int FULLTANK = 1200;
@@ -14,8 +14,8 @@ namespace dotNet5781_01_9647_4789
         public readonly DateTime StartingDate;
         private string license;
         private int km;
-
-        public DateTime Checkup { get; private set; }
+       public int NewKm { get; set; }
+        public DateTime Checkup { get; /*private*/ set; }
         public int Fuel { get; set; }
         public int Km
         {
@@ -78,6 +78,12 @@ namespace dotNet5781_01_9647_4789
             }
             Console.WriteLine("give license number");
             License = Console.ReadLine();
+        }
+
+        public Bus(Bus a)
+        {
+            license = a.license;
+            StartingDate = a.StartingDate;
         }
 
         public override string ToString()
