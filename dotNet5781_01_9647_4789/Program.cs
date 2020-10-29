@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace dotNet5781_01_9647_4789
 {
-   class Program
+    class Program
     {
         static void Main(string[] args)
         {
@@ -16,7 +16,7 @@ namespace dotNet5781_01_9647_4789
             SartEgged(buses, out action, out success);
         }
 
-        //private static void SartEgged(List<Bus> buses, out ACTION action, out bool success)
+        private static void SartEgged(List<Bus> buses, out ACTION action, out bool success)
         {
             do
             {
@@ -47,15 +47,15 @@ namespace dotNet5781_01_9647_4789
                     case ACTION.PICK_BUS:
                         printall(buses);
                         string registration = Console.ReadLine();
-                        Bus bus = findBuses(buses, registration);
-                        if (bus != null)
-                        {
-                            Console.WriteLine("the bus is {0} ", bus);
-                        }
-                        else
-                        {
-                            Console.WriteLine("ein kaze!!!");
-                        }
+                        //Bus bus = findBuses(buses, registration);
+                        //if (bus != null)
+                        //{
+                        //    Console.WriteLine("the bus is {0} ", bus);
+                        //}
+                        //else
+                        //{
+                        //    Console.WriteLine("ein kaze!!!");
+                        //}
                         break;
                     case ACTION.MAINTENANCE:
                         break;
@@ -68,28 +68,30 @@ namespace dotNet5781_01_9647_4789
                 }
             } while (action != ACTION.EXIT);
         }
+
+        private static void printall(List<Bus> buses)
+        {
+            foreach (Bus bus in buses)
+            {
+                Console.WriteLine(bus);
+            }
+        }
     }
 }
 
-  private static void printall(List<Bus> buses)
-  {
-    foreach (Bus bus in buses)
-    {
-         Console.WriteLine(bus);
-    }
-  }
 
-  private static Bus findBuses(List<Bus> buses, string registration)
-  { 
-      registration = registration.Replace("-", string.Empty);
 
-       Bus bus = null;
-       foreach (Bus item in buses)
-       {
-          if (item.Registration == registration)
-          {
-                 bus = item;
-          }
-       }
-      return bus;
-  }
+//private static Bus findBuses(List<Bus> buses, string registration)
+//{ 
+//    registration = registration.Replace("-", string.Empty);
+
+//     Bus bus = null;
+//     foreach (Bus item in buses)
+//     {
+//        if (item.Registration == registration)
+//        {
+//               bus = item;
+//        }
+//     }
+//    return bus;
+//}
