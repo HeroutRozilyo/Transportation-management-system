@@ -14,10 +14,15 @@ namespace dotNet5781_01_9647_4789
         public readonly DateTime StartingDate;
         private string license;
         private int km;
+        private int NweKm;
 
-        public DateTime Checkup { get; private set; }
+        public DateTime Checkup { get;  set; }
         public int Fuel { get; set; }
-        public int Km
+        public int NEWKm
+        {
+            get; set;
+        }
+        public int Km 
         {
             get { return km; }
             set
@@ -76,6 +81,12 @@ namespace dotNet5781_01_9647_4789
             }
             Console.WriteLine("give license number");
             License = Console.ReadLine();
+            
+        }
+        public Bus(Bus a)
+        {
+            license = a.license;
+            StartingDate = a.StartingDate;
         }
 
         public override string ToString()
