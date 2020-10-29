@@ -45,6 +45,17 @@ namespace dotNet5781_01_9647_4789
                         }
                         break;
                     case ACTION.PICK_BUS:
+                        printall(buses);
+                        string registration = Console.ReadLine();
+                        Bus bus = findBuses(buses, registration);
+                        if (bus != null)
+                        {
+                            Console.WriteLine("the bus is {0} ", bus);
+                        }
+                        else
+                        {
+                            Console.WriteLine("ein kaze!!!");
+                        }
                         break;
                     case ACTION.MAINTENANCE:
                         break;
@@ -59,3 +70,11 @@ namespace dotNet5781_01_9647_4789
         }
     }
 }
+
+  private static void printall(List<Bus> buses)
+  {
+    foreach (Bus bus in buses)
+    {
+         Console.WriteLine(bus);
+            }
+        }
