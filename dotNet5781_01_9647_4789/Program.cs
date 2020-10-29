@@ -1,4 +1,5 @@
-﻿using System;
+﻿using dotNet5781_01_9647_4789;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace dotNet5781_01_9647_4789
 {
-   class Program
+    class Program
     {
         static void Main(string[] args)
         {
@@ -68,28 +69,30 @@ namespace dotNet5781_01_9647_4789
                 }
             } while (action != ACTION.EXIT);
         }
+        private static void printall(List<Bus> buses)
+        {
+            foreach (Bus bus in buses)
+            {
+                Console.WriteLine(bus);
+            }
+        }
+        private static Bus findBuses(List<Bus> buses, string registration)
+        {
+            registration = registration.Replace("-", string.Empty);
+
+            Bus bus = null;
+            foreach (Bus item in buses)
+            {
+                if (item.Registration == registration)
+                {
+                    bus = item;
+                }
+            }
+            return bus;
+        }
+
     }
 }
 
-  private static void printall(List<Bus> buses)
-  {
-    foreach (Bus bus in buses)
-    {
-         Console.WriteLine(bus);
-    }
-  }
 
-  private static Bus findBuses(List<Bus> buses, string registration)
-  { 
-      registration = registration.Replace("-", string.Empty);
 
-       Bus bus = null;
-       foreach (Bus item in buses)
-       {
-          if (item.Registration == registration)
-          {
-                 bus = item;
-          }
-       }
-      return bus;
-  }
