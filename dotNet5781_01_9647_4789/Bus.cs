@@ -8,6 +8,8 @@ namespace dotNet5781_01_9647_4789
 {
       public class Bus
     {
+        //----------
+        // Variable definition
         static public int GlobalKM { get; private set; }
         private const int FULLTANK = 1200;
 
@@ -15,7 +17,9 @@ namespace dotNet5781_01_9647_4789
         private string license;
         private int km;
         private int NweKm;
-
+        
+        //------
+        // set and get from our variable
         public DateTime Checkup { get;  set; }
         public int Fuel { get; set; }
         public int NEWKm
@@ -35,11 +39,13 @@ namespace dotNet5781_01_9647_4789
         }
         public string License
         {
+            //----
+            //in order to find if our license need be 7 or 8 numbers. according to yesr of product.
             get
             {
                 string firstpart, middlepart, endpart;
                 string result;
-                if (license.Length == 7)
+                if (license.Length == 7) 
                 {
                     // xx-xxx-xx
                     firstpart = license.Substring(0, 2);
@@ -71,7 +77,7 @@ namespace dotNet5781_01_9647_4789
             }
         }
 
-        public Bus()
+        public Bus() //in order to receive bus
         {
             Console.WriteLine("give Starting date");
             bool success = DateTime.TryParse(Console.ReadLine(), out StartingDate);
@@ -93,7 +99,10 @@ namespace dotNet5781_01_9647_4789
         {
             return String.Format("license is: {0,-10}, starting date: {1}", License, StartingDate);
         }
-        public DateTime Maintenance()
+
+        //------------
+        ////update the date time after treatment
+        public DateTime Maintenance() 
         {
             Checkup = DateTime.Today;
             return Checkup;
@@ -104,7 +113,7 @@ namespace dotNet5781_01_9647_4789
             return Checkup;
         }
 
-        public void Refuelling(int fuel)
+        public void Refuelling(int fuel) //update the new fuel
         {
             Fuel = FULLTANK;
         }
