@@ -33,11 +33,14 @@ using System.Security.Cryptography.X509Certificates;using System.Text;using Sy
                             }
 
                             break;
-                        }                    case ACTION.PICK_BUS: //in orser to choose bus                        {                            printall(buses);    //print all the bus that we have                            Console.WriteLine("please enter license");                            string registration = Console.ReadLine();   //cin the choice                            int number = r.Next(1,20000);   //to choose a random number for the require drive                            Bus bus = findBuses(buses, registration); //find the bus that the customer choose to use                            if (bus != null ) //we have the bus                            {                                DateTime currentDate = DateTime.Now;                                TimeSpan t = currentDate - bus.Checkup;                                                                                              if ()
+                        }                    case ACTION.PICK_BUS: //in orser to choose bus                        {                            printall(buses);    //print all the bus that we have                            Console.WriteLine("please enter license");                            string registration = Console.ReadLine();   //cin the choice                            int number = r.Next(1,20000);   //to choose a random number for the require drive                            Bus bus = findBuses(buses, registration); //find the bus that the customer choose to use                            if (bus != null ) //we have the bus                            {
+                                DateTime dateNow = DateTime.Now;
+                                TimeSpan t = dateNow - bus.lastTreat;
+
+                                if (t.Days > 365) //if past more time than one year from the last treatment the bus cant be use and need go to treatment
                                 {
                                     Console.WriteLine("ERROR- the bus need go to treatment ");
                                     break;
-
                                 }
                                 if (number + bus.Km > 0 && number + bus.Km < 20000) //if the bus can take this travel
                                 {
@@ -73,7 +76,7 @@ using System.Security.Cryptography.X509Certificates;using System.Text;using Sy
             if (a == "1") //we need treat the bus
             {
                 DateTime currentDate = DateTime.Now;
-               bus.Checkup = currentDate;
+               bus.lastTreat = currentDate;
                 bus.NEWKm = bus.Km;
             }
         }

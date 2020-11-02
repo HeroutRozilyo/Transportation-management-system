@@ -20,7 +20,7 @@ namespace dotNet5781_01_9647_4789
         
         //------
         // set and get from our variable
-        public DateTime Checkup { get;  set; }
+        public DateTime lastTreat { get;  set; }
         public int Fuel { get; set; }
         public int NEWKm
         {
@@ -104,13 +104,13 @@ namespace dotNet5781_01_9647_4789
         ////update the date time after treatment
         public DateTime Maintenance() 
         {
-            Checkup = DateTime.Today;
-            return Checkup;
+            lastTreat = DateTime.Today;
+            return lastTreat;
         }
         public DateTime Maintenance(DateTime checkup)
         {
-            Checkup = checkup;
-            return Checkup;
+            lastTreat = checkup;
+            return lastTreat;
         }
 
         public void Refuelling(int fuel) //update the new fuel
