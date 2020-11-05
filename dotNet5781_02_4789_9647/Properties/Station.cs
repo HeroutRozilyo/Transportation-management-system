@@ -11,6 +11,7 @@ namespace dotNet5781_02_4789_9647.Properties
     /// </summary>
     public class Station
     {
+        //try
         private const int MAXDIGITS = 1000000;
         private const int MIN_LAT = -90;
         private const int MAX_LAT = 90;
