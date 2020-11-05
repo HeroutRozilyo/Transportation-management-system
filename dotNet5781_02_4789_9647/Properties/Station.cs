@@ -11,16 +11,17 @@ namespace dotNet5781_02_4789_9647.Properties
     /// </summary>
     public class Station
     {
-        //try
+       
         private const int MAXDIGITS = 1000000;
         private const int MIN_LAT = -90;
         private const int MAX_LAT = 90;
         private const int MIN_LON = -180;
         private const int MAX_LON = 180;
-
-        private static List<int> serials = new List<int>();
+        
+        private static List<int> numberofstation = new List<int>();
 
         private int busStationKey;
+
         private double latitude;
         private double longitude;
 
@@ -33,7 +34,7 @@ namespace dotNet5781_02_4789_9647.Properties
 
             set
             {
-                if (serials.Contains(value))
+                if (numberofstation.Contains(value))
                 {
                     throw new ArgumentException(
                         String.Format("{0} key number exists allready", value));
@@ -44,7 +45,7 @@ namespace dotNet5781_02_4789_9647.Properties
                        String.Format("{0} is not a valid key number", value));
                 }
                 busStationKey = value;
-                serials.Add(BusStationKey);
+                numberofstation.Add(BusStationKey);
             }
         }
 
@@ -87,7 +88,7 @@ namespace dotNet5781_02_4789_9647.Properties
 
         public override string ToString()
         {
-            String result = "BusStation Code: " + busStationKey;
+            String result = "Bus Station Code: " + busStationKey;
             result += String.Format(", {0}°{1} {2}°{3}",
                 Math.Abs(Latitude), (Latitude > 0) ? "N" : "S",
                 Math.Abs(Longitude), (Longitude > 0) ? "E" : "W");

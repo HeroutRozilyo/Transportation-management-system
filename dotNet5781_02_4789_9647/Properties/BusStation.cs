@@ -6,8 +6,24 @@ using System.Threading.Tasks;
 
 namespace dotNet5781_02_4789_9647.Properties
 {
-    class BusStation
+    public class BusStation : Station
     {
-        //try
+
+        /// <summary>
+        /// distance from previous BusStation
+        /// </summary>
+        public double Distance { get; set; }
+        /// <summary>
+        /// Travel time from previous BusStation
+        /// </summary>
+        public TimeSpan TravelTime { get; set; }
+
+
+        public override string ToString()
+        {
+
+            //TODO
+            return base.ToString();
+        }
     }
 }

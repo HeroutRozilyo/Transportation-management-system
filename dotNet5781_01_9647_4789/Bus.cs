@@ -16,7 +16,7 @@ namespace dotNet5781_01_9647_4789
         public readonly DateTime StartingDate;
         private string license;
         private int km;
-        private int NweKm;
+        private int NewKm;
         
         //------
         // set and get from our variable
