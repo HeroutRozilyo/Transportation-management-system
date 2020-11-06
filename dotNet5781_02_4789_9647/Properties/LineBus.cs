@@ -144,6 +144,26 @@ namespace dotNet5781_02_4789_9647.Properties
             return -1;
         }
 
+        public bool pathstation(BusStation bStation)
+        {
+            int temp = find(bStation);
+            if (temp == -1)
+                return false;
+            else
+                return true;
+        }
+
+        public double distance(BusStation bStation1, BusStation bStation2)
+        {
+            double x1, x2, y1, y2;
+           
+
+
+
+
+            return 0.1;
+        }
+
 
 
 
