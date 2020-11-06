@@ -62,10 +62,11 @@ namespace dotNet5781_02_4789_9647.Properties
                 }
                 if (index == busstations.Count)
                 {
-                    //LastStation = busstations[busstations.Count - 1];
-                    AddLast(busStation);
+                     busstations.Insert(index, busStation);
+                    LastStation = busstations[busstations.Count - 1];
+                    //AddLast(busStation);
                 }
-                else
+                else 
                 {
                     busstations.Insert(index, busStation);
                 }
@@ -74,24 +75,32 @@ namespace dotNet5781_02_4789_9647.Properties
             }
         }
 
-        //public interface IEnumerator
-        //{
-        //    IEnumerator GetEnumerator();
-        //}
         public override string ToString()
         {
-            String result = "The Bus station is: " + NumberID;
-            result += String.Format("The area is", area, "Number of the Bus station: ", );
+            string result=" ";
+            for(int i=0;i<busstations.Count-1;i++)
+            {
+                result+= busstations[i].BusStationKey+"  ";
 
-                
+            }
 
-
-            return result;
-
-            //return base.ToString();
+            return "Bus Line: "+NumberID, ",Area: "+area, ",Statins of the bus: "+result;
+               
         }
 
-        IEnumerable a = 
+         public void DelLast(BusStation busStation)
+        {
+              busstations.Add(busStation);
+            LastStation = busstations[busstations.Count - 1];
+        }
+          public void DelFirst(BusStation busStation)
+        {
+        }
+        public void Del(int index, BusStation busStation)
+        {
+        }
+
+       
     }
 
 }
