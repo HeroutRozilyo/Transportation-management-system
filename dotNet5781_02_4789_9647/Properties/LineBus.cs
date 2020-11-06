@@ -90,17 +90,60 @@ namespace dotNet5781_02_4789_9647.Properties
 
         }
 
-        public void DelLast(BusStation busStation)
+        public void DelLast(BusStation bStation)
         {
             LastStation = busstations[busstations.Count - 2];
-            busstations.Remove(busStation);
+            busstations.Remove(bStation);
         }
         public void DelFirst(BusStation busStation)
         {
+            busstations.RemoveAt(0);
+            FirstStation = busstations[0];
         }
-        public void Del(int index, BusStation busStation)
+        public void Del(BusStation bStation)
         {
+            int index = find(bStation);
+
+            if (index == 0)
+            {
+                DelFirst(bStation);
+            }
+            else
+            {
+                if (index==-1)
+                {
+                    throw new ArgumentOutOfRangeException("index", "index should be less than or equal to" + busstations.Count);
+                }
+
+                if (index == busstations.Count-1)
+                {
+                    DelLast(bStation);
+                }
+                else
+                {
+                    busstations.RemoveAt(index);
+                }
+
+
+            }
+
         }
+
+        public int find(BusStation bStation)
+        {
+
+            int i = 0;
+            for (; i < busstations.Count - 1; i++)
+            {
+                if(busstations[i]==bStation)
+                {
+                    return i;
+                }
+
+            }
+            return -1;
+        }
+
 
 
 
