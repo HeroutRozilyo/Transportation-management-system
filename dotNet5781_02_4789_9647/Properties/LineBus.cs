@@ -62,11 +62,10 @@ namespace dotNet5781_02_4789_9647.Properties
                 }
                 if (index == busstations.Count)
                 {
-                     busstations.Insert(index, busStation);
-                    LastStation = busstations[busstations.Count - 1];
-                    //AddLast(busStation);
+                    //LastStation = busstations[busstations.Count - 1];
+                    AddLast(busStation);
                 }
-                else 
+                else
                 {
                     busstations.Insert(index, busStation);
                 }
@@ -75,32 +74,42 @@ namespace dotNet5781_02_4789_9647.Properties
             }
         }
 
+      
         public override string ToString()
         {
-            string result=" ";
-            for(int i=0;i<busstations.Count-1;i++)
+
+            string result = " ";
+            int i = 0;
+            for (; i < busstations.Count - 1; i++)
             {
-                result+= busstations[i].BusStationKey+"  ";
+                result += busstations[i].BusStationKey + "  ";
 
             }
+            result += busstations[i].BusStationKey;
+            return "Bus Line: " + NumberID+ " ,Area: " + area+ " ,Statins of the bus: " + result;
 
-            return "Bus Line: "+NumberID, ",Area: "+area, ",Statins of the bus: "+result;
-               
         }
 
-         public void DelLast(BusStation busStation)
+        public void DelLast(BusStation busStation)
         {
-              busstations.Add(busStation);
-            LastStation = busstations[busstations.Count - 1];
+            LastStation = busstations[busstations.Count - 2];
+            busstations.Remove(busStation);
         }
-          public void DelFirst(BusStation busStation)
+        public void DelFirst(BusStation busStation)
         {
         }
         public void Del(int index, BusStation busStation)
         {
         }
 
-       
-    }
 
+
+
+
+
+
+    }
+   
 }
+
+
