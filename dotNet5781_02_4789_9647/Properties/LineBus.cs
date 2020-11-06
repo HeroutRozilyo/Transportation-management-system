@@ -74,24 +74,42 @@ namespace dotNet5781_02_4789_9647.Properties
             }
         }
 
-        //public interface IEnumerator
-        //{
-        //    IEnumerator GetEnumerator();
-        //}
+      
         public override string ToString()
         {
-            String result = "The Bus station is: " + NumberID;
-            result += String.Format("The area is", area, "Number of the Bus station: ", );
 
-                
+            string result = " ";
+            int i = 0;
+            for (; i < busstations.Count - 1; i++)
+            {
+                result += busstations[i].BusStationKey + "  ";
 
+            }
+            result += busstations[i].BusStationKey;
+            return "Bus Line: " + NumberID+ " ,Area: " + area+ " ,Statins of the bus: " + result;
 
-            return result;
-
-            //return base.ToString();
         }
 
-        IEnumerable a = 
-    }
+        public void DelLast(BusStation busStation)
+        {
+            busstations.Add(busStation);
+            LastStation = busstations[busstations.Count - 1];
+        }
+        public void DelFirst(BusStation busStation)
+        {
+        }
+        public void Del(int index, BusStation busStation)
+        {
+        }
 
+
+
+
+
+
+
+    }
+   
 }
+
+
