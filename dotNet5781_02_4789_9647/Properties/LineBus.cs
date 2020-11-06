@@ -92,8 +92,8 @@ namespace dotNet5781_02_4789_9647.Properties
 
         public void DelLast(BusStation busStation)
         {
-            busstations.Add(busStation);
-            LastStation = busstations[busstations.Count - 1];
+            LastStation = busstations[busstations.Count - 2];
+            busstations.Remove(busStation);
         }
         public void DelFirst(BusStation busStation)
         {
