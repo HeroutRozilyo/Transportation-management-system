@@ -4,13 +4,14 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
-using System.Device.Location;
 
 
-    namespace dotNet5781_02_4789_9647.Properties
-    {
-        public class BusStation : Station
-        {
+
+
+ namespace dotNet5781_02_4789_9647.Properties
+ {
+      public class BusStation : Station
+      {
 
             /// <summary>
             /// distance from previous BusStation
@@ -20,8 +21,13 @@ using System.Device.Location;
                 get { return Distance; }
 
 
-                set
-                {
+               set
+               {
+               
+              
+
+
+
 
 
 
@@ -60,3 +66,4 @@ using System.Device.Location;
             }
         }
     }
+
