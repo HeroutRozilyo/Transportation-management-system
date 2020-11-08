@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace dotNet5781_02_4789_9647
 {
-    public class BusCompany :IEnumerable
+    public class BusCompany :IEnumerable<LineBus>
     {
         private List<LineBus> companyBus;
 
@@ -17,9 +17,14 @@ namespace dotNet5781_02_4789_9647
             companyBus = new List<LineBus>();
         }
 
-        IEnumerator GetEnumerator()
+        IEnumerator<LineBus> IEnumerable<LineBus>.GetEnumerator()
         {
+            throw new NotImplementedException();
+        }
 
+        System.Collections.IEnumerator IEnumerable.GetEnumerator()
+        {
+            throw new NotImplementedException();
         }
 
         public interface IEnumerator
