@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace dotNet5781_02_4789_9647.Properties
 {
-    public class LineBus 
+    public class LineBus :IComparable
     {
 
         private List<BusStation> busstations = new List<BusStation>();
@@ -167,7 +167,7 @@ namespace dotNet5781_02_4789_9647.Properties
 
         public TimeSpan stationTravelTime(BusStation bStation1, BusStation bStation2)
         {
-            TimeSpan timeSpan;
+            TimeSpan timeSpan = TimeSpan.Zero;
             int begin = find(bStation1);
             int end = find(bStation2);
             for (int i = begin + 1; i <= end; i++)
@@ -178,12 +178,41 @@ namespace dotNet5781_02_4789_9647.Properties
             return timeSpan;
         }
 
+        public LineBus pathbetweenStation(BusStation bStation1, BusStation bStation2)
+        {
+            int begin = find(bStation1);
+            int end = find(bStation2);
+            LineBus temp=new LineBus();
+            int j = 0;
+            for(int i=begin;i<=end;i++)
+            {
+                temp.busstations.Insert(j, busstations[i]);
+                 j++;
+            }
+
+            return temp;
+        }
+
+        //public LineBus compareLines(LineBus BLine1, LineBus BLine2)
+        //{
+        //    TimeSpan timeSpan= stationTravelTime(BLine1.busstations[0],BLine1.busstations[BLine1.busstations.Count()-1]);
 
 
+        //    for ()
+
+        //}
+
+        public TimeSpan TravelLine(LineBus BLine1)
+        {
+           TimeSpan timeSpan = stationTravelTime(BLine1.busstations[0], BLine1.busstations[BLine1.busstations.Count() - 1]);
+            return timeSpan;
+        }
 
 
-
-
+        public int CompareTo(object obj)
+        {
+            return CompareTo(((LineBus)obj).TravelLine(this));
+        }
     }
    
 }
