@@ -1,47 +1,41 @@
-﻿using System;
+﻿using dotNet5781_02_4789_9647.Properties;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace dotNet5781_02_4789_9647.Properties
+namespace dotNet5781_02_4789_9647
 {
-    public class BusCompany : IEnumerable<Bus>
+    public class BusCompany :IEnumerable
     {
-        private List<int> numbers = new List<int>();
-
-        private List<Bus> busses;
+        private List<LineBus> companyBus;
 
         public BusCompany()
         {
-            busses = new List<Bus>();
+            companyBus = new List<LineBus>();
         }
-        public void Add(Bus bus)
+
+        IEnumerator GetEnumerator()
         {
-            if (numbers.Count != 0 && numbers.Contains(bus.Mispar))
-            {
-                throw new ArgumentException("mispar kvar kayam bachevra");
-            }
-            busses.Add(bus);
-            numbers.Add(bus.Mispar);
+
         }
 
-        public IEnumerator<Bus> GetEnumerator()
+        public interface IEnumerator
         {
-            return busses.GetEnumerator();
+            object Current { get; } //need to return the obj
+            bool MoveNext(); //current will point to the right place
+            void Reset();
+
+
         }
 
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return this.GetEnumerator();
-        }
 
-        //private List<BusLine> buses = new List<BusLine>();
 
-        //public List<BusLine> Busses
-        //{
-        //    get { return buses; }
-        //}
+
+
     }
+
+
 }

@@ -193,15 +193,7 @@ namespace dotNet5781_02_4789_9647.Properties
             return temp;
         }
 
-        //public LineBus compareLines(LineBus BLine1, LineBus BLine2)
-        //{
-        //    TimeSpan timeSpan= stationTravelTime(BLine1.busstations[0],BLine1.busstations[BLine1.busstations.Count()-1]);
-
-
-        //    for ()
-
-        //}
-
+    
         public TimeSpan TravelLine(LineBus BLine1)
         {
            TimeSpan timeSpan = stationTravelTime(BLine1.busstations[0], BLine1.busstations[BLine1.busstations.Count() - 1]);
