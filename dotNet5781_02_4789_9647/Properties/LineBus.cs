@@ -167,7 +167,7 @@ namespace dotNet5781_02_4789_9647.Properties
 
         public TimeSpan stationTravelTime(BusStation bStation1, BusStation bStation2)
         {
-            Tim
+            TimeSpan sum = time;
             int begin = find(bStation1);
             int end = find(bStation2);
             for (int i = begin + 1; i <= end; i++)
