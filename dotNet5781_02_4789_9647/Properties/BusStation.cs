@@ -25,18 +25,11 @@ using System.Threading.Tasks;
 
                set
                {
-               
-              
 
-
-
-
-
-
-                    //Random r=new Random();
-                    //double a = r.Next(0, 3000); //3000m
-                    //Distance = a;
-                }
+                Random r = new Random();
+                double a = r.Next(0, 3000); //3000m
+                Distance = a;
+            }
             }
 
 
