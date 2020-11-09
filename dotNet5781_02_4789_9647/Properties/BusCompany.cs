@@ -44,7 +44,7 @@ namespace dotNet5781_02_4789_9647.Properties
             return true;
             
         }
-        public void add(LineBus line1)
+        public void addline(LineBus line1)
         {
             bool find = findLIne(line1);
             
@@ -64,7 +64,7 @@ namespace dotNet5781_02_4789_9647.Properties
             }
             return null;
         }
-        public void delete(int iDLine)
+        public void deleteline(int iDLine)
         {
 
             LineBus a = findHelp(iDLine);
@@ -72,11 +72,16 @@ namespace dotNet5781_02_4789_9647.Properties
             {
                 companyBus.Remove(a);
             }
-            else new ArgumentException(string.Format("{0} NumberLine not exist already", iDLine));
+            else
+                new ArgumentException(string.Format("{0} NumberLine not exist already", iDLine));
 
         }
 
+        
+               
+            
 
+        
 
 
 
@@ -152,3 +157,22 @@ namespace dotNet5781_02_4789_9647.Properties
 
 
 }
+
+
+
+//public BusCompany  WhichBusAtTheStation(int idstation)
+//{
+//    List<int> linesAtTheStation = new List<int>();
+
+//    foreach (LineBus item in companyBus)
+//    {
+//        int i = item.BusStations.Count;
+//        for (int j=0; j<i; j++)
+//        {
+//            if( item.BusStations[j].BusStationKey==idstation)
+//            {
+
+//            }
+
+//        }
+//    }
