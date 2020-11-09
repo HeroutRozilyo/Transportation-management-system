@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace dotNet5781_02_4789_9647.Properties
 {
-    public class LineBus : BusStation, IComparable
+    public class LineBus : BusStation,IComparable
     {
 
         private List<BusStation> busstations = new List<BusStation>();

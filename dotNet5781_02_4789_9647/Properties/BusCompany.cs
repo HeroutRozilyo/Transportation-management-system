@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace dotNet5781_02_4789_9647.Properties
 {
-    public class BusCompany :LineBus, IEnumerable<LineBus>
+    public class BusCompany :LineBus,IEnumerable<LineBus>
     {
-        private List<LineBus> companyBus;
+        private  List<LineBus> companyBus;
 
       //  private List<int> numbers = new List<int>();
 
@@ -19,10 +19,9 @@ namespace dotNet5781_02_4789_9647.Properties
         {
             companyBus = new List<LineBus>();
         }
-
-        public bool findline(LineBus line1)
+        public bool findLIne(LineBus line1)
         {
-            
+           
             foreach(LineBus item in companyBus)
             {
                 if(item.NumberID==line1.NumberID)
@@ -31,57 +30,52 @@ namespace dotNet5781_02_4789_9647.Properties
                     {
                         if (item.LastStation == line1.FirstStation)
                         {
-                            return true;
-
+                           return true;
+                           
                         }
-                        return false;
+                        else return false;
                     }
-                    else
-                        return false;
+                    return false;
+
+                    
                 }
+               
             }
             return true;
+            
         }
-
         public void add(LineBus line1)
         {
-            bool result = findline(line1);
-            if(result)
+            bool find = findLIne(line1);
+            
+            if (find)
             {
                 companyBus.Add(line1);
             }
-            else
-                throw new ArgumentException(
-                     String.Format("{0} Number line exsis allready", line1.NumberID));
+
+            else new ArgumentException(string.Format("{0} NumberLine exist already", line1.NumberID));
         }
-
-
-        public LineBus findhelp(int line1)
+        public LineBus findHelp(int iDLine)
         {
-            foreach (LineBus item in companyBus)
+            foreach(LineBus item in companyBus)
             {
-                if (item.NumberID == line1)
+                if (item.NumberID == iDLine)
                     return item;
             }
             return null;
         }
-
-
-
-
-        public void delline(int idline)
+        public void delete(int iDLine)
         {
-            LineBus a = findhelp(idline);
+
+            LineBus a = findHelp(iDLine);
             if(a!=null)
             {
                 companyBus.Remove(a);
             }
-            else
-                throw new ArgumentException(
-                    String.Format("{0} Number line exsis allready", idline));
+            else new ArgumentException(string.Format("{0} NumberLine not exist already", iDLine));
+
         }
 
-        public void delline(int idbustion)
 
 
 
@@ -92,7 +86,7 @@ namespace dotNet5781_02_4789_9647.Properties
 
 
 
-        public IEnumerator<LineBus> GetEnumerator() => new BusCompanyIEnumator();
+            public IEnumerator<LineBus> GetEnumerator() => new BusCompanyIEnumator();
 
         private class BusCompanyIEnumator : IEnumerator<LineBus>
         {
