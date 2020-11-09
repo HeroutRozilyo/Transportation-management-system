@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace dotNet5781_02_4789_9647.Properties
 {
-    public class BusCompany :IEnumerable<LineBus>
+    public class BusCompany :LineBus, IEnumerable<LineBus>
     {
         private List<LineBus> companyBus;
 
@@ -20,6 +20,68 @@ namespace dotNet5781_02_4789_9647.Properties
             companyBus = new List<LineBus>();
         }
 
+        public bool findline(LineBus line1)
+        {
+            
+            foreach(LineBus item in companyBus)
+            {
+                if(item.NumberID==line1.NumberID)
+                {
+                    if (item.FirstStation == line1.LastStation)
+                    {
+                        if (item.LastStation == line1.FirstStation)
+                        {
+                            return true;
+
+                        }
+                        return false;
+                    }
+                    else
+                        return false;
+                }
+            }
+            return true;
+        }
+
+        public void add(LineBus line1)
+        {
+            bool result = findline(line1);
+            if(result)
+            {
+                companyBus.Add(line1);
+            }
+            else
+                throw new ArgumentException(
+                     String.Format("{0} Number line exsis allready", line1.NumberID));
+        }
+
+
+        public LineBus findhelp(int line1)
+        {
+            foreach (LineBus item in companyBus)
+            {
+                if (item.NumberID == line1)
+                    return item;
+            }
+            return null;
+        }
+
+
+
+
+        public void delline(int idline)
+        {
+            LineBus a = findhelp(idline);
+            if(a!=null)
+            {
+                companyBus.Remove(a);
+            }
+            else
+                throw new ArgumentException(
+                    String.Format("{0} Number line exsis allready", idline));
+        }
+
+        public void delline(int idbustion)
 
 
 
