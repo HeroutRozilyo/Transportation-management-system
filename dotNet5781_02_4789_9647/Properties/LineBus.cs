@@ -214,7 +214,13 @@ namespace dotNet5781_02_4789_9647.Properties
             return timeSpan;
         }
 
-
+        public LineBus Compare(LineBus obj)
+        {
+            int t = this.CompareTo(obj);
+            if (t < 0) return obj;
+            else  return this;
+            
+        }
         public int CompareTo(object obj)
         {
             TimeSpan a = TravelLine((LineBus)obj);

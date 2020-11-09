@@ -45,7 +45,7 @@ namespace dotNet5781_02_4789_9647.Properties
             return true;
             
         }
-        public void addline(LineBus line1)
+        public void add(LineBus line1)
         {
             bool find = findLIne(line1);
             
@@ -65,7 +65,7 @@ namespace dotNet5781_02_4789_9647.Properties
             }
             return null;
         }
-        public void deleteline(int iDLine)
+        public void delete(int iDLine)
         {
 
             LineBus a = findHelp(iDLine);
@@ -73,8 +73,7 @@ namespace dotNet5781_02_4789_9647.Properties
             {
                 companyBus.Remove(a);
             }
-            else
-                new ArgumentException(string.Format("{0} NumberLine not exist already", iDLine));
+            else new ArgumentException(string.Format("{0} NumberLine not exist already", iDLine));
 
         }
         public List<int> WhichBusAtTheSTation(int id)
@@ -89,27 +88,23 @@ namespace dotNet5781_02_4789_9647.Properties
             }
             if (temp == null)
                 throw new ArgumentException(string.Format("{0} Number of station not exist already", id));
-
             else
                 return temp;
         }
-
-
-       
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        public List<int> sortBus()
+        {
+            BusCompany sortList;
+            LineBus smaller = null;
+            foreach (LineBus hisony in companyBus)
+            {
+                
+                foreach (LineBus item in companyBus)
+                {
+                    if()
+                }
+                return
+            }
+        }
 
 
             public IEnumerator<LineBus> GetEnumerator() => new BusCompanyIEnumator();
@@ -178,22 +173,3 @@ namespace dotNet5781_02_4789_9647.Properties
 
 
 }
-
-
-
-//public BusCompany  WhichBusAtTheStation(int idstation)
-//{
-//    List<int> linesAtTheStation = new List<int>();
-
-//    foreach (LineBus item in companyBus)
-//    {
-//        int i = item.BusStations.Count;
-//        for (int j=0; j<i; j++)
-//        {
-//            if( item.BusStations[j].BusStationKey==idstation)
-//            {
-
-//            }
-
-//        }
-//    }
