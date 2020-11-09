@@ -91,19 +91,28 @@ namespace dotNet5781_02_4789_9647.Properties
             else
                 return temp;
         }
-        public List<int> sortBus()
+        public BusCompany sortBus()
         {
-            BusCompany sortList;
+            BusCompany sortList = new BusCompany();
+            BusCompany temp = this;
             LineBus smaller = null;
             foreach (LineBus hisony in companyBus)
             {
-                
+                smaller = hisony;
                 foreach (LineBus item in companyBus)
                 {
-                    if()
+                    LineBus a = smaller.Compare(item);
+                    smaller = a;
+                    
                 }
-                return
+                BusStation findTHis = sortList.findHelp(smaller.NumberID);
+                if(findTHis==null)
+                {
+                    sortList.add(smaller);
+                    temp.delete(smaller.NumberID);
+                }
             }
+            return sortList;
         }
 
 
