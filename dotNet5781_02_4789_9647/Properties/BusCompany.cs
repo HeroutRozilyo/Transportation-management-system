@@ -9,15 +9,71 @@ using System.Threading.Tasks;
 
 namespace dotNet5781_02_4789_9647.Properties
 {
-    public class BusCompany :IEnumerable<LineBus>
+    public class BusCompany :LineBus,IEnumerable<LineBus>
     {
-        private List<LineBus> companyBus;
+        private  List<LineBus> companyBus;
 
       //  private List<int> numbers = new List<int>();
 
         public BusCompany()
         {
             companyBus = new List<LineBus>();
+        }
+        public bool findLIne(LineBus line1)
+        {
+           
+            foreach(LineBus item in companyBus)
+            {
+                if(item.NumberID==line1.NumberID)
+                {
+                    if (item.FirstStation == line1.LastStation)
+                    {
+                        if (item.LastStation == line1.FirstStation)
+                        {
+                           return true;
+                           
+                        }
+                        else return false;
+                    }
+                    return false;
+
+                    
+                }
+               
+            }
+            return true;
+            
+        }
+        public void add(LineBus line1)
+        {
+            bool find = findLIne(line1);
+            
+            if (find)
+            {
+                companyBus.Add(line1);
+            }
+
+            else new ArgumentException(string.Format("{0} NumberLine exist already", line1.NumberID));
+        }
+        public LineBus findHelp(int iDLine)
+        {
+            foreach(LineBus item in companyBus)
+            {
+                if (item.NumberID == iDLine)
+                    return item;
+            }
+            return null;
+        }
+        public void delete(int iDLine)
+        {
+
+            LineBus a = findHelp(iDLine);
+            if(a!=null)
+            {
+                companyBus.Remove(a);
+            }
+            else new ArgumentException(string.Format("{0} NumberLine not exist already", iDLine));
+
         }
 
 
@@ -30,7 +86,7 @@ namespace dotNet5781_02_4789_9647.Properties
 
 
 
-        public IEnumerator<LineBus> GetEnumerator() => new BusCompanyIEnumator();
+            public IEnumerator<LineBus> GetEnumerator() => new BusCompanyIEnumator();
 
         private class BusCompanyIEnumator : IEnumerator<LineBus>
         {
