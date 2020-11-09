@@ -115,8 +115,37 @@ namespace dotNet5781_02_4789_9647.Properties
             return sortList;
         }
 
+        public LineBus this[int index]
+        {
+            set
+            {
+                companyBus[index] = value;
+            }
+            get 
+            {
+                return companyBus[index];
+            }
 
-            public IEnumerator<LineBus> GetEnumerator() => new BusCompanyIEnumator();
+        }
+
+        public LineBus this[LineBus a]
+        {
+            get
+            {
+                for (int i = 0; i < companyBus.Count - 1; i++)
+                {
+                    if (companyBus[i].NumberID == a.NumberID)
+                        return companyBus[i];
+                }
+                return null;
+            }
+
+        }
+
+
+
+
+        public IEnumerator<LineBus> GetEnumerator() => new BusCompanyIEnumator();
 
         private class BusCompanyIEnumator : IEnumerator<LineBus>
         {
