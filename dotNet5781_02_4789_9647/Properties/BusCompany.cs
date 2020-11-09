@@ -91,9 +91,29 @@ namespace dotNet5781_02_4789_9647.Properties
             else
                 return temp;
         }
-   
-
-
+        public BusCompany sortBus()
+        {
+            BusCompany sortList = new BusCompany();
+            BusCompany temp = this;
+            LineBus smaller = null;
+            foreach (LineBus hisony in companyBus)
+            {
+                smaller = hisony;
+                foreach (LineBus item in companyBus)
+                {
+                    LineBus a = smaller.Compare(item);
+                    smaller = a;
+                    
+                }
+                BusStation findTHis = sortList.findHelp(smaller.NumberID);
+                if(findTHis==null)
+                {
+                    sortList.add(smaller);
+                    temp.delete(smaller.NumberID);
+                }
+            }
+            return sortList;
+        }
 
 
             public IEnumerator<LineBus> GetEnumerator() => new BusCompanyIEnumator();
@@ -162,28 +182,3 @@ namespace dotNet5781_02_4789_9647.Properties
 
 
 }
-
-
-
-//public List<LineBus> sortBus()
-//{
-//    int topsmall=-1;
-//    LineBus help;
-//    List<LineBus> temp = new List<LineBus>();
-//    foreach (LineBus item in companyBus)
-//    {
-//        help=helpSortBus(topsmall, item);
-//        temp.Add(help);
-//        topsmall = TravelLine(help);
-//    }
-
-//    return temp;
-//}
-
-//public LineBus helpSortBus(int smallest,LineBus a)
-//{
-//    foreach (LineBus item in companyBus)
-//    {
-
-//    }
-//}
