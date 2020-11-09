@@ -15,9 +15,20 @@ using System.Threading.Tasks;
       public  Station station
         { get; set; }
 
-            /// <summary>
-            /// distance from previous BusStation
-            /// </summary>
+        /// <summary>
+        /// distance from previous BusStation
+        /// </summary>
+        /// 
+
+
+        //private Station blbla;
+        //public Station Blabla
+        //{
+        //    set {  }
+        //    get { return Blabla; }
+        //}
+
+       // private double distance;
             public double Distance
             {
                 get { return Distance; }
@@ -30,7 +41,7 @@ using System.Threading.Tasks;
                 double a = r.Next(0, 3000); //3000m
                 Distance = a;
             }
-            }
+      }
 
 
 
