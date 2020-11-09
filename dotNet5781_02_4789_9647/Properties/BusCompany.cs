@@ -88,16 +88,21 @@ namespace dotNet5781_02_4789_9647.Properties
                 
             }
             if (temp == null)
-                throw
+                throw new ArgumentException(string.Format("{0} Number of station not exist already", id));
+
             else
                 return temp;
         }
 
-        
-               
-            
 
-        
+       
+
+
+
+
+
+
+
 
 
 
