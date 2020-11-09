@@ -12,6 +12,8 @@ using System.Threading.Tasks;
  {
       public class BusStation : Station
       {
+      public  Station station
+        { get; set; }
 
             /// <summary>
             /// distance from previous BusStation
