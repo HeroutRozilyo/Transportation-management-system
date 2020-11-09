@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -75,6 +76,21 @@ namespace dotNet5781_02_4789_9647.Properties
             else
                 new ArgumentException(string.Format("{0} NumberLine not exist already", iDLine));
 
+        }
+        public List<int> WhichBusAtTheSTation(int id)
+        {
+            List<int> temp=null;
+            foreach (LineBus item in companyBus)
+            {
+                bool a = item.findStion(id);
+                    if(a)
+                    temp.Add(item.NumberID);
+                
+            }
+            if (temp == null)
+                throw
+            else
+                return temp;
         }
 
         

@@ -143,6 +143,20 @@ namespace dotNet5781_02_4789_9647.Properties
             }
             return -1;
         }
+        public bool findStion(int id) //return the busstion  of the station
+        {
+
+            int i = 0;
+            for (; i < busstations.Count - 1; i++)
+            {
+                if (busstations[i].BusStationKey == id)
+                {
+                    return true;
+                }
+
+            }
+            return false;
+        }
 
         public bool pathstation(BusStation bStation) //return if the station exsis at the bus path.
         {
