@@ -36,8 +36,6 @@ namespace dotNet5781_02_4789_9647.Properties
         public BusStation LastStation { get; private set; }
         public Zone Zone { get; set; }
 
-        public Enum area { get; set; }
-
         public void AddLast(BusStation busStation)
         {
             busstations.Add(busStation);

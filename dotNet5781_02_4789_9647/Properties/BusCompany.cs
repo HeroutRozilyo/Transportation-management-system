@@ -117,30 +117,21 @@ namespace dotNet5781_02_4789_9647.Properties
 
         public LineBus this[int index]
         {
-            set
+           get 
             {
-                companyBus[index] = value;
-            }
-            get 
-            {
-                return companyBus[index];
-            }
-
-        }
-
-        public LineBus this[LineBus a]
-        {
-            get
-            {
-                for (int i = 0; i < companyBus.Count - 1; i++)
+                LineBus lineBus = default(LineBus);
+                lineBus = companyBus.Find(bus => bus.NumberID == index);
+                if(lineBus == null)
                 {
-                    if (companyBus[i].NumberID == a.NumberID)
-                        return companyBus[i];
+                    ArgumentNullException exception = new ArgumentNullException("index", "Kav lo kayam");
+                    exception.Data["LineNumber"] = index;
+                    throw exception;
                 }
-                return null;
+                return lineBus;
             }
 
         }
+
 
 
 
