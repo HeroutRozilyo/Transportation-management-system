@@ -99,7 +99,7 @@ namespace dotNet5781_02_4789_9647.Properties
             foreach (LineBus hisony in companyBus)
             {
                 smaller = hisony;
-                foreach (LineBus item in companyBus)
+                foreach (LineBus item in temp)
                 {
                     LineBus a = smaller.Compare(item);
                     smaller = a;
