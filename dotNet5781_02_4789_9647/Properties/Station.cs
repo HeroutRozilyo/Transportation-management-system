@@ -11,19 +11,27 @@ namespace dotNet5781_02_4789_9647.Properties
     /// </summary>
     public class Station
     {
-       
+
         private const int MAXDIGITS = 1000000;
         private const int MIN_LAT = -90;
         private const int MAX_LAT = 90;
         private const int MIN_LON = -180;
         private const int MAX_LON = 180;
         
-        private static List<int> numberofstation = new List<int>();
+        private static List<int> numberofstation = new List<int>(); //a list to keep all the stations that we have
 
-        private int busStationKey;
+        private int busStationKey; //code to the station
 
-        private double latitude;
+
+        /// <summary>
+        ///  place to the station
+        /// </summary>
+        private double latitude; 
         private double longitude;
+
+
+    
+
 
         /// <summary>
         /// key value should  be unique and max 6 digits
@@ -48,6 +56,7 @@ namespace dotNet5781_02_4789_9647.Properties
                 numberofstation.Add(BusStationKey);
             }
         }
+
 
         public double Latitude
         {
@@ -84,7 +93,9 @@ namespace dotNet5781_02_4789_9647.Properties
 
         }
 
-        public String Address { get; set; }
+
+        public String Address { get; set; } //name station
+
 
         public override string ToString()
         {

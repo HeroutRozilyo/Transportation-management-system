@@ -11,7 +11,9 @@ namespace dotNet5781_02_4789_9647.Properties
     public class LineBus : BusStation,IComparable
     {
 
-        private List<BusStation> busstations = new List<BusStation>();
+        private List<BusStation> busstations = new List<BusStation>(); //list that keep all the station that the bus have
+
+
         public List<BusStation> BusStations
         {
             get
@@ -21,31 +23,34 @@ namespace dotNet5781_02_4789_9647.Properties
             }
         }
 
-        //public readonly List<BusStation> busStations;
 
         public LineBus()
         {
-            //busStations = new List<BusStation>();
+
         }
+
 
         /// <summary>
         /// Line number
         /// </summary>
-        public int NumberID { get; set; }
-        public BusStation FirstStation { get; private set; }
-        public BusStation LastStation { get; private set; }
-        public Zone Zone { get; set; }
+        
+        public int NumberID { get; set; } //the number line
+        public BusStation FirstStation { get; private set; } //firststation
+        public BusStation LastStation { get; private set; } //last station
+        public Zone Zone { get; set; } //area at the country
 
-        public void AddLast(BusStation busStation)
+        public void AddLast(BusStation busStation) //add bus to the list
         {
             busstations.Add(busStation);
             LastStation = busstations[busstations.Count - 1];
         }
-        public void AddFirst(BusStation busStation)
+
+        public void AddFirst(BusStation busStation) //a
         {
             busstations.Insert(0, busStation);
             FirstStation = busstations[0];
         }
+
         public void Add(int index, BusStation busStation)
         {
             if (index == 0)
@@ -60,33 +65,15 @@ namespace dotNet5781_02_4789_9647.Properties
                 }
                 if (index == busstations.Count)
                 {
-                    //LastStation = busstations[busstations.Count - 1];
                     AddLast(busStation);
                 }
                 else
                 {
                     busstations.Insert(index, busStation);
                 }
-
-
             }
         }
 
-      
-        public override string ToString()
-        {
-
-            string result = " ";
-            int i = 0;
-            for (; i < busstations.Count - 1; i++)
-            {
-                result += busstations[i].BusStationKey + "  ";
-
-            }
-            result += busstations[i].BusStationKey;
-            return "Bus Line: " + NumberID+ " ,Area: " + area+ " ,Statins of the bus: " + result;
-
-        }
 
         public void DelLast(BusStation bStation)
         {
@@ -108,12 +95,12 @@ namespace dotNet5781_02_4789_9647.Properties
             }
             else
             {
-                if (index==-1)
+                if (index == -1)
                 {
                     throw new ArgumentOutOfRangeException("index", "index should be less than or equal to" + busstations.Count);
                 }
 
-                if (index == busstations.Count-1)
+                if (index == busstations.Count - 1)
                 {
                     DelLast(bStation);
                 }
@@ -126,6 +113,24 @@ namespace dotNet5781_02_4789_9647.Properties
             }
 
         }
+
+
+        public override string ToString()
+        {
+
+            string result = " ";
+            int i = 0;
+            for (; i < busstations.Count - 1; i++)
+            {
+                result += busstations[i].BusStationKey + "  ";
+
+            }
+            result += busstations[i].BusStationKey;
+            return "Bus Line: " + NumberID+ " ,Area: " + Zone+ " ,Statins of the bus: " + result;
+
+        }
+
+
 
         public int find(BusStation bStation) //return the number of the station
         {
@@ -141,6 +146,7 @@ namespace dotNet5781_02_4789_9647.Properties
             }
             return -1;
         }
+
         public bool findStion(int id) //return the busstion  of the station
         {
 

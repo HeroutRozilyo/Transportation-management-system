@@ -13,26 +13,17 @@ namespace dotNet5781_02_4789_9647.Properties
     public class BusStation : Station
     {
         private static Random r = new Random();
-        //public  Station station
-        //{ get; set; }
 
         /// <summary>
         /// distance from previous BusStation
         /// </summary>
         /// 
-
-
-        //private Station blbla;
-        //public Station Blabla
-        //{
-        //    set {  }
-        //    get { return Blabla; }
-        //}
-
         public double Distance
         {
             get; set;
         }
+
+
         public BusStation()
         {
            //3000m
@@ -59,8 +50,6 @@ namespace dotNet5781_02_4789_9647.Properties
             result = "Travel time is: " + TravelTime + ",Distance between the two stations is: " + Distance;
 
             return result;
-
-            // return base.ToString();
         }
     }
 }
