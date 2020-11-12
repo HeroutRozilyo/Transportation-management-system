@@ -1,4 +1,88 @@
 ﻿using dotNet5781_02_4789_9647.Properties;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -34,7 +118,7 @@ namespace dotNet5781_02_4789_9647.Properties
                            return true;
                            
                         }
-                        else return false;
+                        else return false; 
                     }
                     return false;
 
