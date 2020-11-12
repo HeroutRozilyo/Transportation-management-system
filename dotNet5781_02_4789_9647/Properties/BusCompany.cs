@@ -66,7 +66,7 @@ namespace dotNet5781_02_4789_9647.Properties
         {
             bool find = findLIneAtBusConpany(line1);
 
-            if (find)
+            if (!find)
             {
                 companyBus.Add(line1);
             }
@@ -105,24 +105,25 @@ namespace dotNet5781_02_4789_9647.Properties
 
         public BusCompany sortBus()
         {
-            BusCompany sortList = new BusCompany();
-            BusCompany temp = this;
-            LineBus smaller = null;
-            foreach (LineBus hisony in companyBus)
+            BusCompany sortList = new BusCompany();//the sort list 
+            BusCompany temp = new BusCompany();
+            temp=this;//list to change
+            LineBus smaller = null;//parameter that save the smaller line
+            foreach (LineBus hisony in temp)
             {
-                smaller = hisony;
+                smaller = hisony;//save the this at the list
                 foreach (LineBus item in temp)
                 {
                     LineBus a = smaller.Compare(item);
                     smaller = a;
 
                 }
-           //     BusStation findTHis = sortList.findHelpAtBusConpany(smaller.NumberID);
+                //BusStation findTHis = sortList.findHelpAtBusConpany(smaller.NumberID);
                 //if (findTHis == null)
-             //   {
+                {
                     sortList.addAtBusConpany(smaller);
                     temp.deleteAtBusConpany(smaller.NumberID);
-              //  }
+                }
             }
             return sortList;
         }

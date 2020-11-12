@@ -28,7 +28,6 @@ namespace dotNet5781_02_4789_9647.Properties
         {
             Distance = busStation.Distance;
             TravelTime = busStation.TravelTime;
-
             BusStationKey = busStation.BusStationKey;
             Address = busStation.Address;
             Latitude = busStation.Latitude;
