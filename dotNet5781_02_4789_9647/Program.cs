@@ -13,10 +13,9 @@ namespace dotNet5781_02_4789_9647
         {
 
             BusCompany egged = new BusCompany();
-            egged.add(new LineBus { NumberID = 1123, Zone = Zone.JERUSALEM });
-            egged.add(new LineBus { NumberID = 11553, Zone = Zone.JERUSALEM });
-            egged.add(new LineBus { NumberID = 118, Zone = Zone.JERUSALEM });
-            egged.add(new LineBus { NumberID = 11993, Zone = Zone.JERUSALEM });
+            
+            //egged.addAtBusConpany(new LineBus { NumberID = 1123, Zone = Zone.JERUSALEM });
+            
 
             try
             {
