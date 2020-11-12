@@ -14,28 +14,30 @@ namespace dotNet5781_02_4789_9647.Properties
     {
         private static Random r = new Random();
 
-        /// <summary>
+        public BusStation()
+        {
+           //3000m
+            Distance = r.NextDouble() * (3000 - 100) + 100; 
+
+            //standart average speed is 60 km/minutes
+            TravelTime = TimeSpan.FromMinutes(Distance / 6000);
+        }
+
+        public BusStation(int lat, int lon, int id, string name) :base(lat,lon,id,name)
+        {
+            Distance = r.NextDouble() * (3000 - 100) + 100;
+            TravelTime = TimeSpan.FromMinutes(Distance / 6000);
+        }
+
+     
+
         /// distance from previous BusStation
-        /// </summary>
-        /// 
         public double Distance
         {
             get; set;
         }
 
-
-        public BusStation()
-        {
-           //3000m
-            Distance = r.NextDouble() * (3000 - 100) + 100; 
-            //standart average speed is 60 km/minutes
-            TravelTime = TimeSpan.FromMinutes(Distance / 6000);
-        }
-
-
-        /// <summary>
         /// Travel time from previous BusStation
-        /// </summary>
         public TimeSpan TravelTime
         {
             get;

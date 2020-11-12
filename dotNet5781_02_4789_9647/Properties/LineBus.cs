@@ -13,7 +13,6 @@ namespace dotNet5781_02_4789_9647.Properties
 
         private List<BusStation> busstations = new List<BusStation>(); //list that keep all the station that the bus have
 
-
         public List<BusStation> BusStations
         {
             get
@@ -24,7 +23,7 @@ namespace dotNet5781_02_4789_9647.Properties
         }
 
 
-        public LineBus()
+        public LineBus(BusStation a)
         {
 
         }
