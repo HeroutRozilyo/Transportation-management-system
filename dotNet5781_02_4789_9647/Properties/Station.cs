@@ -86,7 +86,6 @@ namespace dotNet5781_02_4789_9647.Properties
                 }
             }
         }
-
         public double Longitude
         {
             get { return longitude; }
@@ -104,6 +103,7 @@ namespace dotNet5781_02_4789_9647.Properties
             }
 
         }
+
 
         public override string ToString()
         {

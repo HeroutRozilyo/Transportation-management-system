@@ -32,8 +32,6 @@ namespace dotNet5781_02_4789_9647.Properties
             Address = busStation.Address;
             Latitude = busStation.Latitude;
             Longitude = busStation.Longitude;
-
-
         }
 
         public BusStation( int id, string name) :base(id,name)

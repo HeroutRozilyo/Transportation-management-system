@@ -34,6 +34,7 @@ namespace dotNet5781_02_4789_9647.Properties
             NumberID= r.Next(1, 999);
             FirstStation = bus;
             LastStation = bus;
+            Distance = 0;
             Zone= (Zone)r.Next(0, 3);
         }
 
@@ -57,9 +58,8 @@ namespace dotNet5781_02_4789_9647.Properties
             
         }
 
-        public void addFirstAtLineBus(BusStation busStation) //a
+        public void addFirstAtLineBus(BusStation bus) //a
         {
-            busStation[0]
             busstations.Insert(0, busStation);
             FirstStation = busstations[0];
             
