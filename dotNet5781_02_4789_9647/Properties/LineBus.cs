@@ -10,10 +10,10 @@ namespace dotNet5781_02_4789_9647.Properties
 {
     public class LineBus : BusStation,IComparable
     {
+       private static Random r = new Random();
 
-        private List<BusStation> busstations = new List<BusStation>(); //list that keep all the station that the bus have
-
-        public List<BusStation> BusStations
+       private List<BusStation> busstations;  //list that keep all the station that the bus have
+       public List<BusStation> BusStations
         {
             get
             {
@@ -22,39 +22,48 @@ namespace dotNet5781_02_4789_9647.Properties
             }
         }
 
+       public int NumberID { get; set; } //the number line
+       public BusStation FirstStation { get; private set; } //firststation
+       public BusStation LastStation { get; private set; } //last station
+       public Zone Zone { get; set; } //area at the country
 
-        public LineBus(BusStation a)
+        public LineBus(BusStation bus)
         {
+            busstations = new List<BusStation>();
+            busstations.Add(bus);
+            NumberID= r.Next(1, 999);
+            FirstStation = bus;
+            LastStation = bus;
+            Zone= (Zone)r.Next(0, 3);
+        }
 
+        public LineBus() :base()
+        {
+            busstations = new List<BusStation>();
+            NumberID = 0;
+            FirstStation = null;
+            LastStation = null;
         }
 
 
-        /// <summary>
-        /// Line number
-        /// </summary>
         
-        public int NumberID { get; set; } //the number line
-        public BusStation FirstStation { get; private set; } //firststation
-        public BusStation LastStation { get; private set; } //last station
-        public Zone Zone { get; set; } //area at the country
-
-        public void AddLast(BusStation busStation) //add bus to the list
+        public void addLastAtLineBus(BusStation busStation) //add bus to the list
         {
             busstations.Add(busStation);
             LastStation = busstations[busstations.Count - 1];
         }
 
-        public void AddFirst(BusStation busStation) //a
+        public void addFirstAtLineBus(BusStation busStation) //a
         {
             busstations.Insert(0, busStation);
             FirstStation = busstations[0];
         }
 
-        public void Add(int index, BusStation busStation)
+        public void addAtLineBus(int index, BusStation busStation)
         {
             if (index == 0)
             {
-                AddFirst(busStation);
+                addFirstAtLineBus(busStation);
             }
             else
             {
@@ -64,7 +73,7 @@ namespace dotNet5781_02_4789_9647.Properties
                 }
                 if (index == busstations.Count)
                 {
-                    AddLast(busStation);
+                    addLastAtLineBus(busStation);
                 }
                 else
                 {
@@ -74,23 +83,26 @@ namespace dotNet5781_02_4789_9647.Properties
         }
 
 
-        public void DelLast(BusStation bStation)
+        public void DelLastAtLineBus(BusStation bStation)
         {
-            LastStation = busstations[busstations.Count - 2];
             busstations.Remove(bStation);
+            LastStation = busstations[busstations.Count - 1];
+
         }
-        public void DelFirst(BusStation busStation)
+
+        public void DelFirstAtLineBus(BusStation busStation)
         {
             busstations.RemoveAt(0);
             FirstStation = busstations[0];
         }
-        public void Del(BusStation bStation)
+
+        public void DelAtLineBus(BusStation bStation)
         {
             int index = find(bStation);
 
             if (index == 0)
             {
-                DelFirst(bStation);
+                DelFirstAtLineBus(bStation);
             }
             else
             {
@@ -101,7 +113,7 @@ namespace dotNet5781_02_4789_9647.Properties
 
                 if (index == busstations.Count - 1)
                 {
-                    DelLast(bStation);
+                    DelLastAtLineBus(bStation);
                 }
                 else
                 {
@@ -170,7 +182,7 @@ namespace dotNet5781_02_4789_9647.Properties
                 return true;
         }
 
-        public double distance(BusStation bStation1, BusStation bStation2)
+        public double distanceBetweenStations(BusStation bStation1, BusStation bStation2)
         {
             double sum=0;
             int begin = find(bStation1);

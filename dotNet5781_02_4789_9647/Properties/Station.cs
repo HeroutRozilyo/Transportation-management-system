@@ -44,6 +44,8 @@ namespace dotNet5781_02_4789_9647.Properties
             Longitude = r.NextDouble() * (35.5 - 34.3) + 34.3; // in israel territory
             Address = name;
             busStationKey = id;
+
+            numberofstation.Add(busStationKey);
         }
 
     
