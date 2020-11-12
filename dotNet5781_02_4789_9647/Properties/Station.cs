@@ -28,15 +28,6 @@ namespace dotNet5781_02_4789_9647.Properties
 
         public String Address { get; set; } //name station
 
-        public static List<int> Numberofstation()
-        {
-            get{
-
-            }
-        }
-
-
-
         /// constructors
         public Station()
         {
@@ -46,7 +37,7 @@ namespace dotNet5781_02_4789_9647.Properties
             busStationKey = 0;
         }
 
-        public Station(int lat,int lon,int id,string name)
+        public Station(int id,string name)
         {
             Latitude = r.NextDouble() * (33.3 - 31) + 31; // in israel territory
             Longitude = r.NextDouble() * (35.5 - 34.3) + 34.3; // in israel territory

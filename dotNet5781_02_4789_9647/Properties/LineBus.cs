@@ -59,8 +59,10 @@ namespace dotNet5781_02_4789_9647.Properties
 
         public void addFirstAtLineBus(BusStation busStation) //a
         {
+            busStation[0]
             busstations.Insert(0, busStation);
             FirstStation = busstations[0];
+            
         }
 
         public void addAtLineBus( BusStation busStation)

@@ -28,7 +28,6 @@ namespace dotNet5781_02_4789_9647.Properties
         {
             Distance = busStation.Distance;
             TravelTime = busStation.TravelTime;
-
             BusStationKey = busStation.BusStationKey;
             Address = busStation.Address;
             Latitude = busStation.Latitude;
@@ -37,7 +36,7 @@ namespace dotNet5781_02_4789_9647.Properties
 
         }
 
-        public BusStation(int lat, int lon, int id, string name) :base(lat,lon,id,name)
+        public BusStation( int id, string name) :base(id,name)
         {
             Distance = r.NextDouble() * (3000 - 100) + 100;
             TravelTime = TimeSpan.FromMinutes(Distance / 6000);
