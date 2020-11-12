@@ -11,23 +11,43 @@ namespace dotNet5781_02_4789_9647.Properties
     /// </summary>
     public class Station
     {
-       
+        private static Random r = new Random();
+
         private const int MAXDIGITS = 1000000;
         private const int MIN_LAT = -90;
         private const int MAX_LAT = 90;
         private const int MIN_LON = -180;
         private const int MAX_LON = 180;
-        
-        private static List<int> numberofstation = new List<int>();
 
-        private int busStationKey;
+        private static List<int> numberofstation = new List<int>(); //a list to keep all the stations that we have
+        private int busStationKey; //code to the station
 
-        private double latitude;
+        ///  place to the station
+        private double latitude; 
         private double longitude;
 
-        /// <summary>
+        public String Address { get; set; } //name station
+
+
+        /// constructors
+        public Station()
+        {
+            latitude = 0;
+            longitude = 0;
+            Address = null;
+            busStationKey = 0;
+        }
+
+        public Station(int lat,int lon,int id,string name)
+        {
+            Latitude = r.NextDouble() * (33.3 - 31) + 31; // in israel territory
+            Longitude = r.NextDouble() * (35.5 - 34.3) + 34.3; // in israel territory
+            Address = name;
+            busStationKey = id;
+        }
+
+    
         /// key value should  be unique and max 6 digits
-        /// </summary>
         public int BusStationKey
         {
             get { return busStationKey; }
@@ -83,8 +103,6 @@ namespace dotNet5781_02_4789_9647.Properties
             }
 
         }
-
-        public String Address { get; set; }
 
         public override string ToString()
         {

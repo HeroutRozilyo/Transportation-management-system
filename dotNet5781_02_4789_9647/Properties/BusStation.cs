@@ -8,68 +8,51 @@ using System.Threading.Tasks;
 
 
 
- namespace dotNet5781_02_4789_9647.Properties
- {
-      public class BusStation : Station
-      {
-      public  Station station
-        { get; set; }
+namespace dotNet5781_02_4789_9647.Properties
+{
+    public class BusStation : Station
+    {
+        private static Random r = new Random();
 
-        /// <summary>
+        public BusStation()
+        {
+           //3000m
+            Distance = r.NextDouble() * (3000 - 100) + 100; 
+
+            //standart average speed is 60 km/minutes
+            TravelTime = TimeSpan.FromMinutes(Distance / 6000);
+        }
+
+        public BusStation(int lat, int lon, int id, string name) :base(lat,lon,id,name)
+        {
+            Distance = r.NextDouble() * (3000 - 100) + 100;
+            TravelTime = TimeSpan.FromMinutes(Distance / 6000);
+        }
+
+     
+
         /// distance from previous BusStation
-        /// </summary>
-        /// 
+        public double Distance
+        {
+            get; set;
+        }
+
+        /// Travel time from previous BusStation
+        public TimeSpan TravelTime
+        {
+            get;
+            set;
+        }
 
 
-        //private Station blbla;
-        //public Station Blabla
-        //{
-        //    set {  }
-        //    get { return Blabla; }
-        //}
+        public override string ToString()
+        {
+            string result = "";
 
-       // private double distance;
-            public double Distance
-            {
-                get { return Distance; }
+            result = "Travel time is: " + TravelTime + ",Distance between the two stations is: " + Distance;
 
-
-               set
-               {
-
-                Random r = new Random();
-                double a = r.Next(0, 3000); //3000m
-                Distance = a;
-            }
-      }
-
-
-
-            /// <summary>
-            /// Travel time from previous BusStation
-            /// </summary>
-            public TimeSpan TravelTime
-            {
-                get { return TravelTime; }
-                set
-                {
-                    //x=x0+vt.. we decided that the average speed is 60kmsh=6000m
-
-                    TravelTime = TimeSpan.FromMinutes(Distance / 6000);
-                }
-            }
-
-
-            public override string ToString()
-            {
-                string result = "";
-
-                result = "Travle time is: " + TravelTime + ",Distance between the two stations is: " + Distance;
-
-                return result;
-
-                // return base.ToString();
-            }
+            return result;
         }
     }
+}
 
