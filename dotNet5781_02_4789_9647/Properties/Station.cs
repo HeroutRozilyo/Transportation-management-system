@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,6 +28,14 @@ namespace dotNet5781_02_4789_9647.Properties
         private double longitude;
 
         public String Address { get; set; } //name station
+
+        public static List<int> Numberofstation()
+        {
+            get{
+
+            }
+        }
+
 
 
         /// constructors

@@ -50,8 +50,10 @@ namespace dotNet5781_02_4789_9647.Properties
         public void addLastAtLineBus(BusStation busStation) //add bus to the list
         {
             BusStation temp = new BusStation(busStation);
+
             busstations.Add(busStation);
             LastStation = busstations[busstations.Count - 1];
+
             
         }
 
@@ -61,14 +63,20 @@ namespace dotNet5781_02_4789_9647.Properties
             FirstStation = busstations[0];
         }
 
-        public void addAtLineBus(int index, BusStation busStation)
+        public void addAtLineBus( BusStation busStation)
         {
+            //  StationLineBus add = new StationLineBus(station);
+            //  Console.WriteLine("in this line there are " + listOfBus.Count + ", where you want to add this station? [1-" + listOfBus.Count + 1 + "]\n");
+            int index = int.Parse(Console.ReadLine());
+
             if (index == 0)
             {
                 addFirstAtLineBus(busStation);
             }
             else
             {
+           
+
                 if (index > busstations.Count)
                 {
                     throw new ArgumentOutOfRangeException("index", "index should be less than or equal to" + busstations.Count);
