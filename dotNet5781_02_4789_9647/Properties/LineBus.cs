@@ -60,20 +60,24 @@ namespace dotNet5781_02_4789_9647.Properties
 
         public void addFirstAtLineBus(BusStation bus) //a
         {
-            busstations.Insert(0, busStation);
+            bus.TravelTime = TimeSpan.Zero;
+            bus.Distance = 0;//there are not have station befor
+            busstations.Insert(0, bus);
             FirstStation = busstations[0];
-            
+           
         }
 
-        public void addAtLineBus( BusStation busStation)
+        public void addAtLineBus( int place,BusStation busStation)
         {
-            //  StationLineBus add = new StationLineBus(station);
-            //  Console.WriteLine("in this line there are " + listOfBus.Count + ", where you want to add this station? [1-" + listOfBus.Count + 1 + "]\n");
+            BusStation add = new BusStation(busStation);
+              Console.WriteLine("in this line there are " + busstations.Count + ", where you want to add this station? [1-" + busstations.Count + 1 + "]\n");
             int index = int.Parse(Console.ReadLine());
 
             if (index == 0)
             {
+
                 addFirstAtLineBus(busStation);
+
             }
             else
             {
@@ -90,6 +94,9 @@ namespace dotNet5781_02_4789_9647.Properties
                 else
                 {
                     busstations.Insert(index, busStation);
+                    BusStation a=new BusStation();// to random newest Distance and travelTime to the next station after the insert
+                    busstations[index + 1].Distance = a.Distance;
+                    busstations[index + 1].TravelTime = a.TravelTime;
                 }
             }
         }
@@ -100,12 +107,15 @@ namespace dotNet5781_02_4789_9647.Properties
             busstations.Remove(bStation);
             LastStation = busstations[busstations.Count - 1];
 
+
         }
 
         public void DelFirstAtLineBus(BusStation busStation)
         {
             busstations.RemoveAt(0);
             FirstStation = busstations[0];
+            busstations[0].TravelTime = TimeSpan.Zero;
+            busstations[0].Distance = 0;//there are not have station befor
         }
 
         public void DelAtLineBus(BusStation bStation)
@@ -130,6 +140,9 @@ namespace dotNet5781_02_4789_9647.Properties
                 else
                 {
                     busstations.RemoveAt(index);
+                    BusStation a = new BusStation();// to random newest Distance and travelTime to the next station after the delete
+                    busstations[index].Distance = a.Distance;
+                    busstations[index].TravelTime = a.TravelTime;
                 }
 
 
@@ -251,7 +264,7 @@ namespace dotNet5781_02_4789_9647.Properties
         public int CompareTo(object obj)
         {
             TimeSpan a = TravelLine((LineBus)obj);
-            return a.CompareTo(/*((LineBus)obj).*/TravelLine(this));
+            return a.CompareTo(TravelLine(this));
 
         }
         
