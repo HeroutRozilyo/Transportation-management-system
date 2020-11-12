@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace dotNet5781_02_4789_9647.Properties
 {
-    /// <summary>
+   
     /// Staion for bus
-    /// </summary>
     public class Station
     {
         private static Random r = new Random();
@@ -28,6 +28,14 @@ namespace dotNet5781_02_4789_9647.Properties
 
         public String Address { get; set; } //name station
 
+        public static List<int> Numberofstation()
+        {
+            get{
+
+            }
+        }
+
+
 
         /// constructors
         public Station()
@@ -44,6 +52,8 @@ namespace dotNet5781_02_4789_9647.Properties
             Longitude = r.NextDouble() * (35.5 - 34.3) + 34.3; // in israel territory
             Address = name;
             busStationKey = id;
+
+            numberofstation.Add(busStationKey);
         }
 
     

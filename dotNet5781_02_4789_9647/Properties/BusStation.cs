@@ -13,6 +13,7 @@ namespace dotNet5781_02_4789_9647.Properties
     public class BusStation : Station
     {
         private static Random r = new Random();
+       
 
         public BusStation()
         {
@@ -21,6 +22,19 @@ namespace dotNet5781_02_4789_9647.Properties
 
             //standart average speed is 60 km/minutes
             TravelTime = TimeSpan.FromMinutes(Distance / 6000);
+        }
+
+        public BusStation(BusStation busStation)
+        {
+            Distance = busStation.Distance;
+            TravelTime = busStation.TravelTime;
+
+            BusStationKey = busStation.BusStationKey;
+            Address = busStation.Address;
+            Latitude = busStation.Latitude;
+            Longitude = busStation.Longitude;
+
+
         }
 
         public BusStation(int lat, int lon, int id, string name) :base(lat,lon,id,name)
