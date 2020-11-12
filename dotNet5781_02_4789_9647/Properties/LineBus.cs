@@ -62,21 +62,18 @@ namespace dotNet5781_02_4789_9647.Properties
         {
             busstations.Insert(0, bus);
             FirstStation = busstations[0];
-            busstations[0].Distance = 0;
-
-            bus.Distance = 0;
-
+          //  busstations[0].Distance = 0;
         }
 
-        public void addAtLineBus( BusStation busStation)
+        public void addAtLineBus( BusStation station)
         {
-            //  StationLineBus add = new StationLineBus(station);
-            //  Console.WriteLine("in this line there are " + listOfBus.Count + ", where you want to add this station? [1-" + listOfBus.Count + 1 + "]\n");
+            BusStation add = new BusStation(station);
+            Console.WriteLine("in this line there are " + busstations.Count + ", where you want to add this station? [1-" + busstations.Count + 1 + "]\n");
             int index = int.Parse(Console.ReadLine());
 
             if (index == 0)
             {
-                addFirstAtLineBus(busStation);
+                addFirstAtLineBus(station);
             }
             else
             {
@@ -88,11 +85,11 @@ namespace dotNet5781_02_4789_9647.Properties
                 }
                 if (index == busstations.Count)
                 {
-                    addLastAtLineBus(busStation);
+                    addLastAtLineBus(station);
                 }
                 else
                 {
-                    busstations.Insert(index, busStation);
+                    busstations.Insert(index, station);
                 }
             }
         }
@@ -133,6 +130,7 @@ namespace dotNet5781_02_4789_9647.Properties
                 else
                 {
                     busstations.RemoveAt(index);
+
                 }
 
 

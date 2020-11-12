@@ -117,12 +117,12 @@ namespace dotNet5781_02_4789_9647.Properties
                     smaller = a;
 
                 }
-                BusStation findTHis = sortList.findHelpAtBusConpany(smaller.NumberID);
-                if (findTHis == null)
-                {
+           //     BusStation findTHis = sortList.findHelpAtBusConpany(smaller.NumberID);
+                //if (findTHis == null)
+             //   {
                     sortList.addAtBusConpany(smaller);
                     temp.deleteAtBusConpany(smaller.NumberID);
-                }
+              //  }
             }
             return sortList;
         }
