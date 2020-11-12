@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace dotNet5781_02_4789_9647.Properties
 {
-    /// <summary>
+   
     /// Staion for bus
-    /// </summary>
     public class Station
     {
         private static Random r = new Random();
