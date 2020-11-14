@@ -205,6 +205,21 @@ namespace dotNet5781_02_4789_9647.Properties
             return false;
         }
 
+        public BusStation find_Station(int id) //return the busstion  of the station
+        {
+
+            int i = 0;
+            for (; i < busstations.Count; i++)
+            {
+                if (busstations[i].BusStationKey == id)
+                {
+                    return busstations[i];
+                }
+
+            }
+            return null;
+        }
+
         public bool pathstation(BusStation bStation) //return if the station exsis at the bus path.
         {
             int temp = find(bStation);
@@ -257,7 +272,7 @@ namespace dotNet5781_02_4789_9647.Properties
     
         public TimeSpan TravelLine(LineBus BLine1)
         {
-           TimeSpan timeSpan = stationTravelTime(BLine1.busstations[0], BLine1.busstations[BLine1.busstations.Count() - 1]);
+           TimeSpan timeSpan = stationTravelTime(BLine1.busstations[0], BLine1.busstations[BLine1.busstations.Count()]);
             return timeSpan;
         }
 
