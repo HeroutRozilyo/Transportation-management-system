@@ -13,6 +13,11 @@ namespace dotNet5781_02_4789_9647.Properties
     public class BusCompany : LineBus, IEnumerable<LineBus>
     {
         private List<LineBus> companyBus;
+        public List<LineBus> ComanyBus
+        {
+            get { return companyBus; }
+            set 
+        }
 
        
 
