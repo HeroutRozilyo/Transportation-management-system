@@ -14,6 +14,10 @@ namespace dotNet5781_02_4789_9647.Properties
     {
         private List<LineBus> companyBus;
 
+       
+
+
+
         public BusCompany() :base()
         {
             companyBus = new List<LineBus>();
@@ -122,7 +126,7 @@ namespace dotNet5781_02_4789_9647.Properties
                 //if (findTHis == null)
                 {
                     sortList.addAtBusConpany(smaller);
-                    temp.deleteAtBusConpany(smaller.NumberID);
+                    temp.deleteAtBusConpany(smaller.NumberID); 
                 }
             }
             return sortList;

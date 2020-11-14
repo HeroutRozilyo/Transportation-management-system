@@ -119,7 +119,7 @@ namespace dotNet5781_02_4789_9647.Properties
         }
 
         public void DelAtLineBus(BusStation bStation)
-        {
+        { 
             int index = find(bStation);
 
             if (index == 0)
