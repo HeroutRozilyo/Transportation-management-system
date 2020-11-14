@@ -9,10 +9,12 @@ namespace dotNet5781_02_4789_9647
 {
     class Program
     {
+        public double distanceBetweenStations(BusStation bStation1, BusStation bStation2)
         static void Main(string[] args)
         {
 
             BusCompany egged = new BusCompany();
+            
             
             //egged.addAtBusConpany(new LineBus { NumberID = 1123, Zone = Zone.JERUSALEM });
             
