@@ -12,7 +12,8 @@ namespace dotNet5781_02_4789_9647.Properties
     {
        private static Random r = new Random();
 
-       private List<BusStation> busstations;  //list that keep all the station that the bus have
+
+        private List<BusStation> busstations;  //list that keep all the station that the bus have
        public List<BusStation> BusStations
         {
             get
@@ -29,6 +30,8 @@ namespace dotNet5781_02_4789_9647.Properties
 
         public LineBus(BusStation bus)
         {
+            bus.Distance = 0;
+            bus.TravelTime = TimeSpan.Zero;
             busstations = new List<BusStation>();
             busstations.Add(bus);
             NumberID= r.Next(1, 999);
@@ -50,7 +53,7 @@ namespace dotNet5781_02_4789_9647.Properties
         
         public void addLastAtLineBus(BusStation busStation) //add bus to the list
         {
-            BusStation temp = new BusStation(busStation);
+            //BusStation temp = new BusStation(busStation);
 
             busstations.Add(busStation);
             LastStation = busstations[busstations.Count - 1];
@@ -64,14 +67,17 @@ namespace dotNet5781_02_4789_9647.Properties
             bus.Distance = 0;//there are not have station befor
             busstations.Insert(0, bus);
             FirstStation = busstations[0];
-           
+            busstations[1].TravelTime = TimeSpan.FromMinutes(Distance / 6000);
+            busstations[1].Distance = r.NextDouble() * (3000 - 100) + 100;
+
         }
 
-        public void addAtLineBus( int place,BusStation busStation)
+        public void addAtLineBus(BusStation busStation)
         {
-            BusStation add = new BusStation(busStation);
-              Console.WriteLine("in this line there are " + busstations.Count + ", where you want to add this station? [1-" + busstations.Count + 1 + "]\n");
-            int index = int.Parse(Console.ReadLine());
+          //  this.busstations.Add(new BusStation());
+
+              Console.WriteLine("In this line there are " + busstations.Count + " stations" + ", where you want to add this station? [1-" + (busstations.Count+1 ) + "]\n");
+            int index = (int.Parse(Console.ReadLine())-1);
 
             if (index == 0)
             {
@@ -83,11 +89,12 @@ namespace dotNet5781_02_4789_9647.Properties
             {
            
 
-                if (index > busstations.Count)
+                if (index > (busstations.Count))
                 {
+
                     throw new ArgumentOutOfRangeException("index", "index should be less than or equal to" + busstations.Count);
                 }
-                if (index == busstations.Count)
+                if (index == (busstations.Count))
                 {
                     addLastAtLineBus(busStation);
                 }
@@ -133,7 +140,7 @@ namespace dotNet5781_02_4789_9647.Properties
                     throw new ArgumentOutOfRangeException("index", "index should be less than or equal to" + busstations.Count);
                 }
 
-                if (index == busstations.Count - 1)
+                if (index == busstations.Count )
                 {
                     DelLastAtLineBus(bStation);
                 }
@@ -187,7 +194,7 @@ namespace dotNet5781_02_4789_9647.Properties
         {
 
             int i = 0;
-            for (; i < busstations.Count - 1; i++)
+            for (; i < busstations.Count; i++)
             {
                 if (busstations[i].BusStationKey == id)
                 {

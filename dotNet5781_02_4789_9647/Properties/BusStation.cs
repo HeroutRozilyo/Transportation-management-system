@@ -19,20 +19,29 @@ namespace dotNet5781_02_4789_9647.Properties
         {
            //3000m
             Distance = r.NextDouble() * (3000 - 100) + 100; 
-
             //standart average speed is 60 km/minutes
             TravelTime = TimeSpan.FromMinutes(Distance / 6000);
         }
 
-        public BusStation(BusStation busStation)
+        public BusStation(Station a)
         {
-            Distance = busStation.Distance;
-            TravelTime = busStation.TravelTime;
-            BusStationKey = busStation.BusStationKey;
-            Address = busStation.Address;
-            Latitude = busStation.Latitude;
-            Longitude = busStation.Longitude;
+           this.Distance= r.NextDouble() * (3000 - 100) + 100;
+            this.TravelTime= TimeSpan.FromMinutes(Distance / 6000);
+            this.Latitude = a.Latitude;
+            this.Longitude = a.Longitude;
+            this.BusStationKey = a.BusStationKey;
+            this.Address = a.Address;
         }
+
+        //public BusStation(BusStation busStation)
+        //{
+        //    Distance = busStation.Distance;
+        //    TravelTime = busStation.TravelTime;
+        //    BusStationKey = busStation.BusStationKey;
+        //    Address = busStation.Address;
+        //    Latitude = busStation.Latitude;
+        //    Longitude = busStation.Longitude;
+        //}
 
         public BusStation( int id, string name) :base(id,name)
         {
@@ -56,14 +65,14 @@ namespace dotNet5781_02_4789_9647.Properties
         }
 
 
-        public override string ToString()
-        {
-            string result = "";
+        //public override string ToString()
+        //{
+        //    string result = "";
 
-            result = "Travel time is: " + TravelTime + ",Distance between the two stations is: " + Distance;
+        //    result = "For station number "+ BusStationKey+ " The travel time is: " + TravelTime + " and the distance is between the two stations is: " + Distance;
 
-            return result;
-        }
+        //    return result;
+        //}
     }
 }
 

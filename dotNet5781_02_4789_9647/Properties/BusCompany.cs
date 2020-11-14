@@ -12,11 +12,11 @@ namespace dotNet5781_02_4789_9647.Properties
 {
     public class BusCompany : LineBus, IEnumerable<LineBus>
     {
+        private static Random r = new Random();
         private List<LineBus> companyBus;
         public List<LineBus> ComanyBus
         {
-            get { return companyBus; }
-            set 
+            get { return companyBus; } 
         }
 
        
@@ -30,6 +30,12 @@ namespace dotNet5781_02_4789_9647.Properties
 
         public BusCompany(LineBus lineBus)
         {
+            bool find = findLIneAtBusConpany(lineBus);
+            while (!find)
+            {
+                lineBus.NumberID = r.Next(1, 999);
+                find = findLIneAtBusConpany(lineBus);
+            }
             companyBus = new List<LineBus>();
             companyBus.Add(lineBus);
         }
@@ -61,6 +67,16 @@ namespace dotNet5781_02_4789_9647.Properties
 
         }
 
+        public bool findLine_BusConpany(int iDLine)
+        {
+            foreach (LineBus item in companyBus)
+            {
+                if (item.NumberID == iDLine)
+                    return true;
+            }
+            return false;
+        }
+
         public LineBus findHelpAtBusConpany(int iDLine)
         {
             foreach (LineBus item in companyBus)
@@ -75,7 +91,7 @@ namespace dotNet5781_02_4789_9647.Properties
         {
             bool find = findLIneAtBusConpany(line1);
 
-            if (!find)
+            if (find)
             {
                 companyBus.Add(line1);
             }
