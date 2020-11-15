@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 ﻿using dotNet5781_01_9647_4789;
 using System;
 using System.Collections.Generic;

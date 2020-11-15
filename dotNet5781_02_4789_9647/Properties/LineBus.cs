@@ -28,17 +28,18 @@ namespace dotNet5781_02_4789_9647.Properties
        public BusStation LastStation { get; private set; } //last station
        public Zone Zone { get; set; } //area at the country
 
-        public LineBus(BusStation bus)
+        public LineBus(BusStation bus) :base(bus.BusStationKey,bus.Address)
         {
-            bus.Distance = 0;
-            bus.TravelTime = TimeSpan.Zero;
             busstations = new List<BusStation>();
             busstations.Add(bus);
             NumberID= r.Next(1, 999);
             FirstStation = bus;
             LastStation = bus;
-            Distance = 0;
+            
             Zone= (Zone)r.Next(0, 3);
+            busstations[0].Distance = 0;
+            busstations[0].TravelTime = TimeSpan.Zero;
+
         }
 
         public LineBus() :base()
@@ -53,13 +54,15 @@ namespace dotNet5781_02_4789_9647.Properties
         
         public void addLastAtLineBus(BusStation busStation) //add bus to the list
         {
-            //BusStation temp = new BusStation(busStation);
+         
 
             busstations.Add(busStation);
             LastStation = busstations[busstations.Count - 1];
 
             
         }
+
+       
 
         public void addFirstAtLineBus(BusStation bus) //a
         {
@@ -74,11 +77,12 @@ namespace dotNet5781_02_4789_9647.Properties
 
         public void addAtLineBus(BusStation busStation)
         {
-          //  this.busstations.Add(new BusStation());
+           // this.busstations.Add(new BusStation());
 
-              Console.WriteLine("In this line there are " + busstations.Count + " stations" + ", where you want to add this station? [1-" + (busstations.Count+1 ) + "]\n");
-            int index = (int.Parse(Console.ReadLine())-1);
+            //Console.WriteLine("In this line there are " + busstations.Count + " stations" + ", where you want to add this station? [1-" + (busstations.Count + 1) + "]\n");
+           // int index = (int.Parse(Console.ReadLine()) - 1);
 
+             int index= r.Next(1, 2)-1;
             if (index == 0)
             {
 
@@ -179,7 +183,7 @@ namespace dotNet5781_02_4789_9647.Properties
         {
 
             int i = 0;
-            for (; i < busstations.Count - 1; i++)
+            for (; i < busstations.Count ; i++)
             {
                 if(busstations[i]==bStation)
                 {
@@ -263,16 +267,18 @@ namespace dotNet5781_02_4789_9647.Properties
             for(int i=begin;i<=end;i++)
             {
                 temp.busstations.Insert(j, busstations[i]);
+
                  j++;
             }
 
+            temp.NumberID = this.NumberID;
             return temp;
         }
 
     
         public TimeSpan TravelLine(LineBus BLine1)
         {
-           TimeSpan timeSpan = stationTravelTime(BLine1.busstations[0], BLine1.busstations[BLine1.busstations.Count()]);
+           TimeSpan timeSpan = stationTravelTime(BLine1.busstations[0], BLine1.busstations[BLine1.busstations.Count()-1]);
             return timeSpan;
         }
 

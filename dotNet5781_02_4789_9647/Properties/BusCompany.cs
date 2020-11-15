@@ -114,7 +114,7 @@ namespace dotNet5781_02_4789_9647.Properties
 
         public List<int> WhichBusAtTheSTation(int id)
         {
-            List<int> temp = null;
+            List<int> temp = new List<int>();
             foreach (LineBus item in companyBus)
             {
                 bool a = item.findStion(id);
@@ -133,7 +133,7 @@ namespace dotNet5781_02_4789_9647.Properties
             BusCompany sortList = new BusCompany();//the sort list 
             BusCompany temp = new BusCompany();
             temp=this;//list to change
-            LineBus smaller = null;//parameter that save the smaller line
+            LineBus smaller = new LineBus();//parameter that save the smaller line
             foreach (LineBus hisony in temp)
             {
                 smaller = hisony;//save the this at the list
@@ -145,10 +145,10 @@ namespace dotNet5781_02_4789_9647.Properties
                 }
                 //BusStation findTHis = sortList.findHelpAtBusConpany(smaller.NumberID);
                 //if (findTHis == null)
-                {
+                
                     sortList.addAtBusConpany(smaller);
                     temp.deleteAtBusConpany(smaller.NumberID); 
-                }
+                
             }
             return sortList;
         }
@@ -171,18 +171,24 @@ namespace dotNet5781_02_4789_9647.Properties
 
         public LineBus this[int index]
         {
+            //    get
+            //    {
+            //        LineBus lineBus = default(LineBus);
+            //        lineBus = companyBus.Find(bus => bus.NumberID == index);
+
+            //        if (lineBus == null)
+            //        {
+            //            ArgumentNullException exception = new ArgumentNullException("index", "Kav lo kayam");
+            //            exception.Data["LineNumber"] = index;
+            //            throw exception;
+            //        }
+            //        return lineBus;
+            //    }
             get
             {
-                LineBus lineBus = default(LineBus);
-                lineBus = companyBus.Find(bus => bus.NumberID == index);
-                if (lineBus == null)
-                {
-                    ArgumentNullException exception = new ArgumentNullException("index", "Kav lo kayam");
-                    exception.Data["LineNumber"] = index;
-                    throw exception;
-                }
-                return lineBus;
+                return companyBus[index];
             }
+
 
         }
 

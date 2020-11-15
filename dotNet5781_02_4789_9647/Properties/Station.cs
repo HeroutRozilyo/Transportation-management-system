@@ -55,18 +55,26 @@ namespace dotNet5781_02_4789_9647.Properties
 
             set
             {
-                if (numberofstation.Contains(value))
-                {
-                    throw new ArgumentException(
-                        String.Format("{0} key number exists allready", value));
-                }
+          
                 if (value <= 0 && value >= MAXDIGITS)
                 {
                     throw new ArgumentException(
                        String.Format("{0} is not a valid key number", value));
                 }
-                busStationKey = value;
-                numberofstation.Add(BusStationKey);
+                
+                if (numberofstation.Contains(value)) 
+                {
+                    //if the station allready exsis, we dont need to add it to the list of stations. But its okey to have 
+                    //a diffrence bus station wuth the same code because to a diffrent buses the distance and the travel from the station is not equal.
+
+                }
+                else
+                {
+                    busStationKey = value;
+                    numberofstation.Add(BusStationKey);
+                }
+
+               
             }
         }
 

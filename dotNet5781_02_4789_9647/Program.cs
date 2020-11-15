@@ -26,10 +26,11 @@ namespace dotNet5781_02_4789_9647
             }
             for(int k=1;k<=3;k++)
             {
-                int j = 10 ;
+                
+               int j = 10 * k;
                 for (int i = 0; i < 10; i++)
                 {
-                    j = 10*k;
+                
                     company.ComanyBus[i].addAtLineBus(bStation[j]);
                     j++;
                 }
@@ -61,6 +62,7 @@ namespace dotNet5781_02_4789_9647
             for(int i=0;i<egged[index].BusStations.Count;i++)
             {
                 Console.WriteLine(egged[index].BusStations[i]);
+                
             }
 
         }
@@ -77,7 +79,7 @@ namespace dotNet5781_02_4789_9647
 
 
 
-        static int search(int line,BusCompany egged)
+        static int search(int line, BusCompany egged)
         {
             for(int i=0;i<egged.ComanyBus.Count;i++)
             {
@@ -89,22 +91,22 @@ namespace dotNet5781_02_4789_9647
 
         }
 
-        static void lines_at_station(int code,BusCompany egged)
-        {
-            Console.WriteLine("The line/lines that path at this station: ");
-            for(int i=0;i<egged.ComanyBus.Count;i++)
-            {
-                for(int j=0;j<egged[i].BusStations.Count;j++)
-                {
-                    if(egged[i].BusStations[j].BusStationKey==code)
-                    {
-                        Console.WriteLine(egged[i].NumberID);
-                        break;
-                    }
+        //static void lines_at_station(int code,BusCompany egged)
+        //{
+        //    Console.WriteLine("The line/lines that path at this station: ");
+        //    for(int i=0;i<egged.ComanyBus.Count;i++)
+        //    {
+        //        for(int j=0;j<egged[i].BusStations.Count;j++)
+        //        {
+        //            if(egged[i].BusStations[j].BusStationKey==code)
+        //            {
+        //                Console.WriteLine(egged[i].NumberID);
+        //                break;
+        //            }
                     
-                }
-            }
-        }
+        //        }
+        //    }
+        //}
 
         static void time_path(BusCompany egged,int code1,int code2)
         {
@@ -119,9 +121,12 @@ namespace dotNet5781_02_4789_9647
                 end = item.find_Station(code2);
                 if (begin!=null&&end!=null)
                 {
-                   // timeSpan=item.stationTravelTime(begin, end);
-                    b = item.pathbetweenStation(begin,end);
-                    temp.addAtBusConpany(b);
+                  if(item.find(begin)<item.find(end))
+                    {
+                        b = item.pathbetweenStation(begin, end);
+                        temp.addAtBusConpany(b);
+                    }
+                  
                 }
 
             }
@@ -134,7 +139,18 @@ namespace dotNet5781_02_4789_9647
 
 
         }
-    
+        static BusStation find_station(List<BusStation> stations, int id)
+        {
+            for (int i = 0; i < stations.Count; i++)
+            {
+                if (stations[i].BusStationKey == id)
+                    return stations[i];
+            }
+            return null;
+
+        }
+
+        
 
         static void Main(string[] args)
         {
@@ -143,120 +159,152 @@ namespace dotNet5781_02_4789_9647
             List<BusStation> stations = new List<BusStation>();
             restertStationn(ref stations,ref egged);
 
-            Console.WriteLine("Please enter your choice: " +
-                "1. New line bus\n 2.Add new stop station to the line\n 3.Delete line bus\n 4.Delete station from the line\n 5.Find lines that path at this station\n 6.Print options to travel\n 7.Print all the buses\n 8.Print all the station and the lines that path there");
+            // Console.WriteLine("Please enter your choice:\n " +
+            //     "1. New line bus\n 2.Add new stop station to the line\n 3.Delete line bus\n 4.Delete station from the line\n 5.Find lines that path at this station\n 6.Print options to travel\n 7.Print all the buses\n 8.Print all the station and the lines that path there");
 
-            int choice = int.Parse(Console.ReadLine());
-
-            switch (choice)
+            // int choice = int.Parse(Console.ReadLine());
+            int choice;
+            do
             {
-                case (int)options.ADD_NEW_LINE:
-                    {
-                        Console.WriteLine("Please enter number of the new bus");
-                        int number = int.Parse(Console.ReadLine());
-                        Console.WriteLine("pleas choose first station to the new bus, enter the code to the first station and the name's station:  ");
-                        print_stations(stations);
-                        int code = int.Parse(Console.ReadLine());
-                        string name = Console.ReadLine();
-                        BusStation temp=new BusStation(code, name);
+                Console.WriteLine("Please enter your choice:\n " +
+               "1. New line bus\n 2.Add new stop station to the line\n 3.Delete line bus\n 4.Delete station from the line\n 5.Find lines that path at this station\n 6.Print options to travel\n 7.Print all the buses\n 8.Print all the station and the lines that path there");
 
-                        LineBus line = new LineBus(temp);
-                        line.NumberID = number;
-                        egged.addAtBusConpany(line);
+                choice = int.Parse(Console.ReadLine());
 
-                    }break;
-                case (int)options.ADD_STATION:
-                    {
-                        Console.WriteLine("Please enter number of the bus");
-                        print_lines(egged);
-                        int number = int.Parse(Console.ReadLine());
-                        Console.WriteLine("Please enter code station and the name of the new station ");
-                        int code = int.Parse(Console.ReadLine());
-                        string name = Console.ReadLine();
-
-                        if (egged.findLine_BusConpany(number))
+                switch (choice)
+                {
+                    case (int)options.ADD_NEW_LINE:
                         {
-                            BusStation temp = new BusStation(code, name);
-                            int index = search(number, egged);
-                            bool flag = egged[index].findStion(code);
-                            if (!flag)
+                            Console.WriteLine("Please enter number of the new bus");
+                            int number = int.Parse(Console.ReadLine());
+                            if (egged.findLine_BusConpany(number))
                             {
-                                egged[index].addAtLineBus(temp);
+                                Console.WriteLine("The line exsis");
                             }
                             else
-                                throw new ArgumentException(string.Format("The station is allready exsis  {0}  in this line", temp));
+                            {
 
-
+                                print_stations(stations);
+                                Console.WriteLine("pleas choose first station to the new bus, enter the code to the first station  ");
+                                int code = int.Parse(Console.ReadLine());
+                                BusStation temp = new BusStation(find_station(stations, code));
+                                LineBus line = new LineBus(temp);
+                                line.NumberID = number;
+                                egged.addAtBusConpany(line);
+                            }
                         }
-                        else
-                            throw new ArgumentException(string.Format("ERROR! The line {0} is not exsis", number));
-                    }
-                    break;
-                case (int)options.DELETE_LINE:
-                    {
-                        Console.WriteLine("Please enter number of the bus");
-                        print_lines(egged);
-                        int number = int.Parse(Console.ReadLine());
-                        egged.deleteAtBusConpany(number);
-                    }
-                    break;
-                case (int)options.DELETE_STATION:
-                    {
-                        Console.WriteLine("Please enter number of the bus");
-                        print_lines(egged);
-                        int number = int.Parse(Console.ReadLine());
-                        int index = search(number, egged);
-                        Console.WriteLine("Please enter code station and the name of the new station");
-                        print_stations_At_Linee(egged, index);
-                        int code = int.Parse(Console.ReadLine());
-                        string name = Console.ReadLine();
-                        BusStation temp = new BusStation(code, name);
-                        egged[index].DelAtLineBus(temp);
-                    }
-                    break;
-                case (int)options.SEARCH_LINE_AT_STATION:
-                    {
-                        Console.WriteLine("Please enter code of the station");
-                        print_stations(stations);
-                        int code = int.Parse(Console.ReadLine());
-                        lines_at_station(code, egged);
-                    }
-                    break;
-                case (int)options.SEARCH_PATH:
-                    {
-                        print_stations(stations);
-                        Console.WriteLine("Please enter code of the station 1");
-                        int code1 = int.Parse(Console.ReadLine());
-                        Console.WriteLine("Please enter code of the station 2");
-                        int code2 = int.Parse(Console.ReadLine());
-                        time_path(egged, code1, code2);
-                    }
-                    break;
-                case (int)options.PRINT_LINES:
-                    {
-                        foreach(LineBus item in egged)
+                        break;
+                    case (int)options.ADD_STATION:
                         {
-                            Console.WriteLine(item);
-                        }
+                            Console.WriteLine("Please enter number of the bus");
+                            print_lines(egged);
+                            int number = int.Parse(Console.ReadLine());
+                            Console.WriteLine("Please enter code station"); 
+                            int code = int.Parse(Console.ReadLine());
+                            Console.WriteLine("Please enter name of the station");
+                            string name = Console.ReadLine();
 
-                    }break;
-                case (int)options.PRINT_STATIONS:
-                    {
-                        int code;
-                        for (int i = 0; i < stations.Count; i++)
+                            if (egged.findLine_BusConpany(number))
+                            {
+                                BusStation temp = new BusStation(code, name);
+                                int index = search(number, egged);
+                                bool flag = egged[index].findStion(code);
+                                if (!flag)
+                                {
+                                    egged[index].addAtLineBus(temp);
+                                }
+                                else
+                                    throw new ArgumentException(string.Format("The station is allready exsis  {0}  in this line", temp));
+
+
+                            }
+                            else
+                                throw new ArgumentException(string.Format("ERROR! The line {0} is not exsis", number));
+                        }
+                        break;
+                    case (int)options.DELETE_LINE:
                         {
-                            code = stations[i].BusStationKey;
-                            Console.WriteLine("The code of the stations is: {0}", code);
-                            lines_at_station(code, egged);
+                            Console.WriteLine("Please enter number of the bus");
+                            print_lines(egged);
+                            int number = int.Parse(Console.ReadLine());
+                            egged.deleteAtBusConpany(number);
+                            print_lines(egged);
                         }
+                        break;
+                    case (int)options.DELETE_STATION:
+                        {
+                            print_lines(egged);
 
-                    }break;
-                default:
-                    Console.WriteLine("ERROE!");
-                    break;
-                
+                            Console.WriteLine("Please enter number of the bus");
+                           
+                            int number = int.Parse(Console.ReadLine());
+                            int index = search(number, egged);
+                            Console.WriteLine("Please enter code station ");
+                            print_stations_At_Linee(egged, index);
+                            int code = int.Parse(Console.ReadLine());
+                            BusStation temp =  find_station(stations, code);
 
-            }while (choice != (int)options.EXIST) ; 
+
+                        
+                            egged[index].DelAtLineBus(temp);
+                        }
+                        break;
+                    case (int)options.SEARCH_LINE_AT_STATION:
+                        {
+                            print_stations(stations);
+                            Console.WriteLine("Please enter code of the station");
+                          
+                            int code = int.Parse(Console.ReadLine());
+                           List<int> a= egged.WhichBusAtTheSTation(code);
+                            Console.WriteLine("In station number {0} the lines at this station ",code );
+                            for(int i=0;i<a.Count;i++)
+                            {
+                                Console.WriteLine(a[i]);
+                            }
+                        
+                        }
+                        break;
+                    case (int)options.SEARCH_PATH:
+                        {
+                            print_stations(stations);
+                            Console.WriteLine("Please enter code of the station 1");
+                            int code1 = int.Parse(Console.ReadLine());
+                            Console.WriteLine("Please enter code of the station 2");
+                            int code2 = int.Parse(Console.ReadLine());
+                            time_path(egged, code1, code2);
+                        }
+                        break;
+                    case (int)options.PRINT_LINES:
+                        {
+                            foreach (LineBus item in egged)
+                            {
+                                Console.WriteLine(item);
+                            }
+
+                        }
+                        break;
+                    case (int)options.PRINT_STATIONS:
+                        {
+                            int code;
+                            for (int i = 0; i < stations.Count; i++)
+                            {
+                                code = stations[i].BusStationKey;
+                                Console.WriteLine("The code of the stations is: {0}", code);
+                                List<int> a = egged.WhichBusAtTheSTation(code);
+                                Console.WriteLine(a);
+                                //  lines_at_station(code, egged);
+                            }
+
+                        }
+                        break;
+                    default:
+                        Console.WriteLine("ERROE!");
+                        break;
+                }
+
+
+
+            } while (choice != (int)options.EXIST) ; 
 
 
 
