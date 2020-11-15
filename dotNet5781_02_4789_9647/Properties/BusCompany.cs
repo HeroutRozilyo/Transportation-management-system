@@ -128,30 +128,37 @@ namespace dotNet5781_02_4789_9647.Properties
                 return temp;
         }
 
-        public BusCompany sortBus()
-        {
-            BusCompany sortList = new BusCompany();//the sort list 
-            BusCompany temp = new BusCompany();
-            temp=this;//list to change
-            LineBus smaller = new LineBus();//parameter that save the smaller line
-            foreach (LineBus hisony in temp)
-            {
-                smaller = hisony;//save the this at the list
-                foreach (LineBus item in temp)
-                {
-                    LineBus a = smaller.Compare(item);
-                    smaller = a;
 
-                }
-                //BusStation findTHis = sortList.findHelpAtBusConpany(smaller.NumberID);
-                //if (findTHis == null)
-                
-                    sortList.addAtBusConpany(smaller);
-                    temp.deleteAtBusConpany(smaller.NumberID); 
-                
-            }
-            return sortList;
+        public void sortBus()
+        {
+            companyBus.Sort();
         }
+
+
+        //public BusCompany sortBus()
+        //{
+        //    BusCompany sortList = new BusCompany();//the sort list 
+        //    BusCompany temp = new BusCompany();
+        //    temp=this;//list to change
+        //    LineBus smaller = new LineBus();//parameter that save the smaller line
+        //    foreach (LineBus hisony in temp)
+        //    {
+        //        smaller = hisony;//save the this at the list
+        //        foreach (LineBus item in temp)
+        //        {
+        //            LineBus a = smaller.Compare(item);
+        //            smaller = a;
+
+        //        }
+        //        //BusStation findTHis = sortList.findHelpAtBusConpany(smaller.NumberID);
+        //        //if (findTHis == null)
+
+        //            sortList.addAtBusConpany(smaller);
+        //            temp.deleteAtBusConpany(smaller.NumberID); 
+
+        //    }
+        //    return sortList;
+        //}
 
         public IEnumerator<LineBus> GetEnumerator()
         {
@@ -191,6 +198,10 @@ namespace dotNet5781_02_4789_9647.Properties
 
 
         }
+
+
+
+
 
         //public IEnumerator<LineBus> GetEnumerator() => new BusCompanyIEnumator();
 

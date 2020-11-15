@@ -28,19 +28,26 @@ namespace dotNet5781_02_4789_9647.Properties
        public BusStation LastStation { get; private set; } //last station
        public Zone Zone { get; set; } //area at the country
 
-        public LineBus(BusStation bus) :base(bus.BusStationKey,bus.Address)
+        public LineBus(BusStation station1, BusStation station2) 
         {
             busstations = new List<BusStation>();
-            busstations.Add(bus);
-            NumberID= r.Next(1, 999);
-            FirstStation = bus;
-            LastStation = bus;
-            
-            Zone= (Zone)r.Next(0, 3);
+            NumberID = r.Next(1, 999);
+            //to insert the 2 stations we have:
+            busstations.Insert(0, station1);
+            busstations.Insert(1, station2);
+
+            FirstStation = station1;
+            LastStation = station2;
+
+            Zone = (Zone)r.Next(0, 3);
+
             busstations[0].Distance = 0;
             busstations[0].TravelTime = TimeSpan.Zero;
 
         }
+
+       
+        
 
         public LineBus() :base()
         {
@@ -289,14 +296,18 @@ namespace dotNet5781_02_4789_9647.Properties
             else  return this;
             
         }
+       
+
+     
+
         public int CompareTo(object obj)
         {
             TimeSpan a = TravelLine((LineBus)obj);
             return a.CompareTo(TravelLine(this));
 
         }
-        
 
+     
     }
 
 }

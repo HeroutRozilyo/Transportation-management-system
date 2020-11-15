@@ -22,7 +22,7 @@ namespace dotNet5781_02_4789_9647
 
             for(int i=0;i<10;i++)
             {
-                company.ComanyBus.Add( new LineBus(bStation[i])); //now we restart 10 buses
+                company.ComanyBus.Add( new LineBus(bStation[i],bStation[i+1])); //now we restart 10 buses
             }
             for(int k=1;k<=3;k++)
             {
@@ -130,11 +130,11 @@ namespace dotNet5781_02_4789_9647
                 }
 
             }
-            temp = temp.sortBus();
+             temp.sortBus();
             
             foreach(LineBus item in temp)
             {
-                Console.WriteLine("line number: {0} "+item.NumberID+"travel time between the two stations is: {1}"+item.TravelLine(item));
+                Console.WriteLine("line number: {0}, travel time between the two stations is: {1} ", item.NumberID , item.TravelLine(item));
             }
 
 
@@ -159,10 +159,7 @@ namespace dotNet5781_02_4789_9647
             List<BusStation> stations = new List<BusStation>();
             restertStationn(ref stations,ref egged);
 
-            // Console.WriteLine("Please enter your choice:\n " +
-            //     "1. New line bus\n 2.Add new stop station to the line\n 3.Delete line bus\n 4.Delete station from the line\n 5.Find lines that path at this station\n 6.Print options to travel\n 7.Print all the buses\n 8.Print all the station and the lines that path there");
-
-            // int choice = int.Parse(Console.ReadLine());
+       
             int choice;
             do
             {
@@ -186,9 +183,15 @@ namespace dotNet5781_02_4789_9647
 
                                 print_stations(stations);
                                 Console.WriteLine("pleas choose first station to the new bus, enter the code to the first station  ");
-                                int code = int.Parse(Console.ReadLine());
-                                BusStation temp = new BusStation(find_station(stations, code));
-                                LineBus line = new LineBus(temp);
+                                int code1 = int.Parse(Console.ReadLine());
+                                Console.WriteLine("pleas choose last station to the new bus, enter the code to the last station  ");
+                                int code2 = int.Parse(Console.ReadLine());
+
+
+                                BusStation temp1 = new BusStation(find_station(stations, code1));
+                                BusStation temp2 = new BusStation(find_station(stations, code2));
+
+                                LineBus line = new LineBus(temp1,temp2);
                                 line.NumberID = number;
                                 egged.addAtBusConpany(line);
                             }
@@ -291,8 +294,12 @@ namespace dotNet5781_02_4789_9647
                                 code = stations[i].BusStationKey;
                                 Console.WriteLine("The code of the stations is: {0}", code);
                                 List<int> a = egged.WhichBusAtTheSTation(code);
-                                Console.WriteLine(a);
-                                //  lines_at_station(code, egged);
+  
+                                for (int j = 0; j < a.Count; j++)
+                                {
+                                    Console.WriteLine(a[j]);
+                                }
+
                             }
 
                         }
