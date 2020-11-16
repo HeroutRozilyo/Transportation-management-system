@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace dotNet5781_02_4789_9647.Properties
 {
-    public class LineBus : BusStation,IComparable
+    public class LineBus : BusStation, IComparable<LineBus>
     {
        private static Random r = new Random();
 
 
-        private List<BusStation> busstations;  //list that keep all the station that the bus have
+       private List<BusStation> busstations;  //list that keep all the station that the bus have
        public List<BusStation> BusStations
         {
             get
@@ -23,15 +23,19 @@ namespace dotNet5781_02_4789_9647.Properties
             }
         }
 
-       public int NumberID { get; set; } //the number line
-       public BusStation FirstStation { get; private set; } //firststation
-       public BusStation LastStation { get; private set; } //last station
-       public Zone Zone { get; set; } //area at the country
+       public int NumberID { get; set; }         //the number line
+       public BusStation FirstStation { get; private set; }         //firststation
+       public BusStation LastStation { get; private set; }       //last station
+       public Zone Zone { get; set; }        //area at the country
 
-        public LineBus(BusStation station1, BusStation station2) 
+        //------------------------------
+        //constructors 
+
+        public LineBus(BusStation station1, BusStation station2)           //constructor that get 2 stations to restart the new bus
         {
             busstations = new List<BusStation>();
             NumberID = r.Next(1, 999);
+
             //to insert the 2 stations we have:
             busstations.Insert(0, station1);
             busstations.Insert(1, station2);
@@ -49,7 +53,7 @@ namespace dotNet5781_02_4789_9647.Properties
        
         
 
-        public LineBus() :base()
+        public LineBus() :base()        //deafult constructor
         {
             busstations = new List<BusStation>();
             NumberID = 0;
@@ -57,40 +61,16 @@ namespace dotNet5781_02_4789_9647.Properties
             LastStation = null;
         }
 
-
-        
-        public void addLastAtLineBus(BusStation busStation) //add bus to the list
-        {
-         
-
-            busstations.Add(busStation);
-            LastStation = busstations[busstations.Count - 1];
-
-            
-        }
-
-       
-
-        public void addFirstAtLineBus(BusStation bus) //a
-        {
-            bus.TravelTime = TimeSpan.Zero;
-            bus.Distance = 0;//there are not have station befor
-            busstations.Insert(0, bus);
-            FirstStation = busstations[0];
-            busstations[1].TravelTime = TimeSpan.FromMinutes(Distance / 6000);
-            busstations[1].Distance = r.NextDouble() * (3000 - 100) + 100;
-
-        }
+        //------------------------------
+        //the func add a new station to the bus. the func call to another function to add bus incordding to the place to add the station.
 
         public void addAtLineBus(BusStation busStation)
         {
-           // this.busstations.Add(new BusStation());
-
             //Console.WriteLine("In this line there are " + busstations.Count + " stations" + ", where you want to add this station? [1-" + (busstations.Count + 1) + "]\n");
-           // int index = (int.Parse(Console.ReadLine()) - 1);
+            // int index = (int.Parse(Console.ReadLine()) - 1);
 
-             int index= r.Next(1, 2)-1;
-            if (index == 0)
+            int index = r.Next(1, 2) - 1;      
+            if (index == 0)     //if we need add the station at the begin
             {
 
                 addFirstAtLineBus(busStation);
@@ -98,21 +78,23 @@ namespace dotNet5781_02_4789_9647.Properties
             }
             else
             {
-           
 
-                if (index > (busstations.Count))
+
+                if (index > (busstations.Count))        //if the new place is not at the range
                 {
 
                     throw new ArgumentOutOfRangeException("index", "index should be less than or equal to" + busstations.Count);
                 }
-                if (index == (busstations.Count))
+                if (index == (busstations.Count))       //if we need to add at the last of the line path
                 {
                     addLastAtLineBus(busStation);
                 }
-                else
+                else        //if we need to add the station between the first station to last station
                 {
                     busstations.Insert(index, busStation);
-                    BusStation a=new BusStation();// to random newest Distance and travelTime to the next station after the insert
+
+                    // to random newest Distance and travelTime to the next station after the insert
+                    BusStation a = new BusStation();
                     busstations[index + 1].Distance = a.Distance;
                     busstations[index + 1].TravelTime = a.TravelTime;
                 }
@@ -120,45 +102,55 @@ namespace dotNet5781_02_4789_9647.Properties
         }
 
 
-        public void DelLastAtLineBus(BusStation bStation)
-        {
-            busstations.Remove(bStation);
+        public void addLastAtLineBus(BusStation busStation) //add bus to the last place at the list
+        { 
+            busstations.Add(busStation);
             LastStation = busstations[busstations.Count - 1];
-
-
         }
 
-        public void DelFirstAtLineBus(BusStation busStation)
+       
+
+        public void addFirstAtLineBus(BusStation bus) //add bus to the first place at the list
         {
-            busstations.RemoveAt(0);
+            //its the first station so the distance and the travel time from the prestation is zero
+            bus.TravelTime = TimeSpan.Zero;
+            bus.Distance = 0;   
+            
+            busstations.Insert(0, bus);
             FirstStation = busstations[0];
-            busstations[0].TravelTime = TimeSpan.Zero;
-            busstations[0].Distance = 0;//there are not have station befor
+            busstations[1].TravelTime = TimeSpan.FromMinutes(Distance / 6000);
+            busstations[1].Distance = r.NextDouble() * (3000 - 100) + 100;
+
         }
+
+        //------------------------------
+        //the func delete a  station from the bus. the func call to another function to delete the station.
 
         public void DelAtLineBus(BusStation bStation)
-        { 
-            int index = find(bStation);
+        {
+            int index = find(bStation);     //to find the index of the station
 
-            if (index == 0)
+            if (index == 0)     //if we need to delete the first station
             {
                 DelFirstAtLineBus(bStation);
             }
             else
             {
-                if (index == -1)
+                if (index == -1)        //if the staion to delete not exsis
                 {
                     throw new ArgumentOutOfRangeException("index", "index should be less than or equal to" + busstations.Count);
                 }
 
-                if (index == busstations.Count )
+                if (index == busstations.Count)     //if we need delete the last station
                 {
                     DelLastAtLineBus(bStation);
                 }
-                else
+                else        // to delete station at the middle of the list
                 {
                     busstations.RemoveAt(index);
-                    BusStation a = new BusStation();// to random newest Distance and travelTime to the next station after the delete
+
+                    // to random newest Distance and travelTime to the next station after the delete
+                    BusStation a = new BusStation();
                     busstations[index].Distance = a.Distance;
                     busstations[index].TravelTime = a.TravelTime;
                 }
@@ -167,6 +159,24 @@ namespace dotNet5781_02_4789_9647.Properties
             }
 
         }
+
+        public void DelLastAtLineBus(BusStation bStation)       //delete last station
+        {
+            busstations.Remove(bStation);
+            LastStation = busstations[busstations.Count - 1];
+
+
+        }
+
+        public void DelFirstAtLineBus(BusStation busStation)        //delete first station
+        {
+            busstations.RemoveAt(0);
+            FirstStation = busstations[0];
+            busstations[0].TravelTime = TimeSpan.Zero;
+            busstations[0].Distance = 0;//there are not have station befor
+        }
+
+       
 
 
         public override string ToString()
@@ -201,7 +211,7 @@ namespace dotNet5781_02_4789_9647.Properties
             return -1;
         }
 
-        public bool findStion(int id) //return the busstion  of the station
+        public bool findStion(int id) //return true if the station exsis at the current line
         {
 
             int i = 0;
@@ -296,18 +306,27 @@ namespace dotNet5781_02_4789_9647.Properties
             else  return this;
             
         }
-       
 
-     
-
-        public int CompareTo(object obj)
+        public int CompareTo(LineBus obj)
         {
-            TimeSpan a = TravelLine((LineBus)obj);
-            return a.CompareTo(TravelLine(this));
+            LineBus otherLine = (LineBus)obj;
 
+            //calculate the total time of the busesLine:
+            TimeSpan t1 = this.TravelLine(this);
+            TimeSpan t2 = otherLine.TravelLine(otherLine);
+
+            return t1.CompareTo(t2);
         }
 
-     
+
+        //public int CompareTo(object obj)
+        //{
+        //    TimeSpan a = TravelLine((LineBus)obj);
+        //    return a.CompareTo(TravelLine(this));
+
+        //}
+
+
     }
 
 }

@@ -14,16 +14,18 @@ namespace dotNet5781_02_4789_9647.Properties
     {
         private static Random r = new Random();
        
+        //------------------
+        //constructor
 
-        public BusStation()
+        public BusStation()         //deafult constructor
         {
-           //3000m
-            Distance = r.NextDouble() * (3000 - 100) + 100; 
-            //standart average speed is 60 km/minutes
-            TravelTime = TimeSpan.FromMinutes(Distance / 6000);
+           
+            Distance = r.NextDouble() * (3000 - 100) + 100;         //3000m
+            
+            TravelTime = TimeSpan.FromMinutes(Distance / 6000);     //standart average speed is 60 km/minutes
         }
 
-        public BusStation(Station a)
+        public BusStation(Station a)        //constructor
         {
            this.Distance= r.NextDouble() * (3000 - 100) + 100;
             this.TravelTime= TimeSpan.FromMinutes(Distance / 6000);
@@ -33,17 +35,17 @@ namespace dotNet5781_02_4789_9647.Properties
             this.Address = a.Address;
         }
 
-        public BusStation(ref BusStation busStation)
-        {
-            Distance = busStation.Distance;
-            TravelTime = busStation.TravelTime;
-            BusStationKey = busStation.BusStationKey;
-            Address = busStation.Address;
-            Latitude = busStation.Latitude;
-            Longitude = busStation.Longitude;
-        }
+        //public BusStation(ref BusStation busStation)        
+        //{
+        //    Distance = busStation.Distance;
+        //    TravelTime = busStation.TravelTime;
+        //    BusStationKey = busStation.BusStationKey;
+        //    Address = busStation.Address;
+        //    Latitude = busStation.Latitude;
+        //    Longitude = busStation.Longitude;
+        //}
 
-        public BusStation( int id, string name) :base(id,name)
+        public BusStation( int id, string name) :base(id,name)      //constructor that accept values
         {
             Distance = r.NextDouble() * (3000 - 100) + 100;
             TravelTime = TimeSpan.FromMinutes(Distance / 6000);
@@ -51,14 +53,14 @@ namespace dotNet5781_02_4789_9647.Properties
 
      
 
-        /// distance from previous BusStation
-        public double Distance
+      
+        public double Distance        /// distance from previous BusStation
         {
             get; set;
         }
 
-        /// Travel time from previous BusStation
-        public TimeSpan TravelTime
+    
+        public TimeSpan TravelTime          /// Travel time from previous BusStation
         {
             get;
             set;
