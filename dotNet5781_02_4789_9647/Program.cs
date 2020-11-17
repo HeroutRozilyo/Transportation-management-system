@@ -405,6 +405,10 @@ namespace dotNet5781_02_4789_9647
 
                         }
                         break;
+                    case (int)options.EXIST:
+                        {
+                            Console.WriteLine("BYE");
+                        }break;
                     default:
                         Console.WriteLine("ERROE!");
                         break;
