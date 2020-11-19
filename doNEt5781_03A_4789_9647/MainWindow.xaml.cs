@@ -85,7 +85,10 @@ namespace doNEt5781_03A_4789_9647
         {
             currentDisplayBusLine = egged[index];
             UpGrid.DataContext = currentDisplayBusLine;
-            lbBusLineStations.DataContext = currentDisplayBusLine.BusStations;
+            lbBusLineStations.DataContext = currentDisplayBusLine.BusStations; 
+            
+           
+
         }
 
         private void lbBusLineStations_SelectionChanged(object sender, SelectionChangedEventArgs e)
