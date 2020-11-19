@@ -25,5 +25,6 @@ VerticalAlignment="Stretch" Width="793">
             <TextBox Grid.Column="2" Name ="tbArea" HorizontalAlignment="Stretch" Margin="197.667,0,10.333,0" TextWrapping="Wrap" Text="{Binding Path=Area}" VerticalAlignment="Stretch" TextChanged="tbArea_TextChanged" Grid.ColumnSpan="2"/>
             <Label Content="Area" Grid.Column="2" HorizontalAlignment="Left" Margin="67.667,22,0,0" VerticalAlignment="Top" Height="28" Width="91" FontWeight="Bold" FontSize="16"/>
         </Grid>
+        <ListBox x:Name="ibBusLineStation" ItemsSource="{Binding}" HorizontalAlignment="Left" Height="453" Margin="0,-17,0,0" VerticalAlignment="Top" Width="793" SelectionChanged="ListBox_SelectionChanged" Grid.RowSpan="2"/>
     </Grid>
 </Window>
