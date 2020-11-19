@@ -22,7 +22,7 @@ namespace doNEt5781_03A_4789_9647
     /// </summary>
     public partial class MainWindow : Window
     {
-        static Random lineRandom = new Random(DateTime.Now.Millisecond);
+      private static Random r = new Random(DateTime.Now.Millisecond);
         BusCompany egged = new BusCompany();
         List<BusStation> stations = new List<BusStation>();
             
@@ -64,6 +64,12 @@ namespace doNEt5781_03A_4789_9647
             cbBusLines.ItemsSource = stations;
             cbBusLines.DisplayMemberPath = " NumberID ";
             cbBusLines.SelectedIndex = 0;
+            ShowBusLine(((LineBus)cbBusLines.SelectedItem).NumberID);
+        }
+
+        private object ShowBusLine(LineBus selectedItem)
+        {
+            throw new NotImplementedException();
         }
 
         private void tbArea_TextChanged(object sender, TextChangedEventArgs e)
