@@ -5,8 +5,24 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:doNEt5781_03A_4789_9647"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
+        Title="MainWindow" Height="640" Width="800">
+    <Grid Name="MainGrid">
+        <Grid.RowDefinitions>
+
+            <RowDefinition Height="50*"/>
+            <RowDefinition Height="400*"/>
+        </Grid.RowDefinitions>
+        <Grid Name="UpGrid" HorizontalAlignment="Left" Height="auto" Grid.Row="0"
+VerticalAlignment="Stretch" Width="793">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions >
+            <ComboBox Name="cbBusLines" Grid.Column="1" HorizontalAlignment="Stretch" Margin="0.333,0,197.667,0" VerticalAlignment="Stretch" Grid.ColumnSpan="2"/>
+            <TextBox Name ="tbArea" Grid.Column="3" HorizontalAlignment="Left" Margin="198.667,0,-0.333,0" TextWrapping="Wrap" Text="{Binding Path=Area}" VerticalAlignment="Stretch" RenderTransformOrigin="0.493,0.534"  Width="0" FontFamily="Segoe UI Historic" FontSize="24" FontWeight="Bold"/>
+            <Label Content="Label" HorizontalAlignment="Left" Margin="104,14,0,0" VerticalAlignment="Top"/>
+        </Grid>
     </Grid>
 </Window>
