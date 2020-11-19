@@ -21,7 +21,7 @@ VerticalAlignment="Stretch" Width="793">
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions >
-            <ComboBox Name="cbBusLines" Grid.Column="1" HorizontalAlignment="Stretch" Margin="0.333,0,197.667,0" VerticalAlignment="Stretch" Grid.ColumnSpan="2"/>
+            <ComboBox Name="cbBusLines" Grid.Column="1" HorizontalAlignment="Stretch" Margin="0.333,0,197.667,0" VerticalAlignment="Stretch" Grid.ColumnSpan="2" SelectionChanged="cbBusLines_SelectionChanged"/>
             <Label Content="Bus Line Number" HorizontalAlignment="Left" Margin="10,14,0,0" VerticalAlignment="Top" FontSize="20" FontWeight="Bold"/>
             <TextBox Grid.Column="3" Name ="tbArea" HorizontalAlignment="Stretch" Height="23" Margin="9.667,10,0,0" TextWrapping="Wrap" Text="{Binding Path=Area}" VerticalAlignment="Stretch" Width="120" TextChanged="tbArea_TextChanged"/>
             <Label Content="Area" Grid.Column="2" HorizontalAlignment="Left" Margin="72.667,21,0,0" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" RenderTransformOrigin="-0.723,-0.058"/>

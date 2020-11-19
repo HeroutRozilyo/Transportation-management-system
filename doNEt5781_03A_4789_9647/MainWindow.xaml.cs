@@ -57,7 +57,7 @@ namespace doNEt5781_03A_4789_9647
            
 
         }
-        private LineBus currentDisplayBusLine;
+        private LineBus currentDisplayBusLine = new LineBus();
 
         private void initComboBox()
         {
@@ -70,7 +70,17 @@ namespace doNEt5781_03A_4789_9647
         {
         }
 
-        
+        private void cbBusLines_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ShowBusLine((cbBusLines.SelectedValue as LineBus).NumberID);
+        }
+
+        private void ShowBusLine(int index)
+        {
+            currentDisplayBusLine = egged[index];
+            UpGrid.DataContext = currentDisplayBusLine;
+            lbBusLineStations.DataContext = currentDisplayBusLine.BusStations;
+        }
     }
 
 
