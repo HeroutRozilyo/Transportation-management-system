@@ -26,7 +26,7 @@ namespace dotNet5781_02_4789_9647.Properties
        public int NumberID { get; set; }         //the number line
        public BusStation FirstStation { get; private set; }         //firststation
        public BusStation LastStation { get; private set; }       //last station
-       public Zone Zone { get; set; }        //area at the country
+       public Zone zone { get; set; }        //area at the country
 
         //------------------------------
         //constructors 
@@ -43,7 +43,7 @@ namespace dotNet5781_02_4789_9647.Properties
             FirstStation = station1;
             LastStation = station2;
 
-            Zone = (Zone)r.Next(0, 3);
+            zone = (Zone)r.Next(0, 3);
 
             busstations[0].Distance = 0;
             busstations[0].TravelTime = TimeSpan.Zero;
@@ -190,7 +190,7 @@ namespace dotNet5781_02_4789_9647.Properties
 
             }
             result += busstations[i].BusStationKey;
-            return "Bus Line: " + NumberID+ " ,Area: " + Zone+ " ,Statins of the bus: " + result;
+            return "Bus Line: " + NumberID+ " ,Area: " + zone+ " ,Statins of the bus: " + result;
 
         }
 

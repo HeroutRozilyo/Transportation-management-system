@@ -1,4 +1,5 @@
 ﻿
+using dotNet5781_02_4789_9647;
 using dotNet5781_02_4789_9647.Properties;
 using System;
 using System.Collections.Generic;
@@ -57,9 +58,10 @@ namespace doNEt5781_03A_4789_9647
 
             InitializeComponent();
             initComboBox();
-           
+         
 
         }
+
         
 
         private void initComboBox()
@@ -68,12 +70,17 @@ namespace doNEt5781_03A_4789_9647
             cbBusLines.DisplayMemberPath = " NumberID ";
             cbBusLines.SelectedIndex = 0;
             ShowBusLine(((LineBus)cbBusLines.SelectedItem).NumberID);
+            
         }
 
         
+
         private void tbArea_TextChanged(object sender, TextChangedEventArgs e)
         {
+           
         }
+
+        
 
         private void cbBusLines_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
