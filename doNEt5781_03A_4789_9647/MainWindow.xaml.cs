@@ -24,5 +24,10 @@ namespace doNEt5781_03A_4789_9647
         {
             InitializeComponent();
         }
+
+        private void tbArea_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }
