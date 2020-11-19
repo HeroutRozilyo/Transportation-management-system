@@ -199,7 +199,11 @@ namespace dotNet5781_02_4789_9647.Properties
             //    }
             get
             {
-                return companyBus[index];
+                if (index >= 0 && index < companyBus.Count)
+                {
+                    return companyBus[index];
+                }
+                return 
             }
 
 
