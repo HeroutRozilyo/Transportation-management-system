@@ -23,13 +23,16 @@ namespace doNEt5781_03A_4789_9647
     public partial class MainWindow : Window
     {
       private static Random r = new Random(DateTime.Now.Millisecond);
-        BusCompany egged = new BusCompany();
-        List<BusStation> stations = new List<BusStation>();
-            
-        
+      BusCompany egged;
+      List<BusStation> stations;
+
+      private LineBus currentDisplayBusLine = new LineBus();
 
         public MainWindow()
         {
+            egged = new BusCompany();
+            stations = new List<BusStation>();
+
             for (int i = 0; i < 40; i++)//restart stations
             {
                 string name = string.Format("station " + (i + 1));
@@ -57,21 +60,17 @@ namespace doNEt5781_03A_4789_9647
            
 
         }
-        private LineBus currentDisplayBusLine = new LineBus();
+        
 
         private void initComboBox()
         {
-            cbBusLines.ItemsSource = stations;
+            cbBusLines.ItemsSource = egged.ComanyBus;
             cbBusLines.DisplayMemberPath = " NumberID ";
             cbBusLines.SelectedIndex = 0;
             ShowBusLine(((LineBus)cbBusLines.SelectedItem).NumberID);
         }
 
-        private object ShowBusLine(LineBus selectedItem)
-        {
-            throw new NotImplementedException();
-        }
-
+        
         private void tbArea_TextChanged(object sender, TextChangedEventArgs e)
         {
         }
