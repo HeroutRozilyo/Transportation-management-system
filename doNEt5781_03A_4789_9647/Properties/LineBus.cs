@@ -12,7 +12,7 @@ namespace dotNet5781_02_4789_9647.Properties
     {
        private static Random r = new Random();
 
-
+        
        private List<BusStation> busstations;  //list that keep all the station that the bus have
        public List<BusStation> BusStations
         {
