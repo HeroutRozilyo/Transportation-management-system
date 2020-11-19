@@ -1,5 +1,4 @@
-﻿using dotNet5781_02_4789_9647.Properties;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,28 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace doNEt5781_03A_4789_9647
+namespace doNet5781_03A_9647_4789
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
-        static Random lineRandom= new Random(DataTime )
         public MainWindow()
         {
-           
             InitializeComponent();
-        }
-
-        private void tbArea_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
-        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
         }
     }
 }
