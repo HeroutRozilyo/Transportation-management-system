@@ -180,30 +180,23 @@ namespace dotNet5781_02_4789_9647.Properties
             return GetEnumerator();
         }
 
-
-
+            /// <indexer>
         public LineBus this[int index]
         {
-            //    get
-            //    {
-            //        LineBus lineBus = default(LineBus);
-            //        lineBus = companyBus.Find(bus => bus.NumberID == index);
-
-            //        if (lineBus == null)
-            //        {
-            //            ArgumentNullException exception = new ArgumentNullException("index", "Kav lo kayam");
-            //            exception.Data["LineNumber"] = index;
-            //            throw exception;
-            //        }
-            //        return lineBus;
-            //    }
             get
             {
-                return companyBus[index];
+                foreach (LineBus item in ComanyBus)
+                {
+                    if (item.NumberID == index)
+                        return item;
+                }
+                //if the bus is not found:
+                throw new ArgumentException(string.Format("{0} Number of Line is not exist in our company", index));
+
             }
-
-
         }
+
+    
     }
 
 }
