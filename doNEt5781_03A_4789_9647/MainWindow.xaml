@@ -11,8 +11,9 @@ VerticalAlignment="Stretch" Width="793">
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions >
             <ComboBox Name="cbBusLines" Grid.Column="1" HorizontalAlignment="Stretch" Margin="0.333,0,197.667,0" VerticalAlignment="Stretch" Grid.ColumnSpan="2"/>
-            <TextBox Name ="tbArea" Grid.Column="3" HorizontalAlignment="Left" Margin="198.667,0,-0.333,0" TextWrapping="Wrap" Text="{Binding Path=Area}" VerticalAlignment="Stretch" RenderTransformOrigin="0.493,0.534"  Width="0" FontFamily="Segoe UI Historic" FontSize="24" FontWeight="Bold"/>
-            <Label Content="Label" HorizontalAlignment="Left" Margin="104,14,0,0" VerticalAlignment="Top"/>
+            <Label Content="Bus Line Number" HorizontalAlignment="Left" Margin="29,19,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
+            <TextBox Grid.Column="2" Name ="tbArea" HorizontalAlignment="Stretch" Margin="197.667,0,10.333,0" TextWrapping="Wrap" Text="{Binding Path=Area}" VerticalAlignment="Stretch" TextChanged="tbArea_TextChanged" Grid.ColumnSpan="2"/>
+            <Label Content="Area" Grid.Column="2" HorizontalAlignment="Left" Margin="67.667,22,0,0" VerticalAlignment="Top" Height="28" Width="91" FontWeight="Bold" FontSize="16"/>
         </Grid>
     </Grid>
 </Window>
