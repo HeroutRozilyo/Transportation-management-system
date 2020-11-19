@@ -7,6 +7,9 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="640" Width="800">
     <Grid Name="MainGrid">
+        <Grid.Background>
+            <ImageBrush/>
+        </Grid.Background>
         <Grid.RowDefinitions>
 
             <RowDefinition Height="68*"/>
@@ -21,11 +24,11 @@ VerticalAlignment="Stretch" Width="793">
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions >
-            <ComboBox Name="cbBusLines" Grid.Column="1" HorizontalAlignment="Stretch" Margin="0.333,0,197.667,0" VerticalAlignment="Stretch" Grid.ColumnSpan="2" SelectionChanged="cbBusLines_SelectionChanged"/>
+            <ComboBox Name="cbBusLines" Grid.Column="1" HorizontalAlignment="Stretch" Margin="0.333,0,197.667,0" VerticalAlignment="Center" Grid.ColumnSpan="2" SelectionChanged="cbBusLines_SelectionChanged" Opacity="2" HorizontalContentAlignment="Center"/>
             <Label Content="Bus Line Number" HorizontalAlignment="Left" Margin="10,14,0,0" VerticalAlignment="Top" FontSize="20" FontWeight="Bold"/>
             <TextBox Grid.Column="3" Name ="tbArea" HorizontalAlignment="Stretch" Height="23" Margin="9.667,10,0,0" TextWrapping="Wrap" Text="{Binding Path=zone}" VerticalAlignment="Stretch" Width="120" TextChanged="tbArea_TextChanged" FontSize="20"/>
             <Label Content="Area" Grid.Column="2" HorizontalAlignment="Left" Margin="72.667,21,0,0" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" RenderTransformOrigin="-0.723,-0.058"/>
         </Grid>
-        <ListBox Name="lbBusLineStations" HorizontalAlignment="Left" Height="533" Margin="0,10,0,-0.333" Grid.Row="1" VerticalAlignment="Top" Width="783" Grid.RowSpan="2" ItemsSource="{Binding}"/>
+        <ListBox Name="lbBusLineStations" HorizontalAlignment="Left" Height="215" Margin="70,28,0,0" Grid.Row="1" VerticalAlignment="Top" Width="637" ItemsSource="{Binding}" FontSize="20"/>
     </Grid>
 </Window>

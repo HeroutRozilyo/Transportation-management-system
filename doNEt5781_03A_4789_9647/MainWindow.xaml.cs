@@ -62,8 +62,6 @@ namespace doNEt5781_03A_4789_9647
 
         }
 
-        
-
         private void initComboBox()
         {
             cbBusLines.ItemsSource = egged.ComanyBus;
@@ -73,14 +71,10 @@ namespace doNEt5781_03A_4789_9647
             
         }
 
-        
-
         private void tbArea_TextChanged(object sender, TextChangedEventArgs e)
         {
            
         }
-
-        
 
         private void cbBusLines_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
