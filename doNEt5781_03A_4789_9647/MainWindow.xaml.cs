@@ -22,7 +22,7 @@ namespace doNEt5781_03A_4789_9647
     {
         public MainWindow()
         {
-            InitializeComponent();
+            InitializeComponent()
         }
 
         private void tbArea_TextChanged(object sender, TextChangedEventArgs e)
