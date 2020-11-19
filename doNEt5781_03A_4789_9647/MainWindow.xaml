@@ -44,4 +44,4 @@ VerticalAlignment="Stretch" Width="793">
         </ListBox>
         <Label Content="The Stations of the LineBus:" HorizontalAlignment="Left" Margin="113,36,0,0" Grid.Row="1" VerticalAlignment="Top" Height="34" Width="261" FontFamily="Pristina" FontSize="26" FontWeight="Bold"/>
     </Grid>
-</Window></Window>
+</Window>
