@@ -5,8 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:doNEt5781_03A_4789_9647"
         mc:Ignorable="d"
-        Title="BusCompany" Height="640" Width="800">
-
+        Title="BusCompany" Height="640" Width="800" Icon="Bus.jpg" >
     <Grid Name="MainGrid" Background="{DynamicResource {x:Static SystemColors.GradientInactiveCaptionBrushKey}}">
         <Grid.RowDefinitions>
 
