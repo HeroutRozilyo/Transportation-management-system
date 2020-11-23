@@ -20,15 +20,15 @@ namespace dotNet5781_02_4789_9647.Properties
         public BusStation()         //deafult constructor
         {
            
-            Distance = r.NextDouble() * (3000 - 100) + 100;         //3000m
+            Distance = r.NextDouble() * (3000 - 100) + 100;   //3000m
             
-            TravelTime = TimeSpan.FromMinutes(Distance / 6000);     //standart average speed is 60 km/minutes
+            TravelTime = TimeSpan.FromMinutes(Distance / 1000);     //standart average speed is 60 km/h
         }
 
         public BusStation(Station a)        //constructor
         {
            this.Distance= r.NextDouble() * (3000 - 100) + 100;
-            this.TravelTime= TimeSpan.FromMinutes(Distance / 6000);
+            this.TravelTime= TimeSpan.FromMinutes(Distance / 1000);
             this.Latitude = a.Latitude;
             this.Longitude = a.Longitude;
             this.BusStationKey = a.BusStationKey;
@@ -48,7 +48,7 @@ namespace dotNet5781_02_4789_9647.Properties
         public BusStation( int id, string name) :base(id,name)      //constructor that accept values
         {
             Distance = r.NextDouble() * (3000 - 100) + 100;
-            TravelTime = TimeSpan.FromMinutes(Distance / 6000);
+            TravelTime = TimeSpan.FromMinutes(Distance / 1000);
         }
 
      
@@ -67,14 +67,15 @@ namespace dotNet5781_02_4789_9647.Properties
         }
 
 
-        //public override string ToString()
-        //{
-        //    string result = "";
+        public override string ToString()
+        {
+            string result = "";
+            result = "Station Number " + BusStationKey +":\n \t" + " Location:" + base.ToString()+ "\n \t" + " The time and disatance frome the previous station is: " + TravelTime + " ," + Distance + "m.";
 
-        //    result = "For station number "+ BusStationKey+ " The travel time is: " + TravelTime + " and the distance is between the two stations is: " + Distance;
+            //result = "station number " + BusStationKey + ": The time  is- " + TravelTime + " and the distance is between the two stations is: " + Distance;
 
-        //    return result;
-        //}
+            return result;
+        }
     }
 }
 

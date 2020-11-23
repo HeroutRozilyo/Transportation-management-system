@@ -21,10 +21,11 @@ namespace doNEt5781_03A_4789_9647
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
+     
     public partial class MainWindow : Window
     {
-      private static Random r = new Random(DateTime.Now.Millisecond);
-      BusCompany egged;
+        private static Random r = new Random(DateTime.Now.Second);
+        BusCompany egged;
       List<BusStation> stations;
 
       private LineBus currentDisplayBusLine = new LineBus();

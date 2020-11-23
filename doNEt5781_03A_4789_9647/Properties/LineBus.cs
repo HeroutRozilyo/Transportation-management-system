@@ -118,8 +118,9 @@ namespace dotNet5781_02_4789_9647.Properties
             
             busstations.Insert(0, bus);
             FirstStation = busstations[0];
-            busstations[1].TravelTime = TimeSpan.FromMinutes(Distance / 6000);
             busstations[1].Distance = r.NextDouble() * (3000 - 100) + 100;
+            busstations[1].TravelTime = TimeSpan.FromMinutes(busstations[1].Distance / 1000);
+           
 
         }
 
@@ -187,6 +188,7 @@ namespace dotNet5781_02_4789_9647.Properties
             for (; i < busstations.Count - 1; i++)
             {
                 result += busstations[i].BusStationKey + "  ";
+
 
             }
             result += busstations[i].BusStationKey;
