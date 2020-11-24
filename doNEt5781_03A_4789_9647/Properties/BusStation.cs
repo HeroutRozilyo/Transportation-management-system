@@ -23,10 +23,9 @@ namespace dotNet5781_02_4789_9647.Properties
         public BusStation()         //deafult constructor
         {
            
-            Distance = r.NextDouble() * (3000 - 100) + 100;         //3000m
+            Distance = r.NextDouble() * (3000 - 100) + 100;   //3000m
             
-           // TravelTime = TimeSpan.FromMinutes(Distance / 6000);     //standart average speed is 60 km/minutes
-            TravelTime = TimeSpan.FromMilliseconds(Distance / 1000);
+            TravelTime = TimeSpan.FromMinutes(Distance / 1000);     //standart average speed is 60 km/h
         }
 
         public BusStation(Station a)        //constructor
@@ -71,11 +70,11 @@ namespace dotNet5781_02_4789_9647.Properties
         }
 
 
-        public override string ToString()
-        {
-            string result = "";
+        //public override string ToString()
+        //{
+        //    string result = "";
 
-            result = "For station number " + BusStationKey + " The travel time is: " + TravelTime + " and the distance is between the two stations is: " + Distance;
+        //    result = "For station number "+ BusStationKey+ " The travel time is: " + TravelTime + " and the distance is between the two stations is: " + Distance;
 
             return result;
         }
