@@ -10,10 +10,13 @@ using System.Threading.Tasks;
 
 namespace dotNet5781_02_4789_9647.Properties
 {
+    
     public class BusStation : Station
     {
-        private static Random r = new Random();
-       
+        //private static Random r = new Random();
+        private static Random r = new Random(DateTime.Now.Millisecond);
+
+
         //------------------
         //constructor
 
@@ -22,13 +25,14 @@ namespace dotNet5781_02_4789_9647.Properties
            
             Distance = r.NextDouble() * (3000 - 100) + 100;         //3000m
             
-            TravelTime = TimeSpan.FromMinutes(Distance / 6000);     //standart average speed is 60 km/minutes
+           // TravelTime = TimeSpan.FromMinutes(Distance / 6000);     //standart average speed is 60 km/minutes
+            TravelTime = TimeSpan.FromMilliseconds(Distance / 1000);
         }
 
         public BusStation(Station a)        //constructor
         {
            this.Distance= r.NextDouble() * (3000 - 100) + 100;
-            this.TravelTime= TimeSpan.FromMinutes(Distance / 6000);
+            this.TravelTime= TimeSpan.FromMinutes(Distance / 1000);
             this.Latitude = a.Latitude;
             this.Longitude = a.Longitude;
             this.BusStationKey = a.BusStationKey;
@@ -48,7 +52,7 @@ namespace dotNet5781_02_4789_9647.Properties
         public BusStation( int id, string name) :base(id,name)      //constructor that accept values
         {
             Distance = r.NextDouble() * (3000 - 100) + 100;
-            TravelTime = TimeSpan.FromMinutes(Distance / 6000);
+            TravelTime = TimeSpan.FromMinutes(Distance / 1000);
         }
 
      
@@ -67,14 +71,14 @@ namespace dotNet5781_02_4789_9647.Properties
         }
 
 
-        //public override string ToString()
-        //{
-        //    string result = "";
+        public override string ToString()
+        {
+            string result = "";
 
-        //    result = "For station number "+ BusStationKey+ " The travel time is: " + TravelTime + " and the distance is between the two stations is: " + Distance;
+            result = "For station number " + BusStationKey + " The travel time is: " + TravelTime + " and the distance is between the two stations is: " + Distance;
 
-        //    return result;
-        //}
+            return result;
+        }
     }
 }
 

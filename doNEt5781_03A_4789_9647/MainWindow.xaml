@@ -21,7 +21,7 @@ VerticalAlignment="Stretch" Width="793">
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions >
-            <ComboBox Name="cbBusLines" Grid.Column="1" Margin="0.333,14,145.333,10" SelectionChanged="cbBusLines_SelectionChanged" RenderTransformOrigin="0.5,0.5" Height="44" Width="53" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="#FF7C1515" FontFamily="Pristina" FontSize="26">
+            <ComboBox Name="cbBusLines" Grid.Column="1" Margin="0.333,14,132.333,10" SelectionChanged="cbBusLines_SelectionChanged" RenderTransformOrigin="0.5,0.5" Height="44" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="#FF7C1515" FontFamily="Pristina" FontSize="26">
                 <ComboBox.Background>
                     <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveCaptionColorKey}}"/>
                 </ComboBox.Background>
