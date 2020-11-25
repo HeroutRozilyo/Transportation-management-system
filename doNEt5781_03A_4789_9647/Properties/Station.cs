@@ -123,7 +123,7 @@ namespace dotNet5781_02_4789_9647.Properties
         public override string ToString()
         {
             String result = " ";//Bus Station Code: " + busStationKey;
-             result += String.Format(", {0}°{1} {2}°{3}",
+             result += String.Format(" {0}°{1} {2}°{3}",
                 Math.Abs(Latitude), (Latitude > 0) ? "N" : "S",
                 Math.Abs(Longitude), (Longitude > 0) ? "E" : "W");
           // result += "\n \t Address of The Station: " + Address;
