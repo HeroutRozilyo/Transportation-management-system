@@ -30,8 +30,8 @@ namespace doNet5781_03B_4789_9647
         {
             initBuses(egged);
             InitializeComponent();
-          
 
+            allbuses.DataContext = egged;
 
 
 
@@ -39,13 +39,14 @@ namespace doNet5781_03B_4789_9647
 
         }
 
+
         private void initBuses(List<Bus> egged)
         {
             int license1;
             DateTime date1;
 
-
-            for (int i = 0; i < 10; i++) ///restart 10 buses 
+            
+            for (int i = 0; i <= 10; i++) ///restart 10 buses 
             {
                 date1 = new DateTime(r.Next(1990, DateTime.Today.Year), r.Next(1, DateTime.Today.Month), r.Next(1, DateTime.Today.Day));
                 do
@@ -61,16 +62,25 @@ namespace doNet5781_03B_4789_9647
 
                 } while (findBuse(egged, license1)); //check if the license exsis
 
-                Bus temp = new Bus(license1, date1);
-                egged.Add(temp);
+                try
+                {
+                    Bus temp = new Bus(license1, date1);
+                    egged.Add(temp);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+                }
+                
+               
 
 
             }
 
 
             egged[2].lastTreat = (egged[2].lastTreat.AddYears(-1));
-            egged[9].lastTreat = DateTime.Now.AddDays(-1);
-            egged[8].newKm_from_LastTreatment = 19900;
+            egged[1].lastTreat = DateTime.Now.AddDays(-1);
+            egged[3].newKm_from_LastTreatment = 19900;
             egged[4].Fuel = 50;
 
 
@@ -103,8 +113,10 @@ namespace doNet5781_03B_4789_9647
             
         }
 
-
-
-
+        private void addBus_Click(object sender, RoutedEventArgs e)
+        {
+            addWindow wnd = new addWindow();
+            wnd.Show();
+        }
     }
 }

@@ -26,10 +26,10 @@ namespace doNet5781_03B_4789_9647
         private const int MAX_KM = 20000;
         private const int FULLTANK = 1200;
 
-        public readonly DateTime StartingDate;
+        public  DateTime StartingDate;
         private string license;
         private int km;
-        private int NewKm_from_LastTreatment;
+      //  private int NewKm_from_LastTreatment;
 
 
         public Status status { get; set; }
@@ -102,15 +102,13 @@ namespace doNet5781_03B_4789_9647
 
         public Bus() //defult constructor
         {
-            Console.WriteLine("give Starting date");
-            bool success = DateTime.TryParse(Console.ReadLine(), out StartingDate);
-            if (success == false)
-            {
-                throw new Exception("invalid DateTime string format");
-            }
-            Console.WriteLine("give license number");
-            License = Console.ReadLine();
+            int num = 10000000;
+            string a = num.ToString();
+
             status = (Status)0;
+            StartingDate = DateTime.Today;
+            License=a;
+
             lastTreat = Last_tratment();
             Fuel = FULLTANK;
             newKm_from_LastTreatment = 0;

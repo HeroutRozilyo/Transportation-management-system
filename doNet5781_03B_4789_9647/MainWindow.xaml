@@ -12,7 +12,8 @@
                 <RowDefinition Height="10*"/>
                 <RowDefinition Height="90*"/>
             </Grid.RowDefinitions>
-            <Button x:Name="addBus" Content="Add Bus" HorizontalAlignment="Left" Margin="689,10,0,0" VerticalAlignment="Top" Width="75"/>
+            <Button x:Name="addBus" Content="Add Bus" HorizontalAlignment="Left" Margin="689,0,0,11" Width="75" Height="21" VerticalAlignment="Bottom" Click="addBus_Click"/>
+            <ListBox x:Name="allbuses" HorizontalAlignment="Left" Height="247" Margin="77,41,0,0" Grid.Row="1" VerticalAlignment="Top" Width="608" ItemsSource="{Binding}"/>
         </Grid>
 
     </Grid>

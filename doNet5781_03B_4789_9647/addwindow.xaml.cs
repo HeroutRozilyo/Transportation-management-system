@@ -11,17 +11,27 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Resources;
 
 namespace doNet5781_03B_4789_9647
 {
     /// <summary>
-    /// Interaction logic for addwindow.xaml
+    /// Interaction logic for addWindow.xaml
     /// </summary>
-    public partial class addwindow : Window
+    public partial class addWindow : Window
     {
-        public addwindow()
+       private Bus myBus = new Bus();
+        public addWindow()
         {
             InitializeComponent();
+            this.DataContext = myBus;
+        }
+        public Bus NewBus { get { return myBus; } }
+
+        private void okey_Click(object sender, RoutedEventArgs e)
+        {
+           
+            this.Close();
         }
     }
 }
