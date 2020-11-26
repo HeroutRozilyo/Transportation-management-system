@@ -7,6 +7,13 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        
+        <Grid Name="MainGrid">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10*"/>
+                <RowDefinition Height="90*"/>
+            </Grid.RowDefinitions>
+            <Button x:Name="addBus" Content="Add Bus" HorizontalAlignment="Left" Margin="689,10,0,0" VerticalAlignment="Top" Width="75"/>
+        </Grid>
+
     </Grid>
 </Window>

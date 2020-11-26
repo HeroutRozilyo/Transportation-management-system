@@ -1,4 +1,4 @@
-﻿using dotNet5781_01_9647_4789;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,12 +28,26 @@ namespace doNet5781_03B_4789_9647
 
         public MainWindow()
         {
+            initBuses(egged);
             InitializeComponent();
+          
+
+
+
+
+
+
+        }
+
+        private void initBuses(List<Bus> egged)
+        {
             int license1;
             DateTime date1;
-            for (int i=0;i<10;i++)
+
+
+            for (int i = 0; i < 10; i++) ///restart 10 buses 
             {
-               date1 = new DateTime(r.Next(1990,DateTime.Today.Year), r.Next(1,DateTime.Today.Month), r.Next(1,DateTime.Today.Day));
+                date1 = new DateTime(r.Next(1990, DateTime.Today.Year), r.Next(1, DateTime.Today.Month), r.Next(1, DateTime.Today.Day));
                 do
                 {
                     if ((date1.Year < 2018))
@@ -41,22 +55,29 @@ namespace doNet5781_03B_4789_9647
                         license1 = r.Next(1000000, 10000000); //to random number with 7 digite
                     }
                     else
-                    {צלמ
+                    {
                         license1 = r.Next(10000000, 100000000); //to random number with 8 digite
                     }
-                   
-                } while (findBuse(egged,license1));
 
-                Bus temp(license1, date1);
+                } while (findBuse(egged, license1)); //check if the license exsis
 
+                Bus temp = new Bus(license1, date1);
+                egged.Add(temp);
 
 
             }
 
 
+            egged[2].lastTreat = (egged[2].lastTreat.AddYears(-1));
+            egged[9].lastTreat = DateTime.Now.AddDays(-1);
+            egged[8].newKm_from_LastTreatment = 19900;
+            egged[4].Fuel = 50;
 
-         
+
+
+
         }
+
 
 
 

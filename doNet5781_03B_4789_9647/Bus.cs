@@ -4,17 +4,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace dotNet5781_01_9647_4789
+
+
+
+namespace doNet5781_03B_4789_9647
 {
-  public  enum Status
-    {
-        READY_TO_TRAVEL, MIDDLE_TRAVEL,RE_FULLING,TREATMENT
-    }
+   
+        public enum Status
+        {
+            READY_TO_TRAVEL, MIDDLE_TRAVEL, RE_FULLING, TREATMENT
+        }
     public class Bus
     {
         //----------
         // Variable definition
         // static public int GlobalKM { get; private set; }
+
+        static Random r = new Random(DateTime.Now.Millisecond);
+
 
         private const int MAX_KM = 20000;
         private const int FULLTANK = 1200;
@@ -111,16 +118,17 @@ namespace dotNet5781_01_9647_4789
 
         }
 
-        public Bus(int num,DateTime date)
+        public Bus(int num, DateTime date)
         {
             string a = num.ToString();
             License = a;
             StartingDate = date;
-            Fuel = FULLTANK;
-            newKm_from_LastTreatment = 0;
-            km = 0;
-            lastTreat = Last_tratment();
-            status= (Status)0;
+
+            Fuel = r.Next(FULLTANK);
+            newKm_from_LastTreatment = r.Next(20000);
+            km = r.Next(30000);
+            lastTreat =new DateTime(2020, r.Next(1, DateTime.Today.Month), r.Next(1, DateTime.Today.Day));
+            status = (Status)0;
 
         }
 
@@ -185,7 +193,7 @@ namespace dotNet5781_01_9647_4789
         /// <returns></returns>
         public bool Take_travel(int kmTravel)
         {
-            if (newKm_from_LastTreatment < MAX_KM) //if he didnt need go to treatment
+            if (newKm_from_LastTreatment < MAX_KM&&lastTreat.AddYears(-1)>=DateTime.Today) //if he didnt need go to treatment
             {
                 if (newKm_from_LastTreatment + kmTravel < MAX_KM && Fuel - kmTravel > 0) //if he can take this travel
                 {
@@ -201,18 +209,15 @@ namespace dotNet5781_01_9647_4789
                 {
                     status = (Status)0;
                     return false;
-
                 }
-
             }
             else //if he cant travels
             {
                 this.treatment();
                 return false;
             }
-
-
         }
-    
+
     }
+    
 }
