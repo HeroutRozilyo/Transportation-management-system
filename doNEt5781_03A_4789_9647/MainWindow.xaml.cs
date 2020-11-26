@@ -24,16 +24,20 @@ namespace doNEt5781_03A_4789_9647
      
     public partial class MainWindow : Window
     {
-        private static Random r = new Random(DateTime.Now.Second);
-        BusCompany egged;
-      List<BusStation> stations;
+   
+        private static Random r = new Random(DateTime.Now.Second); //static random
+        BusCompany egged; //company of the bus
+      List<BusStation> stations; /// <summary>
+      /// list of station
+      /// </summary>
 
-      private LineBus currentDisplayBusLine = new LineBus();
-
+      private LineBus currentDisplayBusLine = new LineBus(); // a varieble that get a line from the compay bus.
         public MainWindow()
         {
             egged = new BusCompany();
             stations = new List<BusStation>();
+
+            /// restart the buses and the station at the program     
 
             for (int i = 0; i < 40; i++)//restart stations
             {
@@ -62,7 +66,9 @@ namespace doNEt5781_03A_4789_9647
          
 
         }
-
+        /// <summary>
+        /// print at him all the buses numberID
+        /// </summary>
         private void initComboBox()
         {
             cbBusLines.ItemsSource = egged.ComanyBus;
@@ -77,11 +83,19 @@ namespace doNEt5781_03A_4789_9647
            
         }
 
+        /// <summary>
+        /// help func to show data on specific line
+        /// </summary>
+       
         private void cbBusLines_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ShowBusLine((cbBusLines.SelectedValue as LineBus).NumberID);
         }
 
+        /// <summary>
+        /// to print a data on line incordding to his numberID
+        /// </summary>
+  
         private void ShowBusLine(int index)
         {
             currentDisplayBusLine = egged[index];

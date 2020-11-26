@@ -6,27 +6,40 @@ using System.Threading.Tasks;
 
 namespace dotNet5781_01_9647_4789
 {
-      public class Bus
+  public  enum Status
+    {
+        READY_TO_TRAVEL, MIDDLE_TRAVEL,RE_FULLING,TREATMENT
+    }
+    public class Bus
     {
         //----------
         // Variable definition
-        static public int GlobalKM { get; private set; }
+        // static public int GlobalKM { get; private set; }
+
+        private const int MAX_KM = 20000;
         private const int FULLTANK = 1200;
 
         public readonly DateTime StartingDate;
         private string license;
         private int km;
-        private int NewKm;
-        
+        private int NewKm_from_LastTreatment;
+
+
+        public Status status { get; set; }
+
+        public DateTime lastTreat { get; set; }
+
         //------
         // set and get from our variable
-        public DateTime lastTreat { get;  set; }
+
         public int Fuel { get; set; }
-        public int NEWKm
+
+        public int newKm_from_LastTreatment
         {
             get; set;
         }
-        public int Km 
+
+        public int Km
         {
             get { return km; }
             set
@@ -35,8 +48,11 @@ namespace dotNet5781_01_9647_4789
                 {
                     km = value;
                 }
+                else
+                    throw new ArgumentOutOfRangeException("KM must to be a positive number");
             }
         }
+
         public string License
         {
             //----
@@ -45,7 +61,7 @@ namespace dotNet5781_01_9647_4789
             {
                 string firstpart, middlepart, endpart;
                 string result;
-                if (license.Length == 7) 
+                if (license.Length == 7)
                 {
                     // xx-xxx-xx
                     firstpart = license.Substring(0, 2);
@@ -77,9 +93,7 @@ namespace dotNet5781_01_9647_4789
             }
         }
 
-        public DateTime Checkup { get; internal set; }
-
-        public Bus() //in order to receive bus
+        public Bus() //defult constructor
         {
             Console.WriteLine("give Starting date");
             bool success = DateTime.TryParse(Console.ReadLine(), out StartingDate);
@@ -89,12 +103,37 @@ namespace dotNet5781_01_9647_4789
             }
             Console.WriteLine("give license number");
             License = Console.ReadLine();
-            
+            status = (Status)0;
+            lastTreat = Last_tratment();
+            Fuel = FULLTANK;
+            newKm_from_LastTreatment = 0;
+            km = 0;
+
         }
+
+        public Bus(int num,DateTime date)
+        {
+            string a = num.ToString();
+            License = a;
+            StartingDate = date;
+            Fuel = FULLTANK;
+            newKm_from_LastTreatment = 0;
+            km = 0;
+            lastTreat = Last_tratment();
+            status= (Status)0;
+
+        }
+
+
         public Bus(Bus a)
         {
             license = a.license;
             StartingDate = a.StartingDate;
+            Fuel = a.Fuel;
+            status = a.status;
+            km = a.km;
+            newKm_from_LastTreatment = a.newKm_from_LastTreatment;
+            lastTreat = a.lastTreat;
         }
 
         public override string ToString()
@@ -102,24 +141,78 @@ namespace dotNet5781_01_9647_4789
             return String.Format("license is: {0,-10}, starting date: {1}", License, StartingDate);
         }
 
+
+
+        /// <summary>
+        /// func that do treatment to the bus
+        /// </summary>
+        public void treatment()
+        {
+            status = (Status)3;
+            this.Last_tratment();
+
+            newKm_from_LastTreatment = 0;
+            if (this.Fuel <= 1200)
+            {
+                Fuel = FULLTANK;
+            }
+        }
+
         //------------
         ////update the date time after treatment
-        public DateTime Maintenance() 
+        ///
+        public DateTime Last_tratment()
         {
             lastTreat = DateTime.Today;
             return lastTreat;
         }
-        public DateTime Maintenance(DateTime checkup)
+        public DateTime Last_tratment(DateTime checkup)
         {
             lastTreat = checkup;
             return lastTreat;
         }
 
-        public void Refuelling(int fuel) //update the new fuel
+        public void Refuelling() //update the new fuel
         {
+            status = (Status)2;
             Fuel = FULLTANK;
         }
 
+        /// <summary>
+        /// check if the bus can take the travel
+        /// </summary>
+        /// <param name=//"kmTravel= the km to the new travel>
+        /// <returns></returns>
+        public bool Take_travel(int kmTravel)
+        {
+            if (newKm_from_LastTreatment < MAX_KM) //if he didnt need go to treatment
+            {
+                if (newKm_from_LastTreatment + kmTravel < MAX_KM && Fuel - kmTravel > 0) //if he can take this travel
+                {
+                    ///------------
+                    ///update the new data
+                    newKm_from_LastTreatment += kmTravel;
+                    Fuel -= kmTravel;
+                    km += kmTravel;
+                    status = (Status)1;
+                    return true;
+                }
+                else //if he cant take this travel
+                {
+                    status = (Status)0;
+                    return false;
 
+                }
+
+            }
+            else //if he cant travels
+            {
+                this.treatment();
+                return false;
+            }
+
+
+        }
+    
     }
 }

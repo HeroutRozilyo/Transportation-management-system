@@ -33,7 +33,7 @@ VerticalAlignment="Stretch" Width="793">
                 </TextBox.Background>
             </TextBox>
             <Label Content="Area:" Grid.Column="2" HorizontalAlignment="Left" Margin="136.667,22,0,0" VerticalAlignment="Top" FontSize="26" FontWeight="Bold" RenderTransformOrigin="-0.723,-0.058" FontFamily="Pristina" Foreground="#FF7C1515"/>
-        </Grid>
+        </Grid> 
         <ListBox Name="lbBusLineStations"  Margin="81,70,73.333,124.667" Grid.Row="1" ItemsSource="{Binding}" SelectionChanged="lbBusLineStations_SelectionChanged" FontFamily="Baskerville Old Face" Foreground="#FF740F0F" FontSize="14" Background="#FFF2F2F2">
             <ListBox.BorderBrush>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
