@@ -74,7 +74,7 @@ namespace dotNet5781_02_4789_9647.Properties
         {
             string result = "";
 
-            result = "For station number " + BusStationKey + " The travel time is: " + TravelTime + " and the distance is between the two stations is: " + Distance;
+            result = "Station Number: " + BusStationKey + "\nLocation: "+base.ToString()+"\nThe time and distance from the previous station is: " + TravelTime + " ," + Distance ;
 
             return result;
         }
