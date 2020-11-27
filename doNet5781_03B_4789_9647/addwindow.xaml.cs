@@ -20,6 +20,7 @@ namespace doNet5781_03B_4789_9647
     /// </summary>
     public partial class addWindow : Window
     {
+        
        private Bus myBus = new Bus();
         public addWindow()
         {
@@ -30,8 +31,9 @@ namespace doNet5781_03B_4789_9647
 
         private void okey_Click(object sender, RoutedEventArgs e)
         {
-           
+            
             this.Close();
+            
         }
     }
 }

@@ -23,24 +23,22 @@ namespace doNet5781_03B_4789_9647
     {
         List<Bus> egged = new List<Bus>();  //A list that will contain all the buses
         static Random r = new Random(DateTime.Now.Millisecond);
-       
-      
+
+
+
 
         public MainWindow()
         {
             initBuses(egged);
             InitializeComponent();
-
-            allbuses.DataContext = egged;
-
-
-
-
+            allbuses.ItemsSource = egged;
+            //allbuses.DataContext = egged;
 
         }
 
 
-        private void initBuses(List<Bus> egged)
+        private void initBuses(List<Bus> egged)    //List<Bus> egged)
+            
         {
             int license1;
             DateTime date1;
@@ -86,12 +84,13 @@ namespace doNet5781_03B_4789_9647
 
 
 
+
         }
 
 
 
 
-        private static bool findBuse(List<Bus> buses, int num)  //function that check if the require bus exist
+        private static bool findBuse(List<Bus> buses,int num    ) //List<Bus> buses, int num)  //function that check if the require bus exist
         {
             int temp1;
            
@@ -117,6 +116,15 @@ namespace doNet5781_03B_4789_9647
         {
             addWindow wnd = new addWindow();
             wnd.Show();
+            
+           
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var fxElt = sender as FrameworkElement;
+            Bus lineData = fxElt.DataContext as Bus;
+            MessageBox.Show(lineData.License);
         }
     }
 }

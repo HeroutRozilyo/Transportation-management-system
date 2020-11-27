@@ -1,5 +1,5 @@
 ﻿<Window x:Class="doNet5781_03B_4789_9647.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -7,13 +7,31 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        
         <Grid Name="MainGrid">
             <Grid.RowDefinitions>
                 <RowDefinition Height="10*"/>
                 <RowDefinition Height="90*"/>
             </Grid.RowDefinitions>
             <Button x:Name="addBus" Content="Add Bus" HorizontalAlignment="Left" Margin="689,0,0,11" Width="75" Height="21" VerticalAlignment="Bottom" Click="addBus_Click"/>
-            <ListBox x:Name="allbuses" HorizontalAlignment="Left" Height="247" Margin="77,41,0,0" Grid.Row="1" VerticalAlignment="Top" Width="608" ItemsSource="{Binding}"/>
+            <ListView x:Name="allbuses" HorizontalAlignment="Left" Height="256" Margin="75,54,0,0" Grid.Row="1" VerticalAlignment="Top" Width="640" >
+                <ListView.View>
+                    <GridView x:Name="allbusesgrid">
+                        <GridViewColumn Header="license" Width="120" DisplayMemberBinding="{Binding License}" />
+                        <GridViewColumn Header="starting date" Width="100" DisplayMemberBinding="{Binding StartingDate}" />
+                        <GridViewColumn Width="60">
+                            <GridViewColumn.CellTemplate>
+                                 <DataTemplate>
+                                    <Button  Content="Fuel"  Margin="0" VerticalAlignment="Center" Click="Button_Click" />
+                                
+                               
+
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
         </Grid>
 
     </Grid>
