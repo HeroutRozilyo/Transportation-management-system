@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
-
-
+using System.Windows.Controls;
 
 namespace doNet5781_03B_4789_9647
 {
@@ -26,7 +24,12 @@ namespace doNet5781_03B_4789_9647
         private const int MAX_KM = 20000;
         private const int FULLTANK = 1200;
 
-        public  DateTime StartingDate;
+        public DateTime StartingDate { get; set; }
+
+        
+ 
+
+
         private string license;
         private int km;
       //  private int NewKm_from_LastTreatment;
@@ -216,6 +219,19 @@ namespace doNet5781_03B_4789_9647
             }
         }
 
+        public static implicit operator Bus(Grid v)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string fuelString()
+        {
+            string str = " ";
+           // int.TryParse(string a, out Fuel);
+            str = "The amount of fuel at this Bus:\n";
+            str += Fuel;
+            return str;
+        }
     }
     
 }

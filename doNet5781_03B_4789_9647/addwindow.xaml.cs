@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Resources;
 
+
 namespace doNet5781_03B_4789_9647
 {
     /// <summary>
@@ -20,19 +21,35 @@ namespace doNet5781_03B_4789_9647
     /// </summary>
     public partial class addWindow : Window
     {
-        
+       
        private Bus myBus = new Bus();
+        private Bus temp;
+        private Window main;
+
         public addWindow()
         {
             InitializeComponent();
             this.DataContext = myBus;
+            
         }
+
+        public addWindow(Bus newtemp, MainWindow newmain)
+        {
+            this.temp = newtemp;
+            this.main = newmain;
+            InitializeComponent();
+            
+        }
+
         public Bus NewBus { get { return myBus; } }
 
         private void okey_Click(object sender, RoutedEventArgs e)
         {
-            
+         
+          
+           
             this.Close();
+           
             
         }
     }

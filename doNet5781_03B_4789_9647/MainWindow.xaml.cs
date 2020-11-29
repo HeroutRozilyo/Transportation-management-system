@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,7 +24,11 @@ namespace doNet5781_03B_4789_9647
     {
         List<Bus> egged = new List<Bus>();  //A list that will contain all the buses
         static Random r = new Random(DateTime.Now.Millisecond);
+        addWindow wnd;
 
+        public Bus temp { get; private set; }
+
+        //private ObservableCollection<Bus> egged = new ObservableCollection<Bus>();
 
 
 
@@ -32,21 +37,22 @@ namespace doNet5781_03B_4789_9647
             initBuses(egged);
             InitializeComponent();
             allbuses.ItemsSource = egged;
-            //allbuses.DataContext = egged;
+
 
         }
 
 
         private void initBuses(List<Bus> egged)    //List<Bus> egged)
-            
+        //private void initBuses(ObservableCollection<Bus> egged)
         {
             int license1;
             DateTime date1;
 
-            
-            for (int i = 0; i <= 10; i++) ///restart 10 buses 
+
+            for (int i = 0; i < 10; i++) ///restart 10 buses 
             {
-                date1 = new DateTime(r.Next(1990, DateTime.Today.Year), r.Next(1, DateTime.Today.Month), r.Next(1, DateTime.Today.Day));
+                date1 = new DateTime(r.Next(1990, DateTime.Today.Year + 1), r.Next(1, 13), r.Next(1, 29));//,r.Next(1,25),r.Next(0,60),r.Next(0,60));
+                //int a = date1.Year;
                 do
                 {
                     if ((date1.Year < 2018))
@@ -69,8 +75,8 @@ namespace doNet5781_03B_4789_9647
                 {
                     Console.WriteLine(ex);
                 }
-                
-               
+
+
 
 
             }
@@ -90,10 +96,11 @@ namespace doNet5781_03B_4789_9647
 
 
 
-        private static bool findBuse(List<Bus> buses,int num    ) //List<Bus> buses, int num)  //function that check if the require bus exist
+        private static bool findBuse(List<Bus> buses, int num) //List<Bus> buses, int num)  //function that check if the require bus exist
+                                                               //private static bool findBuse(ObservableCollection<Bus> buses, int num)
         {
             int temp1;
-           
+
 
             foreach (Bus item in buses) //move on the list buses
             {
@@ -106,25 +113,49 @@ namespace doNet5781_03B_4789_9647
                 {
                     return true;
                 }
-             
+
             }
             return false;
-            
+
         }
 
         private void addBus_Click(object sender, RoutedEventArgs e)
         {
-            addWindow wnd = new addWindow();
-            wnd.Show();
-            
-           
+
+            MainWindow main = App.Current.MainWindow as MainWindow;
+            temp = this.allbuses.SelectedItem as Bus;
+            wnd = new addWindow(temp, main);
+            wnd.ShowDialog();
+            allbuses.Items.Refresh();
         }
+
+
+
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             var fxElt = sender as FrameworkElement;
             Bus lineData = fxElt.DataContext as Bus;
-            MessageBox.Show(lineData.License);
+            MessageBox.Show(lineData.fuelString());
         }
+        private void Pick_Button_Click(object sender, RoutedEventArgs e)
+        {
+
+           
+
+            StartingTravel smalla = new StartingTravel((sender as Button).DataContext as Bus);
+            smalla.Show();
+
+
+
+        }
+        //public Bus returnValue(object sender, RoutedEventArgs e)
+        //{
+
+        //    //ListViewItem selectedItem = (ListViewItem)allbuses.ItemContainerGenerator.ContainerFromItem(((Button)sender).DataContext);
+        //    // selectedItem.IsSelected=true;
+
+        //}
     }
 }
+
