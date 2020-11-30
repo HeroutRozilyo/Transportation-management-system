@@ -6,25 +6,38 @@
         xmlns:local="clr-namespace:doNet5781_03B_4789_9647"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+
+
+    
+    
     <Grid>
         
         <Grid Name="MainGrid">
+
+
+           
+            
+            
             <Grid.RowDefinitions>
                 <RowDefinition Height="10*"/>
                 <RowDefinition Height="90*"/>
             </Grid.RowDefinitions>
             <Button x:Name="addBus" Content="Add Bus" HorizontalAlignment="Left" Margin="689,0,0,11" Width="75" Height="21" VerticalAlignment="Bottom" Click="addBus_Click"  />
+
             <ListView x:Name="allbuses" HorizontalAlignment="Left" Height="256" Margin="75,54,0,0" Grid.Row="1" VerticalAlignment="Top" Width="640" >
                 <ListView.View>
                     <GridView x:Name="allbusesgrid">
-                        <GridViewColumn Header="license" Width="120" DisplayMemberBinding="{Binding License}" />
+                        
+                        <GridViewColumn Header="license" Width="120" DisplayMemberBinding="{Binding License}"  />
                         <GridViewColumn Header="starting date" Width="160" DisplayMemberBinding="{Binding StartingDate}" />
+                        
                         <GridViewColumn Width="60">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <Button  Content="Fuel"  Margin="0" VerticalAlignment="Center" Click="Button_Click" />
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
+                           
                         </GridViewColumn>
 
                         <GridViewColumn Width="80">

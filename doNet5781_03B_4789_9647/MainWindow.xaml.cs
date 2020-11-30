@@ -14,6 +14,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Threading;
+
 
 namespace doNet5781_03B_4789_9647
 {
@@ -28,13 +30,13 @@ namespace doNet5781_03B_4789_9647
 
     public partial class MainWindow : Window
     {
-        List<Bus> egged = new List<Bus>();  //A list that will contain all the buses
+        //List<Bus> egged = new List<Bus>();  //A list that will contain all the buses
         static Random r = new Random(DateTime.Now.Millisecond);
         addWindow wnd;
 
         public Bus temp { get; private set; }
 
-        //private ObservableCollection<Bus> egged = new ObservableCollection<Bus>();
+        private ObservableCollection<Bus> egged = new ObservableCollection<Bus>();
 
 
 
@@ -49,8 +51,8 @@ namespace doNet5781_03B_4789_9647
         }
 
 
-        private void initBuses(List<Bus> egged)    //List<Bus> egged)
-        //private void initBuses(ObservableCollection<Bus> egged)
+        //private void initBuses(List<Bus> egged)    //List<Bus> egged)
+        private void initBuses(ObservableCollection<Bus> egged)
         {
             int license1;
             DateTime date1;
@@ -101,8 +103,8 @@ namespace doNet5781_03B_4789_9647
 
 
 
-        private static bool findBuse(List<Bus> buses, int num) //List<Bus> buses, int num)  //function that check if the require bus exist
-                                                               //private static bool findBuse(ObservableCollection<Bus> buses, int num)
+        //private static bool findBuse(List<Bus> buses, int num)  //function that check if the require bus exist
+        private static bool findBuse(ObservableCollection<Bus> buses, int num)
         {
             int temp1;
 
@@ -147,9 +149,10 @@ namespace doNet5781_03B_4789_9647
                 case MessageBoxResult.Yes:
                     {
                         ((sender as Button).DataContext as Bus).Refuelling(); //gp to refulling the bus
-                        //לשנות תהליכון וכפתור ואוטובוס שלא יהיה זמין בזמן של התהליכון
 
 
+                        //TimerWindow timer = new TimerWindow();
+                        //timer.Show();
 
 
                     }
@@ -168,7 +171,8 @@ namespace doNet5781_03B_4789_9647
 
 
         }
-       
+        
+
     }
 }
 
