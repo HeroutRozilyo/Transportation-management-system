@@ -21,6 +21,7 @@ namespace doNet5781_03B_4789_9647
     public partial class StartingTravel : Window
     {
         Bus temp = new Bus();
+        Random r = new Random();
         public StartingTravel()
         {
             InitializeComponent();
@@ -64,25 +65,52 @@ namespace doNet5781_03B_4789_9647
             temp = a;
             this.DataContext = temp;
         }
+
+
    
 
         private void OnKeyDownHandler(object sender, KeyEventArgs e)
         {
            
-            if (e.Key == Key.Return)
-                
-            {
+           if (e.Key == Key.Return)         
+          {
                 int a = int.Parse(numOfKm.Text);
+                TimeSpan time = TimeSpan.Zero;
                 if (temp.Take_travel(a))
                 {
+                    //x=x0+vt
+                    double v = r.Next(20, 51); //velocitui of this bus
+                    double t = a / v; //time of this travel.this time is in hour
+
+                    time = TimeSpan.FromSeconds(6 * t); //time travel at our program
+
+                   
 
                 }
-                
-                this.Close();
-            }
-           
-        }
-        
+                else
+                {
+                    if (temp.Fuel - a <= 0)
+                    {
+                        MessageBox.Show("There is not enough fuel of the bus for this travel ", "ERROR FUEL", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                    if (temp.newKm_from_LastTreatment + a > 20000)
+                    {
+                        MessageBox.Show("The bus cannot take the ride because it will go the number of miles allowed ", "ERROR KM", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                    if (temp.lastTreat.AddYears(1) > DateTime.Today)
+                    {
+                        MessageBox.Show("It has been a year since the last treatment ", "ERROR TREATMENT", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
 
+                }
+                this.Close();
+            
+
+
+           }
+
+        }
+
+      
     }
 }

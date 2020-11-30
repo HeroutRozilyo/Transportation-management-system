@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="BusCompany.cs" />
     <Compile Include="StartingTravel.xaml.cs">
       <DependentUpon>StartingTravel.xaml</DependentUpon>
     </Compile>

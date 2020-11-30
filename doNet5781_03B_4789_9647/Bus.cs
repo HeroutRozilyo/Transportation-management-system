@@ -38,6 +38,7 @@ namespace doNet5781_03B_4789_9647
         public Status status { get; set; }
 
         public DateTime lastTreat { get; set; }
+       
 
         //------
         // set and get from our variable
@@ -194,7 +195,7 @@ namespace doNet5781_03B_4789_9647
         /// <returns></returns>
         public bool Take_travel(int kmTravel)
         {
-            if (newKm_from_LastTreatment < MAX_KM&&lastTreat.AddYears(-1)>=DateTime.Today) //if he didnt need go to treatment
+            if (newKm_from_LastTreatment < MAX_KM && lastTreat.AddYears(1)>=DateTime.Today) //if he didnt need go to treatment
             {
                 if (newKm_from_LastTreatment + kmTravel < MAX_KM && Fuel - kmTravel > 0) //if he can take this travel
                 {
@@ -217,6 +218,7 @@ namespace doNet5781_03B_4789_9647
                 this.treatment();
                 return false;
             }
+        
         }
 
         public static implicit operator Bus(Grid v)
@@ -230,6 +232,7 @@ namespace doNet5781_03B_4789_9647
            // int.TryParse(string a, out Fuel);
             str = "The amount of fuel at this Bus:\n";
             str += Fuel;
+            str += "\n Do you want to refull ?";
             return str;
         }
     }

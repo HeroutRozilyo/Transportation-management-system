@@ -20,6 +20,12 @@ namespace doNet5781_03B_4789_9647
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
+
+
+ 
+  
+    
+
     public partial class MainWindow : Window
     {
         List<Bus> egged = new List<Bus>();  //A list that will contain all the buses
@@ -29,6 +35,7 @@ namespace doNet5781_03B_4789_9647
         public Bus temp { get; private set; }
 
         //private ObservableCollection<Bus> egged = new ObservableCollection<Bus>();
+
 
 
 
@@ -71,12 +78,10 @@ namespace doNet5781_03B_4789_9647
                     Bus temp = new Bus(license1, date1);
                     egged.Add(temp);
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
-                    Console.WriteLine(ex);
+                    i--;
                 }
-
-
 
 
             }
@@ -136,26 +141,34 @@ namespace doNet5781_03B_4789_9647
         {
             var fxElt = sender as FrameworkElement;
             Bus lineData = fxElt.DataContext as Bus;
-            MessageBox.Show(lineData.fuelString());
+            MessageBoxResult result =MessageBox.Show(lineData.fuelString(),"FUELIING", MessageBoxButton.YesNo, MessageBoxImage.Exclamation, MessageBoxResult.Yes);
+            switch (result)
+            {
+                case MessageBoxResult.Yes:
+                    {
+                        ((sender as Button).DataContext as Bus).Refuelling(); //gp to refulling the bus
+                        //לשנות תהליכון וכפתור ואוטובוס שלא יהיה זמין בזמן של התהליכון
+
+
+
+
+                    }
+                    break;
+                case MessageBoxResult.No:
+                    break;
+            }
+
         }
         private void Pick_Button_Click(object sender, RoutedEventArgs e)
         {
-
-           
-
             StartingTravel smalla = new StartingTravel((sender as Button).DataContext as Bus);
-            smalla.Show();
+       
+            smalla.ShowDialog();
 
 
 
         }
-        //public Bus returnValue(object sender, RoutedEventArgs e)
-        //{
-
-        //    //ListViewItem selectedItem = (ListViewItem)allbuses.ItemContainerGenerator.ContainerFromItem(((Button)sender).DataContext);
-        //    // selectedItem.IsSelected=true;
-
-        //}
+       
     }
 }
 
