@@ -91,7 +91,7 @@ namespace doNet5781_03B_4789_9647
                 return result;
             }
 
-            private set
+             set
             {
                 if ((StartingDate.Year < 2018 && value.Length == 7) || (StartingDate.Year >= 2018 && value.Length == 8))
                 {
@@ -99,6 +99,7 @@ namespace doNet5781_03B_4789_9647
                 }
                 else
                 {
+
                     throw new Exception("license not valid");
                 }
             }

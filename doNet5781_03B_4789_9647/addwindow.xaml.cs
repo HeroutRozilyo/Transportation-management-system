@@ -19,38 +19,52 @@ namespace doNet5781_03B_4789_9647
     /// <summary>
     /// Interaction logic for addWindow.xaml
     /// </summary>
+    
     public partial class addWindow : Window
     {
        
+     
+   
        private Bus myBus = new Bus();
-        private Bus temp;
-        private Window main;
-
         public addWindow()
         {
             InitializeComponent();
+
             this.DataContext = myBus;
-            
+
+
+
+
         }
 
-        public addWindow(Bus newtemp, MainWindow newmain)
+        public Bus NewBus
         {
-            this.temp = newtemp;
-            this.main = newmain;
-            InitializeComponent();
-            
+            get
+            {
+                return myBus;
+            }
         }
-
-        public Bus NewBus { get { return myBus; } }
 
         private void okey_Click(object sender, RoutedEventArgs e)
         {
-         
-          
-           
+
+            this.DialogResult = true;
             this.Close();
-           
-            
+
+
+        }
+
+        private void licenseTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void cancle_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }
+
+
+

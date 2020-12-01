@@ -126,20 +126,35 @@ namespace doNet5781_03B_4789_9647
 
         }
 
-        private void addBus_Click(object sender, RoutedEventArgs e)
+        private void addBus_Click(object sender, RoutedEventArgs e) //to add bus to our company
         {
 
-            MainWindow main = App.Current.MainWindow as MainWindow;
-            temp = this.allbuses.SelectedItem as Bus;
-            wnd = new addWindow(temp, main);
-            wnd.ShowDialog();
-            allbuses.Items.Refresh();
+           try
+            {
+                wnd = new addWindow();
+
+                bool? result = wnd.ShowDialog();
+                if (result == true)
+                {
+                    egged.Add(wnd.NewBus);
+                }
+            }
+            catch(Exception)
+            {
+                MessageBox.Show("The new licence is not valid,\n please nter again number licence with 8 digite", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            finally
+            {
+                MessageBox.Show("The new licence is not valid,\n please nter again number licence with 8 digite", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+
+            }
+
         }
 
 
 
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e) //to send the bus to refulling
         {
             var fxElt = sender as FrameworkElement;
             Bus lineData = fxElt.DataContext as Bus;
@@ -149,12 +164,7 @@ namespace doNet5781_03B_4789_9647
                 case MessageBoxResult.Yes:
                     {
                         ((sender as Button).DataContext as Bus).Refuelling(); //gp to refulling the bus
-
-
-                        //TimerWindow timer = new TimerWindow();
-                        //timer.Show();
-
-
+                        allbuses.Items.Refresh();
                     }
                     break;
                 case MessageBoxResult.No:
@@ -162,16 +172,20 @@ namespace doNet5781_03B_4789_9647
             }
 
         }
-        private void Pick_Button_Click(object sender, RoutedEventArgs e)
+        private void Pick_Button_Click(object sender, RoutedEventArgs e) //to starting travel
         {
             StartingTravel smalla = new StartingTravel((sender as Button).DataContext as Bus);
-       
-            smalla.ShowDialog();
+                  smalla.ShowDialog();
 
 
 
         }
-        
+        private void doubleflick(object sender, RoutedEventArgs e) //in order to shoe details on the bus
+        {
+            MessageBox.Show("ss");
+        }
+
+
 
     }
 }
