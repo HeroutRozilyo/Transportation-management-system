@@ -13,28 +13,26 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Resources;
 
-
-namespace doNet5781_03B_4789_9647
+namespace dotNet5781_03b_4789_9647
 {
     /// <summary>
-    /// Interaction logic for addWindow.xaml
+    /// Interaction logic for addwindow.xaml
     /// </summary>
- 
-    
-
     public partial class addWindow : Window
     {
-      
-       public Bus myBus;
-    
 
-     
+
+
+        private Bus myBus;
+
+
+
+
         public addWindow()
         {
             InitializeComponent();
             try
             {
-             
                 myBus = new Bus();
 
                 this.DataContext = myBus;
@@ -44,71 +42,39 @@ namespace doNet5781_03B_4789_9647
                 MessageBox.Show("The new licence is not valid,\n please enter again number licence with 8 digite", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
 
             }
+
+
+
+
+
         }
 
-        //public addWindow(ref Bus temp)
-        //{
-        //    try
-        //    {
-        //        InitializeComponent();
-        //        this.DataContext = temp;
-        //    }
-        //    catch(Exception)
-        //    {
-
-        //    }
-
-        //}
-
+        private void InitializeComponent()
+        {
+            
+        }
 
         public Bus NewBus
         {
-
             get
             {
-                 return myBus;
+                return myBus;
             }
-
         }
-
 
         private void okey_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
 
-                this.DialogResult = true;
-                this.Close();
-
-            }
-            catch(Exception)
-            {
-            
-                MessageBox.Show("The new licence is not valid,\n please enter again number licence with 8 digite", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
-
-            }
-
+            this.DialogResult = true;
+            this.Close();
 
 
         }
 
-        private void licenseTextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-
-        }
 
         private void cancle_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
-
-        //public static implicit operator addWindow(Bus_Data v)
-        //{
-        //    throw new NotImplementedException();
-        //}
     }
 }
-
-
-

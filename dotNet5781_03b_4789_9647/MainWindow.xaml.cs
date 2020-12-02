@@ -16,29 +16,18 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Threading;
 
-
-namespace doNet5781_03B_4789_9647
+namespace dotNet5781_03b_4789_9647
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-
-
- 
-  
-    
-
     public partial class MainWindow : Window
     {
         //List<Bus> egged = new List<Bus>();  //A list that will contain all the buses
         static Random r = new Random(DateTime.Now.Millisecond);
         addWindow wnd;
 
-        public Bus temp 
-        { 
-            get; private set; 
-        }
-        
+        public Bus temp { get; private set; }
 
         private ObservableCollection<Bus> egged = new ObservableCollection<Bus>();
 
@@ -47,17 +36,9 @@ namespace doNet5781_03B_4789_9647
 
         public MainWindow()
         {
-            try
-            {
-                initBuses(egged);
-                InitializeComponent();
-                allbuses.ItemsSource = egged;
-            }
-            catch(Exception)
-            {
-                MessageBox.Show("a");
-            }
-        
+            initBuses(egged);
+            InitializeComponent();
+            allbuses.ItemsSource = egged;
 
 
         }
@@ -92,14 +73,13 @@ namespace doNet5781_03B_4789_9647
                     Bus temp = new Bus(license1, date1);
                     egged.Add(temp);
                 }
-
                 catch (Exception)
                 {
                     i--;
                 }
 
 
-        }
+            }
 
 
             egged[2].lastTreat = (egged[2].lastTreat.AddYears(-1));
@@ -119,64 +99,44 @@ namespace doNet5781_03B_4789_9647
         //private static bool findBuse(List<Bus> buses, int num)  //function that check if the require bus exist
         private static bool findBuse(ObservableCollection<Bus> buses, int num)
         {
-            try
+            int temp1;
+
+
+            foreach (Bus item in buses) //move on the list buses
             {
-                int temp1;
+                string temp = item.License;
 
+                temp = temp.Replace("-", string.Empty); //To remove the hyphens from our license number
+                int.TryParse(temp, out temp1);
 
-                foreach (Bus item in buses) //move on the list buses
+                if (temp1 == num) //check if the licenes equal
                 {
-                    string temp = item.License;
-
-                    temp = temp.Replace("-", string.Empty); //To remove the hyphens from our license number
-                    int.TryParse(temp, out temp1);
-
-                    if (temp1 == num) //check if the licenes equal
-                    {
-                        return true;
-                    }
-
+                    return true;
                 }
-                return false;
+
             }
-            catch (Exception)
-            {
-
-                MessageBox.Show("b");
-                return false;
-            }
-
-
+            return false;
 
         }
 
-
-
         private void addBus_Click(object sender, RoutedEventArgs e) //to add bus to our company
         {
-            
-           try
+
+            try
             {
-                   wnd = new addWindow();
-               // Bus temp = new Bus();
-                //wnd = new addWindow(ref temp);
+                wnd = new addWindow();
 
                 bool? result = wnd.ShowDialog();
                 if (result == true)
                 {
-                    
-                  //  egged.Add(temp);
-                
-                    egged.Add(wnd.myBus);
+                    egged.Add(wnd.NewBus);
                 }
             }
-            catch(Exception)
+            catch (Exception)
             {
                 MessageBox.Show("The new licence is not valid,\n please nter again number licence with 8 digite", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
-
             }
-           
-           
+
 
         }
 
@@ -185,58 +145,36 @@ namespace doNet5781_03B_4789_9647
 
         private void Button_Click(object sender, RoutedEventArgs e) //to send the bus to refulling
         {
-            try
+            var fxElt = sender as FrameworkElement;
+            Bus lineData = fxElt.DataContext as Bus;
+            MessageBoxResult result = MessageBox.Show(lineData.fuelString(), "FUELIING", MessageBoxButton.YesNo, MessageBoxImage.Exclamation, MessageBoxResult.Yes);
+            switch (result)
             {
-                var fxElt = sender as FrameworkElement;
-                Bus lineData = fxElt.DataContext as Bus;
-                MessageBoxResult result = MessageBox.Show(lineData.fuelString(), "FUELIING", MessageBoxButton.YesNo, MessageBoxImage.Exclamation, MessageBoxResult.Yes);
-                switch (result)
-                {
-                    case MessageBoxResult.Yes:
-                        {
-                            ((sender as Button).DataContext as Bus).Refuelling(); //gp to refulling the bus
-                            allbuses.Items.Refresh();
-                        }
-                        break;
-                    case MessageBoxResult.No:
-                        break;
-                }
+                case MessageBoxResult.Yes:
+                    {
+                        ((sender as Button).DataContext as Bus).Refuelling(); //gp to refulling the bus
+                        allbuses.Items.Refresh();
+                    }
+                    break;
+                case MessageBoxResult.No:
+                    break;
             }
-            catch (Exception)
-            {
 
-                MessageBox.Show("a");
-            }
         }
-
-
-            
         private void Pick_Button_Click(object sender, RoutedEventArgs e) //to starting travel
         {
-                StartingTravel smalla = new StartingTravel((sender as Button).DataContext as Bus);
-                smalla.ShowDialog();
+            StartingTravel smalla = new StartingTravel((sender as Button).DataContext as Bus);
+            smalla.ShowDialog();
+
+
+
         }
-          
-
-
-
-        
         private void doubleflick(object sender, RoutedEventArgs e) //in order to shoe details on the bus
         {
-
-
-            var list = (ListView)sender;
-            object item = list.SelectedItem;
-            Bus_Data temp = new Bus_Data(item);
-            temp.Show();
-
-            
-      
-
+            MessageBox.Show("ss");
         }
 
 
 
     }
 }
-

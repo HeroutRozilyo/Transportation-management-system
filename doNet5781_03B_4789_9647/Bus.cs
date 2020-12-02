@@ -101,9 +101,11 @@ namespace doNet5781_03B_4789_9647
                 {
 
                     throw new Exception("license not valid");
+                
                 }
             }
         }
+
 
         public Bus() //defult constructor
         {
@@ -124,8 +126,9 @@ namespace doNet5781_03B_4789_9647
         public Bus(int num, DateTime date)
         {
             string a = num.ToString();
-            License = a;
             StartingDate = date;
+            License = a;
+            
 
             Fuel = r.Next(FULLTANK);
             newKm_from_LastTreatment = r.Next(20000);
@@ -222,11 +225,7 @@ namespace doNet5781_03B_4789_9647
         
         }
 
-        public static implicit operator Bus(Grid v)
-        {
-            throw new NotImplementedException();
-        }
-
+     
         public string fuelString()
         {
             string str = " ";

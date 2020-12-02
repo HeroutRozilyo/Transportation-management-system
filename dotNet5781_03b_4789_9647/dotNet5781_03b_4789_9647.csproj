@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{4960957F-B006-48A7-9030-2D1717266A61}</ProjectGuid>
+    <ProjectGuid>{617B4B0F-0C32-4C3A-93ED-3D5692C8CBBF}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>doNet5781_03B_4789_9647</RootNamespace>
-    <AssemblyName>doNet5781_03B_4789_9647</AssemblyName>
+    <RootNamespace>dotNet5781_03b_4789_9647</RootNamespace>
+    <AssemblyName>dotNet5781_03b_4789_9647</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -55,18 +55,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="BusCompany.cs" />
-    <Compile Include="Bus_Data.xaml.cs">
-      <DependentUpon>Bus_Data.xaml</DependentUpon>
-    </Compile>
     <Compile Include="StartingTravel.xaml.cs">
       <DependentUpon>StartingTravel.xaml</DependentUpon>
     </Compile>
     <Page Include="addwindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Bus_Data.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -109,7 +101,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="Properties\DataSources\Bus.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
