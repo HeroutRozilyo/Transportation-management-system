@@ -228,7 +228,7 @@ namespace doNet5781_03B_4789_9647
             var list = (ListView)sender;
             object item = list.SelectedItem;
             Bus_Data temp = new Bus_Data(item);
-            temp.Show();
+            temp.ShowDialog();
 
             
       

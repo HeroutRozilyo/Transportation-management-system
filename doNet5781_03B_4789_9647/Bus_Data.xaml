@@ -10,7 +10,11 @@
         <CollectionViewSource x:Key="busViewSource" d:DesignSource="{d:DesignInstance {x:Type local:Bus}, CreateList=True}"/>
     </Window.Resources>
     <Grid>
-        <Grid x:Name="grid1" DataContext="{StaticResource busViewSource}" HorizontalAlignment="Left" Margin="36,74,0,0" VerticalAlignment="Top">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="32*"/>
+            <ColumnDefinition Width="311*"/>
+        </Grid.ColumnDefinitions>
+        <Grid x:Name="grid1" DataContext="{StaticResource busViewSource}" HorizontalAlignment="Left" Margin="3.619,74,0,0" VerticalAlignment="Top" Grid.Column="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="7.333"/>
@@ -33,11 +37,18 @@
             <Label Content="new Km from Last Treatment:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,3,0,3" Grid.Row="4" VerticalAlignment="Center"/>
             <Label Content="Starting Date:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,3,0,3" Grid.Row="5" VerticalAlignment="Center"/>
             <Label Content="status:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,3,0,3" Grid.Row="6" VerticalAlignment="Center"/>
+
         </Grid>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="258,340,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="170,340,0,0" VerticalAlignment="Top" Width="75"/>
-        <Label Content="Details of the bus:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="297"/>
-        <TextBlock HorizontalAlignment="Left" Margin="239,82,0,0" TextWrapping="Wrap" Text="{Binding Path=Fuel}" VerticalAlignment="Top"/>
+        <Button Content="SEND TO TREATMENT" HorizontalAlignment="Left" Margin="174,340,0,0" VerticalAlignment="Top" Width="127" Grid.Column="1" Click="treat_Click"/>
+        <Button Content="SEND TO REFUEL" HorizontalAlignment="Left" Margin="29,340,0,0" VerticalAlignment="Top" Width="140" Grid.Column="1" Click="fuel_Click"/>
+        <Label Content="Details of the bus:" HorizontalAlignment="Left" Margin="0,24,0,0" VerticalAlignment="Top" Width="297" Grid.ColumnSpan="2"/>
+        <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="184.619,91,0,0" TextWrapping="Wrap" Text="{Binding Path=Fuel}" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="206,114,0,0" TextWrapping="Wrap" Text="{Binding Path=Km}" VerticalAlignment="Top" Height="19" Width="72" Grid.Column="1" RenderTransformOrigin="0.881,0.228"/>
+        <TextBlock HorizontalAlignment="Left" Margin="170,141,0,0" TextWrapping="Wrap" Text="{Binding Path=strLastTreat}" VerticalAlignment="Top" Width="125" Height="26" Grid.Column="1"/>
+        <TextBlock HorizontalAlignment="Left" Margin="184.619,176,0,0" TextWrapping="Wrap" Text="{Binding Path=License}" VerticalAlignment="Top" Height="23" Width="107" Grid.Column="1"/>
+        <TextBlock HorizontalAlignment="Left" Margin="206.619,206,0,0" TextWrapping="Wrap" Text="{Binding Path=newKm_from_LastTreatment}" VerticalAlignment="Top" Height="23" Width="80" Grid.Column="1"/>
+        <TextBlock HorizontalAlignment="Left" Margin="197,239,0,105.667" TextWrapping="Wrap" Text="{Binding Path=strstartingdate}" Width="75" Grid.Column="1"/>
+        <TextBlock HorizontalAlignment="Left" Margin="171.619,277,0,0" TextWrapping="Wrap" Text="{Binding Path=status}" VerticalAlignment="Top" Width="115" Grid.Column="1"/>
 
     </Grid>
 </Window>

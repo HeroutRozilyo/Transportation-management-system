@@ -20,7 +20,7 @@ namespace doNet5781_03B_4789_9647
     public partial class Bus_Data : Window
     {
         public Bus temp = new Bus();
-        private object item;
+      //  private object item;
 
      
         public Bus_Data(Bus v)
@@ -35,15 +35,33 @@ namespace doNet5781_03B_4789_9647
             InitializeComponent();
 
             this.DataContext = item;
-            //this.item = item;
+      
         }
 
         private void Window_Loaded_1(object sender, RoutedEventArgs e)
         {
 
-            System.Windows.Data.CollectionViewSource busViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("busViewSource")));
+            
+
+            //System.Windows.Data.CollectionViewSource busViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("busViewSource")));
+
             // Load data by setting the CollectionViewSource.Source property:
             // busViewSource.Source = [generic data source]
+        }
+
+        private void treat_Click(object sender, RoutedEventArgs e)
+        {
+            
+            (this.DataContext as Bus).treatment();
+            this.Close();
+        }
+
+        private void fuel_Click(object sender, RoutedEventArgs e)
+        {
+            (this.DataContext as Bus).Refuelling();
+            this.Close();
+
+
         }
     }
 }

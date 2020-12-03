@@ -21,7 +21,7 @@
                     <GridView x:Name="allbusesgrid"  >
                         
                         <GridViewColumn Header="license" Width="120" DisplayMemberBinding="{Binding License}"  />
-                        <GridViewColumn Header="starting date" Width="160" DisplayMemberBinding="{Binding StartingDate}" />
+        
                         
                         <GridViewColumn Width="60">
                             <GridViewColumn.CellTemplate>

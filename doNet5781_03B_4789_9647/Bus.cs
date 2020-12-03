@@ -24,7 +24,12 @@ namespace doNet5781_03B_4789_9647
         private const int MAX_KM = 20000;
         private const int FULLTANK = 1200;
 
-        public DateTime StartingDate { get; set; }
+        public DateTime StartingDate
+        {
+            set;
+            get;
+            
+        }
 
         
  
@@ -61,6 +66,35 @@ namespace doNet5781_03B_4789_9647
                 }
                 else
                     throw new ArgumentOutOfRangeException("KM must to be a positive number");
+            }
+        }
+        public string strLastTreat
+        {
+            set
+            {
+
+            }
+            get
+            {
+                string result = " ";
+                result = String.Format("{0}/{1}/{2}", lastTreat.Day, lastTreat.Month, lastTreat.Year);
+                return result;
+            }
+        }
+
+
+        public string strstartingdate
+        {
+            set
+            {
+                strLastTreat = value;
+             
+            }
+            get 
+            {
+                string result= " ";
+                result = String.Format("{0}/{1}/{2}", StartingDate.Day, StartingDate.Month,StartingDate.Year);
+                return result;
             }
         }
 
@@ -120,6 +154,7 @@ namespace doNet5781_03B_4789_9647
             Fuel = FULLTANK;
             newKm_from_LastTreatment = 0;
             km = 0;
+            strstartingdate = String.Format("{0}/{1}/{2}", StartingDate.Day, StartingDate.Month, StartingDate.Year);
 
         }
 
@@ -135,6 +170,8 @@ namespace doNet5781_03B_4789_9647
             km = r.Next(30000);
             lastTreat =new DateTime(2020, r.Next(1, DateTime.Today.Month), r.Next(1, DateTime.Today.Day));
             status = (Status)0;
+            strstartingdate = String.Format("{0}/{1}/{2}", StartingDate.Day, StartingDate.Month, StartingDate.Year);
+
 
         }
 
@@ -148,6 +185,8 @@ namespace doNet5781_03B_4789_9647
             km = a.km;
             newKm_from_LastTreatment = a.newKm_from_LastTreatment;
             lastTreat = a.lastTreat;
+            strLastTreat = a.strLastTreat;
+
         }
 
         public override string ToString()
@@ -164,6 +203,8 @@ namespace doNet5781_03B_4789_9647
         {
             status = (Status)3;
             this.Last_tratment();
+            
+            strLastTreat= String.Format("{0}/{1}/{2}", this.lastTreat.Day, this.lastTreat.Month, this.lastTreat.Year);
 
             newKm_from_LastTreatment = 0;
             if (this.Fuel <= 1200)
@@ -219,7 +260,7 @@ namespace doNet5781_03B_4789_9647
             }
             else //if he cant travels
             {
-                this.treatment();
+                //this.treatment();
                 return false;
             }
         

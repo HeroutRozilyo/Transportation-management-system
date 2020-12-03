@@ -29,7 +29,7 @@ namespace doNet5781_03B_4789_9647
 
 
         private void TextBox_OnlyNumbers_PreviewKeyDown(object sender, KeyEventArgs e)
-        {
+            {
             TextBox text = sender as TextBox;
             if (text == null) return;
             if (e == null) return;
@@ -98,7 +98,7 @@ namespace doNet5781_03B_4789_9647
                     {
                         MessageBox.Show("The bus cannot take the ride because it will go the number of miles allowed ", "ERROR KM", MessageBoxButton.OK, MessageBoxImage.Information);
                     }
-                    if (temp.lastTreat.AddYears(1) > DateTime.Today)
+                    if (temp.lastTreat.AddYears(1) < DateTime.Today)
                     {
                         MessageBox.Show("It has been a year since the last treatment ", "ERROR TREATMENT", MessageBoxButton.OK, MessageBoxImage.Information);
                     }
