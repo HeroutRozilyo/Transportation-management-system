@@ -15,7 +15,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Threading;
-
+using System.ComponentModel;
+using System.Diagnostics;
 
 namespace doNet5781_03B_4789_9647
 {
@@ -33,6 +34,7 @@ namespace doNet5781_03B_4789_9647
         //List<Bus> egged = new List<Bus>();  //A list that will contain all the buses
         static Random r = new Random(DateTime.Now.Millisecond);
         addWindow wnd;
+        BackgroundWorker worker;
 
         public Bus temp 
         { 
@@ -194,6 +196,8 @@ namespace doNet5781_03B_4789_9647
                 {
                     case MessageBoxResult.Yes:
                         {
+                            resultprograssBar.Background = Brushes.LawnGreen;
+                            prograssBar(12);
                             ((sender as Button).DataContext as Bus).Refuelling(); //gp to refulling the bus
                             allbuses.Items.Refresh();
                         }
@@ -235,6 +239,97 @@ namespace doNet5781_03B_4789_9647
 
         }
 
+
+
+
+
+        private void MainWindow_Closing(object sender, CancelEventArgs e)
+        {
+            Environment.Exit(Environment.ExitCode);
+        }
+
+
+
+
+
+        public void prograssBar(int num)
+        {
+            worker = new BackgroundWorker();
+            worker.DoWork += worker_Dowork;
+            worker.ProgressChanged += worker_prograss;
+            worker.RunWorkerCompleted += worker_Run;
+
+            worker.WorkerReportsProgress = true;
+            worker.WorkerSupportsCancellation = true;
+        
+            worker.RunWorkerAsync(num);
+
+        }
+
+        private void worker_Run(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if(e.Cancelled==false)
+            {
+                if(e.Error!=null)
+                {
+                    MessageBox.Show("ERROR");
+                }
+                else
+                {
+                    long result = (long)e.Result;
+                    if(result<1000)
+                    {
+
+                    }
+                    else
+                    {
+
+                    }
+                }
+            }
+         
+
+        }
+
+
+
+
+
+
+
+
+        private void worker_prograss(object sender, ProgressChangedEventArgs e)
+        {
+            int prograss = e.ProgressPercentage;
+            resultprograssBar.Value = prograss;
+
+           
+        }
+
+        private void worker_Dowork(object sender, DoWorkEventArgs e)
+        {
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+
+            int lengh = (int)e.Argument;
+
+            for(int i=1;i<=lengh;i++)
+            {
+                if (worker.CancellationPending == true)
+                {
+                    e.Cancel = true;
+                    e.Result = stopwatch.ElapsedMilliseconds;
+                    break;
+                }
+                else
+                {
+                    System.Threading.Thread.Sleep(500);
+                    worker.ReportProgress(i * 100 / lengh);
+                }
+              
+            }
+            e.Result = stopwatch.ElapsedMilliseconds;
+        }
 
 
     }
