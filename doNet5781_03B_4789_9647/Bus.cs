@@ -4,15 +4,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Windows.Media;
+using System.Threading;
+using System.ComponentModel;
+using System.Windows;
+using System.Diagnostics;
 
 namespace doNet5781_03B_4789_9647
 {
-   
-        public enum Status
-        {
-            READY_TO_TRAVEL, MIDDLE_TRAVEL, RE_FULLING, TREATMENT
-        }
-    public class Bus
+
+    public enum Status
+    {
+        READY_TO_TRAVEL, MIDDLE_TRAVEL, RE_FULLING, TREATMENT
+    }
+    public class Bus : INotifyPropertyChanged
     {
         //----------
         // Variable definition
@@ -28,46 +33,205 @@ namespace doNet5781_03B_4789_9647
         {
             set;
             get;
-            
+
         }
 
-        
- 
+
+
+        BackgroundWorker worker = new BackgroundWorker();
+        public bool isTimerRun;
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void Worker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            int length = (int)e.Argument;
+            timeToEndWork = length;
+
+            //timer = "שניות " + timeToEndWork + " נשארו עוד";
+
+            for (int i = 1; i <= length; i++)
+            {
+                enable = false;
+                Thread.Sleep(1000);
+                worker.ReportProgress(i * 100 / length);
+               
+            }
+          
+
+
+        }
+
+
+        private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            work = (int)e.ProgressPercentage;
+            Time_left = timeToEndWork + "s";
+            timeToEndWork--;
+
+
+
+        }
+
+        private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            isTimerRun = false;
+            status = (Status)0;
+            work = 0;
+            Time_left = "";
+            timeToEndWork = 0;
+            enable = true;
+        }
+
+
+
+        private string _timeleft;
+        public string Time_left
+        {
+
+            get
+            {
+                return _timeleft;
+            }
+            set
+            {
+                _timeleft = value;
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("Time_left"));
+
+                //NotifyPropertyChanged("Timeleft");
+            }
+        }
+
+        private int _work;
+        public int work
+        {
+            get
+            {
+                return _work;
+            }
+            set
+            {
+                _work = value;
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("work"));
+
+            }
+
+        }
+
+
+
+
 
 
         private string license;
         private int km;
-      //  private int NewKm_from_LastTreatment;
+        int timeToEndWork;
 
 
-        public Status status { get; set; }
+        //  private int NewKm_from_LastTreatment;
 
-        public DateTime lastTreat { get; set; }
-       
+
+        //    public Status status { get; set; }
+
+        private Status s;
+        public Status status
+        {
+            get { return s; }
+            set
+            {
+                s = value;
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("status"));
+            }
+        }
+
+        // public DateTime lastTreat { get; set; }
+        private DateTime Lasttreat;
+        public DateTime lastTreat
+        {
+            get { return Lasttreat; }
+            set
+            {
+                Lasttreat = value;
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("lastTreat"));
+            }
+        }
+
+
+
 
         //------
         // set and get from our variable
 
-        public int Fuel { get; set; }
-
-        public int newKm_from_LastTreatment
+        //public int Fuel { get; set; }
+        private int f;
+        public int Fuel
         {
-            get; set;
+            get { return f; }
+            set
+            {
+                f = value;
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("Fuel"));
+            }
         }
 
+
+        //public int newKm_from_LastTreatment
+        //{
+        //    get; set;
+        //}
+
+
+        private int newkm;
+        public int newKm_from_LastTreatment
+        {
+            get { return newkm; }
+            set
+            {
+                newkm = value;
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("newKm_from_LastTreatment"));
+            }
+        }
+
+        //public int Km
+        //{
+        //    get { return km; }
+        //    set
+        //    {
+        //        if (value >= 0)
+        //        {
+        //            km = value;
+        //        }
+        //        else
+        //            throw new ArgumentOutOfRangeException("KM must to be a positive number");
+        //    }
+        //}
+
+
+        private int sumkm;
         public int Km
         {
-            get { return km; }
+            get { return sumkm; }
             set
             {
                 if (value >= 0)
                 {
-                    km = value;
+                    sumkm = value;
+                    if (PropertyChanged != null)
+                        PropertyChanged(this, new PropertyChangedEventArgs("Km"));
                 }
                 else
                     throw new ArgumentOutOfRangeException("KM must to be a positive number");
             }
         }
+
+
+
+
         public string strLastTreat
         {
             set
@@ -82,7 +246,11 @@ namespace doNet5781_03B_4789_9647
             }
         }
 
-
+        public  bool enable
+        {
+            set; get;
+        }
+            
         public string strstartingdate
         {
             set
@@ -134,7 +302,7 @@ namespace doNet5781_03B_4789_9647
                 else
                 {
 
-                    throw new Exception("license not valid");
+                    throw new Exception("license not valid");/////////////////////////////////////////////////////////////!!!!!!!!!!!!!!!!!!!!!
                 
                 }
             }
@@ -155,7 +323,7 @@ namespace doNet5781_03B_4789_9647
             newKm_from_LastTreatment = 0;
             km = 0;
             strstartingdate = String.Format("{0}/{1}/{2}", StartingDate.Day, StartingDate.Month, StartingDate.Year);
-
+            enable = true;
         }
 
         public Bus(int num, DateTime date)
@@ -171,7 +339,13 @@ namespace doNet5781_03B_4789_9647
             lastTreat =new DateTime(2020, r.Next(1, DateTime.Today.Month), r.Next(1, DateTime.Today.Day));
             status = (Status)0;
             strstartingdate = String.Format("{0}/{1}/{2}", StartingDate.Day, StartingDate.Month, StartingDate.Year);
+            enable = true;
+            worker.DoWork += Worker_DoWork;
+            worker.ProgressChanged += Worker_ProgressChanged;
+            worker.RunWorkerCompleted += Worker_RunWorkerCompleted;
 
+            worker.WorkerReportsProgress = true;
+            worker.WorkerSupportsCancellation = true;
 
         }
 
@@ -201,6 +375,9 @@ namespace doNet5781_03B_4789_9647
         /// </summary>
         public void treatment()
         {
+
+            worker.RunWorkerAsync(144);
+
             status = (Status)3;
             this.Last_tratment();
             
@@ -229,7 +406,14 @@ namespace doNet5781_03B_4789_9647
 
         public void Refuelling() //update the new fuel
         {
+
+            // .Background = Brushes.Orange;
+
+            worker.RunWorkerAsync(12);
+            
             status = (Status)2;
+           
+
             Fuel = FULLTANK;
         }
 
@@ -244,6 +428,17 @@ namespace doNet5781_03B_4789_9647
             {
                 if (newKm_from_LastTreatment + kmTravel < MAX_KM && Fuel - kmTravel > 0) //if he can take this travel
                 {
+                    int time =0;
+                    int v = r.Next(20, 51); //velocitui of this bus
+                    int t = kmTravel / v; //time of this travel.This time is in hour
+
+                    time =(int)(t/3.6); //time travel at our program
+                    t = (int)(time / 60);
+
+
+                    worker.RunWorkerAsync((int)(v*kmTravel*0.1)); //=============================================
+
+
                     ///------------
                     ///update the new data
                     newKm_from_LastTreatment += kmTravel;

@@ -29,7 +29,7 @@
                         <GridViewColumn Width="60">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button  Content="Fuel"  Margin="0" VerticalAlignment="Center" Click="Button_Click" />
+                                    <Button  Content="Fuel"  Margin="0" VerticalAlignment="Center" IsEnabled="{Binding enable}" Click="Button_Click"  />
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
@@ -37,25 +37,38 @@
                         <GridViewColumn Width="80">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button  Content="Start Travel"  Margin="0" VerticalAlignment="Center" Click="Pick_Button_Click" />
-                                    
+                                    <Button  Content="Start Travel"  Margin="0" VerticalAlignment="Center" Click="Pick_Button_Click"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
 
-                     
-                        <GridViewColumn Width="250">
-                          
-                           
-                                    <ProgressBar x:Name="resultprograssBar" Height="10" Width="100"/>
 
-                          
+                        <GridViewColumn Width="130">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <ProgressBar x:Name="resultprograssBar" Height="10" Width="100" HorizontalAlignment="center" VerticalAlignment="Bottom" Minimum="0" Maximum="100"  Value="{Binding work, UpdateSourceTrigger=PropertyChanged}" />
+                            </DataTemplate>
+                            </GridViewColumn.CellTemplate>
                         </GridViewColumn>
+
+
+                        <GridViewColumn Width="50">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock x:Name="timeToEnd" Text="{Binding Time_left , UpdateSourceTrigger=PropertyChanged}" Width="120" Height="20" FlowDirection="LeftToRight"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
+
+
+
 
 
                     </GridView>
                 </ListView.View>
-              
+           
+
             </ListView>
         </Grid>
             

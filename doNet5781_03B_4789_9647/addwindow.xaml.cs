@@ -46,19 +46,7 @@ namespace doNet5781_03B_4789_9647
             }
         }
 
-        //public addWindow(ref Bus temp)
-        //{
-        //    try
-        //    {
-        //        InitializeComponent();
-        //        this.DataContext = temp;
-        //    }
-        //    catch(Exception)
-        //    {
-
-        //    }
-
-        //}
+  
 
 
         public Bus NewBus

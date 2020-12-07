@@ -59,6 +59,7 @@
     <Compile Include="Bus_Data.xaml.cs">
       <DependentUpon>Bus_Data.xaml</DependentUpon>
     </Compile>
+    <Compile Include="prograss.cs" />
     <Compile Include="StartingTravel.xaml.cs">
       <DependentUpon>StartingTravel.xaml</DependentUpon>
     </Compile>

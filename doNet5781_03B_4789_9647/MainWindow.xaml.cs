@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -18,6 +17,7 @@ using System.Threading;
 using System.ComponentModel;
 using System.Diagnostics;
 
+
 namespace doNet5781_03B_4789_9647
 {
     /// <summary>
@@ -25,8 +25,8 @@ namespace doNet5781_03B_4789_9647
     /// </summary>
 
 
- 
-  
+
+
     ///
 
     public partial class MainWindow : Window
@@ -34,13 +34,13 @@ namespace doNet5781_03B_4789_9647
         //List<Bus> egged = new List<Bus>();  //A list that will contain all the buses
         static Random r = new Random(DateTime.Now.Millisecond);
         addWindow wnd;
-        BackgroundWorker worker;
 
-        public Bus temp 
-        { 
-            get; private set; 
+
+        public Bus temp
+        {
+            get; private set;
         }
-        
+
 
         private ObservableCollection<Bus> egged = new ObservableCollection<Bus>();
 
@@ -55,11 +55,11 @@ namespace doNet5781_03B_4789_9647
                 InitializeComponent();
                 allbuses.ItemsSource = egged;
             }
-            catch(Exception)
+            catch (Exception)
             {
                 MessageBox.Show("a");
             }
-        
+
 
 
         }
@@ -101,7 +101,7 @@ namespace doNet5781_03B_4789_9647
                 }
 
 
-        }
+            }
 
 
             egged[2].lastTreat = (egged[2].lastTreat.AddYears(-1));
@@ -156,29 +156,29 @@ namespace doNet5781_03B_4789_9647
 
         private void addBus_Click(object sender, RoutedEventArgs e) //to add bus to our company
         {
-            
-           try
+
+            try
             {
-                   wnd = new addWindow();
-               // Bus temp = new Bus();
+                wnd = new addWindow();
+                // Bus temp = new Bus();
                 //wnd = new addWindow(ref temp);
 
                 bool? result = wnd.ShowDialog();
                 if (result == true)
                 {
+
                     
-                  //  egged.Add(temp);
-                
+
                     egged.Add(wnd.myBus);
                 }
             }
-            catch(Exception)
+            catch (Exception)
             {
                 MessageBox.Show("The new licence is not valid,\n please nter again number licence with 8 digite", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
 
             }
-           
-           
+
+
 
         }
 
@@ -196,8 +196,7 @@ namespace doNet5781_03B_4789_9647
                 {
                     case MessageBoxResult.Yes:
                         {
-                            resultprograssBar.Background = Brushes.LawnGreen;
-                            prograssBar(12);
+
                             ((sender as Button).DataContext as Bus).Refuelling(); //gp to refulling the bus
                             allbuses.Items.Refresh();
                         }
@@ -214,17 +213,17 @@ namespace doNet5781_03B_4789_9647
         }
 
 
-            
+
         private void Pick_Button_Click(object sender, RoutedEventArgs e) //to starting travel
         {
-                StartingTravel smalla = new StartingTravel((sender as Button).DataContext as Bus);
-                smalla.ShowDialog();
+            StartingTravel smalla = new StartingTravel((sender as Button).DataContext as Bus);
+            smalla.ShowDialog();
         }
-          
 
 
 
-        
+
+
         private void doubleflick(object sender, RoutedEventArgs e) //in order to shoe details on the bus
         {
 
@@ -234,8 +233,8 @@ namespace doNet5781_03B_4789_9647
             Bus_Data temp = new Bus_Data(item);
             temp.ShowDialog();
 
-            
-      
+
+
 
         }
 
@@ -250,86 +249,6 @@ namespace doNet5781_03B_4789_9647
 
 
 
-
-
-        public void prograssBar(int num)
-        {
-            worker = new BackgroundWorker();
-            worker.DoWork += worker_Dowork;
-            worker.ProgressChanged += worker_prograss;
-            worker.RunWorkerCompleted += worker_Run;
-
-            worker.WorkerReportsProgress = true;
-            worker.WorkerSupportsCancellation = true;
-        
-            worker.RunWorkerAsync(num);
-
-        }
-
-        private void worker_Run(object sender, RunWorkerCompletedEventArgs e)
-        {
-            if(e.Cancelled==false)
-            {
-                if(e.Error!=null)
-                {
-                    MessageBox.Show("ERROR");
-                }
-                else
-                {
-                    long result = (long)e.Result;
-                    if(result<1000)
-                    {
-
-                    }
-                    else
-                    {
-
-                    }
-                }
-            }
-         
-
-        }
-
-
-
-
-
-
-
-
-        private void worker_prograss(object sender, ProgressChangedEventArgs e)
-        {
-            int prograss = e.ProgressPercentage;
-            resultprograssBar.Value = prograss;
-
-           
-        }
-
-        private void worker_Dowork(object sender, DoWorkEventArgs e)
-        {
-            Stopwatch stopwatch = new Stopwatch();
-            stopwatch.Start();
-
-            int lengh = (int)e.Argument;
-
-            for(int i=1;i<=lengh;i++)
-            {
-                if (worker.CancellationPending == true)
-                {
-                    e.Cancel = true;
-                    e.Result = stopwatch.ElapsedMilliseconds;
-                    break;
-                }
-                else
-                {
-                    System.Threading.Thread.Sleep(500);
-                    worker.ReportProgress(i * 100 / lengh);
-                }
-              
-            }
-            e.Result = stopwatch.ElapsedMilliseconds;
-        }
 
 
     }

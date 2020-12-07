@@ -43,10 +43,7 @@ namespace doNet5781_03B_4789_9647
 
             
 
-            //System.Windows.Data.CollectionViewSource busViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("busViewSource")));
-
-            // Load data by setting the CollectionViewSource.Source property:
-            // busViewSource.Source = [generic data source]
+     
         }
 
         private void treat_Click(object sender, RoutedEventArgs e)
