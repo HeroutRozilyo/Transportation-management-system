@@ -39,6 +39,7 @@ namespace doNet5781_03B_4789_9647
 
 
         BackgroundWorker worker = new BackgroundWorker();
+        
         public bool isTimerRun;
         public event PropertyChangedEventHandler PropertyChanged;
 
