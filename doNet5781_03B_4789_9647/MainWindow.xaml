@@ -49,6 +49,8 @@
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <Button  Content="Fuel"  Margin="0" VerticalAlignment="Center" IsEnabled="{Binding enable}" Click="Button_Click" Background="#FFEDE88B" FontFamily="Segoe Print" FontSize="14" FontWeight="Bold" Width="55"  >
+
+
                                         <Button.BorderBrush>
                                             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                                                 <GradientStop Color="Black" Offset="0"/>
@@ -92,6 +94,7 @@
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
+
 
 
 
