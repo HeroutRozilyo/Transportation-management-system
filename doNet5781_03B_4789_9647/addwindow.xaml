@@ -10,7 +10,7 @@
 
 
 
-    <Grid>
+    <Grid Background="#FDEEFDFF">
         <Grid x:Name="dataBus"  HorizontalAlignment="Left" Margin="177,82,0,0" VerticalAlignment="Top" Height="264" Width="466">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" MinWidth="216.667"/>
@@ -24,8 +24,8 @@
                 <!--<RowDefinition Height="*"/>-->
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <Label Content="Fuel:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,3,0,15" Grid.Row="0" VerticalAlignment="Center" Height="26" Width="35"/>
-            <TextBox x:Name="fuelTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="2.667,5,0,16" Grid.Row="0" Text="{Binding Fuel, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            <Label Content="Fuel:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,3,0,15" Grid.Row="0" VerticalAlignment="Center" Height="26" Width="35" FontSize="14"/>
+            <TextBox x:Name="fuelTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="2.667,5,0,16" Grid.Row="0" Text="{Binding Fuel, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" TextChanged="fuelTextBox_TextChanged"/>
             <Label Content="Km:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,9,0,8.333" Grid.Row="1" VerticalAlignment="Center" Height="26" Width="30"/>
             <TextBox x:Name="kmTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="22" Margin="2.667,11,0,10.333" Grid.Row="1" Text="{Binding Km, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
             <Label Content="startingDate :" Grid.Column="0" HorizontalAlignment="Left" Margin="3,14.667,0,7.333" Grid.Row="2" VerticalAlignment="Center" Height="26" Width="60"/>

@@ -192,6 +192,7 @@ namespace doNet5781_03B_4789_9647
             set
             {
                 newkm = value;
+                //km += newkm;
                 if (PropertyChanged != null)
                     PropertyChanged(this, new PropertyChangedEventArgs("newKm_from_LastTreatment"));
             }
@@ -212,15 +213,15 @@ namespace doNet5781_03B_4789_9647
         //}
 
 
-        private int sumkm;
+    //   private int sumkm;
         public int Km
         {
-            get { return sumkm; }
+            get { return km; }
             set
             {
                 if (value >= 0)
                 {
-                    sumkm = value;
+                    km = value;
                     if (PropertyChanged != null)
                         PropertyChanged(this, new PropertyChangedEventArgs("Km"));
                 }
@@ -331,12 +332,13 @@ namespace doNet5781_03B_4789_9647
             string a = num.ToString();
             StartingDate = date;
             License = a;
-            
-
             Fuel = r.Next(FULLTANK);
-            newKm_from_LastTreatment = r.Next(20000);
-            km = r.Next(30000);
-            lastTreat =new DateTime(2020, r.Next(1, DateTime.Today.Month), r.Next(1, DateTime.Today.Day));
+            do
+            {
+                newKm_from_LastTreatment = r.Next(20000);
+                km = r.Next(30000);
+            } while (km < newKm_from_LastTreatment);
+            lastTreat = new DateTime(2020, r.Next(1, DateTime.Today.Month), r.Next(1, DateTime.Today.Day));
             status = (Status)0;
             strstartingdate = String.Format("{0}/{1}/{2}", StartingDate.Day, StartingDate.Month, StartingDate.Year);
             enable = true;

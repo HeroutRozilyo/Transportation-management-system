@@ -247,10 +247,10 @@ namespace doNet5781_03B_4789_9647
             Environment.Exit(Environment.ExitCode);
         }
 
+        private void allbuses_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
 
-
-
-
+        }
     }
 }
 

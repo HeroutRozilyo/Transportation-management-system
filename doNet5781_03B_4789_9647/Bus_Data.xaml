@@ -5,20 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:doNet5781_03B_4789_9647"
         mc:Ignorable="d"
-        Title="Bus_Data" Height="400" Width="350" Loaded="Window_Loaded_1">
+        Title="Bus_Data" Height="327.334" Width="350" Loaded="Window_Loaded_1">
     <Window.Resources>
         <CollectionViewSource x:Key="busViewSource" d:DesignSource="{d:DesignInstance {x:Type local:Bus}, CreateList=True}"/>
     </Window.Resources>
-    <Grid>
+    <Grid Background="#FFEEFDFF" Margin="0,0,0.333,-29.667">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="32*"/>
+            <ColumnDefinition Width="6*"/>
+            <ColumnDefinition Width="26*"/>
             <ColumnDefinition Width="311*"/>
         </Grid.ColumnDefinitions>
-        <Grid x:Name="grid1" DataContext="{StaticResource busViewSource}" HorizontalAlignment="Left" Margin="3.619,74,0,0" VerticalAlignment="Top" Grid.Column="1">
+        <Grid x:Name="grid1" DataContext="{StaticResource busViewSource}" HorizontalAlignment="Left" Margin="29,39,-14.667,0" VerticalAlignment="Top" Grid.Column="2">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="7.333"/>
-                <ColumnDefinition Width="118.667"/>
+                <ColumnDefinition Width="128.667"/>
+                <ColumnDefinition Width="42.667"/>
+                <ColumnDefinition Width="0.667"/>
+                <ColumnDefinition Width="125.333"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -29,26 +31,35 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <Label Content="Fuel:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,3,0,3" Grid.Row="0" VerticalAlignment="Center"/>
+            <Label Content="Fuel:" Grid.Column="0" Margin="0,4,80.667,2" Grid.Row="0" VerticalAlignment="Center" Height="26" FontFamily="Rockwell" FontSize="14"/>
 
-            <Label Content="Km:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,3,0,3" Grid.Row="1" VerticalAlignment="Center"/>
-            <Label Content="last Treat:" Grid.Column="0" Margin="3,3,104.333,3" Grid.Row="2" VerticalAlignment="Center"/>
-            <Label Content="License:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,3,0,3" Grid.Row="3" VerticalAlignment="Center"/>
-            <Label Content="new Km from Last Treatment:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,3,0,3" Grid.Row="4" VerticalAlignment="Center"/>
-            <Label Content="Starting Date:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,3,0,3" Grid.Row="5" VerticalAlignment="Center"/>
-            <Label Content="status:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,3,0,3" Grid.Row="6" VerticalAlignment="Center"/>
+            <Label Content="Km:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,3,0,3" Grid.Row="1" VerticalAlignment="Center" Height="26" Width="35" FontFamily="Rockwell" FontSize="14"/>
+            <Label Content="last Treat:" Grid.Column="0" Margin="3,3,52.667,3" Grid.Row="2" VerticalAlignment="Center" Height="26" FontFamily="Rockwell" FontSize="14"/>
+
+            <Label Content="new Km from Last Treatment:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,3,0,3" Grid.Row="4" VerticalAlignment="Center" Grid.ColumnSpan="4" Height="26" Width="200" FontFamily="Rockwell" FontSize="14"/>
+            <Label Content="Starting Date:" Grid.Column="0" Margin="3,3,29.667,3" Grid.Row="5" VerticalAlignment="Center" Height="26" FontFamily="Rockwell" FontSize="14"/>
+            <Label Content="status:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,3,0,3" Grid.Row="6" VerticalAlignment="Center" Height="26" Width="54" FontFamily="Rockwell" FontSize="14"/>
 
         </Grid>
-        <Button Content="SEND TO TREATMENT" HorizontalAlignment="Left" Margin="174,340,0,0" VerticalAlignment="Top" Width="127" Grid.Column="1" Click="treat_Click"/>
-        <Button Content="SEND TO REFUEL" HorizontalAlignment="Left" Margin="29,340,0,0" VerticalAlignment="Top" Width="140" Grid.Column="1" Click="fuel_Click"/>
-        <Label Content="Details of the bus:" HorizontalAlignment="Left" Margin="0,24,0,0" VerticalAlignment="Top" Width="297" Grid.ColumnSpan="2"/>
-        <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="184.619,91,0,0" TextWrapping="Wrap" Text="{Binding Path=Fuel}" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="206,114,0,0" TextWrapping="Wrap" Text="{Binding Path=Km}" VerticalAlignment="Top" Height="19" Width="72" Grid.Column="1" RenderTransformOrigin="0.881,0.228"/>
-        <TextBlock HorizontalAlignment="Left" Margin="170,141,0,0" TextWrapping="Wrap" Text="{Binding Path=strLastTreat}" VerticalAlignment="Top" Width="125" Height="26" Grid.Column="1"/>
-        <TextBlock HorizontalAlignment="Left" Margin="184.619,176,0,0" TextWrapping="Wrap" Text="{Binding Path=License}" VerticalAlignment="Top" Height="23" Width="107" Grid.Column="1"/>
-        <TextBlock HorizontalAlignment="Left" Margin="206.619,206,0,0" TextWrapping="Wrap" Text="{Binding Path=newKm_from_LastTreatment}" VerticalAlignment="Top" Height="23" Width="80" Grid.Column="1"/>
-        <TextBlock HorizontalAlignment="Left" Margin="197,239,0,105.667" TextWrapping="Wrap" Text="{Binding Path=strstartingdate}" Width="75" Grid.Column="1"/>
-        <TextBlock HorizontalAlignment="Left" Margin="171.619,277,0,0" TextWrapping="Wrap" Text="{Binding Path=status}" VerticalAlignment="Top" Width="115" Grid.Column="1"/>
+        <Button Content="SEND TO TREATMENT" HorizontalAlignment="Left" Margin="130,247,0,0" VerticalAlignment="Top" Width="160" Grid.Column="2" Click="treat_Click" Background="#FFFFA983" FontFamily="Segoe Print"/>
+        <Button Content="SEND TO REFUEL" HorizontalAlignment="Left" Margin="6,247,0,0" VerticalAlignment="Top" Width="140" Grid.Column="1" Click="fuel_Click" Background="#FFD8D371" FontFamily="Segoe Print" Grid.ColumnSpan="2"/>
+        <Label Content="Bus License:" HorizontalAlignment="Left" Margin="29,10,-14.667,0" VerticalAlignment="Top" Width="297" FontFamily="Rockwell Extra Bold" FontSize="16" FontWeight="Bold" Grid.Column="2"/>
+        <TextBlock Grid.Column="2" HorizontalAlignment="Left" Margin="67,48,0,0" TextWrapping="Wrap" Text="{Binding Path=Fuel}" VerticalAlignment="Top" Width="60" FontFamily="Rockwell" FontSize="14"/>
+        <TextBlock HorizontalAlignment="Left" Margin="64,79,0,0" TextWrapping="Wrap" Text="{Binding Path=Km}" VerticalAlignment="Top" Height="19" Width="72" Grid.Column="2" RenderTransformOrigin="0.881,0.228" FontFamily="Rockwell" FontSize="14"/>
+        <TextBlock HorizontalAlignment="Left" Margin="105,111,0,0" TextWrapping="Wrap" Text="{Binding Path=strLastTreat}" VerticalAlignment="Top" Width="125" Height="26" Grid.Column="2" FontFamily="Rockwell" FontSize="14"/>
+        <TextBlock Margin="159,16,0,0" TextWrapping="Wrap" Text="{Binding Path=License}" Height="18" Width="107" Grid.Column="2" FontFamily="Rockwell Extra Bold" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" ScrollViewer.HorizontalScrollBarVisibility="Auto" RenderTransformOrigin="0.5,0.5">
+            <TextBlock.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform AngleX="2.386"/>
+                    <RotateTransform/>
+                    <TranslateTransform X="-0.292"/>
+                </TransformGroup>
+            </TextBlock.RenderTransform>
+        </TextBlock>
+        <TextBlock HorizontalAlignment="Left" Margin="227,142,0,0" TextWrapping="Wrap" Text="{Binding Path=newKm_from_LastTreatment}" VerticalAlignment="Top" Height="23" Width="80" Grid.Column="2" FontFamily="Rockwell" FontSize="14"/>
+        <TextBlock HorizontalAlignment="Left" Margin="127,175,0,124.667" TextWrapping="Wrap" Text="{Binding Path=strstartingdate}" Width="75" Grid.Column="2" FontFamily="Rockwell" FontSize="14"/>
+        <TextBlock HorizontalAlignment="Left" Margin="82,208,0,0" TextWrapping="Wrap" Text="{Binding Path=status}" VerticalAlignment="Top" Width="154" Grid.Column="2" FontFamily="Rockwell"/>
 
     </Grid>
 </Window>

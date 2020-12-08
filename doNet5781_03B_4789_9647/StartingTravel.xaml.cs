@@ -112,6 +112,14 @@ namespace doNet5781_03B_4789_9647
 
         }
 
-      
+        private void numOfKm_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void numOfKm_TextChanged_1(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }

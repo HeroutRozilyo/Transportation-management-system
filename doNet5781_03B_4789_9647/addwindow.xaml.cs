@@ -91,6 +91,11 @@ namespace doNet5781_03B_4789_9647
             this.Close();
         }
 
+        private void fuelTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
         //public static implicit operator addWindow(Bus_Data v)
         //{
         //    throw new NotImplementedException();
