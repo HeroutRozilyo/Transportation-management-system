@@ -196,20 +196,25 @@ namespace doNet5781_03B_4789_9647
                 {
                     case MessageBoxResult.Yes:
                         {
-
                             ((sender as Button).DataContext as Bus).Refuelling(); //gp to refulling the bus
+                          //  ((sender as Button).DataContext as Bus).enable = false;
+                           
                             allbuses.Items.Refresh();
+                            
                         }
                         break;
                     case MessageBoxResult.No:
                         break;
                 }
+
             }
             catch (Exception)
             {
 
                 MessageBox.Show("a");
             }
+
+           
         }
 
 

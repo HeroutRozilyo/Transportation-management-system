@@ -21,7 +21,7 @@ namespace doNet5781_03B_4789_9647
     {
         //----------
         // Variable definition
-        // static public int GlobalKM { get; private set; }
+       
 
         static Random r = new Random(DateTime.Now.Millisecond);
 
@@ -42,21 +42,79 @@ namespace doNet5781_03B_4789_9647
         public bool isTimerRun;
         public event PropertyChangedEventHandler PropertyChanged;
 
+
+        public Bus(int num, DateTime date)
+        {
+            string a = num.ToString();
+            StartingDate = date;
+            License = a;
+
+
+            Fuel = r.Next(FULLTANK);
+            newKm_from_LastTreatment = r.Next(20000);
+            sumkm = r.Next(30000);
+            lastTreat = new DateTime(2020, r.Next(1, DateTime.Today.Month), r.Next(1, DateTime.Today.Day));
+            status = (Status)0;
+            strstartingdate = String.Format("{0}/{1}/{2}", StartingDate.Day, StartingDate.Month, StartingDate.Year);
+            enable = true;
+            worker.DoWork += Worker_DoWork;
+            worker.ProgressChanged += Worker_ProgressChanged;
+            worker.RunWorkerCompleted += Worker_RunWorkerCompleted;
+
+            worker.WorkerReportsProgress = true;
+            worker.WorkerSupportsCancellation = true;
+
+        }
+
+        public Bus() //defult constructor
+        {
+            int num = 10000000;
+            string a = num.ToString();
+
+            status = (Status)0;
+            StartingDate = DateTime.Today;
+            License = a;
+
+            lastTreat = Last_tratment();
+            Fuel = FULLTANK;
+            newKm_from_LastTreatment = 0;
+            sumkm = 0;
+            strstartingdate = String.Format("{0}/{1}/{2}", StartingDate.Day, StartingDate.Month, StartingDate.Year);
+            enable = true;
+        }
+
+
+
+        public Bus(Bus a)
+        {
+            license = a.license;
+            StartingDate = a.StartingDate;
+            Fuel = a.Fuel;
+            status = a.status;
+            sumkm = a.sumkm;
+            newKm_from_LastTreatment = a.newKm_from_LastTreatment;
+            lastTreat = a.lastTreat;
+            strLastTreat = a.strLastTreat;
+
+        }
+
+
+
         private void Worker_DoWork(object sender, DoWorkEventArgs e)
         {
             int length = (int)e.Argument;
             timeToEndWork = length;
 
-            //timer = "שניות " + timeToEndWork + " נשארו עוד";
 
+            enable = false;
             for (int i = 1; i <= length; i++)
             {
-                enable = false;
+            
                 Thread.Sleep(1000);
                 worker.ReportProgress(i * 100 / length);
                
             }
-          
+            enable = true;
 
 
         }
@@ -119,21 +177,12 @@ namespace doNet5781_03B_4789_9647
 
         }
 
-
-
-
-
-
-        private string license;
-        private int km;
+ 
+       
         int timeToEndWork;
 
 
-        //  private int NewKm_from_LastTreatment;
-
-
-        //    public Status status { get; set; }
-
+       
         private Status s;
         public Status status
         {
@@ -146,7 +195,7 @@ namespace doNet5781_03B_4789_9647
             }
         }
 
-        // public DateTime lastTreat { get; set; }
+
         private DateTime Lasttreat;
         public DateTime lastTreat
         {
@@ -161,11 +210,11 @@ namespace doNet5781_03B_4789_9647
 
 
 
-
+      
         //------
         // set and get from our variable
 
-        //public int Fuel { get; set; }
+
         private int f;
         public int Fuel
         {
@@ -178,11 +227,6 @@ namespace doNet5781_03B_4789_9647
             }
         }
 
-
-        //public int newKm_from_LastTreatment
-        //{
-        //    get; set;
-        //}
 
 
         private int newkm;
@@ -197,19 +241,6 @@ namespace doNet5781_03B_4789_9647
             }
         }
 
-        //public int Km
-        //{
-        //    get { return km; }
-        //    set
-        //    {
-        //        if (value >= 0)
-        //        {
-        //            km = value;
-        //        }
-        //        else
-        //            throw new ArgumentOutOfRangeException("KM must to be a positive number");
-        //    }
-        //}
 
 
         private int sumkm;
@@ -266,6 +297,7 @@ namespace doNet5781_03B_4789_9647
             }
         }
 
+        private string license;
         public string License
         {
             //----
@@ -309,58 +341,18 @@ namespace doNet5781_03B_4789_9647
         }
 
 
-        public Bus() //defult constructor
+        //------------
+        ////update the date time after treatment
+        ///
+        public DateTime Last_tratment()
         {
-            int num = 10000000;
-            string a = num.ToString();
-
-            status = (Status)0;
-            StartingDate = DateTime.Today;
-            License=a;
-
-            lastTreat = Last_tratment();
-            Fuel = FULLTANK;
-            newKm_from_LastTreatment = 0;
-            km = 0;
-            strstartingdate = String.Format("{0}/{1}/{2}", StartingDate.Day, StartingDate.Month, StartingDate.Year);
-            enable = true;
+            lastTreat = DateTime.Today;
+            return lastTreat;
         }
-
-        public Bus(int num, DateTime date)
+        public DateTime Last_tratment(DateTime checkup)
         {
-            string a = num.ToString();
-            StartingDate = date;
-            License = a;
-            
-
-            Fuel = r.Next(FULLTANK);
-            newKm_from_LastTreatment = r.Next(20000);
-            km = r.Next(30000);
-            lastTreat =new DateTime(2020, r.Next(1, DateTime.Today.Month), r.Next(1, DateTime.Today.Day));
-            status = (Status)0;
-            strstartingdate = String.Format("{0}/{1}/{2}", StartingDate.Day, StartingDate.Month, StartingDate.Year);
-            enable = true;
-            worker.DoWork += Worker_DoWork;
-            worker.ProgressChanged += Worker_ProgressChanged;
-            worker.RunWorkerCompleted += Worker_RunWorkerCompleted;
-
-            worker.WorkerReportsProgress = true;
-            worker.WorkerSupportsCancellation = true;
-
-        }
-
-
-        public Bus(Bus a)
-        {
-            license = a.license;
-            StartingDate = a.StartingDate;
-            Fuel = a.Fuel;
-            status = a.status;
-            km = a.km;
-            newKm_from_LastTreatment = a.newKm_from_LastTreatment;
-            lastTreat = a.lastTreat;
-            strLastTreat = a.strLastTreat;
-
+            lastTreat = checkup;
+            return lastTreat;
         }
 
         public override string ToString()
@@ -388,20 +380,6 @@ namespace doNet5781_03B_4789_9647
             {
                 Fuel = FULLTANK;
             }
-        }
-
-        //------------
-        ////update the date time after treatment
-        ///
-        public DateTime Last_tratment()
-        {
-            lastTreat = DateTime.Today;
-            return lastTreat;
-        }
-        public DateTime Last_tratment(DateTime checkup)
-        {
-            lastTreat = checkup;
-            return lastTreat;
         }
 
         public void Refuelling() //update the new fuel
@@ -443,7 +421,7 @@ namespace doNet5781_03B_4789_9647
                     ///update the new data
                     newKm_from_LastTreatment += kmTravel;
                     Fuel -= kmTravel;
-                    km += kmTravel;
+                    sumkm += kmTravel;
                     status = (Status)1;
                     return true;
                 }
@@ -455,7 +433,7 @@ namespace doNet5781_03B_4789_9647
             }
             else //if he cant travels
             {
-                //this.treatment();
+                
                 return false;
             }
         
@@ -465,7 +443,6 @@ namespace doNet5781_03B_4789_9647
         public string fuelString()
         {
             string str = " ";
-           // int.TryParse(string a, out Fuel);
             str = "The amount of fuel at this Bus:\n";
             str += Fuel;
             str += "\n Do you want to refull ?";
@@ -474,3 +451,52 @@ namespace doNet5781_03B_4789_9647
     }
     
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// static public int GlobalKM { get; private set; }
+
+// public DateTime lastTreat { get; set; }
+
+//  private int NewKm_from_LastTreatment;
+
+
+//    public Status status { get; set; }
+
+
+//public int Km
+//{
+//    get { return km; }
+//    set
+//    {
+//        if (value >= 0)
+//        {
+//            km = value;
+//        }
+//        else
+//            throw new ArgumentOutOfRangeException("KM must to be a positive number");
+//    }
+//}
+
+
+
+//public int newKm_from_LastTreatment
+//{
+//    get; set;
+//}
+
+//public int Fuel { get; set; }
