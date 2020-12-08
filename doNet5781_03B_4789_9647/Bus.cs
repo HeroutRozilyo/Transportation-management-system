@@ -51,7 +51,7 @@ namespace doNet5781_03B_4789_9647
             isTimerRun = true;
             //timer = "שניות " + timeToEndWork + " נשארו עוד";
 
-            for (int i = 1; i <= length; i++)
+            for (int i =0; i <= length; i++)
             {
                 
                 Thread.Sleep(1000);
