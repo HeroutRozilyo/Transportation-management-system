@@ -39,7 +39,7 @@ namespace doNet5781_03B_4789_9647
 
 
         BackgroundWorker worker = new BackgroundWorker();
-        
+
         public bool isTimerRun;
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -51,15 +51,15 @@ namespace doNet5781_03B_4789_9647
             isTimerRun = true;
             //timer = "שניות " + timeToEndWork + " נשארו עוד";
 
-            for (int i =0; i <= length; i++)
+            for (int i = 0; i <= length; i++)
             {
-                
+
                 Thread.Sleep(1000);
                 worker.ReportProgress(i * 100 / length);
-               
+
             }
 
-          
+
 
 
         }
@@ -72,12 +72,12 @@ namespace doNet5781_03B_4789_9647
             timeToEndWork--;
 
 
-            
+
         }
 
         private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            
+
             isTimerRun = false;
             status = (Status)0;
             work = 0;
@@ -190,10 +190,20 @@ namespace doNet5781_03B_4789_9647
                     PropertyChanged(this, new PropertyChangedEventArgs("newKm_from_LastTreatment"));
             }
         }
+         private bool fulldelek;
+        public bool Fulldelek
+        {
+            get { return fulldelek; }
+            set 
+            {
+                fulldelek = value;
+                if (Fuel == FULLTANK) fulldelek = true;
+                else fulldelek = true;
+            }
+}
 
 
 
-  
         public int Km
         {
             get { return km; }
@@ -240,18 +250,18 @@ namespace doNet5781_03B_4789_9647
 
             }
         }
-            
+
         public string strstartingdate
         {
             set
             {
                 strLastTreat = value;
-             
+
             }
-            get 
+            get
             {
-                string result= " ";
-                result = String.Format("{0}/{1}/{2}", StartingDate.Day, StartingDate.Month,StartingDate.Year);
+                string result = " ";
+                result = String.Format("{0}/{1}/{2}", StartingDate.Day, StartingDate.Month, StartingDate.Year);
                 return result;
             }
         }
@@ -283,7 +293,7 @@ namespace doNet5781_03B_4789_9647
                 return result;
             }
 
-             set
+            set
             {
                 if ((StartingDate.Year < 2018 && value.Length == 7) || (StartingDate.Year >= 2018 && value.Length == 8))
                 {
@@ -293,7 +303,7 @@ namespace doNet5781_03B_4789_9647
                 {
 
                     throw new Exception("license not valid");/////////////////////////////////////////////////////////////!!!!!!!!!!!!!!!!!!!!!
-                
+
                 }
             }
         }
@@ -306,7 +316,7 @@ namespace doNet5781_03B_4789_9647
 
             status = (Status)0;
             StartingDate = DateTime.Today;
-            License=a;
+            License = a;
 
             lastTreat = Last_tratment();
             Fuel = FULLTANK;
@@ -380,8 +390,8 @@ namespace doNet5781_03B_4789_9647
 
             status = (Status)3;
             this.Last_tratment();
-            
-            strLastTreat= String.Format("{0}/{1}/{2}", this.lastTreat.Day, this.lastTreat.Month, this.lastTreat.Year);
+
+            strLastTreat = String.Format("{0}/{1}/{2}", this.lastTreat.Day, this.lastTreat.Month, this.lastTreat.Year);
 
             newKm_from_LastTreatment = 0;
             if (this.Fuel <= 1200)
@@ -410,10 +420,10 @@ namespace doNet5781_03B_4789_9647
             //.Background = Brushes.Orange;
 
             worker.RunWorkerAsync(12);
-            
-            status = (Status)2;
-           
 
+            status = (Status)2;
+
+            fulldelek = true;
             Fuel = FULLTANK;
         }
 
@@ -424,19 +434,19 @@ namespace doNet5781_03B_4789_9647
         /// <returns></returns>
         public bool Take_travel(int kmTravel)
         {
-            if (newKm_from_LastTreatment < MAX_KM && lastTreat.AddYears(1)>=DateTime.Today) //if he didnt need go to treatment
+            if (newKm_from_LastTreatment < MAX_KM && lastTreat.AddYears(1) >= DateTime.Today) //if he didnt need go to treatment
             {
                 if (newKm_from_LastTreatment + kmTravel < MAX_KM && Fuel - kmTravel > 0) //if he can take this travel
                 {
-                    int time =0;
+                    int time = 0;
                     int v = r.Next(20, 51); //velocitui of this bus
                     int t = kmTravel / v; //time of this travel.This time is in hour
 
-                    time =(int)(t/3.6); //time travel at our program
+                    time = (int)(t / 3.6); //time travel at our program
                     t = (int)(time / 60);
 
 
-                    worker.RunWorkerAsync((int)(v*kmTravel*0.1)); //=============================================
+                    worker.RunWorkerAsync((int)(v * kmTravel * 0.1)); //=============================================
 
 
                     ///------------
@@ -445,6 +455,7 @@ namespace doNet5781_03B_4789_9647
                     Fuel -= kmTravel;
                     km += kmTravel;
                     status = (Status)1;
+                    fulldelek = false;
                     return true;
                 }
                 else //if he cant take this travel
@@ -458,19 +469,19 @@ namespace doNet5781_03B_4789_9647
                 //this.treatment();
                 return false;
             }
-        
+
         }
 
-     
+
         public string fuelString()
         {
             string str = " ";
-           // int.TryParse(string a, out Fuel);
+            // int.TryParse(string a, out Fuel);
             str = "The amount of fuel at this Bus:\n";
             str += Fuel;
             str += "\n Do you want to refull ?";
             return str;
         }
     }
-    
+
 }

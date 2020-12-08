@@ -19,22 +19,22 @@ namespace doNet5781_03B_4789_9647
     /// <summary>
     /// Interaction logic for addWindow.xaml
     /// </summary>
- 
-    
+
+
 
     public partial class addWindow : Window
     {
-      
-       public Bus myBus;
-    
 
-     
+        public Bus myBus;
+
+
+
         public addWindow()
         {
             InitializeComponent();
             try
             {
-             
+
                 myBus = new Bus();
 
                 this.DataContext = myBus;
@@ -46,7 +46,7 @@ namespace doNet5781_03B_4789_9647
             }
         }
 
-  
+
 
 
         public Bus NewBus
@@ -54,7 +54,7 @@ namespace doNet5781_03B_4789_9647
 
             get
             {
-                 return myBus;
+                return myBus;
             }
 
         }
@@ -64,14 +64,14 @@ namespace doNet5781_03B_4789_9647
         {
             try
             {
-                myBus = new Bus
-                {
+                myBus = new Bus(int.Parse(this.licenseTextBox.Text), DateTime.Parse(this.lastTreatDatePicker.Text));
+                //{
 
-                    License = this.licenseTextBox.Text,
-                    StartingDate = DateTime.Parse(this.lastTreatDatePicker.Text)
+                //    License = this.licenseTextBox.Text,
+                //    StartingDate = DateTime.Parse(this.lastTreatDatePicker.Text)
 
-                    ///try again
-                };
+                //    ///try again
+                //};
 
 
 
@@ -79,9 +79,9 @@ namespace doNet5781_03B_4789_9647
                 this.Close();
 
             }
-            catch(Exception)
+            catch (Exception)
             {
-            
+
                 MessageBox.Show("The new licence is not valid,\n please enter again number licence with 8 digite", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
 
             }
@@ -90,7 +90,7 @@ namespace doNet5781_03B_4789_9647
 
         }
 
-       
+
         private void cancle_Click(object sender, RoutedEventArgs e)
         {
             this.Close();

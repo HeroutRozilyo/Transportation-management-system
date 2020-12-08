@@ -167,7 +167,7 @@ namespace doNet5781_03B_4789_9647
                 if (result == true)
                 {
 
-                    
+
 
                     egged.Add(wnd.myBus);
                 }
@@ -198,9 +198,10 @@ namespace doNet5781_03B_4789_9647
                         {
 
                             ((sender as Button).DataContext as Bus).Refuelling(); //gp to refulling the bus
-                           
+
                             allbuses.Items.Refresh();
                         }
+                       
                         break;
                     case MessageBoxResult.No:
                         break;
@@ -254,4 +255,5 @@ namespace doNet5781_03B_4789_9647
         }
     }
 }
+
 
