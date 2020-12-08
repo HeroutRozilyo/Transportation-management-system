@@ -44,18 +44,20 @@ namespace doNet5781_03B_4789_9647
 
         private void Worker_DoWork(object sender, DoWorkEventArgs e)
         {
+            enable = false;
             int length = (int)e.Argument;
             timeToEndWork = length;
-
+            isTimerRun = true;
             //timer = "שניות " + timeToEndWork + " נשארו עוד";
 
             for (int i = 1; i <= length; i++)
             {
-                enable = false;
+                
                 Thread.Sleep(1000);
                 worker.ReportProgress(i * 100 / length);
                
             }
+
           
 
 
@@ -69,7 +71,7 @@ namespace doNet5781_03B_4789_9647
             timeToEndWork--;
 
 
-
+            
         }
 
         private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -80,7 +82,7 @@ namespace doNet5781_03B_4789_9647
             work = 0;
             Time_left = "";
             timeToEndWork = 0;
-           
+            enable = true;
         }
 
 
@@ -247,10 +249,19 @@ namespace doNet5781_03B_4789_9647
                 return result;
             }
         }
-
-        public  bool enable
+        public bool Enable;
+        public bool enable
         {
-            set; get;
+            get { return Enable; }
+            set
+            {
+                Enable = value;
+                if (PropertyChanged != null)
+                {
+                    PropertyChanged(this, new PropertyChangedEventArgs("enable"));
+                }
+
+            }
         }
             
         public string strstartingdate
@@ -410,7 +421,7 @@ namespace doNet5781_03B_4789_9647
         public void Refuelling() //update the new fuel
         {
 
-            // .Background = Brushes.Orange;
+            //.Background = Brushes.Orange;
 
             worker.RunWorkerAsync(12);
             
