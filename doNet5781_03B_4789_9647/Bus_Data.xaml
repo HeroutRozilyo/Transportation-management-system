@@ -42,7 +42,31 @@
 
         </Grid>
         <Button Content="SEND TO TREATMENT" HorizontalAlignment="Left" Margin="130,247,0,0" VerticalAlignment="Top" Width="160" Grid.Column="2" Click="treat_Click" Background="#FFFFA983" FontFamily="Segoe Print" IsEnabled="{Binding enable}"/>
-        <Button Content="SEND TO REFUEL" IsEnabled="{Binding enable}" HorizontalAlignment="Left" Margin="6,247,0,0" VerticalAlignment="Top" Width="140" Grid.Column="1" Click="fuel_Click" Background="#FFEDE88B" FontFamily="Segoe Print" Grid.ColumnSpan="2"/>
+        <Button Content="SEND TO REFUEL"  HorizontalAlignment="Left" Margin="6,247,0,0" VerticalAlignment="Top" Width="140" Grid.Column="1" Click="fuel_Click" Background="#FFEDE88B" FontFamily="Segoe Print" Grid.ColumnSpan="2">
+            <Button.Style>
+                <Style>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding enable}" Value="false">
+                            <Setter Property="Button.IsEnabled" Value="false"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Fuelldelek}" Value="true">
+                            <Setter Property="Button.IsEnabled" Value="false"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+
+
+
+
+
+
+
+
+
+
+
         <Label Content="Bus License:" HorizontalAlignment="Left" Margin="29,10,-14.667,0" VerticalAlignment="Top" Width="297" FontFamily="Rockwell Extra Bold" FontSize="16" FontWeight="Bold" Grid.Column="2"/>
         <TextBlock Grid.Column="2" HorizontalAlignment="Left" Margin="67,48,0,0" TextWrapping="Wrap" Text="{Binding Path=Fuel}" VerticalAlignment="Top" Width="60" FontFamily="Rockwell" FontSize="14"/>
         <TextBlock HorizontalAlignment="Left" Margin="64,79,0,0" TextWrapping="Wrap" Text="{Binding Path=Km}" VerticalAlignment="Top" Height="19" Width="72" Grid.Column="2" RenderTransformOrigin="0.881,0.228" FontFamily="Rockwell" FontSize="14"/>

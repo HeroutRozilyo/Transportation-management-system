@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:dotNet5781_03b_4789_9647"
         mc:Ignorable="d"
-      Title="addWindow" Height="450" Width="800">
+      Title="addWindow" Height="200" Width="200">
     <Grid>
         <Grid x:Name="dataBus"  HorizontalAlignment="Left" Margin="177,82,0,0" VerticalAlignment="Top" Height="264" Width="466">
             <Grid.ColumnDefinitions>
@@ -27,7 +27,7 @@
             <Label Content="startingDate :" Grid.Column="0" HorizontalAlignment="Left" Margin="3,14.667,0,7.333" Grid.Row="2" VerticalAlignment="Center" Height="26" Width="60"/>
             <DatePicker x:Name="lastTreatDatePicker" Grid.Column="1" HorizontalAlignment="Left" Margin="2.667,14.667,0,8.333" Grid.Row="2" SelectedDate="{Binding StartingDate , Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Height="25" Width="102"/>
             <Label Content="License:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,5.667,0,11.667" Grid.Row="3" VerticalAlignment="Center" Height="26" Width="51" />
-            <TextBox x:Name="licenseTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="2.667,7.667,0,12.667" Grid.Row="3" Text="{Binding License}" VerticalAlignment="Center" Width="120" TextChanged="licenseTextBox_TextChanged"/>
+            <TextBox x:Name="licenseTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="2.667,7.667,0,12.667" Grid.Row="3" Text="{Binding License}" VerticalAlignment="Center" Width="120" />
             <!--<Label Content="new Km from Last Treatment:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,11.333,0,6" Grid.Row="4" VerticalAlignment="Center" Height="26" Width="165"/>-->
             <!--<TextBox x:Name="newKm_from_LastTreatmentTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="22" Margin="2.667,13.333,0,8" Grid.Row="4" Text="{Binding newKm_from_LastTreatment, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>-->
             <Label Content="status:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,10,0,6.667" Grid.Row="5" VerticalAlignment="Center" Height="26" Width="44"/>

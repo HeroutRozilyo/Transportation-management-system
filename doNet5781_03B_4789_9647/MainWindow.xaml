@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:doNet5781_03B_4789_9647"
         mc:Ignorable="d"
-        Title="MainWindow" Height="275.667" Width="660.667">
+        Title="MainWindow" Height="350" Width="660.667">
 
     <Grid Margin="0,0,0,4.667" Background="#FFE7F6F5">
         <Grid.RowDefinitions>
@@ -36,32 +36,83 @@
 
             </Grid.RowDefinitions>
             <Button x:Name="addBus" Content="Add Bus" Margin="271,0,0,-63" Width="72" Click="addBus_Click" BorderBrush="#FF6D6B15" HorizontalAlignment="Left" VerticalAlignment="Bottom" HorizontalContentAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" VerticalContentAlignment="Center" Padding="-6,1,1,1" FontFamily="Segoe Print" FontSize="14" RenderTransformOrigin="0.5,0.5" Background="#FFF7C3B0" OpacityMask="Black" FontStyle="Italic" FontWeight="Bold" Grid.Row="1"  />
-
+            
             <ListView x:Name="allbuses" HorizontalAlignment="Left" Margin="59,0,0,-29" Width="505" PreviewMouseDoubleClick="doubleflick" SelectionChanged="allbuses_SelectionChanged" Background="WhiteSmoke" Grid.Row="1" FontFamily="Segoe Print" FontSize="14" >
+                <ListView.Resources>
+                    <Style TargetType="ListViewItem">
+                        <Style.Triggers>
+                            <DataTrigger Binding= "{Binding status}" Value="0">
+                                <Setter Property="Background" Value="#FFBAD89D"/>
+                            </DataTrigger>
+                            <DataTrigger Binding= "{Binding status}" Value="1">
+                                <Setter Property="Background" Value="#FFBACCF1"/>
+                            </DataTrigger>
+                            <DataTrigger Binding= "{Binding status}" Value="2">
+                                <Setter Property="Background" Value="#FFDDDBBA"/>
+                            </DataTrigger>
+                            <DataTrigger Binding= "{Binding status}" Value="3">
+                                <Setter Property="Background" Value="#FFC78E90"/>
+                            </DataTrigger>
+                            <DataTrigger Binding= "{Binding status}" Value="4">
+                                <Setter Property="Background" Value="#FF9BCECE"/>
+                            </DataTrigger>
+
+
+                        </Style.Triggers>
+
+
+                        <Style.Resources>
+                            <SolidColorBrush x:Key="t" Color="Blue"/>
+                        </Style.Resources>
+                    </Style>
+
+
+
+                    <!--<Style TargetType="ProgressBar" x:Name="resultprograssBar">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding enable}"  Value="false">
+                                <Setter Property="Visibility" Value="Hidden"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>-->
+                    
+                </ListView.Resources>
                 <ListView.View>
-
-                    <GridView x:Name="allbusesgrid"  >
-
-                        <GridViewColumn Header="license" Width="120" DisplayMemberBinding="{Binding License}"  />
+                  
 
 
+
+
+                <GridView x:Name="allbusesgrid">
+                        <GridViewColumn Header="license" Width="120" DisplayMemberBinding="{Binding License}"/>
                         <GridViewColumn Width="70">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button  Content="Fuel"  Margin="0" VerticalAlignment="Center" IsEnabled="{Binding enable}" Click="Button_Click" Background="#FFEDE88B" FontFamily="Segoe Print" FontSize="14" FontWeight="Bold" Width="55"  >
-
-
+                                    <Button  Content="Fuel"  Margin="0" VerticalAlignment="Center"  Click="Button_Click" Background="#FFEDE88B" FontFamily="Segoe Print" FontSize="14" FontWeight="Bold" Width="55"  >
                                         <Button.BorderBrush>
                                             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                                                 <GradientStop Color="Black" Offset="0"/>
                                                 <GradientStop Color="#FF0C0707" Offset="1"/>
                                             </LinearGradientBrush>
                                         </Button.BorderBrush>
+                                        <Button.Style>
+                                            <Style>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding enable}" Value="false">
+                                                        <Setter Property="Button.IsEnabled" Value="false"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Fuelldelek}" Value="true">
+                                                        <Setter Property="Button.IsEnabled" Value="false"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Button.Style>
                                     </Button>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
 
+                        
                         <GridViewColumn Width="110">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
@@ -81,8 +132,14 @@
                         <GridViewColumn Width="120">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <ProgressBar x:Name="resultprograssBar" Height="10" Width="100" HorizontalAlignment="center" VerticalAlignment="Bottom" Minimum="0" Maximum="100"  Value="{Binding work, UpdateSourceTrigger=PropertyChanged}" />
+
+                                    <ProgressBar x:Name="resultprograssBar" Visibility="{Binding Path= visible}" Height="10" Width="100" HorizontalAlignment="center" VerticalAlignment="Bottom" Minimum="0" Maximum="100"  Value="{Binding work, UpdateSourceTrigger=PropertyChanged }" />
+
+                              
+
                                 </DataTemplate>
+                         
+
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
 
@@ -102,9 +159,9 @@
 
 
                     </GridView>
+
+
                 </ListView.View>
-
-
             </ListView>
         </Grid>
 

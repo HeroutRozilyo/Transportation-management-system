@@ -36,6 +36,23 @@ namespace doNet5781_03B_4789_9647
 
         }
 
+        private string visibility;
+        public string visible
+        {
+            get
+            {
+                return visibility;
+            }
+            set
+            {
+                visibility = value;
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("visible"));
+
+            }
+        
+        
+        }
 
 
         BackgroundWorker worker = new BackgroundWorker();
@@ -49,7 +66,8 @@ namespace doNet5781_03B_4789_9647
             int length = (int)e.Argument;
             timeToEndWork = length;
             isTimerRun = true;
-            //timer = "שניות " + timeToEndWork + " נשארו עוד";
+
+            visible = "Visible";
 
             for (int i = 0; i <= length; i++)
             {
@@ -84,6 +102,10 @@ namespace doNet5781_03B_4789_9647
             Time_left = "";
             timeToEndWork = 0;
             enable = true;
+
+            visible = "Hidden";
+
+
         }
 
 
@@ -102,7 +124,7 @@ namespace doNet5781_03B_4789_9647
                 if (PropertyChanged != null)
                     PropertyChanged(this, new PropertyChangedEventArgs("Time_left"));
 
-                //NotifyPropertyChanged("Timeleft");
+                
             }
         }
 
@@ -123,8 +145,6 @@ namespace doNet5781_03B_4789_9647
 
         }
 
-
-        
 
 
 
@@ -190,15 +210,15 @@ namespace doNet5781_03B_4789_9647
                     PropertyChanged(this, new PropertyChangedEventArgs("newKm_from_LastTreatment"));
             }
         }
-         private bool fulldelek;
-        public bool Fulldelek
+         private bool fuelldelek;
+        public bool Fuelldelek
         {
-            get { return fulldelek; }
+            get { return fuelldelek; }
             set 
             {
-                fulldelek = value;
-                if (Fuel == FULLTANK) fulldelek = true;
-                else fulldelek = true;
+                fuelldelek = value;
+                if (Fuel == FULLTANK) fuelldelek = true;
+                else fuelldelek = true;
             }
 }
 
@@ -324,6 +344,7 @@ namespace doNet5781_03B_4789_9647
             km = 0;
             strstartingdate = String.Format("{0}/{1}/{2}", StartingDate.Day, StartingDate.Month, StartingDate.Year);
             enable = true;
+            visible = "Hidden";
         }
 
         public Bus(int num, DateTime date)
@@ -347,6 +368,7 @@ namespace doNet5781_03B_4789_9647
 
             worker.WorkerReportsProgress = true;
             worker.WorkerSupportsCancellation = true;
+            visible = "Hidden";
 
         }
 
@@ -423,7 +445,7 @@ namespace doNet5781_03B_4789_9647
 
             status = (Status)2;
 
-            fulldelek = true;
+            fuelldelek = true;
             Fuel = FULLTANK;
         }
 
@@ -446,7 +468,7 @@ namespace doNet5781_03B_4789_9647
                     t = (int)(time / 60);
 
 
-                    worker.RunWorkerAsync((int)(v * kmTravel * 0.1)); //=============================================
+                    worker.RunWorkerAsync((int)(v * kmTravel * 0.1));
 
 
                     ///------------
@@ -455,7 +477,7 @@ namespace doNet5781_03B_4789_9647
                     Fuel -= kmTravel;
                     km += kmTravel;
                     status = (Status)1;
-                    fulldelek = false;
+                    fuelldelek = false;
                     return true;
                 }
                 else //if he cant take this travel

@@ -23,11 +23,7 @@ namespace doNet5781_03B_4789_9647
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-
-
-
-
-    ///
+    /// 
 
     public partial class MainWindow : Window
     {
@@ -198,7 +194,7 @@ namespace doNet5781_03B_4789_9647
                         {
 
                             ((sender as Button).DataContext as Bus).Refuelling(); //gp to refulling the bus
-
+                            
                             allbuses.Items.Refresh();
                         }
                        
@@ -212,6 +208,7 @@ namespace doNet5781_03B_4789_9647
 
                 MessageBox.Show("a");
             }
+            allbuses.Items.Refresh();
         }
 
 
@@ -220,6 +217,7 @@ namespace doNet5781_03B_4789_9647
         {
             StartingTravel smalla = new StartingTravel((sender as Button).DataContext as Bus);
             smalla.ShowDialog();
+            allbuses.Items.Refresh();
         }
 
 
@@ -235,7 +233,7 @@ namespace doNet5781_03B_4789_9647
             Bus_Data temp = new Bus_Data(item);
             temp.ShowDialog();
 
-
+            allbuses.Items.Refresh();
 
 
         }
@@ -248,6 +246,8 @@ namespace doNet5781_03B_4789_9647
         {
             Environment.Exit(Environment.ExitCode);
         }
+
+
 
         private void allbuses_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
