@@ -64,6 +64,11 @@ namespace doNet5781_03B_4789_9647
         {
             try
             {
+                myBus = new Bus
+                {
+                    License = this.licenseTextBox.Text,
+                    Fuel = int.Parse(this.fuelTextBox.Text)
+                };
 
                 this.DialogResult = true;
                 this.Close();
@@ -80,12 +85,7 @@ namespace doNet5781_03B_4789_9647
 
         }
 
-        private void licenseTextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-
-        }
-
+       
         private void cancle_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
