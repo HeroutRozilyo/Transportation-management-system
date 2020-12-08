@@ -5,43 +5,78 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:doNet5781_03B_4789_9647"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="257.334" Width="660.667">
 
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="47*"/>
+            <RowDefinition Height="374*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="220*"/>
+            <ColumnDefinition Width="419*"/>
+        </Grid.ColumnDefinitions>
 
-        <Grid Name="MainGrid">
+        <Grid Name="MainGrid" Grid.ColumnSpan="2" Margin="-1,2,1.333,76" Grid.RowSpan="2" RenderTransformOrigin="0.5,0.5">
+            <Grid.Background>
+                <ImageBrush/>
+            </Grid.Background>
+            <Grid.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="0.003"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Grid.RenderTransform>
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="10*"/>
-                <RowDefinition Height="90*"/>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="46*"/>
 
             </Grid.RowDefinitions>
-            <Button x:Name="addBus" Content="Add Bus" HorizontalAlignment="Left" Margin="689,0,0,11" Width="75" Height="21" VerticalAlignment="Bottom" Click="addBus_Click"  />
+            <Button x:Name="addBus" Content="Add Bus" Margin="520,0,0,111" Width="72" Click="addBus_Click" BorderBrush="#FF6D6B15" HorizontalAlignment="Left" VerticalAlignment="Bottom" HorizontalContentAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" VerticalContentAlignment="Center" Padding="-6,1,1,1" FontFamily="Segoe Print" FontSize="14" RenderTransformOrigin="0.5,0.5" Background="#FFACE6E3" OpacityMask="Black" FontStyle="Italic" FontWeight="Bold" Grid.RowSpan="2"  />
 
-            <ListView x:Name="allbuses" HorizontalAlignment="Left" Height="256" Margin="75,54,0,0" Grid.Row="1" VerticalAlignment="Top" Width="640" PreviewMouseDoubleClick="doubleflick" >
+            <ListView x:Name="allbuses" HorizontalAlignment="Left" Margin="10,0,0,-77" Width="505" PreviewMouseDoubleClick="doubleflick" SelectionChanged="allbuses_SelectionChanged" Grid.RowSpan="2" >
                 <ListView.View>
+
                     <GridView x:Name="allbusesgrid"  >
+
                         <GridViewColumn Header="license" Width="120" DisplayMemberBinding="{Binding License}"  />
 
-                        
-                        <GridViewColumn Width="60">
+
+                        <GridViewColumn Width="70">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button  Content="Fuel"  Margin="0" VerticalAlignment="Center" IsEnabled="{Binding  Path=enable}" Click="Button_Click"  />
+                                    <Button  Content="Fuel"  Margin="0" VerticalAlignment="Center" IsEnabled="{Binding enable}" Click="Button_Click" Background="#FFD8D371" FontFamily="Segoe Print" FontSize="14" FontWeight="Bold" Width="55"  >
+                                        <Button.BorderBrush>
+                                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                                <GradientStop Color="Black" Offset="0"/>
+                                                <GradientStop Color="#FF0C0707" Offset="1"/>
+                                            </LinearGradientBrush>
+                                        </Button.BorderBrush>
+                                    </Button>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
 
-                        <GridViewColumn Width="80">
+                        <GridViewColumn Width="110">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button  Content="Start Travel"  Margin="0" VerticalAlignment="Center" Click="Pick_Button_Click"/>
+                                    <Button  Content="Start Travel"  Margin="0,0,0,0" VerticalAlignment="Center"  Width= "95" Click="Pick_Button_Click" FontFamily="Segoe Print" FontWeight="Bold" FontSize="14"   Background="#FF6AB75B" VerticalContentAlignment="Top" HorizontalContentAlignment="Center" HorizontalAlignment="Center">
+                                        <Button.BorderBrush>
+                                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                                <GradientStop Color="Black" Offset="0"/>
+                                                <GradientStop Color="#FF140808" Offset="1"/>
+                                            </LinearGradientBrush>
+                                        </Button.BorderBrush>
+                                    </Button>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
 
 
-                        <GridViewColumn Width="130">
+                        <GridViewColumn Width="120">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <ProgressBar x:Name="resultprograssBar" Height="10" Width="100" HorizontalAlignment="center" VerticalAlignment="Bottom" Minimum="0" Maximum="100"  Value="{Binding work, UpdateSourceTrigger=PropertyChanged}" />
@@ -53,15 +88,24 @@
                         <GridViewColumn Width="50">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock x:Name="timeToEnd" Text="{Binding Time_left , UpdateSourceTrigger=PropertyChanged}" Width="120" Height="20" FlowDirection="LeftToRight"/>
+                                    <TextBlock x:Name="timeToEnd" Text="{Binding Time_left , UpdateSourceTrigger=PropertyChanged}" Width="40" Height="20" FlowDirection="LeftToRight" FontFamily="Segoe Print"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
 
 
+
+
+
+
                     </GridView>
                 </ListView.View>
+
+
             </ListView>
         </Grid>
+
+
     </Grid>
+
 </Window>

@@ -5,11 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:doNet5781_03B_4789_9647"
         mc:Ignorable="d"
-        Title="StartingTravel" Height="450" Width="800">
-    <Grid>
-        <TextBox x:Name="numOfKm" HorizontalAlignment="Left" Height="41" Margin="278,41,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="262"  
-        KeyDown="OnKeyDownHandler" SelectedText=" " PreviewKeyDown="TextBox_OnlyNumbers_PreviewKeyDown"  />
-        <Label x:Name="messege" Content="Please enter KM to the new travel:" HorizontalAlignment="Left" Margin="56,10,0,0" VerticalAlignment="Top" Height="45" Width="440"/>
+        Title="StartingTravel" Height="175.999" Width="382" Background="#FFEEFDFF">
+    <Grid Margin="225,0,0.333,0.333">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="29*"/>
+            <RowDefinition Height="54*"/>
+            <RowDefinition Height="63*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="27*"/>
+            <ColumnDefinition Width="23*"/>
+        </Grid.ColumnDefinitions>
+        <TextBox x:Name="numOfKm" HorizontalAlignment="Left" Height="35" Margin="-113,34.667,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="114"  
+        KeyDown="OnKeyDownHandler" SelectedText=" " PreviewKeyDown="TextBox_OnlyNumbers_PreviewKeyDown" TextChanged="numOfKm_TextChanged_1" Grid.Row="1" Grid.RowSpan="2" Background="#FFEEFDFF" OpacityMask="Black"  />
+        <Label x:Name="messege" Content="  Please this is the number of &#xD;&#xA; kilometers required to travel" HorizontalAlignment="Left" Margin="-158,11,0,19.333" Width="215" FontFamily="Rockwell" FontSize="14" Grid.RowSpan="2" RenderTransformOrigin="0.493,0.862" FontWeight="Light"/>
 
     </Grid>
 </Window>
