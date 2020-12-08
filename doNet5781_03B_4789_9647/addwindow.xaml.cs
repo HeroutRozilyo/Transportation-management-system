@@ -66,10 +66,14 @@ namespace doNet5781_03B_4789_9647
             {
                 myBus = new Bus
                 {
-                    License = this.licenseTextBox.Text
-                    // Fuel = int.Parse(this.fuelTextBox.Text)
-                   // StartingDate=DateTime.Prase(this.StartingDateTextBox.Text)
+
+                    License = this.licenseTextBox.Text,
+                    StartingDate = DateTime.Parse(this.lastTreatDatePicker.Text)
+
+
                 };
+
+
 
                 this.DialogResult = true;
                 this.Close();
