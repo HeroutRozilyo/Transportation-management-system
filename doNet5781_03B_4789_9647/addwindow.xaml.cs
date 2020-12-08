@@ -66,8 +66,9 @@ namespace doNet5781_03B_4789_9647
             {
                 myBus = new Bus
                 {
-                    License = this.licenseTextBox.Text,
-                    Fuel = int.Parse(this.fuelTextBox.Text)
+                    License = this.licenseTextBox.Text
+                    // Fuel = int.Parse(this.fuelTextBox.Text)
+                   // StartingDate=DateTime.Prase(this.StartingDateTextBox.Text)
                 };
 
                 this.DialogResult = true;
@@ -91,7 +92,12 @@ namespace doNet5781_03B_4789_9647
             this.Close();
         }
 
-        private void fuelTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        //private void fuelTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        //{
+
+        //}
+
+        private void kmTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
 
         }

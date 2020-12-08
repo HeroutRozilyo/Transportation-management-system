@@ -15,7 +15,7 @@ namespace doNet5781_03B_4789_9647
 
     public enum Status
     {
-        READY_TO_TRAVEL, MIDDLE_TRAVEL, RE_FULLING, TREATMENT
+        READY_TO_TRAVEL, MIDDLE_TRAVEL, RE_FULLING, TREATMENT, Unfit
     }
     public class Bus : INotifyPropertyChanged
     {
@@ -352,7 +352,7 @@ namespace doNet5781_03B_4789_9647
                 km = r.Next(30000);
             } while (km < newKm_from_LastTreatment);
             lastTreat = new DateTime(2020, r.Next(1, DateTime.Today.Month), r.Next(1, DateTime.Today.Day));
-            status = (Status)0;
+            status = checkingStatus();
             strstartingdate = String.Format("{0}/{1}/{2}", StartingDate.Day, StartingDate.Month, StartingDate.Year);
             enable = true;
             worker.DoWork += Worker_DoWork;
@@ -362,6 +362,14 @@ namespace doNet5781_03B_4789_9647
             worker.WorkerReportsProgress = true;
             worker.WorkerSupportsCancellation = true;
 
+        }
+        public Status checkingStatus()
+        {
+            if (this.Fuel != 0 && newKm_from_LastTreatment < MAX_KM && lastTreat.AddYears(1) >= DateTime.Today)
+            {
+                return Status.READY_TO_TRAVEL;
+            }
+            else return Status.Unfit;
         }
 
 
