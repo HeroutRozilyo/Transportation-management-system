@@ -74,12 +74,13 @@ namespace doNet5781_03B_4789_9647
 
         private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
+            
             isTimerRun = false;
             status = (Status)0;
             work = 0;
             Time_left = "";
             timeToEndWork = 0;
-            enable = true;
+           
         }
 
 
