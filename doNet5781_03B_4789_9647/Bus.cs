@@ -340,11 +340,34 @@ namespace doNet5781_03B_4789_9647
             enable = true;
         }
 
-        public Bus(int num, DateTime date)
+        public Bus( int num, DateTime date)
         {
             string a = num.ToString();
             StartingDate = date;
             License = a;
+            Fuel = r.Next(FULLTANK);
+            do
+            {
+                newKm_from_LastTreatment = r.Next(20000);
+                km = r.Next(30000);
+            } while (km < newKm_from_LastTreatment);
+            lastTreat = new DateTime(2020, r.Next(1, DateTime.Today.Month), r.Next(1, DateTime.Today.Day));
+            status = checkingStatus();
+            strstartingdate = String.Format("{0}/{1}/{2}", StartingDate.Day, StartingDate.Month, StartingDate.Year);
+            enable = true;
+            worker.DoWork += Worker_DoWork;
+            worker.ProgressChanged += Worker_ProgressChanged;
+            worker.RunWorkerCompleted += Worker_RunWorkerCompleted;
+
+            worker.WorkerReportsProgress = true;
+            worker.WorkerSupportsCancellation = true;
+
+        }
+        public Bus(string num, DateTime date)
+        {
+            //string a = num.ToString();
+            StartingDate = date;
+            License = num;
             Fuel = r.Next(FULLTANK);
             do
             {
