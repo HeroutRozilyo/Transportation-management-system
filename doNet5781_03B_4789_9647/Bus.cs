@@ -133,10 +133,6 @@ namespace doNet5781_03B_4789_9647
         int timeToEndWork;
 
 
-        //  private int NewKm_from_LastTreatment;
-
-
-        //    public Status status { get; set; }
 
         private Status s;
         public Status status
@@ -150,7 +146,6 @@ namespace doNet5781_03B_4789_9647
             }
         }
 
-        // public DateTime lastTreat { get; set; }
         private DateTime Lasttreat;
         public DateTime lastTreat
         {
@@ -169,7 +164,6 @@ namespace doNet5781_03B_4789_9647
         //------
         // set and get from our variable
 
-        //public int Fuel { get; set; }
         private int f;
         public int Fuel
         {
@@ -182,11 +176,6 @@ namespace doNet5781_03B_4789_9647
             }
         }
 
-
-        //public int newKm_from_LastTreatment
-        //{
-        //    get; set;
-        //}
 
 
         private int newkm;
@@ -202,22 +191,9 @@ namespace doNet5781_03B_4789_9647
             }
         }
 
-        //public int Km
-        //{
-        //    get { return km; }
-        //    set
-        //    {
-        //        if (value >= 0)
-        //        {
-        //            km = value;
-        //        }
-        //        else
-        //            throw new ArgumentOutOfRangeException("KM must to be a positive number");
-        //    }
-        //}
 
 
-    //   private int sumkm;
+  
         public int Km
         {
             get { return km; }
