@@ -36,38 +36,29 @@ namespace doNet5781_03B_4789_9647
 
         }
 
-        public Bus(Bus a)
-        {
-            license = a.license;
-            StartingDate = a.StartingDate;
-            Fuel = a.Fuel;
-            status = a.status;
-            km = a.km;
-            newKm_from_LastTreatment = a.newKm_from_LastTreatment;
-            lastTreat = a.lastTreat;
-            strLastTreat = a.strLastTreat;
-
-        }
-
 
 
         BackgroundWorker worker = new BackgroundWorker();
+        
         public bool isTimerRun;
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void Worker_DoWork(object sender, DoWorkEventArgs e)
         {
+            enable = false;
             int length = (int)e.Argument;
             timeToEndWork = length;
+            isTimerRun = true;
+            //timer = "שניות " + timeToEndWork + " נשארו עוד";
 
-
-            for (int i = 1; i <= length; i++)
+            for (int i =0; i <= length; i++)
             {
-                enable = false;
+                
                 Thread.Sleep(1000);
                 worker.ReportProgress(i * 100 / length);
                
             }
+
           
 
 
@@ -81,7 +72,7 @@ namespace doNet5781_03B_4789_9647
             timeToEndWork--;
 
 
-
+            
         }
 
         private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -92,7 +83,7 @@ namespace doNet5781_03B_4789_9647
             work = 0;
             Time_left = "";
             timeToEndWork = 0;
-           
+            enable = true;
         }
 
 
@@ -111,7 +102,7 @@ namespace doNet5781_03B_4789_9647
                 if (PropertyChanged != null)
                     PropertyChanged(this, new PropertyChangedEventArgs("Time_left"));
 
-                
+                //NotifyPropertyChanged("Timeleft");
             }
         }
 
@@ -142,7 +133,10 @@ namespace doNet5781_03B_4789_9647
         int timeToEndWork;
 
 
-      
+        //  private int NewKm_from_LastTreatment;
+
+
+        //    public Status status { get; set; }
 
         private Status s;
         public Status status
@@ -175,7 +169,7 @@ namespace doNet5781_03B_4789_9647
         //------
         // set and get from our variable
 
-      
+        //public int Fuel { get; set; }
         private int f;
         public int Fuel
         {
@@ -188,7 +182,12 @@ namespace doNet5781_03B_4789_9647
             }
         }
 
-      
+
+        //public int newKm_from_LastTreatment
+        //{
+        //    get; set;
+        //}
+
 
         private int newkm;
         public int newKm_from_LastTreatment
@@ -203,6 +202,22 @@ namespace doNet5781_03B_4789_9647
             }
         }
 
+        //public int Km
+        //{
+        //    get { return km; }
+        //    set
+        //    {
+        //        if (value >= 0)
+        //        {
+        //            km = value;
+        //        }
+        //        else
+        //            throw new ArgumentOutOfRangeException("KM must to be a positive number");
+        //    }
+        //}
+
+
+    //   private int sumkm;
         public int Km
         {
             get { return km; }
@@ -235,10 +250,19 @@ namespace doNet5781_03B_4789_9647
                 return result;
             }
         }
-
-        public  bool enable
+        public bool Enable;
+        public bool enable
         {
-            set; get;
+            get { return Enable; }
+            set
+            {
+                Enable = value;
+                if (PropertyChanged != null)
+                {
+                    PropertyChanged(this, new PropertyChangedEventArgs("enable"));
+                }
+
+            }
         }
             
         public string strstartingdate
@@ -341,7 +365,19 @@ namespace doNet5781_03B_4789_9647
         }
 
 
-        
+        public Bus(Bus a)
+        {
+            license = a.license;
+            StartingDate = a.StartingDate;
+            Fuel = a.Fuel;
+            status = a.status;
+            km = a.km;
+            newKm_from_LastTreatment = a.newKm_from_LastTreatment;
+            lastTreat = a.lastTreat;
+            strLastTreat = a.strLastTreat;
+
+        }
+
         public override string ToString()
         {
             return String.Format("license is: {0,-10}, starting date: {1}", License, StartingDate);
@@ -386,6 +422,7 @@ namespace doNet5781_03B_4789_9647
         public void Refuelling() //update the new fuel
         {
 
+            //.Background = Brushes.Orange;
 
             worker.RunWorkerAsync(12);
             
@@ -452,44 +489,3 @@ namespace doNet5781_03B_4789_9647
     }
     
 }
-
-
-
-
-
-
-
-
-
-
-
-//  private int NewKm_from_LastTreatment;
-
-// .Background = Brushes.Orange;
-
-//    public Status status { get; set; }
-
-
-
-//public int Fuel { get; set; }
-//public int newKm_from_LastTreatment
-//{
-//    get; set;
-//}
-
-//public int Km
-//{
-//    get { return km; }
-//    set
-//    {
-//        if (value >= 0)
-//        {
-//            km = value;
-//        }
-//        else
-//            throw new ArgumentOutOfRangeException("KM must to be a positive number");
-//    }
-//}
-
-
-//   private int sumkm;

@@ -5,11 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:doNet5781_03B_4789_9647"
         mc:Ignorable="d"
-        Title="Bus_Data" Height="327.334" Width="350" Loaded="Window_Loaded_1">
+        Title="Bus_Data" Height="346.001" Width="350" Loaded="Window_Loaded_1">
     <Window.Resources>
         <CollectionViewSource x:Key="busViewSource" d:DesignSource="{d:DesignInstance {x:Type local:Bus}, CreateList=True}"/>
     </Window.Resources>
-    <Grid Background="#FFEEFDFF" Margin="0,0,0.333,-29.667">
+    <Grid Background="#FFEEFDFF" Margin="0,0,0.333,-46">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="6*"/>
             <ColumnDefinition Width="26*"/>
@@ -41,8 +41,8 @@
             <Label Content="status:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,3,0,3" Grid.Row="6" VerticalAlignment="Center" Height="26" Width="54" FontFamily="Rockwell" FontSize="14"/>
 
         </Grid>
-        <Button Content="SEND TO TREATMENT" HorizontalAlignment="Left" Margin="130,247,0,0" VerticalAlignment="Top" Width="160" Grid.Column="2" Click="treat_Click" Background="#FFFFA983" FontFamily="Segoe Print"/>
-        <Button Content="SEND TO REFUEL" HorizontalAlignment="Left" Margin="6,247,0,0" VerticalAlignment="Top" Width="140" Grid.Column="1" Click="fuel_Click" Background="#FFEDE88B" FontFamily="Segoe Print" Grid.ColumnSpan="2"/>
+        <Button Content="SEND TO TREATMENT" HorizontalAlignment="Left" Margin="130,247,0,0" VerticalAlignment="Top" Width="160" Grid.Column="2" Click="treat_Click" Background="#FFFFA983" FontFamily="Segoe Print" IsEnabled="{Binding enable}"/>
+        <Button Content="SEND TO REFUEL" IsEnabled="{Binding enable}" HorizontalAlignment="Left" Margin="6,247,0,0" VerticalAlignment="Top" Width="140" Grid.Column="1" Click="fuel_Click" Background="#FFEDE88B" FontFamily="Segoe Print" Grid.ColumnSpan="2"/>
         <Label Content="Bus License:" HorizontalAlignment="Left" Margin="29,10,-14.667,0" VerticalAlignment="Top" Width="297" FontFamily="Rockwell Extra Bold" FontSize="16" FontWeight="Bold" Grid.Column="2"/>
         <TextBlock Grid.Column="2" HorizontalAlignment="Left" Margin="67,48,0,0" TextWrapping="Wrap" Text="{Binding Path=Fuel}" VerticalAlignment="Top" Width="60" FontFamily="Rockwell" FontSize="14"/>
         <TextBlock HorizontalAlignment="Left" Margin="64,79,0,0" TextWrapping="Wrap" Text="{Binding Path=Km}" VerticalAlignment="Top" Height="19" Width="72" Grid.Column="2" RenderTransformOrigin="0.881,0.228" FontFamily="Rockwell" FontSize="14"/>
@@ -60,6 +60,7 @@
         <TextBlock HorizontalAlignment="Left" Margin="227,142,0,0" TextWrapping="Wrap" Text="{Binding Path=newKm_from_LastTreatment}" VerticalAlignment="Top" Height="23" Width="80" Grid.Column="2" FontFamily="Rockwell" FontSize="14"/>
         <TextBlock HorizontalAlignment="Left" Margin="127,175,0,124.667" TextWrapping="Wrap" Text="{Binding Path=strstartingdate}" Width="75" Grid.Column="2" FontFamily="Rockwell" FontSize="14"/>
         <TextBlock HorizontalAlignment="Left" Margin="82,208,0,0" TextWrapping="Wrap" Text="{Binding Path=status}" VerticalAlignment="Top" Width="154" Grid.Column="2" FontFamily="Rockwell"/>
+        <TextBlock x:Name="TimeTOend" Grid.Column="2" Margin="111,285,0,52.667" TextWrapping="Wrap"  VerticalAlignment="Center" Text="{Binding Path=Time_left}" Width="59" FontFamily="Segoe Print" Foreground="#FF710303" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left"/>
 
     </Grid>
 </Window>
