@@ -339,6 +339,7 @@ namespace doNet5781_03B_4789_9647
             worker.WorkerSupportsCancellation = true;
 
         }
+
         public Status checkingStatus()
         {
             if (this.Fuel != 0 && newKm_from_LastTreatment < MAX_KM && lastTreat.AddYears(1) >= DateTime.Today)

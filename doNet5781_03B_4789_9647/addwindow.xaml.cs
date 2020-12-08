@@ -70,7 +70,7 @@ namespace doNet5781_03B_4789_9647
                     License = this.licenseTextBox.Text,
                     StartingDate = DateTime.Parse(this.lastTreatDatePicker.Text)
 
-                    //
+                    ///try again
                 };
 
 
@@ -96,20 +96,12 @@ namespace doNet5781_03B_4789_9647
             this.Close();
         }
 
-        //private void fuelTextBox_TextChanged(object sender, TextChangedEventArgs e)
-        //{
-
-        //}
 
         private void kmTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
 
         }
 
-        //public static implicit operator addWindow(Bus_Data v)
-        //{
-        //    throw new NotImplementedException();
-        //}
     }
 }
 
