@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,9 +20,19 @@ namespace doNet5781_03B_4789_9647
     /// </summary>
     public partial class ListDrivers : Window
     {
+        private ObservableCollection<Drivers> driverBus;
+
         public ListDrivers()
         {
             InitializeComponent();
+            allDriver.ItemsSource = driverBus;
+
+        }
+
+        public ListDrivers(ObservableCollection<Drivers> drivers)
+        {
+            InitializeComponent();
+            this.driverBus = drivers;
         }
     }
 }

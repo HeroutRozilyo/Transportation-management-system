@@ -409,6 +409,7 @@ namespace doNet5781_03B_4789_9647
                     km += kmTravel;
                     status = (Status)1;
                     fuelldelek = false;
+                    driverOfBus.SumTime += TimeSpan.FromSeconds(time);
                     return true;
                 }
                 else //if he cant take this travel
@@ -509,7 +510,11 @@ namespace doNet5781_03B_4789_9647
             enable = true;
             visible = "Hidden";
             driverOfBus.InTraveling = false;
-
+            if (driverOfBus.SumTime.TotalSeconds >= 72)//take a break//////////////
+            {
+                driverOfBus.InTraveling = true;
+                driverOfBus.SumTime = TimeSpan.Zero;
+            }
 
         }
 
