@@ -27,23 +27,11 @@ namespace doNet5781_03B_4789_9647
 
         public Bus myBus;
 
-
-
         public addWindow()
         {
             InitializeComponent();
-            try
-            {
-
-                myBus = new Bus();
-
-                this.DataContext = myBus;
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("The new licence is not valid,\n please enter again number licence with 8 digite", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
-
-            }
+            myBus = new Bus();
+            this.DataContext = myBus;
         }
 
 
@@ -65,16 +53,6 @@ namespace doNet5781_03B_4789_9647
             try
             {
                 myBus = new Bus(int.Parse(this.licenseTextBox.Text), DateTime.Parse(this.lastTreatDatePicker.Text));
-                //{
-
-                //    License = this.licenseTextBox.Text,
-                //    StartingDate = DateTime.Parse(this.lastTreatDatePicker.Text)
-
-                //    ///try again
-                //};
-
-
-
                 this.DialogResult = true;
                 this.Close();
 

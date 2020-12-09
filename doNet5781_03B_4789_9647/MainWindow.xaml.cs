@@ -156,16 +156,22 @@ namespace doNet5781_03B_4789_9647
             try
             {
                 wnd = new addWindow();
-                // Bus temp = new Bus();
-                //wnd = new addWindow(ref temp);
+                
 
                 bool? result = wnd.ShowDialog();
                 if (result == true)
                 {
+                    // in order to check if this bus licence exsis already
+                    int temp1;
+                    string a = wnd.myBus.License;
+                    a = a.Replace("-", string.Empty); //To remove the hyphens from our license number
+                    int.TryParse(a, out temp1);
+
+                    if(!findBuse(egged,temp1))
+                        egged.Add(wnd.myBus);
 
 
 
-                    egged.Add(wnd.myBus);
                 }
             }
             catch (Exception)
@@ -226,16 +232,12 @@ namespace doNet5781_03B_4789_9647
 
         private void doubleflick(object sender, RoutedEventArgs e) //in order to shoe details on the bus
         {
-
-
             var list = (ListView)sender;
             object item = list.SelectedItem;
             Bus_Data temp = new Bus_Data(item);
             temp.ShowDialog();
 
             allbuses.Items.Refresh();
-
-
         }
 
 
@@ -249,10 +251,10 @@ namespace doNet5781_03B_4789_9647
 
 
 
-        private void allbuses_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
+        //private void allbuses_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        //{
+        //    SelectionChanged = "allbuses_SelectionChanged"
+        //}
     }
 }
 

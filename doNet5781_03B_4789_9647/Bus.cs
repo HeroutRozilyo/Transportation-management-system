@@ -21,21 +21,18 @@ namespace doNet5781_03B_4789_9647
     {
         //----------
         // Variable definition
-        // static public int GlobalKM { get; private set; }
 
+        BackgroundWorker worker = new BackgroundWorker();
         static Random r = new Random(DateTime.Now.Millisecond);
-
-
         private const int MAX_KM = 20000;
         private const int FULLTANK = 1200;
+        int timeToEndWork;
 
-        public DateTime StartingDate
-        {
-            set;
-            get;
 
-        }
+       
+      
 
+        //variable that connect to the vasibility op prograss ber at main window xamle 
         private string visibility;
         public string visible
         {
@@ -55,102 +52,70 @@ namespace doNet5781_03B_4789_9647
         }
 
 
-        BackgroundWorker worker = new BackgroundWorker();
-
-        public bool isTimerRun;
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void Worker_DoWork(object sender, DoWorkEventArgs e)
+        //cobstructor to the bus wuth to value. we using most the time at this constructor
+        public Bus(int num, DateTime date)
         {
-            enable = false;
-            int length = (int)e.Argument;
-            timeToEndWork = length;
-            isTimerRun = true;
-
-            visible = "Visible";
-
-            for (int i = 0; i <= length; i++)
+            string a = num.ToString();
+            StartingDate = date;
+            License = a;
+            Fuel = r.Next(FULLTANK);
+            do
             {
-
-                Thread.Sleep(1000);
-                worker.ReportProgress(i * 100 / length);
-
-            }
-
-
-
-
-        }
-
-
-        private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
-        {
-            work = (int)e.ProgressPercentage;
-            Time_left = timeToEndWork + "s";
-            timeToEndWork--;
-
-
-
-        }
-
-        private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-
-            isTimerRun = false;
-            status = (Status)0;
-            work = 0;
-            Time_left = "";
-            timeToEndWork = 0;
+                newKm_from_LastTreatment = r.Next(20000);
+                km = r.Next(30000);
+            } while (km < newKm_from_LastTreatment);
+            lastTreat = new DateTime(2020, r.Next(1, DateTime.Today.Month), r.Next(1, DateTime.Today.Day));
+            status = checkingStatus();
+            strstartingdate = String.Format("{0}/{1}/{2}", StartingDate.Day, StartingDate.Month, StartingDate.Year);
             enable = true;
+            worker.DoWork += Worker_DoWork;
+            worker.ProgressChanged += Worker_ProgressChanged;
+            worker.RunWorkerCompleted += Worker_RunWorkerCompleted;
 
+            worker.WorkerReportsProgress = true;
+            worker.WorkerSupportsCancellation = true;
             visible = "Hidden";
 
+        }
 
+        public Bus() //defult constructor
+        {
+            int num = 10000000;
+            string a = num.ToString();
+
+            status = (Status)0;
+            StartingDate = DateTime.Today;
+            License = a;
+
+            lastTreat = Last_tratment();
+            Fuel = FULLTANK;
+            newKm_from_LastTreatment = 0;
+            km = 0;
+            strstartingdate = String.Format("{0}/{1}/{2}", StartingDate.Day, StartingDate.Month, StartingDate.Year);
+            enable = true;
+            visible = "Hidden";
         }
 
 
 
-        private string _timeleft;
-        public string Time_left
-        {
 
-            get
-            {
-                return _timeleft;
-            }
+
+        public DateTime StartingDate { set; get; }
+        public string strstartingdate
+        {
             set
             {
-                _timeleft = value;
-                if (PropertyChanged != null)
-                    PropertyChanged(this, new PropertyChangedEventArgs("Time_left"));
+                strLastTreat = value;
 
-                
             }
-        }
-
-        private int _work;
-        public int work
-        {
             get
             {
-                return _work;
+                string result = " ";
+                result = String.Format("{0}/{1}/{2}", StartingDate.Day, StartingDate.Month, StartingDate.Year);
+                return result;
             }
-            set
-            {
-                _work = value;
-                if (PropertyChanged != null)
-                    PropertyChanged(this, new PropertyChangedEventArgs("work"));
+        } //return thw stating date at string
 
-            }
-
-        }
-
-
-
-
-        private string license;
-        private int km;
-        int timeToEndWork;
 
 
 
@@ -166,6 +131,9 @@ namespace doNet5781_03B_4789_9647
             }
         }
 
+        /// <summary>
+        /// Date last treat func
+        /// </summary>
         private DateTime Lasttreat;
         public DateTime lastTreat
         {
@@ -177,12 +145,32 @@ namespace doNet5781_03B_4789_9647
                     PropertyChanged(this, new PropertyChangedEventArgs("lastTreat"));
             }
         }
+        //------------
+        ////update the date time after treatment
+        ///
+        public DateTime Last_tratment() //update to the current date
+        {
+            lastTreat = DateTime.Today;
+            return lastTreat;
+        }
+        public DateTime Last_tratment(DateTime checkup) //update specific date. when we creat bus who using this func
+        {
+            lastTreat = checkup;
+            return lastTreat;
+        }
+        public string strLastTreat
+        {
+            set
+            {
 
-
-
-
-        //------
-        // set and get from our variable
+            }
+            get
+            {
+                string result = " ";
+                result = String.Format("{0}/{1}/{2}", lastTreat.Day, lastTreat.Month, lastTreat.Year);
+                return result;
+            }
+        }
 
         private int f;
         public int Fuel
@@ -197,7 +185,6 @@ namespace doNet5781_03B_4789_9647
         }
 
 
-
         private int newkm;
         public int newKm_from_LastTreatment
         {
@@ -210,7 +197,8 @@ namespace doNet5781_03B_4789_9647
                     PropertyChanged(this, new PropertyChangedEventArgs("newKm_from_LastTreatment"));
             }
         }
-         private bool fuelldelek;
+
+        private bool fuelldelek;
         public bool Fuelldelek
         {
             get { return fuelldelek; }
@@ -222,8 +210,7 @@ namespace doNet5781_03B_4789_9647
             }
 }
 
-
-
+        private int km;
         public int Km
         {
             get { return km; }
@@ -240,22 +227,7 @@ namespace doNet5781_03B_4789_9647
             }
         }
 
-
-
-
-        public string strLastTreat
-        {
-            set
-            {
-
-            }
-            get
-            {
-                string result = " ";
-                result = String.Format("{0}/{1}/{2}", lastTreat.Day, lastTreat.Month, lastTreat.Year);
-                return result;
-            }
-        }
+    
         public bool Enable;
         public bool enable
         {
@@ -271,21 +243,9 @@ namespace doNet5781_03B_4789_9647
             }
         }
 
-        public string strstartingdate
-        {
-            set
-            {
-                strLastTreat = value;
+        
 
-            }
-            get
-            {
-                string result = " ";
-                result = String.Format("{0}/{1}/{2}", StartingDate.Day, StartingDate.Month, StartingDate.Year);
-                return result;
-            }
-        }
-
+        private string license;
         public string License
         {
             //----
@@ -329,48 +289,13 @@ namespace doNet5781_03B_4789_9647
         }
 
 
-        public Bus() //defult constructor
+
+        public override string ToString()
         {
-            int num = 10000000;
-            string a = num.ToString();
-
-            status = (Status)0;
-            StartingDate = DateTime.Today;
-            License = a;
-
-            lastTreat = Last_tratment();
-            Fuel = FULLTANK;
-            newKm_from_LastTreatment = 0;
-            km = 0;
-            strstartingdate = String.Format("{0}/{1}/{2}", StartingDate.Day, StartingDate.Month, StartingDate.Year);
-            enable = true;
-            visible = "Hidden";
+            return String.Format("license is: {0,-10}, starting date: {1}", License, StartingDate);
         }
 
-        public Bus(int num, DateTime date)
-        {
-            string a = num.ToString();
-            StartingDate = date;
-            License = a;
-            Fuel = r.Next(FULLTANK);
-            do
-            {
-                newKm_from_LastTreatment = r.Next(20000);
-                km = r.Next(30000);
-            } while (km < newKm_from_LastTreatment);
-            lastTreat = new DateTime(2020, r.Next(1, DateTime.Today.Month), r.Next(1, DateTime.Today.Day));
-            status = checkingStatus();
-            strstartingdate = String.Format("{0}/{1}/{2}", StartingDate.Day, StartingDate.Month, StartingDate.Year);
-            enable = true;
-            worker.DoWork += Worker_DoWork;
-            worker.ProgressChanged += Worker_ProgressChanged;
-            worker.RunWorkerCompleted += Worker_RunWorkerCompleted;
 
-            worker.WorkerReportsProgress = true;
-            worker.WorkerSupportsCancellation = true;
-            visible = "Hidden";
-
-        }
 
         public Status checkingStatus()
         {
@@ -379,27 +304,18 @@ namespace doNet5781_03B_4789_9647
                 return Status.READY_TO_TRAVEL;
             }
             else return Status.Unfit;
-        }
+        }           
 
-
-        public Bus(Bus a)
+        //return the fuel of bus at string, in order to show that at main window.
+        public string fuelString()
         {
-            license = a.license;
-            StartingDate = a.StartingDate;
-            Fuel = a.Fuel;
-            status = a.status;
-            km = a.km;
-            newKm_from_LastTreatment = a.newKm_from_LastTreatment;
-            lastTreat = a.lastTreat;
-            strLastTreat = a.strLastTreat;
-
+            string str = " ";
+            // int.TryParse(string a, out Fuel);
+            str = "The amount of fuel at this Bus:\n";
+            str += Fuel;
+            str += "\n Do you want to refull ?";
+            return str;
         }
-
-        public override string ToString()
-        {
-            return String.Format("license is: {0,-10}, starting date: {1}", License, StartingDate);
-        }
-
 
 
         /// <summary>
@@ -422,19 +338,6 @@ namespace doNet5781_03B_4789_9647
             }
         }
 
-        //------------
-        ////update the date time after treatment
-        ///
-        public DateTime Last_tratment()
-        {
-            lastTreat = DateTime.Today;
-            return lastTreat;
-        }
-        public DateTime Last_tratment(DateTime checkup)
-        {
-            lastTreat = checkup;
-            return lastTreat;
-        }
 
         public void Refuelling() //update the new fuel
         {
@@ -495,15 +398,97 @@ namespace doNet5781_03B_4789_9647
         }
 
 
-        public string fuelString()
+
+
+        public bool isTimerRun;
+        public event PropertyChangedEventHandler PropertyChanged;
+
+
+        private string _timeleft;
+        public string Time_left
         {
-            string str = " ";
-            // int.TryParse(string a, out Fuel);
-            str = "The amount of fuel at this Bus:\n";
-            str += Fuel;
-            str += "\n Do you want to refull ?";
-            return str;
+
+            get
+            {
+                return _timeleft;
+            }
+            set
+            {
+                _timeleft = value;
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("Time_left"));
+
+
+            }
         }
+
+        private int _work;
+        public int work
+        {
+            get
+            {
+                return _work;
+            }
+            set
+            {
+                _work = value;
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("work"));
+
+            }
+
+        }
+
+
+
+        private void Worker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            enable = false;
+            int length = (int)e.Argument;
+            timeToEndWork = length;
+            isTimerRun = true;
+
+            visible = "Visible";
+
+            for (int i = 0; i <= length; i++)
+            {
+
+                Thread.Sleep(1000);
+                worker.ReportProgress(i * 100 / length);
+
+            }
+        }
+
+
+        private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            work = (int)e.ProgressPercentage;
+            Time_left = timeToEndWork + "s";
+            timeToEndWork--;
+
+
+
+        }
+
+        private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+
+            isTimerRun = false;
+            status = (Status)0;
+            work = 0;
+            Time_left = "";
+            timeToEndWork = 0;
+            enable = true;
+
+            visible = "Hidden";
+
+
+        }
+
+
+
+
+
     }
 
 }

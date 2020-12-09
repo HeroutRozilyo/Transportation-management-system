@@ -5,13 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:doNet5781_03B_4789_9647"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="660.667">
+        Title="Welcom to Our Company" Height="400" Width="700">
 
     <Grid Margin="0,0,0,4.667" Background="#FFE7F6F5">
         <Grid.RowDefinitions>
             <RowDefinition Height="47*"/>
             <RowDefinition Height="374*"/>
         </Grid.RowDefinitions>
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="220*"/>
             <ColumnDefinition Width="419*"/>
@@ -32,12 +33,13 @@
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="3*"/>
-                <RowDefinition Height="46*"/>
-
+                <RowDefinition Height="50*"/>
+                <RowDefinition Height="5*"/>
             </Grid.RowDefinitions>
-            <Button x:Name="addBus" Content="Add Bus" Margin="271,0,0,-63" Width="72" Click="addBus_Click" BorderBrush="#FF6D6B15" HorizontalAlignment="Left" VerticalAlignment="Bottom" HorizontalContentAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" VerticalContentAlignment="Center" Padding="-6,1,1,1" FontFamily="Segoe Print" FontSize="14" RenderTransformOrigin="0.5,0.5" Background="#FFF7C3B0" OpacityMask="Black" FontStyle="Italic" FontWeight="Bold" Grid.Row="1"  />
-            
-            <ListView x:Name="allbuses" HorizontalAlignment="Left" Margin="59,0,0,-29" Width="505" PreviewMouseDoubleClick="doubleflick" SelectionChanged="allbuses_SelectionChanged" Background="WhiteSmoke" Grid.Row="1" FontFamily="Segoe Print" FontSize="14" >
+
+            <Button x:Name="addBus" Content="Add Bus" Margin="96,0,0,-57" Width="72" Click="addBus_Click" BorderBrush="#FF6D6B15" HorizontalAlignment="Left" VerticalAlignment="Bottom" HorizontalContentAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" VerticalContentAlignment="Center" Padding="-6,1,1,1" FontFamily="Segoe Print" FontSize="14" RenderTransformOrigin="0.5,0.5" Background="#FFF7C3B0" OpacityMask="Black" FontStyle="Italic" FontWeight="Bold" Grid.Row="2"  />
+
+            <ListView x:Name="allbuses" HorizontalAlignment="Left" Margin="96,4.333,0,-9" Width="505" PreviewMouseDoubleClick="doubleflick"  Background="WhiteSmoke" Grid.Row="1" FontFamily="Segoe Print" FontSize="14" Grid.RowSpan="2" >
                 <ListView.Resources>
                     <Style TargetType="ListViewItem">
                         <Style.Triggers>
@@ -56,35 +58,18 @@
                             <DataTrigger Binding= "{Binding status}" Value="4">
                                 <Setter Property="Background" Value="#FF9BCECE"/>
                             </DataTrigger>
-
-
                         </Style.Triggers>
-
-
                         <Style.Resources>
                             <SolidColorBrush x:Key="t" Color="Blue"/>
                         </Style.Resources>
                     </Style>
-
-
-
-                    <!--<Style TargetType="ProgressBar" x:Name="resultprograssBar">
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding enable}"  Value="false">
-                                <Setter Property="Visibility" Value="Hidden"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>-->
-                    
                 </ListView.Resources>
+
+
                 <ListView.View>
-                  
-
-
-
-
-                <GridView x:Name="allbusesgrid">
+                    <GridView x:Name="allbusesgrid">
                         <GridViewColumn Header="license" Width="120" DisplayMemberBinding="{Binding License}"/>
+
                         <GridViewColumn Width="70">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
@@ -112,7 +97,7 @@
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
 
-                        
+
                         <GridViewColumn Width="110">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
@@ -132,14 +117,8 @@
                         <GridViewColumn Width="120">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-
                                     <ProgressBar x:Name="resultprograssBar" Visibility="{Binding Path= visible}" Height="10" Width="100" HorizontalAlignment="center" VerticalAlignment="Bottom" Minimum="0" Maximum="100"  Value="{Binding work, UpdateSourceTrigger=PropertyChanged }" />
-
-                              
-
                                 </DataTemplate>
-                         
-
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
 
@@ -152,20 +131,10 @@
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
 
-
-
-
-
-
-
                     </GridView>
-
-
                 </ListView.View>
             </ListView>
         </Grid>
-
-
+        <TextBlock Grid.Column="1" HorizontalAlignment="Center" Margin="379.333,260.333,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Ready to start travel" Background="#FFBAD89D" VerticalAlignment="Center" Height="55" Width="65"/>
     </Grid>
-
 </Window>
