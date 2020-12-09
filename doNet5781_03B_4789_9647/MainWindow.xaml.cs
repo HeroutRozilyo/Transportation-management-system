@@ -315,7 +315,7 @@ namespace doNet5781_03B_4789_9647
 			wnd1 = new ListDrivers(drivers/*,egged*/);
 
 
-			bool? result = wnd1.ShowDialog();
+			 wnd1.Show();
 			allbuses.Items.Refresh();
 
 
