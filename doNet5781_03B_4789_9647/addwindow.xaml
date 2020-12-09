@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:doNet5781_03B_4789_9647"
         
         mc:Ignorable="d"
-        Title="addWindow" Height="239.5" Width="355">
+        Title="Add New BUS" Height="239.5" Width="355" Icon="Bus11.ico">
 
 
 

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:doNet5781_03B_4789_9647"
         mc:Ignorable="d"
-        Title="StartingTravel" Height="175.999" Width="382" Background="#FFEEFDFF">
+        Title="Km TO Travel" Height="175.999" Width="382" Icon="Bus11.ico">
     <Grid Margin="225,0,0.333,0.333">
         <Grid.RowDefinitions>
             <RowDefinition Height="29*"/>
