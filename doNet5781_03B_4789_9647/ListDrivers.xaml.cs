@@ -23,7 +23,7 @@ namespace doNet5781_03B_4789_9647
     {
         private ObservableCollection<Drivers> driverBus= new ObservableCollection<Drivers>() ;
         private ObservableCollection<Bus> buses = new ObservableCollection<Bus>();
-       // private Bus bbus;
+      //  private Bus bbus;
 
         public ListDrivers()
         {
@@ -44,6 +44,12 @@ namespace doNet5781_03B_4789_9647
             allDriver.ItemsSource = drivers;
             buses = egged;
         }
+
+        //public int work_
+        //{
+        //    get { return bbus.work; }
+        
+        //}
 
     }
 }
