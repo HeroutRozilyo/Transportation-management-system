@@ -23,12 +23,20 @@ namespace doNet5781_03B_4789_9647
     {
         private ObservableCollection<Drivers> driverBus= new ObservableCollection<Drivers>() ;
         private ObservableCollection<Bus> buses = new ObservableCollection<Bus>();
+       // private Bus bbus;
+
         public ListDrivers()
         {
             InitializeComponent();
             //allDriver.ItemsSource = drivers;
 
         }
+
+        //public ListDrivers(Bus bus)
+        //{
+        //    this.bbus = bus;
+
+        //}
 
         public ListDrivers(ObservableCollection<Drivers> drivers, ObservableCollection<Bus>egged)
         {
