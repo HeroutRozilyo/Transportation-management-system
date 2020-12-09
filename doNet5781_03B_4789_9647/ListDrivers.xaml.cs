@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
+
 namespace doNet5781_03B_4789_9647
 {
     /// <summary>
@@ -20,19 +21,20 @@ namespace doNet5781_03B_4789_9647
     /// </summary>
     public partial class ListDrivers : Window
     {
-        private ObservableCollection<Drivers> driverBus;
+        private ObservableCollection<Drivers> driverBus= new ObservableCollection<Drivers>() ;
 
         public ListDrivers()
         {
             InitializeComponent();
-            allDriver.ItemsSource = driverBus;
+            //allDriver.ItemsSource = drivers;
 
         }
 
         public ListDrivers(ObservableCollection<Drivers> drivers)
         {
             InitializeComponent();
-            this.driverBus = drivers;
+            allDriver.ItemsSource = drivers;
+          
         }
     }
 }
