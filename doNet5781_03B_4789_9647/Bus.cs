@@ -28,6 +28,7 @@ namespace doNet5781_03B_4789_9647
         private const int MAX_KM = 20000;
         private const int FULLTANK = 1200;
         int timeToEndWork;
+
         private Drivers driverOfBus;
         public Drivers DriverOfBus
         {
@@ -54,9 +55,6 @@ namespace doNet5781_03B_4789_9647
                     PropertyChanged(this, new PropertyChangedEventArgs("DriverWorking"));
             }
         }
-
-
-
 
 
         //variable that connect to the vasibility op prograss ber at main window xamle 

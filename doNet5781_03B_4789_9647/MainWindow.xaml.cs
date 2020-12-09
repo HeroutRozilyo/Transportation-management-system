@@ -22,13 +22,10 @@
 
 
 
-		private void initBuses(ObservableCollection<Bus> egged)		{			int license1;			DateTime date1;			for (int i = 0; i < 10; i++) ///restart 10 buses 
+		private void initBuses(ObservableCollection<Bus> egged)		{			int license1;			DateTime date1;			for (int i = 0; i < 10; i++) ///restart 10 buses
+			{
 
-
-
-			
-
-{				date1 = new DateTime(r.Next(1990, DateTime.Today.Year + 1), r.Next(1, 13), r.Next(1, 29));//,r.Next(1,25),r.Next(0,60),r.Next(0,60));
+				date1 = new DateTime(r.Next(1990, DateTime.Today.Year + 1), r.Next(1, 13), r.Next(1, 29));//,r.Next(1,25),r.Next(0,60),r.Next(0,60));
 																										  //int a = date1.Year;
 				do				{					if ((date1.Year < 2018))					{						license1 = r.Next(1000000, 10000000); //to random number with 7 digite
 					}					else					{						license1 = r.Next(10000000, 100000000); //to random number with 8 digite
@@ -69,7 +66,7 @@
 			do
 			{
 				int num1 = r.Next(0, drivers.Count());
-				dr = drivers[num1];			} while (dr.InTraveling);			dr.InTraveling = true;			((sender as Button).DataContext as Bus).DriverOfBus = dr;			allbuses.Items.Refresh();		}		private void doubleflick(object sender, RoutedEventArgs e) //in order to shoe details on the bus
+				dr = drivers[num1];			} while (dr.InTraveling);			dr.InTraveling = true;			((sender as Button).DataContext as Bus).DriverOfBus = dr;			allbuses.Items.Refresh();					}		private void doubleflick(object sender, RoutedEventArgs e) //in order to shoe details on the bus
 		{			var list = (ListView)sender;			object item = list.SelectedItem;			Bus_Data temp = new Bus_Data(item);			temp.ShowDialog();			allbuses.Items.Refresh();		}		private void MainWindow_Closing(object sender, CancelEventArgs e)		{			Environment.Exit(Environment.ExitCode);		}
 
 		
