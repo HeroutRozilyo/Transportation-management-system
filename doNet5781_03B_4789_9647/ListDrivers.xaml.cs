@@ -31,6 +31,7 @@ namespace doNet5781_03B_4789_9647
 
         public ListDrivers(ObservableCollection<Drivers> drivers)
         {
+            InitializeComponent();
             this.driverBus = drivers;
         }
     }
