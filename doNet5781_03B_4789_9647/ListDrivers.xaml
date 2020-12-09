@@ -34,7 +34,7 @@
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <ProgressBar x:Name="resultprograssBar" Visibility="{Binding Path= visible}" Height="10" Width="100" HorizontalAlignment="center" VerticalAlignment="Bottom" Minimum="0" Maximum="100"  Value="{Binding work, UpdateSourceTrigger=PropertyChanged }" />
-
+                              
                                     
 
                                 </DataTemplate>
@@ -42,8 +42,22 @@
                         </GridViewColumn>
                     </GridView>
 
+
+                    <!--<GridViewColumn Width="120">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock x:Name="TimeTOend" Grid.Column="2" Margin="111,285,0,52.667" TextWrapping="Wrap"  VerticalAlignment="Center" Text="{Binding Path=Time_left}" Width="59" FontFamily="Segoe Print" Foreground="#FF710303" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left"/>
+
+
+
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    </GridView>-->
+
+
                 </ListView.View>
-                <TextBlock x:Name="textBlock" Height="100" TextWrapping="Wrap" Text="TextBlock" Width="100"/>
+               
 
             </ListView>
 
