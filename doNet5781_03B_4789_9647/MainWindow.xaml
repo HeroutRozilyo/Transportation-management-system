@@ -47,13 +47,13 @@
                                 <Setter Property="Background" Value="#FFBAD89D"/>
                             </DataTrigger>
                             <DataTrigger Binding= "{Binding status}" Value="1">
-                                <Setter Property="Background" Value="#FFBACCF1"/>
+                                <Setter Property="Background" Value="#FF566FA1"/>
                             </DataTrigger>
                             <DataTrigger Binding= "{Binding status}" Value="2">
-                                <Setter Property="Background" Value="#FFDDDBBA"/>
+                                <Setter Property="Background" Value="#FFEFE75F"/>
                             </DataTrigger>
                             <DataTrigger Binding= "{Binding status}" Value="3">
-                                <Setter Property="Background" Value="#FFC78E90"/>
+                                <Setter Property="Background" Value="#FFB7797B"/>
                             </DataTrigger>
                             <DataTrigger Binding= "{Binding status}" Value="4">
                                 <Setter Property="Background" Value="#FF9BCECE"/>
@@ -135,6 +135,9 @@
                 </ListView.View>
             </ListView>
         </Grid>
-        <TextBlock Grid.Column="1" HorizontalAlignment="Center" Margin="379.333,260.333,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Ready to start travel" Background="#FFBAD89D" VerticalAlignment="Center" Height="55" Width="65"/>
+        <TextBlock Grid.Column="1" HorizontalAlignment="Center" Margin="375.333,277.333,9.333,10" Grid.Row="1" TextWrapping="Wrap" Text="Ready to start travel" Background="#FFBAD89D" VerticalAlignment="Center" Height="37" Width="70"/>
+        <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="300.333,277.333,0,0" Grid.Row="1" TextWrapping="Wrap" Text=" Refulling" Background="#FFEFE75F" VerticalAlignment="Top" Height="37" Width="70"/>
+        <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="222.333,276.333,0,0" Grid.Row="1" TextWrapping="Wrap" Text="In a middle of a ride" Background="#FF566FA1"  VerticalAlignment="Top" Height="37" Width="70" />
+        <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="146.333,276.333,0,10" Grid.Row="1" TextWrapping="Wrap" Text="In treatment" Background="#FFB7797B" Height="37" Width="70"/>
     </Grid>
 </Window>

@@ -140,7 +140,7 @@ namespace doNet5781_03B_4789_9647
             catch (Exception)
             {
 
-                MessageBox.Show("b");
+                MessageBox.Show("problem not recognize");
                 return false;
             }
 
@@ -169,14 +169,19 @@ namespace doNet5781_03B_4789_9647
 
                     if(!findBuse(egged,temp1))
                         egged.Add(wnd.myBus);
+                    else
+                        throw new Exception("The new licence is already exsis,\n please nter again number licence with 8 digite");
+
 
 
 
                 }
             }
-            catch (Exception)
+            catch (Exception messege)
             {
-                MessageBox.Show("The new licence is not valid,\n please nter again number licence with 8 digite", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+             
+
+                MessageBox.Show(messege.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
 
             }
 
