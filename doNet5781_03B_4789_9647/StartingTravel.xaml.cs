@@ -41,7 +41,7 @@ namespace doNet5781_03B_4789_9647
             //allow list of system keys (add other key here if you want to allow)
             if (e.Key == Key.Escape || e.Key == Key.Back || e.Key == Key.Delete ||
                 e.Key == Key.CapsLock || e.Key == Key.LeftShift || e.Key == Key.Home
-             || e.Key == Key.End || e.Key == Key.Insert || e.Key == Key.Down || e.Key == Key.Right||e.Key== Key.Decimal)
+             || e.Key == Key.End || e.Key == Key.Insert || e.Key == Key.Down || e.Key == Key.Right||e.Key== Key.OemPeriod)
                 return;
 
             char c = (char)KeyInterop.VirtualKeyFromKey(e.Key);
@@ -74,7 +74,7 @@ namespace doNet5781_03B_4789_9647
            
            if (e.Key == Key.Return)         
           {
-                int a = int.Parse(numOfKm.Text); //change the value of the new km to be number
+                double a = double.Parse(numOfKm.Text); //change the value of the new km to be number
                 TimeSpan time = TimeSpan.Zero;
                 if (temp.Take_travel(a)) //check if the bus can take the travel
                 {

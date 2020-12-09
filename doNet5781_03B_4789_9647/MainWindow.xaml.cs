@@ -101,6 +101,7 @@ namespace doNet5781_03B_4789_9647
 
 
             egged[2].lastTreat = (egged[2].lastTreat.AddYears(-1));
+            egged[2].status = Status.Unfit;
             egged[1].lastTreat = DateTime.Now.AddDays(-1);
             egged[3].newKm_from_LastTreatment = 19900;
             egged[4].Fuel = 50;

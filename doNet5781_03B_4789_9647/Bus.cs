@@ -64,7 +64,8 @@ namespace doNet5781_03B_4789_9647
                 newKm_from_LastTreatment = r.Next(20000);
                 km = r.Next(30000);
             } while (km < newKm_from_LastTreatment);
-            lastTreat = new DateTime(2020, r.Next(1, DateTime.Today.Month), r.Next(1, DateTime.Today.Day));
+            //lastTreat = new DateTime(r.Next(200,, r.Next(1, DateTime.Today.Month), r.Next(1, DateTime.Today.Day));
+            lastTreat = new DateTime(r.Next(2020,DateTime.Today.Year), r.Next(1, DateTime.Today.Month), r.Next(1, DateTime.Today.Day));
             status = checkingStatus();
             strstartingdate = String.Format("{0}/{1}/{2}", StartingDate.Day, StartingDate.Month, StartingDate.Year);
             enable = true;
@@ -172,8 +173,8 @@ namespace doNet5781_03B_4789_9647
             }
         }
 
-        private int f;
-        public int Fuel
+        private double f;
+        public double Fuel
         {
             get { return f; }
             set
@@ -185,8 +186,8 @@ namespace doNet5781_03B_4789_9647
         }
 
 
-        private int newkm;
-        public int newKm_from_LastTreatment
+        private double newkm;
+        public double newKm_from_LastTreatment
         {
             get { return newkm; }
             set
@@ -210,8 +211,8 @@ namespace doNet5781_03B_4789_9647
             }
 }
 
-        private int km;
-        public int Km
+        private double km;
+        public double Km
         {
             get { return km; }
             set
@@ -282,7 +283,7 @@ namespace doNet5781_03B_4789_9647
                 else
                 {
 
-                    throw new Exception("The new licence is not valid,\n please nter again number licence with 8 digite");
+                    throw new Exception("The new licence is not valid,\n please enter again number licence with 8 digite");
 
                 }
             }
@@ -299,7 +300,8 @@ namespace doNet5781_03B_4789_9647
 
         public Status checkingStatus()
         {
-            if (this.Fuel != 0 && newKm_from_LastTreatment < MAX_KM && lastTreat.AddYears(1) >= DateTime.Today)
+            DateTime a = lastTreat;
+            if (this.Fuel != 0 && newKm_from_LastTreatment < MAX_KM && a.AddYears(1) >= DateTime.Today)
             {
                 return Status.READY_TO_TRAVEL;
             }
@@ -357,15 +359,15 @@ namespace doNet5781_03B_4789_9647
         /// </summary>
         /// <param name=//"kmTravel= the km to the new travel>
         /// <returns></returns>
-        public bool Take_travel(int kmTravel)
+        public bool Take_travel(double kmTravel)
         {
-            if (newKm_from_LastTreatment < MAX_KM && lastTreat.AddYears(1) >= DateTime.Today) //if he didnt need go to treatment
+            if (newKm_from_LastTreatment <= MAX_KM && lastTreat.AddYears(1) >= DateTime.Today) //if he didnt need go to treatment
             {
-                if (newKm_from_LastTreatment + kmTravel < MAX_KM && Fuel - kmTravel > 0) //if he can take this travel
+                if (newKm_from_LastTreatment + kmTravel <= MAX_KM && Fuel - kmTravel >= 0) //if he can take this travel
                 {
-                    int time = 0;
+                    double time = 0;
                     int v = r.Next(20, 51); //velocitui of this bus
-                    int t = kmTravel / v; //time of this travel.This time is in hour
+                    double t = kmTravel / v; //time of this travel.This time is in hour
 
                     time = (int)(t / 3.6); //time travel at our program
                     t = (int)(time / 60);
@@ -385,7 +387,7 @@ namespace doNet5781_03B_4789_9647
                 }
                 else //if he cant take this travel
                 {
-                    status = (Status)0;
+                    status = checkingStatus();
                     return false;
                 }
             }
@@ -474,7 +476,7 @@ namespace doNet5781_03B_4789_9647
         {
 
             isTimerRun = false;
-            status = (Status)0;
+            status = checkingStatus();
             work = 0;
             Time_left = "";
             timeToEndWork = 0;

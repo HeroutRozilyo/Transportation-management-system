@@ -37,7 +37,7 @@
                 <RowDefinition Height="5*"/>
             </Grid.RowDefinitions>
 
-            <Button x:Name="addBus" Content="Add Bus" Margin="96,0,0,-57" Width="72" Click="addBus_Click" BorderBrush="#FF6D6B15" HorizontalAlignment="Left" VerticalAlignment="Bottom" HorizontalContentAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" VerticalContentAlignment="Center" Padding="-6,1,1,1" FontFamily="Segoe Print" FontSize="14" RenderTransformOrigin="0.5,0.5" Background="#FFF7C3B0" OpacityMask="Black" FontStyle="Italic" FontWeight="Bold" Grid.Row="2"  />
+            <Button x:Name="addBus" Content="Add Bus" Margin="96,0,0,-57" Width="72" Click="addBus_Click" BorderBrush="#FF040404" HorizontalAlignment="Left" VerticalAlignment="Bottom" HorizontalContentAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" VerticalContentAlignment="Center" Padding="-6,1,1,1" FontFamily="Segoe Print" FontSize="14" RenderTransformOrigin="0.5,0.5" Background="#FFF7C3B0" OpacityMask="Black" FontStyle="Italic" FontWeight="Bold" Grid.Row="2"  />
 
             <ListView x:Name="allbuses" HorizontalAlignment="Left" Margin="96,4.333,0,-9" Width="505" PreviewMouseDoubleClick="doubleflick"  Background="WhiteSmoke" Grid.Row="1" FontFamily="Segoe Print" FontSize="14" Grid.RowSpan="2" >
                 <ListView.Resources>
@@ -47,7 +47,7 @@
                                 <Setter Property="Background" Value="#FFBAD89D"/>
                             </DataTrigger>
                             <DataTrigger Binding= "{Binding status}" Value="1">
-                                <Setter Property="Background" Value="#FF566FA1"/>
+                                <Setter Property="Background" Value="#FF9CB5E8"/>
                             </DataTrigger>
                             <DataTrigger Binding= "{Binding status}" Value="2">
                                 <Setter Property="Background" Value="#FFEFE75F"/>
@@ -56,7 +56,7 @@
                                 <Setter Property="Background" Value="#FFB7797B"/>
                             </DataTrigger>
                             <DataTrigger Binding= "{Binding status}" Value="4">
-                                <Setter Property="Background" Value="#FF9BCECE"/>
+                                <Setter Property="Background" Value="#FFC3B8B8"/>
                             </DataTrigger>
                         </Style.Triggers>
                         <Style.Resources>
@@ -135,9 +135,11 @@
                 </ListView.View>
             </ListView>
         </Grid>
-        <TextBlock Grid.Column="1" HorizontalAlignment="Center" Margin="375.333,277.333,9.333,10" Grid.Row="1" TextWrapping="Wrap" Text="Ready to start travel" Background="#FFBAD89D" VerticalAlignment="Center" Height="37" Width="70"/>
-        <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="300.333,277.333,0,0" Grid.Row="1" TextWrapping="Wrap" Text=" Refulling" Background="#FFEFE75F" VerticalAlignment="Top" Height="37" Width="70"/>
-        <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="222.333,276.333,0,0" Grid.Row="1" TextWrapping="Wrap" Text="In a middle of a ride" Background="#FF566FA1"  VerticalAlignment="Top" Height="37" Width="70" />
-        <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="146.333,276.333,0,10" Grid.Row="1" TextWrapping="Wrap" Text="In treatment" Background="#FFB7797B" Height="37" Width="70"/>
+        <TextBlock HorizontalAlignment="Center" Margin="10,35.333,149.667,255" Grid.Row="1" TextWrapping="Wrap" Text="Ready to start travel" Background="#FFBAD89D" VerticalAlignment="Center" Height="35" Width="79" RenderTransformOrigin="-0.776,0.712" FontFamily="Segoe Print" FontSize="10" TextAlignment="Center" Foreground="#FF0D0B0B" OpacityMask="#FF110F0F"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,113.333,0,0" Grid.Row="1" TextWrapping="Wrap" Text=" Refulling" Background="#FFEFE75F" VerticalAlignment="Top" Height="19" Width="79" FontFamily="Segoe Print" FontSize="10" TextAlignment="Center"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,75.333,0,0" Grid.Row="1" TextWrapping="Wrap" Background="#FF9CB5E8"  VerticalAlignment="Top" Height="33" Width="79" FontFamily="Segoe Print" FontSize="10" TextAlignment="Center" ><Run Text="In a middle of "/><Run FlowDirection="RightToLeft" Text=" "/><Run Text="  a ride"/></TextBlock>
+        <TextBlock HorizontalAlignment="Left" Margin="10,137.333,0,164" TextWrapping="Wrap" Background="#FFB7797B" Width="79"  TextAlignment="Center" FontFamily="Segoe Print" FontSize="10" Text="In treatment" Grid.Row="1" LineHeight="16" RenderTransformOrigin="0.557,0.81" />
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="10,158.333,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Not working properly" VerticalAlignment="Top" Background="#FFC3B8B8" FontFamily="Segoe Print" FontSize="10" TextAlignment="Center" Width="79"/>
+
     </Grid>
 </Window>
