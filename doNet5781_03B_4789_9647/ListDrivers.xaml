@@ -23,11 +23,17 @@
 
             <ListView x:Name="allDriver" HorizontalAlignment="Left" Height="279" Margin="183,49,0,0" VerticalAlignment="Top" Width="433">
                 <ListView.View>
-                    
-                <GridView x:Name="aaa">
-
+                    <GridView x:Name="aaa">
                         <GridViewColumn Header="Name" Width="120" DisplayMemberBinding="{Binding Name}"/>
                       
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
                     </GridView>                  
                 </ListView.View>
             </ListView>
