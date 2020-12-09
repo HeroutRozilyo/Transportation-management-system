@@ -314,10 +314,11 @@ namespace doNet5781_03B_4789_9647
 
 		private void ListDriver_Click(object sender, RoutedEventArgs e) //in order to shoe details on the bus
 		{
-			wnd1 = new ListDrivers(drivers/*,egged*/);
+			//wnd1 = new ListDrivers(drivers/*,egged*/);
 
+			wnd1 = new ListDrivers(drivers,egged);
 
-			 wnd1.Show();
+			wnd1.Show();
 			allbuses.Items.Refresh();
 
 

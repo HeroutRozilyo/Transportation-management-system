@@ -84,8 +84,22 @@ namespace doNet5781_03B_4789_9647
                 PropertyChanged(this, new PropertyChangedEventArgs("inBreak"));
 
         }
-   
-    public bool InTraveling
+
+        public void help(int a)
+        {
+
+            
+            worker.RunWorkerAsync(a);
+            InTraveling = true;
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs("InTraveling"));
+
+        }
+
+
+
+
+        public bool InTraveling
         {
             get { return inTraveling; }
             set

@@ -22,30 +22,56 @@ namespace doNet5781_03B_4789_9647
     public partial class ListDrivers : Window
     {
         private ObservableCollection<Drivers> driverBus= new ObservableCollection<Drivers>() ;
-        //private ObservableCollection<Bus> buses = new ObservableCollection<Bus>();
-       // private Bus bbus;
+        private ObservableCollection<Bus> buses = new ObservableCollection<Bus>();
+      
 
         public ListDrivers()
         {
             InitializeComponent();
-            //allDriver.ItemsSource = drivers;
+           
             allDriver.Items.Refresh();
 
         }
 
-        //public ListDrivers(Bus bus)
-        //{
-        //    this.bbus = bus;
 
+
+        //public ListDrivers(ObservableCollection<Drivers> drivers /*ObservableCollection<Bus>egged*/)
+        //{
+        //    InitializeComponent();
+        //    allDriver.ItemsSource = drivers;
+        //    //buses = egged;
+        //    allDriver.Items.Refresh();
         //}
 
-        public ListDrivers(ObservableCollection<Drivers> drivers /*ObservableCollection<Bus>egged*/)
+
+        public ListDrivers(ObservableCollection<Drivers> drivers ,ObservableCollection<Bus>egged)
         {
             InitializeComponent();
             allDriver.ItemsSource = drivers;
-            //buses = egged;
+            buses = egged;
+            driverBus = drivers;
+            check();
             allDriver.Items.Refresh();
         }
+
+        public void check()
+        {
+            
+            for(int i=0;i<buses.Count;i++)
+            {
+                for(int j=0;j<driverBus.Count;j++)
+                {
+                    if(buses[i].NameDriver==driverBus[j].Name1)
+                    {
+                        int num = buses[i].helptime;
+                        driverBus[j].help(num);
+                    }
+                }
+            }
+        }
+
+
+
 
         private void allDriver_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
