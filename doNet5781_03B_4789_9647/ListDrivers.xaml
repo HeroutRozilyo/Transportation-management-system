@@ -17,16 +17,103 @@
             <ColumnDefinition Width="419*"/>
         </Grid.ColumnDefinitions>
 
-        <Grid>
-            <ListView x:Name="allDriver" HorizontalAlignment="Left" Height="100" Margin="207,290,0,0" VerticalAlignment="Top" Width="433">
-                <ListView.View>
-                    <GridView>
+        <Grid Name="MainGrid" Grid.ColumnSpan="2" Margin="-1,2,1.333,76" Grid.RowSpan="2" RenderTransformOrigin="0.5,0.5">
+            <Grid.Background>
+                <ImageBrush/>
+            </Grid.Background>
+            <Grid.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="0.003"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Grid.RenderTransform>
 
+            <Grid.RowDefinitions>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="50*"/>
+                <RowDefinition Height="5*"/>
+            </Grid.RowDefinitions>
+
+           
+
+            <ListView x:Name="allDriver" HorizontalAlignment="Left" Margin="96,4.333,0,-9" Width="587"   Background="WhiteSmoke" Grid.Row="1" FontFamily="Segoe Print" FontSize="14" Grid.RowSpan="2" >
+                <ListView.Resources>
+                    <!--<Style TargetType="ListViewItem">
+                        <Style.Triggers>
+                            <DataTrigger Binding= "{Binding status}" Value="0">
+                                <Setter Property="Background" Value="#FFBAD89D"/>
+                            </DataTrigger>
+                            <DataTrigger Binding= "{Binding status}" Value="1">
+                                <Setter Property="Background" Value="#FF9CB5E8"/>
+                            </DataTrigger>
+                            <DataTrigger Binding= "{Binding status}" Value="2">
+                                <Setter Property="Background" Value="#FFEFE75F"/>
+                            </DataTrigger>
+                            <DataTrigger Binding= "{Binding status}" Value="3">
+                                <Setter Property="Background" Value="#FFB7797B"/>
+                            </DataTrigger>
+                            <DataTrigger Binding= "{Binding status}" Value="4">
+                                <Setter Property="Background" Value="#FFC3B8B8"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                        <Style.Resources>
+                            <SolidColorBrush x:Key="t" Color="Blue"/>
+                        </Style.Resources>
+                    </Style>-->
+                </ListView.Resources>
+
+
+                <ListView.View>
+                    <GridView x:Name="alldriver">
                         <GridViewColumn Header="Name" Width="120" DisplayMemberBinding="{Binding NameDriver}"/>
-                        <GridViewColumn/>
+
+                        <GridViewColumn Width="70">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
+
+                        <GridViewColumn Width="110">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                   
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
+
+                        <GridViewColumn Width="120">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <!--<ProgressBar x:Name="resultprograssBar" Visibility="{Binding Path= visible}" Height="10" Width="100" HorizontalAlignment="center" VerticalAlignment="Bottom" Minimum="0" Maximum="100"  Value="{Binding work, UpdateSourceTrigger=PropertyChanged }" />-->
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
+
+                        <GridViewColumn Width="50">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <!--<TextBlock x:Name="timeToEnd" Text="{Binding Time_left , UpdateSourceTrigger=PropertyChanged}" Width="40" Height="20" FlowDirection="LeftToRight" FontFamily="Segoe Print"/>-->
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
+                       
                     </GridView>
                 </ListView.View>
+
             </ListView>
         </Grid>
-        </Grid>
+        
+
+
+
+    </Grid>
+
 </Window>
