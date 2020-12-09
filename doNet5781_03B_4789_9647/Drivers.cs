@@ -12,7 +12,7 @@ using System.Diagnostics;
 
 namespace doNet5781_03B_4789_9647
 {
-    public class Drivers//MainWindow
+    public class Drivers: INotifyPropertyChanged
     {
         BackgroundWorker worker = new BackgroundWorker();
         private TimeSpan sumTime;
