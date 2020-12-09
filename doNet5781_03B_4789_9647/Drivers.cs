@@ -42,8 +42,10 @@ namespace doNet5781_03B_4789_9647
                
             set
             {
-                if (value.ToString().Length == 7) id = value;
-                else throw new ArgumentOutOfRangeException("id not valid");
+                if (value.ToString().Length == 9) 
+                    id = value;
+                else
+                    throw new ArgumentOutOfRangeException("id not valid");
 
             }
         }
@@ -53,10 +55,11 @@ namespace doNet5781_03B_4789_9647
             set
             { name = value; }
         }
+
         public bool InTraveling
         {
             get { return inTraveling; }
-                set
+            set
             {
                 inTraveling = value;
             }
