@@ -59,6 +59,10 @@
     <Compile Include="Bus_Data.xaml.cs">
       <DependentUpon>Bus_Data.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Drivers.cs" />
+    <Compile Include="ListDrivers.xaml.cs">
+      <DependentUpon>ListDrivers.xaml</DependentUpon>
+    </Compile>
     <Compile Include="prograss.cs" />
     <Compile Include="StartingTravel.xaml.cs">
       <DependentUpon>StartingTravel.xaml</DependentUpon>
@@ -68,6 +72,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Bus_Data.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ListDrivers.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

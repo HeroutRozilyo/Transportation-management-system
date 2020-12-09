@@ -21,7 +21,9 @@ namespace doNet5781_03B_4789_9647
     public partial class StartingTravel : Window
     {
         Bus temp = new Bus();
+      
         Random r = new Random();
+      
         public StartingTravel()
         {
             InitializeComponent();

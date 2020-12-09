@@ -10,6 +10,7 @@ using System.ComponentModel;
 using System.Windows;
 using System.Diagnostics;
 
+
 namespace doNet5781_03B_4789_9647
 {
 
@@ -27,10 +28,36 @@ namespace doNet5781_03B_4789_9647
         private const int MAX_KM = 20000;
         private const int FULLTANK = 1200;
         int timeToEndWork;
+        private Drivers driverOfBus;
+        public Drivers DriverOfBus
+        {
+            get { return driverOfBus; }
+            set { driverOfBus = value; }
+        }
+        
+        public string NameDriver 
+        {
+            get { return driverOfBus.Name; }
+            set { this.driverOfBus.Name = value;
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("NameDriver"));
+            }
+        }
+        public bool driverWorking;
+        public bool DriverWorking
+        {
+            get { return driverOfBus.InTraveling; }
+            set
+            {
+                this.driverOfBus.InTraveling = value;
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("DriverWorking"));
+            }
+        }
 
 
-       
-      
+
+
 
         //variable that connect to the vasibility op prograss ber at main window xamle 
         private string visibility;
@@ -76,7 +103,7 @@ namespace doNet5781_03B_4789_9647
             worker.WorkerReportsProgress = true;
             worker.WorkerSupportsCancellation = true;
             visible = "Hidden";
-
+            driverOfBus = new Drivers("name");
         }
 
         public Bus() //defult constructor
@@ -95,6 +122,7 @@ namespace doNet5781_03B_4789_9647
             strstartingdate = String.Format("{0}/{1}/{2}", StartingDate.Day, StartingDate.Month, StartingDate.Year);
             enable = true;
             visible = "Hidden";
+            driverOfBus = new Drivers("name");
         }
 
 
@@ -452,7 +480,7 @@ namespace doNet5781_03B_4789_9647
 
             visible = "Visible";
 
-            for (int i = 0; i <= length; i++)
+            for (int i = 1; i <= (length+1); i++)
             {
 
                 Thread.Sleep(1000);
@@ -481,8 +509,8 @@ namespace doNet5781_03B_4789_9647
             Time_left = "";
             timeToEndWork = 0;
             enable = true;
-
             visible = "Hidden";
+            driverOfBus.InTraveling = false;
 
 
         }

@@ -39,7 +39,7 @@
 
             <Button x:Name="addBus" Content="Add Bus" Margin="96,0,0,-57" Width="72" Click="addBus_Click" BorderBrush="#FF040404" HorizontalAlignment="Left" VerticalAlignment="Bottom" HorizontalContentAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" VerticalContentAlignment="Center" Padding="-6,1,1,1" FontFamily="Segoe Print" FontSize="14" RenderTransformOrigin="0.5,0.5" Background="#FFF7C3B0" OpacityMask="Black" FontStyle="Italic" FontWeight="Bold" Grid.Row="2"  />
 
-            <ListView x:Name="allbuses" HorizontalAlignment="Left" Margin="96,4.333,0,-9" Width="505" PreviewMouseDoubleClick="doubleflick"  Background="WhiteSmoke" Grid.Row="1" FontFamily="Segoe Print" FontSize="14" Grid.RowSpan="2" >
+            <ListView x:Name="allbuses" HorizontalAlignment="Left" Margin="96,4.333,0,-9" Width="587" PreviewMouseDoubleClick="doubleflick"  Background="WhiteSmoke" Grid.Row="1" FontFamily="Segoe Print" FontSize="14" Grid.RowSpan="2" >
                 <ListView.Resources>
                     <Style TargetType="ListViewItem">
                         <Style.Triggers>
@@ -144,8 +144,19 @@
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
 
+                        <GridViewColumn Width="200">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock x:Name="NUmeDrivers" Text="{Binding Path=NameDriver}" Width="90" Height="24" FlowDirection="LeftToRight" FontFamily="Segoe Print" Visibility="{Binding Path= visible}" TextWrapping="Wrap">
+
+                                    </TextBlock>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
                     </GridView>
                 </ListView.View>
+
             </ListView>
         </Grid>
         <TextBlock HorizontalAlignment="Center" Margin="10,40.333,149.667,250" Grid.Row="1" TextWrapping="Wrap" Text="Ready to start travel" Background="#FFBAD89D" VerticalAlignment="Center" Height="35" Width="79" RenderTransformOrigin="-0.776,0.712" FontFamily="Segoe Print" FontSize="10" TextAlignment="Center" Foreground="#FF0D0B0B" OpacityMask="#FF110F0F"/>
@@ -161,6 +172,9 @@
             </TextBlock.RenderTransform><Run Text="In a middle of "/><Run FlowDirection="RightToLeft" Text=" "/><Run Text="  a ride"/></TextBlock>
         <TextBlock HorizontalAlignment="Left" Margin="10,137.333,0,164" TextWrapping="Wrap" Background="#FFB7797B" Width="79"  TextAlignment="Center" FontFamily="Segoe Print" FontSize="10" Text="In treatment" Grid.Row="1" LineHeight="16" RenderTransformOrigin="0.557,0.81" />
         <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="10,158.333,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Not working properly" VerticalAlignment="Top" Background="#FFC3B8B8" FontFamily="Segoe Print" FontSize="10" TextAlignment="Center" Width="79"/>
+        <!--<Button x:Name="ListDriversButtom" Grid.ColumnSpan="2" Content="Button" HorizontalAlignment="Left" Margin="213,280.333,0,0" Grid.Row="1" VerticalAlignment="Top" Width="90" Height="35" Click="ListDriver_Click"/>-->
+
+
 
     </Grid>
 </Window>
