@@ -370,8 +370,7 @@ namespace doNet5781_03B_4789_9647
                     double t = kmTravel / (v); //time of this travel.This time is in hour
 
                     time = t *0.1*60; //time travel at our program
-                    //t = (time / 60);
-                    //time = t * 0.1;
+                    
 
 
                     // worker.RunWorkerAsync((int)(v * kmTravel * 0.1));
