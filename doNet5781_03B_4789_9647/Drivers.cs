@@ -55,6 +55,15 @@ namespace doNet5781_03B_4789_9647
             set
             { name = value; }
         }
+        private bool InBreak;
+        public bool inBreak/////////////////////
+        {
+            get { return InBreak; }
+            set
+            {
+                InBreak = value;
+            }
+        }
 
         public bool InTraveling
         {
@@ -64,13 +73,37 @@ namespace doNet5781_03B_4789_9647
                 inTraveling = value;
             }
         }
+        private string stringTraveling;
+        public string StringTraveling
+        {
+            get { return stringTraveling; }
+            set
+            {
+                if (inTraveling) stringTraveling = "In Travelling";
+                else
+                {
+                    if (SumTime.TotalSeconds >= 72)//take a break//////////////
+                    {
+
+                        stringTraveling = "In Break";
+                        inBreak = true;
+                        SumTime = TimeSpan.Zero;
+
+                    }
+                    else stringTraveling = "Available for travel";
+
+
+                }
+            }
+        }
          
          public Drivers(string num1)//constructor
         {
             name = num1;
             id = r.Next(100000000, 1000000000);
             inTraveling = false;
-            sumTime = TimeSpan.Zero; 
+            sumTime = TimeSpan.Zero;
+            stringTraveling = "Available for travel";
 
         }
         public Drivers()//constructor
@@ -78,6 +111,7 @@ namespace doNet5781_03B_4789_9647
             name = "There no name";
             id = r.Next(100000000, 1000000000);
             inTraveling = false;
+            stringTraveling = "Available for travel";
             sumTime = TimeSpan.Zero;
         }
 

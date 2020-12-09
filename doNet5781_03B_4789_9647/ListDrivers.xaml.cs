@@ -22,7 +22,7 @@ namespace doNet5781_03B_4789_9647
     public partial class ListDrivers : Window
     {
         private ObservableCollection<Drivers> driverBus= new ObservableCollection<Drivers>() ;
-
+        private ObservableCollection<Bus> buses = new ObservableCollection<Bus>();
         public ListDrivers()
         {
             InitializeComponent();
@@ -30,11 +30,12 @@ namespace doNet5781_03B_4789_9647
 
         }
 
-        public ListDrivers(ObservableCollection<Drivers> drivers)
+        public ListDrivers(ObservableCollection<Drivers> drivers, ObservableCollection<Bus>egged)
         {
             InitializeComponent();
             allDriver.ItemsSource = drivers;
-          
+            buses = egged;
         }
+
     }
 }

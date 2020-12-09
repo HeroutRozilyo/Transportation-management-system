@@ -513,7 +513,7 @@ namespace doNet5781_03B_4789_9647
             if (driverOfBus.SumTime.TotalSeconds >= 72)//take a break//////////////
             {
                 driverOfBus.InTraveling = true;
-                driverOfBus.SumTime = TimeSpan.Zero;
+               
             }
 
         }

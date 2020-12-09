@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="ListDrivers" Height="450" Width="800">
     <Grid Margin="0,0,0,4.667" Background="#FFE7F6F5">
-        
+
         <Grid.RowDefinitions>
             <RowDefinition Height="47*"/>
             <RowDefinition Height="374*"/>
@@ -21,16 +21,32 @@
 
         <Grid Name="MainGrid" Grid.ColumnSpan="2" Margin="-1,2,1.333,76" Grid.RowSpan="2" RenderTransformOrigin="0.5,0.5">
 
-            <ListView x:Name="allDriver" HorizontalAlignment="Left" Height="279" Margin="183,49,0,0" VerticalAlignment="Top" Width="433">
+            <ListView x:Name="allDriver" HorizontalAlignment="Left" Height="279" Margin="30,49,0,0" VerticalAlignment="Top" Width="753">
                 <ListView.View>
-                    
-                <GridView x:Name="aaa">
+
+                    <GridView x:Name="aaa">
 
                         <GridViewColumn Header="Name" Width="120" DisplayMemberBinding="{Binding Name}"/>
-                      
-                    </GridView>                  
+                        <GridViewColumn Header="ID" Width="120" DisplayMemberBinding="{Binding Id}"/>
+                        <GridViewColumn Header="Status Driver" Width="120" DisplayMemberBinding="{Binding StringTraveling}"/>
+                        <GridViewColumn Header="Total driving time" Width="120" DisplayMemberBinding="{Binding SumTime}"/>
+                        <GridViewColumn Width="120">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <ProgressBar x:Name="resultprograssBar" Visibility="{Binding Path= visible}" Height="10" Width="100" HorizontalAlignment="center" VerticalAlignment="Bottom" Minimum="0" Maximum="100"  Value="{Binding work, UpdateSourceTrigger=PropertyChanged }" />
+
+                                    
+
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+
                 </ListView.View>
+                <TextBlock x:Name="textBlock" Height="100" TextWrapping="Wrap" Text="TextBlock" Width="100"/>
+
             </ListView>
+
         </Grid>
 
     </Grid>

@@ -71,7 +71,7 @@
 
 
 		private void ListDriver_Click(object sender, RoutedEventArgs e) //in order to shoe details on the bus
-		{			wnd1 = new ListDrivers(drivers);
+		{			wnd1 = new ListDrivers(drivers,egged);
 
 
 			bool? result = wnd1.ShowDialog();
