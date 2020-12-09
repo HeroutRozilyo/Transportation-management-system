@@ -74,12 +74,17 @@ namespace doNet5781_03B_4789_9647
             }
         }
         private string stringTraveling;
+
         public string StringTraveling
         {
             get { return stringTraveling; }
             set
             {
-                if (inTraveling) stringTraveling = "In Travelling";
+                if (inTraveling)
+                {
+                    stringTraveling = "In Travelling";
+                    //worker.RunWorkerAsync(12);
+                }
                 else
                 {
                     if (SumTime.TotalSeconds >= 72)//take a break//////////////
@@ -115,5 +120,144 @@ namespace doNet5781_03B_4789_9647
             sumTime = TimeSpan.Zero;
         }
 
+
+        //public int start
+        //{
+
+        //    get
+        //    {
+        //        worker.RunWorkerAsync(12);
+        //        return 1;
+        //    }
+        //}
+
+
+
+
+
+
+
+
+
+
+        //public bool isTimerRun;
+        //public event PropertyChangedEventHandler PropertyChanged;
+
+
+        //private string _timeleft;
+        //public string Time_left
+        //{
+
+        //    get
+        //    {
+        //        return _timeleft;
+        //    }
+        //    set
+        //    {
+        //        _timeleft = value;
+        //        if (PropertyChanged != null)
+        //            PropertyChanged(this, new PropertyChangedEventArgs("Time_left"));
+
+
+        //    }
+        //}
+
+        //private int _work;
+        //public int work
+        //{
+        //    get
+        //    {
+        //        return _work;
+        //    }
+        //    set
+        //    {
+        //        _work = value;
+        //        if (PropertyChanged != null)
+        //            PropertyChanged(this, new PropertyChangedEventArgs("work"));
+
+        //    }
+
+        //}
+        //public bool Enable;
+        //public bool enable
+        //{
+        //    get { return Enable; }
+        //    set
+        //    {
+        //        Enable = value;
+        //        if (PropertyChanged != null)
+        //        {
+        //            PropertyChanged(this, new PropertyChangedEventArgs("enable"));
+        //        }
+
+        //    }
+        //}
+
+        //private string visibility;
+        //public string visible
+        //{
+        //    get
+        //    {
+        //        return visibility;
+        //    }
+        //    set
+        //    {
+        //        visibility = value;
+        //        if (PropertyChanged != null)
+        //            PropertyChanged(this, new PropertyChangedEventArgs("visible"));
+
+        //    }
+
+        //}
+
+
+        //BackgroundWorker worker = new BackgroundWorker();
+
+
+
+        //int timeToEndWork;
+
+        //private void Worker_DoWork(object sender, DoWorkEventArgs e)
+        //{
+        //    enable = false;
+        //    int length = (int)e.Argument;
+        //    timeToEndWork = length;
+        //    isTimerRun = true;
+
+        //    visible = "Visible";
+
+        //    for (int i = 1; i <= (length + 1); i++)
+        //    {
+
+        //        Thread.Sleep(1000);
+        //        worker.ReportProgress(i * 100 / length);
+
+        //    }
+        //}
+
+
+        //private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        //{
+        //    work = (int)e.ProgressPercentage;
+        //    Time_left = timeToEndWork + "s";
+        //    timeToEndWork--;
+
+
+
+        //}
+
+        //private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        //{
+
+        //    isTimerRun = false;
+          
+        //    work = 0;
+        //    Time_left = "";
+        //    timeToEndWork = 0;
+        //    enable = true;
+        //    visible = "Hidden";
+                  
+
+        //}
     }
 }

@@ -23,20 +23,27 @@ namespace doNet5781_03B_4789_9647
     {
         private ObservableCollection<Drivers> driverBus= new ObservableCollection<Drivers>() ;
         private ObservableCollection<Bus> buses = new ObservableCollection<Bus>();
-       // private Bus bbus;
+        private Bus bbus;
 
         public ListDrivers()
         {
             InitializeComponent();
-            //allDriver.ItemsSource = drivers;
+           
 
         }
 
-        //public ListDrivers(Bus bus)
-        //{
-        //    this.bbus = bus;
+        public ListDrivers(Bus bus)
+        {
+            this.bbus = bus;
+            int i;
+            for (i=0;i<10; i++)
+            {
+                if (bbus.NameDriver == driverBus[i].Name)
+                    break;
+            }
+       //   int a=  driverBus[i].start;
 
-        //}
+        }
 
         public ListDrivers(ObservableCollection<Drivers> drivers, ObservableCollection<Bus>egged)
         {
@@ -44,6 +51,15 @@ namespace doNet5781_03B_4789_9647
             allDriver.ItemsSource = drivers;
             buses = egged;
         }
+
+     
+
+
+
+
+
+
+
 
         private void allDriver_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

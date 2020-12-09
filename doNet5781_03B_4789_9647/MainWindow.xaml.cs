@@ -273,7 +273,9 @@ namespace doNet5781_03B_4789_9647
 			} while (dr.InTraveling);
 			dr.InTraveling = true;
 			((sender as Button).DataContext as Bus).DriverOfBus = dr;
-			//wnd1 = new ListDrivers((sender as Button).DataContext as Bus);
+
+
+			wnd1 = new ListDrivers((sender as Button).DataContext as Bus);
 
 			allbuses.Items.Refresh();
 
