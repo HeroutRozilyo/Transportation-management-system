@@ -101,13 +101,26 @@
                         <GridViewColumn Width="110">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button  Content="Start Travel"  IsEnabled="{Binding enable}" Margin="0,0,0,0" VerticalAlignment="Center"  Width= "95" Click="Pick_Button_Click" FontFamily="Segoe Print" FontWeight="Bold" FontSize="14"   Background="#FF91D484" VerticalContentAlignment="Top" HorizontalContentAlignment="Center" HorizontalAlignment="Center">
+                                    <Button  Content="Start Travel"  Margin="0,0,0,0" VerticalAlignment="Center"  Width= "95" Click="Pick_Button_Click" FontFamily="Segoe Print" FontWeight="Bold" FontSize="14"   Background="#FF91D484" VerticalContentAlignment="Top" HorizontalContentAlignment="Center" HorizontalAlignment="Center">
                                         <Button.BorderBrush>
                                             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                                                 <GradientStop Color="Black" Offset="0"/>
                                                 <GradientStop Color="#FF140808" Offset="1"/>
                                             </LinearGradientBrush>
                                         </Button.BorderBrush>
+                                        <Button.Style>
+                                            <Style>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding enable}" Value="false">
+                                                        <Setter Property="Button.IsEnabled" Value="false"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding status}" Value="Unfit">
+                                                        <Setter Property="Button.IsEnabled" Value="false"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Button.Style>
+                                
                                     </Button>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>

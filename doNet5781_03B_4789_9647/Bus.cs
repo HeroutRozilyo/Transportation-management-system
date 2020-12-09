@@ -367,14 +367,15 @@ namespace doNet5781_03B_4789_9647
                 {
                     double time = 0;
                     int v = r.Next(20, 51); //velocitui of this bus
-                    double t = kmTravel / v; //time of this travel.This time is in hour
+                    double t = kmTravel / (v); //time of this travel.This time is in hour
 
-                    time = (int)(t / 3.6); //time travel at our program
-                    t = (int)(time / 60);
+                    time = t *0.1*60; //time travel at our program
+                    //t = (time / 60);
+                    //time = t * 0.1;
 
 
-                    worker.RunWorkerAsync((int)(v * kmTravel * 0.1));
-
+                    // worker.RunWorkerAsync((int)(v * kmTravel * 0.1));
+                    worker.RunWorkerAsync((int)time);
 
                     ///------------
                     ///update the new data
