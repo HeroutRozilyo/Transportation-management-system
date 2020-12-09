@@ -61,7 +61,7 @@ namespace doNet5781_03B_4789_9647
         }
 
 
-        //private void initBuses(List<Bus> egged)    //List<Bus> egged)
+     
         private void initBuses(ObservableCollection<Bus> egged)
         {
             int license1;
@@ -115,7 +115,6 @@ namespace doNet5781_03B_4789_9647
 
 
 
-        //private static bool findBuse(List<Bus> buses, int num)  //function that check if the require bus exist
         private static bool findBuse(ObservableCollection<Bus> buses, int num)
         {
             try
@@ -171,14 +170,18 @@ namespace doNet5781_03B_4789_9647
                     if(!findBuse(egged,temp1))
                         egged.Add(wnd.myBus);
                     else
-                        throw new Exception("The new licence is already exsis,\n please nter again number licence with 8 digite");
+                    {
+                       // throw new Exception("The new licence is already exsis,\n please nter again number licence with 8 digite");
+                        throw new ArgumentException("The new licence is already exsis,\n please nter again number licence with 8 digite");
+                    }
 
 
 
 
                 }
             }
-            catch (Exception messege)
+          //  catch (Exception messege)
+          catch(ArgumentException messege)
             {
              
 
