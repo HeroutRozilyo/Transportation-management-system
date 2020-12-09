@@ -22,13 +22,14 @@ namespace doNet5781_03B_4789_9647
     public partial class ListDrivers : Window
     {
         private ObservableCollection<Drivers> driverBus= new ObservableCollection<Drivers>() ;
-        private ObservableCollection<Bus> buses = new ObservableCollection<Bus>();
+        //private ObservableCollection<Bus> buses = new ObservableCollection<Bus>();
        // private Bus bbus;
 
         public ListDrivers()
         {
             InitializeComponent();
             //allDriver.ItemsSource = drivers;
+            allDriver.Items.Refresh();
 
         }
 
@@ -38,16 +39,23 @@ namespace doNet5781_03B_4789_9647
 
         //}
 
-        public ListDrivers(ObservableCollection<Drivers> drivers, ObservableCollection<Bus>egged)
+        public ListDrivers(ObservableCollection<Drivers> drivers /*ObservableCollection<Bus>egged*/)
         {
             InitializeComponent();
             allDriver.ItemsSource = drivers;
-            buses = egged;
+            //buses = egged;
+            allDriver.Items.Refresh();
         }
 
         private void allDriver_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            allDriver.Items.Refresh();
+        }
 
+        private void TakeAbreak_Click(object sender, RoutedEventArgs e)
+        {
+            ((sender as Button).DataContext as Drivers).TakeBreak();
+           allDriver.Items.Refresh();
         }
     }
 }

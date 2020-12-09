@@ -55,6 +55,12 @@ namespace doNet5781_03B_4789_9647
 
 
 		private ObservableCollection<Bus> egged = new ObservableCollection<Bus>();
+		public ObservableCollection<Bus> Egged
+        {
+			get { return egged; }
+			set{;
+				}
+        }
 		private ObservableCollection<Drivers> drivers = new ObservableCollection<Drivers>();
 
 
@@ -306,10 +312,11 @@ namespace doNet5781_03B_4789_9647
 
 		private void ListDriver_Click(object sender, RoutedEventArgs e) //in order to shoe details on the bus
 		{
-			wnd1 = new ListDrivers(drivers,egged);
+			wnd1 = new ListDrivers(drivers/*,egged*/);
 
 
 			bool? result = wnd1.ShowDialog();
+			allbuses.Items.Refresh();
 
 
 		}
