@@ -172,7 +172,7 @@
             </TextBlock.RenderTransform><Run Text="In a middle of "/><Run FlowDirection="RightToLeft" Text=" "/><Run Text="  a ride"/></TextBlock>
         <TextBlock HorizontalAlignment="Left" Margin="10,137.333,0,164" TextWrapping="Wrap" Background="#FFB7797B" Width="79"  TextAlignment="Center" FontFamily="Segoe Print" FontSize="10" Text="In treatment" Grid.Row="1" LineHeight="16" RenderTransformOrigin="0.557,0.81" />
         <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="10,158.333,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Not working properly" VerticalAlignment="Top" Background="#FFC3B8B8" FontFamily="Segoe Print" FontSize="10" TextAlignment="Center" Width="79"/>
-        <!--<Button x:Name="ListDriversButtom" Grid.ColumnSpan="2" Content="Button" HorizontalAlignment="Left" Margin="213,280.333,0,0" Grid.Row="1" VerticalAlignment="Top" Width="90" Height="35" Click="ListDriver_Click"/>-->
+        <Button x:Name="ListDriversButtom" Grid.ColumnSpan="2" Content="Button" HorizontalAlignment="Left" Margin="213,280.333,0,0" Grid.Row="1" VerticalAlignment="Top" Width="90" Height="35" Click="ListDriver_Click"/>
 
 
 

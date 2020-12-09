@@ -6,7 +6,27 @@
         xmlns:local="clr-namespace:doNet5781_03B_4789_9647"
         mc:Ignorable="d"
         Title="ListDrivers" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+    <Grid Margin="0,0,0,4.667" Background="#FFE7F6F5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="47*"/>
+            <RowDefinition Height="374*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="220*"/>
+            <ColumnDefinition Width="419*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid>
+            <ListView x:Name="allDriver" HorizontalAlignment="Left" Height="100" Margin="207,290,0,0" VerticalAlignment="Top" Width="433">
+                <ListView.View>
+                    <GridView>
+
+                        <GridViewColumn Header="Name" Width="120" DisplayMemberBinding="{Binding NameDriver}"/>
+                        <GridViewColumn/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
+        </Grid>
 </Window>

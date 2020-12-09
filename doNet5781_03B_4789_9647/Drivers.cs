@@ -14,6 +14,12 @@ namespace doNet5781_03B_4789_9647
 {
     public class Drivers
     {
+        private TimeSpan sumTime;
+        public TimeSpan SumTime
+        {
+            get { return sumTime; }
+            set { sumTime = value; }
+        }
         static Random r = new Random();
         private string name;
         private bool inTraveling;
@@ -61,6 +67,7 @@ namespace doNet5781_03B_4789_9647
             name = num1;
             id = r.Next(100000000, 1000000000);
             inTraveling = false;
+            sumTime = TimeSpan.Zero; 
 
         }
         public Drivers()//constructor
@@ -68,7 +75,7 @@ namespace doNet5781_03B_4789_9647
             name = "There no name";
             id = r.Next(100000000, 1000000000);
             inTraveling = false;
-
+            sumTime = TimeSpan.Zero;
         }
 
     }
