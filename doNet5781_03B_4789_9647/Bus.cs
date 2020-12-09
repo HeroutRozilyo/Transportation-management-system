@@ -28,6 +28,8 @@ namespace doNet5781_03B_4789_9647
         private const int MAX_KM = 20000;
         private const int FULLTANK = 1200;
         int timeToEndWork;
+        public int TimeToEndWork
+        { get { return timeToEndWork; } set { } }
 
         private Drivers driverOfBus;
         public Drivers DriverOfBus
@@ -38,8 +40,8 @@ namespace doNet5781_03B_4789_9647
         
         public string NameDriver 
         {
-            get { return driverOfBus.Name; }
-            set { this.driverOfBus.Name = value;
+            get { return driverOfBus.Name1; }
+            set { this.driverOfBus.Name1 = value;
                 if (PropertyChanged != null)
                     PropertyChanged(this, new PropertyChangedEventArgs("NameDriver"));
             }

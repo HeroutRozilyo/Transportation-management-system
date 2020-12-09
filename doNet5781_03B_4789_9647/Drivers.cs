@@ -12,8 +12,9 @@ using System.Diagnostics;
 
 namespace doNet5781_03B_4789_9647
 {
-    public class Drivers
+    public class Drivers//MainWindow
     {
+        BackgroundWorker worker = new BackgroundWorker();
         private TimeSpan sumTime;
         public TimeSpan SumTime
         {
@@ -38,22 +39,27 @@ namespace doNet5781_03B_4789_9647
             {
                 return id;
             }
-            
-               
+
+
             set
             {
-                if (value.ToString().Length == 9) 
+                if (value.ToString().Length == 9)
                     id = value;
                 else
                     throw new ArgumentOutOfRangeException("id not valid");
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("Id"));
 
             }
         }
-        public string Name
+        public string Name1
         {
             get { return name; }
             set
-            { name = value; }
+            { name = value;
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("Name1"));
+            }
         }
         private bool InBreak;
         public bool inBreak/////////////////////
@@ -62,29 +68,47 @@ namespace doNet5781_03B_4789_9647
             set
             {
                 InBreak = value;
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("inBreak"));
+
             }
         }
 
-        public bool InTraveling
+        public void TakeBreak()
+        {
+
+            SumTime = TimeSpan.Zero;
+            worker.RunWorkerAsync(144);
+            inBreak = true;
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs("inBreak"));
+
+        }
+   
+    public bool InTraveling
         {
             get { return inTraveling; }
             set
             {
                 inTraveling = value;
+                if (InTraveling)
+                {
+
+                }
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("InTravelling"));
             }
         }
-        private string stringTraveling;
 
+
+
+        private string stringTraveling;
         public string StringTraveling
         {
             get { return stringTraveling; }
             set
             {
-                if (inTraveling)
-                {
-                    stringTraveling = "In Travelling";
-                    //worker.RunWorkerAsync(12);
-                }
+                if (inTraveling) stringTraveling = "In Travelling";
                 else
                 {
                     if (SumTime.TotalSeconds >= 72)//take a break//////////////
@@ -92,7 +116,7 @@ namespace doNet5781_03B_4789_9647
 
                         stringTraveling = "In Break";
                         inBreak = true;
-                        SumTime = TimeSpan.Zero;
+                      
 
                     }
                     else stringTraveling = "Available for travel";
@@ -101,14 +125,21 @@ namespace doNet5781_03B_4789_9647
                 }
             }
         }
-         
-         public Drivers(string num1)//constructor
+
+        public Drivers(string num1)//constructor
         {
             name = num1;
             id = r.Next(100000000, 1000000000);
             inTraveling = false;
             sumTime = TimeSpan.Zero;
             stringTraveling = "Available for travel";
+            worker.DoWork += Worker_DoWork;
+            worker.ProgressChanged += Worker_ProgressChanged;
+            worker.RunWorkerCompleted += Worker_RunWorkerCompleted;
+
+            worker.WorkerReportsProgress = true;
+            worker.WorkerSupportsCancellation = true;
+            visible = "Hidden";
 
         }
         public Drivers()//constructor
@@ -118,146 +149,130 @@ namespace doNet5781_03B_4789_9647
             inTraveling = false;
             stringTraveling = "Available for travel";
             sumTime = TimeSpan.Zero;
+            worker.DoWork += Worker_DoWork;
+            worker.ProgressChanged += Worker_ProgressChanged;
+            worker.RunWorkerCompleted += Worker_RunWorkerCompleted;
+
+            worker.WorkerReportsProgress = true;
+            worker.WorkerSupportsCancellation = true;
+            visible = "Hidden";
         }
 
 
-        //public int start
-        //{
+       
+        int timeToEndWork;
 
-        //    get
-        //    {
-        //        worker.RunWorkerAsync(12);
-        //        return 1;
-        //    }
-        //}
-
-
+        public bool isTimerRun;
+        private string visible;
+        public string Visible
+        {
+            get { return visible; }
+            set { visible = value; }
 
 
+        }
 
-
-
+        //private string visible;
 
 
 
-        //public bool isTimerRun;
-        //public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
 
 
-        //private string _timeleft;
-        //public string Time_left
-        //{
+        private string _timeleft;
+        public string Time_left
+        {
 
-        //    get
-        //    {
-        //        return _timeleft;
-        //    }
-        //    set
-        //    {
-        //        _timeleft = value;
-        //        if (PropertyChanged != null)
-        //            PropertyChanged(this, new PropertyChangedEventArgs("Time_left"));
-
-
-        //    }
-        //}
-
-        //private int _work;
-        //public int work
-        //{
-        //    get
-        //    {
-        //        return _work;
-        //    }
-        //    set
-        //    {
-        //        _work = value;
-        //        if (PropertyChanged != null)
-        //            PropertyChanged(this, new PropertyChangedEventArgs("work"));
-
-        //    }
-
-        //}
-        //public bool Enable;
-        //public bool enable
-        //{
-        //    get { return Enable; }
-        //    set
-        //    {
-        //        Enable = value;
-        //        if (PropertyChanged != null)
-        //        {
-        //            PropertyChanged(this, new PropertyChangedEventArgs("enable"));
-        //        }
-
-        //    }
-        //}
-
-        //private string visibility;
-        //public string visible
-        //{
-        //    get
-        //    {
-        //        return visibility;
-        //    }
-        //    set
-        //    {
-        //        visibility = value;
-        //        if (PropertyChanged != null)
-        //            PropertyChanged(this, new PropertyChangedEventArgs("visible"));
-
-        //    }
-
-        //}
+            get
+            {
+                return _timeleft;
+            }
+            set
+            {
+                _timeleft = value;
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("Time_left"));
 
 
-        //BackgroundWorker worker = new BackgroundWorker();
+            }
+        }
+
+        private int _work;
+        public int work
+        {
+            get
+            {
+                return _work;
+            }
+            set
+            {
+                _work = value;
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("work"));
+
+            }
+
+        }
 
 
 
-        //int timeToEndWork;
+        private void Worker_DoWork(object sender, DoWorkEventArgs e)
+        {
 
-        //private void Worker_DoWork(object sender, DoWorkEventArgs e)
-        //{
-        //    enable = false;
-        //    int length = (int)e.Argument;
-        //    timeToEndWork = length;
-        //    isTimerRun = true;
+            //enable = false;
+            int length = (int)e.Argument;
+            timeToEndWork = length;
+            isTimerRun = true;
 
-        //    visible = "Visible";
+            visible = "Visible";
 
-        //    for (int i = 1; i <= (length + 1); i++)
-        //    {
+            for (int i = 1; i <= (length + 1); i++)
+            {
 
-        //        Thread.Sleep(1000);
-        //        worker.ReportProgress(i * 100 / length);
+                Thread.Sleep(1000);
+                worker.ReportProgress(i * 100 / length);
 
-        //    }
-        //}
-
-
-        //private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
-        //{
-        //    work = (int)e.ProgressPercentage;
-        //    Time_left = timeToEndWork + "s";
-        //    timeToEndWork--;
+            }
+        }
 
 
+        private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            work = (int)e.ProgressPercentage;
+            Time_left = timeToEndWork + "s";
+            timeToEndWork--;
 
-        //}
 
-        //private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        //{
 
-        //    isTimerRun = false;
+        }
+
+        private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+
+            isTimerRun = false;
+           
+            work = 0;
+            Time_left = "";
+            timeToEndWork = 0;
           
-        //    work = 0;
-        //    Time_left = "";
-        //    timeToEndWork = 0;
-        //    enable = true;
-        //    visible = "Hidden";
-                  
+            visible = "Hidden";
+            InTraveling = false;
+            inBreak = false;
+            if (SumTime.TotalSeconds >= 72)//take a break//////////////
+            {
+                InTraveling = true;
+                inBreak = true;
 
-        //}
+            }
+
+        }
+
+
+
+
+
     }
+
 }
+
+    
