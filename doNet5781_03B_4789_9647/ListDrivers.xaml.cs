@@ -86,5 +86,16 @@ namespace doNet5781_03B_4789_9647
            
             allDriver.Items.Refresh();
         }
+
+        private void adddriver_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void close_Click(object sender, RoutedEventArgs e)
+        {
+            this.close();
+
+        }
     }
 }
