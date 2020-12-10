@@ -31,7 +31,7 @@ namespace doNet5781_03B_4789_9647
 
 
         private void TextBox_OnlyNumbers_PreviewKeyDown(object sender, KeyEventArgs e)
-            {
+        { 
             TextBox text = sender as TextBox;
             if (text == null) return;
             if (e == null) return;
