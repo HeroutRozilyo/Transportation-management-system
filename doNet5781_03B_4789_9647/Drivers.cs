@@ -212,7 +212,12 @@ namespace doNet5781_03B_4789_9647
         public string Visible
         {
             get { return visible; }
-            set { visible = value; }
+            set
+            {
+                visible = value;
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("Visible"));
+            }
 
 
         }
@@ -300,7 +305,7 @@ namespace doNet5781_03B_4789_9647
             Time_left = "";
             timeToEndWork = 0;
 
-            visible = "Hidden";
+            Visible = "Hidden";
             InTraveling = false;
             inBreak = false;
             if (SumTime.TotalSeconds >= 72)//take a break//////////////
