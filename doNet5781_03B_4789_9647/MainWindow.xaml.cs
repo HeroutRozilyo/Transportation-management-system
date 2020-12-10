@@ -77,7 +77,7 @@ namespace doNet5781_03B_4789_9647
 			}
 			catch (Exception)
 			{
-				MessageBox.Show("a");
+				MessageBox.Show("");
 			}
 
 
@@ -90,7 +90,7 @@ namespace doNet5781_03B_4789_9647
 		{
 			int license1;
 			DateTime date1;
-
+			
 
 			for (int i = 0; i < 10; i++) ///restart 10 buses
 			{
@@ -142,9 +142,9 @@ namespace doNet5781_03B_4789_9647
 
 			List<string> names = new List<string>();
 
-			string num1 = "Eli Coen", num2 = "Oria Bat", num3 = "Oria Bat", num4 = "Itay Ofir", num5 = "Shirel David", num6 = "Noam Oved", num7 = "David Levi", num8 = "Yeonatan Snir", num9 = "Eitan Malka", num10 = "Beny Don";
+			string num1 = "Eli Coen", num2 = "Oria Bat", num3 = "Benel Tavori", num4 = "Itay Ofir", num5 = "Shirel David", num6 = "Noam Oved", num7 = "David Levi", num8 = "Yeonatan Snir", num9 = "Eitan Malka", num10 = "Beny Don";
 			names.Add(num1); names.Add(num2); names.Add(num3); names.Add(num4); names.Add(num5); names.Add(num6); names.Add(num7); names.Add(num8); names.Add(num9); names.Add(num10);
-			for (int i = 0; i < 10; i++)
+			for (int i = 0; i <10; i++)
 			{
 				Drivers temp = new Drivers(names[i]);
 				drivers.Add(temp);
@@ -248,7 +248,7 @@ namespace doNet5781_03B_4789_9647
 						{
 
 							((sender as Button).DataContext as Bus).Refuelling(); //gp to refulling the bus
-
+							lineData.DriverOfBus = "";
 							allbuses.Items.Refresh();
 						}
 
@@ -273,7 +273,7 @@ namespace doNet5781_03B_4789_9647
 			Drivers dr = new Drivers();
 			try
 			{
-
+				string name = "";
 				for (i = 0; i < drivers.Count; i++)
 				{
 					//int num1 = r.Next(0, drivers.Count());
@@ -283,12 +283,17 @@ namespace doNet5781_03B_4789_9647
 				}
 				if (i == drivers.Count )
 					throw new ArgumentException("No drivers available, please wait and try again ");
-				drivers[i].InTraveling = true;
-				((sender as Button).DataContext as Bus).DriverOfBus = dr;
+				//drivers[i].InTraveling = true;
+				name = drivers[i].Name1;
+				((sender as Button).DataContext as Bus).DriverOfBus = dr.Name1;
 				StartingTravel smalla = new StartingTravel((sender as Button).DataContext as Bus);
 
 
 				smalla.ShowDialog();
+			
+				drivers[i].Name1 = name;
+				
+				drivers[i].SumTime += TimeSpan.FromSeconds(((sender as Button).DataContext as Bus).timeTravel);
 
 
 			}

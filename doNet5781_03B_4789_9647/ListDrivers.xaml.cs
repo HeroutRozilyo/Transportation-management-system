@@ -67,9 +67,13 @@ namespace doNet5781_03B_4789_9647
                     {
                         int num = buses[i].helptime;
                         driverBus[j].help(num);
+                        
+                        //driverBus[j].SumTime+= TimeSpan.FromSeconds(buses[i].timeTravel);
+                        allDriver.Items.Refresh();
                     }
                 }
             }
+            allDriver.Items.Refresh();
         }
 
 

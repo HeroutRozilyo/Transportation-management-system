@@ -31,8 +31,8 @@ namespace doNet5781_03B_4789_9647
         public int TimeToEndWork
         { get { return timeToEndWork; } set { } }
 
-        private Drivers driverOfBus;
-        public Drivers DriverOfBus
+        private string driverOfBus;
+        public string DriverOfBus
         {
             get { return driverOfBus; }
             set { driverOfBus = value; }
@@ -40,23 +40,23 @@ namespace doNet5781_03B_4789_9647
         
         public string NameDriver 
         {
-            get { return driverOfBus.Name1; }
-            set { this.driverOfBus.Name1 = value;
+            get { return driverOfBus; }
+            set { this.driverOfBus = value;
                 if (PropertyChanged != null)
                     PropertyChanged(this, new PropertyChangedEventArgs("NameDriver"));
             }
         }
-        public bool driverWorking;
-        public bool DriverWorking
-        {
-            get { return driverOfBus.InTraveling; }
-            set
-            {
-                this.driverOfBus.InTraveling = value;
-                if (PropertyChanged != null)
-                    PropertyChanged(this, new PropertyChangedEventArgs("DriverWorking"));
-            }
-        }
+        //public bool driverWorking;
+        //public bool DriverWorking
+        //{
+        //    get { return driverOfBus.InTraveling; }
+        //    set
+        //    {
+        //        this.driverOfBus.InTraveling = value;
+        //        if (PropertyChanged != null)
+        //            PropertyChanged(this, new PropertyChangedEventArgs("DriverWorking"));
+        //    }
+        //}
 
 
         //variable that connect to the vasibility op prograss ber at main window xamle 
@@ -103,7 +103,7 @@ namespace doNet5781_03B_4789_9647
             worker.WorkerReportsProgress = true;
             worker.WorkerSupportsCancellation = true;
             visible = "Hidden";
-            driverOfBus = new Drivers("name");
+            driverOfBus =("");
         }
 
         public Bus() //defult constructor
@@ -122,7 +122,7 @@ namespace doNet5781_03B_4789_9647
             strstartingdate = String.Format("{0}/{1}/{2}", StartingDate.Day, StartingDate.Month, StartingDate.Year);
             enable = true;
             visible = "Hidden";
-            driverOfBus = new Drivers("name");
+            driverOfBus = ("");
         }
 
 
@@ -390,6 +390,18 @@ namespace doNet5781_03B_4789_9647
         
         
         }
+        private int TimeTravel;
+        public int timeTravel
+        {
+            get
+            {
+                return TimeTravel;
+            }
+            set
+            {
+                TimeTravel = value;
+            }
+        }
 
 
 
@@ -410,9 +422,9 @@ namespace doNet5781_03B_4789_9647
 
                     time = t *0.1*60; //time travel at our program
 
-         
 
 
+                    timeTravel = (int)time;
                     // worker.RunWorkerAsync((int)(v * kmTravel * 0.1));
                     worker.RunWorkerAsync((int)time);
 
@@ -423,7 +435,7 @@ namespace doNet5781_03B_4789_9647
                     km += kmTravel;
                     status = (Status)1;
                     fuelldelek = false;
-                    driverOfBus.SumTime += TimeSpan.FromSeconds(time);
+                    //driverOfBus.SumTime += TimeSpan.FromSeconds(time);
                     return true;
                 }
                 else //if he cant take this travel
@@ -523,12 +535,13 @@ namespace doNet5781_03B_4789_9647
             timeToEndWork = 0;
             enable = true;
             visible = "Hidden";
-            driverOfBus.InTraveling = false;
-            if (driverOfBus.SumTime.TotalSeconds >= 72)//take a break//////////////
-            {
-                driverOfBus.InTraveling = true;
+           // driverOfBus.InTraveling = false;
+            //if (driverOfBus.SumTime.TotalSeconds >= 72)//take a break//////////////
+            //{
+            //    driverOfBus.inBreak = true;
                
-            }
+            //}
+            driverOfBus = "";
 
         }
 
