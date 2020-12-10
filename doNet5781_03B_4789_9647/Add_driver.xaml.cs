@@ -18,10 +18,41 @@ namespace doNet5781_03B_4789_9647
     /// Interaction logic for Add_driver.xaml
     /// </summary>
     public partial class Add_driver : Window
+        
     {
+        public Drivers driver;
         public Add_driver()
         {
+
             InitializeComponent();
+        driver = new Drivers();
+        this.DataContext = NEwDriver;
+    }
+        public Drivers NEwDriver
+        {
+
+            get
+            {
+                return driver;
+            }
+
+        }
+
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Drivers driver = new Drivers(int.Parse(this.Idnum.Text), this.NameDriverTe.Text);
+                this.DialogResult = true;
+                this.Close();
+
+            }
+            catch (Exception)/////
+            {
+
+                MessageBox.Show("The new licence is not valid,\n please enter again number licence with 8 digite", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+
+            }
         }
     }
 }

@@ -167,6 +167,23 @@ namespace doNet5781_03B_4789_9647
             enable = true;
 
         }
+        public Drivers(int d,string num1)//constructor
+        {
+            name = num1;
+            id = d;
+            inTraveling = false;
+            sumTime = TimeSpan.Zero;
+            stringTraveling = "Available for travel";
+            worker.DoWork += Worker_DoWork;
+            worker.ProgressChanged += Worker_ProgressChanged;
+            worker.RunWorkerCompleted += Worker_RunWorkerCompleted;
+
+            worker.WorkerReportsProgress = true;
+            worker.WorkerSupportsCancellation = true;
+            visible = "Hidden";
+            enable = true;
+
+        }
         public Drivers()//constructor
         {
             name = "There no name";

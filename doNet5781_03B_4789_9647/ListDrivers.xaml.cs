@@ -93,39 +93,35 @@ namespace doNet5781_03B_4789_9647
         private void adddriver_Click(object sender, RoutedEventArgs e)
         {
 
-            //try
-            //{
-            //    wnd = new a();
+            try
+            {
+                 Add_driver wnd = new Add_driver();
 
 
-            //    bool? result = wnd.ShowDialog();
-            //    if (result == true)
-            //    {
-            //        // in order to check if this bus licence exsis already
-            //        int temp1;
-            //        a = a.Replace("-", string.Empty); //To remove the hyphens from our license number
-            //        int.TryParse(a, out temp1);
-
-                  
-            //        else
-            //        {
-                        
-            //            throw new ArgumentException("The new licence is already exsis,\n please nter again number licence with 8 digite");
-            //        }
+                bool? result = wnd.ShowDialog();
+                if (result == true)
+                {
 
 
 
 
-            //    }
-            //}
-           
-            //catch (ArgumentException messege)
-            //{
+                    driverBus.Add(wnd.NEwDriver);
+                    this.allDriver.Items.Refresh();
+                    
 
 
-            //    MessageBox.Show(messege.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
 
-            //}
+
+                }
+            }
+
+            catch (ArgumentException messege)
+            {
+
+
+                MessageBox.Show(messege.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+
+            }
 
 
 
