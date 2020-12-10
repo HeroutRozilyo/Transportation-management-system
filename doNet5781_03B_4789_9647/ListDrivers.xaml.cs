@@ -59,8 +59,11 @@ namespace doNet5781_03B_4789_9647
                 {
                     if(buses[i].NameDriver==driverBus[j].Name1)
                     {
-                        int num = buses[i].helptime;
-                        driverBus[j].help(num);
+                        if (driverBus[j].isTimerRun)
+                        {
+                            int num = buses[i].helptime;
+                            driverBus[j].help(num);
+                        }      
                         
                       
                         allDriver.Items.Refresh();

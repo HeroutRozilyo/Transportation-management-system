@@ -256,6 +256,8 @@ namespace doNet5781_03B_4789_9647
 		{
 			int i = 0;
 			Drivers dr = new Drivers();
+			
+
 			try
 			{
 				string name = "";
@@ -268,18 +270,30 @@ namespace doNet5781_03B_4789_9647
 				}
 				if (i == drivers.Count )
 					throw new ArgumentException("No drivers available, please wait and try again ");
+				
 				drivers[i].InTraveling = true;
+				if (wnd1 == null)
+					wnd1 = new ListDrivers(drivers, egged);
+				else
+				{
+					wnd1.allDriver.Items.Refresh();
+					wnd1.check();
+					
+				}
 				name = drivers[i].Name1;
 				((sender as Button).DataContext as Bus).DriverOfBus = dr.Name1;
 				StartingTravel smalla = new StartingTravel((sender as Button).DataContext as Bus);
 
 
 				smalla.ShowDialog();
-			
+				
+				wnd1.allDriver.Items.Refresh();
+				wnd1.check();
 				drivers[i].Name1 = name;
 				
-				drivers[i].SumTime += TimeSpan.FromSeconds(((sender as Button).DataContext as Bus).timeTravel);
 
+				drivers[i].SumTime += TimeSpan.FromSeconds(((sender as Button).DataContext as Bus).timeTravel);
+				
 
 			}
 			catch (ArgumentException a)
@@ -289,8 +303,9 @@ namespace doNet5781_03B_4789_9647
 		
 
 			allbuses.Items.Refresh();
+			wnd1.allDriver.Items.Refresh();
 
-			
+
 		}
 
 
@@ -319,9 +334,17 @@ namespace doNet5781_03B_4789_9647
 
 		private void ListDriver_Click(object sender, RoutedEventArgs e) //in order to shoe details on the bus
 		{
+			if(wnd1==null)
 			wnd1 = new ListDrivers(drivers,egged);
+			else
+			{
+				wnd1.allDriver.Items.Refresh();
+				wnd1.check();
 
-			wnd1.ShowDialog();
+			}
+
+			wnd1.Show();
+			wnd1.allDriver.Items.Refresh();
 			allbuses.Items.Refresh();
 
 
