@@ -269,19 +269,39 @@ namespace doNet5781_03B_4789_9647
 
 		private void Pick_Button_Click(object sender, RoutedEventArgs e) //to starting travel
 		{
-			StartingTravel smalla = new StartingTravel((sender as Button).DataContext as Bus);
+			int i = 0;
 			Drivers dr = new Drivers();
-			smalla.ShowDialog();
-			do
+			try
 			{
-				int num1 = r.Next(0, drivers.Count());
-				dr = drivers[num1];
-			} while (dr.InTraveling);
-			dr.InTraveling = true;
-			((sender as Button).DataContext as Bus).DriverOfBus = dr;
+
+				for (i = 0; i < drivers.Count; i++)
+				{
+					//int num1 = r.Next(0, drivers.Count());
+					dr = drivers[i];
+					if (!dr.InTraveling) break;
+					
+				}
+				if (i == drivers.Count )
+					throw new ArgumentException("No drivers available, please wait and try again ");
+				drivers[i].InTraveling = true;
+				((sender as Button).DataContext as Bus).DriverOfBus = dr;
+				StartingTravel smalla = new StartingTravel((sender as Button).DataContext as Bus);
 
 
-		//	wnd1 = new ListDrivers((sender as Button).DataContext as Bus);
+				smalla.ShowDialog();
+
+
+			}
+			catch (ArgumentException a)
+			{
+				MessageBox.Show(a.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+			}
+			
+
+
+
+
+			//	wnd1 = new ListDrivers((sender as Button).DataContext as Bus);
 
 			allbuses.Items.Refresh();
 
