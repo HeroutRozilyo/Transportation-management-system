@@ -278,13 +278,16 @@ namespace doNet5781_03B_4789_9647
 					} while (drivers[i].InTraveling);
                 }
 				
-				name = drivers[i].Name1;
+				name = drivers[i].Name1; /////////////////////
 			
 				StartingTravel smalla = new StartingTravel((sender as Button).DataContext as Bus);
 
 				bool ? result = smalla.ShowDialog();
 				if(result==true)
                 {
+
+					TimeSpan a= drivers[i].SumTime + TimeSpan.FromSeconds(((sender as Button).DataContext as Bus).timeTravel);
+					
 					//drivers[i].InTraveling = ((sender as Button).DataContext as Bus).isTimerRun;
 					((sender as Button).DataContext as Bus).DriverOfBus = dr.Name1;
 					if (wnd1 != null) wnd1.allDriver.Items.Refresh();
