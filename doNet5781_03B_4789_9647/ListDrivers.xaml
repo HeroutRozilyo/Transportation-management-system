@@ -36,7 +36,7 @@
                         <GridViewColumn Width="120">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <ProgressBar x:Name="resultprograssBar"  Visibility="{Binding Path= Visible}" Height="10" Width="100" HorizontalAlignment="center"  Minimum="0" Maximum="100"  Value="{Binding help, UpdateSourceTrigger=PropertyChanged }" />
+                                    <ProgressBar x:Name="resultprograssBar"  Visibility="{Binding Path= Visible}" Height="10" Width="100" HorizontalAlignment="center"  Minimum="0" Maximum="100"  Value="{Binding work, UpdateSourceTrigger=PropertyChanged }" />
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
