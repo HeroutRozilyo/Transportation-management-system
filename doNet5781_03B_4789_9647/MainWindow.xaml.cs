@@ -41,11 +41,13 @@ namespace doNet5781_03B_4789_9647
 
 		private ObservableCollection<Bus> egged = new ObservableCollection<Bus>();
 		public ObservableCollection<Bus> Egged
-        {
+		{
 			get { return egged; }
-			set{;
-				}
-        }
+			set
+			{
+				;
+			}
+		}
 		private ObservableCollection<Drivers> drivers = new ObservableCollection<Drivers>();
 
 
@@ -75,7 +77,7 @@ namespace doNet5781_03B_4789_9647
 		{
 			int license1;
 			DateTime date1;
-			
+
 
 			for (int i = 0; i < 10; i++) ///restart 10 buses
 			{
@@ -129,7 +131,7 @@ namespace doNet5781_03B_4789_9647
 
 			string num1 = "Eli Coen", num2 = "Oria Bat", num3 = "Benel Tavori", num4 = "Itay Ofir", num5 = "Shirel David", num6 = "Noam Oved", num7 = "David Levi", num8 = "Yeonatan Snir", num9 = "Eitan Malka", num10 = "Beny Don";
 			names.Add(num1); names.Add(num2); names.Add(num3); names.Add(num4); names.Add(num5); names.Add(num6); names.Add(num7); names.Add(num8); names.Add(num9); names.Add(num10);
-			for (int i = 0; i <10; i++)
+			for (int i = 0; i < 10; i++)
 			{
 				Drivers temp = new Drivers(names[i]);
 				drivers.Add(temp);
@@ -256,8 +258,6 @@ namespace doNet5781_03B_4789_9647
 		{
 			int i = 0;
 			Drivers dr = new Drivers();
-			
-
 			try
 			{
 				string name = "";
@@ -266,44 +266,31 @@ namespace doNet5781_03B_4789_9647
 					//int num1 = r.Next(0, drivers.Count());
 					dr = drivers[i];
 					if (!dr.InTraveling) break;
-					
+
 				}
-				if (i == drivers.Count )
+				if (i == drivers.Count)
 					throw new ArgumentException("No drivers available, please wait and try again ");
-				
 				drivers[i].InTraveling = true;
-				if (wnd1 == null)
-					wnd1 = new ListDrivers(drivers, egged);
-				else
-				{
-					wnd1.allDriver.Items.Refresh();
-					wnd1.check();
-					
-				}
 				name = drivers[i].Name1;
 				((sender as Button).DataContext as Bus).DriverOfBus = dr.Name1;
 				StartingTravel smalla = new StartingTravel((sender as Button).DataContext as Bus);
 
 
 				smalla.ShowDialog();
-				
-				wnd1.allDriver.Items.Refresh();
-				wnd1.check();
+
 				drivers[i].Name1 = name;
-				
 
 				drivers[i].SumTime += TimeSpan.FromSeconds(((sender as Button).DataContext as Bus).timeTravel);
-				
+
 
 			}
 			catch (ArgumentException a)
 			{
 				MessageBox.Show(a.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
 			}
-		
+
 
 			allbuses.Items.Refresh();
-			wnd1.allDriver.Items.Refresh();
 
 
 		}
@@ -334,17 +321,9 @@ namespace doNet5781_03B_4789_9647
 
 		private void ListDriver_Click(object sender, RoutedEventArgs e) //in order to shoe details on the bus
 		{
-			if(wnd1==null)
-			wnd1 = new ListDrivers(drivers,egged);
-			else
-			{
-				wnd1.allDriver.Items.Refresh();
-				wnd1.check();
+			wnd1 = new ListDrivers(drivers, egged);
 
-			}
-
-			wnd1.Show();
-			wnd1.allDriver.Items.Refresh();
+			wnd1.ShowDialog();
 			allbuses.Items.Refresh();
 
 
@@ -352,6 +331,3 @@ namespace doNet5781_03B_4789_9647
 
 	}
 }
-
-
-

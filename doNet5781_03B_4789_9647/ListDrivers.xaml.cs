@@ -97,7 +97,7 @@ namespace doNet5781_03B_4789_9647
 
         private void close_Click(object sender, RoutedEventArgs e)
         {
-            this.close();
+            this.Close();
 
         }
     }
