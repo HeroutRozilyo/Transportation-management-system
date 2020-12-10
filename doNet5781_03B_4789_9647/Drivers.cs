@@ -126,12 +126,8 @@ namespace doNet5781_03B_4789_9647
             set
             {
                 inTraveling = value;
-                if (InTraveling)
-                {
-
-                }
                 if (PropertyChanged != null)
-                    PropertyChanged(this, new PropertyChangedEventArgs("InTravelling"));
+                    PropertyChanged(this, new PropertyChangedEventArgs("InTraveling"));
             }
         }
 
