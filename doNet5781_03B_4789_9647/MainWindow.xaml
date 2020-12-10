@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:doNet5781_03B_4789_9647"
         mc:Ignorable="d"
-        Title="Bus Company" Height="400" Width="700" Icon="Bus11.ico">
+        Title="Bus Company" Height="400" Width="800" Icon="Bus11.ico">
 
     <Grid Margin="0,0,-133.667,4.667" Background="#FFE7F6F5" HorizontalAlignment="Left" Width="827">
         <Grid.RowDefinitions>
@@ -37,7 +37,7 @@
                 <RowDefinition Height="2*"/>
             </Grid.RowDefinitions>
 
-            <Button x:Name="addBus" Content="Add Bus" Margin="96,0,0,-63.333" Width="72" Click="addBus_Click" BorderBrush="#FF040404" HorizontalAlignment="Left" VerticalAlignment="Bottom" HorizontalContentAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" VerticalContentAlignment="Center" Padding="-6,1,1,1" FontFamily="Segoe Print" FontSize="14" RenderTransformOrigin="0.5,0.5" Background="#FFF7C3B0" OpacityMask="Black" FontStyle="Italic" FontWeight="Bold" Grid.Row="2" Height="30"  />
+            <Button x:Name="addBus" Content="Add Bus" Margin="711,0,0,183.667" Width="72" Click="addBus_Click" BorderBrush="#FF040404" HorizontalAlignment="Left" VerticalAlignment="Bottom" HorizontalContentAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" VerticalContentAlignment="Center" Padding="-6,1,1,1" FontFamily="Segoe Print" FontSize="14" RenderTransformOrigin="0.5,0.5" Background="#FFF7C3B0" OpacityMask="Black" FontStyle="Italic" FontWeight="Bold" Grid.Row="1" Height="30"  />
 
             <ListView x:Name="allbuses" Margin="96,4.333,119,-15.333" PreviewMouseDoubleClick="doubleflick"  Background="WhiteSmoke" Grid.Row="1" FontFamily="Segoe Print" FontSize="14" Grid.RowSpan="2" RenderTransformOrigin="0.5,0.5" BorderBrush="#FF0D0D0D" >
                 <ListView.Resources>
@@ -179,7 +179,7 @@
             </TextBlock.RenderTransform><Run Text="In a middle of "/><Run FlowDirection="RightToLeft" Text=" "/><Run Text="  a ride"/></TextBlock>
         <TextBlock HorizontalAlignment="Left" Margin="10,137.333,0,164" TextWrapping="Wrap" Background="#FFB7797B" Width="79"  TextAlignment="Center" FontFamily="Segoe Print" FontSize="10" Text="In treatment" Grid.Row="1" LineHeight="16" RenderTransformOrigin="0.557,0.81" />
         <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="10,158.333,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Not working properly" VerticalAlignment="Top" Background="#FFC3B8B8" FontFamily="Segoe Print" FontSize="10" TextAlignment="Center" Width="79"/>
-        <Button x:Name="ListDriversButtom" Grid.ColumnSpan="2" Content="Button" HorizontalAlignment="Left" Margin="213,280.333,0,0" Grid.Row="1" VerticalAlignment="Top" Width="90" Height="35" Click="ListDriver_Click"/>
+        <Button x:Name="ListDriversButtom" Content="The List &#xD;&#xA;of Driver" HorizontalAlignment="Left" Margin="426.333,77.333,0,0" Grid.Row="1" VerticalAlignment="Top" Width="71" Height="41" Click="ListDriver_Click" Grid.Column="1" RenderTransformOrigin="0.566,0.238" Background="#FFF7C3B0" FontFamily="Segoe Print" FontStyle="Italic" FontWeight="Bold" BorderBrush="#FF090808"/>
 
 
 

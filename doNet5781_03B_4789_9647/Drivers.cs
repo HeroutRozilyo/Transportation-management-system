@@ -94,6 +94,7 @@ namespace doNet5781_03B_4789_9647
 
         public void TakeBreak()
         {
+            
             enable = false;
              SumTime = TimeSpan.Zero;
             StringTraveling = "In Break";
@@ -102,7 +103,9 @@ namespace doNet5781_03B_4789_9647
             InTraveling = true;
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs("InTraveling"));
-          
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs("SumTime"));
+
         }
 
 
@@ -304,10 +307,14 @@ namespace doNet5781_03B_4789_9647
             Visible = "Hidden";
             InTraveling = false;
             inBreak = false;
-            if (SumTime.TotalSeconds >= 72)//take a break//////////////
+            if (SumTime.TotalSeconds >= 10)//take a break//////////////
             {
+                BackgroundWorker worker = new BackgroundWorker();
                 TakeBreak();
                 inBreak = true;
+                Visible = "Visible";
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("inBreak"));
 
             }
             else 

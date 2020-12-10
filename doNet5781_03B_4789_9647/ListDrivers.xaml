@@ -24,10 +24,13 @@
                     <Style TargetType="ListViewItem">
                         <Style.Triggers>
                             <DataTrigger Binding= "{Binding InTraveling}" Value="true">
-                                <Setter Property="Background" Value="#FFBAD89D"/>
+                                <Setter Property="Background" Value="#FF9CB5E8"/>
                             </DataTrigger>
                             <DataTrigger Binding= "{Binding inBreak}" Value="true">
-                                <Setter Property="Background" Value="#FF9CB5E8"/>
+                                <Setter Property="Background" Value="#FFC3B8B8"/>
+                            </DataTrigger>
+                            <DataTrigger Binding= "{Binding StringTraveling}" Value="Available for travel">
+                                <Setter Property="Background" Value="#FFBAD89D"/>
                             </DataTrigger>
 
                         </Style.Triggers>
