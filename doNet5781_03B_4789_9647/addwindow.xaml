@@ -6,11 +6,14 @@
         xmlns:local="clr-namespace:doNet5781_03B_4789_9647"
         
         mc:Ignorable="d"
-        Title="Add New BUS" Height="239.5" Width="355" Icon="Bus11.ico">
+        Title="Add New BUS" Height="239.5" Width="355" Icon="icon.jpg">
 
 
 
-    <Grid Background="#FDEEFDFF" Margin="0,0,3,3">
+    <Grid Margin="0,0,3,3">
+        <Grid.Background>
+            <ImageBrush ImageSource="backround.jpg"/>
+        </Grid.Background>
         <Grid x:Name="dataBus"  HorizontalAlignment="Left" Margin="18,36,0,0" Width="436">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="21.167"/>
@@ -24,10 +27,10 @@
                 <RowDefinition Height="56*"/>
                 <RowDefinition Height="3*"/>
                 <RowDefinition Height="34*"/>
- 
+
                 <RowDefinition Height="34*"/>
             </Grid.RowDefinitions>
-            
+
             <Label Content="startingDate :" Grid.Column="2" HorizontalAlignment="Left" Margin="9.667,5,0,4.667" VerticalAlignment="Center" Height="35" Width="151" FontFamily="Rockwell" FontWeight="Bold" FontSize="18" Grid.ColumnSpan="2"/>
             <DatePicker x:Name="lastTreatDatePicker" HorizontalAlignment="Left" Margin="0.333,12,0,9.667" SelectedDate="{Binding StartingDate , Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Height="23" Width="118" Grid.Column="3" FontFamily="Rockwell"/>
             <Label Content="License:" Grid.Column="2" HorizontalAlignment="Left" Margin="9.667,6.333,0,15.667" VerticalAlignment="Center" Height="34" Width="80" FontFamily="Rockwell" FontSize="18" FontWeight="Bold" RenderTransformOrigin="0.56,-1.737" Grid.Row="1" />
@@ -46,7 +49,7 @@
 
 
         </Grid>
-        <Button x:Name="okey" Content="ADD BUS" Margin="275,144,0,0" VerticalAlignment="Top" Height="32" Click="okey_Click" IsDefault="True" Background="#FF5B7D43" FontFamily="Segoe Print" FontWeight="Bold" RenderTransformOrigin="0.002,0.505" HorizontalAlignment="Left" Width="60" FontSize="11">
+        <Button x:Name="okey" Content="ADD BUS" Margin="275,144,0,0" VerticalAlignment="Top" Height="32" Click="okey_Click" IsDefault="True" Background="#FFA1B593" FontFamily="Segoe Print" FontWeight="Bold" RenderTransformOrigin="0.002,0.505" HorizontalAlignment="Left" Width="60" FontSize="11" BorderBrush="#FF0C0909">
             <Button.Style>
                 <Style>
                     <Style.Triggers>
@@ -58,7 +61,7 @@
                 </Style>
             </Button.Style>
         </Button>
-        <Button x:Name="cancle" Content="CANCLE" HorizontalAlignment="Left" Margin="18,144,0,0" VerticalAlignment="Top" Width="60" Height="32" Click="cancle_Click" Background="#FF810808" FontFamily="Segoe Print" FontWeight="Bold" Foreground="#FFEFECEC" FontSize="11"/>
+        <Button x:Name="cancle" Content="CANCLE" HorizontalAlignment="Left" Margin="18,144,0,0" VerticalAlignment="Top" Width="60" Height="32" Click="cancle_Click" Background="#FFF7C3B0" FontFamily="Segoe Print" FontWeight="Bold" Foreground="#FF080707" FontSize="11"/>
 
 
     </Grid>

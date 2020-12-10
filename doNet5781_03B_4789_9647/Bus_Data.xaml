@@ -5,11 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:doNet5781_03B_4789_9647"
         mc:Ignorable="d"
-        Title="Bus Data" Height="346.001" Width="350" Loaded="Window_Loaded_1" Icon="Bus11.ico">
+        Title="Bus Data" Height="346.001" Width="350" Loaded="Window_Loaded_1" Icon="icon.jpg">
     <Window.Resources>
         <CollectionViewSource x:Key="busViewSource" d:DesignSource="{d:DesignInstance {x:Type local:Bus}, CreateList=True}"/>
     </Window.Resources>
-    <Grid Background="#FFEEFDFF" Margin="0,0,0.333,-46">
+    <Grid Margin="0,0,0.333,-46">
+        <Grid.Background>
+            <ImageBrush ImageSource="backround.jpg"/>
+        </Grid.Background>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="6*"/>
             <ColumnDefinition Width="26*"/>
@@ -41,8 +44,8 @@
             <Label Content="status:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,3,0,3" Grid.Row="6" VerticalAlignment="Center" Height="26" Width="54" FontFamily="Rockwell" FontSize="14"/>
 
         </Grid>
-        <Button Content="SEND TO TREATMENT" HorizontalAlignment="Left" Margin="130,247,0,0" VerticalAlignment="Top" Width="160" Grid.Column="2" Click="treat_Click" Background="#FFFFA983" FontFamily="Segoe Print" IsEnabled="{Binding enable}"/>
-        <Button Content="SEND TO REFUEL"  HorizontalAlignment="Left" Margin="6,247,0,0" VerticalAlignment="Top" Width="140" Grid.Column="1" Click="fuel_Click" Background="#FFEDE88B" FontFamily="Segoe Print" Grid.ColumnSpan="2">
+        <Button Content="SEND TO TREATMENT" HorizontalAlignment="Left" Margin="130,247,0,0" VerticalAlignment="Top" Width="160" Grid.Column="2" Click="treat_Click" Background="#FFD89193" FontFamily="Segoe Print" IsEnabled="{Binding enable}"/>
+        <Button Content="SEND TO REFUEL"  HorizontalAlignment="Left" Margin="6,247,0,0" VerticalAlignment="Top" Width="140" Grid.Column="1" Click="fuel_Click" Background="#FFF0F1B2" FontFamily="Segoe Print" Grid.ColumnSpan="2">
             <Button.Style>
                 <Style>
                     <Style.Triggers>

@@ -58,7 +58,6 @@
     <Compile Include="Add_driver.xaml.cs">
       <DependentUpon>Add_driver.xaml</DependentUpon>
     </Compile>
-    <Compile Include="BusCompany.cs" />
     <Compile Include="Bus_Data.xaml.cs">
       <DependentUpon>Bus_Data.xaml</DependentUpon>
     </Compile>
@@ -66,7 +65,6 @@
     <Compile Include="ListDrivers.xaml.cs">
       <DependentUpon>ListDrivers.xaml</DependentUpon>
     </Compile>
-    <Compile Include="prograss.cs" />
     <Compile Include="StartingTravel.xaml.cs">
       <DependentUpon>StartingTravel.xaml</DependentUpon>
     </Compile>
@@ -136,6 +134,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Bus11.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="backround.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icon.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

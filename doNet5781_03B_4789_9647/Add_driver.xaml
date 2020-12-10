@@ -5,7 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:doNet5781_03B_4789_9647"
         mc:Ignorable="d"
-        Title="Add_driver" Height="218" Width="294.667" Background="#FDEEFDFF">
+        Title="Add_driver" Height="218" Width="294.667" Icon="icon.jpg">
+    <Window.Background>
+        <ImageBrush ImageSource="backround.jpg"/>
+    </Window.Background>
     <Grid Margin="45,0,-7,-0.333">
         <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="-31,65,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="22" Width="89" FontFamily="Rockwell"><Run FontWeight="Bold" FontSize="14" Text="Number "/><Run Text="ID:"/></TextBlock>
 
@@ -34,7 +37,7 @@
         </TextBox>
 
         <TextBlock x:Name="Name" HorizontalAlignment="Left" Margin="-31,103,0,0" TextWrapping="Wrap" Text="Name:" VerticalAlignment="Top" Width="62" FontFamily="Rockwell" FontSize="14" FontWeight="Bold"/>
-        <Button x:Name="button" Content="Add Driver"  Margin="150,147,0,0" VerticalAlignment="Top" Height="32" Click="AddDriver_click" IsDefault="True" Background="#FF5B7D43" FontFamily="Segoe Print" FontWeight="Bold" RenderTransformOrigin="0.002,0.505" HorizontalAlignment="Left" Width="77" FontSize="11">
+        <Button x:Name="button" Content="Add Driver"  Margin="150,147,0,0" VerticalAlignment="Top" Height="32" Click="AddDriver_click" IsDefault="True" Background="#FFA1B593" FontFamily="Segoe Print" FontWeight="Bold" RenderTransformOrigin="0.002,0.505" HorizontalAlignment="Left" Width="77" FontSize="11" BorderBrush="#FF141313">
             <Button.Style>
                 <Style>
                     <Style.Triggers>
