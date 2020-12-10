@@ -74,11 +74,27 @@ namespace doNet5781_03B_4789_9647
             }
         }
 
+        public bool Enable;
+        public bool enable
+        {
+            get { return Enable; }
+            set
+            {
+                Enable = value;
+                if (PropertyChanged != null)
+                {
+                    PropertyChanged(this, new PropertyChangedEventArgs("enable"));
+                }
+
+            }
+        }
+
+
 
         public void TakeBreak()
         {
-
-            SumTime = TimeSpan.Zero;
+            enable = false;
+             SumTime = TimeSpan.Zero;
             StringTraveling = "In Break";
             worker.RunWorkerAsync(144);
             inBreak = true;
@@ -91,9 +107,9 @@ namespace doNet5781_03B_4789_9647
 
         public void help(int a)
         {
-
+            enable = false;
             StringTraveling = "In Travelling";
-            worker.RunWorkerAsync(a+1);
+            worker.RunWorkerAsync(a);
             InTraveling = true;
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs("InTraveling"));
@@ -148,6 +164,7 @@ namespace doNet5781_03B_4789_9647
             worker.WorkerReportsProgress = true;
             worker.WorkerSupportsCancellation = true;
             visible = "Hidden";
+            enable = true;
 
         }
         public Drivers()//constructor
@@ -164,6 +181,7 @@ namespace doNet5781_03B_4789_9647
             worker.WorkerReportsProgress = true;
             worker.WorkerSupportsCancellation = true;
             visible = "Hidden";
+            enable = true;
         }
 
 
@@ -258,8 +276,8 @@ namespace doNet5781_03B_4789_9647
         {
 
             isTimerRun = false;
-           
-            work = 0;
+            enable = true;
+             work = 0;
             Time_left = "";
             timeToEndWork = 0;
 
