@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:doNet5781_03B_4789_9647"
         mc:Ignorable="d"
-        Title="Bus Company" Height="400" Width="700" Icon="Bus11.ico">
+        Title="Bus Company" Height="400" Width="800" Icon="Bus11.ico">
 
     <Grid Margin="0,0,-133.667,4.667" Background="#FFE7F6F5" HorizontalAlignment="Left" Width="827">
         <Grid.RowDefinitions>
