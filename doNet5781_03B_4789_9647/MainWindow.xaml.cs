@@ -283,12 +283,14 @@ namespace doNet5781_03B_4789_9647
 				StartingTravel smalla = new StartingTravel((sender as Button).DataContext as Bus);
 
 
-				smalla.ShowDialog();
 
-				drivers[i].Name1 = name;
-
-				drivers[i].SumTime += TimeSpan.FromSeconds(((sender as Button).DataContext as Bus).timeTravel);
-
+				bool ? result = smalla.ShowDialog();
+				if(result==true)
+                {
+					drivers[i].Name1 = name;
+					drivers[i].SumTime += TimeSpan.FromSeconds(((sender as Button).DataContext as Bus).timeTravel);
+				}
+               
 
 			}
 			catch (ArgumentException a)

@@ -43,10 +43,6 @@ namespace dotNet5781_03b_4789_9647
 
             }
 
-
-
-
-
         }
 
         private void InitializeComponent()

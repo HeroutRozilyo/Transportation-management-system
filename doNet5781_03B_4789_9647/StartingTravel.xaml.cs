@@ -86,12 +86,13 @@ namespace doNet5781_03B_4789_9647
 
                     time = TimeSpan.FromSeconds(6 * t); //time travel at our program
 
-                    //this.DialogResult = true;
+                    this.DialogResult = true;
 
                     
                 }
                 else
                 {
+                    this.DialogResult = false;
                     if (temp.Fuel - a <= 0)
                     {
                         MessageBox.Show("There is not enough fuel of the bus for this travel ", "ERROR FUEL", MessageBoxButton.OK, MessageBoxImage.Information);
