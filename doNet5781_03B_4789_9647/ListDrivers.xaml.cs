@@ -22,6 +22,7 @@ namespace doNet5781_03B_4789_9647
     public partial class ListDrivers : Window
     {
         private ObservableCollection<Drivers> driverBus= new ObservableCollection<Drivers>() ;
+
         private ObservableCollection<Bus> buses = new ObservableCollection<Bus>();
       
 
@@ -35,14 +36,7 @@ namespace doNet5781_03B_4789_9647
 
 
 
-        //public ListDrivers(ObservableCollection<Drivers> drivers /*ObservableCollection<Bus>egged*/)
-        //{
-        //    InitializeComponent();
-        //    allDriver.ItemsSource = drivers;
-        //    //buses = egged;
-        //    allDriver.Items.Refresh();
-        //}
-
+        
 
         public ListDrivers(ObservableCollection<Drivers> drivers ,ObservableCollection<Bus>egged)
         {
@@ -68,10 +62,11 @@ namespace doNet5781_03B_4789_9647
                         int num = buses[i].helptime;
                         driverBus[j].help(num);
                         
-                        //driverBus[j].SumTime+= TimeSpan.FromSeconds(buses[i].timeTravel);
+                      
                         allDriver.Items.Refresh();
                     }
                 }
+                allDriver.Items.Refresh();
             }
             allDriver.Items.Refresh();
         }
@@ -88,7 +83,8 @@ namespace doNet5781_03B_4789_9647
         private void TakeAbreak_Click(object sender, RoutedEventArgs e)
         {
             ((sender as Button).DataContext as Drivers).TakeBreak();
-           allDriver.Items.Refresh();
+           
+            allDriver.Items.Refresh();
         }
     }
 }

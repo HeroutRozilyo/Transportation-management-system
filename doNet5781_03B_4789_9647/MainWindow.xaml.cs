@@ -21,21 +21,6 @@ using System.Diagnostics;
 namespace doNet5781_03B_4789_9647
 {
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	/// <summary>
 	/// Interaction logic for MainWindow.xaml
 	/// </summary>
@@ -283,7 +268,7 @@ namespace doNet5781_03B_4789_9647
 				}
 				if (i == drivers.Count )
 					throw new ArgumentException("No drivers available, please wait and try again ");
-				//drivers[i].InTraveling = true;
+				drivers[i].InTraveling = true;
 				name = drivers[i].Name1;
 				((sender as Button).DataContext as Bus).DriverOfBus = dr.Name1;
 				StartingTravel smalla = new StartingTravel((sender as Button).DataContext as Bus);
@@ -301,12 +286,7 @@ namespace doNet5781_03B_4789_9647
 			{
 				MessageBox.Show(a.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
 			}
-			
-
-
-
-
-			//	wnd1 = new ListDrivers((sender as Button).DataContext as Bus);
+		
 
 			allbuses.Items.Refresh();
 
@@ -339,11 +319,9 @@ namespace doNet5781_03B_4789_9647
 
 		private void ListDriver_Click(object sender, RoutedEventArgs e) //in order to shoe details on the bus
 		{
-			//wnd1 = new ListDrivers(drivers/*,egged*/);
-
 			wnd1 = new ListDrivers(drivers,egged);
 
-			wnd1.Show();
+			wnd1.ShowDialog();
 			allbuses.Items.Refresh();
 
 

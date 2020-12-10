@@ -520,7 +520,7 @@ namespace doNet5781_03B_4789_9647
             work = (int)e.ProgressPercentage;
             Time_left = timeToEndWork + "s";
             timeToEndWork--;
-            helptime = timeToEndWork-1;
+            helptime = timeToEndWork;
 
 
         }

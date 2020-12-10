@@ -21,28 +21,31 @@
 
         <Grid Name="MainGrid" Grid.ColumnSpan="2" Margin="-1,2,1.333,76" Grid.RowSpan="2" RenderTransformOrigin="0.5,0.5">
 
-            <ListView x:Name="allDriver" HorizontalAlignment="Left" Height="279" Margin="30,49,0,0" VerticalAlignment="Top" Width="753">
+            <ListView x:Name="allDriver" HorizontalAlignment="Left" Height="279" Margin="30,49,0,0" VerticalAlignment="Top" Width="753" >
                 <ListView.View>
 
                     <GridView x:Name="aaa">
+                
 
                         <GridViewColumn Header="Name" Width="120"  DisplayMemberBinding="{Binding Name1}"/>
                         <GridViewColumn Header="ID" Width="120" DisplayMemberBinding="{Binding Id}"/>
-                        <GridViewColumn Header="Status Driver" Width="120" DisplayMemberBinding="{Binding StringTraveling}"/>
+                        <GridViewColumn Header="Status Driver" Width="120" DisplayMemberBinding="{Binding StringTraveling}"  />
                         <GridViewColumn Header="Total driving time" Width="120" DisplayMemberBinding="{Binding SumTime}"/>
-                        <GridViewColumn Width="120">
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <ProgressBar x:Name="resultprograssBar"  Visibility="{Binding Path= Visible}" Height="10" Width="100" HorizontalAlignment="center"  Minimum="0" Maximum="100"  Value="{Binding work, UpdateSourceTrigger=PropertyChanged }" />
-
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
+                        
                         
                         <GridViewColumn Width="120">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                        <TextBlock x:Name="TimeTOend"   TextWrapping="Wrap"  VerticalAlignment="Center" Text="{Binding Path=Time_left}" />
+                                    <ProgressBar x:Name="resultprograssBar"  Visibility="{Binding Path= Visible}" Height="10" Width="100" HorizontalAlignment="center"  Minimum="0" Maximum="100"  Value="{Binding help, UpdateSourceTrigger=PropertyChanged }" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        
+                        
+                        <GridViewColumn Width="120">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock x:Name="TimeTOend"   TextWrapping="Wrap"  VerticalAlignment="Center" Text="{Binding Path=Time_left, UpdateSourceTrigger=PropertyChanged}" />
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
@@ -51,13 +54,11 @@
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <Button x:Name="TakeAbreak" Content="Button" Height="40" Width="75 " Click="TakeAbreak_Click"/>
-
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
 
-
-
+                       
 
 
 
@@ -66,7 +67,8 @@
 
 
                 </ListView.View>
-              
+               
+
 
 
             </ListView>

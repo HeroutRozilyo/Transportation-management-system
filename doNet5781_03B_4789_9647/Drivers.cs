@@ -74,6 +74,7 @@ namespace doNet5781_03B_4789_9647
             }
         }
 
+
         public void TakeBreak()
         {
 
@@ -81,15 +82,17 @@ namespace doNet5781_03B_4789_9647
             StringTraveling = "In Break";
             worker.RunWorkerAsync(144);
             inBreak = true;
+            InTraveling = true;
             if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs("inBreak"));
-
+                PropertyChanged(this, new PropertyChangedEventArgs("InTraveling"));
+          
         }
+
 
         public void help(int a)
         {
 
-              StringTraveling = "In Travelling";
+            StringTraveling = "In Travelling";
             worker.RunWorkerAsync(a+1);
             InTraveling = true;
             if (PropertyChanged != null)
@@ -123,21 +126,11 @@ namespace doNet5781_03B_4789_9647
             get { return stringTraveling; }
             set
             {
-                if (inTraveling) stringTraveling = "In Travelling";
-                else
-                {
-                    if (SumTime.TotalSeconds >= 72)//take a break//////////////
-                    {
 
-                        stringTraveling = "In Break";
-                        inBreak = true;
-                      
+                    stringTraveling = value;
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("StringTraveling"));
 
-                    }
-                    else stringTraveling = "Available for travel";
-
-
-                }
             }
         }
 
@@ -178,6 +171,7 @@ namespace doNet5781_03B_4789_9647
         int timeToEndWork;
 
         public bool isTimerRun;
+
         private string visible;
         public string Visible
         {
@@ -187,7 +181,6 @@ namespace doNet5781_03B_4789_9647
 
         }
 
-        //private string visible;
 
 
 
@@ -269,18 +262,18 @@ namespace doNet5781_03B_4789_9647
             work = 0;
             Time_left = "";
             timeToEndWork = 0;
-           
+
             visible = "Hidden";
             InTraveling = false;
             inBreak = false;
             if (SumTime.TotalSeconds >= 72)//take a break//////////////
             {
                 TakeBreak();
-
                 inBreak = true;
 
             }
-            else StringTraveling = "Available for travel";
+            else 
+                StringTraveling = "Available for travel";
 
         }
 
