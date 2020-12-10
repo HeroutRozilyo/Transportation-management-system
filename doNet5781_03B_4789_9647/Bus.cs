@@ -410,7 +410,7 @@ namespace doNet5781_03B_4789_9647
 
                     time = t *0.1*60; //time travel at our program
 
-                  //  helptime = (int)time;
+         
 
 
                     // worker.RunWorkerAsync((int)(v * kmTravel * 0.1));
@@ -434,7 +434,7 @@ namespace doNet5781_03B_4789_9647
             }
             else //if he cant travels
             {
-                //this.treatment();
+                
                 return false;
             }
 
