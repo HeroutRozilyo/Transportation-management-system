@@ -106,7 +106,7 @@ namespace doNet5781_03B_4789_9647
         }
 
 
-        public void help(int a)
+        public void help(int a)//send to prograss
         {
             enable = false;
             StringTraveling = "In Travelling";
@@ -274,6 +274,7 @@ namespace doNet5781_03B_4789_9647
             {
 
                 Thread.Sleep(1000);
+                if(length!=0)
                 worker.ReportProgress(i * 100 / length);
 
             }

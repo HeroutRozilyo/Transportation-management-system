@@ -47,7 +47,7 @@ namespace doNet5781_03B_4789_9647
 
 
 
-        public void check()
+        public void check()//find who the drivers for each bus
         {
             
             for(int i=0;i<buses.Count;i++)
@@ -146,7 +146,7 @@ namespace doNet5781_03B_4789_9647
 
         private void allDriver_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
         {
-
+            allDriver.Items.Refresh();
         }
     }
 }
