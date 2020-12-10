@@ -93,7 +93,7 @@ namespace doNet5781_03B_4789_9647
         {
 
             StringTraveling = "In Travelling";
-            worker.RunWorkerAsync(a+1);
+            worker.RunWorkerAsync(a);
             InTraveling = true;
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs("InTraveling"));
