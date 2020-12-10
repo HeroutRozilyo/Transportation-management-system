@@ -252,7 +252,7 @@ namespace doNet5781_03B_4789_9647
                         PropertyChanged(this, new PropertyChangedEventArgs("Km"));
                 }
                 else
-                    throw new ArgumentOutOfRangeException("KM must to be a positive number");
+                    throw new ArgumentException("KM must to be a positive number");
             }
         }
 
@@ -310,9 +310,9 @@ namespace doNet5781_03B_4789_9647
                 }
                 else
                 {
-
-                    ///throw new Exception("The new licence is not valid,\n please enter again number licence with 8 digite");
+                    if(StartingDate.Year>=2018)
                    throw new ArgumentException("The new licence is not valid,\n please enter again number licence with 8 digite");
+                    else throw new ArgumentException("The new licence is not valid,\n please enter again number licence with 7 digite");
                 }
             }
         }

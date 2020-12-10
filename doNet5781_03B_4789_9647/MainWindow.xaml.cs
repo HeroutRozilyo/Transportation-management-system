@@ -259,15 +259,24 @@ namespace doNet5781_03B_4789_9647
 			try
 			{
 				string name = "";
+				int g = 0;
 				for (i = 0; i < drivers.Count; i++)
 				{
 					dr = drivers[i];
-					if (!dr.InTraveling)
-						break;
+					if (dr.InTraveling)
+						g++;
 
 				}
-				if (i == drivers.Count)
+				if (g == drivers.Count)
 					throw new ArgumentException("No drivers available, please wait and try again ");
+				else
+                {
+					do
+					{
+						i = r.Next(0, drivers.Count());
+						dr = drivers[i];
+					} while (drivers[i].InTraveling);
+                }
 				drivers[i].InTraveling = true;
 				name = drivers[i].Name1;
 				((sender as Button).DataContext as Bus).DriverOfBus = dr.Name1;

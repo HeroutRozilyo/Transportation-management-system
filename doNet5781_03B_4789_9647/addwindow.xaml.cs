@@ -57,10 +57,10 @@ namespace doNet5781_03B_4789_9647
                 this.Close();
 
             }
-            catch (Exception)
+            catch (ArgumentException a)
             {
 
-                MessageBox.Show("The new licence is not valid,\n please enter again number licence with 8 digite", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(a.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
 
             }
 

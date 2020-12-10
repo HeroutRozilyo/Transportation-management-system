@@ -115,5 +115,23 @@ namespace doNet5781_03B_4789_9647
             e.Handled = true; //ignore this key. mark event as handled, will not be routed to other controls
             return;
         }
+
+        private void AddDriver_click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                driver = new Drivers(int.Parse(this.Idnum.Text),(this.Name.Text));
+                this.DialogResult = true;
+                this.Close();
+
+            }
+            catch (ArgumentException a)/////////////////////////////////אסור לזרוק ככהההה
+            {
+              
+                MessageBox.Show(a.Message,"ERROR",MessageBoxButton.OK,MessageBoxImage.Error);
+                
+            }
+
+        }
     }
 }

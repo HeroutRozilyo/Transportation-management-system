@@ -5,13 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:doNet5781_03B_4789_9647"
         mc:Ignorable="d"
-        Title="ListDrivers" Height="450" Width="800">
+        Title="ListDrivers" Height="374.456" Width="883.938">
     <Grid Margin="0,0,0,4.667" Background="#FFE7F6F5">
 
-        <Grid.RowDefinitions>
-            <RowDefinition Height="47*"/>
-            <RowDefinition Height="374*"/>
-        </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="220*"/>
@@ -19,22 +15,57 @@
         </Grid.ColumnDefinitions>
 
 
-        <Grid Name="MainGrid" Grid.ColumnSpan="2" Margin="-1,2,1.333,76" Grid.RowSpan="2" RenderTransformOrigin="0.5,0.5">
+        <Grid Name="MainGrid" Grid.ColumnSpan="2" Margin="-1,2,0,-0.334" RenderTransformOrigin="0.5,0.5" Background="#FDEEFDFF" HorizontalAlignment="Left" Width="856">
 
-          
 
-            <ListView x:Name="allDriver" HorizontalAlignment="Left" Height="279" Margin="30,49,0,0" VerticalAlignment="Top" Width="753" >
+
+            <ListView x:Name="allDriver" HorizontalAlignment="Left" Height="279" Margin="10,10,0,0" VerticalAlignment="Top" Width="804" RenderTransformOrigin="0.556,0.477" FontFamily="Segoe Print" SelectionChanged="allDriver_SelectionChanged_1" Background="#FDEEFDFF" BorderBrush="#FF060708" OpacityMask="#FF110C0C" Foreground="#FF131315" BorderThickness="1" >
+                <ListView.Resources>
+                    <Style TargetType="ListViewItem">
+                        <Style.Triggers>
+                            <DataTrigger Binding= "{Binding InTraveling}" Value="true">
+                                <Setter Property="Background" Value="#FFBAD89D"/>
+                            </DataTrigger>
+                            <DataTrigger Binding= "{Binding inBreak}" Value="true">
+                                <Setter Property="Background" Value="#FF9CB5E8"/>
+                            </DataTrigger>
+
+                        </Style.Triggers>
+                        <Style.Resources>
+                            <SolidColorBrush x:Key="t" Color="#FFF6F4DB"/>
+                        </Style.Resources>
+                    </Style>
+                </ListView.Resources>
+
                 <ListView.View>
 
                     <GridView x:Name="aaa">
-                
+
 
                         <GridViewColumn Header="Name" Width="120"  DisplayMemberBinding="{Binding Name1}"/>
                         <GridViewColumn Header="ID" Width="120" DisplayMemberBinding="{Binding Id}"/>
-                        <GridViewColumn Header="Status Driver" Width="120" DisplayMemberBinding="{Binding StringTraveling}"  />
-                        <GridViewColumn Header="Total driving time" Width="120" DisplayMemberBinding="{Binding SumTime}"/>
-                        
-                        
+                        <GridViewColumn Header="Status Driver" Width="140" DisplayMemberBinding="{Binding StringTraveling}"  />
+                        <GridViewColumn Header="Total driving time" Width="118" DisplayMemberBinding="{Binding SumTime}"  />
+                        <GridViewColumn Width="110">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button x:Name="TakeAbreak" Content="Take a break" Height="40" Width="90 "  Click="TakeAbreak_Click" BorderBrush="#FF0D0C0C" Background="#FFEFF5C2" FontSize="10">
+                                        <Button.Style>
+                                            <Style>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding enable}" Value="false">
+                                                        <Setter Property="Button.IsEnabled" Value="false"/>
+                                                    </DataTrigger>
+
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Button.Style>
+                                    </Button>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
+
                         <GridViewColumn Width="120">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
@@ -42,9 +73,9 @@
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        
-                        
-                        <GridViewColumn Width="120">
+
+
+                        <GridViewColumn Width="50">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock x:Name="TimeTOend"   TextWrapping="Wrap"  VerticalAlignment="Center" Text="{Binding Path=Time_left, UpdateSourceTrigger=PropertyChanged}" />
@@ -52,26 +83,9 @@
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
 
-                        <GridViewColumn Width="100">
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                  <Button x:Name="TakeAbreak" Content="Button" Height="40" Width="75 " Click="TakeAbreak_Click">
-                                    <Button.Style>
-                                        <Style>
-                                            <Style.Triggers>
-                                                <DataTrigger Binding="{Binding enable}" Value="false">
-                                                    <Setter Property="Button.IsEnabled" Value="false"/>
-                                                </DataTrigger>
-                                              
-                                            </Style.Triggers>
-                                        </Style>
-                                    </Button.Style>
-                                  </Button>
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
 
-                       
+
+
 
 
 
@@ -80,15 +94,15 @@
 
 
                 </ListView.View>
-               
+
 
 
 
             </ListView>
 
         </Grid>
-        <Button x:Name="adddriver" Content="Add Driver" HorizontalAlignment="Left" Margin="85,312.333,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75" Click="adddriver_Click"/>
-        <Button x:Name="close" Grid.ColumnSpan="2" Content="Close" HorizontalAlignment="Left" Margin="238,312.333,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75" Click="close_Click"/>
+        <Button x:Name="adddriver" Content="Add Driver" HorizontalAlignment="Left" Margin="415.667,305,0,0" VerticalAlignment="Top" Width="75" Click="adddriver_Click" FontFamily="Segoe Print" BorderBrush="#FF100E0E" Background="#FF5B7D43" Grid.Column="1"/>
+        <Button x:Name="close" Content="Close" HorizontalAlignment="Left" Margin="10,305,0,0" VerticalAlignment="Top" Width="75" Click="close_Click"  Background="#FFA83C3C" FontFamily="Segoe Print"/>
 
     </Grid>
 </Window>

@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Bus Company" Height="400" Width="700" Icon="Bus11.ico">
 
-    <Grid Margin="0,0,0,4.667" Background="#FFE7F6F5">
+    <Grid Margin="0,0,-133.667,4.667" Background="#FFE7F6F5" HorizontalAlignment="Left" Width="827">
         <Grid.RowDefinitions>
             <RowDefinition Height="47*"/>
             <RowDefinition Height="374*"/>
@@ -18,7 +18,7 @@
             <ColumnDefinition Width="419*"/>
         </Grid.ColumnDefinitions>
 
-        <Grid Name="MainGrid" Grid.ColumnSpan="2" Margin="-1,2,1.333,76" Grid.RowSpan="2" RenderTransformOrigin="0.5,0.5">
+        <Grid Name="MainGrid" Grid.ColumnSpan="2" Margin="-1,2,4.667,71" Grid.RowSpan="2" RenderTransformOrigin="0.5,0.5">
             <Grid.Background>
                 <ImageBrush/>
             </Grid.Background>
@@ -32,14 +32,14 @@
             </Grid.RenderTransform>
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="3*"/>
-                <RowDefinition Height="50*"/>
-                <RowDefinition Height="5*"/>
+                <RowDefinition Height="15*"/>
+                <RowDefinition Height="276*"/>
+                <RowDefinition Height="2*"/>
             </Grid.RowDefinitions>
 
-            <Button x:Name="addBus" Content="Add Bus" Margin="96,0,0,-57" Width="72" Click="addBus_Click" BorderBrush="#FF040404" HorizontalAlignment="Left" VerticalAlignment="Bottom" HorizontalContentAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" VerticalContentAlignment="Center" Padding="-6,1,1,1" FontFamily="Segoe Print" FontSize="14" RenderTransformOrigin="0.5,0.5" Background="#FFF7C3B0" OpacityMask="Black" FontStyle="Italic" FontWeight="Bold" Grid.Row="2"  />
+            <Button x:Name="addBus" Content="Add Bus" Margin="96,0,0,-63.333" Width="72" Click="addBus_Click" BorderBrush="#FF040404" HorizontalAlignment="Left" VerticalAlignment="Bottom" HorizontalContentAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" VerticalContentAlignment="Center" Padding="-6,1,1,1" FontFamily="Segoe Print" FontSize="14" RenderTransformOrigin="0.5,0.5" Background="#FFF7C3B0" OpacityMask="Black" FontStyle="Italic" FontWeight="Bold" Grid.Row="2" Height="30"  />
 
-            <ListView x:Name="allbuses" HorizontalAlignment="Left" Margin="96,4.333,0,-9" Width="587" PreviewMouseDoubleClick="doubleflick"  Background="WhiteSmoke" Grid.Row="1" FontFamily="Segoe Print" FontSize="14" Grid.RowSpan="2" >
+            <ListView x:Name="allbuses" Margin="96,4.333,119,-15.333" PreviewMouseDoubleClick="doubleflick"  Background="WhiteSmoke" Grid.Row="1" FontFamily="Segoe Print" FontSize="14" Grid.RowSpan="2" RenderTransformOrigin="0.5,0.5" BorderBrush="#FF0D0D0D" >
                 <ListView.Resources>
                     <Style TargetType="ListViewItem">
                         <Style.Triggers>
@@ -64,6 +64,14 @@
                         </Style.Resources>
                     </Style>
                 </ListView.Resources>
+                <ListView.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform AngleY="0.426"/>
+                        <RotateTransform/>
+                        <TranslateTransform Y="2.326"/>
+                    </TransformGroup>
+                </ListView.RenderTransform>
 
 
                 <ListView.View>
@@ -143,7 +151,7 @@
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
 
-                        <GridViewColumn Width="200">
+                        <GridViewColumn Width="auto">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock x:Name="NUmeDrivers" Text="{Binding Path=NameDriver}" Width="90" Height="24" FlowDirection="LeftToRight" FontFamily="Segoe Print" Visibility="{Binding Path= visible}" TextWrapping="Wrap">
@@ -158,7 +166,7 @@
 
             </ListView>
         </Grid>
-        <TextBlock HorizontalAlignment="Center" Margin="10,40.333,149.667,250" Grid.Row="1" TextWrapping="Wrap" Text="Ready to start travel" Background="#FFBAD89D" VerticalAlignment="Center" Height="35" Width="79" RenderTransformOrigin="-0.776,0.712" FontFamily="Segoe Print" FontSize="10" TextAlignment="Center" Foreground="#FF0D0B0B" OpacityMask="#FF110F0F"/>
+        <TextBlock HorizontalAlignment="Center" Margin="10,36.333,195.667,254" Grid.Row="1" TextWrapping="Wrap" Text="Ready to start travel" Background="#FFBAD89D" VerticalAlignment="Center" Height="35" Width="79" RenderTransformOrigin="-0.776,0.712" FontFamily="Segoe Print" FontSize="10" TextAlignment="Center" Foreground="#FF0D0B0B" OpacityMask="#FF110F0F"/>
         <TextBlock HorizontalAlignment="Left" Margin="10,113.333,0,0" Grid.Row="1" TextWrapping="Wrap" Text=" Refulling" Background="#FFEFE75F" VerticalAlignment="Top" Height="19" Width="79" FontFamily="Segoe Print" FontSize="10" TextAlignment="Center"/>
         <TextBlock HorizontalAlignment="Left" Margin="10,75.333,0,0" Grid.Row="1" TextWrapping="Wrap" Background="#FF9CB5E8"  VerticalAlignment="Top" Height="33" Width="79" FontFamily="Segoe Print" FontSize="10" TextAlignment="Center" RenderTransformOrigin="0.5,0.5" >
             <TextBlock.RenderTransform>

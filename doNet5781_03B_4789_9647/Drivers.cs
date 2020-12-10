@@ -46,8 +46,8 @@ namespace doNet5781_03B_4789_9647
                 if (value.ToString().Length == 9)
                     id = value;
                 else
-                    throw new ArgumentOutOfRangeException("ID not valid, please enter ID with 9 digite");
-
+                    throw new ArgumentException(string.Format("ID number is incorrect, please enter ID number with only 9 digits"));
+                
                 if (PropertyChanged != null)
                     PropertyChanged(this, new PropertyChangedEventArgs("Id"));
 
