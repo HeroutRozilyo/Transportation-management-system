@@ -285,10 +285,11 @@ namespace doNet5781_03B_4789_9647
 				bool ? result = smalla.ShowDialog();
 				if(result==true)
                 {
-					drivers[i].InTraveling = true;
+				//	drivers[i].InTraveling = false;
 					((sender as Button).DataContext as Bus).DriverOfBus = dr.Name1;
 					drivers[i].Name1 = name;
 					drivers[i].SumTime += TimeSpan.FromSeconds(((sender as Button).DataContext as Bus).timeTravel);
+					allbuses.Items.Refresh();
 				}
                
 
@@ -331,7 +332,7 @@ namespace doNet5781_03B_4789_9647
 		private void ListDriver_Click(object sender, RoutedEventArgs e) //in order to shoe details on the bus
 		{
 			wnd1 = new ListDrivers(drivers, egged);
-
+		
 			wnd1.ShowDialog();
 			allbuses.Items.Refresh();
 
