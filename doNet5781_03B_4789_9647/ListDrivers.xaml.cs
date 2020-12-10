@@ -105,7 +105,7 @@ namespace doNet5781_03B_4789_9647
 
 
 
-                    driverBus.Add(wnd.NEwDriver);
+                    driverBus.Add(wnd.driver);
                     this.allDriver.Items.Refresh();
                     
 

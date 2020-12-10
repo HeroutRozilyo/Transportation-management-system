@@ -197,7 +197,6 @@ namespace doNet5781_03B_4789_9647
 						egged.Add(wnd.myBus);
 					else
 					{
-						// throw new Exception("The new licence is already exsis,\n please nter again number licence with 8 digite");
 						throw new ArgumentException("The new licence is already exsis,\n please nter again number licence with 8 digite");
 					}
 
@@ -263,9 +262,9 @@ namespace doNet5781_03B_4789_9647
 				string name = "";
 				for (i = 0; i < drivers.Count; i++)
 				{
-					//int num1 = r.Next(0, drivers.Count());
 					dr = drivers[i];
-					if (!dr.InTraveling) break;
+					if (!dr.InTraveling)
+						break;
 
 				}
 				if (i == drivers.Count)
