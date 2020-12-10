@@ -307,7 +307,7 @@ namespace doNet5781_03B_4789_9647
             Visible = "Hidden";
             InTraveling = false;
             inBreak = false;
-            if (SumTime.TotalSeconds >= 10)//take a break//////////////
+            if (SumTime.TotalSeconds >= 72)//take a break//////////////
             {
                 BackgroundWorker worker = new BackgroundWorker();
                 TakeBreak();

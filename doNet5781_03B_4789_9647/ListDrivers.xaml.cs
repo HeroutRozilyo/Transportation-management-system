@@ -133,14 +133,15 @@ namespace doNet5781_03B_4789_9647
 
         private static bool findriverID(ObservableCollection<Drivers> driver, int num)
         {
-            
-                for(int i=0;i<driver.Count;i++)
-                {
-                    if (driver[i].Id == num)
-                        return true;
-                }
+
+            for (int i = 0; i < driver.Count; i++)
+            {
+                if (driver[i].Id == num)
+                    throw new ArgumentException(String.Format("{0} Number Id allready exsis", num));
+            }
+            return false;
            
-                return false;
+                
             
         }
 

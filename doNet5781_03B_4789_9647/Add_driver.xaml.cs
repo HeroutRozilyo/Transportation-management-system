@@ -120,7 +120,7 @@ namespace doNet5781_03B_4789_9647
         {
             try
             {
-                driver = new Drivers(int.Parse(this.Idnum.Text),(this.Name.Text));
+                driver = new Drivers(int.Parse(this.Idnum.Text),(this.NameDriverTe.Text));
                 this.DialogResult = true;
                 this.Close();
 
