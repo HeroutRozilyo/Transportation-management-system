@@ -205,7 +205,6 @@ namespace doNet5781_03B_4789_9647
 
 				}
 			}
-			//  catch (Exception messege)
 			catch (ArgumentException messege)
 			{
 

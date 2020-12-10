@@ -102,15 +102,14 @@ namespace doNet5781_03B_4789_9647
                 if (result == true)
                 {
 
+                    int a = wnd.driver.Id;
 
+                    if (!findriverID(driverBus,a))
+                    {
+                        driverBus.Add(wnd.driver);
+                    }
 
-
-                    driverBus.Add(wnd.driver);
                     this.allDriver.Items.Refresh();
-                    
-
-
-
 
                 }
             }
@@ -131,6 +130,21 @@ namespace doNet5781_03B_4789_9647
         {
             this.Close();
 
+        }
+
+
+
+        private static bool findriverID(ObservableCollection<Drivers> driver, int num)
+        {
+            
+                for(int i=0;i<driver.Count;i++)
+                {
+                    if (driver[i].Id == num)
+                        return true;
+                }
+           
+                return false;
+            
         }
     }
 }

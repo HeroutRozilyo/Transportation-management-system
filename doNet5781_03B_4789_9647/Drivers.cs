@@ -46,7 +46,8 @@ namespace doNet5781_03B_4789_9647
                 if (value.ToString().Length == 9)
                     id = value;
                 else
-                    throw new ArgumentOutOfRangeException("id not valid");
+                    throw new ArgumentOutOfRangeException("ID not valid, please enter ID with 9 digite");
+
                 if (PropertyChanged != null)
                     PropertyChanged(this, new PropertyChangedEventArgs("Id"));
 
@@ -170,7 +171,7 @@ namespace doNet5781_03B_4789_9647
         public Drivers(int d,string num1)//constructor
         {
             name = num1;
-            id = d;
+            Id = d;
             inTraveling = false;
             sumTime = TimeSpan.Zero;
             stringTraveling = "Available for travel";

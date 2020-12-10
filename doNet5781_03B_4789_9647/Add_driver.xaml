@@ -9,8 +9,8 @@
     <Grid>
         <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="73,78,0,0" TextWrapping="Wrap" Text="ID number" VerticalAlignment="Top" Height="25" Width="68"/>
 
-        <TextBox x:Name="Idnum" HorizontalAlignment="Left" Height="23" Margin="141,75,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" PreviewKeyDown="Idnum_PreviewKeyDown"/>
-        <TextBox x:Name="NameDriverTe" HorizontalAlignment="Left" Height="23" Margin="144,103,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="Idnum" HorizontalAlignment="Left" Height="23" Margin="141,75,0,0" TextWrapping="Wrap" Text=" " VerticalAlignment="Top" Width="120" PreviewKeyDown="Idnum_PreviewKeyDown"/>
+        <TextBox x:Name="NameDriverTe" HorizontalAlignment="Left" Height="23" Margin="144,103,0,0" TextWrapping="Wrap" Text=" " VerticalAlignment="Top" Width="120" PreviewKeyDown="NameDriverTe_PreviewKeyDown"/>
         <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="96,103,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Width="62"/>
         <Button x:Name="button" Content="Add Driver" HorizontalAlignment="Left" Margin="208,149,0,0" VerticalAlignment="Top" Width="75" Click="button_Click"/>
 
