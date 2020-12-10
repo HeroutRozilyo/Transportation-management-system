@@ -55,6 +55,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Add_driver.xaml.cs">
+      <DependentUpon>Add_driver.xaml</DependentUpon>
+    </Compile>
     <Compile Include="BusCompany.cs" />
     <Compile Include="Bus_Data.xaml.cs">
       <DependentUpon>Bus_Data.xaml</DependentUpon>
@@ -68,6 +71,10 @@
       <DependentUpon>StartingTravel.xaml</DependentUpon>
     </Compile>
     <Page Include="addwindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Add_driver.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
