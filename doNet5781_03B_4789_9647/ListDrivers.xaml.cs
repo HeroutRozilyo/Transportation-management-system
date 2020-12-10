@@ -58,7 +58,7 @@ namespace doNet5781_03B_4789_9647
                     {
 
 
-                        int num = buses[i].helptime;
+                        int num = buses[i].TimeToEndWork;
                         driverBus[j].help(num);
                          
                         

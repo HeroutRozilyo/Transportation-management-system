@@ -233,7 +233,7 @@ namespace doNet5781_03B_4789_9647
 						{
 
 							((sender as Button).DataContext as Bus).Refuelling(); //gp to refulling the bus
-							lineData.DriverOfBus = "";
+							lineData.NameDriver = "";
 							allbuses.Items.Refresh();
 						}
 
@@ -289,7 +289,7 @@ namespace doNet5781_03B_4789_9647
 					TimeSpan a= drivers[i].SumTime + TimeSpan.FromSeconds(((sender as Button).DataContext as Bus).timeTravel);
 					
 					//drivers[i].InTraveling = ((sender as Button).DataContext as Bus).isTimerRun;
-					((sender as Button).DataContext as Bus).DriverOfBus = dr.Name1;
+					((sender as Button).DataContext as Bus).NameDriver = dr.Name1;
 					if (wnd1 != null) wnd1.allDriver.Items.Refresh();
 					//drivers[i].Name1 = name;
 					drivers[i].SumTime += TimeSpan.FromSeconds(((sender as Button).DataContext as Bus).timeTravel);
