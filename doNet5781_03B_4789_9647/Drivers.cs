@@ -106,7 +106,7 @@ namespace doNet5781_03B_4789_9647
         }
 
 
-        public void help(int a)
+        public void help(int a)//send to prograss
         {
             enable = false;
             StringTraveling = "In Travelling";
@@ -164,7 +164,7 @@ namespace doNet5781_03B_4789_9647
 
             worker.WorkerReportsProgress = true;
             worker.WorkerSupportsCancellation = true;
-            Visible = "Hidden";
+            visible = "Hidden";
             enable = true;
 
         }
@@ -181,7 +181,7 @@ namespace doNet5781_03B_4789_9647
 
             worker.WorkerReportsProgress = true;
             worker.WorkerSupportsCancellation = true;
-            Visible = "Hidden";
+            visible = "Hidden";
             enable = true;
 
         }
@@ -198,7 +198,7 @@ namespace doNet5781_03B_4789_9647
 
             worker.WorkerReportsProgress = true;
             worker.WorkerSupportsCancellation = true;
-            Visible = "Hidden";
+            visible = "Hidden";
             enable = true;
         }
 
@@ -268,13 +268,13 @@ namespace doNet5781_03B_4789_9647
             timeToEndWork = length;
             isTimerRun = true;
 
-            Visible = "Visible";
+            visible = "Visible";
 
             for (int i = 1; i <= (length + 1); i++)
             {
 
                 Thread.Sleep(1000);
-            
+                if(length!=0)
                 worker.ReportProgress(i * 100 / length);
 
             }
@@ -283,7 +283,7 @@ namespace doNet5781_03B_4789_9647
 
         private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            work = (int)e.ProgressPercentage;           
+            work = (int)e.ProgressPercentage;
             Time_left = timeToEndWork + "s";
             timeToEndWork--;
 
@@ -293,13 +293,14 @@ namespace doNet5781_03B_4789_9647
 
         private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            work = 0;
+
             isTimerRun = false;
             enable = true;
+             work = 0;
             Time_left = "";
             timeToEndWork = 0;
 
-            Visible = "Hidden";
+            visible = "Hidden";
             InTraveling = false;
             inBreak = false;
             if (SumTime.TotalSeconds >= 72)//take a break//////////////
@@ -309,7 +310,7 @@ namespace doNet5781_03B_4789_9647
 
             }
             else 
-                StringTraveling = "Available for travel"; 
+                StringTraveling = "Available for travel";
 
         }
 
