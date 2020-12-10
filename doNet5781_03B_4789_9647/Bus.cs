@@ -410,7 +410,7 @@ namespace doNet5781_03B_4789_9647
 
                     time = t *0.1*60; //time travel at our program
 
-                    helptime = (int)time;
+                  //  helptime = (int)time;
 
 
                     // worker.RunWorkerAsync((int)(v * kmTravel * 0.1));
@@ -508,7 +508,7 @@ namespace doNet5781_03B_4789_9647
             work = (int)e.ProgressPercentage;
             Time_left = timeToEndWork + "s";
             timeToEndWork--;
-
+            helptime = timeToEndWork-1;
 
 
         }
