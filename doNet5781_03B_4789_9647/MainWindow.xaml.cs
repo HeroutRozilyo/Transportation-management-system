@@ -125,7 +125,7 @@ namespace doNet5781_03B_4789_9647
 
 			string num1 = "Eli Coen", num2 = "Oria Bat", num3 = "Benel Tavori", num4 = "Itay Ofir", num5 = "Shirel David", num6 = "Noam Oved", num7 = "David Levi", num8 = "Yeonatan Snir", num9 = "Eitan Malka", num10 = "Beny Don";
 			names.Add(num1); names.Add(num2); names.Add(num3); names.Add(num4); names.Add(num5); names.Add(num6); names.Add(num7); names.Add(num8); names.Add(num9); names.Add(num10);
-			for (int i = 0; i < 10; i++)
+			for (int i = 0; i < 1; i++)
 			{
 				Drivers temp = new Drivers(names[i]);
 				drivers.Add(temp);
@@ -272,7 +272,7 @@ namespace doNet5781_03B_4789_9647
 										
 					((sender as Button).DataContext as Bus).NameDriver = dr.Name1; //connect  the driver to ths bus
 					if (wnd1 != null) wnd1.allDriver.Items.Refresh();
-				
+					drivers[i].InTraveling = true;
 					drivers[i].SumTime += TimeSpan.FromSeconds(((sender as Button).DataContext as Bus).timeTravel); //update the sum time travel of the bus
 				}
                

@@ -94,7 +94,7 @@
                                                     <DataTrigger Binding="{Binding enable}" Value="false">
                                                         <Setter Property="Button.IsEnabled" Value="false"/>
                                                     </DataTrigger>
-                                                    <DataTrigger Binding="{Binding Fuelldelek}" Value="true">
+                                                    <DataTrigger Binding="{Binding Fuel}" Value="1200">
                                                         <Setter Property="Button.IsEnabled" Value="false"/>
                                                     </DataTrigger>
                                                 </Style.Triggers>
