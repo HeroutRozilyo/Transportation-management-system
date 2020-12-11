@@ -20,17 +20,16 @@ namespace doNet5781_03B_4789_9647
     public partial class Bus_Data : Window
     {
         public Bus temp = new Bus();
-      //  private object item;
-
      
-        public Bus_Data(Bus v)
+    
+        public Bus_Data(Bus v) //constructor that get bus to show
         {
             InitializeComponent();
             temp = v;
             this.DataContext = temp;
         }
 
-        public Bus_Data(object item)
+        public Bus_Data(object item) //constructor that get object to show
         {
             InitializeComponent();
 
@@ -38,25 +37,25 @@ namespace doNet5781_03B_4789_9647
       
         }
 
-        private void Window_Loaded_1(object sender, RoutedEventArgs e)
-        {
 
-            
-
-     
-        }
-
-        private void treat_Click(object sender, RoutedEventArgs e)
-        {
-            
+        private void treat_Click(object sender, RoutedEventArgs e) //send the bus to treatment
+        {         
             (this.DataContext as Bus).treatment();
             this.Close();
         }
 
-        private void fuel_Click(object sender, RoutedEventArgs e)
+        private void fuel_Click(object sender, RoutedEventArgs e) //send the bus to refulling
         {
             (this.DataContext as Bus).Refuelling();
             this.Close();
+
+
+        }
+
+        private void Window_Loaded_1(object sender, RoutedEventArgs e)
+        {
+
+
 
 
         }

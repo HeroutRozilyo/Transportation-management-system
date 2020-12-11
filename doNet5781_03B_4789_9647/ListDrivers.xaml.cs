@@ -19,6 +19,7 @@ namespace doNet5781_03B_4789_9647
     /// <summary>
     /// Interaction logic for ListDrivers.xaml
     /// </summary>
+    
     public partial class ListDrivers : Window
     {
         private ObservableCollection<Drivers> driverBus= new ObservableCollection<Drivers>() ;
@@ -26,26 +27,30 @@ namespace doNet5781_03B_4789_9647
         private ObservableCollection<Bus> buses = new ObservableCollection<Bus>();
       
 
-        public ListDrivers()
+        public ListDrivers() //defult constructor
         {
-            InitializeComponent();
-           
+            InitializeComponent();        
             allDriver.Items.Refresh();
 
         }
 
 
-        public ListDrivers(ObservableCollection<Drivers> drivers ,ObservableCollection<Bus>egged)
+        public ListDrivers(ObservableCollection<Drivers> drivers ,ObservableCollection<Bus>egged)  //constructor that get the list of driver and the list of buses
         {
             InitializeComponent();
             allDriver.ItemsSource = drivers;
             buses = egged;
             driverBus = drivers;
-            check();
+            check(); //go to find which driver is at travel
             allDriver.Items.Refresh();
         }
 
-
+        /// <summary>
+        ///  when we open this window we want to show prograss bar on driver that been at travel.
+        ///  so in order to do this we need find which driver been at travel when the customer want to open this window.
+        ///  we move on the driver list and buses list to check if someone been at travle.
+        ///  if we find driver at travel we send him to func that begin to us a prograss bar. this func get the current time that this bus have to finish the travel.
+        /// </summary>
 
         public void check()//find who the drivers for each bus
         {
@@ -80,14 +85,14 @@ namespace doNet5781_03B_4789_9647
             allDriver.Items.Refresh();
         }
 
-        private void TakeAbreak_Click(object sender, RoutedEventArgs e)
+        private void TakeAbreak_Click(object sender, RoutedEventArgs e) //send the driver to break
         {
             ((sender as Button).DataContext as Drivers).TakeBreak();
            
             allDriver.Items.Refresh();
         }
 
-        private void adddriver_Click(object sender, RoutedEventArgs e)
+        private void adddriver_Click(object sender, RoutedEventArgs e) //add driver to our company
         {
 
             try
@@ -101,7 +106,7 @@ namespace doNet5781_03B_4789_9647
 
                     int a = wnd.driver.Id;
 
-                    if (!findriverID(driverBus,a))
+                    if (!findriverID(driverBus,a)) //find if the ID already exsis
                     {
                         driverBus.Add(wnd.driver);
                     }
@@ -123,7 +128,7 @@ namespace doNet5781_03B_4789_9647
 
         }
 
-        private void close_Click(object sender, RoutedEventArgs e)
+        private void close_Click(object sender, RoutedEventArgs e) //close the window
         {
             this.Close();
 
@@ -131,7 +136,7 @@ namespace doNet5781_03B_4789_9647
 
 
 
-        private static bool findriverID(ObservableCollection<Drivers> driver, int num)
+        private static bool findriverID(ObservableCollection<Drivers> driver, int num) //if the new ID is allready exsis so throw messege
         {
 
             for (int i = 0; i < driver.Count; i++)

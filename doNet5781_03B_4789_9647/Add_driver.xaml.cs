@@ -29,7 +29,6 @@ namespace doNet5781_03B_4789_9647
     
         public Drivers NEwDriver
         {
-
             get
             {
                 return driver;
@@ -37,7 +36,25 @@ namespace doNet5781_03B_4789_9647
 
         }
 
-        private void button_Click(object sender, RoutedEventArgs e)
+        private void AddDriver_click(object sender, RoutedEventArgs e) //to add driver after rhe customer insert data
+        {
+            try
+            {
+                driver = new Drivers(int.Parse(this.Idnum.Text), (this.NameDriverTe.Text)); //creat driver with the nea data. if ID not valid or allresy exsis so throw.
+                this.DialogResult = true;
+                this.Close();
+
+            }
+            catch (ArgumentException a)
+            {
+
+                MessageBox.Show(a.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+
+            }
+
+        }
+
+        private void button_Click(object sender, RoutedEventArgs e) //to add driver when the customer do enter and not click on the button to add.
         {
             try
             {
@@ -55,6 +72,8 @@ namespace doNet5781_03B_4789_9647
             }
         }
 
+
+        // func that enable nlly to insert numbers to ID text lable.
         private void Idnum_PreviewKeyDown(object sender, KeyEventArgs e)
         {
             TextBox text = sender as TextBox;
@@ -65,7 +84,7 @@ namespace doNet5781_03B_4789_9647
             if (e.Key == Key.Enter || e.Key == Key.Return || e.Key == Key.Tab)
                 return;
 
-            //allow list of system keys (add other key here if you want to allow)
+            //allow list of system keys 
             if (e.Key == Key.Escape || e.Key == Key.Back || e.Key == Key.Delete ||
                 e.Key == Key.CapsLock || e.Key == Key.LeftShift || e.Key == Key.Home
              || e.Key == Key.End || e.Key == Key.Insert || e.Key == Key.Down || e.Key == Key.Right || e.Key == Key.Decimal)
@@ -86,6 +105,7 @@ namespace doNet5781_03B_4789_9647
             return;
         }
 
+        //func that enable onlly to insert letters to Name text lable.
         private void NameDriverTe_PreviewKeyDown(object sender, KeyEventArgs e)
         {
             TextBox text = sender as TextBox;
@@ -96,7 +116,7 @@ namespace doNet5781_03B_4789_9647
             if (e.Key == Key.Enter || e.Key == Key.Return || e.Key == Key.Tab)
                 return;
 
-            //allow list of system keys (add other key here if you want to allow)
+            //allow list of system keys 
             if (e.Key == Key.Escape || e.Key == Key.Back || e.Key == Key.Delete ||
                 e.Key == Key.CapsLock || e.Key == Key.LeftShift || e.Key == Key.Home
              || e.Key == Key.End || e.Key == Key.Insert || e.Key == Key.Down || e.Key == Key.Right || e.Key == Key.Decimal)
@@ -116,22 +136,6 @@ namespace doNet5781_03B_4789_9647
             return;
         }
 
-        private void AddDriver_click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                driver = new Drivers(int.Parse(this.Idnum.Text),(this.NameDriverTe.Text));
-                this.DialogResult = true;
-                this.Close();
-
-            }
-            catch (ArgumentException a)/////////////////////////////////אסור לזרוק ככהההה
-            {
-              
-                MessageBox.Show(a.Message,"ERROR",MessageBoxButton.OK,MessageBoxImage.Error);
-                
-            }
-
-        }
+      
     }
 }

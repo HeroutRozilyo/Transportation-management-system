@@ -28,7 +28,7 @@ namespace doNet5781_03B_4789_9647
 
 	public partial class MainWindow : Window
 	{
-		//List<Bus> egged = new List<Bus>();  //A list that will contain all the buses
+	
 		static Random r = new Random(DateTime.Now.Millisecond);
 		addWindow wnd;
 		ListDrivers wnd1;
@@ -38,8 +38,7 @@ namespace doNet5781_03B_4789_9647
 			get; private set;
 		}
 
-
-		private ObservableCollection<Bus> egged = new ObservableCollection<Bus>();
+		private ObservableCollection<Bus> egged = new ObservableCollection<Bus>(); //list of buses
 		public ObservableCollection<Bus> Egged
 		{
 			get { return egged; }
@@ -48,17 +47,15 @@ namespace doNet5781_03B_4789_9647
 				;
 			}
 		}
-		private ObservableCollection<Drivers> drivers = new ObservableCollection<Drivers>();
-
-
+		private ObservableCollection<Drivers> drivers = new ObservableCollection<Drivers>(); //list of driver
 
 
 		public MainWindow()
 		{
 			try
 			{
-				initBuses(egged);
-				initDrivers(drivers);
+				initBuses(egged); //insert vbuses
+				initDrivers(drivers); //insert driver
 				InitializeComponent();
 				allbuses.ItemsSource = egged;
 			}
@@ -73,21 +70,18 @@ namespace doNet5781_03B_4789_9647
 
 
 
-		private void initBuses(ObservableCollection<Bus> egged)
+		private void initBuses(ObservableCollection<Bus> egged) //inser randomaly buses
 		{
 			int license1;
 			DateTime date1;
 
-
 			for (int i = 0; i < 10; i++) ///restart 10 buses
 			{
-
-
-				date1 = new DateTime(r.Next(1990, DateTime.Today.Year + 1), r.Next(1, 13), r.Next(1, 29));//,r.Next(1,25),r.Next(0,60),r.Next(0,60));
-																										  //int a = date1.Year;
+				date1 = new DateTime(r.Next(1990, DateTime.Today.Year + 1), r.Next(1, 13), r.Next(1, 29)); //random a starting date to the buses
+																										  
 				do
 				{
-					if ((date1.Year < 2018))
+					if ((date1.Year < 2018)) //if the starting date lee than 2018 we need a licence with 7 digits
 					{
 						license1 = r.Next(1000000, 10000000); //to random number with 7 digite
 					}
@@ -98,9 +92,9 @@ namespace doNet5781_03B_4789_9647
 
 				} while (findBuse(egged, license1)); //check if the license exsis
 
-				try
+				try //insert the bus to the list
 				{
-					Bus temp = new Bus(license1, date1);
+					Bus temp = new Bus(license1, date1); 
 					egged.Add(temp);
 				}
 
@@ -108,7 +102,6 @@ namespace doNet5781_03B_4789_9647
 				{
 					i--;
 				}
-
 
 			}
 
@@ -124,7 +117,8 @@ namespace doNet5781_03B_4789_9647
 
 
 		}
-		private void initDrivers(ObservableCollection<Drivers> drivers)
+
+		private void initDrivers(ObservableCollection<Drivers> drivers) //insert driver
 		{
 
 			List<string> names = new List<string>();
@@ -141,12 +135,11 @@ namespace doNet5781_03B_4789_9647
 
 
 
-		private static bool findBuse(ObservableCollection<Bus> buses, int num)
+		private static bool findBuse(ObservableCollection<Bus> buses, int num) //find if specific licence is already exsis at our company bus.
 		{
 			try
 			{
 				int temp1;
-
 
 				foreach (Bus item in buses) //move on the list buses
 				{
@@ -174,15 +167,12 @@ namespace doNet5781_03B_4789_9647
 
 		}
 
-
-
 		private void addBus_Click(object sender, RoutedEventArgs e) //to add bus to our company
 		{
 
 			try
 			{
 				wnd = new addWindow();
-
 
 				bool? result = wnd.ShowDialog();
 				if (result == true)
@@ -193,47 +183,36 @@ namespace doNet5781_03B_4789_9647
 					a = a.Replace("-", string.Empty); //To remove the hyphens from our license number
 					int.TryParse(a, out temp1);
 
-					if (!findBuse(egged, temp1))
+					if (!findBuse(egged, temp1)) //if this licence not exsis already so add the bus to our company.
 						egged.Add(wnd.myBus);
 					else
 					{
 						throw new ArgumentException("The new licence is already exsis,\n please nter again number licence with 8 digite");
 					}
 
-
-				//////////////////
-
 				}
 			}
 			catch (ArgumentException messege)
 			{
-
-
 				MessageBox.Show(messege.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
-
 			}
-
-
-
 		}
-
-
 
 
 		private void Button_Click(object sender, RoutedEventArgs e) //to send the bus to refulling
 		{
 			try
 			{
-				var fxElt = sender as FrameworkElement;
+				var fxElt = sender as FrameworkElement; //get the licence of the bus to refulling. 
 				Bus lineData = fxElt.DataContext as Bus;
+
 				MessageBoxResult result = MessageBox.Show(lineData.fuelString(), "FUELIING", MessageBoxButton.YesNo, MessageBoxImage.Exclamation, MessageBoxResult.Yes);
-				switch (result)
+				switch (result) //get if the customer want to refull the bus or not
 				{
 					case MessageBoxResult.Yes:
 						{
-
 							((sender as Button).DataContext as Bus).Refuelling(); //gp to refulling the bus
-							lineData.NameDriver = "";
+							lineData.NameDriver = ""; 
 							allbuses.Items.Refresh();
 						}
 
@@ -244,7 +223,6 @@ namespace doNet5781_03B_4789_9647
 			}
 			catch (Exception)
 			{
-
 				MessageBox.Show("a");
 			}
 			allbuses.Items.Refresh();
@@ -255,12 +233,16 @@ namespace doNet5781_03B_4789_9647
 		private void Pick_Button_Click(object sender, RoutedEventArgs e) //to starting travel
 		{
 			int i = 0;
-			Drivers dr = new Drivers();
+			Drivers dr = new Drivers(); //driver to the bus
 			try
-			{
+			{ 
+				///------------
+				/// to choose driver to the travel
+				///------------
+				
 				string name = "";
 				int g = 0;
-				for (i = 0; i < drivers.Count; i++)
+				for (i = 0; i < drivers.Count; i++) //check if there is a driver that can take the travel
 				{
 					dr = drivers[i];
 					if (dr.InTraveling)
@@ -269,7 +251,7 @@ namespace doNet5781_03B_4789_9647
 				}
 				if (g == drivers.Count)
 					throw new ArgumentException("No drivers available, please wait and try again ");
-				else
+				else //if there is a driver that can take the travle so radon driver 
                 {
 					do
 					{
@@ -278,21 +260,20 @@ namespace doNet5781_03B_4789_9647
 					} while (drivers[i].InTraveling);
                 }
 				
-				name = drivers[i].Name1; /////////////////////
+				name = drivers[i].Name1; //keep the driver name
 			
-				StartingTravel smalla = new StartingTravel((sender as Button).DataContext as Bus);
+				StartingTravel smalla = new StartingTravel((sender as Button).DataContext as Bus); //open new window in orser to insert data
 
 				bool ? result = smalla.ShowDialog();
+
 				if(result==true)
                 {
-
-					TimeSpan a= drivers[i].SumTime + TimeSpan.FromSeconds(((sender as Button).DataContext as Bus).timeTravel);
-					
-					//drivers[i].InTraveling = ((sender as Button).DataContext as Bus).isTimerRun;
-					((sender as Button).DataContext as Bus).NameDriver = dr.Name1;
+					TimeSpan a= drivers[i].SumTime + TimeSpan.FromSeconds(((sender as Button).DataContext as Bus).timeTravel); // calucate the sum of time that this driver did and add the new time to the new travel. in order to check if the driver can take this travel.
+										
+					((sender as Button).DataContext as Bus).NameDriver = dr.Name1; //connect  the driver to ths bus
 					if (wnd1 != null) wnd1.allDriver.Items.Refresh();
-					//drivers[i].Name1 = name;
-					drivers[i].SumTime += TimeSpan.FromSeconds(((sender as Button).DataContext as Bus).timeTravel);
+				
+					drivers[i].SumTime += TimeSpan.FromSeconds(((sender as Button).DataContext as Bus).timeTravel); //update the sum time travel of the bus
 				}
                
 
@@ -310,20 +291,16 @@ namespace doNet5781_03B_4789_9647
 		}
 
 
-
-
-
 		private void doubleflick(object sender, RoutedEventArgs e) //in order to shoe details on the bus
 		{
-			var list = (ListView)sender;
+			var list = (ListView)sender; //to get the bus
 			object item = list.SelectedItem;
-			Bus_Data temp = new Bus_Data(item);
+
+			Bus_Data temp = new Bus_Data(item); //open window to show bus data
 			temp.ShowDialog();
 
 			allbuses.Items.Refresh();
 		}
-
-
 
 
 
@@ -333,7 +310,7 @@ namespace doNet5781_03B_4789_9647
 		}
 
 
-		private void ListDriver_Click(object sender, RoutedEventArgs e) //in order to shoe details on the bus
+		private void ListDriver_Click(object sender, RoutedEventArgs e) //in order to show the list of drivers and data on them
 		{
 			wnd1 = new ListDrivers(drivers, egged);
 			

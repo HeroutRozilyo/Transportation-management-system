@@ -21,7 +21,6 @@ namespace doNet5781_03B_4789_9647
     /// </summary>
 
 
-
     public partial class addWindow : Window
     {
 
@@ -48,11 +47,11 @@ namespace doNet5781_03B_4789_9647
         }
 
 
-        private void okey_Click(object sender, RoutedEventArgs e)
+        private void okey_Click(object sender, RoutedEventArgs e) //to add the data of bus that the customer insert
         {
             try
             {
-                myBus = new Bus(int.Parse(this.licenseTextBox.Text), DateTime.Parse(this.lastTreatDatePicker.Text));
+                myBus = new Bus(int.Parse(this.licenseTextBox.Text), DateTime.Parse(this.lastTreatDatePicker.Text)); //build bus with this data. if the licence is allready exsis or not valid we have exeption.
                 this.DialogResult = true;
                 this.Close();
 
@@ -69,17 +68,14 @@ namespace doNet5781_03B_4789_9647
         }
 
 
-        private void cancle_Click(object sender, RoutedEventArgs e)
+        private void cancle_Click(object sender, RoutedEventArgs e) //close the window
         {
             this.Close();
         }
 
 
-        private void kmTextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
+      
+        //func that enable insert onlly number to the text lable.
         private void licenseTextBox_PreviewKeyDown(object sender, KeyEventArgs e)
         {
             TextBox text = sender as TextBox;
@@ -90,7 +86,7 @@ namespace doNet5781_03B_4789_9647
             if (e.Key == Key.Enter || e.Key == Key.Return || e.Key == Key.Tab)
                 return;
 
-            //allow list of system keys (add other key here if you want to allow)
+            //allow list of system keys 
             if (e.Key == Key.Escape || e.Key == Key.Back || e.Key == Key.Delete ||
                 e.Key == Key.CapsLock || e.Key == Key.LeftShift || e.Key == Key.Home
              || e.Key == Key.End || e.Key == Key.Insert || e.Key == Key.Down || e.Key == Key.Right || e.Key == Key.Decimal)
@@ -109,6 +105,11 @@ namespace doNet5781_03B_4789_9647
             //forbid letters and signs (#,$, %, ...)
             e.Handled = true; //ignore this key. mark event as handled, will not be routed to other controls
             return;
+        }
+
+        private void kmTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
         }
     }
     
