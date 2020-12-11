@@ -286,7 +286,7 @@ namespace doNet5781_03B_4789_9647
 			if (wnd1 != null)
 			{ wnd1.allDriver.Items.Refresh();}
 				allbuses.Items.Refresh();
-			drivers[i].InTraveling = false;
+			//drivers[i].InTraveling = false;
 
 
 		}
