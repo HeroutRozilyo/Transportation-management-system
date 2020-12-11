@@ -21,7 +21,6 @@ namespace doNet5781_03B_4789_9647
     public partial class StartingTravel : Window
     {
         Bus temp = new Bus();
-      
         Random r = new Random();
       
         public StartingTravel()
@@ -30,6 +29,7 @@ namespace doNet5781_03B_4789_9647
         }
 
 
+        //func that enable to insert onlly digite to text lable 
         private void TextBox_OnlyNumbers_PreviewKeyDown(object sender, KeyEventArgs e)
         { 
             TextBox text = sender as TextBox;
@@ -40,7 +40,7 @@ namespace doNet5781_03B_4789_9647
             if (e.Key == Key.Enter || e.Key == Key.Return || e.Key == Key.Tab)
                 return;
 
-            //allow list of system keys (add other key here if you want to allow)
+            //allow list of system keys 
             if (e.Key == Key.Escape || e.Key == Key.Back || e.Key == Key.Delete ||
                 e.Key == Key.CapsLock || e.Key == Key.LeftShift || e.Key == Key.Home
              || e.Key == Key.End || e.Key == Key.Insert || e.Key == Key.Down || e.Key == Key.Right||e.Key== Key.OemPeriod)
@@ -70,11 +70,11 @@ namespace doNet5781_03B_4789_9647
 
 
    
-
+        //when the customer do enter so he finish to insert new data and we come here
         private void OnKeyDownHandler(object sender, KeyEventArgs e)
         {
            
-           if (e.Key == Key.Return)         
+           if (e.Key == Key.Return)  //if enter       
           {
                 double a = double.Parse(numOfKm.Text); //change the value of the new km to be number
                 TimeSpan time = TimeSpan.Zero;
