@@ -315,7 +315,7 @@ namespace doNet5781_03B_4789_9647
              work = 0;
             Time_left = "";
             timeToEndWork = 0;
-
+            //
             Visible = "Hidden";
             InTraveling = false;
             inBreak = false;
