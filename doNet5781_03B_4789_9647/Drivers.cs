@@ -9,6 +9,7 @@ using System.Threading;
 using System.ComponentModel;
 using System.Windows;
 using System.Diagnostics;
+using Prometheus;
 
 namespace doNet5781_03B_4789_9647
 {
@@ -179,12 +180,19 @@ namespace doNet5781_03B_4789_9647
                 PropertyChanged(this, new PropertyChangedEventArgs("SumTime"));
 
         }
+        public static int counter = 0; 
 
         public void help(int a)//send thr driver to start prograss. in order to do a prograss bar at driver window when driver have a travel.
         {
+
+            if (worker.IsBusy)
+            {
+                worker = new BackgroundWorker();
+                counter++;
+            }
             enable = false;
             StringTraveling = "In Travelling";
-            worker.RunWorkerAsync(a);
+            worker.RunWorkerAsync(a-counter);
             InTraveling = true;
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs("InTraveling"));
@@ -311,6 +319,7 @@ namespace doNet5781_03B_4789_9647
             Visible = "Hidden";
             InTraveling = false;
             inBreak = false;
+            counter--;
             if (SumTime.TotalSeconds >= 72)//take a break//////////////
             {
                 BackgroundWorker worker = new BackgroundWorker();

@@ -154,7 +154,7 @@
                         <GridViewColumn Width="auto">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock x:Name="NUmeDrivers" Text="{Binding Path=NameDriver}" Width="90" Height="24" FlowDirection="LeftToRight" FontFamily="Segoe Print" Visibility="{Binding Path= visible}" TextWrapping="Wrap">
+                                    <TextBlock x:Name="NUmeDrivers" Text="{Binding Path=NameDriver}" Width="103" Height="24" FlowDirection="LeftToRight" FontFamily="Segoe Print" Visibility="{Binding Path= visible}" TextWrapping="Wrap">
 
                                     </TextBlock>
                                 </DataTemplate>

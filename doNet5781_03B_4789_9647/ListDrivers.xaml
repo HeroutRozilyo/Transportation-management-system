@@ -51,7 +51,7 @@
                     <GridView x:Name="aaa">
 
 
-                        <GridViewColumn Header="Name" Width="120"  DisplayMemberBinding="{Binding Name1}"/>
+                        <GridViewColumn Header="Name" Width="Auto"  DisplayMemberBinding="{Binding Name1}"/>
                         <GridViewColumn Header="ID" Width="120" DisplayMemberBinding="{Binding Id}"/>
                         <GridViewColumn Header="Status Driver" Width="140" DisplayMemberBinding="{Binding StringTraveling}"  />
                         <GridViewColumn Header="Total driving time" Width="118" DisplayMemberBinding="{Binding SumTime}"  />
