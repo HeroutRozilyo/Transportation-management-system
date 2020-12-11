@@ -270,7 +270,7 @@ namespace doNet5781_03B_4789_9647
                 return result;
             }
         } //return the date at string. in order show at data bus window.
-
+        //
         public Status checkingStatus()//return the current status of this bus
         {
             DateTime a = lastTreat;
