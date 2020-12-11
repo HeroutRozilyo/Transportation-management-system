@@ -25,7 +25,7 @@
 
 
 
-            <ListView x:Name="allDriver" HorizontalAlignment="Left" Height="279" Margin="10,10,0,0" VerticalAlignment="Top" Width="714" RenderTransformOrigin="0.556,0.477" FontFamily="Segoe Print" SelectionChanged="allDriver_SelectionChanged_1" Background="#FDEEFDFF" BorderBrush="#FF060708" OpacityMask="#FF110C0C" Foreground="#FF131315" BorderThickness="1" >
+            <ListView x:Name="allDriver" HorizontalAlignment="Left" Height="279" Margin="10,10,0,0" VerticalAlignment="Top" Width="714" RenderTransformOrigin="0.556,0.477" FontFamily="Segoe Print" SelectionChanged="allDriver_SelectionChanged_1" Background="#FDE8E8E8" BorderBrush="#FF060708" OpacityMask="#FF110C0C" Foreground="#FF131315" BorderThickness="1" >
                 <ListView.Resources>
                     <Style TargetType="ListViewItem">
                         <Style.Triggers>

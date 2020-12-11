@@ -73,40 +73,56 @@ namespace doNet5781_03B_4789_9647
         //when the customer do enter so he finish to insert new data and we come here
         private void OnKeyDownHandler(object sender, KeyEventArgs e)
         {
-           
-           if (e.Key == Key.Return)  //if enter       
-          {
-                double a = double.Parse(numOfKm.Text); //change the value of the new km to be number
-                TimeSpan time = TimeSpan.Zero;
-                if (temp.Take_travel(a)) //check if the bus can take the travel
+
+            if (e.Key == Key.Return)  //if enter       
+            {
+                bool thereAreDigit = false;
+                for(int i=0;i< (numOfKm.Text.Count());i++)
                 {
-                    //x=x0+vt
-                    double v = r.Next(20, 51); //velocitui of this bus
-                    double t = a / v; //time of this travel.this time is in hour
-
-                    time = TimeSpan.FromSeconds(6 * t); //time travel at our program
-
-                    this.DialogResult = true;
-
-                    
-                }
-                else
+                    if (char.IsDigit(numOfKm.Text[i]))
+                    {
+                        thereAreDigit = true;
+                        break;
+                    }
+                }    
+                if(thereAreDigit)
                 {
-                    this.DialogResult = false;
-                    if (temp.Fuel - a <= 0)
+                    double a = double.Parse(numOfKm.Text); //change the value of the new km to be number
+
+                    TimeSpan time = TimeSpan.Zero;
+                    if (temp.Take_travel(a)) //check if the bus can take the travel
                     {
-                        MessageBox.Show("There is not enough fuel of the bus for this travel ", "ERROR FUEL", MessageBoxButton.OK, MessageBoxImage.Information);
-                    }
-                    if (temp.newKm_from_LastTreatment + a > 20000)
-                    {
-                        MessageBox.Show("The bus cannot take the ride because it will go the number of miles allowed ", "ERROR KM", MessageBoxButton.OK, MessageBoxImage.Information);
-                    }
-                    if (temp.lastTreat.AddYears(1) < DateTime.Today)
-                    {
-                        MessageBox.Show("It has been a year since the last treatment ", "ERROR TREATMENT", MessageBoxButton.OK, MessageBoxImage.Information);
+                        //x=x0+vt
+                        double v = r.Next(20, 51); //velocitui of this bus
+                        double t = a / v; //time of this travel.this time is in hour
+
+                        time = TimeSpan.FromSeconds(6 * t); //time travel at our program
+
+                        this.DialogResult = true;
+
+
                     }
 
+                    else
+                    {
+                        this.DialogResult = false;
+                        if (temp.Fuel - a <= 0)
+                        {
+                            MessageBox.Show("There is not enough fuel of the bus for this travel ", "ERROR FUEL", MessageBoxButton.OK, MessageBoxImage.Information);
+                           
+                        }
+                        if (temp.newKm_from_LastTreatment + a > 20000)
+                        {
+                            MessageBox.Show("The bus cannot take the ride because it will over the number of miles allowed ", "ERROR KM", MessageBoxButton.OK, MessageBoxImage.Information);
+                        }
+                        if (temp.lastTreat.AddYears(1) < DateTime.Today)
+                        {
+                            MessageBox.Show("It has been a year since the last treatment ", "ERROR TREATMENT", MessageBoxButton.OK, MessageBoxImage.Information);
+                        }
+
+                    }
                 }
+                else MessageBox.Show("please enter Km \n to cancle pick ביטול", "ERROR KM", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
                 this.Close();
             
 
