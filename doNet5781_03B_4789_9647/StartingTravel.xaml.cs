@@ -27,7 +27,7 @@ namespace doNet5781_03B_4789_9647
         {
             InitializeComponent();
         }
-
+        
 
         //func that enable to insert onlly digite to text lable 
         private void TextBox_OnlyNumbers_PreviewKeyDown(object sender, KeyEventArgs e)
