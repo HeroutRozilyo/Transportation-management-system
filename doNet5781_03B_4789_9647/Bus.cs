@@ -300,7 +300,7 @@ namespace doNet5781_03B_4789_9647
         public void treatment()/// func that do treatment to the bus
         {
 
-            worker.RunWorkerAsync(10);
+            worker.RunWorkerAsync(144);//one day
 
             status = (Status)3;
             this.Last_tratment();
