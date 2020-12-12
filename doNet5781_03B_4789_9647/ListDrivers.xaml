@@ -19,13 +19,17 @@
 
 
         <Grid Name="MainGrid" Grid.ColumnSpan="2" Margin="-1,2,0,-0.334" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" Width="856">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="129*"/>
+                <ColumnDefinition Width="727*"/>
+            </Grid.ColumnDefinitions>
             <Grid.Background>
                 <ImageBrush ImageSource="backround.jpg"/>
             </Grid.Background>
 
 
 
-            <ListView x:Name="allDriver" HorizontalAlignment="Left" Height="279" Margin="10,10,0,0" VerticalAlignment="Top" Width="714" RenderTransformOrigin="0.556,0.477" FontFamily="Segoe Print" SelectionChanged="allDriver_SelectionChanged_1" Background="#FDE8E8E8" BorderBrush="#FF060708" OpacityMask="#FF110C0C" Foreground="#FF131315" BorderThickness="1" >
+            <ListView x:Name="allDriver" HorizontalAlignment="Left" Height="279" Margin="10,10,0,0" VerticalAlignment="Top" Width="714" RenderTransformOrigin="0.556,0.477" FontFamily="Segoe Print" SelectionChanged="allDriver_SelectionChanged_1" Background="#FDE8E8E8" BorderBrush="#FF060708" OpacityMask="#FF110C0C" Foreground="#FF131315" BorderThickness="1" Grid.ColumnSpan="2" >
                 <ListView.Resources>
                     <Style TargetType="ListViewItem">
                         <Style.Triggers>
@@ -51,8 +55,8 @@
                     <GridView x:Name="aaa">
 
 
-                        <GridViewColumn Header="Name" Width="Auto"  DisplayMemberBinding="{Binding Name1}"/>
-                        <GridViewColumn Header="ID" Width="120" DisplayMemberBinding="{Binding Id}"/>
+                        <GridViewColumn Header="Name" Width="120"  DisplayMemberBinding="{Binding Name1}"/>
+                        <GridViewColumn Header="ID" Width="100" DisplayMemberBinding="{Binding Id}"/>
                         <GridViewColumn Header="Status Driver" Width="140" DisplayMemberBinding="{Binding StringTraveling}"  />
                         <GridViewColumn Header="Total driving time" Width="118" DisplayMemberBinding="{Binding SumTime}"  />
                         <GridViewColumn Width="110">
