@@ -314,9 +314,14 @@ namespace doNet5781_03B_4789_9647
 
 		private void ListDriver_Click(object sender, RoutedEventArgs e) //in order to show the list of drivers and data on them
 		{
-			if(wnd1==null)
-			wnd1 = new ListDrivers(drivers, egged);
 			
+			if (wnd1==null)
+			wnd1 = new ListDrivers(drivers, egged);
+			if(wnd1.Visibility.ToString()=="Hidden")
+            {
+				wnd1 = new ListDrivers(drivers, egged);
+				wnd1.Visibility = Visibility.Visible;
+			}
 			wnd1.ShowDialog();
 			allbuses.Items.Refresh();
 

@@ -13,13 +13,15 @@ using Prometheus;
 
 namespace doNet5781_03B_4789_9647
 {
-    public class Drivers: INotifyPropertyChanged
+    public class Drivers : INotifyPropertyChanged
     {
         /// <summary>
         /// variebles defination
         /// </summary>
         /// 
         BackgroundWorker worker = new BackgroundWorker();
+        
+
         static Random r = new Random();
 
         private TimeSpan sumTime; //keep the sum of time that this driver work until he go to break.
@@ -28,10 +30,10 @@ namespace doNet5781_03B_4789_9647
             get { return sumTime; }
             set { sumTime = value; }
         }
-     
-        
+
+
         private bool inTraveling;
-     
+
         private int id;
         public int Id
         {
@@ -47,7 +49,7 @@ namespace doNet5781_03B_4789_9647
                     id = value;
                 else
                     throw new ArgumentException(string.Format("ID number is incorrect, please enter ID number with only 9 digits"));
-                
+
                 if (PropertyChanged != null)
                     PropertyChanged(this, new PropertyChangedEventArgs("Id"));
 
@@ -82,7 +84,7 @@ namespace doNet5781_03B_4789_9647
         /// <summary>
         /// constructors
         /// </summary>
-        
+
         public Drivers()//constructor
         {
             name = "There no name";
@@ -139,7 +141,7 @@ namespace doNet5781_03B_4789_9647
         /// <summary>
         /// help metod to our variable
         /// </summary>
-       
+
         private bool InBreak; //return if the driver is at break or not
         public bool inBreak
         {
@@ -167,9 +169,9 @@ namespace doNet5781_03B_4789_9647
 
         public void TakeBreak()//func that send the driver to break if he work more that 12h= 72s at our program
         {
-            
+
             enable = false;
-             SumTime = TimeSpan.Zero;
+            SumTime = TimeSpan.Zero;
             StringTraveling = "In Break";
             worker.RunWorkerAsync(144);
             inBreak = true;
@@ -180,25 +182,24 @@ namespace doNet5781_03B_4789_9647
                 PropertyChanged(this, new PropertyChangedEventArgs("SumTime"));
 
         }
-        public static int counter = 0; 
+        public static int counter = 0;
 
         public void help(int a)//send thr driver to start prograss. in order to do a prograss bar at driver window when driver have a travel.
         {
 
-            if (worker.IsBusy)
+            if (worker.IsBusy)//after ew closed the list Window and open
             {
-                worker = new BackgroundWorker();
-                counter++;
             }
+            else worker.RunWorkerAsync(a);//for the first time we open the window
             enable = false;
             StringTraveling = "In Travelling";
-            worker.RunWorkerAsync(a-counter);
+
             InTraveling = true;
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs("InTraveling"));
 
         }
-    
+
 
 
         /// <summary>
@@ -208,7 +209,15 @@ namespace doNet5781_03B_4789_9647
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        int timeToEndWork;
+         int timeToEndWork;
+        public int TimeToEndWork
+        {
+            get { return timeToEndWork; }
+            set { timeToEndWork = 0; }
+        }
+    
+
+       
 
         public bool isTimerRun;
 
@@ -330,11 +339,11 @@ namespace doNet5781_03B_4789_9647
                     PropertyChanged(this, new PropertyChangedEventArgs("inBreak"));
 
             }
-            else 
+            else
                 StringTraveling = "Available for travel";
 
         }
-
+     
 
 
 

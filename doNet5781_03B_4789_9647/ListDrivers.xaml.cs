@@ -57,8 +57,10 @@ namespace doNet5781_03B_4789_9647
             
             for(int i=0;i<buses.Count;i++)
             {
-                for(int j=0;j<driverBus.Count;j++)
+                allDriver.Items.Refresh();
+                for (int j=0;j<driverBus.Count;j++)
                 {
+                    allDriver.Items.Refresh();
                     if (buses[i].NameDriver == driverBus[j].Name1)
                     {
 
@@ -109,11 +111,13 @@ namespace doNet5781_03B_4789_9647
                     if (!findriverID(driverBus,a)) //find if the ID already exsis
                     {
                         driverBus.Add(wnd.driver);
+                        allDriver.Items.Refresh();
                     }
 
                     this.allDriver.Items.Refresh();
                     
                 }
+                allDriver.Items.Refresh();
             }
 
             catch (ArgumentException messege)
@@ -130,6 +134,8 @@ namespace doNet5781_03B_4789_9647
 
         private void close_Click(object sender, RoutedEventArgs e) //close the window
         {
+            Visibility = Visibility.Hidden;
+            
             this.Close();
 
         }
@@ -143,7 +149,9 @@ namespace doNet5781_03B_4789_9647
             {
                 if (driver[i].Id == num)
                     throw new ArgumentException(String.Format("{0} Number Id allready exsis", num));
+              
             }
+            
             return false;
            
                 
