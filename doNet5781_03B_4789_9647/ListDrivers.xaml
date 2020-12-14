@@ -114,8 +114,8 @@
             </ListView>
 
         </Grid>
-        <Button x:Name="adddriver" Content="Add Driver" HorizontalAlignment="Left" Margin="453,130,0,0" VerticalAlignment="Top" Width="75" Click="adddriver_Click" FontFamily="Segoe Print" BorderBrush="#FF100E0E" Background="#FFA1B593" Grid.Column="1"/>
-        <Button x:Name="close" Content="Close" HorizontalAlignment="Left" Margin="453,191,0,0" VerticalAlignment="Top" Width="75" Click="close_Click"  Background="#FFF7C3B0" FontFamily="Segoe Print" Grid.Column="1" BorderBrush="#FF0A0808"/>
+        <Button x:Name="adddriver" Content="Add Driver" HorizontalAlignment="Left" Margin="453,130,0,0" VerticalAlignment="Top" Width="75" Click="adddriver_Click" FontFamily="Segoe Print" BorderBrush="#FF100E0E" Background="#FFA1B593" Grid.Column="1" FontWeight="Bold"/>
+        <Button x:Name="close" Content="Close" HorizontalAlignment="Left" Margin="453,191,0,0" VerticalAlignment="Top" Width="75" Click="close_Click"  Background="#FFF7C3B0" FontFamily="Segoe Print" Grid.Column="1" BorderBrush="#FF0A0808" FontWeight="Bold"/>
 
     </Grid>
 </Window>
