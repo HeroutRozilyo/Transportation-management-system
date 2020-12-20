@@ -9,5 +9,4 @@ namespace factory
     public static class factoryDAL
     {
     }
-    
 }

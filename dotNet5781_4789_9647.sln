@@ -23,7 +23,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DS", "DS\DS.csproj", "{9270
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PIGui", "PIGui\PIGui.csproj", "{D0A287A4-AC74-4265-A0B7-B9099F5D2873}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "factory", "factory\factory.csproj", "{0CC09D90-657A-4E75-AAFD-F263BE998E6C}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{88054C6F-F0DD-4652-B871-D8A7D66BFD32}"
+	ProjectSection(SolutionItems) = preProject
+		config.xml = config.xml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -71,10 +74,6 @@ Global
 		{D0A287A4-AC74-4265-A0B7-B9099F5D2873}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D0A287A4-AC74-4265-A0B7-B9099F5D2873}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D0A287A4-AC74-4265-A0B7-B9099F5D2873}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0CC09D90-657A-4E75-AAFD-F263BE998E6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0CC09D90-657A-4E75-AAFD-F263BE998E6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0CC09D90-657A-4E75-AAFD-F263BE998E6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0CC09D90-657A-4E75-AAFD-F263BE998E6C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

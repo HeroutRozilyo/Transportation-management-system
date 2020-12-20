@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{0CC09D90-657A-4E75-AAFD-F263BE998E6C}</ProjectGuid>
+    <ProjectGuid>{9C7F328A-CDD5-47A6-8529-F02319C38C76}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>factory</RootNamespace>
@@ -42,14 +42,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="factoryDAL.cs" />
-    <Compile Include="factoryBL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BL\BL.csproj">
-      <Project>{4ba9dbd1-b2eb-4ad2-baaf-5eb8b60a76bc}</Project>
-      <Name>BL</Name>
-    </ProjectReference>
     <ProjectReference Include="..\DalApi\DalApi.csproj">
       <Project>{39f55534-b208-47b9-8cfd-89e162390580}</Project>
       <Name>DalApi</Name>
