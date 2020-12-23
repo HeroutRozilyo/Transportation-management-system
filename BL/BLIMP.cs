@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BlApi;
-using DalApi;
+using DALAPI;
 //using DL;
 using BO;
 using DO;
@@ -14,7 +14,7 @@ using DO;
 
 namespace BL
 {
-    public class BlImp1 : IBL
+    internal class BlImp1 : IBL
     {
         static Random rnd = new Random(DateTime.Now.Millisecond);
 

@@ -46,9 +46,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DalApi\DalApi.csproj">
+    <ProjectReference Include="..\DalApi\DALAPI.csproj">
       <Project>{39f55534-b208-47b9-8cfd-89e162390580}</Project>
-      <Name>DalApi</Name>
+      <Name>DALAPI</Name>
     </ProjectReference>
     <ProjectReference Include="..\DS\DS.csproj">
       <Project>{927056d9-0d38-45b9-8c16-f204247bd8d4}</Project>
