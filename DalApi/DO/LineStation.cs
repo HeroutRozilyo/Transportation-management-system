@@ -11,8 +11,10 @@ namespace DO
         public int LineId { get; set; }
         public int StationCode { get; set; }
         public int LineStationIndex { get; set; }
+        public bool LineStationExsis { get; set; }
         public int PrevStation { get; set; } //opsionaly
         public int NextStation { get; set; } //opsionaly
+       
 
 
     }

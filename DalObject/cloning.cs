@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using DO;
@@ -9,25 +10,13 @@ namespace DL
 {
     static class Cloning
     {
-        internal static IClonable Clone(this IClonable original)//דרך שניה - בונוס (יש להשתמש בממשק)
+        internal static T Clone<T>(this T original) where T :new()
         {
-            IClonable target = (IClonable)Activator.CreateInstance(original.GetType());
-            //...
-            return target;
+            T copyToObject = new T();
+            foreach (PropertyInfo propertyInfo in typeof(T).GetProperties())
+                propertyInfo.SetValue(copyToObject, propertyInfo.GetValue(original, null), null);
+            return copyToObject;
         }
 
-        internal static T Clone<T>(this T original)//דרך שלישית - בונוס
-        {
-            T target = (T)Activator.CreateInstance(original.GetType());
-            //...
-            return target;
-        }
-
-        internal static WindDirection Clone(this WindDirection original) //דרך ראשונה
-        {
-            WindDirection target = new WindDirection();
-            target.direction = original.direction;
-            return target;
-        }
     }
 }

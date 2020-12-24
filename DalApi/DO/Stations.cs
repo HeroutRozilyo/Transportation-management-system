@@ -13,5 +13,6 @@ namespace DO
         public double Longtitude { get; set; }
         public double Latitude { get; set; }
         public string AddressOfStation { get; set; }
+        public bool StationExsis { get; set; }
     }
 }
