@@ -43,7 +43,17 @@
   <ItemGroup>
     <Compile Include="DalConfig.cs" />
     <Compile Include="DalFactory.cs" />
-    <Compile Include="DO.cs" />
+    <Compile Include="DO\AdjacentStations.cs" />
+    <Compile Include="DO\Exceptions.cs" />
+    <Compile Include="DO\Line.cs" />
+    <Compile Include="DO\LineStation.cs" />
+    <Compile Include="DO\LineTrip.cs" />
+    <Compile Include="DO\Stations.cs" />
+    <Compile Include="DO\Bus.cs" />
+    <Compile Include="DO\BusOnTrip.cs" />
+    <Compile Include="DO\Enums.cs" />
+    <Compile Include="DO\Trip.cs" />
+    <Compile Include="DO\User.cs" />
     <Compile Include="ICloneable.cs" />
     <Compile Include="IDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

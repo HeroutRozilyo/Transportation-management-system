@@ -22,19 +22,9 @@ namespace DL
         #endregion
 
 
-        static Random rnd = new Random(DateTime.Now.Millisecond);
 
-
-        //public int Licence { get; set; }
-        //public DateTime StartingDate { get; set; }
-        //public double Kilometrz { get; set; }
-        //public double KilometrFromLastTreat { get; set; }
-        //public double FuellAmount { get; set; }
-        //public STUTUS StatusBus { get; set; }
-        //public bool BusExsis { get; set; }
 
         #region Bus
-
         public DO.Bus GetBus(int licence) //check if the bus exsis according to the licence
         {
             DO.Bus bus = DataSource.ListBus.Find(b => b.Licence == licence);
@@ -91,7 +81,7 @@ namespace DL
         public void UpdateBus(int licence, Action<DO.Bus> update)
         {
             DO.Bus bus = DataSource.ListBus.Find(b => b.Licence == licence);
-            if (bus != null && bus.BusExsis)
+            if (bus != null && bus.BusExsis)//
             {
              
                 
