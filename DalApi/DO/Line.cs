@@ -8,8 +8,8 @@ namespace DO
 {
     public class Line
     {
-        public int Id { get; set; }
-        public int CodeLine { get; set; }
+        public int Licence { get; set; }
+        public int NumberLine { get; set; }
         public int FirstStationCode { get; set; }
         public int LastStationCode { get; set; }
         public AREA Area { get; set; }
