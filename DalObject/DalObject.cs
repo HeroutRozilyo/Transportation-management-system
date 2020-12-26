@@ -39,7 +39,7 @@ namespace DL
                    select bus.Clone();
         }
 
-        public IEnumerable<DO.Bus> GetAllBusesBy(Predicate<DO.Bus> buscondition) //איך כותבים??
+        public IEnumerable<DO.Bus> GetAllBusesBy(Predicate<DO.Bus> buscondition) 
         {
             var list = from bus in DataSource.ListBus
                        where (bus.BusExsis && buscondition(bus))
@@ -118,6 +118,7 @@ namespace DL
             if(DataSource.ListLine.FirstOrDefault(l=>l.Licence==line.Licence)!=null) //so the line is already exsis
             {
                 DO.Line l = DataSource.ListLine.Find(b => b.Licence == line.Licence );
+
                 if (l.LineExsis)
                     throw new DO.WrongLicenceException(line.Licence, "the line is already exsis");
                 if(DataSource.ListBus.FirstOrDefault(b=>b.Licence==line.Licence)!=null&&!(DataSource.ListBus.Find(b => b.Licence == line.Licence).BusExsis))
