@@ -21,9 +21,6 @@ namespace DL
         public static DalObject Instance => instance;
         #endregion
 
-
-
-
         #region Bus
         public DO.Bus GetBus(int licence) //check if the bus exsis according to the licence
         {
@@ -42,10 +39,13 @@ namespace DL
                    select bus.Clone();
         }
 
-        //public IEnumerable<DO.Bus> GetAllPersonsBy(Predicate<DO.Bus> predicate) //איך כותבים??
-        //{
-            
-        //}
+        public IEnumerable<DO.Bus> GetAllBusesBy(Predicate<DO.Bus> buscondition) //איך כותבים??
+        {
+            var list = from bus in DataSource.ListBus
+                       where (bus.BusExsis && buscondition(bus))
+                       select bus.Clone();
+            return list;
+        }
 
         public void AddBus(DO.Bus bus)
         {
@@ -134,9 +134,9 @@ namespace DL
 
 
         #endregion Line
-        //
+        
 
 
-        //
-    }//
+        
+    }
 }
