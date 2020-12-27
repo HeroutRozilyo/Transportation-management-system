@@ -552,11 +552,12 @@ namespace DL
         public int InStation { get; set; }
         public TimeSpan InAt { get; set; }
         public int OutStation { get; set; }
-        public TimeSpan OutAt { get; set; }*/
+        public TimeSpan OutAt { get; set; }
+        public bool TripExsis { get; set; }*/
 
         public DO.Trip GetTrip(int id) //check if the Trip exsis according to the id
         {
-            DO.Trip trip = DataSource.ListTrip.Find(b => b.Id == id);
+            DO.Trip trip = DataSource.ListTrip.Find(b => b.Id == id&&b.TripExsis);
             if (trip != null)
             {
                 return trip.Clone();
@@ -568,54 +569,55 @@ namespace DL
         public IEnumerable<DO.Trip> GetAllTrip() //return all the stations that we have
         {
             return from trip in DataSource.ListTrip
-                   where (trip.)
-                   select station.Clone();
+                   where (trip.TripExsis)
+                   select trip.Clone();
+        }
+        public IEnumerable<DO.Trip> GetAllTripLine(int line) //return all the trip that we have in thid line
+        {
+            return from trip in DataSource.ListTrip
+                   where (trip.TripExsis&&trip.LineId==line)
+                   select trip.Clone();
         }
 
-        public IEnumerable<DO.Stations> GetAllStationsBy(Predicate<DO.Stations> Stationscondition) //איך כותבים??
+        public IEnumerable<DO.Trip> GetAllTripsBy(Predicate<DO.Trip> Tripcondition) //איך כותבים??
         {
-            var list = from stations in DataSource.ListStations
-                       where (stations.StationExsis && Stationscondition(stations))
-                       select stations.Clone();
+            var list = from trip in DataSource.ListTrip
+                       where (trip.TripExsis && Tripcondition(trip))
+                       select trip.Clone();
             return list;
         }
 
-        public void AddStations(DO.Stations station)
+        public void AddTrip(DO.Trip trip)
         {
-            if (DataSource.ListStations.FirstOrDefault(b => b.Code == station.Code) != null) //if != null its means that this licence is allready exsis
-                throw new DO.WrongLicenceException(station.Code, "This licence already exsis");/////////////////////////////////////////////////////////////////
-            DataSource.ListStations.Add(station.Clone());
+            if (DataSource.ListTrip.FirstOrDefault(b => b.Id == trip.Id) != null) //if != null its means that this licence is allready exsis
+                throw new DO.WrongLicenceException(trip.Id, "This licence already exsis");/////////////////////////////////////////////////////////////////
+            DataSource.ListTrip.Add(trip.Clone());
         }
 
 
-        public void DeleteStations(int code)
+        public void DeleteTrip(int id)
         {
-            DO.Stations stations = DataSource.ListStations.Find(b => b.Code == code && b.StationExsis);
+            DO.Trip stations = DataSource.ListTrip.Find(b => b.Id == id && b.TripExsis);
             if (stations != null)
             {
-                stations.StationExsis = false;
+                stations.TripExsis = false;
 
             }
             else
-                throw new DO.WrongLicenceException(code, "Licence not exsis");//////////////////////////////////////////////////////
+                throw new DO.WrongLicenceException(id, "Licence not exsis");//////////////////////////////////////////////////////
         }
 
-        public void UpdateStations(DO.Stations stations)
+        public void UpdateStations(DO.Trip trip)
         {
-            DO.Stations station = DataSource.ListStations.Find(b => b.Code == stations.Code && b.StationExsis);
-            if (station != null)
+            DO.Trip t = DataSource.ListTrip.Find(b => b.Id== trip.Id && b.TripExsis);
+            if (t != null)
             {
-                DataSource.ListStations.Remove(station);
-                DataSource.ListStations.Add(stations.Clone());
+                DataSource.ListTrip.Remove(t);
+                DataSource.ListTrip.Add(trip.Clone());
             }
             else
-                throw new DO.WrongLicenceException(stations.Code, "Licence not exsis");///////////////////////////////////////////////////////
+                throw new DO.WrongLicenceException(trip.Id, "Licence not exsis");///////////////////////////////////////////////////////
         }
-
-   
-
-
-
         #endregion Trip
     }
 }
