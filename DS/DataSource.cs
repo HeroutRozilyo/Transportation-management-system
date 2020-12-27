@@ -18,6 +18,8 @@ namespace DS
         public static List<LineTrip> ListLineTrip=new List<LineTrip>();
         public static List<BusOnTrip> ListBusOnTrip=new List<BusOnTrip>();
         public static List<Trip> ListTrip=new List<Trip>();
+        public static List<AdjacentStations> ListAdjacentStations = new List<AdjacentStations>();
 
+        
     }
 }
