@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DO
 {
-    public class WrongLicenceException : Exception
+    public class WrongLicenceException : Exception //when licence is wrong 
     {
         public int Licence;
         public WrongLicenceException(int licence) : base() => Licence = licence;
@@ -16,7 +16,32 @@ namespace DO
         {
             return base.ToString() + $",Licence not valid:{Licence} ";
         }
-
+    }
+    public class WrongIDExeption:Exception //when the id number is wrong.. use at line, station, trip,linestation..
+    {
+        public int ID;
+        public WrongIDExeption(int idline) : base() => ID = idline;
+        public WrongIDExeption(int idline, string messege) : base(messege) => ID = idline;
+        public WrongIDExeption(int idline, string messege, Exception innerException) : base(messege, innerException) => ID = idline;
+        public override string ToString()
+        {
+            return base.ToString() + $",ID line not valid:{ID} ";
+        }
 
     }
+    public class WrongNameExeption :Exception //if name user wrong
+    {
+        public string Name;
+        public WrongNameExeption(string name) : base() => Name = name;
+        public WrongNameExeption(string name, string messege) : base(messege) => Name = name;
+        public WrongNameExeption(string name, string messege, Exception innerException) : base(messege, innerException) => Name = name;
+        public override string ToString()
+        {
+            return base.ToString() + $",Name user not valid:{Name} ";
+        }
+    }
+
+
+
+
 }
