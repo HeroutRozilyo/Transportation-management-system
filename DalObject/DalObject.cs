@@ -254,7 +254,7 @@ namespace DL
                    select station.Clone();
         }
 
-        public IEnumerable<DO.LineStation> GetAllLineStationsBy(Predicate<DO.LineStation> StationsLinecondition) 
+        public IEnumerable<DO.LineStation> GetAllLineStationsBy(Predicate<DO.LineStation> StationsLinecondition)
         {
             var list = from stations in DataSource.ListLineStations
                        where (stations.LineStationExsis && StationsLinecondition(stations))
@@ -282,7 +282,7 @@ namespace DL
         }
         public void DeleteStationsFromLine(int Scode) //we use here at foreach because it more effective.
         {
-            foreach(DO.LineStation item in DataSource.ListLineStations)
+            foreach (DO.LineStation item in DataSource.ListLineStations)
             {
                 if (item.StationCode == Scode)
                     item.LineStationExsis = false;
@@ -292,7 +292,7 @@ namespace DL
 
         public void UpdateStations(DO.LineStation linestations)
         {
-            DO.LineStation station = DataSource.ListLineStations.Find(b => b.StationCode == linestations.StationCode &&b.LineId== linestations.LineId && b.LineStationExsis);
+            DO.LineStation station = DataSource.ListLineStations.Find(b => b.StationCode == linestations.StationCode && b.LineId == linestations.LineId && b.LineStationExsis);
             if (station != null)
             {
                 DataSource.ListLineStations.Remove(station);
@@ -304,5 +304,318 @@ namespace DL
 
         #endregion LineStation
 
+        #region LineTrip
+        /*public int KeyId { get; set; }
+        public TimeSpan StartAt { get; set; }
+        public TimeSpan Frequency { get; set; } //if 0 so its mean single exit 
+        public TimeSpan FinishAt { get; set; } //It is possible to have several end times per hour*/
+        public DO.LineTrip GetLineTrip(TimeSpan start, int idline) //return specific linetrip according to start time oand id line 
+        {
+            DO.LineTrip linetrip = DataSource.ListLineTrip.Find(b => b.KeyId == idline && b.StartAt == start);
+            if (linetrip != null)
+            {
+                return linetrip.Clone();
+            }
+            else
+                throw new DO.WrongLicenceException(idline, $"Licence not valid:{start}");/////////////////////////////////////////////////////////
+
+        }
+
+        public IEnumerable<DO.LineTrip> GetAllTripline(int idline) //return all the lineTrip of specific line
+        {
+            return from linetrip in DataSource.ListLineTrip
+                   where (linetrip.KeyId == idline)
+                   select linetrip.Clone();
+        }
+
+
+        public IEnumerable<DO.LineTrip> GetAllLineTripsBy(Predicate<DO.LineTrip> StationsLinecondition)
+        {
+            var list = from linetrip in DataSource.ListLineTrip
+                       where (StationsLinecondition(linetrip))
+                       select linetrip.Clone();
+            return list;
+        }
+
+        public void AddLineTrip(DO.LineTrip lineTrip)
+        {
+            //DO.LineTrip temp = DataSource.ListLineTrip.Find(b => b.KeyId == station.KeyId);
+            //if (temp != null)
+            //    throw new DO.WrongLicenceException(station.StationCode, "This licence already exsis");/////////////////////////////////////////////////////////////////
+            DataSource.ListLineTrip.Add(lineTrip.Clone());
+        }
+
+        //public void DeleteStationsFromLine(int Scode, int idline)
+        //{
+        //    DO.LineStation stations = DataSource.ListLineStations.Find(b => b.StationCode == Scode && b.LineId == idline && b.LineStationExsis);
+        //    if (stations != null)
+        //    {
+        //        stations.LineStationExsis = false;
+        //    }
+        //    else
+        //        throw new DO.WrongLicenceException(Scode, "Licence not exsis");//////////////////////////////////////////////////////
+        //}
+        //public void DeleteStationsFromLine(int Scode) //we use here at foreach because it more effective.
+        //{
+        //    foreach (DO.LineStation item in DataSource.ListLineStations)
+        //    {
+        //        if (item.StationCode == Scode)
+        //            item.LineStationExsis = false;
+        //    }
+
+        //}
+
+        public void UpdatelineTrip(DO.LineTrip lineTrip)
+        {
+            DO.LineTrip station = DataSource.ListLineTrip.Find(b => b.KeyId == lineTrip.KeyId && lineTrip.StartAt == b.StartAt);
+            if (station != null)
+            {
+                DataSource.ListLineTrip.Remove(station);
+                DataSource.ListLineTrip.Add(lineTrip.Clone());
+            }
+            else
+                throw new DO.WrongLicenceException(lineTrip.KeyId, "Licence not exsis");///////////////////////////////////////////////////////
+        }
+
+
+        #endregion LineTrip
+
+        #region AdjacentStations
+
+        /*  public int Station1 { get; set; }
+        public int Station2 { get; set; }
+        public double Distance { get; set; }
+        public TimeSpan TimeAverage { get; set; }*/
+
+
+        public DO.AdjacentStations GetAdjacentStations(int Scode1, int Scode2) //return specific AdjacentStations
+        {
+            DO.AdjacentStations linestations = DataSource.ListAdjacentStations.Find(b => b.Station1 == Scode1 && b.Station2 == Scode2 || b.Station1 == Scode2 && b.Station2 == Scode1);
+            if (linestations != null)
+            {
+                return linestations.Clone();
+            }
+            else
+                throw new DO.WrongLicenceException(Scode1, $"Licence not valid:{Scode1}");/////////////////////////////////////////////////////////
+
+        }
+
+        public IEnumerable<DO.AdjacentStations> GetAllAdjacentStations(int stationCode) //return all the AdjacentStations that we have for this station code
+        {
+            return from station in DataSource.ListAdjacentStations
+                   where (stationCode == station.Station1)
+                   select station.Clone();
+        }
+        public IEnumerable<DO.AdjacentStations> GetAllAdjacentStationsTo(int stationCode) //return all the AdjacentStations that we have for this station code (from end)
+        {
+            return from station in DataSource.ListAdjacentStations
+                   where (stationCode == station.Station2)
+                   select station.Clone();
+        }
+
+
+        public IEnumerable<DO.AdjacentStations> GetAllAdjacentStationsBy(Predicate<DO.AdjacentStations> StationsLinecondition)
+        {
+            var list = from stations in DataSource.ListAdjacentStations
+                       where (StationsLinecondition(stations))
+                       select stations.Clone();
+            return list;
+        }
+
+        public void AddLineStations(DO.AdjacentStations adjacentStations)
+        {
+            DO.AdjacentStations temp = DataSource.ListAdjacentStations.Find(b => b.Station1 == adjacentStations.Station1 && b.Station2 == adjacentStations.Station2);
+            if (temp != null)
+                throw new DO.WrongLicenceException(adjacentStations.Station1, "This licence already exsis");/////////////////////////////////////////////////////////////////
+            DataSource.ListAdjacentStations.Add(adjacentStations.Clone());
+        }
+
+        public void DeleteAdjacentStationse(int Scode1, int Scode2)
+        {
+            DO.AdjacentStations stations = DataSource.ListAdjacentStations.Find(b => b.Station1 == Scode1 && b.Station2 == Scode2);
+            if (stations != null)
+            {
+                DataSource.ListAdjacentStations.Remove(stations);
+            }
+            else
+                throw new DO.WrongLicenceException(Scode1, "Licence not exsis");//////////////////////////////////////////////////////
+        }
+        public void DeleteAdjacentStationseBStation(int Scode1)
+        {
+            foreach (DO.AdjacentStations item in DataSource.ListAdjacentStations)
+            {
+                if (item.Station1 == Scode1 || item.Station2 == Scode1)
+                    DataSource.ListAdjacentStations.Remove(item);
+            }
+
+        }
+
+        public void UpdateAdjacentStations(DO.AdjacentStations adjacentStations)
+        {
+            DO.AdjacentStations station = DataSource.ListAdjacentStations.Find(b => b.Station1 == adjacentStations.Station1 && b.Station2 == adjacentStations.Station2);
+            if (station != null)
+            {
+                DataSource.ListAdjacentStations.Remove(station);
+                DataSource.ListAdjacentStations.Add(adjacentStations.Clone());
+            }
+            else
+                throw new DO.WrongLicenceException(adjacentStations.Station1, "Licence not exsis");///////////////////////////////////////////////////////
+        }
+        #endregion AdjacentStations
+
+        #region User
+        /* public string UserName { get; set; }
+         public string Password { get; set; }
+         public bool Admin { get; set; }
+         public bool UserExsis
+         {
+             get; set;
+         }
+        */
+        public DO.User GetUser(string name) //check if the user exsis according to the name
+        {
+            DO.User user = DataSource.ListUsers.Find(b => b.UserName == name && b.UserExsis);
+            if (user != null)
+            {
+                return user.Clone();
+            }
+            else
+                throw new DO.WrongLicenceException(1, $"Licence not valid:{1}");/////////////////////////////////////////////////////////
+
+        }
+        public IEnumerable<DO.User> GetAlluser() //return all the user that we have
+        {
+            return from user in DataSource.ListUsers
+                   where (user.UserExsis)
+                   select user.Clone();
+        }
+        public IEnumerable<DO.User> GetAlluserAdmin() //return all the user Admin we have
+        {
+            return from user in DataSource.ListUsers
+                   where (user.UserExsis&&user.Admin)
+                   select user.Clone();
+        }
+        public IEnumerable<DO.User> GetAlluserNAdmin() //return all the user not Admin we have
+        {
+            return from user in DataSource.ListUsers
+                   where (user.UserExsis && !user.Admin)
+                   select user.Clone();
+        }
+
+        public IEnumerable<DO.User> GetAlluserBy(Predicate<DO.User> userConditions) //איך כותבים??
+        {
+            var users = from u in DataSource.ListUsers
+                       where (u.UserExsis && userConditions(u))
+                       select u.Clone();
+            return users;
+        }
+
+        public void AddUser(DO.User user)
+        {
+            if (DataSource.ListUsers.FirstOrDefault(b => b.UserName == user.UserName) != null) //if != null its means that this name is allready exsis
+                throw new DO.WrongLicenceException(1, "This licence already exsis");/////////////////////////////////////////////////////////////////
+            DataSource.ListUsers.Add(user.Clone());
+        }
+
+
+        public void DeleteUser(string name)
+        {
+            DO.User userDelete = DataSource.ListUsers.Find(b => b.UserName == name && b.UserExsis);
+            if (userDelete != null)
+            {
+                userDelete.UserExsis = false;
+
+            }
+            else
+                throw new DO.WrongLicenceException(1, "Licence not exsis");//////////////////////////////////////////////////////
+        }
+
+        public void UpdateUser(DO.User user)
+        {
+            DO.User u = DataSource.ListUsers.Find(b => b.UserName == user.UserName && b.UserExsis);
+            if (u != null)
+            {
+                DataSource.ListUsers.Remove(u);
+                DataSource.ListUsers.Add(user.Clone());
+            }
+            else
+                throw new DO.WrongLicenceException(1, "Licence not exsis");///////////////////////////////////////////////////////
+        }
+
+        #endregion User
+
+        #region Trip
+
+        /*public int Id { get; set; }
+        public string UserName { get; set; }
+        public int LineId { get; set; }
+        public int InStation { get; set; }
+        public TimeSpan InAt { get; set; }
+        public int OutStation { get; set; }
+        public TimeSpan OutAt { get; set; }*/
+
+        public DO.Trip GetTrip(int id) //check if the Trip exsis according to the id
+        {
+            DO.Trip trip = DataSource.ListTrip.Find(b => b.Id == id);
+            if (trip != null)
+            {
+                return trip.Clone();
+            }
+            else
+                throw new DO.WrongLicenceException(id, $"Licence not valid:{id}");/////////////////////////////////////////////////////////
+
+        }
+        public IEnumerable<DO.Trip> GetAllTrip() //return all the stations that we have
+        {
+            return from trip in DataSource.ListTrip
+                   where (trip.)
+                   select station.Clone();
+        }
+
+        public IEnumerable<DO.Stations> GetAllStationsBy(Predicate<DO.Stations> Stationscondition) //איך כותבים??
+        {
+            var list = from stations in DataSource.ListStations
+                       where (stations.StationExsis && Stationscondition(stations))
+                       select stations.Clone();
+            return list;
+        }
+
+        public void AddStations(DO.Stations station)
+        {
+            if (DataSource.ListStations.FirstOrDefault(b => b.Code == station.Code) != null) //if != null its means that this licence is allready exsis
+                throw new DO.WrongLicenceException(station.Code, "This licence already exsis");/////////////////////////////////////////////////////////////////
+            DataSource.ListStations.Add(station.Clone());
+        }
+
+
+        public void DeleteStations(int code)
+        {
+            DO.Stations stations = DataSource.ListStations.Find(b => b.Code == code && b.StationExsis);
+            if (stations != null)
+            {
+                stations.StationExsis = false;
+
+            }
+            else
+                throw new DO.WrongLicenceException(code, "Licence not exsis");//////////////////////////////////////////////////////
+        }
+
+        public void UpdateStations(DO.Stations stations)
+        {
+            DO.Stations station = DataSource.ListStations.Find(b => b.Code == stations.Code && b.StationExsis);
+            if (station != null)
+            {
+                DataSource.ListStations.Remove(station);
+                DataSource.ListStations.Add(stations.Clone());
+            }
+            else
+                throw new DO.WrongLicenceException(stations.Code, "Licence not exsis");///////////////////////////////////////////////////////
+        }
+
+   
+
+
+
+        #endregion Trip
     }
 }

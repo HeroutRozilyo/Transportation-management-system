@@ -18,6 +18,7 @@ namespace DS
         public static List<LineTrip> ListLineTrip;
         public static List<BusOnTrip> ListBusOnTrip;
         public static List<Trip> ListTrip;
+        public static List<AdjacentStations> ListAdjacentStations;
 
 
     }
