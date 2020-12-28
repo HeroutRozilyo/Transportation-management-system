@@ -449,15 +449,7 @@ namespace DS
                 #endregion
             };
 
-            // public int Licence { get; set; }
-            //public DateTime StartingDate { get; set; }
-            //public double Kilometrz { get; set; }
-            //public double KilometrFromLastTreat { get; set; }
-            //public double FuellAmount { get; set; }
-            //public STUTUS StatusBus { get; set; }
-            //public bool BusExsis { get; set; }
-
-
+           
             ListBus = new List<Bus>
             {
                 #region initialization buses
@@ -465,209 +457,1390 @@ namespace DS
                 {
                     Licence=5267008,
                     StartingDate= new DateTime(2013, 02, 05),
-            //Kilometrz
-            //KilometrFromLastTreat
-            //FuellAmount
-            //StatusBus
-            //BusExsis
-        },
-                new Bus
-                {
-                    //Licence=
-                    //StartingDate
-                    //Kilometrz
-                    //KilometrFromLastTreat
-                    //FuellAmount
-                    //StatusBus
-                    //BusExsis
+                    Kilometrz=22000,
+                    KilometrFromLastTreat=2000,
+                    FuellAmount=200,
+                    StatusBus=DO.STUTUS.READT_TO_TRAVEL,
+                    BusExsis=true
                 },
+
+
                 new Bus
                 {
-                    //Licence=
-                    //StartingDate
-                    //Kilometrz
-                    //KilometrFromLastTreat
-                    //FuellAmount
-                    //StatusBus
-                    //BusExsis
+                    Licence=2784562,
+                    StartingDate= new DateTime(2014, 03, 05),
+                    Kilometrz=22000,
+                    KilometrFromLastTreat=2000,
+                    FuellAmount=700,
+                    StatusBus=DO.STUTUS.READT_TO_TRAVEL,
+                    BusExsis=true
                 },
                 new Bus
                 {
-                    //Licence=
-                    //StartingDate
-                    //Kilometrz
-                    //KilometrFromLastTreat
-                    //FuellAmount
-                    //StatusBus
-                    //BusExsis
+                    Licence=12345678,
+                    StartingDate= new DateTime(2019, 02, 05),
+                    Kilometrz=10000,
+                    KilometrFromLastTreat=10000,
+                    FuellAmount=340,
+                    StatusBus=DO.STUTUS.READT_TO_TRAVEL,
+                    BusExsis=true
                 },
                 new Bus
                 {
-                    //Licence=
-                    //StartingDate
-                    //Kilometrz
-                    //KilometrFromLastTreat
-                    //FuellAmount
-                    //StatusBus
-                    //BusExsis
+                    Licence=5267008,
+                    StartingDate= new DateTime(2013, 02, 05),
+                    Kilometrz=22000,
+                    KilometrFromLastTreat=2000,
+                    FuellAmount=200,
+                    StatusBus=DO.STUTUS.READT_TO_TRAVEL,
+                    BusExsis=true
                 },
-                                              new Bus
+                new Bus
                 {
-                    //Licence=
-                    //StartingDate
-                    //Kilometrz
-                    //KilometrFromLastTreat
-                    //FuellAmount
-                    //StatusBus
-                    //BusExsis
+                    Licence=1234567,
+                    StartingDate= new DateTime(2013, 09, 21),
+                    Kilometrz=70000,
+                    KilometrFromLastTreat=1500.34,
+                    FuellAmount=643.98,
+                    StatusBus=DO.STUTUS.READT_TO_TRAVEL,
+                    BusExsis=true
                 },
-                                                    new Bus
+                new Bus
                 {
-                    //Licence=
-                    //StartingDate
-                    //Kilometrz
-                    //KilometrFromLastTreat
-                    //FuellAmount
-                    //StatusBus
-                    //BusExsis
+                    Licence=7654321,
+                    StartingDate= new DateTime(2013, 02, 05),
+                    Kilometrz=22000,
+                    KilometrFromLastTreat=2000,
+                    FuellAmount=200,
+                    StatusBus=DO.STUTUS.READT_TO_TRAVEL,
+                    BusExsis=true
                 },
-                                                          new Bus
+                new Bus
                 {
-                    //Licence=
-                    //StartingDate
-                    //Kilometrz
-                    //KilometrFromLastTreat
-                    //FuellAmount
-                    //StatusBus
-                    //BusExsis
+                    Licence=5463728,
+                    StartingDate= new DateTime(2013, 06, 20),
+                    Kilometrz=22000,
+                    KilometrFromLastTreat=78500,
+                    FuellAmount=350,
+                    StatusBus=DO.STUTUS.READT_TO_TRAVEL,
+                    BusExsis=true
                 },
-                                                                new Bus
+                new Bus
                 {
-                    //Licence=
-                    //StartingDate
-                    //Kilometrz
-                    //KilometrFromLastTreat
-                    //FuellAmount
-                    //StatusBus
-                    //BusExsis
+                    Licence=8216542,
+                    StartingDate= new DateTime(2010, 04, 15),
+                    Kilometrz=100000,
+                    KilometrFromLastTreat=15000,
+                    FuellAmount=900,
+                    StatusBus=DO.STUTUS.READT_TO_TRAVEL,
+                    BusExsis=true
                 },
-                                                                      new Bus
+                new Bus
                 {
-                    //Licence=
-                    //StartingDate
-                    //Kilometrz
-                    //KilometrFromLastTreat
-                    //FuellAmount
-                    //StatusBus
-                    //BusExsis
+                    Licence=34509814,
+                    StartingDate= new DateTime(2019, 02, 20),
+                    Kilometrz=10500,
+                    KilometrFromLastTreat=1400,
+                    FuellAmount=300,
+                    StatusBus=DO.STUTUS.READT_TO_TRAVEL,
+                    BusExsis=true
                 },
-                                                                            new Bus
+                new Bus
                 {
-                    //Licence=
-                    //StartingDate
-                    //Kilometrz
-                    //KilometrFromLastTreat
-                    //FuellAmount
-                    //StatusBus
-                    //BusExsis
+                    Licence=10926574,
+                    StartingDate= new DateTime(2020, 04, 15),
+                    Kilometrz=100000,
+                    KilometrFromLastTreat=15000,
+                    FuellAmount=900,
+                    StatusBus=DO.STUTUS.READT_TO_TRAVEL,
+                    BusExsis=true
                 },
-                                                                                  new Bus
+               new Bus
                 {
-                    //Licence=
-                    //StartingDate
-                    //Kilometrz
-                    //KilometrFromLastTreat
-                    //FuellAmount
-                    //StatusBus
-                    //BusExsis
+                    Licence=1192657,
+                    StartingDate= new DateTime(2010, 12, 15),
+                    Kilometrz=28970,
+                    KilometrFromLastTreat=8970,
+                    FuellAmount=1000,
+                    StatusBus=DO.STUTUS.READT_TO_TRAVEL,
+                    BusExsis=true
                 },
-                                                                                        new Bus
+             new Bus
                 {
-                    //Licence=
-                    //StartingDate
-                    //Kilometrz
-                    //KilometrFromLastTreat
-                    //FuellAmount
-                    //StatusBus
-                    //BusExsis
+                    Licence=1265473,
+                    StartingDate= new DateTime(2009, 07, 18),
+                    Kilometrz=20000,
+                    KilometrFromLastTreat=100,
+                    FuellAmount=900,
+                    StatusBus=DO.STUTUS.READT_TO_TRAVEL,
+                      BusExsis=true
                 },
-                                                                                              new Bus
+                new Bus
                 {
-                    //Licence=
-                    //StartingDate
-                    //Kilometrz
-                    //KilometrFromLastTreat
-                    //FuellAmount
-                    //StatusBus
-                    //BusExsis
+                    Licence=89712365,
+                    StartingDate= new DateTime(2020, 03, 15),
+                    Kilometrz=100000,
+                    KilometrFromLastTreat=15000,
+                    FuellAmount=900,
+                    StatusBus=DO.STUTUS.READT_TO_TRAVEL,
+                    BusExsis=true
                 },
-                                                                                                    new Bus
+                new Bus
                 {
-                    //Licence=
-                    //StartingDate
-                    //Kilometrz
-                    //KilometrFromLastTreat
-                    //FuellAmount
-                    //StatusBus
-                    //BusExsis
+                    Licence=1778328,
+                    StartingDate= new DateTime(2010, 02, 15),
+                    Kilometrz=100000,
+                    KilometrFromLastTreat=15000,
+                    FuellAmount=900,
+                    StatusBus=DO.STUTUS.READT_TO_TRAVEL,
+                    BusExsis=true
                 },
-                                                                                                          new Bus
+              new Bus
                 {
-                    //Licence=
-                    //StartingDate
-                    //Kilometrz
-                    //KilometrFromLastTreat
-                    //FuellAmount
-                    //StatusBus
-                    //BusExsis
+                    Licence=5059589,
+                    StartingDate= new DateTime(1999, 04, 15),
+                    Kilometrz=100000,
+                    KilometrFromLastTreat=15000,
+                    FuellAmount=900,
+                    StatusBus=DO.STUTUS.READT_TO_TRAVEL,
+                    BusExsis=true
                 },
-                                                                                                                new Bus
+                                                                                                                          new Bus
                 {
-                    //Licence=
-                    //StartingDate
-                    //Kilometrz
-                    //KilometrFromLastTreat
-                    //FuellAmount
-                    //StatusBus
-                    //BusExsis
+                    Licence=12845999,
+                    StartingDate= new DateTime(2020, 01, 15),
+                    Kilometrz=100000,
+                    KilometrFromLastTreat=15000,
+                    FuellAmount=900,
+                    StatusBus=DO.STUTUS.READT_TO_TRAVEL,
+                    BusExsis=true
+                },
+                                                                                                                          new Bus
+                {
+                    Licence=2000000,
+                    StartingDate= new DateTime(2012, 07, 25),
+                    Kilometrz=109283,
+                    KilometrFromLastTreat=15000,
+                    FuellAmount=900,
+                    StatusBus=DO.STUTUS.READT_TO_TRAVEL,
+                    BusExsis=true
                 },
                                                                                                                       new Bus
                 {
-                    //Licence=
-                    //StartingDate
-                    //Kilometrz
-                    //KilometrFromLastTreat
-                    //FuellAmount
-                    //StatusBus
-                    //BusExsis
+                    Licence=11119999,
+                    StartingDate= new DateTime(2020, 08, 15),
+                    Kilometrz=100000,
+                    KilometrFromLastTreat=15000,
+                    FuellAmount=900,
+                    StatusBus=DO.STUTUS.READT_TO_TRAVEL,
+                    BusExsis=true
                 },
                                                                                                                             new Bus
                 {
-                    //Licence=
-                    //StartingDate
-                    //Kilometrz
-                    //KilometrFromLastTreat
-                    //FuellAmount
-                    //StatusBus
-                    //BusExsis
+                    Licence=8576669,
+                    StartingDate= new DateTime(2017, 04, 15),
+                    Kilometrz=100000,
+                    KilometrFromLastTreat=15000,
+                    FuellAmount=900,
+                    StatusBus=DO.STUTUS.READT_TO_TRAVEL,
+                     BusExsis=true
                 },
-                                                                                                                                  new Bus
+                                                                                                                          new Bus
                 {
-                    //Licence=
-                    //StartingDate
-                    //Kilometrz
-                    //KilometrFromLastTreat
-                    //FuellAmount
-                    //StatusBus
-                    //BusExsis
+                   Licence=10928300,
+                    StartingDate= new DateTime(2020, 09, 22),
+                    Kilometrz=100000,
+                    KilometrFromLastTreat=15000,
+                    FuellAmount=900,
+                    StatusBus=DO.STUTUS.READT_TO_TRAVEL,
+                    BusExsis=true
                 },
-
-
-
 
                 #endregion
             };
 
+            ListLine = new List<Line>
+            {
+                #region line
+                new Line
+                {
+                IdNumber = ++DS.Config.idLineCounter,
+                NumberLine=18,
+                FirstStationCode=73,
+                LastStationCode=89,
+                Area=DO.AREA.CENTER,
+                LineExsis=true,
+                },
+                new Line
+                {
+                IdNumber = ++DS.Config.idLineCounter,
+                NumberLine=10,
+                FirstStationCode=85,
+                LastStationCode=97,
+                Area=DO.AREA.GENERAL,
+                LineExsis=true,
+                },
+                new Line
+                {
+                IdNumber = ++DS.Config.idLineCounter,
+                NumberLine=5,
+                FirstStationCode=122,
+                LastStationCode=1511,
+                Area=DO.AREA.JERUSALEM,
+                LineExsis=true,
+                },
+                new Line
+                {
+                IdNumber = ++DS.Config.idLineCounter,
+                NumberLine=6,
+                FirstStationCode=121,
+                LastStationCode=1491,
+                Area=DO.AREA.NORTH,
+                LineExsis=true,
+                },
+                new Line
+                {
+                IdNumber = ++DS.Config.idLineCounter,
+                NumberLine=33,
+                FirstStationCode=119,
+                LastStationCode=1491,
+                Area=DO.AREA.SOUTH,
+                LineExsis=true,
+                },
+                new Line
+                {
+                IdNumber = ++DS.Config.idLineCounter,
+                NumberLine=67,
+                FirstStationCode=110,
+                LastStationCode=1486,
+                Area=DO.AREA.YOSH,
+                LineExsis=true,
+                },
+                new Line
+                {
+                IdNumber = ++DS.Config.idLineCounter,
+                NumberLine=24,
+                FirstStationCode=97,
+                LastStationCode=111,
+                Area=DO.AREA.JERUSALEM,
+                LineExsis=true,
+                },
+                new Line
+                {
+                IdNumber = ++DS.Config.idLineCounter,
+                NumberLine=20,
+                FirstStationCode=102,
+                LastStationCode=116,
+                Area=DO.AREA.JERUSALEM,
+                LineExsis=true,
+                },
+                new Line
+                {
+                IdNumber = ++DS.Config.idLineCounter,
+                NumberLine=27,
+                FirstStationCode=85,
+                LastStationCode=102,
+                Area=DO.AREA.JERUSALEM,
+                LineExsis=true,
+                },
+                new Line
+                {
+                IdNumber = ++DS.Config.idLineCounter,
+                NumberLine=21,
+                FirstStationCode=111,
+                LastStationCode=1488,
+                Area=DO.AREA.JERUSALEM,
+                LineExsis=true,
+                }
+
+                #endregion
+            };
+
+            
+            ListLineTrip = new List<LineTrip>
+            {
+                 #region LineTrip
+                new LineTrip
+                {
+                 KeyId=1,
+                 StartAt=new TimeSpan(06,00,00),
+                 FinishAt=new TimeSpan(24,00,00),
+                 Frequency=19,
+                 },
+                new LineTrip
+                {
+                 KeyId=2,
+                 StartAt=new TimeSpan(06,00,00),
+                 FinishAt=new TimeSpan(24,00,00),
+                 Frequency=13,
+                 },
+                new LineTrip
+                {
+                 KeyId=3,
+                 StartAt=new TimeSpan(06,00,00),
+                 FinishAt=new TimeSpan(24,00,00),
+                 Frequency=15,
+                 },
+                new LineTrip
+                {
+                 KeyId=4,
+                 StartAt=new TimeSpan(06,00,00),
+                 FinishAt=new TimeSpan(19,00,00),
+                 Frequency=10,
+                 },
+                new LineTrip
+                {
+                 KeyId=4,
+                 StartAt=new TimeSpan(19,00,00),
+                 FinishAt=new TimeSpan(24,00,00),
+                 Frequency=30,
+                 },
+                new LineTrip
+                {
+                 KeyId=5,
+                 StartAt=new TimeSpan(06,00,00),
+                 FinishAt=new TimeSpan(08,30,00),
+                 Frequency=3,
+                 },
+                new LineTrip
+                {
+                 KeyId=5,
+                 StartAt=new TimeSpan(08,30,00),
+                 FinishAt=new TimeSpan(14,00,00),
+                 Frequency=60,
+                 },
+                new LineTrip
+                {
+                 KeyId=5,
+                 StartAt=new TimeSpan(14,00,00),
+                 FinishAt=new TimeSpan(24,00,00),
+                 Frequency=20,
+                 },
+                new LineTrip
+                {
+                 KeyId=6,
+                 StartAt=new TimeSpan(06,00,00),
+                 FinishAt=new TimeSpan(24,00,00),
+                 Frequency=17,
+                 },
+                new LineTrip
+                {
+                 KeyId=7,
+                 StartAt=new TimeSpan(08,00,00),
+                 FinishAt=new TimeSpan(24,00,00),
+                 Frequency=30,
+                 },
+                new LineTrip
+                {
+                 KeyId=8,
+                 StartAt=new TimeSpan(01,00,00),
+                 FinishAt=new TimeSpan(06,00,00),
+                 Frequency=60,
+                 },
+                new LineTrip
+                {
+                 KeyId=9,
+                 StartAt=new TimeSpan(05,00,00),
+                 FinishAt=new TimeSpan(10,00,00),
+                 Frequency=20,
+                 },
+                new LineTrip
+                {
+                 KeyId=9,
+                 StartAt=new TimeSpan(10,00,00),
+                 FinishAt=new TimeSpan(24,00,00),
+                 Frequency=40,
+                 },
+                new LineTrip
+                {
+                 KeyId=10,
+                 StartAt=new TimeSpan(6,00,00),
+                 FinishAt=new TimeSpan(24,00,00),
+                 Frequency=40,
+                 }
+                 #endregion LineTrip
+            };
+
+            
+            ListUsers = new List<User>
+            {
+               #region User
+                new User
+                {
+                    UserName="RonDavid123",
+                    Password="20934h584",
+                    Admin=true,
+                    UserExsis=true,
+                },
+
+                new User
+                {
+                    UserName="TheKing99",
+                    Password="1qazxsw2",
+                    Admin=false,
+                    UserExsis=true,
+                },
+                new User
+                {
+                    UserName="Michal_Work",
+                    Password="21071999M",
+                    Admin=true,
+                    UserExsis=true,
+                },
+                new User
+                {
+                    UserName="OriyaShmoel",
+                    Password="busbus123",
+                    Admin=false,
+                    UserExsis=true,
+                },
+                 #endregion User
+            };
+            //    public int Id { get; set; }
+            //public string UserName { get; set; }
+            //public int LineId { get; set; }
+            //public int InStation { get; set; }
+            //public TimeSpan InAt { get; set; }
+            //public int OutStation { get; set; }
+            //public TimeSpan OutAt { get; set; }
+            //public bool TripExsis { get; set; }
+            ListTrip = new List<Trip>////TODO
+            {
+           #region Trip
+            new Trip
+            {
+               
+
+            
+            }
+           #endregion Trip/////
+            };
+
+            ListLineStations = new List<LineStation>
+            {
+                #region line station
+                //line number 18
+                new LineStation
+                {
+                    LineId=1,
+                    StationCode=73,
+                    LineStationIndex=1,
+                    LineStationExsis=true,
+                    PrevStation=0,
+                    NextStation=76,
+                },
+                new LineStation
+                {
+                    LineId=1,
+                    StationCode=76,
+                    LineStationIndex=2,
+                    LineStationExsis=true,
+                    PrevStation=73,
+                    NextStation=77,
+                },
+                new LineStation
+                {
+                    LineId=1,
+                    StationCode=77,
+                    LineStationIndex=3,
+                    LineStationExsis=true,
+                    PrevStation=76,
+                    NextStation=78,
+                },
+                new LineStation
+                {
+                    LineId=1,
+                    StationCode=78,
+                    LineStationIndex=4,
+                    LineStationExsis=true,
+                    PrevStation=77,
+                    NextStation=83,
+                },
+                new LineStation
+                {
+                    LineId=1,
+                    StationCode=83,
+                    LineStationIndex=5,
+                    LineStationExsis=true,
+                    PrevStation=78,
+                    NextStation=84,
+                },
+                new LineStation
+                {
+                    LineId=1,
+                    StationCode=84,
+                    LineStationIndex=6,
+                    LineStationExsis=true,
+                    PrevStation=83,
+                    NextStation=85,
+                },
+                new LineStation
+                {
+                    LineId=1,
+                    StationCode=85,
+                    LineStationIndex=7,
+                    LineStationExsis=true,
+                    PrevStation=84,
+                    NextStation=86,
+                },
+                new LineStation
+                {
+                    LineId=1,
+                    StationCode=86,
+                    LineStationIndex=8,
+                    LineStationExsis=true,
+                    PrevStation=85,
+                    NextStation=88,
+                },
+                new LineStation
+                {
+                    LineId=1,
+                    StationCode=88,
+                    LineStationIndex=9,
+                    LineStationExsis=true,
+                    PrevStation=86,
+                    NextStation=89,
+                },
+                new LineStation
+                {
+                    LineId=1,
+                    StationCode=89,
+                    LineStationIndex=10,
+                    LineStationExsis=true,
+                    PrevStation=88,
+                    NextStation=0,
+                },
+
+             //line 10
+                new LineStation
+                {
+                    LineId=2,
+                    StationCode=85,
+                    LineStationIndex=1,
+                    LineStationExsis=true,
+                    PrevStation=0,
+                    NextStation=86,
+                },
+                new LineStation
+                {
+                    LineId=2,
+                    StationCode=86,
+                    LineStationIndex=2,
+                    LineStationExsis=true,
+                    PrevStation=85,
+                    NextStation=88,
+                },
+                new LineStation
+                {
+                    LineId=2,
+                    StationCode=88,
+                    LineStationIndex=3,
+                    LineStationExsis=true,
+                    PrevStation=86,
+                    NextStation=89,
+                },
+                new LineStation
+                {
+                    LineId=2,
+                    StationCode=89,
+                    LineStationIndex=4,
+                    LineStationExsis=true,
+                    PrevStation=88,
+                    NextStation=90,
+                },
+                new LineStation
+                {
+                    LineId=2,
+                    StationCode=90,
+                    LineStationIndex=5,
+                    LineStationExsis=true,
+                    PrevStation=89,
+                    NextStation=91,
+                },
+                new LineStation
+                {
+                    LineId=2,
+                    StationCode=91,
+                    LineStationIndex=6,
+                    LineStationExsis=true,
+                    PrevStation=90,
+                    NextStation=93,
+                },
+                new LineStation
+                {
+                    LineId=2,
+                    StationCode=93,
+                    LineStationIndex=7,
+                    LineStationExsis=true,
+                    PrevStation=91,
+                    NextStation=94,
+                },
+                new LineStation
+                {
+                    LineId=2,
+                    StationCode=94,
+                    LineStationIndex=8,
+                    LineStationExsis=true,
+                    PrevStation=93,
+                    NextStation=95,
+                },
+                new LineStation
+                {
+                    LineId=2,
+                    StationCode=95,
+                    LineStationIndex=9,
+                    LineStationExsis=true,
+                    PrevStation=94,
+                    NextStation=97,
+                },
+                new LineStation
+                {
+                    LineId=2,
+                    StationCode=97,
+                    LineStationIndex=10,
+                    LineStationExsis=true,
+                    PrevStation=95,
+                    NextStation=0,
+                }, 
+             //line 5         
+                new LineStation
+                {
+                    LineId=3,
+                    StationCode=122,
+                    LineStationIndex=1,
+                    LineStationExsis=true,
+                    PrevStation=0,
+                    NextStation=123,
+                },
+                new LineStation
+                {
+                    LineId=3,
+                    StationCode=123,
+                    LineStationIndex=2,
+                    LineStationExsis=true,
+                    PrevStation=122,
+                    NextStation=121,
+                },
+                new LineStation
+                {
+                    LineId=3,
+                    StationCode=121,
+                    LineStationIndex=3,
+                    LineStationExsis=true,
+                    PrevStation=123,
+                    NextStation=1524,
+                },
+                new LineStation
+                {
+                    LineId=3,
+                    StationCode=1524,
+                    LineStationIndex=4,
+                    LineStationExsis=true,
+                    PrevStation=121,
+                    NextStation=1523,
+                },
+                new LineStation
+                {
+                    LineId=3,
+                    StationCode=1523,
+                    LineStationIndex=5,
+                    LineStationExsis=true,
+                    PrevStation=1524,
+                    NextStation=1522,
+                },
+                new LineStation
+                {
+                    LineId=3,
+                    StationCode=1522,
+                    LineStationIndex=6,
+                    LineStationExsis=true,
+                    PrevStation=1523,
+                    NextStation=1518,
+                },
+                new LineStation
+                {
+                    LineId=3,
+                    StationCode=1518,
+                    LineStationIndex=7,
+                    LineStationExsis=true,
+                    PrevStation=1522,
+                    NextStation=1514,
+                },
+                new LineStation
+                {
+                    LineId=3,
+                    StationCode=1514,
+                    LineStationIndex=8,
+                    LineStationExsis=true,
+                    PrevStation=1518,
+                    NextStation=1512,
+                },
+                new LineStation
+                {
+                    LineId=3,
+                    StationCode=1512,
+                    LineStationIndex=9,
+                    LineStationExsis=true,
+                    PrevStation=1514,
+                    NextStation=1511,
+                },
+                new LineStation
+                {
+                    LineId=3,
+                    StationCode=1511,
+                    LineStationIndex=10,
+                    LineStationExsis=true,
+                    PrevStation=1512,
+                    NextStation=0,
+                },
+
+                //line=6
+                new LineStation
+                {
+                    LineId=4,
+                    StationCode=121,
+                    LineStationIndex=1,
+                    LineStationExsis=true,
+                    PrevStation=0,
+                    NextStation=123,
+                },
+                new LineStation
+                {
+                    LineId=4,
+                    StationCode=123,
+                    LineStationIndex=2,
+                    LineStationExsis=true,
+                    PrevStation=121,
+                    NextStation=122,
+                },
+                new LineStation
+                {
+                    LineId=4,
+                    StationCode=122,
+                    LineStationIndex=3,
+                    LineStationExsis=true,
+                    PrevStation=123,
+                    NextStation=1524,
+                },
+                new LineStation
+                {
+                    LineId=4,
+                    StationCode=1524,
+                    LineStationIndex=4,
+                    LineStationExsis=true,
+                    PrevStation=122,
+                    NextStation=1523,
+                },
+                new LineStation
+                {
+                    LineId=4,
+                    StationCode=1523,
+                    LineStationIndex=5,
+                    LineStationExsis=true,
+                    PrevStation=1524,
+                    NextStation=1522,
+                },
+                new LineStation
+                {
+                    LineId=4,
+                    StationCode=1522,
+                    LineStationIndex=6,
+                    LineStationExsis=true,
+                    PrevStation=1523,
+                    NextStation=1518,
+                },
+                new LineStation
+                {
+                    LineId=4,
+                    StationCode=1518,
+                    LineStationIndex=7,
+                    LineStationExsis=true,
+                    PrevStation=1522,
+                    NextStation=1514,
+                },
+                new LineStation
+                {
+                    LineId=4,
+                    StationCode=1514,
+                    LineStationIndex=8,
+                    LineStationExsis=true,
+                    PrevStation=1518,
+                    NextStation=1512,
+                },
+                new LineStation
+                {
+                    LineId=4,
+                    StationCode=1512,
+                    LineStationIndex=9,
+                    LineStationExsis=true,
+                    PrevStation=1514,
+                    NextStation=1491,
+                },
+                new LineStation
+                {
+                    LineId=4,
+                    StationCode=1491,
+                    LineStationIndex=10,
+                    LineStationExsis=true,
+                    PrevStation=1512,
+                    NextStation=0,
+                }, 
+
+                //line=33
+                new LineStation
+                {
+                    LineId=5,
+                    StationCode=119,
+                    LineStationIndex=1,
+                    LineStationExsis=true,
+                    PrevStation=0,
+                    NextStation=1485,
+                },
+                new LineStation
+                {
+                    LineId=5,
+                    StationCode=1485,
+                    LineStationIndex=2,
+                    LineStationExsis=true,
+                    PrevStation=119,
+                    NextStation=1486,
+                },
+                new LineStation
+                {
+                    LineId=5,
+                    StationCode=1486,
+                    LineStationIndex=3,
+                    LineStationExsis=true,
+                    PrevStation=1485,
+                    NextStation=1487,
+                },
+                new LineStation
+                {
+                    LineId=5,
+                    StationCode=1487,
+                    LineStationIndex=4,
+                    LineStationExsis=true,
+                    PrevStation=1486,
+                    NextStation=1488,
+                },
+                new LineStation
+                {
+                    LineId=5,
+                    StationCode=1488,
+                    LineStationIndex=5,
+                    LineStationExsis=true,
+                    PrevStation=1487,
+                    NextStation=1490,
+                },
+                new LineStation
+                {
+                    LineId=5,
+                    StationCode=1490,
+                    LineStationIndex=6,
+                    LineStationExsis=true,
+                    PrevStation=1488,
+                    NextStation=1494,
+                },
+                new LineStation
+                {
+                    LineId=5,
+                    StationCode=1494,
+                    LineStationIndex=7,
+                    LineStationExsis=true,
+                    PrevStation=1490,
+                    NextStation=1492,
+                },
+                new LineStation
+                {
+                    LineId=5,
+                    StationCode=1492,
+                    LineStationIndex=8,
+                    LineStationExsis=true,
+                    PrevStation=1494,
+                    NextStation=1493,
+                },
+                new LineStation
+                {
+                    LineId=5,
+                    StationCode=1493,
+                    LineStationIndex=9,
+                    LineStationExsis=true,
+                    PrevStation=1492,
+                    NextStation=1491,
+                },
+                new LineStation
+                {
+                    LineId=5,
+                    StationCode=1491,
+                    LineStationIndex=10,
+                    LineStationExsis=true,
+                    PrevStation=1493,
+                    NextStation=0,
+                },
+
+                //line=67,
+                new LineStation
+                {
+                    LineId=6,
+                    StationCode=110,
+                    LineStationIndex=1,
+                    LineStationExsis=true,
+                    PrevStation=0,
+                    NextStation=111,
+                },
+                new LineStation
+                {
+                    LineId=6,
+                    StationCode=111,
+                    LineStationIndex=2,
+                    LineStationExsis=true,
+                    PrevStation=110,
+                    NextStation=112,
+                },
+                new LineStation
+                {
+                    LineId=6,
+                    StationCode=112,
+                    LineStationIndex=3,
+                    LineStationExsis=true,
+                    PrevStation=111,
+                    NextStation=113,
+                },
+                new LineStation
+                {
+                    LineId=6,
+                    StationCode=113,
+                    LineStationIndex=4,
+                    LineStationExsis=true,
+                    PrevStation=112,
+                    NextStation=115,
+                },
+                new LineStation
+                {
+                    LineId=6,
+                    StationCode=115,
+                    LineStationIndex=5,
+                    LineStationExsis=true,
+                    PrevStation=113,
+                    NextStation=116,
+                },
+                new LineStation
+                {
+                    LineId=6,
+                    StationCode=116,
+                    LineStationIndex=6,
+                    LineStationExsis=true,
+                    PrevStation=115,
+                    NextStation=117,
+                },
+                new LineStation
+                {
+                    LineId=6,
+                    StationCode=117,
+                    LineStationIndex=7,
+                    LineStationExsis=true,
+                    PrevStation=116,
+                    NextStation=119,
+                },
+                new LineStation
+                {
+                    LineId=6,
+                    StationCode=119,
+                    LineStationIndex=8,
+                    LineStationExsis=true,
+                    PrevStation=117,
+                    NextStation=1485,
+                },
+                new LineStation
+                {
+                    LineId=6,
+                    StationCode=1485,
+                    LineStationIndex=9,
+                    LineStationExsis=true,
+                    PrevStation=119,
+                    NextStation=1486,
+                },
+                new LineStation
+                {
+                    LineId=6,
+                    StationCode=1486,
+                    LineStationIndex=10,
+                    LineStationExsis=true,
+                    PrevStation=1485,
+                    NextStation=0,
+                },
+
+                //line=24,
+                new LineStation
+                {
+                    LineId=7,
+                    StationCode=97,
+                    LineStationIndex=1,
+                    LineStationExsis=true,
+                    PrevStation=0,
+                    NextStation=102,
+                },
+                new LineStation
+                {
+                    LineId=7,
+                    StationCode=102,
+                    LineStationIndex=2,
+                    LineStationExsis=true,
+                    PrevStation=97,
+                    NextStation=103,
+                },
+                new LineStation
+                {
+                    LineId=7,
+                    StationCode=103,
+                    LineStationIndex=3,
+                    LineStationExsis=true,
+                    PrevStation=102,
+                    NextStation=105,
+                },
+                new LineStation
+                {
+                    LineId=7,
+                    StationCode=105,
+                    LineStationIndex=4,
+                    LineStationExsis=true,
+                    PrevStation=103,
+                    NextStation=106,
+                },
+                new LineStation
+                {
+                    LineId=7,
+                    StationCode=106,
+                    LineStationIndex=5,
+                    LineStationExsis=true,
+                    PrevStation=105,
+                    NextStation=108,
+                },
+                new LineStation
+                {
+                    LineId=7,
+                    StationCode=108,
+                    LineStationIndex=6,
+                    LineStationExsis=true,
+                    PrevStation=106,
+                    NextStation=109,
+                },
+                new LineStation
+                {
+                    LineId=7,
+                    StationCode=109,
+                    LineStationIndex=7,
+                    LineStationExsis=true,
+                    PrevStation=108,
+                    NextStation=110,
+                },
+                new LineStation
+                {
+                    LineId=7,
+                    StationCode=110,
+                    LineStationIndex=8,
+                    LineStationExsis=true,
+                    PrevStation=109,
+                    NextStation=112,
+                },
+                new LineStation
+                {
+                    LineId=7,
+                    StationCode=112,
+                    LineStationIndex=9,
+                    LineStationExsis=true,
+                    PrevStation=110,
+                    NextStation=111,
+                },
+                new LineStation
+                {
+                    LineId=7,
+                    StationCode=111,
+                    LineStationIndex=10,
+                    LineStationExsis=true,
+                    PrevStation=112,
+                    NextStation=0,
+                },
+                
+                //  NumberLine=20
+                new LineStation
+                {
+                    LineId=8,
+                    StationCode=102,
+                    LineStationIndex=1,
+                    LineStationExsis=true,
+                    PrevStation=0,
+                    NextStation=103,
+                },
+                new LineStation
+                {
+                    LineId=8,
+                    StationCode=103,
+                    LineStationIndex=2,
+                    LineStationExsis=true,
+                    PrevStation=102,
+                    NextStation=105,
+                },
+                new LineStation
+                {
+                    LineId=8,
+                    StationCode=105,
+                    LineStationIndex=3,
+                    LineStationExsis=true,
+                    PrevStation=103,
+                    NextStation=106,
+                },
+                new LineStation
+                {
+                    LineId=8,
+                    StationCode=106,
+                    LineStationIndex=4,
+                    LineStationExsis=true,
+                    PrevStation=105,
+                    NextStation=108,
+                },
+                new LineStation
+                {
+                    LineId=8,
+                    StationCode=108,
+                    LineStationIndex=5,
+                    LineStationExsis=true,
+                    PrevStation=106,
+                    NextStation=109,
+                },
+                new LineStation
+                {
+                    LineId=8,
+                    StationCode=109,
+                    LineStationIndex=6,
+                    LineStationExsis=true,
+                    PrevStation=108,
+                    NextStation=110,
+                },
+                new LineStation
+                {
+                    LineId=8,
+                    StationCode=110,
+                    LineStationIndex=7,
+                    LineStationExsis=true,
+                    PrevStation=109,
+                    NextStation=111,
+                },
+                new LineStation
+                {
+                    LineId=8,
+                    StationCode=111,
+                    LineStationIndex=8,
+                    LineStationExsis=true,
+                    PrevStation=110,
+                    NextStation=112,
+                },
+                new LineStation
+                {
+                    LineId=8,
+                    StationCode=112,
+                    LineStationIndex=9,
+                    LineStationExsis=true,
+                    PrevStation=111,
+                    NextStation=116,
+                },
+                new LineStation
+                {
+                    LineId=8,
+                    StationCode=116,
+                    LineStationIndex=10,
+                    LineStationExsis=true,
+                    PrevStation=112,
+                    NextStation=0,
+                },
+
+                //line=27
+                new LineStation
+                {
+                    LineId=9,
+                    StationCode=85,
+                    LineStationIndex=1,
+                    LineStationExsis=true,
+                    PrevStation=0,
+                    NextStation=86,
+                },
+                new LineStation
+                {
+                    LineId=9,
+                    StationCode=86,
+                    LineStationIndex=2,
+                    LineStationExsis=true,
+                    PrevStation=85,
+                    NextStation=88,
+                },
+                new LineStation
+                {
+                    LineId=9,
+                    StationCode=88,
+                    LineStationIndex=3,
+                    LineStationExsis=true,
+                    PrevStation=86,
+                    NextStation=89,
+                },
+                new LineStation
+                {
+                    LineId=9,
+                    StationCode=89,
+                    LineStationIndex=4,
+                    LineStationExsis=true,
+                    PrevStation=88,
+                    NextStation=90,
+                },
+                new LineStation
+                {
+                    LineId=9,
+                    StationCode=90,
+                    LineStationIndex=5,
+                    LineStationExsis=true,
+                    PrevStation=89,
+                    NextStation=91,
+                },
+                new LineStation
+                {
+                    LineId=9,
+                    StationCode=91,
+                    LineStationIndex=6,
+                    LineStationExsis=true,
+                    PrevStation=90,
+                    NextStation=93,
+                },
+                new LineStation
+                {
+                    LineId=9,
+                    StationCode=93,
+                    LineStationIndex=7,
+                    LineStationExsis=true,
+                    PrevStation=91,
+                    NextStation=94,
+                },
+                new LineStation
+                {
+                    LineId=9,
+                    StationCode=94,
+                    LineStationIndex=8,
+                    LineStationExsis=true,
+                    PrevStation=93,
+                    NextStation=95,
+                },
+                new LineStation
+                {
+                    LineId=9,
+                    StationCode=95,
+                    LineStationIndex=9,
+                    LineStationExsis=true,
+                    PrevStation=94,
+                    NextStation=102,
+                },
+                new LineStation
+                {
+                    LineId=9,
+                    StationCode=102,
+                    LineStationIndex=10,
+                    LineStationExsis=true,
+                    PrevStation=95,
+                    NextStation=0,
+                },
+
+                //line=21,
+                new LineStation
+                {
+                    LineId=10,
+                    StationCode=111,
+                    LineStationIndex=1,
+                    LineStationExsis=true,
+                    PrevStation=0,
+                    NextStation=112,
+                },
+                new LineStation
+                {
+                    LineId=10,
+                    StationCode=112,
+                    LineStationIndex=2,
+                    LineStationExsis=true,
+                    PrevStation=111,
+                    NextStation=113,
+                },
+                new LineStation
+                {
+                    LineId=10,
+                    StationCode=113,
+                    LineStationIndex=3,
+                    LineStationExsis=true,
+                    PrevStation=112,
+                    NextStation=115,
+                },
+                new LineStation
+                {
+                    LineId=10,
+                    StationCode=115,
+                    LineStationIndex=4,
+                    LineStationExsis=true,
+                    PrevStation=113,
+                    NextStation=116,
+                },
+                new LineStation
+                {
+                    LineId=10,
+                    StationCode=116,
+                    LineStationIndex=5,
+                    LineStationExsis=true,
+                    PrevStation=115,
+                    NextStation=117,
+                },
+                new LineStation
+                {
+                    LineId=10,
+                    StationCode=117,
+                    LineStationIndex=6,
+                    LineStationExsis=true,
+                    PrevStation=116,
+                    NextStation=119,
+                },
+                new LineStation
+                {
+                    LineId=10,
+                    StationCode=119,
+                    LineStationIndex=7,
+                    LineStationExsis=true,
+                    PrevStation=117,
+                    NextStation=1485,
+                },
+                new LineStation
+                {
+                    LineId=10,
+                    StationCode=1485,
+                    LineStationIndex=8,
+                    LineStationExsis=true,
+                    PrevStation=119,
+                    NextStation=1486,
+                },
+                new LineStation
+                {
+                    LineId=10,
+                    StationCode=1486,
+                    LineStationIndex=9,
+                    LineStationExsis=true,
+                    PrevStation=1485,
+                    NextStation=1488,
+                },
+                new LineStation
+                {
+                    LineId=10,
+                    StationCode=1488,
+                    LineStationIndex=10,
+                    LineStationExsis=true,
+                    PrevStation=1486,
+                    NextStation=0,
+                },
+
+               #endregion
+
+            };
 
 
 

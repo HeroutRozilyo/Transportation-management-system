@@ -54,7 +54,6 @@
     <Compile Include="DO\Enums.cs" />
     <Compile Include="DO\Trip.cs" />
     <Compile Include="DO\User.cs" />
-    <Compile Include="ICloneable.cs" />
     <Compile Include="IDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -43,7 +43,7 @@ namespace BL
                    select busDoBoAdapter(item.Licence);
         }
 
-        public IEnumerable<BO.Bus> GetBusBy(int line)
+        public IEnumerable<BO.Bus> GetBusByline(int line)
         {
             return from item in dl.GetAllBusesBy(x => x.Licence == line)
                    select busDoBoAdapter(item.Licence);
