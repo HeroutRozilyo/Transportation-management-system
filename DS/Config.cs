@@ -6,20 +6,24 @@ using System.Threading.Tasks;
 
 namespace DS
 {
-    static class Config
+    public static class Config
     {
         //for Line
-        static int idLineCounter = 0;
-        public static int IdLineCounter => ++idLineCounter;
-
+       public static int idLineCounter;
         //for trip uses
-        static int tripUser = 0;
-        public static int TripUser => ++tripUser;
-
+      public  static int tripUser;
         //for bus trip
-        static int tripBus = 0;
-        public static int TripBus => ++tripBus;
+      public  static int tripBus = 0;
 
+ //       public static int IdLineCounter => ++idLineCounter;
+ //        public static int TripUser => ++tripUser;
+ //      public static int TripBus => ++tripBus;
 
+        static Config()
+        {
+            idLineCounter = 0;
+            tripUser = 0;
+            tripBus = 0;
+        }
     }
 }

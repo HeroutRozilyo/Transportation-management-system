@@ -21,7 +21,7 @@ namespace BL
         #region Bus
         BO.Bus busDoBoAdapter(int licence) // return the bus from dl according to licence
         {
-            BO.Bus busBO = new BO.Bus(); ///???מה זה הבנאי הזה לשאול מחר
+            BO.Bus busBO = new BO.Bus(); 
             DO.Bus busDO;
             try
             {
@@ -43,11 +43,10 @@ namespace BL
                    select busDoBoAdapter(item.Licence);
         }
 
-        public IEnumerable<BO.Bus> GetBusBy(Predicate<BO.Bus> predicate)
+        public IEnumerable<BO.Bus> GetBusBy(int line)
         {
-            return from item in dl.GetAllBuses()
-                   where (predicate(busDoBoAdapter(item.Licence)))
-                   select item.clone;
+            return from item in dl.GetAllBusesBy(x => x.Licence == line)
+                   select busDoBoAdapter(item.Licence);
         }
 
 

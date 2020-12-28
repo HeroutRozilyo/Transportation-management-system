@@ -96,7 +96,6 @@ namespace DL
         #endregion Bus
 
         #region Line
-
         public DO.Line GetLine(int idline)
         {
             DO.Line line = DataSource.ListLine.Find(l => l.IdNumber == idline);
@@ -109,13 +108,13 @@ namespace DL
 
         public void AddLine(DO.Line line)
         {
-            if (DataSource.ListLine.FirstOrDefault(p => p.IdNumber == line.IdNumber) != null)
-                throw new DO.WrongIDExeption(line.IdNumber, "these line exist");       
+            //eliezer told us that we can do here checking because check according to idnumber is meaningless
+            line.IdNumber = ++DS.Config.idLineCounter;
+          
             DataSource.ListLine.Add(line.Clone());
 
         }
-        /// כדי לא ךשכוח. צריך לחשוב אם כל פעם שמוחקים אוטובוס אז צרך לעדכן גם ברשומה של הקו אם הוא לא קיים. אחרת צריך כל פעם לעשות בדיקות בקו אוטובוס נראלי. 
-        /// 
+        
         public IEnumerable<DO.Line> GetAllLineBy(Predicate<DO.Line> linecondition)//return according to condition and just the working line
         {
             var list = from line in DataSource.ListLine
@@ -135,11 +134,7 @@ namespace DL
                    select generate(line.IdNumber, line.LineExsis);
         }
 
-        //public IEnumerable<object> GetlinetListWithSelectedFields(Func<DO.Line, object> generate)
-        //{
-        //    return from student in DataSource.ListStudents
-        //           select generate(student);
-        //}
+
         public void UpdateLine(DO.Line line)
         {
             DO.Line tempLine = DataSource.ListLine.Find(b => b.IdNumber == line.IdNumber && b.LineExsis == true);
@@ -174,7 +169,7 @@ namespace DL
                 return stations.Clone();
             }
             else
-                throw new DO.WrongIDExeption(code, $"Licence not valid:{code}");/////////////////////////////////////////////////////////
+                throw new DO.WrongIDExeption(code, $"Licence not valid:{code}");
 
         }
         public IEnumerable<DO.Stations> GetAllStations() //return all the stations that we have
@@ -336,9 +331,6 @@ namespace DL
 
         public void AddLineTrip(DO.LineTrip lineTrip)
         {
-            //DO.LineTrip temp = DataSource.ListLineTrip.Find(b => b.KeyId == station.KeyId);
-            //if (temp != null)
-            //    throw new DO.WrongLicenceException(station.StationCode, "This licence already exsis");/////////////////////////////////////////////////////////////////
             DataSource.ListLineTrip.Add(lineTrip.Clone());
         }
 
@@ -550,6 +542,8 @@ namespace DL
         {
             if (DataSource.ListTrip.FirstOrDefault(b => b.Id == trip.Id) != null) //if != null its means that this licence is allready exsis
                 throw new DO.WrongIDExeption(trip.Id, "This Id already exsis");
+            trip.Id = ++DS.Config.tripUser;
+
             DataSource.ListTrip.Add(trip.Clone());
         }
 
