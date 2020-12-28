@@ -24,6 +24,7 @@ namespace DALAPI
         /// which must contain the single instance of the class.
         /// </summary>
         /// <returns>Dal tier implementation object</returns>
+        
         public static IDAL GetDal()
         {
             // get dal implementation name from config.xml according to <data> element
@@ -51,6 +52,8 @@ namespace DALAPI
             //    NB: the class may not be public - it will still be found... Our approach that the implemntation class
             //        should hold "internal" access permission (which is actually the default access permission)
             // 2nd element is the package name = assembly name (as above)
+
+
             Type type = Type.GetType($"DL.{dalPackage}, {dalPackage}");
             // If the type is not found - the implementation is not correct - it looks like the class name is wrong...
             if (type == null)
@@ -62,6 +65,8 @@ namespace DALAPI
             // as a Singleton...
             // Get the value of the property Instance (get function is automatically called by the system)
             // Since the property is static - the object parameter is irrelevant for the GetValue() function and we can use null
+
+
             try
             {
                 IDAL dal = type.GetProperty("Instance", BindingFlags.Public | BindingFlags.Static).GetValue(null) as IDAL;

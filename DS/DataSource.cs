@@ -10,16 +10,24 @@ namespace DS
 {
     public static class DataSource
     {
-        public static List<Bus> ListBus=new List<Bus>();
-        public static List<Stations> ListStations=new List<Stations>();
-        public static List<Line> ListLine=new List<Line>();
-        public static List<LineStation> ListLineStations=new List<LineStation>();
-        public static List<User> ListUsers=new List<User>();
-        public static List<LineTrip> ListLineTrip=new List<LineTrip>();
-        public static List<BusOnTrip> ListBusOnTrip=new List<BusOnTrip>();
-        public static List<Trip> ListTrip=new List<Trip>();
-        public static List<AdjacentStations> ListAdjacentStations = new List<AdjacentStations>();
+        public static List<Bus> ListBus;
+        public static List<Stations> ListStations;
+        public static List<Line> ListLine;
+        public static List<LineStation> ListLineStations;
+        public static List<User> ListUsers;
+        public static List<LineTrip> ListLineTrip;
+        public static List<BusOnTrip> ListBusOnTrip;
+        public static List<Trip> ListTrip;
+        public static List<AdjacentStations> ListAdjacentStations;
 
-        
+        static DataSource()
+        {
+            InitAllLists();
+        }
+
+        static void InitAllLists()
+        {
+
+        }
     }
 }
