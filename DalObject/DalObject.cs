@@ -110,7 +110,7 @@ namespace DL
         public void AddLine(DO.Line line)
         {
             if (DataSource.ListLine.FirstOrDefault(p => p.IdNumber == line.IdNumber) != null)
-                throw new DO.WrongIDExeption(line.IdNumber, "these line exist");
+                throw new DO.WrongIDExeption(line.IdNumber, "these line exist");       
             DataSource.ListLine.Add(line.Clone());
 
         }

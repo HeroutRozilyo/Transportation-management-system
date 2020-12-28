@@ -6,9 +6,7 @@ using System.Threading.Tasks;
 
 namespace BO
 {
-    public class Weather
+    public class BusOnTrip
     {
-        public int Feeling
-        { get; set; }
     }
 }

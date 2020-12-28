@@ -7,83 +7,53 @@ using BlApi;
 using DALAPI;
 //using DL;
 using BO;
-using DO;
+
 
 
 
 
 namespace BL
 {
-    internal class BlImp1 : IBL
+    class BlImp : IBL
     {
-        static Random rnd = new Random(DateTime.Now.Millisecond);
+        IDAL dl = DalFactory.GetDal();
 
-        readonly IDAL dal = DalFactory.GetDal();
-
-        public Weather GetWeather(int day)
+        #region Bus
+        BO.Bus busDoBoAdapter(int licence) // return the bus from dl according to licence
         {
-            Weather w = new Weather();
-            double feeling;
-            WindDirections dir;
-
-
-            feeling = dal.GetTemparture(day);
-            dir = dal.GetWindDirection(day).direction;
-
-            switch (dir)
+            BO.Bus busBO = new BO.Bus(); ///???מה זה הבנאי הזה לשאול מחר
+            DO.Bus busDO;
+            try
             {
-                case WindDirections.S:
-                    feeling += 2;
-                    break;
-                case WindDirections.SSE:
-                    feeling += 1.5;
-                    break;
-                case WindDirections.SE:
-                    feeling += 1;
-                    break;
-                case WindDirections.SEE:
-                    feeling += 0.5;
-                    break;
-                case WindDirections.E:
-                    feeling -= 0.5;
-                    break;
-                case WindDirections.NEE:
-                    feeling -= 1;
-                    break;
-                case WindDirections.NE:
-                    feeling -= 1.5;
-                    break;
-                case WindDirections.NNE:
-                    feeling -= 2;
-                    break;
-                case WindDirections.N:
-                    feeling -= 3;
-                    break;
-                case WindDirections.NNW:
-                    feeling -= 2.5;
-                    break;
-                case WindDirections.NW:
-                    feeling -= 2;
-                    break;
-                case WindDirections.NWW:
-                    feeling -= 1.5;
-                    break;
-                case WindDirections.W:
-                    feeling -= 1;
-                    break;
-                case WindDirections.SWW:
-                    feeling -= 0;
-                    break;
-                case WindDirections.SW:
-                    break;
-                case WindDirections.SSW:
-                    feeling += 1;
-                    break;
+                busDO = dl.GetBus(licence);
             }
-            w.Feeling = (int)feeling;
-            return w;
+            catch(DO.WrongLicenceException ex)
+            {
+                throw new BO.BadBusLicenceException("Licence is illegal", ex);
+            }
+
+            busDO.CopyPropertiesTo(busBO); //go to a deep copy. all field is copied to a same field at bo.
+
+            return busBO;
+        }
+
+        public IEnumerable<BO.Bus> GetAllBus() //return all the buses that working 
+        {
+            return from item in dl.GetAllBuses()
+                   select busDoBoAdapter(item.Licence);
+        }
+
+        public IEnumerable<BO.Bus> GetBusBy(Predicate<BO.Bus> predicate)
+        {
+            return from item in dl.GetAllBuses()
+                   where (predicate(busDoBoAdapter(item.Licence)))
+                   select item.clone;
         }
 
 
+
+
+
+        #endregion
     }
 }

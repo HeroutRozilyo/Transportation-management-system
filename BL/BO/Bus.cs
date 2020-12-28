@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DO
+namespace BO
 {
-   public class Bus
-   {
+    public class Bus
+    {
         public int Licence { get; set; }
         public DateTime StartingDate { get; set; }
         public double Kilometrz { get; set; }
@@ -15,8 +15,6 @@ namespace DO
         public double FuellAmount { get; set; }
         public STUTUS StatusBus { get; set; }
         public bool BusExsis { get; set; }
-  
-
 
     }
 }

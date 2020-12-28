@@ -4,14 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BlApi
+namespace BO
 {
-    public static class factoryBL
+    public class LineStation
     {
-        public static IBL GetBl()
-        {
-           
-        }
-
     }
 }
