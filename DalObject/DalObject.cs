@@ -93,7 +93,7 @@ namespace DL
         //        throw new DO.WrongLicenceException(licence, "Licence not exsis");
         //}
 
-        #endregion Bus
+#endregion Bus
 
         #region Line
 
@@ -512,7 +512,7 @@ namespace DL
 
         public void AddUser(DO.User user)
         {
-            if (DataSource.ListUsers.FirstOrDefault(b => b.UserName == user.UserName) != null) //if != null its means that this name is allready exsis
+            if (DataSource.ListUsers.FirstOrDefault(b => b.UserName == user.UserName) != null) //if != null its means that th void AddUser(DO.User user)is name is allready exsis
                 throw new DO.WrongLicenceException(1, "This licence already exsis");/////////////////////////////////////////////////////////////////
             DataSource.ListUsers.Add(user.Clone());
         }
