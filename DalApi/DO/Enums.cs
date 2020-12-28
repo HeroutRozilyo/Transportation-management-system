@@ -6,6 +6,6 @@ using System.Threading.Tasks;
 
 namespace DO
 {
-    public enum STUTUS { IN_TRAVELING, READT_TO_TRAVEL, IN_TREATMENT, REFULLING }
+    public enum STUTUS { IN_TRAVELING, READT_TO_TRAVEL, IN_TREATMENT, REFULLING, Unfit }
     public enum AREA { GENERAL, SOUTH, CENTER, JERUSALEM, NORTH, YOSH }
 }
