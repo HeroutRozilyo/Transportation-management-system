@@ -38,6 +38,12 @@ namespace DL
             return from bus in DataSource.ListBus
                    select bus.Clone();
         }
+        public IEnumerable<DO.Bus> GetAllBusesStusus(DO.STUTUS stusus) //return all the buses that we have
+        {
+            return from bus in DataSource.ListBus
+                   where(bus.StatusBus==stusus)
+                   select bus.Clone();
+        }
 
         public IEnumerable<DO.Bus> GetAllBusesBy(Predicate<DO.Bus> buscondition) //איך כותבים??
         {
@@ -47,33 +53,36 @@ namespace DL
             return list;
         }
 
-        public void AddBus(DO.Bus bus)
+        public int AddBus(DO.Bus bus)
         {
             if (DataSource.ListBus.FirstOrDefault(b => b.Licence == bus.Licence) != null) //if != null its means that this licence is allready exsis
                 throw new DO.WrongLicenceException(bus.Licence, "This licence already exsis");
             DataSource.ListBus.Add(bus.Clone());
+            return 1;
         }
 
         ///===================================================================
         ///לבדוק איך מעדכנים נתון בתוך הרשימה שלי
-        public void DeleteBus(int licence)
+        public bool DeleteBus(int licence)
         {
             DO.Bus bus = DataSource.ListBus.Find(b => b.Licence == licence);
             if (bus != null && bus.BusExsis)
             {
                 // bus.BusExsis = false;
                 DataSource.ListBus.Find(b => b.Licence == licence).BusExsis = false;
+                return true;
             }
             else
                 throw new DO.WrongLicenceException(licence, "Licence not exsis");
         }
-        public void UpdateBus(DO.Bus buses)
+        public bool UpdateBus(DO.Bus buses)
         {
             DO.Bus bus = DataSource.ListBus.Find(b => b.Licence == buses.Licence);
             if (bus != null && bus.BusExsis)
             {
                 DataSource.ListBus.Remove(bus);
                 DataSource.ListBus.Add(buses.Clone());
+                return true;
             }
             else
                 throw new DO.WrongLicenceException(buses.Licence, "Licence not exsis");
@@ -81,17 +90,6 @@ namespace DL
 
 
 
-        //public void UpdateBus(int licence, Action<DO.Bus> update)
-        //{
-        //    DO.Bus bus = DataSource.ListBus.Find(b => b.Licence == licence);
-        //    if (bus != null && bus.BusExsis)//
-        //    {
-
-
-        //    }
-        //    else
-        //        throw new DO.WrongLicenceException(licence, "Licence not exsis");
-        //}
 
         #endregion Bus
 

@@ -15,9 +15,6 @@ namespace DS
         //for bus trip
       public  static int tripBus = 0;
 
- //       public static int IdLineCounter => ++idLineCounter;
- //        public static int TripUser => ++tripUser;
- //      public static int TripBus => ++tripBus;
 
         static Config()
         {

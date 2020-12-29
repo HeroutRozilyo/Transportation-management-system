@@ -10,6 +10,7 @@ namespace BO
     public class BadBusLicenceException : Exception
     {
         public int ID;
+        public BadBusLicenceException(string message,int licence) : base(message) => ID = licence;
         public BadBusLicenceException(string message, Exception innerException) :
             base(message, innerException) => ID = ((DO.WrongLicenceException)innerException).Licence;
         public override string ToString() => base.ToString() + $", bad Licence id: {ID}";

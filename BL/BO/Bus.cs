@@ -16,5 +16,7 @@ namespace BO
         public STUTUS StatusBus { get; set; }
         public bool BusExsis { get; set; }
 
+
+
     }
 }

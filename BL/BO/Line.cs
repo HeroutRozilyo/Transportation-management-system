@@ -14,5 +14,8 @@ namespace BO
         public int LastStationCode { get; set; }
         public AREA Area { get; set; }
         public bool LineExsis { get; set; }
+        public IEnumerable<LineStation> StationsOfBus { get; set; }
+        public IEnumerable<LineTrip> TimeLineTrip { get; set; }
+
     }
 }

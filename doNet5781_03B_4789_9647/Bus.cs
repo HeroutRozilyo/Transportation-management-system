@@ -114,7 +114,6 @@ namespace doNet5781_03B_4789_9647
                 }
                 return result;
             }
-
             set
             {
                 if ((StartingDate.Year < 2018 && value.Length == 7) || (StartingDate.Year >= 2018 && value.Length == 8))

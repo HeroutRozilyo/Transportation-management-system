@@ -14,5 +14,7 @@ namespace BO
         public double Latitude { get; set; }
         public string Address { get; set; }
         public bool StationExsis { get; set; }
+        //public IEnumerable<LineStation> StationsOfBus { get; set; }
+
     }
 }
