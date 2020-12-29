@@ -28,7 +28,7 @@ namespace DS
 
         static void InitAllLists()
         {
-
+            double speed = 13.89;//m/s- 50 km/h
 
 
 
@@ -896,25 +896,7 @@ namespace DS
                 },
                  #endregion User
             };
-            //    public int Id { get; set; }
-            //public string UserName { get; set; }
-            //public int LineId { get; set; }
-            //public int InStation { get; set; }
-            //public TimeSpan InAt { get; set; }
-            //public int OutStation { get; set; }
-            //public TimeSpan OutAt { get; set; }
-            //public bool TripExsis { get; set; }
-            ListTrip = new List<Trip>////TODO
-            {
-           #region Trip
-            new Trip
-            {
-               
-
             
-            }
-           #endregion Trip/////
-            };
 
             ListLineStations = new List<LineStation>
             {
@@ -1843,11 +1825,7 @@ namespace DS
             };
             ListAdjacentStations = new List<AdjacentStations>
             {
-                /*public int Station1 { get; set; }
-        public int Station2 { get; set; }
-        public double Distance { get; set; }
-        public TimeSpan TimeAverage { get; set; }
-*/
+                
 #region AdjacentStations  
                 #region lineId1
                 new AdjacentStations
@@ -1855,7 +1833,7 @@ namespace DS
                     Station1=73,
                     Station2= 76,
                    Distance=10387.6464817987,
-                   //TimeAverage
+                   TimeAverage= TimeSpan.FromSeconds((1.5*10387.6464817987)/speed),//i.5- air to ground
                 },
 
                 new AdjacentStations
@@ -1863,8 +1841,8 @@ namespace DS
                     Station1=76,
                     Station2= 77,
                    Distance=10291.789644608,
-                   //TimeAverage
-              
+                  TimeAverage= TimeSpan.FromSeconds((1.5*10291.789644608)/speed)
+
 
                 },
 
@@ -1873,8 +1851,8 @@ namespace DS
                     Station1=77,
                     Station2= 78,
                    Distance=5942.26478400092,
-                   //TimeAverage
-              
+                    TimeAverage= TimeSpan.FromSeconds((1.5*5942.26478400092)/speed)
+
 
                 },
 
@@ -1883,8 +1861,8 @@ namespace DS
                     Station1=78,
                     Station2= 83,
                    Distance=4115.12303761144,
-                   //TimeAverage
-              
+                    TimeAverage= TimeSpan.FromSeconds((1.5*4115.12303761144)/speed)
+
 
                 },
 
@@ -1893,8 +1871,8 @@ namespace DS
                     Station1=83,
                     Station2= 84,
                    Distance=3971.03321849724,
-                   //TimeAverage
-              
+                    TimeAverage= TimeSpan.FromSeconds((1.5*3971.03321849724)/speed)
+
 
                 },
 
@@ -1903,8 +1881,8 @@ namespace DS
                     Station1=84,
                     Station2= 85,
                    Distance=3665.92895953549,
-                   //TimeAverage
-              
+                    TimeAverage= TimeSpan.FromSeconds((1.5*3665.92895953549)/speed)
+
 
                 },
 
@@ -1913,8 +1891,8 @@ namespace DS
                     Station1=85,
                     Station2= 86,
                    Distance=181.343172558381,
-                   //TimeAverage
-              
+                   TimeAverage= TimeSpan.FromSeconds((1.5*181.343172558381)/speed)
+
 
                 },
                 new AdjacentStations
@@ -1922,8 +1900,8 @@ namespace DS
                     Station1=86,
                     Station2= 88,
                    Distance=338.193775824042,
-                   //TimeAverage
-              
+                   TimeAverage= TimeSpan.FromSeconds((1.5*338.193775824042)/speed)
+
 
                 },
                 new AdjacentStations
@@ -1931,8 +1909,8 @@ namespace DS
                     Station1=88,
                     Station2= 89,
                    Distance=839.108713036705,
-                   //TimeAverage
-              
+                    TimeAverage= TimeSpan.FromSeconds((1.5*839.108713036705)/speed)
+
 
                 },
 #endregion LineId1
@@ -1943,7 +1921,7 @@ namespace DS
                     Station1=85,
                     Station2= 86,
                    Distance=181.343172558381,
-                   //TimeAverage
+                    TimeAverage= TimeSpan.FromSeconds((1.5*181.343172558381)/speed)
                 },
 
                 new AdjacentStations
@@ -1951,8 +1929,8 @@ namespace DS
                     Station1=86,
                     Station2= 88,
                    Distance=338.193775824042,
-                   //TimeAverage
-              
+                    TimeAverage= TimeSpan.FromSeconds((1.5*338.193775824042)/speed)
+
 
                 },
 
@@ -1961,8 +1939,8 @@ namespace DS
                     Station1=88,
                     Station2= 89,
                    Distance=839.108713036705,
-                   //TimeAverage
-              
+                    TimeAverage= TimeSpan.FromSeconds((1.5*839.108713036705)/speed)
+
 
                 },
 
@@ -1971,8 +1949,8 @@ namespace DS
                     Station1=89,
                     Station2= 90,
                    Distance=4972.12709975181,
-                   //TimeAverage
-              
+                    TimeAverage= TimeSpan.FromSeconds((1.5*4972.12709975181)/speed)
+
 
                 },
 
@@ -1981,8 +1959,8 @@ namespace DS
                     Station1=90,
                     Station2= 91,
                    Distance=4978.59764273959,
-                   //TimeAverage
-              
+                    TimeAverage= TimeSpan.FromSeconds((1.5*4978.59764273959)/speed)
+
 
                 },
 
@@ -1991,8 +1969,8 @@ namespace DS
                     Station1=91,
                     Station2= 93,
                    Distance=178.858161402408,
-                   //TimeAverage
-              
+                   TimeAverage= TimeSpan.FromSeconds((1.5*178.858161402408)/speed)
+
 
                 },
 
@@ -2001,8 +1979,8 @@ namespace DS
                     Station1=93,
                     Station2= 94,
                    Distance=20.9542368918975,
-                   //TimeAverage
-              
+                    TimeAverage= TimeSpan.FromSeconds((1.5*20.9542368918975)/speed)
+
 
                 },
                 new AdjacentStations
@@ -2010,8 +1988,8 @@ namespace DS
                     Station1=94,
                     Station2= 95,
                    Distance=329058.161860042,
-                   //TimeAverage
-              
+                    TimeAverage= TimeSpan.FromSeconds((1.5*329058.161860042)/speed)
+
 
                 },
                 new AdjacentStations
@@ -2019,8 +1997,8 @@ namespace DS
                     Station1=95,
                     Station2= 97,
                    Distance=328752.547331663,
-                   //TimeAverage
-              
+                    TimeAverage= TimeSpan.FromSeconds((1.5*328752.547331663)/speed)
+
 
                 },
 #endregion LineId2
@@ -2031,7 +2009,7 @@ namespace DS
                     Station1=122,
                     Station2= 123,
                    Distance=161.658025824811,
-                   //TimeAverage
+                    TimeAverage= TimeSpan.FromSeconds((1.5*161.658025824811)/speed)
                 },
 
                 new AdjacentStations
@@ -2039,8 +2017,8 @@ namespace DS
                     Station1=123,
                     Station2= 121,
                    Distance=145.638205945867,
-                   //TimeAverage
-              
+                    TimeAverage= TimeSpan.FromSeconds((1.5*145.638205945867)/speed)
+
 
                 },
 
@@ -2049,8 +2027,8 @@ namespace DS
                     Station1=121,
                     Station2= 1524,
                    Distance=2943.02888382813,
-                   //TimeAverage
-              
+                   TimeAverage= TimeSpan.FromSeconds((1.5*2943.02888382813)/speed)
+
 
                 },
 
@@ -2059,8 +2037,8 @@ namespace DS
                     Station1=1524,
                     Station2= 1523,
                    Distance=140.492280736979,
-                   //TimeAverage
-              
+                   TimeAverage= TimeSpan.FromSeconds((1.5*140.492280736979)/speed)
+
 
                 },
 
@@ -2069,8 +2047,8 @@ namespace DS
                     Station1=1523,
                     Station2= 1522,
                    Distance=710.578511572254,
-                   //TimeAverage
-              
+                   TimeAverage= TimeSpan.FromSeconds((1.5*710.578511572254)/speed)
+
 
                 },
 
@@ -2079,8 +2057,8 @@ namespace DS
                     Station1=1522,
                     Station2= 1518,
                    Distance=2265.21319232095,
-                   //TimeAverage
-              
+                   TimeAverage= TimeSpan.FromSeconds((1.5*2265.21319232095)/speed)
+
 
                 },
 
@@ -2089,8 +2067,8 @@ namespace DS
                     Station1=1518,
                     Station2= 1514,
                    Distance=16.6091664944544,
-                   //TimeAverage
-              
+                    TimeAverage= TimeSpan.FromSeconds((1.5*16.6091664944544)/speed)
+
 
                 },
                 new AdjacentStations
@@ -2098,8 +2076,8 @@ namespace DS
                     Station1=1514,
                     Station2= 1512,
                    Distance=1034.11608174677,
-                   //TimeAverage
-              
+                    TimeAverage= TimeSpan.FromSeconds((1.5*1034.11608174677)/speed)
+
 
                 },
                 new AdjacentStations
@@ -2107,8 +2085,8 @@ namespace DS
                     Station1=1512,
                     Station2= 1511,
                    Distance=2271.65706974387,
-                   //TimeAverage
-              
+                    TimeAverage= TimeSpan.FromSeconds((1.5*2271.65706974387)/speed)
+
 
                 },
 #endregion LineId3
@@ -2119,7 +2097,7 @@ namespace DS
                     Station1=121,
                     Station2= 123,
                    Distance=145.638205945867,
-                   //TimeAverage
+                   TimeAverage= TimeSpan.FromSeconds((1.5*145.638205945867)/speed)
                 },
 
                 new AdjacentStations
@@ -2127,8 +2105,8 @@ namespace DS
                     Station1=123,
                     Station2= 122,
                    Distance=161.658025824811,
-                   //TimeAverage
-              
+                   TimeAverage= TimeSpan.FromSeconds((1.5*161.658025824811)/speed)
+
 
                 },
 
@@ -2137,8 +2115,8 @@ namespace DS
                     Station1=122,
                     Station2= 1524,
                    Distance=2957.82843148296,
-                   //TimeAverage
-              
+                  TimeAverage= TimeSpan.FromSeconds((1.5*2957.82843148296)/speed)
+
 
                 },
 
@@ -2146,9 +2124,9 @@ namespace DS
                 {
                     Station1=1524,
                     Station2= 1523,
-                   Distance=140.492280736979
-                   //TimeAverage
-              
+                   Distance=140.492280736979,
+                   TimeAverage= TimeSpan.FromSeconds((1.5*140.492280736979)/speed)
+
 
                 },
 
@@ -2157,8 +2135,8 @@ namespace DS
                     Station1=1523,
                     Station2= 1522,
                    Distance=710.578511572254,
-                   //TimeAverage
-              
+                   TimeAverage= TimeSpan.FromSeconds((1.5*710.578511572254)/speed)
+
 
                 },
 
@@ -2167,8 +2145,8 @@ namespace DS
                     Station1=1522,
                     Station2= 1518,
                    Distance=2265.21319232095,
-                   //TimeAverage
-              
+                   TimeAverage= TimeSpan.FromSeconds((1.5*2265.21319232095)/speed)
+
 
                 },
 
@@ -2177,8 +2155,8 @@ namespace DS
                     Station1=1518,
                     Station2= 1514,
                    Distance=16.6091664944544,
-                   //TimeAverage
-              
+                   TimeAverage= TimeSpan.FromSeconds((1.5*16.6091664944544)/speed)
+
 
                 },
                 new AdjacentStations
@@ -2186,8 +2164,8 @@ namespace DS
                     Station1=1514,
                     Station2= 1512,
                    Distance=1034.11608174677,
-                   //TimeAverage
-              
+                   TimeAverage= TimeSpan.FromSeconds((1.5*1034.11608174677)/speed)
+
 
                 },
                 new AdjacentStations
@@ -2195,8 +2173,8 @@ namespace DS
                     Station1=1512,
                     Station2= 1491,
                    Distance=2604.33240816743,
-                   //TimeAverage
-              
+                   TimeAverage= TimeSpan.FromSeconds((1.5*2604.33240816743)/speed)
+
 
                 },
 #endregion LineId4
@@ -2207,7 +2185,7 @@ namespace DS
                     Station1=119,
                     Station2= 1485,
                    Distance=5719.48141855948,
-                   //TimeAverage
+                 TimeAverage= TimeSpan.FromSeconds((1.5*5719.48141855948)/speed)
                 },
 
                 new AdjacentStations
@@ -2215,8 +2193,8 @@ namespace DS
                     Station1=1485,
                     Station2= 1486,
                    Distance=179.006776536478,
-                   //TimeAverage
-              
+                  TimeAverage= TimeSpan.FromSeconds((1.5*179.006776536478)/speed)
+
 
                 },
 
@@ -2225,8 +2203,8 @@ namespace DS
                     Station1=1486,
                     Station2= 1487,
                    Distance=772.225954779688,
-                   //TimeAverage
-              
+                   TimeAverage= TimeSpan.FromSeconds((1.5*772.225954779688)/speed)
+
 
                 },
 
@@ -2235,8 +2213,8 @@ namespace DS
                     Station1=1487,
                     Station2= 1488,
                    Distance=1415.66487905204,
-                   //TimeAverage
-              
+                   TimeAverage= TimeSpan.FromSeconds((1.5*1415.66487905204)/speed)
+
 
                 },
 
@@ -2245,8 +2223,8 @@ namespace DS
                     Station1=1488,
                     Station2= 1490,
                    Distance=445.425376124488,
-                   //TimeAverage
-              
+                   TimeAverage= TimeSpan.FromSeconds((1.5*445.425376124488)/speed)
+
 
                 },
 
@@ -2255,8 +2233,8 @@ namespace DS
                     Station1=1490,
                     Station2= 1494,
                    Distance=10374.8817694688,
-                   //TimeAverage
-              
+                   TimeAverage= TimeSpan.FromSeconds((1.5*10374.8817694688)/speed)
+
 
                 },
 
@@ -2265,8 +2243,8 @@ namespace DS
                     Station1=1494,
                     Station2= 1492,
                    Distance=587.350643701609,
-                   //TimeAverage
-              
+                   TimeAverage= TimeSpan.FromSeconds((1.5*587.350643701609)/speed)
+
 
                 },
                 new AdjacentStations
@@ -2274,8 +2252,8 @@ namespace DS
                     Station1=1492,
                     Station2= 1493,
                    Distance=361.691515745432,
-                   //TimeAverage
-              
+                   TimeAverage= TimeSpan.FromSeconds((1.5*361.691515745432)/speed)
+
 
                 },
                 new AdjacentStations
@@ -2283,8 +2261,8 @@ namespace DS
                     Station1=1493,
                     Station2= 1491,
                    Distance=1144.85124079156,
-                   //TimeAverage
-              
+                   TimeAverage= TimeSpan.FromSeconds((1.5*1144.85124079156)/speed)
+
 
                 },
 #endregion LineId5
@@ -2294,17 +2272,17 @@ namespace DS
                 {
                     Station1=110,
                     Station2= 111,
-                   //Distance
-                   //TimeAverage
+                   Distance=195.920342315088,
+                    TimeAverage= TimeSpan.FromSeconds((1.5*195.920342315088)/speed)
                 },
 
                 new AdjacentStations
                 {
                     Station1=111,
                     Station2= 112,
-                   //Distance
-                   //TimeAverage
-              
+                    Distance=50.4574978208662,
+                    TimeAverage= TimeSpan.FromSeconds((1.5*50.4574978208662)/speed)
+
 
                 },
 
@@ -2312,9 +2290,9 @@ namespace DS
                 {
                     Station1=112,
                     Station2= 113,
-                   //Distance
-                   //TimeAverage
-              
+                   Distance=143.276626873244,
+                    TimeAverage= TimeSpan.FromSeconds((1.5*143.276626873244)/speed)
+
 
                 },
 
@@ -2322,9 +2300,9 @@ namespace DS
                 {
                     Station1=113,
                     Station2= 115,
-                   //Distance
-                   //TimeAverage
-              
+                    Distance=279.425185419296,
+                   TimeAverage= TimeSpan.FromSeconds((1.5*279.425185419296)/speed)
+
 
                 },
 
@@ -2332,9 +2310,9 @@ namespace DS
                 {
                     Station1=115,
                     Station2= 116,
-                   //Distance
-                   //TimeAverage
-              
+                   Distance=72.2684666055651,
+                   TimeAverage= TimeSpan.FromSeconds((1.5*72.2684666055651)/speed)
+
 
                 },
 
@@ -2342,9 +2320,9 @@ namespace DS
                 {
                     Station1=116,
                     Station2= 117,
-                   //Distance
-                   //TimeAverage
-              
+                   Distance=192.809573417871,
+                    TimeAverage= TimeSpan.FromSeconds((1.5*192.809573417871)/speed)
+
 
                 },
 
@@ -2352,27 +2330,27 @@ namespace DS
                 {
                     Station1=117,
                     Station2= 119,
-                   //Distance
-                   //TimeAverage
-              
+                   Distance=193.971761810414,
+                   TimeAverage= TimeSpan.FromSeconds((1.5*193.971761810414)/speed)
+
 
                 },
                 new AdjacentStations
                 {
                     Station1=119,
                     Station2= 1485,
-                   //Distance
-                   //TimeAverage
-              
+                   Distance=5719.48141855948,
+                    TimeAverage= TimeSpan.FromSeconds((1.5*5719.48141855948)/speed)
+
 
                 },
                 new AdjacentStations
                 {
                     Station1=1485,
                     Station2= 1486,
-                   //Distance
-                   //TimeAverage
-              
+                   Distance=179.006776536478,
+                   TimeAverage= TimeSpan.FromSeconds((1.5*179.006776536478)/speed)
+
 
                 },
 #endregion LineId6
@@ -2380,19 +2358,19 @@ namespace DS
                 #region lineId7
                 new AdjacentStations
                 {
-                    Station1=96,
+                    Station1=97,
                     Station2= 102,
-                   //Distance
-                   //TimeAverage
+                   Distance=4739.1072386442,
+                     TimeAverage= TimeSpan.FromSeconds((1.5*4739.1072386442)/speed)
                 },
 
                 new AdjacentStations
                 {
                     Station1=102,
                     Station2= 103,
-                   //Distance
-                   //TimeAverage
-              
+                   Distance=554.235295622813,
+                    TimeAverage= TimeSpan.FromSeconds((1.5*554.235295622813)/speed)
+
 
                 },
 
@@ -2400,9 +2378,8 @@ namespace DS
                 {
                     Station1=103,
                     Station2= 105,
-                   //Distance
-                   //TimeAverage
-              
+                   Distance=383.45864939499,
+                     TimeAverage= TimeSpan.FromSeconds((1.5*383.45864939499)/speed)
 
                 },
 
@@ -2410,9 +2387,9 @@ namespace DS
                 {
                     Station1=105,
                     Station2= 106,
-                   //Distance
-                   //TimeAverage
-              
+                   Distance=20.551585590077,
+                    TimeAverage= TimeSpan.FromSeconds((1.5*20.551585590077)/speed)
+
 
                 },
 
@@ -2420,9 +2397,9 @@ namespace DS
                 {
                     Station1=106,
                     Station2= 108,
-                   //Distance
-                   //TimeAverage
-              
+                   Distance=314.882994150425,
+                    TimeAverage= TimeSpan.FromSeconds((1.5*314.882994150425)/speed)
+
 
                 },
 
@@ -2430,9 +2407,9 @@ namespace DS
                 {
                     Station1=108,
                     Station2= 109,
-                   //Distance
-                   //TimeAverage
-              
+                   Distance=109.450560373063,
+                     TimeAverage= TimeSpan.FromSeconds((1.5*109.450560373063)/speed)
+
 
                 },
 
@@ -2440,27 +2417,26 @@ namespace DS
                 {
                     Station1=109,
                     Station2= 110,
-                   //Distance
-                   //TimeAverage
-              
+                   Distance=79.9157986778367,
+                     TimeAverage= TimeSpan.FromSeconds((1.5*79.9157986778367)/speed)
 
                 },
                 new AdjacentStations
                 {
                     Station1=110,
                     Station2= 112,
-                   //Distance
-                   //TimeAverage
-              
+                   Distance=151.091747503085,
+                     TimeAverage= TimeSpan.FromSeconds((1.5*151.091747503085)/speed)
+
 
                 },
                 new AdjacentStations
                 {
                     Station1=112,
                     Station2= 111,
-                   //Distance
-                   //TimeAverage
-              
+                   Distance=50.4574978208662,
+                     TimeAverage= TimeSpan.FromSeconds((1.5*50.4574978208662)/speed)
+
 
                 },
 #endregion LineId7
@@ -2470,17 +2446,17 @@ namespace DS
                 {
                     Station1=102,
                     Station2= 103,
-                   //Distance
-                   //TimeAverage
+                   Distance=554.235295622813,
+                   TimeAverage= TimeSpan.FromSeconds((1.5*554.235295622813)/speed)
                 },
 
                 new AdjacentStations
                 {
                     Station1=103,
                     Station2= 105,
-                   //Distance
-                   //TimeAverage
-              
+                   Distance=383.45864939499,
+                   TimeAverage= TimeSpan.FromSeconds((1.5*383.45864939499)/speed)
+
 
                 },
 
@@ -2488,9 +2464,9 @@ namespace DS
                 {
                     Station1=105,
                     Station2= 106,
-                   //Distance
-                   //TimeAverage
-              
+                   Distance=20.551585590077,
+                   TimeAverage= TimeSpan.FromSeconds((1.5*20.551585590077)/speed)
+
 
                 },
 
@@ -2498,9 +2474,9 @@ namespace DS
                 {
                     Station1=106,
                     Station2= 108,
-                   //Distance
-                   //TimeAverage
-              
+                   Distance=314.882994150425,
+                   TimeAverage= TimeSpan.FromSeconds((1.5*314.882994150425)/speed)
+
 
                 },
 
@@ -2508,9 +2484,9 @@ namespace DS
                 {
                     Station1=108,
                     Station2= 109,
-                   //Distance
-                   //TimeAverage
-              
+                   Distance=109.450560373063,
+                   TimeAverage= TimeSpan.FromSeconds((1.5*109.450560373063)/speed)
+
 
                 },
 
@@ -2518,9 +2494,9 @@ namespace DS
                 {
                     Station1=109,
                     Station2= 110,
-                   //Distance
-                   //TimeAverage
-              
+                   Distance=79.9157986778367,
+                    TimeAverage= TimeSpan.FromSeconds((1.5*79.9157986778367)/speed)
+
 
                 },
 
@@ -2528,27 +2504,27 @@ namespace DS
                 {
                     Station1=110,
                     Station2= 111,
-                   //Distance
-                   //TimeAverage
-              
+                   Distance=195.920342315088,
+                   TimeAverage= TimeSpan.FromSeconds((1.5*195.920342315088)/speed)
+
 
                 },
                 new AdjacentStations
                 {
                     Station1=111,
                     Station2= 112,
-                   //Distance
-                   //TimeAverage
-              
+                   Distance=50.4574978208662,
+                    TimeAverage= TimeSpan.FromSeconds((1.5*50.4574978208662)/speed)
+
 
                 },
                 new AdjacentStations
                 {
                     Station1=112,
                     Station2= 116,
-                   //Distance
-                   //TimeAverage
-              
+                   Distance=481.422062665161,
+                    TimeAverage= TimeSpan.FromSeconds((1.5*481.422062665161)/speed)
+
 
                 },
 #endregion LineId8
@@ -2558,17 +2534,17 @@ namespace DS
                 {
                     Station1=85,
                     Station2= 86,
-                   //Distance
-                   //TimeAverage
+                   Distance=181.343172558381,
+                    TimeAverage= TimeSpan.FromSeconds((1.5*181.343172558381)/speed)
                 },
 
                 new AdjacentStations
                 {
                     Station1=86,
                     Station2= 88,
-                   //Distance
-                   //TimeAverage
-              
+                   Distance=338.193775824042,
+                    TimeAverage= TimeSpan.FromSeconds((1.5*338.193775824042)/speed)
+
 
                 },
 
@@ -2576,9 +2552,9 @@ namespace DS
                 {
                     Station1=88,
                     Station2= 89,
-                   //Distance
-                   //TimeAverage
-              
+                   Distance=839.108713036705,
+                    TimeAverage= TimeSpan.FromSeconds((1.5*839.108713036705)/speed)
+
 
                 },
 
@@ -2586,9 +2562,9 @@ namespace DS
                 {
                     Station1=89,
                     Station2= 90,
-                   //Distance
-                   //TimeAverage
-              
+                   Distance=4972.12709975181,
+                    TimeAverage= TimeSpan.FromSeconds((1.5*4972.12709975181)/speed)
+
 
                 },
 
@@ -2596,9 +2572,9 @@ namespace DS
                 {
                     Station1=90,
                     Station2= 91,
-                   //Distance
-                   //TimeAverage
-              
+                   Distance=4978.59764273959,
+                    TimeAverage= TimeSpan.FromSeconds((1.5*4978.59764273959)/speed)
+
 
                 },
 
@@ -2606,9 +2582,9 @@ namespace DS
                 {
                     Station1=91,
                     Station2= 93,
-                   //Distance
-                   //TimeAverage
-              
+                   Distance=178.858161402408,
+                    TimeAverage= TimeSpan.FromSeconds((1.5*178.858161402408)/speed)
+
 
                 },
 
@@ -2616,27 +2592,27 @@ namespace DS
                 {
                     Station1=93,
                     Station2= 94,
-                   //Distance
-                   //TimeAverage
-              
+                   Distance=20.9542368918975,
+                    TimeAverage= TimeSpan.FromSeconds((1.5*20.9542368918975)/speed)
+
 
                 },
                 new AdjacentStations
                 {
                     Station1=94,
                     Station2= 95,
-                   //Distance
-                   //TimeAverage
-              
+                   Distance=329058.161860042,
+                   TimeAverage= TimeSpan.FromSeconds((1.5*329058.161860042)/speed)
+
 
                 },
                 new AdjacentStations
                 {
                     Station1=95,
                     Station2= 102,
-                   //Distance
-                   //TimeAverage
-              
+                   Distance=325385.905757283,
+                    TimeAverage= TimeSpan.FromSeconds((1.5*325385.905757283)/speed)
+
 
                 },
 #endregion LineId9
@@ -2646,17 +2622,17 @@ namespace DS
                 {
                     Station1=111,
                     Station2= 112,
-                   //Distance
-                   //TimeAverage
+                   Distance=50.4574978208662,
+                    TimeAverage= TimeSpan.FromSeconds((1.5*50.4574978208662)/speed)
                 },
 
                 new AdjacentStations
                 {
                     Station1=112,
                     Station2= 113,
-                   //Distance
-                   //TimeAverage
-              
+                   Distance=143.276626873244,
+                     TimeAverage= TimeSpan.FromSeconds((1.5*143.276626873244)/speed)
+
 
                 },
 
@@ -2664,9 +2640,9 @@ namespace DS
                 {
                     Station1=113,
                     Station2= 115,
-                   //Distance
-                   //TimeAverage
-              
+                   Distance=279.425185419296,
+                     TimeAverage= TimeSpan.FromSeconds((1.5*279.425185419296)/speed)
+
 
                 },
 
@@ -2674,9 +2650,9 @@ namespace DS
                 {
                     Station1=115,
                     Station2= 116,
-                   //Distance
-                   //TimeAverage
-              
+                   Distance=72.2684666055651,
+                     TimeAverage= TimeSpan.FromSeconds((1.5*72.2684666055651)/speed)
+
 
                 },
 
@@ -2684,9 +2660,8 @@ namespace DS
                 {
                     Station1=116,
                     Station2= 117,
-                   //Distance
-                   //TimeAverage
-              
+                   Distance=192.809573417871,
+                    TimeAverage= TimeSpan.FromSeconds((1.5*192.809573417871)/speed)
 
                 },
 
@@ -2694,9 +2669,9 @@ namespace DS
                 {
                     Station1=117,
                     Station2= 119,
-                   //Distance
-                   //TimeAverage
-              
+                   Distance=193.971761810414,
+                    TimeAverage= TimeSpan.FromSeconds((1.5*193.971761810414)/speed)
+
 
                 },
 
@@ -2704,47 +2679,33 @@ namespace DS
                 {
                     Station1=119,
                     Station2= 1485,
-                   //Distance
-                   //TimeAverage
-              
+                   Distance=5719.48141855948,
+                    TimeAverage= TimeSpan.FromSeconds((1.5*5719.48141855948)/speed)
+
 
                 },
                 new AdjacentStations
                 {
                     Station1=1485,
                     Station2= 1486,
-                   //Distance
-                   //TimeAverage
-              
+                   Distance=179.006776536478,
+                     TimeAverage= TimeSpan.FromSeconds((1.5*179.006776536478)/speed)
+
 
                 },
                 new AdjacentStations
                 {
                     Station1=1486,
                     Station2= 1488,
-                   //Distance
-                   //TimeAverage
-              
+                   Distance=650.976014538566,
+                     TimeAverage= TimeSpan.FromSeconds((1.5*650.976014538566)/speed)
+
 
                 },
 #endregion LineId10
 
-
-
-
-
-
-
-
-
-
-
-                
                     };
             #endregion AdjacentStations
-
-
-
 
         }
     }
