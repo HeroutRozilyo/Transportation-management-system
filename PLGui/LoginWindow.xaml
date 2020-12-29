@@ -1,0 +1,20 @@
+﻿<Window x:Class="PLGui.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PLGui"
+        mc:Ignorable="d"
+        Title="Login" Height="450" Width="800" FontSize="14">
+    <Grid>
+        <StackPanel Margin="20">
+            <Label Content="Login" FontSize="25" HorizontalAlignment="Center"/>
+            <Separator></Separator>
+            <Label Content="UserName"></Label>
+            <TextBox Name="txtUserName"></TextBox>
+            <Label Content="Password"></Label>
+            <PasswordBox Name="txtPassword"></PasswordBox>
+            <Button Name="btnSubmit" Content="Submit" Click="Click-Submit"></Button>
+        </StackPanel>
+    </Grid>
+</Window>

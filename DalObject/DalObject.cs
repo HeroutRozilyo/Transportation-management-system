@@ -538,8 +538,8 @@ namespace DL
 
         public void AddTrip(DO.Trip trip)
         {
-            if (DataSource.ListTrip.FirstOrDefault(b => b.Id == trip.Id) != null) //if != null its means that this licence is allready exsis
-                throw new DO.WrongIDExeption(trip.Id, "This Id already exsis");
+            if (DataSource.ListTrip.FirstOrDefault(b => b.UserName == trip.UserName) != null) //if != null its means that this licence is allready exsis
+                throw new DO.WrongNameExeption(trip.UserName, "This User already in trip");
             trip.Id = ++DS.Config.tripUser;
 
             DataSource.ListTrip.Add(trip.Clone());

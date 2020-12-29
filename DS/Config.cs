@@ -13,7 +13,7 @@ namespace DS
         //for trip uses
       public  static int tripUser;
         //for bus trip
-      public  static int tripBus = 0;
+      public  static int tripBus ;
 
 
         static Config()
