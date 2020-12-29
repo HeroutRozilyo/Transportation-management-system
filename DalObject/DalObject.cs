@@ -131,7 +131,12 @@ namespace DL
             return from line in DataSource.ListLine
                    select generate(line.IdNumber, line.LineExsis);
         }
-
+        public IEnumerable<DO.Line> GetAllLinesArea(DO.AREA area) //return all the buses that we have
+        {
+            return from line in DataSource.ListLine
+                   where (line.Area == area)
+                   select line.Clone();
+        }
 
         public void UpdateLine(DO.Line line)
         {

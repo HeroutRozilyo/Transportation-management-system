@@ -26,8 +26,10 @@ namespace DALAPI
         IEnumerable<DO.Line> GetAllLineBy(Predicate<DO.Line> linecondition);//return according to condition and just the working line
         IEnumerable<DO.Line> GetAllLine();//return all the lines in the list
         IEnumerable<object> GetLineFields(Func<int, bool, object> generate);//return all the lines on the country that exsis and withe the sme lineNumber
+        IEnumerable<DO.Line> GetAllLinesArea(DO.AREA area);
         void UpdateLine(DO.Line line);
         void DeleteLine(int idnumber);
+       
 
         #endregion Line
 
@@ -46,9 +48,6 @@ namespace DALAPI
         IEnumerable<DO.LineTrip> GetAllLineTripsBy(Predicate<DO.LineTrip> StationsLinecondition);
         void AddLineTrip(DO.LineTrip lineTrip);
         void UpdatelineTrip(DO.LineTrip lineTrip);
-
-
-
         #endregion LineTrip
 
         #region LineStation
