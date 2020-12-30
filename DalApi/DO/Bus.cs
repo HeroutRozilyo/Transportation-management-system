@@ -15,7 +15,8 @@ namespace DO
         public double FuellAmount { get; set; }
         public STUTUS StatusBus { get; set; }
         public bool BusExsis { get; set; }
-  
+        public DateTime LastTreatment { get; set; }
+
 
 
     }

@@ -14,7 +14,7 @@
             <TextBox Name="txtUserName"></TextBox>
             <Label Content="Password"></Label>
             <PasswordBox Name="txtPassword"></PasswordBox>
-            <Button Name="btnSubmit" Content="Submit" Click="Click-Submit"></Button>
+            <Button Name="btnSubmit" Content="Submit" Click="Click_Submit"></Button>
         </StackPanel>
     </Grid>
 </Window>
