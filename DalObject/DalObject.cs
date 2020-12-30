@@ -36,6 +36,7 @@ namespace DL
         public IEnumerable<DO.Bus> GetAllBuses() //return all the buses that we have
         {
             return from bus in DataSource.ListBus
+                   where (bus.BusExsis==true)
                    select bus.Clone();
         }
         public IEnumerable<DO.Bus> GetAllBusesStusus(DO.STUTUS stusus) //return all the buses that we have
@@ -244,12 +245,18 @@ namespace DL
                    where (station.LineId == idline)
                    select station.Clone();
         }
-        public IEnumerable<DO.LineStation> GetAllStationsCode(int code) //return all the stations that we have with the same code
+
+
+
+        public IEnumerable<DO.LineStation> GetAllStationsCode(int code) //return all the lines at this station
         {
             return from station in DataSource.ListLineStations
                    where (station.StationCode == code)
                    select station.Clone();
         }
+
+
+
 
         public IEnumerable<DO.LineStation> GetAllLineStationsBy(Predicate<DO.LineStation> StationsLinecondition)
         {
@@ -257,6 +264,27 @@ namespace DL
                        where (stations.LineStationExsis && StationsLinecondition(stations))
                        select stations.Clone();
             return list;
+        }
+
+
+
+
+        public IEnumerable<DO.LineStation> GetAllLineAt2Stations(int code1, int cod2) //get 2 stations and return all the lines this 2 stations is adjacted at them
+        {
+            IEnumerable<DO.LineStation> lines = GetAllStationsCode(code1); //get all the lines that move at this station
+            IEnumerable<DO.LineStation> stations;
+            IEnumerable<DO.LineStation> stline = (IEnumerable<DO.LineStation>)new DO.LineStation(); ///???????? ככה כותבים
+
+            foreach (var item in lines)
+            {
+                stations = GetAllStationsLine(item.LineId);  //get all the station of the line that move at station with cod1
+
+                //return all the line that move at these 2 stations
+                stline = from temp in stations
+                         where (temp.StationCode == cod2 &&temp.LineStationIndex-1==item.LineStationIndex )
+                         select temp.Clone();
+            }
+            return stline;
         }
 
         public void AddLineStations(DO.LineStation station)

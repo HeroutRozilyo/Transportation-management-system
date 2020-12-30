@@ -21,7 +21,7 @@ namespace PLGui
     /// </summary>
     public partial class MainWindow : Window
     {
-        IBL bl = factoryBL.GetBL();
+        IBL bl = factoryBL.GetBl();
         AdminWindow wnd; 
         public MainWindow()
         {
