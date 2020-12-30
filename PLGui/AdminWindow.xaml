@@ -1,0 +1,42 @@
+﻿<Window x:Class="PLGui.AdminWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PLGui"
+        mc:Ignorable="d"
+        Title="AdminWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="13*"/>
+            <RowDefinition Height="407*"/>
+        </Grid.RowDefinitions>
+        <Label Content="Welcome" Margin="0,0,0.333,-0.334" Grid.RowSpan="2"></Label>
+        <TextBlock Name="userName" Margin="0,0,-0.667,-0.334" Grid.RowSpan="2"/>
+        <TabControl x:Name="tabControl" HorizontalAlignment="Left" Height="364" Margin="0,43.667,0,-0.333" Grid.Row="1" VerticalAlignment="Top" Width="793">
+            <TabItem Header="Bus">
+
+                <Grid Background="#FFE5E5E5">
+                    <ListView x:Name="allbuses" Margin="10,4,35.667,-14.667" PreviewMouseDoubleClick="allbuses_PreviewMouseDoubleClick"  Background="WhiteSmoke" FontFamily="Segoe Print" FontSize="14" RenderTransformOrigin="0.5,0.5" BorderBrush="#FF0D0D0D" >
+                        <ListView.View>
+                                    <GridView x:Name="allbusesgrid">
+                                <GridViewColumn Header="license" Width="120" DisplayMemberBinding="{Binding Bus.Licence}"/>
+                                        <GridViewColumn/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Stations">
+
+
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+            <TabItem Header="Line">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+        </TabControl>
+
+
+    </Grid>
+</Window>
