@@ -222,21 +222,54 @@ namespace BL
 
         public void AddStationLine(BO.LineStation station) //we add station to the bus travel
         {
-           
+            int index = station.LineStationIndex;
             DO.Line lineDO = new DO.Line();
             BO.Line lineBO = new BO.Line();
             IEnumerable<DO.LineStation> tempDO;
             IEnumerable<DO.LineTrip> tripDO;
+            int adj1=-1, adj2=-1;
             try
             {
-                lineDO = dl.GetLine(station.LineStationIndex);
-                tempDO = dl.GetAllStationsLine(station.LineStationIndex);
-                tripDO = dl.GetAllTripline(station.LineStationIndex);
+                lineDO = dl.GetLine(station.LineId);  //if the bus not exsis we will have exeption from DL
+                tempDO = dl.GetAllStationsLine(station.LineId);
+                tripDO = dl.GetAllTripline(station.LineId);
 
                 //creat BO line
                 lineBO.StationsOfBus = (IEnumerable<LineStation>)tempDO;
                 lineBO.TimeLineTrip = (IEnumerable<LineTrip>)tripDO;
                 lineBO.CopyPropertiesTo(lineDO);
+                for(int i=0;i<lineBO.StationsOfBus.Count();i++)
+                {
+                    try
+                    {
+                        // check if we need to delete the adjacted station after we add between them another station
+                        //find the require 2 stations
+                        if (lineBO.StationsOfBus.ElementAt(i).LineStationIndex == index - 1)
+                            adj1 = lineBO.StationsOfBus.ElementAt(i).StationCode;
+                        if(lineBO.StationsOfBus.ElementAt(i).LineStationIndex == index)
+                            adj2 = lineBO.StationsOfBus.ElementAt(i).StationCode;
+                        //if we find them so check if thet=y adjacted station for another bus. if not-delete
+                        if (adj1 != -1 && adj2 != -1)
+                            if (dl.GetAllLineAt2Stations(adj1, adj2).Count() == 1)
+                                dl.DeleteAdjacentStationse(adj1, adj2);
+
+                        // creat a new adj station if they not exsis yet
+                        if (lineBO.StationsOfBus.ElementAt(i).LineStationIndex == index - 1 || lineBO.StationsOfBus.ElementAt(i).LineStationIndex == index + 1)
+                        {
+                            CreatAdjStations(lineBO.StationsOfBus.ElementAt(i).StationCode, station.StationCode); 
+                        }
+
+                        //in order to update the station index at line travel
+                        if (lineBO.StationsOfBus.ElementAt(i).LineStationIndex >= index)
+                            lineBO.StationsOfBus.ElementAt(i).LineStationIndex++;
+
+                        
+                    }
+                    catch (DO.WrongIDExeption ex) { string a = ""; a += ex; }
+
+                }
+                
+
             }
             catch (DO.WrongIDExeption ex)
             {

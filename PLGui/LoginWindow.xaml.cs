@@ -21,7 +21,7 @@ namespace PLGui
     {
         public LoginWindow()
         {
-            InitializeComponent();
+//            InitializeComponent();
             BO.User user = new BO.User();
             
         }
