@@ -1,20 +1,18 @@
-﻿using System;
+﻿using BL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BL;
 
 namespace BlAPI
 {
     public static class factoryBL
     {
-        public static IBL GetBL(/*string type*/)
+        public static IBL GetBl()
         {
-            
-            
-                return new BlImp();
-            
+            return new BlImp();
+     
         }
 
     }

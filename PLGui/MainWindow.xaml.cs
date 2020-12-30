@@ -21,7 +21,7 @@ namespace PLGui
     /// </summary>
     public partial class MainWindow : Window
     {
-        IBL bl = factoryBL.GetBL();
+        IBL bl = factoryBL.GetBl();
         AdminWindow wnd; 
         public MainWindow()
         {
@@ -38,6 +38,7 @@ namespace PLGui
             // You do not need to log in to this stage yet so we will go straight to the admin window
             wnd = new AdminWindow(bl);
             wnd.Show();
+            this.Close();
 
         }
 

@@ -3,19 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Threading;
 using BlAPI;
+using DALAPI;
 //using DL;
 using BO;
 using System.Device.Location;
 using DLAPI;
-using DALAPI;
 
 namespace BL
 {
     class BlImp : IBL
     {
-        IDAL dl = DLFactory.GetDL();
+        IDAL dl = DalFactory.GetDL();
 
         #region Bus
         BO.Bus busDoBoAdapter(int licence) // return the bus from dl according to licence
@@ -170,8 +169,10 @@ namespace BL
             //do the bus to be DO
             line.CopyPropertiesTo(lineDO);
             IEnumerable<DO.LineStation> tempDO=(IEnumerable<DO.LineStation>)line.StationsOfBus;
+            IEnumerable<DO.LineStation> tempDO1 = (IEnumerable<DO.LineStation>)line.StationsOfBus;
             IEnumerable<DO.LineTrip> tripDO = (IEnumerable<DO.LineTrip>)line.TimeLineTrip;
-       
+            DO.LineStation l1 = new DO.LineStation();
+            DO.LineStation l2 = new DO.LineStation();
             try
             {
                int id= dl.AddLine(lineDO);
@@ -195,13 +196,65 @@ namespace BL
                     catch (DO.WrongIDExeption ex) { string a = ""; a += ex; }
 
                 }
-
-
+                //sorted the line station according to their index.
+                tempDO1 = from item in tempDO          ///////////////לוודא שעובד
+                          orderby item.LineStationIndex
+                          select item;
+                for (int i=1;i<tempDO.Count();i++) //move on the line station list send 2 adj station to creat if they not exsis yet.
+                {             
+                    //if we have this both station at list adj station so we have throw. we catch the throw here in order tocontinue at the for.
+                    try  
+                    {
+                        l1 = tempDO1.ElementAt(i);
+                        i++;
+                        l2 = tempDO1.ElementAt(i);
+                        i--;
+                        CreatAdjStations(l1.StationCode, l2.StationCode);
+                    }
+                    catch (DO.WrongIDExeption ex) { string a = ""; a += ex; }
+                }
             }
             catch (DO.WrongIDExeption ex)
             {
                 throw new BO.BadIdException("ID not valid", ex);
             }
+        }
+
+        public void AddStationLine(BO.LineStation station) //we add station to the bus travel
+        {
+           
+            DO.Line lineDO = new DO.Line();
+            BO.Line lineBO = new BO.Line();
+            IEnumerable<DO.LineStation> tempDO;
+            IEnumerable<DO.LineTrip> tripDO;
+            try
+            {
+                lineDO = dl.GetLine(station.LineStationIndex);
+                tempDO = dl.GetAllStationsLine(station.LineStationIndex);
+                tripDO = dl.GetAllTripline(station.LineStationIndex);
+
+                //creat BO line
+                lineBO.StationsOfBus = (IEnumerable<LineStation>)tempDO;
+                lineBO.TimeLineTrip = (IEnumerable<LineTrip>)tripDO;
+                lineBO.CopyPropertiesTo(lineDO);
+            }
+            catch (DO.WrongIDExeption ex)
+            {
+                throw new BO.BadIdException("ID not valid", ex);
+            }
+
+            //for (int i = 1; i < tempDO.Count(); i++) //move on the line station list send 2 adj station to creat if they not exsis yet.
+            //{
+            //    try
+            //    {
+            //        l1 = tempDO.ElementAt(i);
+            //        i++;
+            //        l2 = tempDO.ElementAt(i);
+            //        i--;
+            //        CreatAdjStations(l1.StationCode, l2.StationCode);
+            //    }
+            //    catch (DO.WrongIDExeption ex) { string a = ""; a += ex; }
+            //}
         }
 
         public void DeleteLine(int idLine)
@@ -226,6 +279,7 @@ namespace BL
                 ST2 = dl.GetStations(station2);
                 double d = (ST1.Coordinate).GetDistanceTo((ST2.Coordinate));
                 adjacent.Distance = d;
+
                 adjacent.TimeAverage = TimeSpan.FromSeconds((1.5 * d) / speed);
                 dl.AddLineStations(adjacent);
 

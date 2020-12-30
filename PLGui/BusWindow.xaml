@@ -1,0 +1,38 @@
+﻿<Window x:Class="PLGui.BusWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PLGui"
+        mc:Ignorable="d"
+        Title="BusWindow" Height="450" Width="800">
+    <Grid>
+        <TabControl x:Name="BusData" HorizontalAlignment="Left" Height="411" Margin="10,10,0,-0.333" VerticalAlignment="Top" Width="773">
+            <TabItem Header="Bus Data">
+                <Grid Background="#FFE5E5E5">
+                    <ListView x:Name="list_Bus_Data" HorizontalAlignment="Left" Height="236" Margin="74,61,0,0" VerticalAlignment="Top" Width="613" PreviewMouseDoubleClick="list_Bus_Data_PreviewMouseDoubleClick" >
+                        <ListView.View>
+                            <GridView x:Name="allbusesgrid" >
+                                <GridViewColumn Header="license" Width="120" DisplayMemberBinding="{Binding Licence}"/>
+                                <GridViewColumn Header="" Width="120" >
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button  Content="Fuel"  Margin="0" VerticalAlignment="Center"  Click="Button_Click" Background="#FFF0F1B2" FontFamily="Segoe Print" FontSize="14" FontWeight="Bold" Width="55"   >
+                                            </Button>
+                                    </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn> 
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </Grid>
+
+
+            </TabItem>
+            <TabItem Header="TabItem" HorizontalAlignment="Right" Width="58">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+        </TabControl>
+
+    </Grid>
+</Window>

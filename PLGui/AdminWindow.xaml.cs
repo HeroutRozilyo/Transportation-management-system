@@ -41,9 +41,25 @@ namespace PLGui
             Environment.Exit(Environment.ExitCode);
         }
 
-        private void allbuses_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
+        
 
+        private void Start_Click(object sender, RoutedEventArgs e)
+        {
+            if(rbBuses.IsChecked==true)
+            {
+                BusWindow busWindow = new BusWindow(bl);
+                busWindow.Show();
+            }
+            else if(rbLine.IsChecked==true)
+            {
+                LineWindow lineWindow = new LineWindow(bl);
+                lineWindow.Show();
+            }
+            else if(rbStation.IsChecked==true)
+            {
+                StationWindow stationWindow = new StationWindow(bl);
+                stationWindow.Show();
+            }
         }
     }
 }

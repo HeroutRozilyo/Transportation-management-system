@@ -5,38 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PLGui"
         mc:Ignorable="d"
-        Title="AdminWindow" Height="450" Width="800">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="13*"/>
-            <RowDefinition Height="407*"/>
-        </Grid.RowDefinitions>
-        <Label Content="Welcome" Margin="0,0,0.333,-0.334" Grid.RowSpan="2"></Label>
-        <TextBlock Name="userName" Margin="0,0,-0.667,-0.334" Grid.RowSpan="2"/>
-        <TabControl x:Name="tabControl" HorizontalAlignment="Left" Height="364" Margin="0,43.667,0,-0.333" Grid.Row="1" VerticalAlignment="Top" Width="793">
-            <TabItem Header="Bus">
-
-                <Grid Background="#FFE5E5E5">
-                    <ListView x:Name="allbuses" Margin="10,4,35.667,-14.667" PreviewMouseDoubleClick="allbuses_PreviewMouseDoubleClick"  Background="WhiteSmoke" FontFamily="Segoe Print" FontSize="14" RenderTransformOrigin="0.5,0.5" BorderBrush="#FF0D0D0D" >
-                        <ListView.View>
-                                    <GridView x:Name="allbusesgrid">
-                                <GridViewColumn Header="license" Width="120" DisplayMemberBinding="{Binding Bus.Licence}"/>
-                                        <GridViewColumn/>
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
-                </Grid>
-            </TabItem>
-            <TabItem Header="Stations">
-
-
-                <Grid Background="#FFE5E5E5"/>
-            </TabItem>
-            <TabItem Header="Line">
-                <Grid Background="#FFE5E5E5"/>
-            </TabItem>
-        </TabControl>
-
-
+        Title="AdminWindow" Height="300" Width="472.667">
+    <Grid Margin="0,0,0,-29.333" Height="212" VerticalAlignment="Top">
+        <GroupBox Header="Choose Option:" HorizontalAlignment="Left" Height="186" Margin="63,10,0,-13.333" VerticalAlignment="Top" Width="333" FontSize="16" FontStyle="Italic" FontWeight="SemiBold">
+            <StackPanel Margin="21,20,29,24">
+                <RadioButton x:Name ="rbBuses" Content="Buses" Height="24" />
+                <RadioButton x:Name ="rbLine" Content="Line" Height="23" Margin="0,0,-11,0"/>
+                <RadioButton x:Name ="rbStation" Content="Station" Height="25" Margin="0,0,0.333,0"/>
+                <RadioButton x:Name ="AdminUser" Content="Add New Admin-Users" Height="35"/>
+            </StackPanel>
+        </GroupBox>
+        <Button x:Name="Start" Content="Start Working" HorizontalAlignment="Left" Height="30" Margin="175,226,0,-44" VerticalAlignment="Top" Width="124" Click="Start_Click"/>
     </Grid>
 </Window>
