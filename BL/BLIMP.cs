@@ -7,10 +7,7 @@ using BlAPI;
 using DALAPI;
 //using DL;
 using BO;
-
-
-
-
+using System.Device.Location;
 
 namespace BL
 {
@@ -164,8 +161,79 @@ namespace BL
             return from item in dl.GetAllLinesArea((DO.AREA)area)
                    select lineDoBoAdapter(item.IdNumber);
         }
-        
 
+        public void AddLine(BO.Line line)
+        {          
+            DO.Line lineDO=new DO.Line();
+            //do the bus to be DO
+            line.CopyPropertiesTo(lineDO);
+            IEnumerable<DO.LineStation> tempDO=(IEnumerable<DO.LineStation>)line.StationsOfBus;
+            IEnumerable<DO.LineTrip> tripDO = (IEnumerable<DO.LineTrip>)line.TimeLineTrip;
+       
+            try
+            {
+               int id= dl.AddLine(lineDO);
+                foreach(var item in tempDO)        ///////////////////////////לשאול את אליעזר איך כותבים את זה עם ביטוי למדה או לינק
+                {
+                    item.LineId = id;
+                    try //in case that the we have to same station in mistake.
+                    {
+                        dl.AddLineStations(item);
+                    }
+                    catch (DO.WrongIDExeption ex) { string a = ""; a += ex; }
+
+                }
+                foreach (var item in tripDO)        ///////////////////////////לשאול את אליעזר איך כותבים את זה עם ביטוי למדה או לינק
+                {
+                    item.KeyId = id;
+                    try
+                    {
+                        dl.AddLineTrip(item);
+                    }
+                    catch (DO.WrongIDExeption ex) { string a = ""; a += ex; }
+
+                }
+
+
+            }
+            catch (DO.WrongIDExeption ex)
+            {
+                throw new BO.BadIdException("ID not valid", ex);
+            }
+        }
+
+        public void DeleteLine(int idLine)
+        {
+
+        }
+
+
+        public void CreatAdjStations(int station1,int station2)
+        {
+            double speed = 13.89;//m/s= 50 km/h
+            DO.AdjacentStations adjacent=new DO.AdjacentStations();
+            adjacent.Station1 = station1;
+            adjacent.Station2 = station2;
+
+            DO.Stations ST1 = new DO.Stations();
+            DO.Stations ST2 = new DO.Stations();
+            try
+            {
+                // in order to freat adj station we need the "real" station in order to calucate distance and travel time.
+                ST1 = dl.GetStations(station1);
+                ST2 = dl.GetStations(station2);
+                double d = (ST1.Coordinate).GetDistanceTo((ST2.Coordinate));
+                adjacent.Distance = d;
+                adjacent.TimeAverage = TimeSpan.FromSeconds((1.5 * d) / speed);
+                dl.AddLineStations(adjacent);
+
+            }
+            catch (DO.WrongIDExeption ex)
+            {
+                throw new BO.BadIdException("ID not valid", ex);
+            }
+
+        }
         #endregion 
 
     }

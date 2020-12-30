@@ -104,12 +104,13 @@ namespace DL
 
         }
 
-        public void AddLine(DO.Line line)
+        public int AddLine(DO.Line line)
         {
             //eliezer told us that we can do here checking because check according to idnumber is meaningless
             line.IdNumber = ++DS.Config.idLineCounter;
           
             DataSource.ListLine.Add(line.Clone());
+            return line.IdNumber;
 
         }
         
@@ -225,8 +226,6 @@ namespace DL
         #endregion Stations
 
         #region LineStation
-
-
         public DO.LineStation GetLineStation(int Scode, int idline) //return specific stations according to code of the station and line that Passing through it
         {
             DO.LineStation linestations = DataSource.ListLineStations.Find(b => b.StationCode == Scode && b.LineId == idline && b.LineStationExsis == true);
@@ -267,6 +266,8 @@ namespace DL
                 throw new DO.WrongIDExeption(station.StationCode, "This station already exsis");/////////////////////////////////////////////////////////////////
             DataSource.ListLineStations.Add(station.Clone());
         }
+
+
 
         public void DeleteStationsFromLine(int Scode, int idline)
         {
