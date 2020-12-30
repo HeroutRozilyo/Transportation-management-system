@@ -1,10 +1,7 @@
-﻿using System;
+﻿using DALAPI;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Reflection;
-using DALAPI;
 
 namespace DLAPI
 {
@@ -12,7 +9,7 @@ namespace DLAPI
     /// Static Factory class for creating Dal tier implementation object according to
     /// configuration in file config.xml
     /// </summary>
-    public static class DLFactory
+    public static class DalFactory
     {
         /// <summary>
         /// The function creates Dal tier implementation object according to Dal type
@@ -28,12 +25,12 @@ namespace DLAPI
         public static IDAL GetDL()
         {
             // get dal implementation name from config.xml according to <data> element
-            string dlType = DalConfig.DLName;
+            string dlType = DLConfig.DLName;
             // bring package name (dll file name) for the dal name (above) from the list of packages in config.xml
-            DalConfig.DLPackage dlPackage;
+            DLConfig.DLPackage dlPackage;
             try // get dal package info according to <dal> element value in config file
             {
-                dlPackage = DalConfig.DLPackages[dlType];
+                dlPackage = DLConfig.DalPackages[dlType];
             }
             catch (KeyNotFoundException ex)
             {
@@ -72,7 +69,7 @@ namespace DLAPI
             { // If the type is not found - the implementation is not correct - it looks like the class name is wrong...
                 throw new DLConfigException($"Class not found due to a wrong namespace or/and class name: {dlPackageName}:{dlNameSpace}.{dlClass}", ex);
             }
-            // *** Get concrete Dal implementation's Instance
+            // * Get concrete Dal implementation's Instance
             // Get property info for public static property named "Instance" (in the dal implementation class- taken above)
             // If the property is not found or it's not public or not static then it is not properly implemented
             // as a Singleton...
