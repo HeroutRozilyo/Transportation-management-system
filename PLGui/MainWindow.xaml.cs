@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BlAPI;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,9 @@ namespace PLGui
     {
         public MainWindow()
         {
+           IBL bl = factoryBL.GetBl();
+ //           AdminWindow wnd;
+
             InitializeComponent();
         }
     }
