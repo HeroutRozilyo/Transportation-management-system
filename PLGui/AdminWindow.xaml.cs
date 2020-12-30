@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BlAPI;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -20,13 +21,21 @@ namespace PLGui
     /// </summary>
     public partial class AdminWindow : Window
     {
+        private IBL bl;
+
         public AdminWindow()
         {
             InitializeComponent();
 
             
         }
-        
+
+        public AdminWindow(IBL _bl)
+        {
+            InitializeComponent();
+            this.bl = _bl;
+        }
+
         private void AdminWindow_Closing(object sender, CancelEventArgs e)
         {
             Environment.Exit(Environment.ExitCode);

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BlAPI;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,15 +21,27 @@ namespace PLGui
     /// </summary>
     public partial class MainWindow : Window
     {
+        IBL bl = factoryBL.GetBL();
+        AdminWindow wnd; 
         public MainWindow()
         {
             InitializeComponent();
-            //List<BO.Bus> buslist = new List<BO.Bus>();
-            //buslist=
-            //AdminWindow wnd = new AdminWindow();
-            //wnd.Show();
+            
 
         }
 
+        private void Login_Click(object sender, RoutedEventArgs e)
+        {
+            // You do not need to log in to this stage yet so we will go straight to the admin window
+            wnd = new AdminWindow(bl);
+            wnd.Show();
+
+        }
+
+        private void NewUser_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("This feature is not valid for this step", "Soon...", MessageBoxButton.OK, MessageBoxImage.Information);
+               
+        }
     }
 }

@@ -5,16 +5,17 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
 using BlAPI;
-using DALAPI;
 //using DL;
 using BO;
 using System.Device.Location;
+using DLAPI;
+using DALAPI;
 
 namespace BL
 {
     class BlImp : IBL
     {
-        IDAL dl = DalFactory.GetDal();
+        IDAL dl = DLFactory.GetDL();
 
         #region Bus
         BO.Bus busDoBoAdapter(int licence) // return the bus from dl according to licence

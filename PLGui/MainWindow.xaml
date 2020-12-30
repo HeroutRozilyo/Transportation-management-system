@@ -5,8 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PLGui"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
+        Title="MainWindow" Height="212" Width="472.667">
+    <Grid Margin="0,0,19.333,18">
+        <Button x:Name="Login" Content="Login" HorizontalAlignment="Left" Margin="46,128,0,0" Click="Login_Click" Width="75" Height="27" VerticalAlignment="Top" RenderTransformOrigin="0.249,0.765"/>
+        <Button x:Name="NewUser" Content="New User" HorizontalAlignment="Left" Margin="339,128,0,0" VerticalAlignment="Top" Width="75" Click="NewUser_Click"/>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Center" Margin="289,92,0,0" TextWrapping="Wrap" Text="Do not have an account? Click here" VerticalAlignment="Top" Width="148" Cursor="None" UseLayoutRounding="False" TextAlignment="Center"/>
     </Grid>
 </Window>
