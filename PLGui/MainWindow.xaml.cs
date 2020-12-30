@@ -25,6 +25,9 @@ namespace PLGui
         AdminWindow wnd; 
         public MainWindow()
         {
+           IBL bl = factoryBL.GetBl();
+ //           AdminWindow wnd;
+
             InitializeComponent();
             
 
