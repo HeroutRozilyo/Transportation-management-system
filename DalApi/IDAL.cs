@@ -22,15 +22,13 @@ namespace DALAPI
 
         #region Line
         DO.Line GetLine(int idline);
-        void AddLine(DO.Line line);
+        int AddLine(DO.Line line);
         IEnumerable<DO.Line> GetAllLineBy(Predicate<DO.Line> linecondition);//return according to condition and just the working line
         IEnumerable<DO.Line> GetAllLine();//return all the lines in the list
         IEnumerable<object> GetLineFields(Func<int, bool, object> generate);//return all the lines on the country that exsis and withe the sme lineNumber
         IEnumerable<DO.Line> GetAllLinesArea(DO.AREA area);
         void UpdateLine(DO.Line line);
         void DeleteLine(int idnumber);
-       
-
         #endregion Line
 
         #region Stations
