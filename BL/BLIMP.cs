@@ -80,7 +80,8 @@ namespace BL
             bool okey = checkLicence(bus); //if the licence not goot this func will throw exeption
             
             DO.Bus busDO = new DO.Bus();
-        
+            bus.BusExsis = true;
+            bus.StatusBus = STUTUS.READT_TO_TRAVEL;
            (treatment(bus)).CopyPropertiesTo(busDO);
             string te = bus.Licence.Replace("-", "");
             busDO.Licence = te;
