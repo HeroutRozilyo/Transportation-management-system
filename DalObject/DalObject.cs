@@ -377,7 +377,9 @@ namespace DL
 
         public void DeleteLineTrip(int idline) //when we delete line we need to delete his line trip
         {
-            DataSource.ListLineTrip.RemoveAll(p => p.KeyId == idline);
+            foreach (var item in DataSource.ListLineTrip)
+                if (item.KeyId == idline)
+                    item.LineExsis = false;
         }
 
 

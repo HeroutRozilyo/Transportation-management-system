@@ -35,7 +35,25 @@ namespace BL
             //    busDO.CopyPropertiesTo(busBO); //go to a deep copy. all field is copied to a same field at bo.
             CopyToDo(busBO, busDO);
 
+            string firstpart, middlepart, endpart, result;
+            if (licence_.Length == 7)
+            {
+                // xx-xxx-xx
+                firstpart = licence_.Substring(0, 2);
+                middlepart = licence_.Substring(2, 3);
+                endpart = licence_.Substring(5, 2);
+                result = String.Format("{0}-{1}-{2}", firstpart, middlepart, endpart);
+            }
+            else
+            {
+                // xxx-xx-xxx
+                firstpart = licence_.Substring(0, 3);
+                middlepart = licence_.Substring(3, 2);
+                endpart = licence_.Substring(5, 3);
+                result = String.Format("{0}-{1}-{2}", firstpart, middlepart, endpart);
+            }
 
+            busBO.Licence = result;
             return busBO;
 
         }
@@ -115,7 +133,7 @@ namespace BL
             else
             {
                 if (bus.StartingDate.Year >= 2018)
-                    throw new BO.BadBusLicenceException("The new licence is not valid,\n please enter again number licence with 8 digite",Convert.ToInt32( bus.Licence));
+                    throw new BO.BadBusLicenceException("The new licence is not valid,\n please enter again number licence with 8 digite", Convert.ToInt32(bus.Licence));
                 else
                     throw new BO.BadBusLicenceException("The new licence is not valid,\n please enter again number licence with 7 digite", Convert.ToInt32(bus.Licence));
             }
@@ -126,17 +144,17 @@ namespace BL
             if (licence.Length == 7 || licence.Length == 8)
                 return true;
             else
-                throw new BO.BadBusLicenceException("The new licence is not valid,\n please enter again number licence with 8 or 7 digite",Convert.ToInt32( licence));
+                throw new BO.BadBusLicenceException("The new licence is not valid,\n please enter again number licence with 8 or 7 digite", Convert.ToInt32(licence));
         }
 
         public static void CopyToDo(BO.Bus bus, DO.Bus bus1)
         {
-            (bus.Licence) = Convert.ToString(bus1.Licence) ;
-             bus.Kilometrz= bus1.Kilometrz ;
+            (bus.Licence) = Convert.ToString(bus1.Licence);
+            bus.Kilometrz = bus1.Kilometrz;
             bus.KilometrFromLastTreat = bus1.KilometrFromLastTreat;
-           bus.LastTreatment = bus1.LastTreatment;
+            bus.LastTreatment = bus1.LastTreatment;
             bus.StartingDate = bus1.StartingDate;
-              bus.StatusBus= (BO.STUTUS)bus1.StatusBus;
+            bus.StatusBus = (BO.STUTUS)bus1.StatusBus;
             bus.FuellAmount = bus1.FuellAmount;
             bus.BusExsis = bus1.BusExsis;
         }
@@ -144,9 +162,9 @@ namespace BL
 
         public BO.Bus Refuelling(BO.Bus bus) //update the new fuel
         {
-          //  worker.RunWorkerAsync(12);
+            //  worker.RunWorkerAsync(12);
 
-            bus.StatusBus=(STUTUS)2;
+            bus.StatusBus = (STUTUS)2;
             bus.FuellAmount = 1200;
 
             return bus;
@@ -160,7 +178,7 @@ namespace BL
             bus.StatusBus = (STUTUS)3;
             bus.LastTreatment = DateTime.Today;
 
-         //   strLastTreat = String.Format("{0}/{1}/{2}", this.lastTreat.Day, this.lastTreat.Month, this.lastTreat.Year);
+            //   strLastTreat = String.Format("{0}/{1}/{2}", this.lastTreat.Day, this.lastTreat.Month, this.lastTreat.Year);
 
             bus.KilometrFromLastTreat = 0;
             if (bus.FuellAmount <= 1200)
@@ -188,12 +206,12 @@ namespace BL
                 tempDO = dl.GetAllStationsLine(idLine);
                 tripDO = dl.GetAllTripline(idLine);
             }
-            catch(DO.WrongIDExeption ex)
+            catch (DO.WrongIDExeption ex)
             {
                 throw new BO.BadIdException("ID not valid", ex);
             }
 
-      
+
             lineDO.CopyPropertiesTo(lineBO); //go to a deep copy. all field is copied to a same field at bo.
             lineBO.StationsOfBus = (IEnumerable<LineStation>)tempDO;
             lineBO.TimeLineTrip = (IEnumerable<LineTrip>)tripDO;
@@ -216,19 +234,19 @@ namespace BL
         }
 
         public void AddLine(BO.Line line)
-        {          
-            DO.Line lineDO=new DO.Line();
+        {
+            DO.Line lineDO = new DO.Line();
             //do the bus to be DO
             line.CopyPropertiesTo(lineDO);
-            IEnumerable<DO.LineStation> tempDO=(IEnumerable<DO.LineStation>)line.StationsOfBus;
+            IEnumerable<DO.LineStation> tempDO = (IEnumerable<DO.LineStation>)line.StationsOfBus;
             IEnumerable<DO.LineStation> tempDO1 = (IEnumerable<DO.LineStation>)line.StationsOfBus;
             IEnumerable<DO.LineTrip> tripDO = (IEnumerable<DO.LineTrip>)line.TimeLineTrip;
             DO.LineStation l1 = new DO.LineStation();
             DO.LineStation l2 = new DO.LineStation();
             try
             {
-               int id= dl.AddLine(lineDO);
-                foreach(var item in tempDO)        ///////////////////////////לשאול את אליעזר איך כותבים את זה עם ביטוי למדה או לינק
+                int id = dl.AddLine(lineDO);
+                foreach (var item in tempDO)        ///////////////////////////לשאול את אליעזר איך כותבים את זה עם ביטוי למדה או לינק
                 {
                     item.LineId = id;
                     try //in case that the we have to same station in mistake.
@@ -252,10 +270,10 @@ namespace BL
                 tempDO1 = from item in tempDO          ///////////////לוודא שעובד
                           orderby item.LineStationIndex
                           select item;
-                for (int i=1;i<tempDO.Count();i++) //move on the line station list send 2 adj station to creat if they not exsis yet.
-                {             
+                for (int i = 1; i < tempDO.Count(); i++) //move on the line station list send 2 adj station to creat if they not exsis yet.
+                {
                     //if we have this both station at list adj station so we have throw. we catch the throw here in order tocontinue at the for.
-                    try  
+                    try
                     {
                         l1 = tempDO1.ElementAt(i);
                         i++;
@@ -279,7 +297,7 @@ namespace BL
             BO.Line lineBO = new BO.Line();
             IEnumerable<DO.LineStation> tempDO;
             IEnumerable<DO.LineTrip> tripDO;
-            int adj1=-1, adj2=-1;
+            int adj1 = -1, adj2 = -1;
 
             try
             {
@@ -288,12 +306,12 @@ namespace BL
                 lineDO = dl.GetLine(station.LineId);  //if the bus not exsis we will have exeption from DL
                 tempDO = dl.GetAllStationsLine(station.LineId);
                 tripDO = dl.GetAllTripline(station.LineId);
-              
+
                 lineBO.StationsOfBus = (IEnumerable<LineStation>)tempDO;
                 lineBO.TimeLineTrip = (IEnumerable<LineTrip>)tripDO;
                 lineBO.CopyPropertiesTo(lineDO);
 
-                for(int i=0;i<lineBO.StationsOfBus.Count();i++)
+                for (int i = 0; i < lineBO.StationsOfBus.Count(); i++)
                 {
                     try
                     {
@@ -302,7 +320,7 @@ namespace BL
 
                         if (lineBO.StationsOfBus.ElementAt(i).LineStationIndex == (index - 1))
                             adj1 = lineBO.StationsOfBus.ElementAt(i).StationCode;
-                        if(lineBO.StationsOfBus.ElementAt(i).LineStationIndex == index)
+                        if (lineBO.StationsOfBus.ElementAt(i).LineStationIndex == index)
                             adj2 = lineBO.StationsOfBus.ElementAt(i).StationCode;
                         //if we find them so check if they adjacted station for another bus. if not-delete
                         if (adj1 != -1 && adj2 != -1)
@@ -312,19 +330,19 @@ namespace BL
                         // creat a new adj station if they not exsis yet
                         if (lineBO.StationsOfBus.ElementAt(i).LineStationIndex == (index - 1) || lineBO.StationsOfBus.ElementAt(i).LineStationIndex == (index + 1))
                         {
-                            CreatAdjStations(lineBO.StationsOfBus.ElementAt(i).StationCode, station.StationCode); 
+                            CreatAdjStations(lineBO.StationsOfBus.ElementAt(i).StationCode, station.StationCode);
                         }
 
                         //in order to update the station index at line travel
                         if (lineBO.StationsOfBus.ElementAt(i).LineStationIndex >= index)
                             lineBO.StationsOfBus.ElementAt(i).LineStationIndex++;
 
-                        
+
                     }
                     catch (DO.WrongIDExeption ex) { string a = ""; a += ex; }
 
                 }
-                
+
 
             }
             catch (DO.WrongIDExeption ex)
@@ -332,18 +350,7 @@ namespace BL
                 throw new BO.BadIdException("ID not valid", ex);
             }
 
-            //for (int i = 1; i < tempDO.Count(); i++) //move on the line station list send 2 adj station to creat if they not exsis yet.
-            //{
-            //    try
-            //    {
-            //        l1 = tempDO.ElementAt(i);
-            //        i++;
-            //        l2 = tempDO.ElementAt(i);
-            //        i--;
-            //        CreatAdjStations(l1.StationCode, l2.StationCode);
-            //    }
-            //    catch (DO.WrongIDExeption ex) { string a = ""; a += ex; }
-            //}
+
         }
 
         public void DeleteLine(int idLine)
@@ -351,7 +358,7 @@ namespace BL
             try
             {
                 dl.DeleteLine(idLine);
-                dl.DeleteTrip(idLine);
+                dl.DeleteLineTrip(idLine);
                 dl.DeleteStationsOfLine(idLine);
             }
             catch (DO.WrongIDExeption ex)
@@ -365,10 +372,10 @@ namespace BL
         }
 
 
-        public void CreatAdjStations(int station1,int station2)
+        public void CreatAdjStations(int station1, int station2)
         {
             double speed = 13.89;//m/s= 50 km/h
-            DO.AdjacentStations adjacent=new DO.AdjacentStations();
+            DO.AdjacentStations adjacent = new DO.AdjacentStations();
             adjacent.Station1 = station1;
             adjacent.Station2 = station2;
 
