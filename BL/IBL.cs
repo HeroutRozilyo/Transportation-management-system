@@ -18,6 +18,8 @@ namespace BlAPI
         int AddBus(BO.Bus bus);
         bool DeleteBus(string licence);
         bool UpdateBus(BO.Bus bus);
+        BO.Bus Refuelling(BO.Bus bus);
+        BO.Bus treatment(BO.Bus bus);
         #endregion
     }
 }

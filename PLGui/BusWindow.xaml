@@ -46,13 +46,13 @@
             <Label Content=" Status:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,3,0,3" Grid.Row="6" VerticalAlignment="Center"/>
             <ComboBox x:Name="StatusComboBox" Grid.Column="1"  SelectedItem="{Binding StatusBus}" HorizontalAlignment="Left" Height="Auto"  Margin="2.667,5,0,7" Grid.Row="6" VerticalAlignment="Center" Width="120" Grid.ColumnSpan="2"/>
 
-            <Label Content="Last Treatment Date:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,3,0,3" Grid.Row="7" VerticalAlignment="Center"/>
-            <TextBox x:Name="lastTreatmentTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="24" Margin="2.667,4,0,4" Grid.Row="7" Text="{Binding LastTreatment, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" Grid.ColumnSpan="2"/>
+            <Label Content="Last Treatment Date:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,3,0,3" Grid.Row="7" VerticalAlignment="Center" />
+            <DatePicker x:Name="lastTreatmentTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="24" Margin="2.667,4,0,4" Grid.Row="7" SelectedDate="{Binding LastTreatment, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" Grid.ColumnSpan="2"/>
             <Label Content="Km from the last treatment:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,3,0,3" Grid.Row="8" VerticalAlignment="Center"/>
             <TextBox x:Name="NewKmComboBox" Grid.Column="1" Text="{Binding KilometrFromLastTreat}" HorizontalAlignment="Left" Height="Auto"  Margin="2.667,5,0,5" Grid.Row="8" VerticalAlignment="Center"  Width="120" Grid.ColumnSpan="2"/>
-
-
         </Grid>
+        <Label Content="Optional actions:" Margin="544,37,100.333,350.667"></Label>
+        <Button  Content="Fuel"  Margin="568,70,170.333,321.667" VerticalAlignment="Center"  Click="RefulingClick" Background="#FFF0F1B2" FontFamily="Segoe Print" FontSize="14" FontWeight="Bold" Width="55" />
 
 
 

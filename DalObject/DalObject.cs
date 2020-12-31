@@ -22,7 +22,7 @@ namespace DL
         #endregion
 
         #region Bus
-        public DO.Bus GetBus(int licence) //check if the bus exsis according to the licence
+        public DO.Bus GetBus( string licence) //check if the bus exsis according to the licence
         {
             DO.Bus bus = DataSource.ListBus.Find(b => b.Licence == licence);
             if (bus != null && bus.BusExsis)
@@ -30,7 +30,7 @@ namespace DL
                 return bus.Clone();
             }
             else
-                throw new DO.WrongLicenceException(licence, $"Licence not valid:{licence}");
+                throw new DO.WrongLicenceException(int.Parse(licence), $"Licence not valid:{licence}");
 
         }
         public IEnumerable<DO.Bus> GetAllBuses() //return all the buses that we have
@@ -57,14 +57,14 @@ namespace DL
         public int AddBus(DO.Bus bus)
         {
             if (DataSource.ListBus.FirstOrDefault(b => b.Licence == bus.Licence) != null) //if != null its means that this licence is allready exsis
-                throw new DO.WrongLicenceException(bus.Licence, "This licence already exsis");
+                throw new DO.WrongLicenceException(int.Parse(bus.Licence), "This licence already exsis");
             DataSource.ListBus.Add(bus.Clone());
             return 1;
         }
 
         ///===================================================================
         ///לבדוק איך מעדכנים נתון בתוך הרשימה שלי
-        public bool DeleteBus(int licence)
+        public bool DeleteBus(string licence)
         {
             DO.Bus bus = DataSource.ListBus.Find(b => b.Licence == licence);
             if (bus != null && bus.BusExsis)
@@ -74,7 +74,7 @@ namespace DL
                 return true;
             }
             else
-                throw new DO.WrongLicenceException(licence, "Licence not exsis");
+                throw new DO.WrongLicenceException(int.Parse(licence), "Licence not exsis");
         }
         public bool UpdateBus(DO.Bus buses)
         {
@@ -86,7 +86,7 @@ namespace DL
                 return true;
             }
             else
-                throw new DO.WrongLicenceException(buses.Licence, "Licence not exsis");
+                throw new DO.WrongLicenceException(int.Parse(buses.Licence), "Licence not exsis");
         }
 
 

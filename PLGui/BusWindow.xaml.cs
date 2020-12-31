@@ -36,16 +36,16 @@ namespace PLGui
             InitializeComponent();
             bl = _bl;
 
-            temp = bl.GetAllBus().ToList();
-            egged = Convert<BO.Bus>(temp);//to make ObservableCollection
+            RefreshDataBus();
             StatusComboBox.ItemsSource = Enum.GetValues(typeof(BO.STUTUS));
             //buses.DisplayMemberPath = "Licence";//show only specific Property of object
             //buses.SelectedValuePath = "Licence";//selection return only specific Property of object
             //buses.SelectedIndex = 0; //index of the object to be selected
-            buses.ItemsSource = egged;
+           
         
 
         }
+        
         public ObservableCollection<T> Convert<T>(IEnumerable<T>listFromBO)
         {
             return new ObservableCollection<T>(listFromBO);
@@ -62,7 +62,29 @@ namespace PLGui
 
         private void RefreshDataBus()
         {
-            throw new NotImplementedException();
+            temp = bl.GetAllBus().ToList();
+            egged = Convert<BO.Bus>(temp);//to make ObservableCollection
+            buses.ItemsSource = egged;
+        }
+      
+
+        private void RefulingClick(object sender, RoutedEventArgs e)
+        {
+            bus = (buses.SelectedItem as BO.Bus);
+            if(bus!=null)
+            {
+                try
+                {
+                    bus = bl.Refuelling(bus);
+                    FuelTextBox.Text = bus.FuellAmount.ToString();
+                }
+                catch(/*BO.BadBusLicenceException a*/ Exception a)
+                {
+                    MessageBox.Show(a.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+          
+
         }
     }
 }

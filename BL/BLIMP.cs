@@ -19,7 +19,7 @@ namespace BL
         #region Bus
         BO.Bus busDoBoAdapter(string licence_) // return the bus from dl according to licence
         {
-            int licence = int.Parse(licence_);
+            string licence = (licence_).Replace("-", "");
             bool okey = checkLicence(licence_);
             BO.Bus busBO = new BO.Bus();
             DO.Bus busDO;
@@ -61,7 +61,7 @@ namespace BL
         public IEnumerable<BO.Bus> GetAllBus() //return all the buses that working 
         {
             return from item in dl.GetAllBuses()
-                   select busDoBoAdapter(Convert.ToString(item.Licence));
+                   select busDoBoAdapter(item.Licence);
         }
         //public IEnumerable<BO.Bus> GetBusByline(int licence) //return all the bus according to predicate
         //{
@@ -76,7 +76,9 @@ namespace BL
         }
         public int AddBus(BO.Bus bus)
         {
+
             bool okey = checkLicence(bus); //if the licence not goot this func will throw exeption
+           
             DO.Bus busDO = new DO.Bus();
             //         bus.CopyPropertiesTo(busDO); //go to copy the varieble to be DO
             CopyToDo(bus, busDO);
@@ -94,11 +96,11 @@ namespace BL
         }
         public bool DeleteBus(string licence_) //delete bus according to his licence
         {
-            int licence = Convert.ToInt32(licence_);
+            string licence = licence_.Replace("-", "");
             bool okey = checkLicence(licence_);
             try
             {
-                dl.DeleteBus(licence);
+                dl.DeleteBus( licence);
             }
             catch (DO.WrongLicenceException ex)
             {
@@ -109,6 +111,8 @@ namespace BL
         }
         public bool UpdateBus(BO.Bus bus) //update the bus at the DS
         {
+           string te= bus.Licence.Replace("-", "");
+            bus.Licence = te;
             DO.Bus busDO = new DO.Bus();
             bus.CopyPropertiesTo(busDO); //go to copy the varieble to be DO
             try
@@ -166,7 +170,8 @@ namespace BL
 
             bus.StatusBus = (STUTUS)2;
             bus.FuellAmount = 1200;
-
+           
+            UpdateBus(bus);
             return bus;
         }
 
