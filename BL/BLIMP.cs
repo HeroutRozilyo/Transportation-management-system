@@ -131,14 +131,14 @@ namespace BL
 
         public static void CopyToDo(BO.Bus bus, DO.Bus bus1)
         {
-            bus1.Licence = Convert.ToInt32(bus.Licence);
-            bus1.Kilometrz = bus.Kilometrz;
-            bus1.KilometrFromLastTreat = bus.KilometrFromLastTreat;
-            bus1.LastTreatment = bus.LastTreatment;
-            bus1.StartingDate = bus.StartingDate;
-            bus1.StatusBus = (DO.STUTUS)bus.StatusBus;
-            bus1.FuellAmount = bus.FuellAmount;
-            bus1.BusExsis = bus.BusExsis;
+            (bus.Licence) = Convert.ToString(bus1.Licence) ;
+             bus.Kilometrz= bus1.Kilometrz ;
+            bus.KilometrFromLastTreat = bus1.KilometrFromLastTreat;
+           bus.LastTreatment = bus1.LastTreatment;
+            bus.StartingDate = bus1.StartingDate;
+              bus.StatusBus= (BO.STUTUS)bus1.StatusBus;
+            bus.FuellAmount = bus1.FuellAmount;
+            bus.BusExsis = bus1.BusExsis;
         }
 
 
