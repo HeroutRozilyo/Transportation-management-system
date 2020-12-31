@@ -158,17 +158,7 @@ namespace BL
                 throw new BO.BadBusLicenceException("The new licence is not valid,\n please enter again number licence with 8 or 7 digite", Convert.ToInt32(licence));
         }
 
-        //public static void CopyToBo(BO.Bus bus, DO.Bus bus1)
-        //{
-        //    (bus.Licence) = Convert.ToString(bus1.Licence);
-        //    bus.Kilometrz = bus1.Kilometrz;
-        //    bus.KilometrFromLastTreat = bus1.KilometrFromLastTreat;
-        //    bus.LastTreatment = bus1.LastTreatment;
-        //    bus.StartingDate = bus1.StartingDate;
-        //    bus.StatusBus = (BO.STUTUS)bus1.StatusBus;
-        //    bus.FuellAmount = bus1.FuellAmount;
-        //    bus.BusExsis = bus1.BusExsis;
-        //}
+
 
 
         public BO.Bus Refuelling(BO.Bus bus) //update the new fuel
@@ -576,7 +566,6 @@ namespace BL
 
 
         #region Station
-
 
 
 
