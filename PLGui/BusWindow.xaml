@@ -6,13 +6,13 @@
         xmlns:local="clr-namespace:PLGui"
         mc:Ignorable="d"
         Title="BusWindow" Height="450" Width="800">
-    <Grid>
-        <ComboBox x:Name="buses" HorizontalAlignment="Left" Margin="353,10,0,0" VerticalAlignment="Top" Width="102" Height="41" ItemsSource="{Binding}" SelectionChanged="buses_SelectionChanged"/>
-       
-            
-                   
-                   
-       
+    <Grid x:Name="busesData">
+        <ComboBox x:Name="buses" HorizontalAlignment="Left" Margin="353,10,0,0" VerticalAlignment="Top" Width="102" Height="41" ItemsSource="{Binding}" DisplayMemberPath="Licence" SelectedValuePath="Licence"  SelectionChanged="buses_SelectionChanged"/>
+
+
+
+
+
         <Label x:Name="Select" Content="Select Bus" HorizontalAlignment="Left" Margin="290,19,0,0" VerticalAlignment="Top"/>
 
         <Grid x:Name="GridDataBus"  HorizontalAlignment="Left" Margin="39,76,0,0" VerticalAlignment="Top" Height="320" Width="314">
@@ -36,22 +36,22 @@
             <Label Content="Starting Date:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,3,0,3" Grid.Row="0" VerticalAlignment="Center"/>
             <DatePicker x:Name="StartingDate" Grid.Column="1" HorizontalAlignment="Left" Margin="2.667,4,0,3" Grid.Row="0" SelectedDate="{Binding StartingDate, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Height="25" Width="120" Grid.ColumnSpan="2"/>
             <Label Content="Linces:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,3,0,3" Grid.Row="1" VerticalAlignment="Center"/>
-            <TextBox x:Name="LincestextBox" Grid.Column="1" HorizontalAlignment="Left" Height="24" Margin="2.667,4,0,4" Grid.Row="1" Text="{Binding Licence, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" Grid.ColumnSpan="2"/>
+            <TextBox x:Name="LincestextBox" Grid.Column="1" HorizontalAlignment="Left" Height="24" Margin="2.667,4,0,4" Grid.Row="1"  IsReadOnly="True" Text="{Binding Licence, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" Grid.ColumnSpan="2"/>
             <Label Content="KM:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,3,0,3" Grid.Row="2" VerticalAlignment="Center"/>
             <TextBox x:Name="KmtextBox" Grid.Column="1" Text="{Binding Kilometrz}" HorizontalAlignment="Left" Height="Auto"  Margin="2.667,5,0,5" Grid.Row="2" VerticalAlignment="Center" Width="120" Grid.ColumnSpan="2"/>
 
             <Label Content="Fuel:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,3,0,3" Grid.Row="3" VerticalAlignment="Center"/>
             <TextBox x:Name="FuelTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="24" Margin="2.667,4,0,4" Grid.Row="3" Text="{Binding FuellAmount, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" Grid.ColumnSpan="2"/>
-           
+
             <Label Content=" Status:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,3,0,3" Grid.Row="6" VerticalAlignment="Center"/>
-            <ComboBox x:Name="StatusComboBox" Grid.Column="1"  SelectedItem="{Binding StatusBus}" HorizontalAlignment="Left" Height="Auto"  Margin="2.667,5,0,5" Grid.Row="6" VerticalAlignment="Center" Width="120" Grid.ColumnSpan="2"/>
+            <ComboBox x:Name="StatusComboBox" Grid.Column="1"  SelectedItem="{Binding StatusBus}" HorizontalAlignment="Left" Height="Auto"  Margin="2.667,5,0,7" Grid.Row="6" VerticalAlignment="Center" Width="120" Grid.ColumnSpan="2"/>
 
             <Label Content="Last Treatment Date:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,3,0,3" Grid.Row="7" VerticalAlignment="Center"/>
             <TextBox x:Name="lastTreatmentTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="24" Margin="2.667,4,0,4" Grid.Row="7" Text="{Binding LastTreatment, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" Grid.ColumnSpan="2"/>
             <Label Content="Km from the last treatment:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,3,0,3" Grid.Row="8" VerticalAlignment="Center"/>
-            <ComboBox x:Name="NewKmComboBox" Grid.Column="1" SelectedItem="{Binding KilometrFromLastTreat}" HorizontalAlignment="Left" Height="Auto"  Margin="2.667,5,0,5" Grid.Row="8" VerticalAlignment="Center" Width="120" Grid.ColumnSpan="2"/>
+            <TextBox x:Name="NewKmComboBox" Grid.Column="1" Text="{Binding KilometrFromLastTreat}" HorizontalAlignment="Left" Height="Auto"  Margin="2.667,5,0,5" Grid.Row="8" VerticalAlignment="Center"  Width="120" Grid.ColumnSpan="2"/>
 
-           
+
         </Grid>
 
 
