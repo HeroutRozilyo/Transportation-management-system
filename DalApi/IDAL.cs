@@ -10,12 +10,12 @@ namespace DALAPI
     public interface IDAL
     {
         #region Bus
-        Bus GetBus(int licence); //return the bus exsis according to the licence
+        Bus GetBus(string licence); //return the bus exsis according to the licence
         IEnumerable<DO.Bus> GetAllBuses(); //return all the buses that we have
         IEnumerable<DO.Bus> GetAllBusesBy(Predicate<DO.Bus> buscondition);
         IEnumerable<DO.Bus> GetAllBusesStusus(DO.STUTUS stusus);
         int AddBus(DO.Bus bus);
-        bool DeleteBus(int licence);
+        bool DeleteBus(string licence);
         bool UpdateBus(DO.Bus buses);
 
         #endregion Bus

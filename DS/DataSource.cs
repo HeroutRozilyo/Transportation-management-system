@@ -455,7 +455,7 @@ namespace DS
                 #region initialization buses
                 new Bus
                 {
-                    Licence=5267008,
+                    Licence="5267008",
                     StartingDate= new DateTime(2013, 02, 05),
                     Kilometrz=22000,
                     KilometrFromLastTreat=2000,
@@ -467,7 +467,7 @@ namespace DS
 
                 new Bus
                 {
-                    Licence=2784562,
+                    Licence="2784562",
                     StartingDate= new DateTime(2014, 03, 05),
                     Kilometrz=22000,
                     KilometrFromLastTreat=2000,
@@ -477,7 +477,7 @@ namespace DS
                 },
                 new Bus
                 {
-                    Licence=12345678,
+                    Licence="12345678",
                     StartingDate= new DateTime(2019, 02, 05),
                     Kilometrz=10000,
                     KilometrFromLastTreat=10000,
@@ -487,7 +487,7 @@ namespace DS
                 },
                 new Bus
                 {
-                    Licence=5267008,
+                    Licence="5267008",
                     StartingDate= new DateTime(2013, 02, 05),
                     Kilometrz=22000,
                     KilometrFromLastTreat=2000,
@@ -497,7 +497,7 @@ namespace DS
                 },
                 new Bus
                 {
-                    Licence=1234567,
+                    Licence="1234567",
                     StartingDate= new DateTime(2013, 09, 21),
                     Kilometrz=70000,
                     KilometrFromLastTreat=1500.34,
@@ -507,7 +507,7 @@ namespace DS
                 },
                 new Bus
                 {
-                    Licence=7654321,
+                    Licence="7654321",
                     StartingDate= new DateTime(2013, 02, 05),
                     Kilometrz=22000,
                     KilometrFromLastTreat=2000,
@@ -517,7 +517,7 @@ namespace DS
                 },
                 new Bus
                 {
-                    Licence=5463728,
+                    Licence="5463728",
                     StartingDate= new DateTime(2013, 06, 20),
                     Kilometrz=22000,
                     KilometrFromLastTreat=78500,
@@ -527,7 +527,7 @@ namespace DS
                 },
                 new Bus
                 {
-                    Licence=8216542,
+                    Licence="8216542",
                     StartingDate= new DateTime(2010, 04, 15),
                     Kilometrz=100000,
                     KilometrFromLastTreat=15000,
@@ -537,7 +537,7 @@ namespace DS
                 },
                 new Bus
                 {
-                    Licence=34509814,
+                    Licence="34509814",
                     StartingDate= new DateTime(2019, 02, 20),
                     Kilometrz=10500,
                     KilometrFromLastTreat=1400,
@@ -547,7 +547,7 @@ namespace DS
                 },
                 new Bus
                 {
-                    Licence=10926574,
+                    Licence="10926574",
                     StartingDate= new DateTime(2020, 04, 15),
                     Kilometrz=100000,
                     KilometrFromLastTreat=15000,
@@ -557,7 +557,7 @@ namespace DS
                 },
                new Bus
                 {
-                    Licence=1192657,
+                    Licence="1192657",
                     StartingDate= new DateTime(2010, 12, 15),
                     Kilometrz=28970,
                     KilometrFromLastTreat=8970,
@@ -567,7 +567,7 @@ namespace DS
                 },
              new Bus
                 {
-                    Licence=1265473,
+                    Licence="1265473",
                     StartingDate= new DateTime(2009, 07, 18),
                     Kilometrz=20000,
                     KilometrFromLastTreat=100,
@@ -577,7 +577,7 @@ namespace DS
                 },
                 new Bus
                 {
-                    Licence=89712365,
+                    Licence="89712365",
                     StartingDate= new DateTime(2020, 03, 15),
                     Kilometrz=100000,
                     KilometrFromLastTreat=15000,
@@ -587,7 +587,7 @@ namespace DS
                 },
                 new Bus
                 {
-                    Licence=1778328,
+                    Licence="1778328",
                     StartingDate= new DateTime(2010, 02, 15),
                     Kilometrz=100000,
                     KilometrFromLastTreat=15000,
@@ -597,7 +597,7 @@ namespace DS
                 },
               new Bus
                 {
-                    Licence=5059589,
+                    Licence="5059589",
                     StartingDate= new DateTime(1999, 04, 15),
                     Kilometrz=100000,
                     KilometrFromLastTreat=15000,
@@ -607,7 +607,7 @@ namespace DS
                 },
                                                                                                                           new Bus
                 {
-                    Licence=12845999,
+                    Licence="12845999",
                     StartingDate= new DateTime(2020, 01, 15),
                     Kilometrz=100000,
                     KilometrFromLastTreat=15000,
@@ -617,7 +617,7 @@ namespace DS
                 },
                                                                                                                           new Bus
                 {
-                    Licence=2000000,
+                    Licence="2000000",
                     StartingDate= new DateTime(2012, 07, 25),
                     Kilometrz=109283,
                     KilometrFromLastTreat=15000,
@@ -627,7 +627,7 @@ namespace DS
                 },
                                                                                                                       new Bus
                 {
-                    Licence=11119999,
+                    Licence="11119999",
                     StartingDate= new DateTime(2020, 08, 15),
                     Kilometrz=100000,
                     KilometrFromLastTreat=15000,
@@ -637,7 +637,7 @@ namespace DS
                 },
                                                                                                                             new Bus
                 {
-                    Licence=8576669,
+                    Licence="8576669",
                     StartingDate= new DateTime(2017, 04, 15),
                     Kilometrz=100000,
                     KilometrFromLastTreat=15000,
@@ -647,7 +647,7 @@ namespace DS
                 },
                                                                                                                           new Bus
                 {
-                   Licence=10928300,
+                   Licence="10928300",
                     StartingDate= new DateTime(2020, 09, 22),
                     Kilometrz=100000,
                     KilometrFromLastTreat=15000,
