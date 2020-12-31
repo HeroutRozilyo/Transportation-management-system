@@ -17,9 +17,10 @@ namespace BL
         IDAL dl = DalFactory.GetDL();
 
         #region Bus
-        BO.Bus busDoBoAdapter(int licence) // return the bus from dl according to licence
+        BO.Bus busDoBoAdapter(string licence_) // return the bus from dl according to licence
         {
-            bool okey = checkLicence(licence);
+            int licence = int.Parse(licence_);
+            bool okey = checkLicence(licence_);
             BO.Bus busBO = new BO.Bus();
             DO.Bus busDO;
             try //get the list from DL
@@ -31,15 +32,18 @@ namespace BL
                 throw new BO.BadBusLicenceException("Licence is illegal", ex);
             }
 
-            busDO.CopyPropertiesTo(busBO); //go to a deep copy. all field is copied to a same field at bo.
+            //    busDO.CopyPropertiesTo(busBO); //go to a deep copy. all field is copied to a same field at bo.
+            CopyToDo(busBO, busDO);
+
 
             return busBO;
 
         }
+
         public IEnumerable<BO.Bus> GetAllBus() //return all the buses that working 
         {
             return from item in dl.GetAllBuses()
-                   select busDoBoAdapter(item.Licence);
+                   select busDoBoAdapter(Convert.ToString(item.Licence));
         }
         //public IEnumerable<BO.Bus> GetBusByline(int licence) //return all the bus according to predicate
         //{
@@ -50,13 +54,15 @@ namespace BL
         public IEnumerable<BO.Bus> GetBusByStatus(BO.STUTUS stutus) //return all the bus according to their stutus
         {
             return from item in dl.GetAllBusesStusus((DO.STUTUS)stutus)
-                   select busDoBoAdapter(item.Licence);
+                   select busDoBoAdapter(Convert.ToString(item.Licence));
         }
         public int AddBus(BO.Bus bus)
         {
             bool okey = checkLicence(bus); //if the licence not goot this func will throw exeption
             DO.Bus busDO = new DO.Bus();
-            bus.CopyPropertiesTo(busDO); //go to copy the varieble to be DO
+            //         bus.CopyPropertiesTo(busDO); //go to copy the varieble to be DO
+            CopyToDo(bus, busDO);
+
             try
             {
                 dl.AddBus(busDO);
@@ -68,9 +74,10 @@ namespace BL
             }
             return 1;
         }
-        public bool DeleteBus(int licence) //delete bus according to his licence
+        public bool DeleteBus(string licence_) //delete bus according to his licence
         {
-            bool okey = checkLicence(licence);
+            int licence = Convert.ToInt32(licence_);
+            bool okey = checkLicence(licence_);
             try
             {
                 dl.DeleteBus(licence);
@@ -96,6 +103,7 @@ namespace BL
             }
             return true;
         }
+
         bool checkLicence(BO.Bus bus) //check if the new licence that the passenger enter is valid
         {
             string licence = "";
@@ -107,20 +115,64 @@ namespace BL
             else
             {
                 if (bus.StartingDate.Year >= 2018)
-                    throw new BO.BadBusLicenceException("The new licence is not valid,\n please enter again number licence with 8 digite", bus.Licence);
+                    throw new BO.BadBusLicenceException("The new licence is not valid,\n please enter again number licence with 8 digite",Convert.ToInt32( bus.Licence));
                 else
-                    throw new BO.BadBusLicenceException("The new licence is not valid,\n please enter again number licence with 7 digite", bus.Licence);
+                    throw new BO.BadBusLicenceException("The new licence is not valid,\n please enter again number licence with 7 digite", Convert.ToInt32(bus.Licence));
             }
         }
-        bool checkLicence(int licence) //check if the licence number is valid
+
+        bool checkLicence(string licence) //check if the licence number is valid
         {
-            string licences = "";
-            licences += licence;
-            if (licences.Length == 7 || licences.Length == 8)
+            if (licence.Length == 7 || licence.Length == 8)
                 return true;
             else
-                throw new BO.BadBusLicenceException("The new licence is not valid,\n please enter again number licence with 8 or 7 digite", licence);
+                throw new BO.BadBusLicenceException("The new licence is not valid,\n please enter again number licence with 8 or 7 digite",Convert.ToInt32( licence));
         }
+
+        public static void CopyToDo(BO.Bus bus, DO.Bus bus1)
+        {
+            bus1.Licence = Convert.ToInt32(bus.Licence);
+            bus1.Kilometrz = bus.Kilometrz;
+            bus1.KilometrFromLastTreat = bus.KilometrFromLastTreat;
+            bus1.LastTreatment = bus.LastTreatment;
+            bus1.StartingDate = bus.StartingDate;
+            bus1.StatusBus = (DO.STUTUS)bus.StatusBus;
+            bus1.FuellAmount = bus.FuellAmount;
+            bus1.BusExsis = bus.BusExsis;
+        }
+
+
+        public BO.Bus Refuelling(BO.Bus bus) //update the new fuel
+        {
+          //  worker.RunWorkerAsync(12);
+
+            bus.StatusBus=(STUTUS)2;
+            bus.FuellAmount = 1200;
+
+            return bus;
+        }
+
+        public BO.Bus treatment(BO.Bus bus)/// func that do treatment to the bus
+        {
+
+            //   worker.RunWorkerAsync(144);//one day
+
+            bus.StatusBus = (STUTUS)3;
+            bus.LastTreatment = DateTime.Today;
+
+         //   strLastTreat = String.Format("{0}/{1}/{2}", this.lastTreat.Day, this.lastTreat.Month, this.lastTreat.Year);
+
+            bus.KilometrFromLastTreat = 0;
+            if (bus.FuellAmount <= 1200)
+            {
+                bus.FuellAmount = 1200;
+            }
+
+            return bus;
+        }
+
+
+
         #endregion
 
         #region Line
@@ -140,7 +192,7 @@ namespace BL
             {
                 throw new BO.BadIdException("ID not valid", ex);
             }
-   ///////////////
+
       
             lineDO.CopyPropertiesTo(lineBO); //go to a deep copy. all field is copied to a same field at bo.
             lineBO.StationsOfBus = (IEnumerable<LineStation>)tempDO;

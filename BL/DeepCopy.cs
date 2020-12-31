@@ -9,6 +9,7 @@ namespace BL
 {
     public static class DeepCopy
     {
+
         public static void CopyPropertiesTo<T, S>(this S from, T to)
         {
             foreach (PropertyInfo propTo in to.GetType().GetProperties())
@@ -21,6 +22,8 @@ namespace BL
                     propTo.SetValue(to, value);
             }
         }
+
+
 
     }
 }

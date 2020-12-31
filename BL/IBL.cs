@@ -16,7 +16,7 @@ namespace BlAPI
       //  IEnumerable<BO.Bus> GetBusByline(int line);
         IEnumerable<BO.Bus> GetBusByStatus(BO.STUTUS stutus);
         int AddBus(BO.Bus bus);
-        bool DeleteBus(int licence);
+        bool DeleteBus(string licence);
         bool UpdateBus(BO.Bus bus);
         #endregion
     }

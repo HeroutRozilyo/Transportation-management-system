@@ -8,7 +8,7 @@ namespace BO
 {
     public class Bus
     {
-        public int Licence { get; set; }
+        public string Licence { get; set; }
         public DateTime StartingDate { get; set; }
         public double Kilometrz { get; set; }
         public double KilometrFromLastTreat { get; set; }
