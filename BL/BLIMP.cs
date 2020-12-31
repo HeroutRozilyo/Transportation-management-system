@@ -248,9 +248,15 @@ namespace BL
             DO.Line lineDO = new DO.Line();
             //do the bus to be DO
             line.CopyPropertiesTo(lineDO);
-            IEnumerable<DO.LineStation> tempDO = (IEnumerable<DO.LineStation>)line.StationsOfBus;
-            IEnumerable<DO.LineStation> tempDO1 = (IEnumerable<DO.LineStation>)line.StationsOfBus;
-            IEnumerable<DO.LineTrip> tripDO = (IEnumerable<DO.LineTrip>)line.TimeLineTrip;
+            IEnumerable<DO.LineStation> tempDO = (IEnumerable<DO.LineStation>)new DO.LineStation(); //line.StationsOfBus;
+            line.StationsOfBus.CopyPropertiesTo(tempDO);
+
+            IEnumerable<DO.LineStation> tempDO1 = (IEnumerable<DO.LineStation>)new DO.LineStation();   //line.StationsOfBus;
+            line.StationsOfBus.CopyPropertiesTo(tempDO1);
+
+            IEnumerable<DO.LineTrip> tripDO = (IEnumerable<DO.LineTrip>)new DO.LineTrip();//line.TimeLineTrip;
+            line.TimeLineTrip.CopyPropertiesTo(tripDO);
+
             DO.LineStation l1 = new DO.LineStation();
             DO.LineStation l2 = new DO.LineStation();
             try
@@ -424,14 +430,27 @@ namespace BL
         public bool UpdateLine(BO.Line line)
         {
             DO.Line lineDO = new DO.Line();
-            IEnumerable<DO.LineStation> tempDO= (IEnumerable<DO.LineStation>)line.StationsOfBus;
-            IEnumerable<DO.LineTrip> tripDO= (IEnumerable<DO.LineTrip>)line.TimeLineTrip;
+
+            IEnumerable<DO.LineStation> tempDO = (IEnumerable<DO.LineStation>)new DO.LineStation();//= (IEnumerable<DO.LineStation>)line.StationsOfBus;
+            line.StationsOfBus.CopyPropertiesTo(tempDO);
+
+            IEnumerable<DO.LineStation> tempDO1;
+            IEnumerable<DO.LineStation> tempDO2;
+
+            IEnumerable<DO.LineTrip> tripDO = (IEnumerable<DO.LineTrip>)new DO.LineTrip();//line.TimeLineTrip;
+            line.TimeLineTrip.CopyPropertiesTo(tripDO);
             line.CopyPropertiesTo(lineDO);
-          
+
             try
             {
                 dl.UpdateLine(lineDO);
-               // dl.UpdateStations()/////
+                tempDO1 =from item in dl.GetAllStationsLine(line.IdNumber)
+                         orderby item.LineStationIndex
+                         select item;
+                //tempDO2=
+
+
+                // dl.UpdateStations()/////
             }
             catch (DO.WrongIDExeption ex)
             {

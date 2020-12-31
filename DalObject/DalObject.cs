@@ -246,17 +246,12 @@ namespace DL
                    select station.Clone();
         }
 
-
-
         public IEnumerable<DO.LineStation> GetAllStationsCode(int code) //return all the lines at this station
         {
             return from station in DataSource.ListLineStations
                    where (station.StationCode == code)
                    select station.Clone();
         }
-
-
-
 
         public IEnumerable<DO.LineStation> GetAllLineStationsBy(Predicate<DO.LineStation> StationsLinecondition)
         {
@@ -265,9 +260,6 @@ namespace DL
                        select stations.Clone();
             return list;
         }
-
-
-
 
         public IEnumerable<DO.LineStation> GetAllLineAt2Stations(int code1, int cod2) //get 2 stations and return all the lines this 2 stations is adjacted at them
         {
@@ -294,8 +286,6 @@ namespace DL
                 throw new DO.WrongIDExeption(station.StationCode, "This station already exsis");/////////////////////////////////////////////////////////////////
             DataSource.ListLineStations.Add(station.Clone());
         }
-
-
 
         public int DeleteStationsFromLine(int Scode, int idline)
         {
@@ -327,9 +317,11 @@ namespace DL
 
         }
 
+        
+
         public void UpdateStations(DO.LineStation linestations)
         {
-            DO.LineStation station = DataSource.ListLineStations.Find(b => b.StationCode == linestations.StationCode && b.LineId == linestations.LineId && b.LineStationExsis);
+            DO.LineStation station = DataSource.ListLineStations.Find(b => b.StationCode == linestations.StationCode && b.LineId == linestations.LineId && b.LineStationExsis);           
             if (station != null)
             {
                 DataSource.ListLineStations.Remove(station);
@@ -338,6 +330,7 @@ namespace DL
             else
                 throw new DO.WrongIDExeption(linestations.StationCode, "Code not exsis");///////////////////////////////////////////////////////
         }
+
 
         #endregion LineStation
 
