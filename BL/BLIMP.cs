@@ -20,7 +20,7 @@ namespace BL
         BO.Bus busDoBoAdapter(string licence_) // return the bus from dl according to licence
         {
             string licence = (licence_).Replace("-", "");
-            bool okey = checkLicence(licence_);
+            bool okey = checkLicence(licence);
             BO.Bus busBO = new BO.Bus();
             DO.Bus busDO;
             try //get the list from DL
@@ -32,16 +32,16 @@ namespace BL
                 throw new BO.BadBusLicenceException("Licence is illegal", ex);
             }
 
-            //    busDO.CopyPropertiesTo(busBO); //go to a deep copy. all field is copied to a same field at bo.
-            CopyToDo(busBO, busDO);
+            busDO.CopyPropertiesTo(busBO);
+            // CopyToBo(busBO, busDO);
 
             string firstpart, middlepart, endpart, result;
             if (licence_.Length == 7)
             {
                 // xx-xxx-xx
-                firstpart = licence_.Substring(0, 2);
-                middlepart = licence_.Substring(2, 3);
-                endpart = licence_.Substring(5, 2);
+                firstpart = licence.Substring(0, 2);
+                middlepart = licence.Substring(2, 3);
+                endpart = licence.Substring(5, 2);
                 result = String.Format("{0}-{1}-{2}", firstpart, middlepart, endpart);
             }
             else
@@ -72,16 +72,19 @@ namespace BL
         public IEnumerable<BO.Bus> GetBusByStatus(BO.STUTUS stutus) //return all the bus according to their stutus
         {
             return from item in dl.GetAllBusesStusus((DO.STUTUS)stutus)
-                   select busDoBoAdapter(Convert.ToString(item.Licence));
+                   select busDoBoAdapter(item.Licence);
         }
+
         public int AddBus(BO.Bus bus)
         {
-
             bool okey = checkLicence(bus); //if the licence not goot this func will throw exeption
-           
+            
             DO.Bus busDO = new DO.Bus();
-            //         bus.CopyPropertiesTo(busDO); //go to copy the varieble to be DO
-            CopyToDo(bus, busDO);
+        
+           (treatment(bus)).CopyPropertiesTo(busDO);
+            string te = bus.Licence.Replace("-", "");
+            busDO.Licence = te;
+            //CopyToBo(bus, busDO);
 
             try
             {
@@ -97,7 +100,7 @@ namespace BL
         public bool DeleteBus(string licence_) //delete bus according to his licence
         {
             string licence = licence_.Replace("-", "");
-            bool okey = checkLicence(licence_);
+            bool okey = checkLicence(licence);
             try
             {
                 dl.DeleteBus( licence);
@@ -112,11 +115,12 @@ namespace BL
         public bool UpdateBus(BO.Bus bus) //update the bus at the DS
         {
            string te= bus.Licence.Replace("-", "");
+          
             DO.Bus busDO = new DO.Bus();
             bus.CopyPropertiesTo(busDO); //go to copy the varieble to be DO
+            busDO.Licence = te;
             try
             {
-                busDO.Licence = te;
                 dl.UpdateBus(busDO);
             }
             catch (DO.WrongLicenceException ex)
@@ -128,8 +132,8 @@ namespace BL
 
         bool checkLicence(BO.Bus bus) //check if the new licence that the passenger enter is valid
         {
-            string licence = "";
-            licence += bus.Licence;
+            string licence = bus.Licence.Replace("-", "");
+         
             if ((bus.StartingDate.Year < 2018 && licence.Length == 7) || (bus.StartingDate.Year >= 2018 && licence.Length == 8))
             {
                 return true;
@@ -143,25 +147,26 @@ namespace BL
             }
         }
 
-        bool checkLicence(string licence) //check if the licence number is valid
+        bool checkLicence(string licences) //check if the licence number is valid
         {
+            string licence = licences.Replace("-", "");
             if (licence.Length == 7 || licence.Length == 8)
                 return true;
             else
                 throw new BO.BadBusLicenceException("The new licence is not valid,\n please enter again number licence with 8 or 7 digite", Convert.ToInt32(licence));
         }
 
-        public static void CopyToDo(BO.Bus bus, DO.Bus bus1)
-        {
-            (bus.Licence) = Convert.ToString(bus1.Licence);
-            bus.Kilometrz = bus1.Kilometrz;
-            bus.KilometrFromLastTreat = bus1.KilometrFromLastTreat;
-            bus.LastTreatment = bus1.LastTreatment;
-            bus.StartingDate = bus1.StartingDate;
-            bus.StatusBus = (BO.STUTUS)bus1.StatusBus;
-            bus.FuellAmount = bus1.FuellAmount;
-            bus.BusExsis = bus1.BusExsis;
-        }
+        //public static void CopyToBo(BO.Bus bus, DO.Bus bus1)
+        //{
+        //    (bus.Licence) = Convert.ToString(bus1.Licence);
+        //    bus.Kilometrz = bus1.Kilometrz;
+        //    bus.KilometrFromLastTreat = bus1.KilometrFromLastTreat;
+        //    bus.LastTreatment = bus1.LastTreatment;
+        //    bus.StartingDate = bus1.StartingDate;
+        //    bus.StatusBus = (BO.STUTUS)bus1.StatusBus;
+        //    bus.FuellAmount = bus1.FuellAmount;
+        //    bus.BusExsis = bus1.BusExsis;
+        //}
 
 
         public BO.Bus Refuelling(BO.Bus bus) //update the new fuel
@@ -294,7 +299,6 @@ namespace BL
                 throw new BO.BadIdException("ID not valid", ex);
             }
         }
-
         public void AddStationLine(BO.LineStation station) //we add station to the bus travel
         {
             int index = station.LineStationIndex;
@@ -371,11 +375,72 @@ namespace BL
                 throw new BO.BadIdException("ID not valid", ex);
             }
         }
-        public void DeleteStation()
+        public void DeleteStation(int idline, int code) //delete station from the line travel
         {
+            try
+            {
+                int index = dl.DeleteStationsFromLine(code, idline);
+
+                IEnumerable<DO.LineStation> tempDO;
+                tempDO = dl.GetAllStationsLine(idline);
+                int adj1 = -1, adj2 = -1;
+
+                foreach (var item in tempDO)
+                {
+                    if (item.LineStationIndex == (index - 1))
+                        adj1 = item.StationCode;
+                    if (item.LineStationIndex == (index + 1))
+                        adj2 = item.StationCode;
+
+                    if (adj1 != -1 && adj2 != -1)
+                    {
+                        try
+                        {
+                            if (dl.GetAllLineAt2Stations(adj1, code).Count() == 1)
+                                dl.DeleteAdjacentStationse(adj1, code);
+                            if (dl.GetAllLineAt2Stations(code, adj2).Count() == 1)
+                                dl.DeleteAdjacentStationse(code, adj2);
+
+                            CreatAdjStations(adj1, adj2);
+                        }
+                        catch (DO.WrongIDExeption ex) { string a = ""; a += ex; }
+
+
+                    }
+
+                    if (item.LineStationIndex > index)
+                        item.LineStationIndex--;
+
+                }
+            }
+            catch (DO.WrongIDExeption ex)
+            {
+                throw new BO.BadIdException("ID not valid", ex);
+            }
+
 
         }
 
+        public bool UpdateLine(BO.Line line)
+        {
+            DO.Line lineDO = new DO.Line();
+            IEnumerable<DO.LineStation> tempDO= (IEnumerable<DO.LineStation>)line.StationsOfBus;
+            IEnumerable<DO.LineTrip> tripDO= (IEnumerable<DO.LineTrip>)line.TimeLineTrip;
+            line.CopyPropertiesTo(lineDO);
+          
+            try
+            {
+                dl.UpdateLine(lineDO);
+               // dl.UpdateStations()
+            }
+            catch (DO.WrongIDExeption ex)
+            {
+                throw new BO.BadIdException("ID not valid", ex);
+            }
+
+
+            return true;
+        }
 
         public void CreatAdjStations(int station1, int station2)
         {

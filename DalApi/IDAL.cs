@@ -62,7 +62,7 @@ namespace DALAPI
 
         void AddLineStations(DO.LineStation station);
 
-        void DeleteStationsFromLine(int Scode, int idline);
+        int DeleteStationsFromLine(int Scode, int idline);
 
         void DeleteStationsFromLine(int Scode); //we use here at foreach because it more effective.
         void DeleteStationsOfLine(int idline); //we use here at foreach because it more effective. when we delete line we need delete all his stations
