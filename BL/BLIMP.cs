@@ -17,6 +17,8 @@ namespace BL
         IDAL dl = DalFactory.GetDL();
 
         #region Bus
+        
+
         BO.Bus busDoBoAdapter(string licence_) // return the bus from dl according to licence
         {
             string licence = (licence_).Replace("-", "");
