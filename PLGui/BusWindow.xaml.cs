@@ -70,7 +70,9 @@ namespace PLGui
         {
             temp = bl.GetAllBus().ToList();
             egged = Convert<BO.Bus>(temp);//to make ObservableCollection
-           
+            buses.ItemsSource = egged;
+            
+
         }
       
 
@@ -123,40 +125,97 @@ namespace PLGui
 
                 if (!add)
                 {
-                    BO.Bus busadd = new BO.Bus();
-                    busadd.StartingDate = DateTime.Today;
-                    busadd.LastTreatment = DateTime.Today;
-                  
-                    egged.Add(busadd);
-                    buses.SelectedIndex = egged.Count() - 1;
+
+                    RefreshDataBus();
                     add = true;
 
 
                 }
-                else if (LincestextBox.Text != "")
+                else if (LincestextBox.Text != "" && StartingDate.Text != "")
                 {
-                    newbus = new BO.Bus();
                     add = false;
                     HelpAddBus();
-                    egged.RemoveAt(egged.Count - 1);
                     bl.AddBus(newbus);
-                    
+                    RefreshDataBus();
+                    buses.SelectedIndex = 0;
+                    MessageBox.Show("The Bus Was Successfully added to the System", "Success Message", MessageBoxButton.OK, MessageBoxImage.Asterisk);
 
                 }
-                else
-                    buses.SelectedIndex = egged.Count() - 1;
-                buses.IsReadOnly = false;
-              
+                else  
+                {
+                  MessageBoxResult result=  MessageBox.Show("In order to create a bus, you need to fill in the license number   and Starting Date field. To cancel the process click cancel", "ERROR", MessageBoxButton.OKCancel, MessageBoxImage.Error);
+                    switch(result)
+                    {
+                        case MessageBoxResult.OK:break;
+                        case MessageBoxResult.Cancel:
+                            {
+                                buses.SelectedIndex = 0;
+                            }
+                            break;
+                    }
+                }
+
             }
-            catch(BO.BadBusLicenceException a)
+            catch (BO.BadBusLicenceException a)
             {
                 buses.SelectedIndex = 0;
                 MessageBox.Show(a.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
+        }
+
+        
+
+        private void Window_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                if (e.Key == Key.Return && add && LincestextBox.Text != "" && StartingDate.Text != "")  //if enter            
+                {
+                    newbus = new BO.Bus();
+                    add = false;
+                    HelpAddBus();
+                    bl.AddBus(newbus);
+                    RefreshDataBus();
+                    buses.SelectedIndex = 0;
+                    MessageBox.Show("The Bus Was Successfully added to the System", "Success Message", MessageBoxButton.OK, MessageBoxImage.Asterisk);
+                }
+                if (e.Key == Key.Return && add && (LincestextBox == null || StartingDate.Text == ""))
+                {
+                    MessageBoxResult result = MessageBox.Show("In order to create a bus, you need to fill in the license number   and Starting Date field. To cancel the process click cancel", "ERROR", MessageBoxButton.OKCancel, MessageBoxImage.Error);
+                    switch (result)
+                    {
+                        case MessageBoxResult.OK: break;
+                        case MessageBoxResult.Cancel:
+                            {
+                                buses.SelectedIndex = 0;
+                            }
+                            break;
+                    }
+                }
+                }
+            catch(BO.BadBusLicenceException a)
+            {
+                buses.SelectedIndex = 0;
+                MessageBox.Show(a.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void Update_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                HelpAddBus();
+               bl.UpdateBus(newbus);
+                List<BO.Bus>temp1 = bl.GetAllBus().ToList();
 
 
-
+                MessageBox.Show("Bus details saved successfully", "Success Message", MessageBoxButton.OK, MessageBoxImage.Asterisk);
+            }
+            catch (BO.BadBusLicenceException a)
+            {
+                MessageBox.Show(a.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
 
 
         }
@@ -166,38 +225,26 @@ namespace PLGui
 
         }
 
-        private void Window_PreviewKeyDown(object sender, KeyEventArgs e)
+        public void  HelpAddBus()
         {
             try
             {
-                if (e.Key == Key.Return && add && LincestextBox.Text != "" && StartingDate != null)  //if enter       
-                {
-                    newbus = new BO.Bus();
-                    add = false;
-                    HelpAddBus();
-                    egged.RemoveAt(egged.Count - 1);
-                    bl.AddBus(newbus);
-                    RefreshDataBus();
-
-                }
-                if (e.Key == Key.Return && add && (LincestextBox == null || StartingDate.Text == null))
-                    MessageBox.Show("In order to create a bus, you need to fill in the license number   and Starting Date field", "ERROR", MessageBoxButton.OKCancel, MessageBoxImage.Error);
+                newbus = new BO.Bus();
+                if (KmtextBox.Text == "") KmtextBox.Text = "0";
+                newbus.Kilometrz = double.Parse(KmtextBox.Text);
+                if (lastTreatmentTextBox.Text == "") lastTreatmentTextBox.Text = DateTime.Now.ToString();
+                newbus.LastTreatment = DateTime.Parse(lastTreatmentTextBox.Text);
+                newbus.Licence = LincestextBox.Text;
+                newbus.StartingDate = DateTime.Parse(StartingDate.Text);
+                newbus.StatusBus = (BO.STUTUS)StatusComboBox.SelectedIndex;
+                if (NewKmTextboBox.Text == "") NewKmTextboBox.Text = "0";
+                newbus.KilometrFromLastTreat = double.Parse(NewKmTextboBox.Text);
             }
-            catch(BO.BadBusLicenceException a)
+            catch  (BO.BadBusLicenceException a)
             {
-                buses.SelectedIndex = 0;
                 MessageBox.Show(a.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-        }
-        public void  HelpAddBus()
-        {
-            newbus = new BO.Bus();
-            newbus.Kilometrz = double.Parse(KmtextBox.Text);
-            newbus.LastTreatment = DateTime.Parse(lastTreatmentTextBox.Text);
-            newbus.Licence = LincestextBox.Text;
-            newbus.StartingDate = DateTime.Parse(StartingDate.Text);
-            newbus.StatusBus = (BO.STUTUS)StatusComboBox.SelectedIndex;
-            newbus.KilometrFromLastTreat = double.Parse(NewKmTextboBox.Text);
+
         }
     }
 }
