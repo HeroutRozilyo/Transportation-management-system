@@ -375,6 +375,12 @@ namespace DL
                 if (item.KeyId == idline)
                     item.LineExsis = false;
         }
+        public void DeleteLineTrip1(DO.LineTrip lineTrip) //when we delete line we need to delete his line trip
+        {
+            DO.LineTrip L= DataSource.ListLineTrip.Find(b => b.KeyId == lineTrip.KeyId && b.StartAt == lineTrip.StartAt && b.FinishAt == lineTrip.FinishAt);
+            L.LineExsis = false;
+        
+        }
 
 
         public void UpdatelineTrip(DO.LineTrip lineTrip)

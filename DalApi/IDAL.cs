@@ -47,6 +47,7 @@ namespace DALAPI
         void AddLineTrip(DO.LineTrip lineTrip);
         void UpdatelineTrip(DO.LineTrip lineTrip);
         void DeleteLineTrip(int idline); //when we delete line we need to delete his line trip
+        void DeleteLineTrip1(DO.LineTrip lineTrip);
         #endregion LineTrip
 
         #region LineStation
