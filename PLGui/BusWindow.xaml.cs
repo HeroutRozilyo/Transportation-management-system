@@ -98,6 +98,8 @@ namespace PLGui
                     FuelTextBox.Text = bus.FuellAmount.ToString();
                     lastTreatmentTextBox.SelectedDate = bus.LastTreatment;
                     NewKmTextboBox.Text = bus.KilometrFromLastTreat.ToString();
+
+
                 }
                 catch (BO.BadBusLicenceException a)
                 {
@@ -108,6 +110,8 @@ namespace PLGui
 
         private void AddBus_Click(object sender, RoutedEventArgs e)
         {
+            AddBus wnd = new AddBus(bl);
+            wnd.Show();
 
         }
 
