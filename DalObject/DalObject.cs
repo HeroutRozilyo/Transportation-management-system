@@ -22,6 +22,7 @@ namespace DL
         #endregion
 
         #region Bus
+        
         public DO.Bus GetBus( string licence) //check if the bus exsis according to the licence
         {
             DO.Bus bus = DataSource.ListBus.Find(b => b.Licence == licence);
@@ -76,27 +77,20 @@ namespace DL
             else
                 throw new DO.WrongLicenceException(int.Parse(licence), "Licence not exsis");
         }
-        public bool UpdateBus(DO.Bus buses)
+        public bool UpdateBus(DO.Bus bus)
         {
-            DO.Bus bus = DataSource.ListBus.Find(b => b.Licence == buses.Licence);
-            if (bus != null && bus.BusExsis)
+            int indexOftheBUs = DataSource.ListBus.FindIndex(b => b.Licence == bus.Licence);
+            if (indexOftheBUs != -1&&DataSource.ListBus[indexOftheBUs].BusExsis)
             {
-                bus.BusExsis = true;
-                bus.FuellAmount = buses.FuellAmount;
-                bus.KilometrFromLastTreat = buses.KilometrFromLastTreat;
-                bus.Kilometrz = buses.Kilometrz;
-                bus.Licence = buses.Licence;
-                bus.StartingDate = buses.StartingDate;
-                bus.StatusBus = buses.StatusBus;
-                bus.LastTreatment = buses.LastTreatment;
-                
+                DataSource.ListBus[indexOftheBUs] = bus;
+
            //     DataSource.ListBus.Remove(bus);
-            //    buses.BusExsis = true;
-             //   DataSource.ListBus.Add(buses.Clone());
+           //    buses.BusExsis = true;
+           //   DataSource.ListBus.Add(buses.Clone());
                 return true;
             }
             else
-                throw new DO.WrongLicenceException(int.Parse(buses.Licence), "Licence not exsis");
+                throw new DO.WrongLicenceException(int.Parse(bus.Licence), "Licence not exsis");
         }
 
 

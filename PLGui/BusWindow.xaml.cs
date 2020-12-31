@@ -55,11 +55,7 @@ namespace PLGui
         private void buses_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
            
-            if (add)
-            {
-                egged.RemoveAt(egged.Count - 1);
-                add = false;
-            }
+            
             bus = (buses.SelectedItem as BO.Bus);
            busesData.DataContext = bus;
 
@@ -68,9 +64,9 @@ namespace PLGui
 
         private void RefreshDataBus()
         {
-            //temp = bl.GetAllBus().ToList();
-            IEnumerable<BO.Bus> temp = bl.GetAllBus();
-            egged = Convert<BO.Bus>(temp);//to make ObservableCollection
+            
+           
+            egged = Convert<BO.Bus>(bl.GetAllBus());//to make ObservableCollection
             buses.ItemsSource = egged;
             
 
@@ -172,7 +168,7 @@ namespace PLGui
             {
                 if (e.Key == Key.Return && add && LincestextBox.Text != "" && StartingDate.Text != "")  //if enter            
                 {
-                    newbus = new BO.Bus();
+                    
                     add = false;
                     HelpAddBus();
                     bl.AddBus(newbus);
@@ -205,13 +201,9 @@ namespace PLGui
         {
             try
             {
-                HelpAddBus();
-                bl.UpdateBus(newbus);
-       
+                if(bus!=null)
+                   bl.UpdateBus(bus);
                 RefreshDataBus();
-
-
-
                 MessageBox.Show("Bus details saved successfully", "Success Message", MessageBoxButton.OK, MessageBoxImage.Asterisk);
             }
             catch (BO.BadBusLicenceException a)
