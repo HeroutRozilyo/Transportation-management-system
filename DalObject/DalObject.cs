@@ -297,12 +297,13 @@ namespace DL
 
 
 
-        public void DeleteStationsFromLine(int Scode, int idline)
+        public int DeleteStationsFromLine(int Scode, int idline)
         {
             DO.LineStation stations = DataSource.ListLineStations.Find(b => b.StationCode == Scode && b.LineId == idline && b.LineStationExsis);
             if (stations != null)
             {
                 stations.LineStationExsis = false;
+                return stations.LineStationIndex;
             }
             else
                 throw new DO.WrongIDExeption(Scode, "Code not exsis");//////////////////////////////////////////////////////
