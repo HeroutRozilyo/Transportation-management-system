@@ -113,7 +113,7 @@ namespace BL
             }
             return true;
         }
-        public bool UpdateBus(BO.Bus bus) //update the bus at the DS
+        public BO.Bus UpdateBus(BO.Bus bus) //update the bus at the DS
         {
            string te= bus.Licence.Replace("-", "");
           
@@ -128,7 +128,8 @@ namespace BL
             {
                 throw new BO.BadBusLicenceException("Licence not valid", ex);
             }
-            return true;
+            IEnumerable<DO.Bus> temp= dl.GetAllBuses();
+            return bus;
         }
 
         bool checkLicence(BO.Bus bus) //check if the new licence that the passenger enter is valid
@@ -571,7 +572,15 @@ namespace BL
             }
 
         }
-        #endregion 
+        #endregion
 
+
+        #region Station
+
+
+
+
+
+        #endregion
     }
 }

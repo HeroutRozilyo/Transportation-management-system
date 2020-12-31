@@ -81,8 +81,18 @@ namespace DL
             DO.Bus bus = DataSource.ListBus.Find(b => b.Licence == buses.Licence);
             if (bus != null && bus.BusExsis)
             {
-                DataSource.ListBus.Remove(bus);
-                DataSource.ListBus.Add(buses.Clone());
+                bus.BusExsis = true;
+                bus.FuellAmount = buses.FuellAmount;
+                bus.KilometrFromLastTreat = buses.KilometrFromLastTreat;
+                bus.Kilometrz = buses.Kilometrz;
+                bus.Licence = buses.Licence;
+                bus.StartingDate = buses.StartingDate;
+                bus.StatusBus = buses.StatusBus;
+                bus.LastTreatment = buses.LastTreatment;
+                
+           //     DataSource.ListBus.Remove(bus);
+            //    buses.BusExsis = true;
+             //   DataSource.ListBus.Add(buses.Clone());
                 return true;
             }
             else

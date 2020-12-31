@@ -68,7 +68,8 @@ namespace PLGui
 
         private void RefreshDataBus()
         {
-            temp = bl.GetAllBus().ToList();
+            //temp = bl.GetAllBus().ToList();
+            IEnumerable<BO.Bus> temp = bl.GetAllBus();
             egged = Convert<BO.Bus>(temp);//to make ObservableCollection
             buses.ItemsSource = egged;
             
@@ -85,6 +86,7 @@ namespace PLGui
                 {
                     bus = bl.Refuelling(bus);
                     FuelTextBox.Text = bus.FuellAmount.ToString();
+          
                 }
                 catch(BO.BadBusLicenceException a)
                 {
@@ -121,8 +123,6 @@ namespace PLGui
         {
             try
             {
-
-
                 if (!add)
                 {
 
@@ -206,8 +206,10 @@ namespace PLGui
             try
             {
                 HelpAddBus();
-               bl.UpdateBus(newbus);
-                List<BO.Bus>temp1 = bl.GetAllBus().ToList();
+                bl.UpdateBus(newbus);
+       
+                RefreshDataBus();
+
 
 
                 MessageBox.Show("Bus details saved successfully", "Success Message", MessageBoxButton.OK, MessageBoxImage.Asterisk);

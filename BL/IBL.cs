@@ -17,9 +17,22 @@ namespace BlAPI
         IEnumerable<BO.Bus> GetBusByStatus(BO.STUTUS stutus);
         int AddBus(BO.Bus bus);
         bool DeleteBus(string licence);
-        bool UpdateBus(BO.Bus bus);
+        BO.Bus UpdateBus(BO.Bus bus);
         BO.Bus Refuelling(BO.Bus bus);
         BO.Bus treatment(BO.Bus bus);
+        #endregion
+
+        #region Line
+        IEnumerable<BO.Line> GetAllLine(); //return all the lines that working 
+        IEnumerable<BO.Line> GetLineBy(int stationCode); //return all the lines according to predicate
+        IEnumerable<BO.Line> GetLineByArea(BO.AREA area); //return all the line according to their area
+        void AddLine(BO.Line line);
+        void AddStationLine(BO.LineStation station); //we add station to the bus travel
+        void DeleteLine(int idLine);
+        void DeleteStation(int idline, int code); //delete station from the line travel
+        bool UpdateLine(BO.Line line);
+        void AddOneTripLine(DO.LineTrip line); //func that get new lineTrip and update the list at DS
+        void CreatAdjStations(int station1, int station2);
         #endregion
     }
 }
