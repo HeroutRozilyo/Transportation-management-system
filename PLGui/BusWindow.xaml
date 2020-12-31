@@ -56,6 +56,7 @@
 
         <Button Content="SEND TO TREATMENT" HorizontalAlignment="Left" Margin="460,121,0,0" VerticalAlignment="Top" Width="163" Click="Treatment_Click" Background="#FFD89193" FontFamily="Segoe Print" IsEnabled="{Binding enable}" Height="31"/>
         <Button x:Name="AddBus" Content="Add new bus" HorizontalAlignment="Left" Margin="507,212,0,0" VerticalAlignment="Top" Width="75" Click="AddBus_Click"/>
+        <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="529,176,0,0" VerticalAlignment="Top" Width="75"/>
 
 
 
