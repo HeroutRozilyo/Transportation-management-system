@@ -280,33 +280,37 @@ namespace BL
             IEnumerable<DO.LineStation> tempDO;
             IEnumerable<DO.LineTrip> tripDO;
             int adj1=-1, adj2=-1;
+
             try
             {
+                //creat BO line
+
                 lineDO = dl.GetLine(station.LineId);  //if the bus not exsis we will have exeption from DL
                 tempDO = dl.GetAllStationsLine(station.LineId);
                 tripDO = dl.GetAllTripline(station.LineId);
-
-                //creat BO line
+              
                 lineBO.StationsOfBus = (IEnumerable<LineStation>)tempDO;
                 lineBO.TimeLineTrip = (IEnumerable<LineTrip>)tripDO;
                 lineBO.CopyPropertiesTo(lineDO);
+
                 for(int i=0;i<lineBO.StationsOfBus.Count();i++)
                 {
                     try
                     {
                         // check if we need to delete the adjacted station after we add between them another station
                         //find the require 2 stations
-                        if (lineBO.StationsOfBus.ElementAt(i).LineStationIndex == index - 1)
+
+                        if (lineBO.StationsOfBus.ElementAt(i).LineStationIndex == (index - 1))
                             adj1 = lineBO.StationsOfBus.ElementAt(i).StationCode;
                         if(lineBO.StationsOfBus.ElementAt(i).LineStationIndex == index)
                             adj2 = lineBO.StationsOfBus.ElementAt(i).StationCode;
-                        //if we find them so check if thet=y adjacted station for another bus. if not-delete
+                        //if we find them so check if they adjacted station for another bus. if not-delete
                         if (adj1 != -1 && adj2 != -1)
                             if (dl.GetAllLineAt2Stations(adj1, adj2).Count() == 1)
                                 dl.DeleteAdjacentStationse(adj1, adj2);
 
                         // creat a new adj station if they not exsis yet
-                        if (lineBO.StationsOfBus.ElementAt(i).LineStationIndex == index - 1 || lineBO.StationsOfBus.ElementAt(i).LineStationIndex == index + 1)
+                        if (lineBO.StationsOfBus.ElementAt(i).LineStationIndex == (index - 1) || lineBO.StationsOfBus.ElementAt(i).LineStationIndex == (index + 1))
                         {
                             CreatAdjStations(lineBO.StationsOfBus.ElementAt(i).StationCode, station.StationCode); 
                         }
@@ -343,6 +347,19 @@ namespace BL
         }
 
         public void DeleteLine(int idLine)
+        {
+            try
+            {
+                dl.DeleteLine(idLine);
+                dl.DeleteTrip(idLine);
+                dl.DeleteStationsOfLine(idLine);
+            }
+            catch (DO.WrongIDExeption ex)
+            {
+                throw new BO.BadIdException("ID not valid", ex);
+            }
+        }
+        public void DeleteStation()
         {
 
         }

@@ -46,6 +46,7 @@ namespace DALAPI
         IEnumerable<DO.LineTrip> GetAllLineTripsBy(Predicate<DO.LineTrip> StationsLinecondition);
         void AddLineTrip(DO.LineTrip lineTrip);
         void UpdatelineTrip(DO.LineTrip lineTrip);
+        void DeleteLineTrip(int idline); //when we delete line we need to delete his line trip
         #endregion LineTrip
 
         #region LineStation
@@ -64,6 +65,7 @@ namespace DALAPI
         void DeleteStationsFromLine(int Scode, int idline);
 
         void DeleteStationsFromLine(int Scode); //we use here at foreach because it more effective.
+        void DeleteStationsOfLine(int idline); //we use here at foreach because it more effective. when we delete line we need delete all his stations
 
         void UpdateStations(DO.LineStation linestations);
         #endregion LineStation

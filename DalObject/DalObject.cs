@@ -316,6 +316,15 @@ namespace DL
             }
 
         }
+        public void DeleteStationsOfLine(int idline) //we use here at foreach because it more effective. when we delete line we need delete all his stations
+        {
+            foreach (DO.LineStation item in DataSource.ListLineStations)
+            {
+                if (item.LineId == idline)
+                    item.LineStationExsis = false;
+            }
+
+        }
 
         public void UpdateStations(DO.LineStation linestations)
         {
@@ -333,9 +342,9 @@ namespace DL
 
         #region LineTrip
 
-        public DO.LineTrip GetLineTrip(TimeSpan start, int idline) //return specific linetrip according to start time oand id line 
+        public DO.LineTrip GetLineTrip(TimeSpan start, int idline) //return specific linetrip according to start time and id line 
         {
-            DO.LineTrip linetrip = DataSource.ListLineTrip.Find(b => b.KeyId == idline && b.StartAt == start);
+            DO.LineTrip linetrip = DataSource.ListLineTrip.Find(b => b.KeyId == idline && b.StartAt == start&&b.LineExsis==true);
             if (linetrip != null)
             {
                 return linetrip.Clone();
@@ -348,7 +357,7 @@ namespace DL
         public IEnumerable<DO.LineTrip> GetAllTripline(int idline) //return all the lineTrip of specific line
         {
             return from linetrip in DataSource.ListLineTrip
-                   where (linetrip.KeyId == idline)
+                   where (linetrip.KeyId == idline&&linetrip.LineExsis==true)
                    select linetrip.Clone();
         }
 
@@ -356,7 +365,7 @@ namespace DL
         public IEnumerable<DO.LineTrip> GetAllLineTripsBy(Predicate<DO.LineTrip> StationsLinecondition)
         {
             var list = from linetrip in DataSource.ListLineTrip
-                       where (StationsLinecondition(linetrip))
+                       where (StationsLinecondition(linetrip)&&linetrip.LineExsis==true)
                        select linetrip.Clone();
             return list;
         }
@@ -366,11 +375,15 @@ namespace DL
             DataSource.ListLineTrip.Add(lineTrip.Clone());
         }
 
+        public void DeleteLineTrip(int idline) //when we delete line we need to delete his line trip
+        {
+            DataSource.ListLineTrip.RemoveAll(p => p.KeyId == idline);
+        }
 
 
         public void UpdatelineTrip(DO.LineTrip lineTrip)
         {
-            DO.LineTrip station = DataSource.ListLineTrip.Find(b => b.KeyId == lineTrip.KeyId && lineTrip.StartAt == b.StartAt);
+            DO.LineTrip station = DataSource.ListLineTrip.Find(b => b.KeyId == lineTrip.KeyId && lineTrip.StartAt == b.StartAt&&lineTrip.LineExsis==true);
             if (station != null)
             {
                 DataSource.ListLineTrip.Remove(station);
