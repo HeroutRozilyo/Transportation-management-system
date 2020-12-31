@@ -22,6 +22,7 @@ namespace PLGui
     public partial class BusWindow : Window
     {
         private IBL bl;
+        private BO.Bus bus;
 
         public BusWindow()
         {
@@ -35,26 +36,27 @@ namespace PLGui
             bl = _bl;
 
             temp = bl.GetAllBus().ToList();
-            foreach (var item in temp)
-             egged.Add(item);
-            list_Bus_Data.ItemsSource = egged;
-        
+            egged = Convert<BO.Bus>(temp);
+
+            buses.DisplayMemberPath = "Licence";//show only specific Property of object
+            buses.SelectedValuePath = "Licence";//selection return only specific Property of object
+            buses.SelectedIndex = 0; //index of the object to be selected
+            buses.ItemsSource = egged;
+
+
+        }
+        public ObservableCollection<T> Convert<T>(IEnumerable<T>listFromBO)
+        {
+            return new ObservableCollection<T>(listFromBO);
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void buses_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ///to build refuling func
-        }
+            bus = (buses.SelectedItem as BO.Bus);
+            
 
-        private void list_Bus_Data_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            var list = (ListView)sender; //to get the bus
-            BO.Bus item = (BO.Bus)list.SelectedItem;
 
-            BusData temp = new BusData(item); //open window to show bus data
-            temp.ShowDialog();
 
-            list_Bus_Data.Items.Refresh();
         }
     }
 }
