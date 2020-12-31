@@ -49,10 +49,13 @@
             <Label Content="Last Treatment Date:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,3,0,3" Grid.Row="7" VerticalAlignment="Center" />
             <DatePicker x:Name="lastTreatmentTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="24" Margin="2.667,4,0,4" Grid.Row="7" SelectedDate="{Binding LastTreatment, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" Grid.ColumnSpan="2"/>
             <Label Content="Km from the last treatment:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,3,0,3" Grid.Row="8" VerticalAlignment="Center"/>
-            <TextBox x:Name="NewKmComboBox" Grid.Column="1" Text="{Binding KilometrFromLastTreat}" HorizontalAlignment="Left" Height="Auto"  Margin="2.667,5,0,5" Grid.Row="8" VerticalAlignment="Center"  Width="120" Grid.ColumnSpan="2"/>
+            <TextBox x:Name="NewKmTextboBox" Grid.Column="1" Text="{Binding KilometrFromLastTreat}" HorizontalAlignment="Left" Height="Auto"  Margin="2.667,5,0,5" Grid.Row="8" VerticalAlignment="Center"  Width="120" Grid.ColumnSpan="2" TextChanged="NewKmTextboBox_TextChanged" />
         </Grid>
         <Label Content="Optional actions:" Margin="544,37,100.333,350.667"></Label>
         <Button  Content="Fuel"  Margin="568,70,170.333,321.667" VerticalAlignment="Center"  Click="RefulingClick" Background="#FFF0F1B2" FontFamily="Segoe Print" FontSize="14" FontWeight="Bold" Width="55" />
+
+        <Button Content="SEND TO TREATMENT" HorizontalAlignment="Left" Margin="460,121,0,0" VerticalAlignment="Top" Width="163" Click="Treatment_Click" Background="#FFD89193" FontFamily="Segoe Print" IsEnabled="{Binding enable}" Height="31"/>
+        <Button x:Name="AddBus" Content="Add new bus" HorizontalAlignment="Left" Margin="507,212,0,0" VerticalAlignment="Top" Width="75" Click="AddBus_Click"/>
 
 
 

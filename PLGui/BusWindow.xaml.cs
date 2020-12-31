@@ -78,12 +78,41 @@ namespace PLGui
                     bus = bl.Refuelling(bus);
                     FuelTextBox.Text = bus.FuellAmount.ToString();
                 }
-                catch(/*BO.BadBusLicenceException a*/ Exception a)
+                catch(BO.BadBusLicenceException a)
                 {
                     MessageBox.Show(a.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
           
+
+        }
+
+        private void Treatment_Click(object sender, RoutedEventArgs e)
+        {
+            bus = (buses.SelectedItem as BO.Bus);
+            if (bus != null)
+            {
+                try
+                {
+                    bus = bl.treatment(bus);
+                    FuelTextBox.Text = bus.FuellAmount.ToString();
+                    lastTreatmentTextBox.SelectedDate = bus.LastTreatment;
+                    NewKmTextboBox.Text = bus.KilometrFromLastTreat.ToString();
+                }
+                catch (BO.BadBusLicenceException a)
+                {
+                    MessageBox.Show(a.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
+
+        private void AddBus_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void NewKmTextboBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
 
         }
     }

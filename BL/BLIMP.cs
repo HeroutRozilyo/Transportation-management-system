@@ -112,11 +112,11 @@ namespace BL
         public bool UpdateBus(BO.Bus bus) //update the bus at the DS
         {
            string te= bus.Licence.Replace("-", "");
-            bus.Licence = te;
             DO.Bus busDO = new DO.Bus();
             bus.CopyPropertiesTo(busDO); //go to copy the varieble to be DO
             try
             {
+                busDO.Licence = te;
                 dl.UpdateBus(busDO);
             }
             catch (DO.WrongLicenceException ex)
