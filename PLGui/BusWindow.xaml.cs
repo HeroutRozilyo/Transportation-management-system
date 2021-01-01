@@ -59,7 +59,7 @@ namespace PLGui
             bus = (buses.SelectedItem as BO.Bus);
            busesData.DataContext = bus;
 
-
+            //
         }
 
         private void RefreshDataBus()
