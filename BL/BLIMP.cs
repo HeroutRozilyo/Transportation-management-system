@@ -8,7 +8,6 @@ using DALAPI;
 //using DL;
 using BO;
 using System.Device.Location;
-using DLAPI;
 
 namespace BL
 {
@@ -160,17 +159,7 @@ namespace BL
                 throw new BO.BadBusLicenceException("The new licence is not valid,\n please enter again number licence with 8 or 7 digite", Convert.ToInt32(licence));
         }
 
-        //public static void CopyToBo(BO.Bus bus, DO.Bus bus1)
-        //{
-        //    (bus.Licence) = Convert.ToString(bus1.Licence);
-        //    bus.Kilometrz = bus1.Kilometrz;
-        //    bus.KilometrFromLastTreat = bus1.KilometrFromLastTreat;
-        //    bus.LastTreatment = bus1.LastTreatment;
-        //    bus.StartingDate = bus1.StartingDate;
-        //    bus.StatusBus = (BO.STUTUS)bus1.StatusBus;
-        //    bus.FuellAmount = bus1.FuellAmount;
-        //    bus.BusExsis = bus1.BusExsis;
-        //}
+
 
 
         public BO.Bus Refuelling(BO.Bus bus) //update the new fuel
@@ -234,18 +223,37 @@ namespace BL
         }
         public IEnumerable<BO.Line> GetAllLine() //return all the lines that working 
         {
-            return from item in dl.GetAllLine()
+            var v= from item in dl.GetAllLine()
                    select lineDoBoAdapter(item.IdNumber);
+            foreach(var temp in v)
+            {
+                temp.StationsOfBus = (IEnumerable<LineStation>)dl.GetAllStationsLine(temp.IdNumber);
+                temp.TimeLineTrip = (IEnumerable<LineTrip>)dl.GetAllTripline(temp.IdNumber);
+            }
+            return v;
+            
         }
         public IEnumerable<BO.Line> GetLineBy(int stationCode) //return all the lines according to predicate
         {
-            return from item in dl.GetAllLineBy(x => x.FirstStationCode == stationCode)
+            var v= from item in dl.GetAllLineBy(x => x.FirstStationCode == stationCode)
                    select lineDoBoAdapter(item.IdNumber);
+            foreach (var temp in v)
+            {
+                temp.StationsOfBus = (IEnumerable<LineStation>)dl.GetAllStationsLine(temp.IdNumber);
+                temp.TimeLineTrip = (IEnumerable<LineTrip>)dl.GetAllTripline(temp.IdNumber);
+            }
+            return v;
         }
         public IEnumerable<BO.Line> GetLineByArea(BO.AREA area) //return all the line according to their area
         {
-            return from item in dl.GetAllLinesArea((DO.AREA)area)
+            var v = from item in dl.GetAllLinesArea((DO.AREA)area)
                    select lineDoBoAdapter(item.IdNumber);
+            foreach (var temp in v)
+            {
+                temp.StationsOfBus = (IEnumerable<LineStation>)dl.GetAllStationsLine(temp.IdNumber);
+                temp.TimeLineTrip = (IEnumerable<LineTrip>)dl.GetAllTripline(temp.IdNumber);
+            }
+            return v;
         }
 
         public void AddLine(BO.Line line)
@@ -580,7 +588,51 @@ namespace BL
 
         #region Station
 
+        BO.Station stationDoBoAdapter(int code) // return the station from dl according to code
+        {
+            BO.Station stationBO = new BO.Station();
+            DO.Stations stationDO;
+            IEnumerable<DO.LineStation> tempDO;
 
+            try
+            {
+                stationDO = dl.GetStations(code);
+                tempDO = dl.GetAllStationsCode(code);
+            }
+            catch (DO.WrongIDExeption ex)
+            {
+                throw new BO.BadIdException("ID not valid", ex);
+            }
+
+
+            stationDO.CopyPropertiesTo(stationBO); //go to a deep copy. all field is copied to a same field at bo.
+            stationBO.LineAtStation = (IEnumerable<LineStation>)tempDO;
+            return stationBO;
+        }
+
+     
+
+        public IEnumerable<BO.Station> GetAllStations()
+        {
+            var v= from item in dl.GetAllStations()
+                   select stationDoBoAdapter(item.Code);
+            foreach(var temp in v)
+            {
+                temp.LineAtStation = (IEnumerable<LineStation>)dl.GetAllStationsCode(temp.Code);
+            }
+            return v;
+
+        }
+
+        public void AddLine(BO.Station station)
+        {
+            DO.Stations stationDO = new DO.Stations();
+            DO.LineStation lineStationDO;
+            station.CopyPropertiesTo(stationDO);
+
+
+           
+        }
 
 
 
