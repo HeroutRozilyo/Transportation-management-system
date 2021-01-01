@@ -1,6 +1,7 @@
 ﻿using BlAPI;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,6 +22,28 @@ namespace PLGui
     public partial class LineWindow : Window
     {
         private IBL bl;
+        /*private IBL bl;
+       
+        {
+            InitializeComponent();
+            bl = _bl;
+            
+            RefreshDataBus();
+            StatusComboBox.ItemsSource = Enum.GetValues(typeof(BO.STUTUS));
+            buses.IsReadOnly = true;
+            buses.ItemsSource = egged;
+            buses.SelectedIndex = 0;
+           
+
+
+
+        }
+
+        public ObservableCollection<T> Convert<T>(IEnumerable<T>listFromBO)
+        {
+            return new ObservableCollection<T>(listFromBO);
+        }*/
+        private ObservableCollection<BO.Line> egged = new ObservableCollection<BO.Line>();
 
         public LineWindow()
         {
@@ -29,7 +52,32 @@ namespace PLGui
 
         public LineWindow(IBL bl)
         {
+            InitializeComponent();
+
             this.bl = bl;
+            RefreshLine();
+            comboBoxArea.ItemsSource = Enum.GetValues(typeof(BO.AREA));
+
+        }
+        public ObservableCollection<T> Convert<T>(IEnumerable<T> listFromBO)
+        {
+            return new ObservableCollection<T>(listFromBO);
+        }
+        private void RefreshLine()
+        {
+            egged = Convert<BO.Line>(bl.GetAllLine());//to make ObservableCollection
+           // LineComboBOx.ItemsSource = egged;
+        }
+       
+
+        private void comboBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void comboBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
