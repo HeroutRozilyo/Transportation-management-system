@@ -36,15 +36,21 @@ namespace DL
         }
         public IEnumerable<DO.Bus> GetAllBuses() //return all the buses that we have
         {
-            return from bus in DataSource.ListBus
+           var a= from bus in DataSource.ListBus
                    where (bus.BusExsis==true)
                    select bus.Clone();
+            foreach (var item in a)
+                yield return item;
         }
         public IEnumerable<DO.Bus> GetAllBusesStusus(DO.STUTUS stusus) //return all the buses that we have
         {
-            return from bus in DataSource.ListBus
-                   where(bus.StatusBus==stusus)
+
+
+            var v= from bus in DataSource.ListBus
+                   where (bus.StatusBus == stusus)
                    select bus.Clone();
+            return v;
+
         }
 
         public IEnumerable<DO.Bus> GetAllBusesBy(Predicate<DO.Bus> buscondition) //איך כותבים??
@@ -83,10 +89,9 @@ namespace DL
             if (indexOftheBUs != -1&&DataSource.ListBus[indexOftheBUs].BusExsis)
             {
                 DataSource.ListBus[indexOftheBUs] = bus;
+              
 
-           //     DataSource.ListBus.Remove(bus);
-           //    buses.BusExsis = true;
-           //   DataSource.ListBus.Add(buses.Clone());
+      
                 return true;
             }
             else

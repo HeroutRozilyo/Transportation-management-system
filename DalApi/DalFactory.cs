@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace DLAPI
+namespace DALAPI
 {
     /// <summary>
     /// Static Factory class for creating Dal tier implementation object according to
