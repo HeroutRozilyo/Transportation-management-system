@@ -14,7 +14,7 @@ namespace BL
 {
     class BlImp : IBL
     {
-        IDAL dl = DalFactory.GetDL();
+        private IDAL dl = DalFactory.GetDL();
 
         #region Bus
         
@@ -64,6 +64,7 @@ namespace BL
         {
             return from item in dl.GetAllBuses()
                    select busDoBoAdapter(item.Licence);
+
         }
         //public IEnumerable<BO.Bus> GetBusByline(int licence) //return all the bus according to predicate
         //{
@@ -84,7 +85,6 @@ namespace BL
             DO.Bus busDO = new DO.Bus();
             bus.BusExsis = true;
             bus.StatusBus = STUTUS.READT_TO_TRAVEL;
-           (treatment(bus)).CopyPropertiesTo(busDO);
             string te = bus.Licence.Replace("-", "");
             busDO.Licence = te;
             //CopyToBo(bus, busDO);
@@ -199,6 +199,7 @@ namespace BL
             {
                 bus.FuellAmount = 1200;
             }
+            UpdateBus(bus);
 
             return bus;
         }
