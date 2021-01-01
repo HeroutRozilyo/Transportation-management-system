@@ -41,7 +41,7 @@ namespace PLGui
             buses.IsReadOnly = true;
             buses.ItemsSource = egged;
             buses.SelectedIndex = 0;
-
+           
 
 
 
@@ -133,7 +133,8 @@ namespace PLGui
                     HelpAddBus();
                     bl.AddBus(newbus);
                     RefreshDataBus();
-                    buses.SelectedIndex = 0;
+                    buses.SelectedIndex = egged.Count() - 1;
+                   
                     MessageBox.Show("The Bus Was Successfully added to the System", "Success Message", MessageBoxButton.OK, MessageBoxImage.Asterisk);
 
                 }
@@ -173,7 +174,7 @@ namespace PLGui
                     HelpAddBus();
                     bl.AddBus(newbus);
                     RefreshDataBus();
-                    buses.SelectedIndex = 0;
+                    buses.SelectedIndex = egged.Count()-1;
                     MessageBox.Show("The Bus Was Successfully added to the System", "Success Message", MessageBoxButton.OK, MessageBoxImage.Asterisk);
                 }
                 if (e.Key == Key.Return && add && (LincestextBox == null || StartingDate.Text == ""))
@@ -203,7 +204,10 @@ namespace PLGui
             {
                 if(bus!=null)
                    bl.UpdateBus(bus);
+                int index = buses.SelectedIndex;
                 RefreshDataBus();
+                buses.SelectedIndex = index;
+              
                 MessageBox.Show("Bus details saved successfully", "Success Message", MessageBoxButton.OK, MessageBoxImage.Asterisk);
             }
             catch (BO.BadBusLicenceException a)
@@ -216,6 +220,28 @@ namespace PLGui
 
         private void NewKmTextboBox_TextChanged(object sender, TextChangedEventArgs e)
         {
+
+        }
+
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+           
+
+        }
+
+        private void DeleteBus_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (bus != null)
+                    bl.DeleteBus(bus.Licence);
+                RefreshDataBus();
+                buses.SelectedIndex = 0;
+            }
+            catch (BO.BadBusLicenceException a)
+            {
+                MessageBox.Show(a.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
 
         }
 
@@ -233,6 +259,7 @@ namespace PLGui
                 newbus.StatusBus = (BO.STUTUS)StatusComboBox.SelectedIndex;
                 if (NewKmTextboBox.Text == "") NewKmTextboBox.Text = "0";
                 newbus.KilometrFromLastTreat = double.Parse(NewKmTextboBox.Text);
+                newbus.BusExsis = true;
             }
             catch  (BO.BadBusLicenceException a)
             {

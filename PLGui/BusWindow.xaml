@@ -49,7 +49,7 @@
             <ComboBox x:Name="StatusComboBox" Grid.Column="1"  SelectedItem="{Binding StatusBus}" HorizontalAlignment="Left" Height="Auto"  Margin="3.333,5,0,7.667" Grid.Row="6" VerticalAlignment="Center" Width="120" Grid.ColumnSpan="2"/>
 
             <Label Content="Last Treatment Date:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,3.333,0,3.333" Grid.Row="7" VerticalAlignment="Center" />
-            <DatePicker x:Name="lastTreatmentTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="24" Margin="3.333,4.333,0,4.333" Grid.Row="7"  VerticalAlignment="Center" Width="120" SelectedDate="{Binding LastTreatment, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.ColumnSpan="2"/>
+            <DatePicker x:Name="lastTreatmentTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="24" Margin="3.333,4.333,0,4.333" Grid.Row="7"  VerticalAlignment="Center" Width="120" SelectedDate="{Binding LastTreatment, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.ColumnSpan="2"  DisplayDateStart="1/01/90"/>
             <Label Content="Km from the last treatment:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,3.667,0,3" Grid.Row="8" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
             <TextBox x:Name="NewKmTextboBox" Grid.Column="1" Text="{Binding KilometrFromLastTreat}" HorizontalAlignment="Left" Height="Auto"  Margin="3.333,7.667,0,7" Grid.Row="8" VerticalAlignment="Center"  Width="120" Grid.ColumnSpan="2" TextChanged="NewKmTextboBox_TextChanged" />
         </Grid>
@@ -59,6 +59,7 @@
         <Button Content="SEND TO TREATMENT" HorizontalAlignment="Left" Margin="460,121,0,0" VerticalAlignment="Top" Width="163" Click="Treatment_Click" Background="#FFD89193" FontFamily="Segoe Print" IsEnabled="{Binding enable}" Height="31"/>
         <Button x:Name="AddBus" Content="Add new bus" HorizontalAlignment="Left" Margin="507,212,0,0" VerticalAlignment="Top" Width="75" Click="AddBus_Click"/>
         <Button x:Name="Update" Content="Update Bus" HorizontalAlignment="Left" Margin="529,176,0,0" VerticalAlignment="Top" Width="75" Click="Update_Click"/>
+        <Button x:Name="DeleteBus" Content="Delete Bus" HorizontalAlignment="Left" Margin="507,238,0,0" VerticalAlignment="Top" Width="75" Click="DeleteBus_Click"/>
 
 
 
