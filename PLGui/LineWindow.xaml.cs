@@ -75,8 +75,39 @@ namespace PLGui
 
             area = (BO.AREA)(comboBoxArea.SelectedItem);
             egged = Convert(bl.GetLineByArea(area));
-
+            ListOfLine.ItemsSource = egged;
+            GridDataLine.DataContext = null;
           //  busesData.DataContext = bus;
+        }
+
+        private void ListOfLine_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            var list = (ListView)sender; //to get the line
+			object item = list.SelectedItem;
+            GridDataLine.DataContext = item;
+
+
+
+
+
+
+        }
+
+        private void DeleteLine_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        
+
+        private void AddLine_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void UpdateLine_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

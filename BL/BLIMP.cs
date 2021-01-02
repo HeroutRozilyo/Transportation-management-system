@@ -215,7 +215,7 @@ namespace BL
                 throw new BO.BadIdException("ID not valid", ex);
             }
 
-
+            lineBO.TimeTravel = 0;
             lineDO.CopyPropertiesTo(lineBO); //go to a deep copy. all field is copied to a same field at bo.
                                           
             lineBO.StationsOfBus = from st in tempDO                           
