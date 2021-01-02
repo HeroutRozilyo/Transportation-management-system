@@ -217,7 +217,8 @@ namespace BL
 
 
             lineDO.CopyPropertiesTo(lineBO); //go to a deep copy. all field is copied to a same field at bo.
-            lineBO.StationsOfBus = (IEnumerable<LineStation>)tempDO;
+                                             // lineBO.StationsOfBus = (IEnumerable<LineStation>)tempDO;
+           tempDO.CopyPropertiesTo(lineBO.StationsOfBus); ;
             lineBO.TimeLineTrip = (IEnumerable<LineTrip>)tripDO;
             return lineBO;
         }
@@ -624,7 +625,7 @@ namespace BL
 
         }
 
-        public void AddLine(BO.Station station)
+        public void AddLine(BO.Station station)///////////////////
         {
             DO.Stations stationDO = new DO.Stations();
             DO.LineStation lineStationDO;

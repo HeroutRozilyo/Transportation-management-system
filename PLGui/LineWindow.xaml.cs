@@ -44,7 +44,7 @@ namespace PLGui
             return new ObservableCollection<T>(listFromBO);
         }*/
         private ObservableCollection<BO.Line> egged = new ObservableCollection<BO.Line>();
-
+        private BO.AREA area;
         public LineWindow()
         {
             InitializeComponent();
@@ -55,7 +55,7 @@ namespace PLGui
             InitializeComponent();
 
             this.bl = bl;
-            RefreshLine();
+         //   RefreshLine();
             comboBoxArea.ItemsSource = Enum.GetValues(typeof(BO.AREA));
 
         }
@@ -70,14 +70,13 @@ namespace PLGui
         }
        
 
-        private void comboBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void comboBoxArea_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
-        }
+            area = (BO.AREA)(comboBoxArea.SelectedItem);
+            egged = Convert(bl.GetLineByArea(area));
 
-        private void comboBox_GotFocus(object sender, RoutedEventArgs e)
-        {
-
+          //  busesData.DataContext = bus;
         }
     }
 }
