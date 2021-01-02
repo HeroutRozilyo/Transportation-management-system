@@ -285,32 +285,19 @@ namespace BL
                      select (DO.LineStation)st.CopyPropertiesToNew(typeof(DO.LineStation));
 
             IEnumerable<DO.LineStation> tempDO1;
-            //tempDO1 = from item in tempDO
-            //          select new
-            //          {
-            //              LineId = item.LineId,
-            //              LineStationExsis = item.LineStationExsis,
-            //              LineStationIndex = item.LineStationIndex,
-            //              NextStation = item.NextStation,
-            //              PrevStation = item.PrevStation,
-            //              StationCode = item.StationCode
-            //          };
 
-            //foreach(var item in tempDO)
-            //{
-            //    tempDO1 = new DO.LineStation()
-            //    {
-            //        LineId = item.LineId,
-            //        LineStationExsis = item.LineStationExsis,
-            //        LineStationIndex = item.LineStationIndex,
-            //        NextStation = item.NextStation,
-            //        PrevStation = item.PrevStation,
-            //        StationCode = item.StationCode
-            //    };
-
-            //}
-            tempDO1 = from st in line.StationsOfBus    ///לא בטוח נכונה
-                     select (DO.LineStation)st.CopyPropertiesToNew(typeof(DO.LineStation));
+            tempDO1 = from item in tempDO
+                      select new DO.LineStation
+                      {
+                          LineId = item.LineId,
+                          LineStationExsis = item.LineStationExsis,
+                          LineStationIndex = item.LineStationIndex,
+                          NextStation = item.NextStation,
+                          PrevStation = item.PrevStation,
+                          StationCode = item.StationCode
+                      };
+            //tempDO1 = from st in line.StationsOfBus    ///לא בטוח נכונה
+            //         select (DO.LineStation)st.CopyPropertiesToNew(typeof(DO.LineStation));
             
 
             IEnumerable<DO.LineTrip> tripDO = (IEnumerable<DO.LineTrip>)new DO.LineTrip();//line.TimeLineTrip;
