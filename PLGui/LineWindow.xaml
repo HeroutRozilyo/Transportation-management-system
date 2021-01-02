@@ -7,6 +7,15 @@
         mc:Ignorable="d"
         Title="LineWindow" Height="450" Width="800">
     <Grid>
-        
+        <ComboBox x:Name="comboBoxArea" HorizontalAlignment="Left" Margin="266,10,0,0" VerticalAlignment="Top" Width="208" Height="30" SelectionChanged="comboBoxArea_SelectionChanged"/>
+        <Label x:Name="Area" Content="Please select the desired area" HorizontalAlignment="Left" Margin="80,10,0,0" VerticalAlignment="Top" Height="40" Width="181"/>
+
+
+
+
+
+
+
+
     </Grid>
 </Window>
