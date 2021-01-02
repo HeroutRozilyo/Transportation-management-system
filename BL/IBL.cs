@@ -39,6 +39,9 @@ namespace BlAPI
 
         #region Station
         IEnumerable<BO.Station> GetAllStations();
+        void AddStation(BO.Station station);
+        void DeleteStation(int code);
+        void UpdateStation(BO.Station station);
         #endregion
     }
 }

@@ -75,7 +75,6 @@ namespace DALAPI
         DO.AdjacentStations GetAdjacentStations(int Scode1, int Scode2); //return specific AdjacentStations
 
         IEnumerable<DO.AdjacentStations> GetAllAdjacentStations(int stationCode);//return all the AdjacentStations that we have for this station code
-        IEnumerable<DO.AdjacentStations> GetAllAdjacentStationsTo(int stationCode);//return all the AdjacentStations that we have for this station code (from end) 
 
         IEnumerable<DO.AdjacentStations> GetAllAdjacentStationsBy(Predicate<DO.AdjacentStations> StationsLinecondition);
 

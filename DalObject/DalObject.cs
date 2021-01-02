@@ -421,15 +421,10 @@ namespace DL
         public IEnumerable<DO.AdjacentStations> GetAllAdjacentStations(int stationCode) //return all the AdjacentStations that we have for this station code
         {
             return from station in DataSource.ListAdjacentStations
-                   where (stationCode == station.Station1)
+                   where (stationCode == station.Station1|| stationCode == station.Station2)
                    select station.Clone();
         }
-        public IEnumerable<DO.AdjacentStations> GetAllAdjacentStationsTo(int stationCode) //return all the AdjacentStations that we have for this station code (from end)
-        {
-            return from station in DataSource.ListAdjacentStations
-                   where (stationCode == station.Station2)
-                   select station.Clone();
-        }
+
 
 
         public IEnumerable<DO.AdjacentStations> GetAllAdjacentStationsBy(Predicate<DO.AdjacentStations> StationsLinecondition)
