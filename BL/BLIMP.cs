@@ -495,6 +495,73 @@ namespace BL
 
         }
 
+        public bool UpdateLineTrip(BO.Line line)
+        {
+            DO.Line lineDO = new DO.Line();
+            line.CopyPropertiesTo(lineDO);
+            return true;
+        }
+        public bool UpdateLineStation(BO.Line line)
+        {
+            DO.Line lineDO = new DO.Line();
+            line.CopyPropertiesTo(lineDO);
+
+            IEnumerable<DO.LineStation> tempDO;
+            tempDO = from st in line.StationsOfBus
+                     select (DO.LineStation)st.CopyPropertiesToNew(typeof(DO.LineStation));
+
+
+            IEnumerable<DO.LineStation> tempDO1;
+            IEnumerable<DO.LineStation> tempDO2;
+
+            try
+            {
+
+                //for add update on line stations
+                tempDO1 = from item in dl.GetAllStationsLine(line.IdNumber) //the oldest line station
+                          orderby item.LineStationIndex
+                          select item;
+                tempDO2 = from item in tempDO //the new line station
+                          orderby item.LineStationIndex
+                          select item;
+                for (int i = 0; i < tempDO.Count(); i++)
+                {
+                    if (tempDO1.ElementAt(i).StationCode != tempDO2.ElementAt(i).StationCode)
+                    {
+                        if (i == 0)
+                        {
+                            tempDO2.ElementAt(i).PrevStation = 0;
+                            tempDO2.ElementAt(i).NextStation = tempDO2.ElementAt(i + 1).StationCode;
+                            dl.UpdateStations(tempDO2.ElementAt(i));
+                        }
+                        if (i == tempDO.Count() - 1)
+                        {
+                            tempDO2.ElementAt(i).PrevStation = tempDO2.ElementAt(i - 1).StationCode;
+                            tempDO2.ElementAt(i).NextStation = 0;
+                            dl.UpdateStations(tempDO2.ElementAt(i));
+                        }
+                        else
+                        {
+                            tempDO2.ElementAt(i).PrevStation = tempDO2.ElementAt(i - 1).StationCode;
+                            tempDO2.ElementAt(i).NextStation = tempDO2.ElementAt(i + 1).StationCode;
+                            dl.UpdateStations(tempDO2.ElementAt(i));
+
+                        }
+
+                    }
+
+                }
+
+
+            }
+            catch (DO.WrongIDExeption ex)
+            {
+                throw new BO.BadIdException("ID not valid", ex);
+            }
+            return true;
+
+        }
+
 
         public bool UpdateLine(BO.Line line)
         {
@@ -585,13 +652,18 @@ namespace BL
                 temp = tripDO1.ElementAt(i);
                 if (temp.StartAt <= line.StartAt && temp.FinishAt > line.StartAt)
                 {
-                    lineTrip.StartAt = tripDO1.ElementAt(i).StartAt;
-                    lineTrip.TripLineExsis = true;
-                    lineTrip.KeyId = tripDO1.ElementAt(i).KeyId;
-                    lineTrip.Frequency = tripDO1.ElementAt(i).Frequency;
-                    lineTrip.FinishAt = line.StartAt;
+                    if(temp.StartAt!= line.StartAt)
+                    {
+                        lineTrip.StartAt = tripDO1.ElementAt(i).StartAt;
+                        lineTrip.TripLineExsis = true;
+                        lineTrip.KeyId = tripDO1.ElementAt(i).KeyId;
+                        lineTrip.Frequency = tripDO1.ElementAt(i).Frequency;
+                        lineTrip.FinishAt = line.StartAt;
 
-                    dl.UpdatelineTrip(lineTrip);
+                        dl.UpdatelineTrip(lineTrip);
+
+                    }
+            
 
                     dl.DeleteLineTrip1(temp);
                     dl.AddLineTrip(lineTrip);
@@ -610,7 +682,7 @@ namespace BL
                     break;
 
                 }
-                if (temp.StartAt >= line.StartAt && temp.FinishAt <= line.FinishAt)
+                if (temp.StartAt > line.StartAt && temp.FinishAt < line.FinishAt)
                     dl.DeleteLineTrip1(tripDO1.ElementAt(i));
             }
 
@@ -713,35 +785,157 @@ namespace BL
             return stationBO;
         }
 
-
-
         public IEnumerable<BO.Station> GetAllStations()
         {
-            var v = from item in dl.GetAllStations()
-                    select stationDoBoAdapter(item.Code);
-            foreach (var temp in v)
+            try
             {
-                temp.LineAtStation = from st in dl.GetAllStationsCode(temp.Code)
-                                     select (BO.LineStation)st.CopyPropertiesToNew(typeof(BO.LineStation));
-            }
-            return v;
+                var v = from item in dl.GetAllStations()
+                        select stationDoBoAdapter(item.Code);
+                foreach (var temp in v)
+                {
+                    temp.LineAtStation = from st in dl.GetAllStationsCode(temp.Code)
+                                         select (BO.LineStation)st.CopyPropertiesToNew(typeof(BO.LineStation));
+                }
+                return v;
 
+            }
+            catch (DO.WrongIDExeption ex)
+            {
+                throw new BO.BadIdException("code not valid", ex);
+            }
         }
 
-        public void AddLine(BO.Station station)///////////////////
+        public void AddStation(BO.Station station)///////////////////
         {
             DO.Stations stationDO = new DO.Stations();
-            DO.LineStation lineStationDO;
             station.CopyPropertiesTo(stationDO);
+            try
+            {
+                if (station.Coordinate.Latitude >= 29.3 && station.Coordinate.Latitude <= 33.5 && station.Coordinate.Longitude >= 33.7 && station.Coordinate.Longitude <= 36.3)
+                    dl.AddStations(stationDO);
+                else
+                    throw new BO.BadCoordinateException(Convert.ToInt32(station.Coordinate), "Wrong coordinate");
+            }
+            catch (DO.WrongIDExeption ex)
+            {
+                throw new BO.BadIdException("code not valid", ex);
+            }
+        }
+        
+        public void DeleteStation(int code)
+        {
+            try
+            {
+                dl.DeleteStations(code);
+                dl.DeleteAdjacentStationseBStation(code);
+                dl.DeleteStationsFromLine(code);
+            }
+            catch (DO.WrongIDExeption ex)
+            {
+                throw new BO.BadIdException("code not valid", ex);
+            }
+        }
 
-            dl.AddStations(stationDO);
+        public void UpdateStation(BO.Station station)
+        {
+            double speed = 13.89;//m/s= 50 km/h
+
+            try
+            {
+                DO.Stations stationDO = new DO.Stations();
+                DO.Stations stationOldDO = new DO.Stations();
+                DO.AdjacentStations adjacent = new DO.AdjacentStations();
+                DO.Stations ST = new DO.Stations();
 
 
+                station.CopyPropertiesTo(stationDO);
+
+                if (station.Coordinate.Latitude >= 29.3 && station.Coordinate.Latitude <= 33.5 && station.Coordinate.Longitude >= 33.7 && station.Coordinate.Longitude <= 36.3)
+                {
+                    stationOldDO = dl.GetStations(station.Code);
+                    dl.UpdateStations(stationDO);
+
+                    if(stationOldDO.Coordinate!=station.Coordinate)
+                    {
+                        IEnumerable<DO.AdjacentStations> adjacentStations=  dl.GetAllAdjacentStations(station.Code);
+                        foreach(var item in adjacentStations)
+                        {
+                            if (item.Station1 != station.Code)
+                            {
+                                stationOldDO = dl.GetStations(item.Station1);
+
+                                adjacent.Station1 = item.Station1;
+                                adjacent.Station2 = station.Code;
+                                ST = dl.GetStations(item.Station1);
+
+                            }
+                            else
+                            {
+                                stationOldDO = dl.GetStations(item.Station2);
+                                adjacent.Station1 = station.Code;
+                                adjacent.Station2 = item.Station2;
+                                ST = dl.GetStations(item.Station2);
+                            }
+
+                            double d = (station.Coordinate).GetDistanceTo((ST.Coordinate));
+                            adjacent.Distance = d;
+
+                            adjacent.TimeAverage = TimeSpan.FromSeconds((1.5 * d) / speed);
+                            dl.UpdateAdjacentStations(adjacent);
+                        }
+
+                    }
+
+                }
+                else
+                    throw new BO.BadCoordinateException(Convert.ToInt32(station.Coordinate), "Wrong coordinate");
+
+
+
+            }
+            catch (DO.WrongIDExeption ex)
+            {
+                throw new BO.BadIdException("code not valid", ex);
+            }
 
         }
+        #endregion
+
+
+        #region User
+        BO.User userDoBoAdapter(string name) 
+        {
+            BO.User userBO = new BO.User();
+            DO.User userDO;
+
+            try
+            {
+                userDO = dl.GetUser(name);
+            }
+            catch (DO.WrongIDExeption ex)
+            {
+                throw new BO.BadIdException("ID not valid", ex);
+            }
+
+
+            userDO.CopyPropertiesTo(userBO); //go to a deep copy. all field is copied to a same field at bo.
+
+            return userBO;
+        }
+
+        //public BO.User GetUser(string name)
+        //{
+
+
+
+
+        //}
+
+
 
 
 
         #endregion
+
     }
 }

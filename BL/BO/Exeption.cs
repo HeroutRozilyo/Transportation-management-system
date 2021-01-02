@@ -25,6 +25,21 @@ namespace BO
         public override string ToString() => base.ToString() + $", bad identity number: {ID}";
     }
 
+    [Serializable]
+    public class BadCoordinateException : Exception
+    {
+        public int cordinate;
+        public BadCoordinateException(int geo) : base() =>cordinate=geo;
+        public BadCoordinateException(int geo, string messege) : base(messege) => cordinate = geo;
+        public BadCoordinateException(int geo, string messege, Exception innerException) : base(messege, innerException) => cordinate = geo;
+        public override string ToString()
+        {
+            return base.ToString() + $",ID line not valid:{cordinate} ";
+        }
+
+    }
+
+
 
 
 
