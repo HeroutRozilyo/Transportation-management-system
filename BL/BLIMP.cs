@@ -298,10 +298,12 @@ namespace BL
                       };
             //tempDO1 = from st in line.StationsOfBus    ///לא בטוח נכונה
             //         select (DO.LineStation)st.CopyPropertiesToNew(typeof(DO.LineStation));
-            
 
-            IEnumerable<DO.LineTrip> tripDO = (IEnumerable<DO.LineTrip>)new DO.LineTrip();//line.TimeLineTrip;
-            line.TimeLineTrip.CopyPropertiesTo(tripDO);
+
+            IEnumerable<DO.LineTrip> tripDO;
+            tripDO = from st in line.TimeLineTrip    ///לא בטוח נכונה
+                     select (DO.LineTrip)st.CopyPropertiesToNew(typeof(DO.LineTrip));
+     
 
             DO.LineStation l1 = new DO.LineStation();
             DO.LineStation l2 = new DO.LineStation();
@@ -351,6 +353,7 @@ namespace BL
                 throw new BO.BadIdException("ID not valid", ex);
             }
         }
+
         public void AddStationLine(BO.LineStation station) //we add station to the bus travel
         {
             int index = station.LineStationIndex;
@@ -368,8 +371,11 @@ namespace BL
                 tempDO = dl.GetAllStationsLine(station.LineId);
                 tripDO = dl.GetAllTripline(station.LineId);
 
-                lineBO.StationsOfBus = (IEnumerable<LineStation>)tempDO;
-                lineBO.TimeLineTrip = (IEnumerable<LineTrip>)tripDO;
+                lineBO.StationsOfBus = from st in dl.GetAllStationsLine(lineBO.IdNumber)
+                                     select (BO.LineStation)tempDO.CopyPropertiesToNew(typeof(BO.LineStation));
+              
+                lineBO.TimeLineTrip = from st in dl.GetAllStationsLine(lineBO.IdNumber)
+                                       select (BO.LineTrip)tripDO.CopyPropertiesToNew(typeof(BO.LineTrip));
                 lineBO.CopyPropertiesTo(lineDO);
 
                 for (int i = 0; i < lineBO.StationsOfBus.Count(); i++)
@@ -479,15 +485,17 @@ namespace BL
             DO.Line lineDO = new DO.Line();
             line.CopyPropertiesTo(lineDO);
 
-            IEnumerable<DO.LineStation> tempDO = (IEnumerable<DO.LineStation>)new DO.LineStation();
-            line.StationsOfBus.CopyPropertiesTo(tempDO);
+            IEnumerable<DO.LineStation> tempDO;
+            tempDO = from st in line.StationsOfBus
+                      select (DO.LineStation)st.CopyPropertiesToNew(typeof(DO.LineStation));
 
-            IEnumerable<DO.LineTrip> tripDO = (IEnumerable<DO.LineTrip>)new DO.LineTrip();
-            line.TimeLineTrip.CopyPropertiesTo(tripDO);
+            IEnumerable<DO.LineTrip> tripDO;
+            tripDO = from st in line.TimeLineTrip
+                     select (DO.LineTrip)st.CopyPropertiesToNew(typeof(DO.LineTrip));
+          
 
             IEnumerable<DO.LineStation> tempDO1;
             IEnumerable<DO.LineStation> tempDO2;
-        
 
             try
             {
@@ -616,7 +624,55 @@ namespace BL
             }
 
         }
+
+
+        public double CalucateTravel(int lineId)
+        {
+            IEnumerable<DO.LineStation> tempDO;
+            DO.AdjacentStations adj = new DO.AdjacentStations();
+            double sum = 0;
+            tempDO = dl.GetAllStationsLine(lineId);
+            var v = from item in tempDO
+                    orderby item.LineStationIndex
+                    select item;
+            for(int i=0;i<(tempDO.Count()-1);i++)
+            {
+               adj=  dl.GetAdjacentStations(v.ElementAt(i).StationCode, v.ElementAt((i + 1)).StationCode);
+                sum += adj.TimeAverage.TotalMinutes;
+            }
+
+            return sum;
+
+
+        }
+
+        public IEnumerable<object> DetailsOfStation(IEnumerable<LineStation> lineStations)
+        {
+            return from itemStation in dl.GetAllStations()
+                   from itemLineStation in lineStations
+                   where itemStation.Code == itemLineStation.StationCode
+                   select new
+                   {
+                       StationCode = itemLineStation.StationCode,
+                       LineStationIndex = itemLineStation.LineStationIndex,
+                       LineStationExsis = itemLineStation.LineStationExsis,
+                       Name = itemStation.Name,
+                       Address = itemStation.Address,
+                       Coordinate = itemStation.Coordinate,
+                   };
+
+        }
+
+
+
         #endregion
+
+
+
+
+
+
+
 
 
         #region Station
