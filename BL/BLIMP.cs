@@ -554,12 +554,12 @@ namespace BL
 
                 //for update the line trip
 
-                for (int i = 0; 0 < tripDO.Count(); i++)
-                {
-                    AddOneTripLine(tripDO.ElementAt(i));
-                }
+                //for (int i = 0; 0 < tripDO.Count(); i++)
+                //{
+                //    AddOneTripLine(tripDO.ElementAt(i));
+                //}
 
-                line.TimeTravel = CalucateTravel(line.IdNumber);
+                //line.TimeTravel = CalucateTravel(line.IdNumber);
             }
             catch (DO.WrongIDExeption ex)
             {
@@ -568,6 +568,7 @@ namespace BL
 
             return true;
         }
+
 
         public void AddOneTripLine(DO.LineTrip line) //func that get new lineTrip and update the list at DS
         {
