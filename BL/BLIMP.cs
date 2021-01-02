@@ -16,7 +16,7 @@ namespace BL
         private IDAL dl = DalFactory.GetDL();
 
         #region Bus
-        
+
 
         BO.Bus busDoBoAdapter(string licence_) // return the bus from dl according to licence
         {
@@ -80,7 +80,7 @@ namespace BL
         public int AddBus(BO.Bus bus)
         {
             bool okey = checkLicence(bus); //if the licence not goot this func will throw exeption
-            
+
             DO.Bus busDO = new DO.Bus();
             bus.BusExsis = true;
             bus.StatusBus = STUTUS.READT_TO_TRAVEL;
@@ -105,7 +105,7 @@ namespace BL
             bool okey = checkLicence(licence);
             try
             {
-                dl.DeleteBus( licence);
+                dl.DeleteBus(licence);
             }
             catch (DO.WrongLicenceException ex)
             {
@@ -116,8 +116,8 @@ namespace BL
         }
         public BO.Bus UpdateBus(BO.Bus bus) //update the bus at the DS
         {
-           string te= bus.Licence.Replace("-", "");
-          
+            string te = bus.Licence.Replace("-", "");
+
             DO.Bus busDO = new DO.Bus();
             bus.CopyPropertiesTo(busDO); //go to copy the varieble to be DO
             busDO.Licence = te;
@@ -129,14 +129,14 @@ namespace BL
             {
                 throw new BO.BadBusLicenceException("Licence not valid", ex);
             }
-            IEnumerable<DO.Bus> temp= dl.GetAllBuses();
+            IEnumerable<DO.Bus> temp = dl.GetAllBuses();
             return bus;
         }
 
         bool checkLicence(BO.Bus bus) //check if the new licence that the passenger enter is valid
         {
             string licence = bus.Licence.Replace("-", "");
-         
+
             if ((bus.StartingDate.Year < 2018 && licence.Length == 7) || (bus.StartingDate.Year >= 2018 && licence.Length == 8))
             {
                 return true;
@@ -168,7 +168,7 @@ namespace BL
 
             bus.StatusBus = (STUTUS)2;
             bus.FuellAmount = 1200;
-           
+
             UpdateBus(bus);
             return bus;
         }
@@ -217,58 +217,74 @@ namespace BL
 
             lineBO.TimeTravel = 0;
             lineDO.CopyPropertiesTo(lineBO); //go to a deep copy. all field is copied to a same field at bo.
-                                          
-            lineBO.StationsOfBus = from st in tempDO                           
-                                 select (BO.LineStation)lineBO.CopyPropertiesToNew(typeof(BO.LineStation));
+
+            lineBO.StationsOfBus = from st in tempDO
+                                   select (BO.LineStation)st.CopyPropertiesToNew(typeof(BO.LineStation));
             lineBO.TimeLineTrip = from st in tripDO
-                                  select (BO.LineTrip)lineBO.CopyPropertiesToNew(typeof(BO.LineTrip));
+                                  select (BO.LineTrip)st.CopyPropertiesToNew(typeof(BO.LineTrip));
 
             return lineBO;
         }
         public IEnumerable<BO.Line> GetAllLine() //return all the lines that working 
         {
-            var v= from item in dl.GetAllLine()
-                   select lineDoBoAdapter(item.IdNumber);
-            foreach(var temp in v)
+            var v = from item in dl.GetAllLine()
+                    select lineDoBoAdapter(item.IdNumber);
+            foreach (var temp in v)
             {
-         
+
+                //temp.StationsOfBus = from st in dl.GetAllStationsLine(temp.IdNumber)
+                //                     select (BO.LineStation)temp.CopyPropertiesToNew(typeof(BO.LineStation));
+
                 temp.StationsOfBus = from st in dl.GetAllStationsLine(temp.IdNumber)
-                                     select (BO.LineStation)temp.CopyPropertiesToNew(typeof(BO.LineStation));
-          
+                                     orderby st.LineStationIndex
+                                     select (BO.LineStation)st.CopyPropertiesToNew(typeof(BO.LineStation));
+
+
+
                 temp.TimeLineTrip = from st in dl.GetAllTripline(temp.IdNumber)
-                                    select (BO.LineTrip)temp.CopyPropertiesToNew(typeof(BO.LineTrip));
+                                    select (BO.LineTrip)st.CopyPropertiesToNew(typeof(BO.LineTrip));
+
+
+                temp.TimeTravel = CalucateTravel(temp.IdNumber);
             }
+
             return v;
-            
+
         }
         public IEnumerable<BO.Line> GetLineBy(int stationCode) //return all the lines according to predicate
         {
-            var v= from item in dl.GetAllLineBy(x => x.FirstStationCode == stationCode)
-                   select lineDoBoAdapter(item.IdNumber);
+            var v = from item in dl.GetAllLineBy(x => x.FirstStationCode == stationCode)
+                    select lineDoBoAdapter(item.IdNumber);
             foreach (var temp in v)
             {
 
                 temp.StationsOfBus = from st in dl.GetAllStationsLine(temp.IdNumber)
-                                     select (BO.LineStation)temp.CopyPropertiesToNew(typeof(BO.LineStation));
-             
+                                     orderby st.LineStationIndex
+                                     select (BO.LineStation)st.CopyPropertiesToNew(typeof(BO.LineStation));
+
                 temp.TimeLineTrip = from st in dl.GetAllTripline(temp.IdNumber)
-                                    select (BO.LineTrip)temp.CopyPropertiesToNew(typeof(BO.LineTrip));
+                                    select (BO.LineTrip)st.CopyPropertiesToNew(typeof(BO.LineTrip));
+
+                temp.TimeTravel = CalucateTravel(temp.IdNumber);
             }
             return v;
         }
         public IEnumerable<BO.Line> GetLineByArea(BO.AREA area) //return all the line according to their area
         {
             var v = from item in dl.GetAllLinesArea((DO.AREA)area)
-                   select lineDoBoAdapter(item.IdNumber);
+                    select lineDoBoAdapter(item.IdNumber);
             foreach (var temp in v)
             {
 
                 temp.StationsOfBus = from st in dl.GetAllStationsLine(temp.IdNumber)
-                                     select (BO.LineStation)temp.CopyPropertiesToNew(typeof(BO.LineStation));
-    
+                                     orderby st.LineStationIndex
+                                     select (BO.LineStation)st.CopyPropertiesToNew(typeof(BO.LineStation));
+
 
                 temp.TimeLineTrip = from st in dl.GetAllTripline(temp.IdNumber)
-                                    select (BO.LineTrip)temp.CopyPropertiesToNew(typeof(BO.LineTrip));
+                                    select (BO.LineTrip)st.CopyPropertiesToNew(typeof(BO.LineTrip));
+
+                temp.TimeTravel = CalucateTravel(temp.IdNumber);
             }
             return v;
         }
@@ -303,7 +319,7 @@ namespace BL
             IEnumerable<DO.LineTrip> tripDO;
             tripDO = from st in line.TimeLineTrip    ///לא בטוח נכונה
                      select (DO.LineTrip)st.CopyPropertiesToNew(typeof(DO.LineTrip));
-     
+
 
             DO.LineStation l1 = new DO.LineStation();
             DO.LineStation l2 = new DO.LineStation();
@@ -371,11 +387,11 @@ namespace BL
                 tempDO = dl.GetAllStationsLine(station.LineId);
                 tripDO = dl.GetAllTripline(station.LineId);
 
-                lineBO.StationsOfBus = from st in dl.GetAllStationsLine(lineBO.IdNumber)
-                                     select (BO.LineStation)tempDO.CopyPropertiesToNew(typeof(BO.LineStation));
-              
-                lineBO.TimeLineTrip = from st in dl.GetAllStationsLine(lineBO.IdNumber)
-                                       select (BO.LineTrip)tripDO.CopyPropertiesToNew(typeof(BO.LineTrip));
+                lineBO.StationsOfBus = from st in tempDO
+                                       select (BO.LineStation)st.CopyPropertiesToNew(typeof(BO.LineStation));
+
+                lineBO.TimeLineTrip = from st in tripDO
+                                      select (BO.LineTrip)st.CopyPropertiesToNew(typeof(BO.LineTrip));
                 lineBO.CopyPropertiesTo(lineDO);
 
                 for (int i = 0; i < lineBO.StationsOfBus.Count(); i++)
@@ -487,12 +503,12 @@ namespace BL
 
             IEnumerable<DO.LineStation> tempDO;
             tempDO = from st in line.StationsOfBus
-                      select (DO.LineStation)st.CopyPropertiesToNew(typeof(DO.LineStation));
+                     select (DO.LineStation)st.CopyPropertiesToNew(typeof(DO.LineStation));
 
             IEnumerable<DO.LineTrip> tripDO;
             tripDO = from st in line.TimeLineTrip
                      select (DO.LineTrip)st.CopyPropertiesToNew(typeof(DO.LineTrip));
-          
+
 
             IEnumerable<DO.LineStation> tempDO1;
             IEnumerable<DO.LineStation> tempDO2;
@@ -502,23 +518,23 @@ namespace BL
                 dl.UpdateLine(lineDO);
 
                 //for add update on line stations
-                tempDO1 =from item in dl.GetAllStationsLine(line.IdNumber) //the oldest line station
-                         orderby item.LineStationIndex
-                         select item;
+                tempDO1 = from item in dl.GetAllStationsLine(line.IdNumber) //the oldest line station
+                          orderby item.LineStationIndex
+                          select item;
                 tempDO2 = from item in tempDO //the new line station
                           orderby item.LineStationIndex
                           select item;
-                for(int i=0;i<tempDO.Count();i++)
+                for (int i = 0; i < tempDO.Count(); i++)
                 {
-                    if(tempDO1.ElementAt(i).StationCode != tempDO2.ElementAt(i).StationCode)
+                    if (tempDO1.ElementAt(i).StationCode != tempDO2.ElementAt(i).StationCode)
                     {
-                        if(i==0)
+                        if (i == 0)
                         {
                             tempDO2.ElementAt(i).PrevStation = 0;
                             tempDO2.ElementAt(i).NextStation = tempDO2.ElementAt(i + 1).StationCode;
                             dl.UpdateStations(tempDO2.ElementAt(i));
                         }
-                        if(i==tempDO.Count()-1)
+                        if (i == tempDO.Count() - 1)
                         {
                             tempDO2.ElementAt(i).PrevStation = tempDO2.ElementAt(i - 1).StationCode;
                             tempDO2.ElementAt(i).NextStation = 0;
@@ -526,7 +542,7 @@ namespace BL
                         }
                         else
                         {
-                            tempDO2.ElementAt(i).PrevStation = tempDO2.ElementAt(i -1).StationCode;
+                            tempDO2.ElementAt(i).PrevStation = tempDO2.ElementAt(i - 1).StationCode;
                             tempDO2.ElementAt(i).NextStation = tempDO2.ElementAt(i + 1).StationCode;
                             dl.UpdateStations(tempDO2.ElementAt(i));
 
@@ -535,13 +551,15 @@ namespace BL
                     }
 
                 }
-               
+
                 //for update the line trip
-                
-                for(int i=1;0< tripDO.Count();i++)
+
+                for (int i = 1; 0 < tripDO.Count(); i++)
                 {
                     AddOneTripLine(tripDO.ElementAt(i));
                 }
+
+                line.TimeTravel = CalucateTravel(line.IdNumber);
             }
             catch (DO.WrongIDExeption ex)
             {
@@ -553,7 +571,7 @@ namespace BL
 
         public void AddOneTripLine(DO.LineTrip line) //func that get new lineTrip and update the list at DS
         {
-            
+
             DO.LineTrip lineTrip = new DO.LineTrip();
             DO.LineTrip temp = new DO.LineTrip();
 
@@ -564,7 +582,7 @@ namespace BL
             for (int i = 0; 0 < tripDO1.Count(); i++)
             {
                 temp = tripDO1.ElementAt(i);
-                if (temp.StartAt <= line.StartAt && temp.FinishAt>line.StartAt)  
+                if (temp.StartAt <= line.StartAt && temp.FinishAt > line.StartAt)
                 {
                     lineTrip.StartAt = tripDO1.ElementAt(i).StartAt;
                     lineTrip.LineExsis = true;
@@ -591,10 +609,10 @@ namespace BL
                     break;
 
                 }
-                if(temp.StartAt>=line.StartAt && temp.FinishAt<=line.FinishAt)
+                if (temp.StartAt >= line.StartAt && temp.FinishAt <= line.FinishAt)
                     dl.DeleteLineTrip1(tripDO1.ElementAt(i));
             }
-          
+
         }
 
         public void CreatAdjStations(int station1, int station2)
@@ -635,9 +653,9 @@ namespace BL
             var v = from item in tempDO
                     orderby item.LineStationIndex
                     select item;
-            for(int i=0;i<(tempDO.Count()-1);i++)
+            for (int i = 0; i < (tempDO.Count() - 1); i++)
             {
-               adj=  dl.GetAdjacentStations(v.ElementAt(i).StationCode, v.ElementAt((i + 1)).StationCode);
+                adj = dl.GetAdjacentStations(v.ElementAt(i).StationCode, v.ElementAt((i + 1)).StationCode);
                 sum += adj.TimeAverage.TotalMinutes;
             }
 
@@ -660,19 +678,10 @@ namespace BL
                        Address = itemStation.Address,
                        Coordinate = itemStation.Coordinate,
                    };
-            //
+
         }
 
-
-
         #endregion
-
-
-
-
-
-
-
 
 
         #region Station
@@ -696,16 +705,21 @@ namespace BL
 
             stationDO.CopyPropertiesTo(stationBO); //go to a deep copy. all field is copied to a same field at bo.
             stationBO.LineAtStation = (IEnumerable<LineStation>)tempDO;
+
+            stationBO.LineAtStation = from st in tempDO
+                                      select (BO.LineStation)st.CopyPropertiesToNew(typeof(BO.LineStation));
+
+
             return stationBO;
         }
 
-     
+
 
         public IEnumerable<BO.Station> GetAllStations()
         {
-            var v= from item in dl.GetAllStations()
-                   select stationDoBoAdapter(item.Code);
-            foreach(var temp in v)
+            var v = from item in dl.GetAllStations()
+                    select stationDoBoAdapter(item.Code);
+            foreach (var temp in v)
             {
                 temp.LineAtStation = (IEnumerable<LineStation>)dl.GetAllStationsCode(temp.Code);
             }
@@ -720,7 +734,7 @@ namespace BL
             station.CopyPropertiesTo(stationDO);
 
 
-           
+
         }
 
 
