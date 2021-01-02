@@ -83,9 +83,12 @@ namespace PLGui
         private void ListOfLine_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             var list = (ListView)sender; //to get the line
-			object item = list.SelectedItem;
-            GridDataLine.DataContext = item;
-
+            BO.Line line = list.SelectedItem as BO.Line;
+         
+            GridDataLine.DataContext = line;
+            IEnumerable<object> listFromBO = bl.DetailsOfStation(line.StationsOfBus);
+            //StationLineList.DataContext=Convert(bl.DetailsOfStation(line.StationsOfBus));
+            IEnumerable<BO.Station> tem = bl.GetAllStations();
 
 
 
@@ -106,6 +109,16 @@ namespace PLGui
         }
 
         private void UpdateLine_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void DeleteStationLine_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void UpdataLineStation_Click(object sender, RoutedEventArgs e)
         {
 
         }

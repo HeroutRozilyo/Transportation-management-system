@@ -6,10 +6,10 @@
         xmlns:local="clr-namespace:PLGui"
         mc:Ignorable="d"
         Title="LineWindow" Height="450" Width="1044.983">
-    <Grid Margin="0,0,-45,2.667" HorizontalAlignment="Left" Width="961">
+    <Grid Margin="0,0,0,2.667" HorizontalAlignment="Left" Width="1035">
         <ComboBox x:Name="comboBoxArea" HorizontalAlignment="Left" Margin="266,10,0,0" VerticalAlignment="Top" Width="208" Height="30" SelectionChanged="comboBoxArea_SelectionChanged"/>
         <Label x:Name="Area" Content="Please select the desired area" HorizontalAlignment="Left" Margin="80,10,0,0" VerticalAlignment="Top" Height="40" Width="181"/>
-        <Grid x:Name="GridDataLine" Margin="248,81,393,0" VerticalAlignment="Top" Height="125">
+        <Grid x:Name="GridDataLine" Margin="248,81,528,0" VerticalAlignment="Top" Height="125">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="136"/>
@@ -33,7 +33,7 @@
             <Label Content="Area" Grid.Column="0" HorizontalAlignment="Left" Margin="3,7.667,0,7.667" Grid.Row="1" VerticalAlignment="Center" Width="116" Height="26"/>
             <TextBox x:Name="AreaTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="24" Margin="3.667,8.667,0,8.667" Grid.Row="1"   Text="{Binding Area, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
             <Label Content="Travel Time" Grid.Column="0" HorizontalAlignment="Left" Margin="3,12.333,0,4.333" Grid.Row="2" VerticalAlignment="Center" Width="108" Height="26"/>
-            <TextBox x:Name="TimeTravlTextBox" Grid.Column="1" Text="{Binding Kilometrz}" HorizontalAlignment="Left" Height="26"  Margin="3.667,16.333,0,0.333" Grid.Row="2" VerticalAlignment="Center" Width="120"/>
+            <TextBox x:Name="TimeTravlTextBox" Grid.Column="1" Text="{Binding TimeTravel}" HorizontalAlignment="Left" Height="26"  Margin="3.667,16.333,0,0.333" Grid.Row="2" VerticalAlignment="Center" Width="120"/>
             <TextBox x:Name="LineNumber" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="5.667,6,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="{Binding NumberLine}"/>
         </Grid>
         <ListView x:Name="ListOfLine" HorizontalAlignment="Left" Height="245" Margin="10,81,0,0" VerticalAlignment="Top" Width="164" PreviewMouseDoubleClick="ListOfLine_PreviewMouseDoubleClick" >
@@ -45,15 +45,46 @@
                             <DataTemplate>
                                 <Button x:Name="DeleteLine" Content="Delete" Click="DeleteLine_Click"/>
                             </DataTemplate>
-                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn.CellTemplate>
                     </GridViewColumn>
                 </GridView>
-               
+
             </ListView.View>
-           
+
         </ListView>
         <Button x:Name="AddLine" Content="Add Line" HorizontalAlignment="Left" Margin="239,231,0,0" VerticalAlignment="Top" Width="75" Click="AddLine_Click"/>
         <Button x:Name="UpdateLine" Content="Update Line" HorizontalAlignment="Left" Margin="357,231,0,0" VerticalAlignment="Top" Width="75" Click="UpdateLine_Click"/>
+        <ListView x:Name="StationLineList" HorizontalAlignment="Left" Height="100" Margin="526,84,0,0" VerticalAlignment="Top" Width="467">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn  Header="Station Code" Width="80" DisplayMemberBinding="{Binding StationCode}"/>
+                    <GridViewColumn  Header="Index" Width="80" DisplayMemberBinding="{Binding LineStationIndex}"/>
+                    <GridViewColumn Header="Address"  Width="150" DisplayMemberBinding="{Binding Address}"/>
+                    <GridViewColumn Header="Name Station"  Width="80" DisplayMemberBinding="{Binding Name}"/>
+                    <GridViewColumn  Width="40" >
+                    <GridViewColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button x:Name="UpdataLineStation" Content="Updata" Click="UpdataLineStation_Click"/>
+                        </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                       </GridViewColumn>
+                    <GridViewColumn  Width="40" >
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button x:Name="DeleteStationLine" Content="Delete" Click="DeleteStationLine_Click"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <ListView x:Name="listView1" HorizontalAlignment="Left" Height="100" Margin="526,215,0,0" VerticalAlignment="Top" Width="427">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn/>
+                </GridView>
+            </ListView.View>
+        </ListView>
 
 
 

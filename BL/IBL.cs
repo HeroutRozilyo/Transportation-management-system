@@ -33,6 +33,10 @@ namespace BlAPI
         bool UpdateLine(BO.Line line);
         void AddOneTripLine(DO.LineTrip line); //func that get new lineTrip and update the list at DS
         void CreatAdjStations(int station1, int station2);
+        IEnumerable<object> DetailsOfStation(IEnumerable<LineStation> lineStations);
         #endregion
+        #region Station
+        IEnumerable<BO.Station> GetAllStations();
+        #endregion Station
     }
 }
