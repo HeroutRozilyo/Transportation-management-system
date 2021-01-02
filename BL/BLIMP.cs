@@ -498,9 +498,21 @@ namespace BL
         public bool UpdateLineTrip(BO.Line line)
         {
             DO.Line lineDO = new DO.Line();
+
+            IEnumerable<DO.LineTrip> tripDO;
+            tripDO = from st in line.TimeLineTrip
+                     select (DO.LineTrip)st.CopyPropertiesToNew(typeof(DO.LineTrip));
             line.CopyPropertiesTo(lineDO);
             return true;
+
+            //for update the line trip
+            for (int i = 0; 0 < tripDO.Count(); i++)
+            {
+                AddOneTripLine(tripDO.ElementAt(i));
+            }
+
         }
+
         public bool UpdateLineStation(BO.Line line)
         {
             DO.Line lineDO = new DO.Line();
@@ -533,6 +545,7 @@ namespace BL
                             tempDO2.ElementAt(i).PrevStation = 0;
                             tempDO2.ElementAt(i).NextStation = tempDO2.ElementAt(i + 1).StationCode;
                             dl.UpdateStations(tempDO2.ElementAt(i));
+
                         }
                         if (i == tempDO.Count() - 1)
                         {
@@ -574,67 +587,20 @@ namespace BL
 
             IEnumerable<DO.LineTrip> tripDO;
             tripDO = from st in line.TimeLineTrip
-                     select (DO.LineTrip)st.CopyPropertiesToNew(typeof(DO.LineTrip));
-
-
-            IEnumerable<DO.LineStation> tempDO1;
-            IEnumerable<DO.LineStation> tempDO2;
+                     select (DO.LineTrip)st.CopyPropertiesToNew(typeof(DO.LineTrip));      
 
             try
             {
-                dl.UpdateLine(lineDO);
-
-                //for add update on line stations
-                tempDO1 = from item in dl.GetAllStationsLine(line.IdNumber) //the oldest line station
-                          orderby item.LineStationIndex
-                          select item;
-                tempDO2 = from item in tempDO //the new line station
-                          orderby item.LineStationIndex
-                          select item;
-                for (int i = 0; i < tempDO.Count(); i++)
-                {
-                    if (tempDO1.ElementAt(i).StationCode != tempDO2.ElementAt(i).StationCode)
-                    {
-                        if (i == 0)
-                        {
-                            tempDO2.ElementAt(i).PrevStation = 0;
-                            tempDO2.ElementAt(i).NextStation = tempDO2.ElementAt(i + 1).StationCode;
-                            dl.UpdateStations(tempDO2.ElementAt(i));
-                        }
-                        if (i == tempDO.Count() - 1)
-                        {
-                            tempDO2.ElementAt(i).PrevStation = tempDO2.ElementAt(i - 1).StationCode;
-                            tempDO2.ElementAt(i).NextStation = 0;
-                            dl.UpdateStations(tempDO2.ElementAt(i));
-                        }
-                        else
-                        {
-                            tempDO2.ElementAt(i).PrevStation = tempDO2.ElementAt(i - 1).StationCode;
-                            tempDO2.ElementAt(i).NextStation = tempDO2.ElementAt(i + 1).StationCode;
-                            dl.UpdateStations(tempDO2.ElementAt(i));
-
-                        }
-
-                    }
-
-                }
-
-                //for update the line trip
-
-                for (int i = 0; 0 < tripDO.Count(); i++)
-                {
-                    AddOneTripLine(tripDO.ElementAt(i));
-                }
-
+                dl.UpdateLine(lineDO);          
                 line.TimeTravel = CalucateTravel(line.IdNumber);
             }
             catch (DO.WrongIDExeption ex)
             {
                 throw new BO.BadIdException("ID not valid", ex);
             }
-
             return true;
         }
+
 
         public void AddOneTripLine(DO.LineTrip line) //func that get new lineTrip and update the list at DS
         {
