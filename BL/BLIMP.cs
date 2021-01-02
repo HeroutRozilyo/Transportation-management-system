@@ -704,7 +704,7 @@ namespace BL
 
 
             stationDO.CopyPropertiesTo(stationBO); //go to a deep copy. all field is copied to a same field at bo.
-            stationBO.LineAtStation = (IEnumerable<LineStation>)tempDO;
+         
 
             stationBO.LineAtStation = from st in tempDO
                                       select (BO.LineStation)st.CopyPropertiesToNew(typeof(BO.LineStation));
