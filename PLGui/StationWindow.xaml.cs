@@ -21,7 +21,7 @@ namespace PLGui
     public partial class StationWindow : Window
     {
         private IBL bl;
-
+        //
         public StationWindow()
         {
             InitializeComponent();
