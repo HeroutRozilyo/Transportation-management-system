@@ -585,7 +585,7 @@ namespace BL
                 if (temp.StartAt <= line.StartAt && temp.FinishAt > line.StartAt)
                 {
                     lineTrip.StartAt = tripDO1.ElementAt(i).StartAt;
-                    lineTrip.LineExsis = true;
+                    lineTrip.TripLineExsis = true;
                     lineTrip.KeyId = tripDO1.ElementAt(i).KeyId;
                     lineTrip.Frequency = tripDO1.ElementAt(i).Frequency;
                     lineTrip.FinishAt = line.StartAt;
@@ -598,7 +598,7 @@ namespace BL
                 if (temp.FinishAt > line.FinishAt)
                 {
                     lineTrip.StartAt = line.FinishAt;
-                    lineTrip.LineExsis = true;
+                    lineTrip.TripLineExsis = true;
                     lineTrip.KeyId = tripDO1.ElementAt(i).KeyId;
                     lineTrip.Frequency = tripDO1.ElementAt(i).Frequency;
                     lineTrip.FinishAt = tripDO1.ElementAt(i).FinishAt;
