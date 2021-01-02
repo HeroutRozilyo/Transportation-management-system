@@ -217,9 +217,12 @@ namespace BL
 
 
             lineDO.CopyPropertiesTo(lineBO); //go to a deep copy. all field is copied to a same field at bo.
-                                             // lineBO.StationsOfBus = (IEnumerable<LineStation>)tempDO;
-           tempDO.CopyPropertiesTo(lineBO.StationsOfBus); ;
-            lineBO.TimeLineTrip = (IEnumerable<LineTrip>)tripDO;
+                                          
+            lineBO.StationsOfBus = from st in tempDO                           
+                                 select (BO.LineStation)lineBO.CopyPropertiesToNew(typeof(BO.LineStation));
+            lineBO.TimeLineTrip = from st in tripDO
+                                  select (BO.LineTrip)lineBO.CopyPropertiesToNew(typeof(BO.LineTrip));
+
             return lineBO;
         }
         public IEnumerable<BO.Line> GetAllLine() //return all the lines that working 
@@ -228,8 +231,12 @@ namespace BL
                    select lineDoBoAdapter(item.IdNumber);
             foreach(var temp in v)
             {
-                temp.StationsOfBus = (IEnumerable<LineStation>)dl.GetAllStationsLine(temp.IdNumber);
-                temp.TimeLineTrip = (IEnumerable<LineTrip>)dl.GetAllTripline(temp.IdNumber);
+         
+                temp.StationsOfBus = from st in dl.GetAllStationsLine(temp.IdNumber)
+                                     select (BO.LineStation)temp.CopyPropertiesToNew(typeof(BO.LineStation));
+          
+                temp.TimeLineTrip = from st in dl.GetAllTripline(temp.IdNumber)
+                                    select (BO.LineTrip)temp.CopyPropertiesToNew(typeof(BO.LineTrip));
             }
             return v;
             
@@ -240,8 +247,12 @@ namespace BL
                    select lineDoBoAdapter(item.IdNumber);
             foreach (var temp in v)
             {
-                temp.StationsOfBus = (IEnumerable<LineStation>)dl.GetAllStationsLine(temp.IdNumber);
-                temp.TimeLineTrip = (IEnumerable<LineTrip>)dl.GetAllTripline(temp.IdNumber);
+
+                temp.StationsOfBus = from st in dl.GetAllStationsLine(temp.IdNumber)
+                                     select (BO.LineStation)temp.CopyPropertiesToNew(typeof(BO.LineStation));
+             
+                temp.TimeLineTrip = from st in dl.GetAllTripline(temp.IdNumber)
+                                    select (BO.LineTrip)temp.CopyPropertiesToNew(typeof(BO.LineTrip));
             }
             return v;
         }
@@ -251,8 +262,13 @@ namespace BL
                    select lineDoBoAdapter(item.IdNumber);
             foreach (var temp in v)
             {
-                temp.StationsOfBus = (IEnumerable<LineStation>)dl.GetAllStationsLine(temp.IdNumber);
-                temp.TimeLineTrip = (IEnumerable<LineTrip>)dl.GetAllTripline(temp.IdNumber);
+
+                temp.StationsOfBus = from st in dl.GetAllStationsLine(temp.IdNumber)
+                                     select (BO.LineStation)temp.CopyPropertiesToNew(typeof(BO.LineStation));
+    
+
+                temp.TimeLineTrip = from st in dl.GetAllTripline(temp.IdNumber)
+                                    select (BO.LineTrip)temp.CopyPropertiesToNew(typeof(BO.LineTrip));
             }
             return v;
         }
@@ -262,11 +278,40 @@ namespace BL
             DO.Line lineDO = new DO.Line();
             //do the bus to be DO
             line.CopyPropertiesTo(lineDO);
-            IEnumerable<DO.LineStation> tempDO = (IEnumerable<DO.LineStation>)new DO.LineStation(); //line.StationsOfBus;
-            line.StationsOfBus.CopyPropertiesTo(tempDO);
 
-            IEnumerable<DO.LineStation> tempDO1 = (IEnumerable<DO.LineStation>)new DO.LineStation();   //line.StationsOfBus;
-            line.StationsOfBus.CopyPropertiesTo(tempDO1);
+            IEnumerable<DO.LineStation> tempDO;
+
+            tempDO = from st in line.StationsOfBus    ///לא בטוח נכונה
+                     select (DO.LineStation)st.CopyPropertiesToNew(typeof(DO.LineStation));
+
+            IEnumerable<DO.LineStation> tempDO1;
+            //tempDO1 = from item in tempDO
+            //          select new
+            //          {
+            //              LineId = item.LineId,
+            //              LineStationExsis = item.LineStationExsis,
+            //              LineStationIndex = item.LineStationIndex,
+            //              NextStation = item.NextStation,
+            //              PrevStation = item.PrevStation,
+            //              StationCode = item.StationCode
+            //          };
+
+            //foreach(var item in tempDO)
+            //{
+            //    tempDO1 = new DO.LineStation()
+            //    {
+            //        LineId = item.LineId,
+            //        LineStationExsis = item.LineStationExsis,
+            //        LineStationIndex = item.LineStationIndex,
+            //        NextStation = item.NextStation,
+            //        PrevStation = item.PrevStation,
+            //        StationCode = item.StationCode
+            //    };
+
+            //}
+            tempDO1 = from st in line.StationsOfBus    ///לא בטוח נכונה
+                     select (DO.LineStation)st.CopyPropertiesToNew(typeof(DO.LineStation));
+            
 
             IEnumerable<DO.LineTrip> tripDO = (IEnumerable<DO.LineTrip>)new DO.LineTrip();//line.TimeLineTrip;
             line.TimeLineTrip.CopyPropertiesTo(tripDO);
