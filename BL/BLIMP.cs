@@ -217,10 +217,13 @@ namespace BL
 
 
             lineDO.CopyPropertiesTo(lineBO); //go to a deep copy. all field is copied to a same field at bo.
-            lineBO.StationsOfBus = (IEnumerable<LineStation>)tempDO;
+          //  lineBO.StationsOfBus = tempDO;
+            tempDO.CopyPropertiesTo(lineBO.StationsOfBus);
             lineBO.TimeLineTrip = (IEnumerable<LineTrip>)tripDO;
             return lineBO;
         }
+
+
         public IEnumerable<BO.Line> GetAllLine() //return all the lines that working 
         {
             var v= from item in dl.GetAllLine()
