@@ -86,8 +86,8 @@ namespace PLGui
             BO.Line line = list.SelectedItem as BO.Line;
          
             GridDataLine.DataContext = line;
-            IEnumerable<object> listFromBO = bl.DetailsOfStation(line.StationsOfBus);
-            //StationLineList.DataContext=Convert(bl.DetailsOfStation(line.StationsOfBus));
+          //  IEnumerable<object> listFromBO = bl.DetailsOfStation(line.StationsOfBus);
+            StationLineList.DataContext=Convert(bl.DetailsOfStation(line.StationsOfBus));
             IEnumerable<BO.Station> tem = bl.GetAllStations();
 
 

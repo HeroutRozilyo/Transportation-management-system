@@ -344,7 +344,7 @@ namespace DL
 
         public DO.LineTrip GetLineTrip(TimeSpan start, int idline) //return specific linetrip according to start time and id line 
         {
-            DO.LineTrip linetrip = DataSource.ListLineTrip.Find(b => b.KeyId == idline && b.StartAt == start&&b.LineExsis==true);
+            DO.LineTrip linetrip = DataSource.ListLineTrip.Find(b => b.KeyId == idline && b.StartAt == start&&b.TripLineExsis==true);
             if (linetrip != null)
             {
                 return linetrip.Clone();
@@ -357,7 +357,7 @@ namespace DL
         public IEnumerable<DO.LineTrip> GetAllTripline(int idline) //return all the lineTrip of specific line
         {
             return from linetrip in DataSource.ListLineTrip
-                   where (linetrip.KeyId == idline&&linetrip.LineExsis==true)
+                   where (linetrip.KeyId == idline&&linetrip.TripLineExsis == true)
                    select linetrip.Clone();
         }
 
@@ -365,7 +365,7 @@ namespace DL
         public IEnumerable<DO.LineTrip> GetAllLineTripsBy(Predicate<DO.LineTrip> StationsLinecondition)
         {
             var list = from linetrip in DataSource.ListLineTrip
-                       where (StationsLinecondition(linetrip)&&linetrip.LineExsis==true)
+                       where (StationsLinecondition(linetrip)&&linetrip.TripLineExsis == true)
                        select linetrip.Clone();
             return list;
         }
@@ -379,19 +379,19 @@ namespace DL
         {
             foreach (var item in DataSource.ListLineTrip)
                 if (item.KeyId == idline)
-                    item.LineExsis = false;
+                    item.TripLineExsis = false;
         }
         public void DeleteLineTrip1(DO.LineTrip lineTrip) //when we delete line we need to delete his line trip
         {
             DO.LineTrip L= DataSource.ListLineTrip.Find(b => b.KeyId == lineTrip.KeyId && b.StartAt == lineTrip.StartAt && b.FinishAt == lineTrip.FinishAt);
-            L.LineExsis = false;
+            L.TripLineExsis = false;
         
         }
 
 
         public void UpdatelineTrip(DO.LineTrip lineTrip)
         {
-            DO.LineTrip station = DataSource.ListLineTrip.Find(b => b.KeyId == lineTrip.KeyId && lineTrip.StartAt == b.StartAt&&lineTrip.LineExsis==true);
+            DO.LineTrip station = DataSource.ListLineTrip.Find(b => b.KeyId == lineTrip.KeyId && lineTrip.StartAt == b.StartAt&&lineTrip.TripLineExsis == true);
             if (station != null)
             {
                 DataSource.ListLineTrip.Remove(station);
