@@ -554,7 +554,7 @@ namespace BL
 
                 //for update the line trip
 
-                for (int i = 1; 0 < tripDO.Count(); i++)
+                for (int i = 0; 0 < tripDO.Count(); i++)
                 {
                     AddOneTripLine(tripDO.ElementAt(i));
                 }

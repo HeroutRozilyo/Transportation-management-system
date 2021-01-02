@@ -383,8 +383,8 @@ namespace DL
         }
         public void DeleteLineTrip1(DO.LineTrip lineTrip) //when we delete line we need to delete his line trip
         {
-            DO.LineTrip L= DataSource.ListLineTrip.Find(b => b.KeyId == lineTrip.KeyId && b.StartAt == lineTrip.StartAt && b.FinishAt == lineTrip.FinishAt);
-            L.TripLineExsis = false;
+          int index= DataSource.ListLineTrip.FindIndex(b => b.KeyId == lineTrip.KeyId && b.StartAt == lineTrip.StartAt && b.FinishAt == lineTrip.FinishAt);
+            DataSource.ListLineTrip[index].TripLineExsis = false;
         
         }
 

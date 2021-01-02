@@ -39,7 +39,7 @@ namespace DS
                 {
                     Code = 73,
                     Name = "שדרות גולדה מאיר/המשורר אצ''ג",
-                    Address = "רחוב:שדרות גולדה מאיר  עיר: ירושלים ",
+                    Address = "שדרות גולדה מאיר ,ירושלים ",
                     Coordinate= new GeoCoordinate( 31.825302,35.188624),
                     StationExsis=true,
 
