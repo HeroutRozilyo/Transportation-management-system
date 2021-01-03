@@ -131,7 +131,19 @@ namespace PLGui
         {
 
             AddLine addline = new AddLine(bl);
-            addline.ShowDialog();
+           bool?result= addline.ShowDialog();
+            if(result!=null)
+            {
+                BO.Line newline = addline.NewLine;
+                line = newline;
+                RefreshStationListView();
+                comboBoxArea.SelectedItem = newline.Area;
+                RefreshLine();
+
+
+
+
+            }
         }
 
         private void UpdateLine_Click(object sender, RoutedEventArgs e)
@@ -143,6 +155,8 @@ namespace PLGui
                 int index = comboBoxArea.SelectedIndex;
                 RefreshLine();
                 comboBoxArea.SelectedIndex = index;
+
+
 
                 MessageBox.Show("Line details saved successfully", "Success Message", MessageBoxButton.OK, MessageBoxImage.Asterisk);
             }

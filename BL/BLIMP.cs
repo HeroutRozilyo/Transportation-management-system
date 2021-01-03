@@ -317,9 +317,13 @@ namespace BL
             //         select (DO.LineStation)st.CopyPropertiesToNew(typeof(DO.LineStation));
 
 
-            IEnumerable<DO.LineTrip> tripDO;
-            tripDO = from st in line.TimeLineTrip    ///לא בטוח נכונה
-                     select (DO.LineTrip)st.CopyPropertiesToNew(typeof(DO.LineTrip));
+            //IEnumerable<DO.LineTrip> tripDO; ;
+            //if (line.TimeLineTrip != null)
+            //{
+            //    tripDO = from st in line.TimeLineTrip
+            //                 ///לא בטוח נכונה
+            //             select (DO.LineTrip)st.CopyPropertiesToNew(typeof(DO.LineTrip));
+            //}
 
 
             DO.LineStation l1 = new DO.LineStation();
@@ -337,21 +341,22 @@ namespace BL
                     catch (DO.WrongIDExeption ex) { string a = ""; a += ex; }
 
                 }
-                foreach (var item in tripDO)        ///////////////////////////לשאול את אליעזר איך כותבים את זה עם ביטוי למדה או לינק
-                {
-                    item.KeyId = id;
-                    try
-                    {
-                        dl.AddLineTrip(item);
-                    }
-                    catch (DO.WrongIDExeption ex) { string a = ""; a += ex; }
+                //if(tripDO!=null)
+                //foreach (var item in tripDO)        ///////////////////////////לשאול את אליעזר איך כותבים את זה עם ביטוי למדה או לינק
+                //{
+                //    item.KeyId = id;
+                //    try
+                //    {
+                //        dl.AddLineTrip(item);
+                //    }
+                //    catch (DO.WrongIDExeption ex) { string a = ""; a += ex; }
 
-                }
+                //}
                 //sorted the line station according to their index.
                 tempDO1 = from item in tempDO          ///////////////לוודא שעובד
                           orderby item.LineStationIndex
                           select item;
-                for (int i = 0; i < tempDO.Count(); i++) //move on the line station list send 2 adj station to creat if they not exsis yet.
+                for (int i = 0; i < tempDO.Count()-1; i++) //move on the line station list send 2 adj station to creat if they not exsis yet.
                 {
                     //if we have this both station at list adj station so we have throw. we catch the throw here in order tocontinue at the for.
                     try
