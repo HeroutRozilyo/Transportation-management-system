@@ -28,9 +28,17 @@ namespace PLGui
         private ObservableCollection<BO.LineStation> GetLineStations = new ObservableCollection<BO.LineStation>();
         BO.LineStation convertStation = new BO.LineStation();
         static int add;
-        //bool enableArea = false;
-        //bool enableLine = false;
-        private bool enable2Station = false;
+        BO.Line newLine = new BO.Line();
+        public BO.Line NewLine
+        {
+
+            get
+            {
+                return newLine;
+            }
+
+        }
+
         public AddLine()
         {
             InitializeComponent();
@@ -51,6 +59,7 @@ namespace PLGui
             RefreshLineStation();
             add = 0;
             AreaComboBox.ItemsSource = Enum.GetValues(typeof(BO.AREA));
+            this.DataContext = newLine;
             
 
         }
@@ -58,6 +67,11 @@ namespace PLGui
         {
             StationOfTheLine.ItemsSource = GetLineStations;
             StationOfTheLine.Items.Refresh();
+            if(LineNumber.Text!=""&& AreaComboBox.SelectedIndex!=-1&&GetLineStations.Count()>=2)
+            {
+                FinishAddLine.IsEnabled = true;
+            }
+            else FinishAddLine.IsEnabled = false;
 
         }
         private void RefreshLineStation()
@@ -106,10 +120,7 @@ namespace PLGui
                 add--;
                 RefreshLineStation();
                 RefreshStation();
-                if(add<2)
-                {
-                    enable2Station = false;
-                }
+                
                 
             }
             catch (BO.BadIdException a)
@@ -157,10 +168,7 @@ namespace PLGui
                 GetStations.Remove(ToAdd);
                 RefreshLineStation();
                 RefreshStation();
-                if (add >=2)
-                {
-                    enable2Station = true;
-                }
+               
 
 
 
@@ -175,7 +183,7 @@ namespace PLGui
 
         private void AreaComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            RefreshStation();
         }
 
         private void button_Click(object sender, RoutedEventArgs e)
@@ -185,17 +193,50 @@ namespace PLGui
 
         private void FinishAddLine_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
 
+                MessageBoxResult result = MessageBox.Show("You sure you want to add that line?", "Delete Line Message", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                switch (result)
+                {
+                    case MessageBoxResult.Yes:
+                        {
+                            newLine.NumberLine = Convert.ToInt32(LineNumber.Text);
+                            newLine.StationsOfBus = GetLineStations;
+                            newLine.Area = (BO.AREA)AreaComboBox.SelectedItem;
+                            newLine.FirstStationCode = GetLineStations.ToList().ElementAt(0).StationCode;
+                            newLine.LastStationCode = GetLineStations.ToList().ElementAt(GetLineStations.Count() - 1).StationCode;
+                            newLine.LineExist = true;
+                            bl.AddLine(newLine);
+                            MessageBox.Show("The line was successfully added to the system", "Success Message", MessageBoxButton.OK, MessageBoxImage.Asterisk);
+                            this.DialogResult = true;
+                            this.Close();
+                            break;
+                        }
+                    case MessageBoxResult.No:
+                        {
+                            break;
+                        }
+
+
+                }
+
+                }
+            catch (BO.BadIdException a)
+            {
+                MessageBox.Show(a.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
 
         }
 
         private void LineNumber_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            RefreshStation();
         }
 
         private void LineNumber_PreviewKeyDown(object sender, KeyEventArgs e)
         {
+
             TextBox text = sender as TextBox;
             if (text == null) return;
             if (e == null) return;
