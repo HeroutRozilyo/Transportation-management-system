@@ -20,7 +20,7 @@ namespace PLGui
     /// <summary>
     /// Interaction logic for AddLine.xaml
     /// </summary>
-    public partial class AddLine : Window, 
+    public partial class AddLine : Window
     {
         private IBL bl;
         private ObservableCollection<BO.Station> GetStations = new ObservableCollection<BO.Station>();
@@ -51,6 +51,7 @@ namespace PLGui
             RefreshLineStation();
             add = 0;
             AreaComboBox.ItemsSource = Enum.GetValues(typeof(BO.AREA));
+            
 
         }
         private void RefreshStation()

@@ -54,6 +54,7 @@ namespace PLGui
         {
             egged = Convert(bl.GetLineByArea(area)) ;//to make ObservableCollection
             ListOfLine.ItemsSource = egged;
+            
 
         }
         private void RefreshStationListView()
