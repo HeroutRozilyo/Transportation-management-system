@@ -16,7 +16,7 @@ namespace BO
         public bool LineExist { get; set; }
         public IEnumerable<LineStation> StationsOfBus { get; set; }
         public IEnumerable<LineTrip> TimeLineTrip { get; set; }
-        public  double TimeTravel { get; set; }
+        public double TimeTravel { get; set; }
         //
     }
 }
