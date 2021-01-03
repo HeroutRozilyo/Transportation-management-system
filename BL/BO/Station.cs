@@ -11,8 +11,8 @@ namespace BO
     {
         public int Code { get; set; }
         public string Name { get; set; }
-       // public string Address { get; set; }
-        public GeoCoordinate Coordinate { get; set; }
+        public string Address { get; set; }
+       public GeoCoordinate Coordinate { get; set; }
         public bool StationExist { get; set; }
         public IEnumerable<LineStation> LineAtStation { get; set; }
 

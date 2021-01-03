@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="AddLine" Height="450" Width="800">
     <Grid>
-        <Grid x:Name="GridDataLine" Margin="53,56,477.333,0" VerticalAlignment="Top" Height="88">
+        <Grid x:Name="GridDataLine" Margin="20,57,510.333,0" VerticalAlignment="Top" Height="88">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="118.667"/>
@@ -17,13 +17,66 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
-               
+
             </Grid.RowDefinitions>
             <Label Content="Line Number" Grid.Column="0" HorizontalAlignment="Left" Margin="3,3,0,12.333" Grid.Row="0" VerticalAlignment="Center" Height="26" Width="79"/>
             <Label Content="Area" Grid.Column="0" HorizontalAlignment="Left" Margin="3,7.667,0,7.667" Grid.Row="1" VerticalAlignment="Center" Width="116" Height="26"/>
-            <TextBox x:Name="AreaTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="24" Margin="3.667,8.667,0,8.667" Grid.Row="1"   Text="{Binding Area, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" Grid.ColumnSpan="2"/>
-            <TextBox x:Name="LineNumber" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="5.667,6,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="{Binding NumberLine}" Grid.ColumnSpan="2"/>
+            <ComboBox x:Name="AreaComboBox" Grid.Column="1" HorizontalAlignment="Left" Height="24" Margin="3.667,8.667,0,8.667" Grid.Row="1"   Text="{Binding Area, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" Grid.ColumnSpan="2" SelectionChanged="AreaComboBox_SelectionChanged"/>
+            <TextBox x:Name="LineNumber" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="5.667,6,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="{Binding NumberLine}" Grid.ColumnSpan="2" TextChanged="LineNumber_TextChanged" PreviewKeyDown="LineNumber_PreviewKeyDown"/>
         </Grid>
+        <ListView x:Name="StationOfTheLine" HorizontalAlignment="Left" Height="159" Margin="288,38,0,0" VerticalAlignment="Top" Width="407">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Station Code" Width="80" DisplayMemberBinding="{Binding StationCode}" />
+                    <GridViewColumn  x:Name="Index" Header="Index" Width="80" DisplayMemberBinding="{Binding LineStationIndex}" />
+
+                    <GridViewColumn Width="80">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button x:Name="CancelStation" Content="Cancel" Click="CancelStation_Click"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <ListView x:Name="Station" HorizontalAlignment="Left" Height="159" Margin="50,221,0,0" VerticalAlignment="Top" Width="645">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Station Code" Width="80" DisplayMemberBinding="{Binding Code}" />
+                    <GridViewColumn Header="Name" Width="200" DisplayMemberBinding="{Binding Name}" />
+                    <GridViewColumn Header="Address" Width="200" DisplayMemberBinding="{Binding Address}" />
+                    <GridViewColumn Width="80">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button x:Name="AddStation" Content="Add Station" Click="AddStation_Click"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button x:Name="FinishAddLine" Content="Add line to the system" HorizontalAlignment="Left" Margin="20,171,0,0" VerticalAlignment="Top" Width="162" Click="FinishAddLine_Click">
+            <Button.Style>
+                <Style>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding enableLine ,Mode=OneWay}" Value="false">
+                            <Setter Property="Button.IsEnabled" Value="false"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding enableArea, Mode=OneWay}" Value="false">
+                            <Setter Property="Button.IsEnabled" Value="false"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding enable2Station, Mode=OneWay}" Value="false">
+                            <Setter Property="Button.IsEnabled" Value="false"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+        <Button x:Name="AddStation" Content="Add Station" HorizontalAlignment="Left" Margin="700,359,0,0" VerticalAlignment="Top" Width="75" />
 
     </Grid>
 </Window>

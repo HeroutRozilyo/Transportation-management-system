@@ -129,6 +129,8 @@ namespace PLGui
         private void AddLine_Click(object sender, RoutedEventArgs e)
         {
 
+            AddLine addline = new AddLine(bl);
+            addline.ShowDialog();
         }
 
         private void UpdateLine_Click(object sender, RoutedEventArgs e)
@@ -158,6 +160,7 @@ namespace PLGui
         {
             var fxElt = sender as FrameworkElement; //get the licence of the bus to refulling. 
           object lineData = fxElt.DataContext as object;//to get the line
+
          
             UpdataStationLineIndex updataStationLineIndex = new UpdataStationLineIndex(line, lineData);
 

@@ -91,7 +91,7 @@
                                         <Button.Style>
                                             <Style>
                                                 <Style.Triggers>
-                                                    <DataTrigger Binding="{Binding enable}" Value="false">
+                                                    <DataTrigger Binding="{Binding enable }" Value="false">
                                                         <Setter Property="Button.IsEnabled" Value="false"/>
                                                     </DataTrigger>
                                                     <DataTrigger Binding="{Binding Fuel}" Value="1200">
