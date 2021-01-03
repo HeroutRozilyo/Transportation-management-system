@@ -52,8 +52,9 @@ namespace PLGui
        
         private void RefreshLine()
         {
-            egged = Convert<BO.Line>(bl.GetAllLine());//to make ObservableCollection
-           
+            egged = Convert(bl.GetLineByArea(area)) ;//to make ObservableCollection
+            ListOfLine.ItemsSource = egged;
+
         }
         private void RefreshStationListView()
         {
@@ -78,8 +79,7 @@ namespace PLGui
         {
 
             area = (BO.AREA)(comboBoxArea.SelectedItem);
-            egged = Convert(bl.GetLineByArea(area));
-            ListOfLine.ItemsSource = egged;
+            RefreshLine();
             line = null;
             RefreshStationListView();
           //  busesData.DataContext = bus;
@@ -97,12 +97,25 @@ namespace PLGui
         {
             try
             {
-
-                var fxElt = sender as FrameworkElement; //get the licence of the bus to refulling. 
-               BO.Line lineToDelete = fxElt.DataContext as BO.Line;
-                bl.DeleteLine(lineToDelete.IdNumber);
-                RefreshLine();
-                MessageBox.Show("The line was successfully deleted from the system", "Success Message", MessageBoxButton.OK, MessageBoxImage.Asterisk);
+                
+                MessageBoxResult result= MessageBox.Show("You sure you want to delete that line?", "Delete Line Message", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                switch(result)
+                {
+                    case MessageBoxResult.Yes:
+                        {
+                            var fxElt = sender as FrameworkElement; //get the licence of the bus to refulling. 
+                            BO.Line lineToDelete = fxElt.DataContext as BO.Line;
+                            bl.DeleteLine(lineToDelete.IdNumber);
+                            RefreshLine();
+                            MessageBox.Show("The line was successfully deleted from the system", "Success Message", MessageBoxButton.OK, MessageBoxImage.Asterisk);
+                            break;
+                        }
+                    case MessageBoxResult.No:
+                        {
+                            break;
+                        }
+                }
+               
             }
             catch (BO.BadIdException a)
             {

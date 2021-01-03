@@ -271,6 +271,7 @@ namespace BL
         }
         public IEnumerable<BO.Line> GetLineByArea(BO.AREA area) //return all the line according to their area
         {
+            var x = dl.GetAllLinesArea((DO.AREA)area);
             var v = from item in dl.GetAllLinesArea((DO.AREA)area)
                     select lineDoBoAdapter(item.IdNumber);
             foreach (var temp in v)

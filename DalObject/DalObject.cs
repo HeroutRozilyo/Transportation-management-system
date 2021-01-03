@@ -143,7 +143,7 @@ namespace DL
         public IEnumerable<DO.Line> GetAllLinesArea(DO.AREA area) //return all the buses that we have
         {
             return from line in DataSource.ListLine
-                   where (line.Area == area)
+                   where (line.Area == area&&line.LineExist)
                    select line.Clone();
         }
 
