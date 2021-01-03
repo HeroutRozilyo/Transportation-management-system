@@ -306,7 +306,7 @@ namespace BL
                       select new DO.LineStation
                       {
                           LineId = item.LineId,
-                          LineStationExsis = item.LineStationExsis,
+                          LineStationExist = item.LineStationExist,
                           LineStationIndex = item.LineStationIndex,
                           NextStation = item.NextStation,
                           PrevStation = item.PrevStation,
@@ -655,7 +655,7 @@ namespace BL
                     if(temp.StartAt!= line.StartAt)
                     {
                         lineTrip.StartAt = tripDO1.ElementAt(i).StartAt;
-                        lineTrip.TripLineExsis = true;
+                        lineTrip.TripLineExist = true;
                         lineTrip.KeyId = tripDO1.ElementAt(i).KeyId;
                         lineTrip.Frequency = tripDO1.ElementAt(i).Frequency;
                         lineTrip.FinishAt = line.StartAt;
@@ -671,7 +671,7 @@ namespace BL
                 if (temp.FinishAt > line.FinishAt)
                 {
                     lineTrip.StartAt = line.FinishAt;
-                    lineTrip.TripLineExsis = true;
+                    lineTrip.TripLineExist = true;
                     lineTrip.KeyId = tripDO1.ElementAt(i).KeyId;
                     lineTrip.Frequency = tripDO1.ElementAt(i).Frequency;
                     lineTrip.FinishAt = tripDO1.ElementAt(i).FinishAt;
@@ -746,7 +746,7 @@ namespace BL
                    {
                        StationCode = itemLineStation.StationCode,
                        LineStationIndex = itemLineStation.LineStationIndex,
-                       LineStationExsis = itemLineStation.LineStationExsis,
+                       LineStationExist = itemLineStation.LineStationExist,
                        Name = itemStation.Name,
                        Address = itemStation.Address,
                        //Coordinate = itemStation.Coordinate,

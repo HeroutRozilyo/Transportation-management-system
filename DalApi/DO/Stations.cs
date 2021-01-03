@@ -14,6 +14,6 @@ namespace DO
         public string Name { get; set; }
         public  GeoCoordinate Coordinate { get; set; }
         public string Address { get; set; }
-        public bool StationExsis { get; set; }
+        public bool StationExist { get; set; }
     }
 }

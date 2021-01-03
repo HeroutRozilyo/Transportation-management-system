@@ -13,6 +13,6 @@ namespace DO
         public int FirstStationCode { get; set; }
         public int LastStationCode { get; set; }
         public AREA Area { get; set; }
-        public bool LineExsis { get; set; }
+        public bool LineExist { get; set; }
     }
 }

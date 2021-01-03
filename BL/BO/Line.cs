@@ -13,7 +13,7 @@ namespace BO
         public int FirstStationCode { get; set; }
         public int LastStationCode { get; set; }
         public AREA Area { get; set; }
-        public bool LineExsis { get; set; }
+        public bool LineExist { get; set; }
         public IEnumerable<LineStation> StationsOfBus { get; set; }
         public IEnumerable<LineTrip> TimeLineTrip { get; set; }
         public  double TimeTravel { get; set; }

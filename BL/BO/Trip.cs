@@ -15,6 +15,6 @@ namespace BO
         public TimeSpan InAt { get; set; }
         public int OutStation { get; set; }
         public TimeSpan OutAt { get; set; }
-        public bool TripExsis { get; set; }
+        public bool TripExist { get; set; }
     }
 }
