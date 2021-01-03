@@ -20,7 +20,7 @@ namespace PLGui
     /// <summary>
     /// Interaction logic for AddLine.xaml
     /// </summary>
-    public partial class AddLine : Window, 
+    public partial class AddLine : Window
     {
         private IBL bl;
         private ObservableCollection<BO.Station> GetStations = new ObservableCollection<BO.Station>();
@@ -28,9 +28,9 @@ namespace PLGui
         private ObservableCollection<BO.LineStation> GetLineStations = new ObservableCollection<BO.LineStation>();
         BO.LineStation convertStation = new BO.LineStation();
         static int add;
-        bool enableArea = false;
-        bool enableLine = false;
-        private bool enable2Station = false;
+        //bool enableArea = false;
+        //bool enableLine = false;
+        //private bool enable2Station = false;
         public AddLine()
         {
             InitializeComponent();
@@ -107,7 +107,7 @@ namespace PLGui
                 RefreshStation();
                 if(add<2)
                 {
-                    enable2Station = false;
+                  //  enable2Station = false;
                 }
                 
             }
@@ -158,7 +158,7 @@ namespace PLGui
                 RefreshStation();
                 if (add >=2)
                 {
-                    enable2Station = true;
+                //    enable2Station = true;
                 }
 
 
