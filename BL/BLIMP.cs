@@ -495,7 +495,7 @@ namespace BL
 
         }
 
-        public bool UpdateLineTrip(BO.Line line)
+        public bool UpdateLineTrip(BO.Line line) //add new time to of day to the line
         {
             try
             {
@@ -520,9 +520,9 @@ namespace BL
 
         }
 
-        public bool UpdateLineStation(BO.Line line)
+        public bool UpdateLineStation(BO.Line line) //change the order of station at the line
         {
-  
+
             IEnumerable<DO.LineStation> tempDO;
             tempDO = from st in line.StationsOfBus
                      select (DO.LineStation)st.CopyPropertiesToNew(typeof(DO.LineStation));
@@ -541,34 +541,45 @@ namespace BL
                           select item;
                 for (int i = 0; i < tempDO.Count(); i++)
                 {
-                    if (tempDO1.ElementAt(i).StationCode != tempDO2.ElementAt(i).StationCode)
+                    if (i == 0) //if its the first station
                     {
-                        if (i == 0)
-                        {
-                            tempDO2.ElementAt(i).PrevStation = 0;
-                            tempDO2.ElementAt(i).NextStation = tempDO2.ElementAt(i + 1).StationCode;
-                            dl.UpdateStations(tempDO2.ElementAt(i));
+                        tempDO2.ElementAt(i).PrevStation = 0;
+                        tempDO2.ElementAt(i).NextStation = tempDO2.ElementAt(i + 1).StationCode;
+                        dl.UpdateStations(tempDO2.ElementAt(i));
 
-
-                        }
-                        if (i == tempDO.Count() - 1)
-                        {
-                            tempDO2.ElementAt(i).PrevStation = tempDO2.ElementAt(i - 1).StationCode;
-                            tempDO2.ElementAt(i).NextStation = 0;
-                            dl.UpdateStations(tempDO2.ElementAt(i));
-                        }
-                        else
-                        {
-                            tempDO2.ElementAt(i).PrevStation = tempDO2.ElementAt(i - 1).StationCode;
-                            tempDO2.ElementAt(i).NextStation = tempDO2.ElementAt(i + 1).StationCode;
-                            dl.UpdateStations(tempDO2.ElementAt(i));
-
-                        }
 
                     }
+                    if (i == tempDO.Count() - 1) //last atation
+                    {
+                        tempDO2.ElementAt(i).PrevStation = tempDO2.ElementAt(i - 1).StationCode;
+                        tempDO2.ElementAt(i).NextStation = 0;
+                        dl.UpdateStations(tempDO2.ElementAt(i));
+                    }
+                    else
+                    {
+                        tempDO2.ElementAt(i).PrevStation = tempDO2.ElementAt(i - 1).StationCode;
+                        tempDO2.ElementAt(i).NextStation = tempDO2.ElementAt(i + 1).StationCode;
+                        dl.UpdateStations(tempDO2.ElementAt(i));
+                    }
+
+                    //we do herw try and catch because we wont that the func will continue if we get throw
+                    try
+                    {
+                        /// in order to know if we need delete the old station// all adlact station go to func that check if we need delete this adjacte station or not
+                        if (i < (tempDO.Count() - 1))
+                        {
+                            bool result = CheckAdjactStation(tempDO1.ElementAt(i).StationCode, tempDO1.ElementAt(i + 1).StationCode);
+                            if (!result)
+                                dl.DeleteAdjacentStationse(tempDO1.ElementAt(i).StationCode, tempDO1.ElementAt(i + 1).StationCode);
+
+
+                            CreatAdjStations(tempDO2.ElementAt(i).StationCode, tempDO2.ElementAt(i + 1).StationCode); //creat new adjacte station after all the diffrences.
+
+                        }
+                    }
+                    catch (DO.WrongIDExeption ex) { string a = ""; a += ex; }
 
                 }
-
 
             }
             catch (DO.WrongIDExeption ex)
@@ -584,10 +595,10 @@ namespace BL
         {
             DO.Line lineDO = new DO.Line();
             line.CopyPropertiesTo(lineDO);
-      
+
             try
             {
-                dl.UpdateLine(lineDO);          
+                dl.UpdateLine(lineDO);
                 line.TimeTravel = CalucateTravel(line.IdNumber);
             }
             catch (DO.WrongIDExeption ex)
@@ -613,7 +624,7 @@ namespace BL
                 temp = tripDO1.ElementAt(i);
                 if (temp.StartAt <= line.StartAt && temp.FinishAt > line.StartAt)
                 {
-                    if(temp.StartAt!= line.StartAt)
+                    if (temp.StartAt != line.StartAt)
                     {
                         lineTrip.StartAt = tripDO1.ElementAt(i).StartAt;
                         lineTrip.TripLineExsis = true;
@@ -624,7 +635,7 @@ namespace BL
                         dl.UpdatelineTrip(lineTrip);
 
                     }
-            
+
 
                     dl.DeleteLineTrip1(temp);
                     dl.AddLineTrip(lineTrip);
@@ -660,7 +671,7 @@ namespace BL
             DO.Stations ST2 = new DO.Stations();
             try
             {
-                // in order to freat adj station we need the "real" station in order to calucate distance and travel time.
+                // in order to creat adj station we need the "real" station in order to calucate distance and travel time.
                 ST1 = dl.GetStations(station1);
                 ST2 = dl.GetStations(station2);
                 double d = (ST1.Coordinate).GetDistanceTo((ST2.Coordinate));
@@ -714,6 +725,29 @@ namespace BL
                    };
 
         }
+
+        public bool CheckAdjactStation(int cod1, int cod2)
+        {
+            IEnumerable<DO.LineStation> lines1 = dl.GetAllStationsCode(cod1); //get all the lines that move at this station
+            IEnumerable<DO.LineStation> lines2 = dl.GetAllStationsCode(cod2);
+            IEnumerable<DO.LineStation> stations;
+
+
+            stations = from item in lines1               //from all the line that move at the first station
+                       from temp in lines2               //from all the line that move at the second station
+                       let index1 = item.LineStationIndex  //keep the index of station of cod1
+                       let index2 = temp.LineStationIndex
+                       where temp.LineId == item.LineId    //if the line move at both the station
+                       where index1 + 1 == index2            //if the stations are adjacted         
+                       select temp;                      //return this line station
+
+            if (stations.Count() > 1)
+                return true;
+            else
+                return false;
+
+        }
+
 
         #endregion
 
@@ -782,7 +816,7 @@ namespace BL
                 throw new BO.BadIdException("code not valid", ex);
             }
         }
-        
+
         public void DeleteStation(int code)
         {
             try
@@ -816,10 +850,10 @@ namespace BL
                     stationOldDO = dl.GetStations(station.Code);
                     dl.UpdateStations(stationDO);
 
-                    if(stationOldDO.Coordinate!=station.Coordinate)
+                    if (stationOldDO.Coordinate != station.Coordinate)
                     {
-                        IEnumerable<DO.AdjacentStations> adjacentStations=  dl.GetAllAdjacentStations(station.Code);
-                        foreach(var item in adjacentStations)
+                        IEnumerable<DO.AdjacentStations> adjacentStations = dl.GetAllAdjacentStations(station.Code);
+                        foreach (var item in adjacentStations)
                         {
                             if (item.Station1 != station.Code)
                             {
@@ -864,7 +898,7 @@ namespace BL
 
 
         #region User
-        BO.User userDoBoAdapter(string name) 
+        BO.User userDoBoAdapter(string name)
         {
             BO.User userBO = new BO.User();
             DO.User userDO;

@@ -232,6 +232,7 @@ namespace DL
 
         #endregion Stations
 
+
         #region LineStation
         public DO.LineStation GetLineStation(int Scode, int idline) //return specific stations according to code of the station and line that Passing through it
         {
@@ -267,23 +268,25 @@ namespace DL
             return list;
         }
 
-        public IEnumerable<DO.LineStation> GetAllLineAt2Stations(int code1, int cod2) //get 2 stations and return all the lines this 2 stations is adjacted at them
-        {
-            IEnumerable<DO.LineStation> lines = GetAllStationsCode(code1); //get all the lines that move at this station
-            IEnumerable<DO.LineStation> stations;
-            IEnumerable<DO.LineStation> stline = (IEnumerable<DO.LineStation>)new DO.LineStation(); ///???????? ככה כותבים
+        //public IEnumerable<DO.LineStation> GetAllLineAt2Stations(int code1, int cod2) //get 2 stations and return all the lines this 2 stations is adjacted at them
+        //{
+        //    IEnumerable<DO.LineStation> lines = GetAllStationsCode(code1); //get all the lines that move at this station
+        //    IEnumerable<DO.LineStation> stations;
+           
 
-            foreach (var item in lines)
-            {
-                stations = GetAllStationsLine(item.LineId);  //get all the station of the line that move at station with cod1
+        //    foreach (var item in lines)
+        //    {
+        //        stations = GetAllStationsLine(item.LineId);  //get all the station of the line that move at station with cod1
 
-                //return all the line that move at these 2 stations
-                stline = from temp in stations
-                         where (temp.StationCode == cod2 &&temp.LineStationIndex-1==item.LineStationIndex )
-                         select temp.Clone();
-            }
-            return stline;
-        }
+        //        //return all the line that move at these 2 stations
+        //       = from temp in stations
+        //                 where (temp.StationCode == cod2 && temp.LineStationIndex - 1 == item.LineStationIndex)
+        //                 select temp.Clone();
+            
+
+        //    }
+        //    return v;
+        //}
 
         public void AddLineStations(DO.LineStation station)
         {
@@ -437,8 +440,8 @@ namespace DL
 
         public void AddLineStations(DO.AdjacentStations adjacentStations)
         {
-            DO.AdjacentStations temp = DataSource.ListAdjacentStations.Find(b => b.Station1 == adjacentStations.Station1 && b.Station2 == adjacentStations.Station2|| b.Station1 == adjacentStations.Station2 && b.Station2 == adjacentStations.Station1);
-            if (temp != null)
+            int temp = DataSource.ListAdjacentStations.FindIndex(b => b.Station1 == adjacentStations.Station1 && b.Station2 == adjacentStations.Station2|| b.Station1 == adjacentStations.Station2 && b.Station2 == adjacentStations.Station1);
+            if (temp ==-1)
                 throw new DO.WrongIDExeption(adjacentStations.Station1, "This adjacent station already exsis ");/////////////////////////////////////////////////////////////////
             DataSource.ListAdjacentStations.Add(adjacentStations.Clone());
         }
