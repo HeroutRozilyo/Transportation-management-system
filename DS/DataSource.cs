@@ -509,7 +509,7 @@ namespace DS
                     FuellAmount=200,
                     StatusBus=DO.STUTUS.READT_TO_TRAVEL,
                     LastTreatment=new DateTime(12/12/2020),
-                    BusExsis=true
+                    BusExist=true
                 },
 
 
@@ -522,7 +522,7 @@ namespace DS
                     FuellAmount=700,
                        LastTreatment=new DateTime(12/12/2020),
                     StatusBus=DO.STUTUS.READT_TO_TRAVEL,
-                    BusExsis=true
+                    BusExist=true
 
                 },
                 new Bus
@@ -534,7 +534,7 @@ namespace DS
                     KilometrFromLastTreat=10000,
                     FuellAmount=340,
                     StatusBus=DO.STUTUS.READT_TO_TRAVEL,
-                    BusExsis=true
+                    BusExist=true
                 },
                 new Bus
                 {
@@ -546,7 +546,7 @@ namespace DS
                     KilometrFromLastTreat=2000,
                     FuellAmount=200,
                     StatusBus=DO.STUTUS.READT_TO_TRAVEL,
-                    BusExsis=true
+                    BusExist=true
                 },
                 new Bus
                 {
@@ -557,7 +557,7 @@ namespace DS
                     KilometrFromLastTreat=1500.34,
                     FuellAmount=643.98,
                     StatusBus=DO.STUTUS.READT_TO_TRAVEL,
-                    BusExsis=true
+                    BusExist=true
                 },
                 new Bus
                 {
@@ -568,7 +568,7 @@ namespace DS
                     KilometrFromLastTreat=2000,
                     FuellAmount=200,
                     StatusBus=DO.STUTUS.READT_TO_TRAVEL,
-                    BusExsis=true
+                    BusExist=true
                 },
                 new Bus
                 {
@@ -579,7 +579,7 @@ namespace DS
                     KilometrFromLastTreat=78500,
                     FuellAmount=350,
                     StatusBus=DO.STUTUS.READT_TO_TRAVEL,
-                    BusExsis=true
+                    BusExist=true
                 },
                 new Bus
                 {
@@ -590,7 +590,7 @@ namespace DS
                     KilometrFromLastTreat=15000,
                     FuellAmount=900,
                     StatusBus=DO.STUTUS.READT_TO_TRAVEL,
-                    BusExsis=true
+                    BusExist=true
                 },
                 new Bus
                 {
@@ -601,7 +601,7 @@ namespace DS
                     KilometrFromLastTreat=1400,
                     FuellAmount=300,
                     StatusBus=DO.STUTUS.READT_TO_TRAVEL,
-                    BusExsis=true
+                    BusExist=true
                 },
                 new Bus
                 {
@@ -612,7 +612,7 @@ namespace DS
                     KilometrFromLastTreat=15000,
                     FuellAmount=900,
                     StatusBus=DO.STUTUS.READT_TO_TRAVEL,
-                    BusExsis=true
+                    BusExist=true
                 },
                new Bus
                 {
@@ -623,7 +623,7 @@ namespace DS
                     KilometrFromLastTreat=8970,
                     FuellAmount=1000,
                     StatusBus=DO.STUTUS.READT_TO_TRAVEL,
-                    BusExsis=true
+                    BusExist=true
                 },
              new Bus
                 {
@@ -634,7 +634,7 @@ namespace DS
                     KilometrFromLastTreat=100,
                     FuellAmount=900,
                     StatusBus=DO.STUTUS.READT_TO_TRAVEL,
-                      BusExsis=true
+                      BusExist=true
                 },
                 new Bus
                 {
@@ -645,7 +645,7 @@ namespace DS
                     KilometrFromLastTreat=15000,
                     FuellAmount=900,
                     StatusBus=DO.STUTUS.READT_TO_TRAVEL,
-                    BusExsis=true
+                    BusExist=true
                 },
                 new Bus
                 {
@@ -656,7 +656,7 @@ namespace DS
                     KilometrFromLastTreat=15000,
                     FuellAmount=900,
                     StatusBus=DO.STUTUS.READT_TO_TRAVEL,
-                    BusExsis=true
+                    BusExist=true
                 },
               new Bus
                 {
@@ -667,7 +667,7 @@ namespace DS
                     KilometrFromLastTreat=15000,
                     FuellAmount=900,
                     StatusBus=DO.STUTUS.READT_TO_TRAVEL,
-                    BusExsis=true
+                    BusExist=true
                 },
                                                                                                                           new Bus
                 {
@@ -678,7 +678,7 @@ namespace DS
                     KilometrFromLastTreat=15000,
                     FuellAmount=900,
                     StatusBus=DO.STUTUS.READT_TO_TRAVEL,
-                    BusExsis=true
+                    BusExist=true
                 },
                                                                                                                           new Bus
                 {
@@ -689,7 +689,7 @@ namespace DS
                     KilometrFromLastTreat=15000,
                     FuellAmount=900,
                     StatusBus=DO.STUTUS.READT_TO_TRAVEL,
-                    BusExsis=true
+                    BusExist=true
                 },
                                                                                                                       new Bus
                 {
@@ -700,7 +700,7 @@ namespace DS
                     KilometrFromLastTreat=15000,
                     FuellAmount=900,
                     StatusBus=DO.STUTUS.READT_TO_TRAVEL,
-                    BusExsis=true
+                    BusExist=true
                 },
                                                                                                                             new Bus
                 {
@@ -711,7 +711,7 @@ namespace DS
                     KilometrFromLastTreat=15000,
                     FuellAmount=900,
                     StatusBus=DO.STUTUS.READT_TO_TRAVEL,
-                     BusExsis=true
+                     BusExist=true
                 },
                                                                                                                           new Bus
                 {
@@ -722,7 +722,7 @@ namespace DS
                     KilometrFromLastTreat=15000,
                     FuellAmount=900,
                     StatusBus=DO.STUTUS.READT_TO_TRAVEL,
-                    BusExsis=true
+                    BusExist=true
                 },
 
                 #endregion

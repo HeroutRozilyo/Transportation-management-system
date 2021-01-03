@@ -749,7 +749,7 @@ namespace BL
                        LineStationExsis = itemLineStation.LineStationExsis,
                        Name = itemStation.Name,
                        Address = itemStation.Address,
-                       Coordinate = itemStation.Coordinate,
+                       //Coordinate = itemStation.Coordinate,
                    };
 
         }

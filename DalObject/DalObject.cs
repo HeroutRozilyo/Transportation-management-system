@@ -26,7 +26,7 @@ namespace DL
         public DO.Bus GetBus( string licence) //check if the bus exsis according to the licence
         {
             int indexBus = DataSource.ListBus.FindIndex(b => b.Licence == licence);
-            if (indexBus != -1 && DataSource.ListBus[indexBus].BusExsis)
+            if (indexBus != -1 && DataSource.ListBus[indexBus].BusExist)
             {
                 return DataSource.ListBus[indexBus].Clone();
             }
@@ -37,7 +37,7 @@ namespace DL
         public IEnumerable<DO.Bus> GetAllBuses() //return all the buses that we have
         {
             return from bus in DataSource.ListBus
-                   where (bus.BusExsis == true)
+                   where (bus.BusExist == true)
                    select bus.Clone();
         }
         public IEnumerable<DO.Bus> GetAllBusesStusus(DO.STUTUS stusus) //return all the buses that we have
@@ -50,7 +50,7 @@ namespace DL
         public IEnumerable<DO.Bus> GetAllBusesBy(Predicate<DO.Bus> buscondition) //איך כותבים??
         {
             var list = from bus in DataSource.ListBus
-                       where (bus.BusExsis && buscondition(bus))
+                       where (bus.BusExist && buscondition(bus))
                        select bus.Clone();
             return list;
         }
@@ -59,7 +59,7 @@ namespace DL
         {
             if (DataSource.ListBus.FirstOrDefault(b => b.Licence == bus.Licence) != null) //if != null its means that this licence is allready exsis
                 throw new DO.WrongLicenceException(int.Parse(bus.Licence), "This licence already exsis");
-            bus.BusExsis = true;
+            bus.BusExist = true;
             DataSource.ListBus.Add(bus.Clone());
             return 1;
         }
@@ -69,10 +69,10 @@ namespace DL
         public bool DeleteBus(string licence)
         {
            int indexOfBus = DataSource.ListBus.FindIndex(b => b.Licence == licence);
-            if (indexOfBus!=-1&& DataSource.ListBus[indexOfBus].BusExsis)
+            if (indexOfBus!=-1&& DataSource.ListBus[indexOfBus].BusExist)
             {
                 // bus.BusExsis = false;
-                DataSource.ListBus[indexOfBus].BusExsis = false;
+                DataSource.ListBus[indexOfBus].BusExist = false;
                 
                 return true;
             }
@@ -82,7 +82,7 @@ namespace DL
         public bool UpdateBus(DO.Bus bus)
         {
             int indexOftheBUs = DataSource.ListBus.FindIndex(b => b.Licence == bus.Licence);
-            if (indexOftheBUs != -1&&DataSource.ListBus[indexOftheBUs].BusExsis)
+            if (indexOftheBUs != -1&&DataSource.ListBus[indexOftheBUs].BusExist)
             {
                 DataSource.ListBus[indexOftheBUs] = bus;
 
@@ -131,6 +131,7 @@ namespace DL
         public IEnumerable<DO.Line> GetAllLine()//return all the lines in the list
         {
             return from line in DataSource.ListLine
+                   where line.LineExsis
                    select line.Clone();
         }
 

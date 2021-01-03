@@ -14,7 +14,7 @@ namespace DO
         public double KilometrFromLastTreat { get; set; }
         public double FuellAmount { get; set; }
         public STUTUS StatusBus { get; set; }
-        public bool BusExsis { get; set; }
+        public bool BusExist { get; set; }
         public DateTime LastTreatment { get; set; }
 
 

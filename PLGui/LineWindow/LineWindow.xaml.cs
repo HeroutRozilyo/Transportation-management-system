@@ -26,6 +26,8 @@ namespace PLGui
        
         private ObservableCollection<BO.Line> egged = new ObservableCollection<BO.Line>();
         private ObservableCollection<object> lineStationOfLine = new ObservableCollection<object>();
+        private List<PL.LineStationUI> lineStationOfLineUI = new List<PL.LineStationUI>();
+
         private BO.AREA area;
         public LineWindow()
         {
@@ -47,6 +49,7 @@ namespace PLGui
         {
             return new ObservableCollection<T>(listFromBO);
         }
+       
         private void RefreshLine()
         {
             egged = Convert<BO.Line>(bl.GetAllLine());//to make ObservableCollection
@@ -57,6 +60,7 @@ namespace PLGui
             if (line != null)
             {
                 lineStationOfLine = Convert(bl.DetailsOfStation(line.StationsOfBus));
+
                 Looz.ItemsSource = line.TimeLineTrip;
 
             }
@@ -91,6 +95,19 @@ namespace PLGui
 
         private void DeleteLine_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+
+                var fxElt = sender as FrameworkElement; //get the licence of the bus to refulling. 
+               BO.Line lineToDelete = fxElt.DataContext as BO.Line;
+                bl.DeleteLine(lineToDelete.IdNumber);
+                RefreshLine();
+                MessageBox.Show("The line was successfully deleted from the system", "Success Message", MessageBoxButton.OK, MessageBoxImage.Asterisk);
+            }
+            catch (BO.BadIdException a)
+            {
+                MessageBox.Show(a.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
 
         }
 
@@ -126,6 +143,13 @@ namespace PLGui
 
         private void UpdataLineStation_Click(object sender, RoutedEventArgs e)
         {
+            var fxElt = sender as FrameworkElement; //get the licence of the bus to refulling. 
+          object lineData = fxElt.DataContext as object;//to get the line
+         
+            UpdataStationLineIndex updataStationLineIndex = new UpdataStationLineIndex(line, lineData);
+
+            updataStationLineIndex.ShowDialog();
+           
             
         }
 

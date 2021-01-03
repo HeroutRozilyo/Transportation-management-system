@@ -35,6 +35,7 @@ namespace BlAPI
         void CreatAdjStations(int station1, int station2);
         double CalucateTravel(int lineId); //return the sum of time travel
         IEnumerable<object> DetailsOfStation(IEnumerable<LineStation> lineStations); //creat a new object in order to return all data on station
+         bool UpdateLineStation(BO.Line line);
         #endregion
 
         #region Station

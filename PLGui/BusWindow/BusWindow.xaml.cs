@@ -41,7 +41,7 @@ namespace PLGui
             buses.IsReadOnly = true;
             buses.ItemsSource = egged;
             buses.SelectedIndex = 0;
-           
+          
 
 
 
@@ -58,7 +58,7 @@ namespace PLGui
             
             bus = (buses.SelectedItem as BO.Bus);
            busesData.DataContext = bus;
-
+            RefreshDataBus();
             ////
         }
 

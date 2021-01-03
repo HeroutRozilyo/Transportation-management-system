@@ -1,0 +1,14 @@
+﻿<Window x:Class="PLGui.UpdataStationLineIndex"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="UpdataStationLineIndex" Height="450" Width="800">
+    <Grid>
+        <Label x:Name="chooseIndex" Content="Choose the new Index of the Station in the Line" HorizontalAlignment="Left" Margin="247,85,0,0" VerticalAlignment="Top" Height="42" Width="308"/>
+        <ComboBox x:Name="IndexCOmboBox" HorizontalAlignment="Left" Margin="316,132,0,0" VerticalAlignment="Top" Width="120" ItemsSource="{Binding}"  DisplayMemberPath="LineStationIndex" SelectedValuePath="LineStationIndex"  SelectionChanged="IndexCOmboBox_SelectionChanged" />
+        
+     
+    </Grid>
+</Window>
