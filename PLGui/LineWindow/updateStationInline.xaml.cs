@@ -1,5 +1,4 @@
-﻿using BlAPI;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,20 +15,13 @@ using System.Windows.Shapes;
 namespace PLGui
 {
     /// <summary>
-    /// Interaction logic for StationWindow.xaml
+    /// Interaction logic for updateStationInline.xaml
     /// </summary>
-    public partial class StationWindow : Window
+    public partial class updateStationInline : Window
     {
-        private IBL bl;
-        //
-        public StationWindow()
+        public updateStationInline()
         {
             InitializeComponent();
-        }
-
-        public StationWindow(IBL bl)
-        {
-            this.bl = bl;
         }
     }
 }

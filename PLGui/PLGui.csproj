@@ -55,25 +55,21 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AddBus.xaml.cs">
-      <DependentUpon>AddBus.xaml</DependentUpon>
-    </Compile>
     <Compile Include="StationWindow.xaml.cs">
       <DependentUpon>StationWindow.xaml</DependentUpon>
     </Compile>
-    <Page Include="AddBus.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
+    <Compile Include="LineWindow\updateStationInline.xaml.cs">
+      <DependentUpon>updateStationInline.xaml</DependentUpon>
+    </Compile>
     <Page Include="AdminWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="BusWindow.xaml">
+    <Page Include="BusWindow\BusWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="LineWindow.xaml">
+    <Page Include="LineWindow\LineWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -92,10 +88,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="BusWindow.xaml.cs">
+    <Compile Include="BusWindow\BusWindow.xaml.cs">
       <DependentUpon>BusWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="LineWindow.xaml.cs">
+    <Compile Include="LineWindow\LineWindow.xaml.cs">
       <DependentUpon>LineWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="LoginWindow.xaml.cs">
@@ -106,6 +102,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="StationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LineWindow\updateStationInline.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
