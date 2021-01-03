@@ -407,7 +407,7 @@ namespace BL
                             adj2 = lineBO.StationsOfBus.ElementAt(i).StationCode;
                         //if we find them so check if they adjacted station for another bus. if not-delete
                         if (adj1 != -1 && adj2 != -1)
-                            if (dl.GetAllLineAt2Stations(adj1, adj2).Count() == 1)
+                            if (!CheckAdjactStation(adj1, adj2))
                                 dl.DeleteAdjacentStationse(adj1, adj2);
 
                         // creat a new adj station if they not exsis yet
@@ -453,13 +453,13 @@ namespace BL
         {
             try
             {
-                int index = dl.DeleteStationsFromLine(code, idline);
+                int index = dl.DeleteStationsFromLine(code, idline); 
 
                 IEnumerable<DO.LineStation> tempDO;
                 tempDO = dl.GetAllStationsLine(idline);
                 int adj1 = -1, adj2 = -1;
 
-                foreach (var item in tempDO)
+                foreach (var item in tempDO) //in order creat a new adjacted station 
                 {
                     if (item.LineStationIndex == (index - 1))
                         adj1 = item.StationCode;
@@ -470,9 +470,9 @@ namespace BL
                     {
                         try
                         {
-                            if (dl.GetAllLineAt2Stations(adj1, code).Count() == 1)
+                            if (!CheckAdjactStation(adj1, code))
                                 dl.DeleteAdjacentStationse(adj1, code);
-                            if (dl.GetAllLineAt2Stations(code, adj2).Count() == 1)
+                            if (!CheckAdjactStation(code, adj2))
                                 dl.DeleteAdjacentStationse(code, adj2);
 
                             CreatAdjStations(adj1, adj2);

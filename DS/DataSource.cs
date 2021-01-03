@@ -138,7 +138,7 @@ namespace DS
                     Address = " רחוב:דרך בית לחם הישנה  עיר: ירושלים ",
                     StationExsis=true,
                     Coordinate= new GeoCoordinate(31.765717,35.247102)
-                    
+
                 },
                 new Stations
                 {
@@ -147,7 +147,7 @@ namespace DS
                     Address = " רחוב:דרך בית לחם הישנה  עיר: ירושלים",
                     StationExsis=true,
                     Coordinate= new GeoCoordinate(31.767265,35.246594)
-                    
+
                 },
                 new Stations
                 {
@@ -156,7 +156,7 @@ namespace DS
                     Address = " רחוב:דרך בית לחם הישנה  עיר: ירושלים",
                     StationExsis=true,
                     Coordinate= new GeoCoordinate(31.767084,35.246655)
-                   
+
                 },
                 new Stations
                 {
@@ -165,7 +165,7 @@ namespace DS
                     Address = " רחוב:דרך בית לחם הישנה  עיר: ירושלים",
                     StationExsis=true,
                     Coordinate= new GeoCoordinate(31.768759,31.768759)
-                    
+
                 },
                 new Stations
                 {
@@ -174,7 +174,7 @@ namespace DS
                     Address = " רחוב:דרך בית לחם הישנה  עיר: ירושלים",
                     StationExsis=true,
                     Coordinate= new GeoCoordinate(31.77002,35.24348)
-                    
+
                 },
                 new Stations
                 {
@@ -183,7 +183,7 @@ namespace DS
                     Address = " רחוב:שדרות גולדה מאיר  עיר: ירושלים",
                     StationExsis=true,
                     Coordinate= new GeoCoordinate(31.8003,35.208257)
-                    
+
                 },
                 new Stations
                 {
@@ -192,7 +192,7 @@ namespace DS
                     Address = " רחוב:שדרות גולדה מאיר  עיר: ירושלים",
                     StationExsis=true,
                     Coordinate= new GeoCoordinate(31.8,35.214106)
-                   
+
                 },
                 new Stations
                 {
@@ -201,7 +201,7 @@ namespace DS
                     Address = " רחוב:גבעת משה 2 עיר: ירושלים",
                     StationExsis=true,
                     Coordinate= new GeoCoordinate(31.797708,35.217133)
-                    
+
                 },
                 new Stations
                 {
@@ -210,7 +210,7 @@ namespace DS
                     Address = " רחוב:גבעת משה 3 עיר: ירושלים",
                     StationExsis=true,
                     Coordinate= new GeoCoordinate(31.797535,35.217057)
-                    
+
                 },
                 //20
                 new Stations
@@ -220,7 +220,7 @@ namespace DS
                     Address = "  רחוב:עזרת תורה 25 עיר: ירושלים",
                     StationExsis=true,
                     Coordinate= new GeoCoordinate(31.797535,35.213728)
-                    
+
                 },
                 new Stations
                 {
@@ -229,7 +229,7 @@ namespace DS
                     Address = "  רחוב:עזרת תורה 21 עיר: ירושלים ",
                     StationExsis=true,
                     Coordinate= new GeoCoordinate(31.796818,35.212936)
-                    
+
                 },
                 new Stations
                 {
@@ -238,7 +238,7 @@ namespace DS
                     Address = " רחוב:עזרת תורה 12 עיר: ירושלים",
                     StationExsis=true,
                     Coordinate= new GeoCoordinate(31.796129,35.212698)
-                    
+
                 },
                 new Stations
                 {
@@ -247,7 +247,7 @@ namespace DS
                     Address = "  רחוב:יעקובזון 1 עיר: ירושלים",
                     StationExsis=true,
                     Coordinate= new GeoCoordinate(31.794631,35.21161)
-                    
+
                 },
                 new Stations
                 {
@@ -256,7 +256,7 @@ namespace DS
                     Address = " רחוב:יעקובזון  עיר: ירושלים",
                     StationExsis=true,
                     Coordinate= new GeoCoordinate(31.79508,35.211684)
-                   
+
                 },
                 //25
                 new Stations
@@ -266,7 +266,7 @@ namespace DS
                     Address = "  רחוב:זית רענן 1 עיר: ירושלים",
                     StationExsis=true,
                     Coordinate= new GeoCoordinate(31.796255,35.211065)
-                   
+
                 },
                 new Stations
                 {
@@ -275,7 +275,7 @@ namespace DS
                     Address = " רחוב:זית רענן  עיר: ירושלים",
                     StationExsis=true,
                     Coordinate= new GeoCoordinate(31.798423,35.209575)
-                    
+
                 },
                 new Stations
                 {
@@ -284,7 +284,7 @@ namespace DS
                     Address = "  רחוב:הרב סורוצקין 48 עיר: ירושלים ",
                     StationExsis=true,
                     Coordinate= new GeoCoordinate(31.798689,35.208878)
-                    
+
                 },
                 new Stations
                 {
@@ -293,7 +293,7 @@ namespace DS
                     Address = "  רחוב:הרב סורוצקין  עיר: ירושלים",
                     StationExsis=true,
                     Coordinate= new GeoCoordinate(31.799165,35.206918)
-                    
+
                 },
                 new Stations
                 {
@@ -302,7 +302,7 @@ namespace DS
                     Address = "  רחוב:הרב סורוצקין 31 עיר: ירושלים",
                     StationExsis=true,
                     Coordinate= new GeoCoordinate(31.797829,35.205601)
-                    
+
                 },
 
                 //#endregion //30
@@ -313,7 +313,7 @@ namespace DS
                     Address = "רחוב: שדרות נווה יעקוב  עיר:ירושלים ",
                     StationExsis=true,
                     Coordinate= new GeoCoordinate(31.840063,35.240062)
-                    
+
 
                 },
                 new Stations
@@ -323,7 +323,7 @@ namespace DS
                     Address = "רחוב:שדרות נווה יעקוב ירושלים עיר:ירושלים ",
                     StationExsis=true,
                     Coordinate= new GeoCoordinate(31.838481,35.23972)
-                   
+
                 },
 
 
@@ -334,7 +334,7 @@ namespace DS
                     StationExsis=true,
             Address = "רחוב:שדרות נווה יעקב 7 עיר: ירושלים  ",
             Coordinate= new GeoCoordinate(31.837748,35.231598)
-                   
+
                 },
                 new Stations
                 {
@@ -343,7 +343,7 @@ namespace DS
                     StationExsis=true,
                     Address = "רחוב:מעגלות הרב פרדס  עיר: ירושלים רציף  ",
                     Coordinate= new GeoCoordinate(31.840279,35.246272)
-                    
+
                 },
                 new Stations
                 {
@@ -352,7 +352,7 @@ namespace DS
                     Address = "רחוב:מעגלות הרב פרדס 24 עיר: ירושלים   ",
                     StationExsis=true,
                     Coordinate= new GeoCoordinate(31.843598,35.243639)
-                    
+
                 },
                 new Stations
                 {
@@ -361,7 +361,7 @@ namespace DS
                     Address = "רחוב:ברזיל 14 עיר: ירושלים",
                     StationExsis=true,
                     Coordinate= new GeoCoordinate(31.766256,35.173)
-                   
+
                 },
                 new Stations
                 {
@@ -370,7 +370,7 @@ namespace DS
                     Address = "רחוב:בית וגן 61 עיר: ירושלים ",
                     StationExsis=true,
                     Coordinate= new GeoCoordinate(31.76736,35.184771)
-                    
+
                 },
                 new Stations
                 {
@@ -379,7 +379,7 @@ namespace DS
                     Address = "רחוב:בית וגן 21 עיר: ירושלים    ",
                     StationExsis=true,
                     Coordinate= new GeoCoordinate(31.770543,35.183999)
-                    
+
                 },
                 new Stations
                 {
@@ -388,7 +388,7 @@ namespace DS
                     Address = "רחוב:ארתור הנטקה  עיר: ירושלים    ",
                     StationExsis=true,
                     Coordinate= new GeoCoordinate(31.768465,35.178701)
-                    
+
                 },
                 new Stations
                 {
@@ -397,7 +397,7 @@ namespace DS
                     StationExsis=true,
                     Address = "רחוב:יאנוש קורצ'אק 7 עיר: ירושלים",
                     Coordinate= new GeoCoordinate(31.759534,35.173688)
-                   
+
                 },
                 new Stations
                 {
@@ -406,7 +406,7 @@ namespace DS
                     Address = "רחוב:יעקב טהון  עיר: ירושלים     ",
                     StationExsis=true,
                     Coordinate= new GeoCoordinate(31.761447,35.175929)
-                   
+
                 },
                 new Stations
                 {
@@ -415,7 +415,7 @@ namespace DS
                     Address = "רחוב:הרב הרצוג  עיר: ירושלים רציף",
                     StationExsis=true,
                     Coordinate= new GeoCoordinate(31.761447,35.199936)
-                    
+
                 },
                 new Stations
                 {
@@ -434,7 +434,7 @@ namespace DS
             Address = " רחוב:פרץ ברנשטיין 56 עיר: ירושלים ",
             StationExsis=true,
             Coordinate= new GeoCoordinate(31.759121,35.189178)
-           
+
         },
               new Stations
               {
@@ -443,7 +443,7 @@ namespace DS
             Address = "  רחוב:דרך רופין  עיר: ירושלים ",
             StationExsis=true,
             Coordinate= new GeoCoordinate(31.774484,35.204882)
-            
+
                 },
 
              new Stations
@@ -462,7 +462,7 @@ namespace DS
             Address = "    רחוב:הרב הרצוג  עיר: ירושלים   ",
             StationExsis=true,
             Coordinate= new GeoCoordinate(31.769652,35.208248)
-           
+
                  },
                 new Stations
                 {
@@ -471,7 +471,7 @@ namespace DS
                     Address = " רחוב:הרב סורוצקין 13 עיר: ירושלים",
                     StationExsis=true,
                     Coordinate= new GeoCoordinate(31.796033,35.206094)
-                    
+
                 },
                 new Stations
                 {
@@ -480,7 +480,7 @@ namespace DS
                     Address = "  רחוב:הרב סורוצקין 9 עיר: ירושלים",
                     StationExsis=true,
                     Coordinate= new GeoCoordinate(31.794958,35.205216)
-                   
+
                 },
                 new Stations
                 {
@@ -489,7 +489,7 @@ namespace DS
                     Address = "  רחוב:הרב סורוצקין 28 עיר: ירושלים",
                     StationExsis=true,
                     Coordinate= new GeoCoordinate(31.79617,35.206158)
-                    
+
                 }
 
 
@@ -738,7 +738,7 @@ namespace DS
                 FirstStationCode=73,
                 LastStationCode=89,
                 Area=DO.AREA.CENTER,
-                
+
                 LineExsis=true,
                 },
                 new Line
@@ -945,7 +945,7 @@ namespace DS
                  #endregion LineTrip
             };
 
-            
+
             ListUsers = new List<User>
             {
                #region User
@@ -980,7 +980,7 @@ namespace DS
                 },
                  #endregion User
             };
-            
+
 
             ListLineStations = new List<LineStation>
             {
@@ -2000,33 +2000,9 @@ namespace DS
 #endregion LineId1
                 
                 #region lineId2
-                new AdjacentStations
-                {
-                    Station1=85,
-                    Station2= 86,
-                   Distance=181.343172558381,
-                    TimeAverage= TimeSpan.FromSeconds((1.5*181.343172558381)/speed)
-                },
+       
 
-                new AdjacentStations
-                {
-                    Station1=86,
-                    Station2= 88,
-                   Distance=338.193775824042,
-                    TimeAverage= TimeSpan.FromSeconds((1.5*338.193775824042)/speed)
-
-
-                },
-
-                new AdjacentStations
-                {
-                    Station1=88,
-                    Station2= 89,
-                   Distance=839.108713036705,
-                    TimeAverage= TimeSpan.FromSeconds((1.5*839.108713036705)/speed)
-
-
-                },
+        
 
                 new AdjacentStations
                 {
@@ -2176,23 +2152,8 @@ namespace DS
 #endregion LineId3
 
                 #region lineId4
-                new AdjacentStations
-                {
-                    Station1=121,
-                    Station2= 123,
-                   Distance=145.638205945867,
-                   TimeAverage= TimeSpan.FromSeconds((1.5*145.638205945867)/speed)
-                },
-
-                new AdjacentStations
-                {
-                    Station1=123,
-                    Station2= 122,
-                   Distance=161.658025824811,
-                   TimeAverage= TimeSpan.FromSeconds((1.5*161.658025824811)/speed)
-
-
-                },
+  
+       
 
                 new AdjacentStations
                 {
@@ -2204,54 +2165,7 @@ namespace DS
 
                 },
 
-                new AdjacentStations
-                {
-                    Station1=1524,
-                    Station2= 1523,
-                   Distance=140.492280736979,
-                   TimeAverage= TimeSpan.FromSeconds((1.5*140.492280736979)/speed)
-
-
-                },
-
-                new AdjacentStations
-                {
-                    Station1=1523,
-                    Station2= 1522,
-                   Distance=710.578511572254,
-                   TimeAverage= TimeSpan.FromSeconds((1.5*710.578511572254)/speed)
-
-
-                },
-
-                new AdjacentStations
-                {
-                    Station1=1522,
-                    Station2= 1518,
-                   Distance=2265.21319232095,
-                   TimeAverage= TimeSpan.FromSeconds((1.5*2265.21319232095)/speed)
-
-
-                },
-
-                new AdjacentStations
-                {
-                    Station1=1518,
-                    Station2= 1514,
-                   Distance=16.6091664944544,
-                   TimeAverage= TimeSpan.FromSeconds((1.5*16.6091664944544)/speed)
-
-
-                },
-                new AdjacentStations
-                {
-                    Station1=1514,
-                    Station2= 1512,
-                   Distance=1034.11608174677,
-                   TimeAverage= TimeSpan.FromSeconds((1.5*1034.11608174677)/speed)
-
-
-                },
+     
                 new AdjacentStations
                 {
                     Station1=1512,
@@ -2419,24 +2333,8 @@ namespace DS
 
 
                 },
-                new AdjacentStations
-                {
-                    Station1=119,
-                    Station2= 1485,
-                   Distance=5719.48141855948,
-                    TimeAverage= TimeSpan.FromSeconds((1.5*5719.48141855948)/speed)
-
-
-                },
-                new AdjacentStations
-                {
-                    Station1=1485,
-                    Station2= 1486,
-                   Distance=179.006776536478,
-                   TimeAverage= TimeSpan.FromSeconds((1.5*179.006776536478)/speed)
-
-
-                },
+     
+     
 #endregion LineId6
 
                 #region lineId7
@@ -2514,94 +2412,18 @@ namespace DS
 
 
                 },
-                new AdjacentStations
-                {
-                    Station1=112,
-                    Station2= 111,
-                   Distance=50.4574978208662,
-                     TimeAverage= TimeSpan.FromSeconds((1.5*50.4574978208662)/speed)
-
-
-                },
+         
 #endregion LineId7
 
                 #region lineId8
-                new AdjacentStations
-                {
-                    Station1=102,
-                    Station2= 103,
-                   Distance=554.235295622813,
-                   TimeAverage= TimeSpan.FromSeconds((1.5*554.235295622813)/speed)
-                },
+      
 
-                new AdjacentStations
-                {
-                    Station1=103,
-                    Station2= 105,
-                   Distance=383.45864939499,
-                   TimeAverage= TimeSpan.FromSeconds((1.5*383.45864939499)/speed)
+     
+      
 
 
-                },
-
-                new AdjacentStations
-                {
-                    Station1=105,
-                    Station2= 106,
-                   Distance=20.551585590077,
-                   TimeAverage= TimeSpan.FromSeconds((1.5*20.551585590077)/speed)
 
 
-                },
-
-                new AdjacentStations
-                {
-                    Station1=106,
-                    Station2= 108,
-                   Distance=314.882994150425,
-                   TimeAverage= TimeSpan.FromSeconds((1.5*314.882994150425)/speed)
-
-
-                },
-
-                new AdjacentStations
-                {
-                    Station1=108,
-                    Station2= 109,
-                   Distance=109.450560373063,
-                   TimeAverage= TimeSpan.FromSeconds((1.5*109.450560373063)/speed)
-
-
-                },
-
-                new AdjacentStations
-                {
-                    Station1=109,
-                    Station2= 110,
-                   Distance=79.9157986778367,
-                    TimeAverage= TimeSpan.FromSeconds((1.5*79.9157986778367)/speed)
-
-
-                },
-
-                new AdjacentStations
-                {
-                    Station1=110,
-                    Station2= 111,
-                   Distance=195.920342315088,
-                   TimeAverage= TimeSpan.FromSeconds((1.5*195.920342315088)/speed)
-
-
-                },
-                new AdjacentStations
-                {
-                    Station1=111,
-                    Station2= 112,
-                   Distance=50.4574978208662,
-                    TimeAverage= TimeSpan.FromSeconds((1.5*50.4574978208662)/speed)
-
-
-                },
                 new AdjacentStations
                 {
                     Station1=112,
@@ -2614,82 +2436,17 @@ namespace DS
 #endregion LineId8
 
                 #region lineId9
-                new AdjacentStations
-                {
-                    Station1=85,
-                    Station2= 86,
-                   Distance=181.343172558381,
-                    TimeAverage= TimeSpan.FromSeconds((1.5*181.343172558381)/speed)
-                },
+        
 
-                new AdjacentStations
-                {
-                    Station1=86,
-                    Station2= 88,
-                   Distance=338.193775824042,
-                    TimeAverage= TimeSpan.FromSeconds((1.5*338.193775824042)/speed)
+       
 
 
-                },
 
-                new AdjacentStations
-                {
-                    Station1=88,
-                    Station2= 89,
-                   Distance=839.108713036705,
-                    TimeAverage= TimeSpan.FromSeconds((1.5*839.108713036705)/speed)
+        
 
+       
 
-                },
-
-                new AdjacentStations
-                {
-                    Station1=89,
-                    Station2= 90,
-                   Distance=4972.12709975181,
-                    TimeAverage= TimeSpan.FromSeconds((1.5*4972.12709975181)/speed)
-
-
-                },
-
-                new AdjacentStations
-                {
-                    Station1=90,
-                    Station2= 91,
-                   Distance=4978.59764273959,
-                    TimeAverage= TimeSpan.FromSeconds((1.5*4978.59764273959)/speed)
-
-
-                },
-
-                new AdjacentStations
-                {
-                    Station1=91,
-                    Station2= 93,
-                   Distance=178.858161402408,
-                    TimeAverage= TimeSpan.FromSeconds((1.5*178.858161402408)/speed)
-
-
-                },
-
-                new AdjacentStations
-                {
-                    Station1=93,
-                    Station2= 94,
-                   Distance=20.9542368918975,
-                    TimeAverage= TimeSpan.FromSeconds((1.5*20.9542368918975)/speed)
-
-
-                },
-                new AdjacentStations
-                {
-                    Station1=94,
-                    Station2= 95,
-                   Distance=329058.161860042,
-                   TimeAverage= TimeSpan.FromSeconds((1.5*329058.161860042)/speed)
-
-
-                },
+           
                 new AdjacentStations
                 {
                     Station1=95,
@@ -2702,81 +2459,12 @@ namespace DS
 #endregion LineId9
 
                 #region lineId10
-                new AdjacentStations
-                {
-                    Station1=111,
-                    Station2= 112,
-                   Distance=50.4574978208662,
-                    TimeAverage= TimeSpan.FromSeconds((1.5*50.4574978208662)/speed)
-                },
+     
+          
 
-                new AdjacentStations
-                {
-                    Station1=112,
-                    Station2= 113,
-                   Distance=143.276626873244,
-                     TimeAverage= TimeSpan.FromSeconds((1.5*143.276626873244)/speed)
-
-
-                },
-
-                new AdjacentStations
-                {
-                    Station1=113,
-                    Station2= 115,
-                   Distance=279.425185419296,
-                     TimeAverage= TimeSpan.FromSeconds((1.5*279.425185419296)/speed)
-
-
-                },
-
-                new AdjacentStations
-                {
-                    Station1=115,
-                    Station2= 116,
-                   Distance=72.2684666055651,
-                     TimeAverage= TimeSpan.FromSeconds((1.5*72.2684666055651)/speed)
-
-
-                },
-
-                new AdjacentStations
-                {
-                    Station1=116,
-                    Station2= 117,
-                   Distance=192.809573417871,
-                    TimeAverage= TimeSpan.FromSeconds((1.5*192.809573417871)/speed)
-
-                },
-
-                new AdjacentStations
-                {
-                    Station1=117,
-                    Station2= 119,
-                   Distance=193.971761810414,
-                    TimeAverage= TimeSpan.FromSeconds((1.5*193.971761810414)/speed)
-
-
-                },
-
-                new AdjacentStations
-                {
-                    Station1=119,
-                    Station2= 1485,
-                   Distance=5719.48141855948,
-                    TimeAverage= TimeSpan.FromSeconds((1.5*5719.48141855948)/speed)
-
-
-                },
-                new AdjacentStations
-                {
-                    Station1=1485,
-                    Station2= 1486,
-                   Distance=179.006776536478,
-                     TimeAverage= TimeSpan.FromSeconds((1.5*179.006776536478)/speed)
-
-
-                },
+       
+         
+        
                 new AdjacentStations
                 {
                     Station1=1486,

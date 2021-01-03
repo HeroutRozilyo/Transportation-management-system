@@ -59,7 +59,7 @@ namespace DALAPI
 
         IEnumerable<DO.LineStation> GetAllLineStationsBy(Predicate<DO.LineStation> StationsLinecondition);
 
-        IEnumerable<DO.LineStation> GetAllLineAt2Stations(int code1, int cod2); //get 2 stations and return all the lines this 2 stations is adjacted at them
+       // IEnumerable<DO.LineStation> GetAllLineAt2Stations(int code1, int cod2); //get 2 stations and return all the lines this 2 stations is adjacted at them
 
         void AddLineStations(DO.LineStation station);
 
