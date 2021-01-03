@@ -51,6 +51,7 @@ namespace PLGui
             RefreshLineStation();
             add = 0;
             AreaComboBox.ItemsSource = Enum.GetValues(typeof(BO.AREA));
+            
 
         }
         private void RefreshStation()
