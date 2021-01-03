@@ -59,17 +59,17 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <!--<Button x:Name="FinishAddLine" Content="Add line to the system" HorizontalAlignment="Left" Margin="20,171,0,0" VerticalAlignment="Top" Width="162" Click="FinishAddLine_Click">
+        <Button x:Name="FinishAddLine" Content="Add line to the system" HorizontalAlignment="Left" Margin="20,171,0,0" VerticalAlignment="Top" Width="162" Click="FinishAddLine_Click">
             <Button.Style>
                 <Style>
                     <Style.Triggers>
-                        <DataTrigger Binding="{Binding enableLine ,Mode=OneWay}" Value="false">
+                        <DataTrigger Binding="{Binding enable2Station}" Value="fakse">
                             <Setter Property="Button.IsEnabled" Value="false"/>
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>
             </Button.Style>
-        </Button>-->
+        </Button>
         <Button x:Name="AddStation" Content="Add Station" HorizontalAlignment="Left" Margin="700,359,0,0" VerticalAlignment="Top" Width="75" />
 
     </Grid>

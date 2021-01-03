@@ -30,7 +30,7 @@ namespace PLGui
         static int add;
         //bool enableArea = false;
         //bool enableLine = false;
-        //private bool enable2Station = false;
+        private bool enable2Station = false;
         public AddLine()
         {
             InitializeComponent();
@@ -108,7 +108,7 @@ namespace PLGui
                 RefreshStation();
                 if(add<2)
                 {
-                  //  enable2Station = false;
+                    enable2Station = false;
                 }
                 
             }
@@ -159,7 +159,7 @@ namespace PLGui
                 RefreshStation();
                 if (add >=2)
                 {
-                //    enable2Station = true;
+                    enable2Station = true;
                 }
 
 
