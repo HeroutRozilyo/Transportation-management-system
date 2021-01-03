@@ -497,38 +497,41 @@ namespace BL
 
         public bool UpdateLineTrip(BO.Line line)
         {
-            DO.Line lineDO = new DO.Line();
-
-            IEnumerable<DO.LineTrip> tripDO;
-            tripDO = from st in line.TimeLineTrip
-                     select (DO.LineTrip)st.CopyPropertiesToNew(typeof(DO.LineTrip));
-            line.CopyPropertiesTo(lineDO);
-            return true;
-
-            //for update the line trip
-            for (int i = 0; 0 < tripDO.Count(); i++)
+            try
             {
-                AddOneTripLine(tripDO.ElementAt(i));
+                IEnumerable<DO.LineTrip> tripDO;
+                tripDO = from st in line.TimeLineTrip
+                         select (DO.LineTrip)st.CopyPropertiesToNew(typeof(DO.LineTrip));
+
+
+                //for update the line trip
+                for (int i = 0; 0 < tripDO.Count(); i++)
+                {
+                    AddOneTripLine(tripDO.ElementAt(i));
+                }
+
             }
+            catch (DO.WrongIDExeption ex)
+            {
+                throw new BO.BadIdException("ID not valid", ex);
+            }
+
+            return true;
 
         }
 
         public bool UpdateLineStation(BO.Line line)
         {
-            DO.Line lineDO = new DO.Line();
-            line.CopyPropertiesTo(lineDO);
-
+  
             IEnumerable<DO.LineStation> tempDO;
             tempDO = from st in line.StationsOfBus
                      select (DO.LineStation)st.CopyPropertiesToNew(typeof(DO.LineStation));
-
 
             IEnumerable<DO.LineStation> tempDO1;
             IEnumerable<DO.LineStation> tempDO2;
 
             try
             {
-
                 //for add update on line stations
                 tempDO1 = from item in dl.GetAllStationsLine(line.IdNumber) //the oldest line station
                           orderby item.LineStationIndex
@@ -545,6 +548,7 @@ namespace BL
                             tempDO2.ElementAt(i).PrevStation = 0;
                             tempDO2.ElementAt(i).NextStation = tempDO2.ElementAt(i + 1).StationCode;
                             dl.UpdateStations(tempDO2.ElementAt(i));
+
 
                         }
                         if (i == tempDO.Count() - 1)
@@ -580,15 +584,7 @@ namespace BL
         {
             DO.Line lineDO = new DO.Line();
             line.CopyPropertiesTo(lineDO);
-
-            IEnumerable<DO.LineStation> tempDO;
-            tempDO = from st in line.StationsOfBus
-                     select (DO.LineStation)st.CopyPropertiesToNew(typeof(DO.LineStation));
-
-            IEnumerable<DO.LineTrip> tripDO;
-            tripDO = from st in line.TimeLineTrip
-                     select (DO.LineTrip)st.CopyPropertiesToNew(typeof(DO.LineTrip));      
-
+      
             try
             {
                 dl.UpdateLine(lineDO);          
