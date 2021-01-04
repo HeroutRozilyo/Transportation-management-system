@@ -7,7 +7,7 @@
         Title="UpdataStationLineIndex" Height="450" Width="800">
     <Grid>
         <Label x:Name="chooseIndex" Content="Choose the new Index of the Station in the Line" HorizontalAlignment="Left" Margin="247,85,0,0" VerticalAlignment="Top" Height="42" Width="308"/>
-        <ComboBox x:Name="IndexCOmboBox" HorizontalAlignment="Left" Margin="316,132,0,0" VerticalAlignment="Top" Width="120" ItemsSource="{Binding}"  DisplayMemberPath="LineStationIndex" SelectedValuePath="LineStationIndex"  SelectionChanged="IndexCOmboBox_SelectionChanged" />
+        <ComboBox x:Name="IndexCOmboBox" HorizontalAlignment="Left" Margin="316,132,0,0" VerticalAlignment="Top" Width="120" ItemsSource="{Binding}"   SelectionChanged="IndexCOmboBox_SelectionChanged" />
         
      
     </Grid>
