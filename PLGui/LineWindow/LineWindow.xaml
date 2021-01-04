@@ -46,7 +46,7 @@
         </ListView>
         <Button x:Name="AddLine" Content="Add Line" HorizontalAlignment="Left" Margin="99,331,0,0" VerticalAlignment="Top" Width="75" Click="AddLine_Click"/>
         <Button x:Name="UpdateLine" Content="Update Line" HorizontalAlignment="Left" Margin="198,211,0,0" VerticalAlignment="Top" Width="75" Click="UpdateLine_Click"/>
-        <ListView x:Name="StationLineList" HorizontalAlignment="Left" Height="100" Margin="455,86,0,0" VerticalAlignment="Top" Width="641">
+        <ListView x:Name="StationLineList" HorizontalAlignment="Left" Height="190" Margin="455,40,0,0" VerticalAlignment="Top" Width="641">
             <ListView.View>
                 <GridView>
                     <GridViewColumn  Header="Station Code" Width="80" DisplayMemberBinding="{Binding StationCode}"/>
@@ -95,9 +95,9 @@
         </ListView>
         <Label x:Name="label" Content="The Stations in this Line:" HorizontalAlignment="Left" Margin="455,54,0,0" VerticalAlignment="Top" Width="164"/>
         <Label x:Name="label1" Content="The schedules of the line:" HorizontalAlignment="Left" Margin="455,206,0,0" VerticalAlignment="Top" Width="159"/>
-        <Button x:Name="AddStation" Content="Add Station to the line" HorizontalAlignment="Left" Margin="963,191,0,0" VerticalAlignment="Top" Width="134" Click="AddStation_Click" Height="27"/>
+        <Button x:Name="AddStation" Content="Add Station to the line" HorizontalAlignment="Left" Margin="962,233,0,0" VerticalAlignment="Top" Width="134" Click="AddStation_Click" Height="27"/>
         <Button x:Name="AddSchedules" Content="Add Schedule" HorizontalAlignment="Left" Margin="806,340,0,0" VerticalAlignment="Top" Width="88" Click="AddSchedules_Click"/>
-  
+
 
 
 
