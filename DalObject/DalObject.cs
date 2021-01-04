@@ -409,7 +409,7 @@ namespace DL
 
         public DO.AdjacentStations GetAdjacentStations(int Scode1, int Scode2) //return specific AdjacentStations
         {
-            DO.AdjacentStations linestations = DataSource.ListAdjacentStations.Find(b => b.Station1 == Scode1 && b.Station2 == Scode2 || b.Station1 == Scode2 && b.Station2 == Scode1);
+            DO.AdjacentStations linestations = DataSource.ListAdjacentStations.Find(b => b.Station1 == Scode1 && b.Station2 == Scode2);//|| b.Station1 == Scode2 && b.Station2 == Scode1);
             if (linestations != null)
             {
                 return linestations.Clone();
@@ -425,6 +425,7 @@ namespace DL
                    where (stationCode == station.Station1|| stationCode == station.Station2)
                    select station.Clone();
         }
+
 
 
 

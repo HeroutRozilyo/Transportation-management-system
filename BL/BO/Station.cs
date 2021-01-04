@@ -15,6 +15,8 @@ namespace BO
        public GeoCoordinate Coordinate { get; set; }
         public bool StationExist { get; set; }
         public IEnumerable<LineStation> LineAtStation { get; set; }
+        public IEnumerable<AdjacentStations> StationAdjacent { get; set; }
+
 
     }
 }
