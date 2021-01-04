@@ -222,7 +222,7 @@ namespace BL
                                    select (BO.LineStation)st.CopyPropertiesToNew(typeof(BO.LineStation));
             lineBO.TimeLineTrip = from st in tripDO
                                   select (BO.LineTrip)st.CopyPropertiesToNew(typeof(BO.LineTrip));
-          
+            lineBO.TimeTravel = CalucateTravel(idLine);
 
             return lineBO;
         }
@@ -289,7 +289,7 @@ namespace BL
                                     select (BO.LineTrip)st.CopyPropertiesToNew(typeof(BO.LineTrip));
 
 
-                temp.TimeTravel = CalucateTravel(temp.IdNumber); ////////////////////////////////////////////////////////////////////////////
+              
           
             }
 
