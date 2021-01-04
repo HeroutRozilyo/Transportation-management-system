@@ -222,7 +222,6 @@ namespace BL
                                    orderby st.LineStationIndex
                                    select (BO.LineStation)st.CopyPropertiesToNew(typeof(BO.LineStation));
             lineBO.TimeLineTrip = from st in tripDO
-                                  orderby st.StartAt
                                   select (BO.LineTrip)st.CopyPropertiesToNew(typeof(BO.LineTrip));
             lineBO.TimeTravel = CalucateTravel(idLine);
 
@@ -536,56 +535,115 @@ namespace BL
             {
                 DO.LineStation toSend = new DO.LineStation();
                 DO.LineStation toSendTo = new DO.LineStation();
-                for (int i=oldPlaceIndex;i<indexChange-1;i++)
+                if (oldPlaceIndex < indexChange)
                 {
-                    toSend = lineStationDO.ElementAt(i);
-                    toSend.LineStationIndex--;
-                    if (i==oldPlaceIndex)
+                    for (int i = oldPlaceIndex; i < indexChange - 1; i++)
                     {
-                        
-                        if (i==0)
+                        toSend = lineStationDO.ElementAt(i);
+                        toSend.LineStationIndex--;
+                        if (i == oldPlaceIndex)
                         {
-                            toSend.PrevStation = 0;
-                           
-                            dl.UpdateLineStations(toSend);
+
+                            if (i == 0)
+                            {
+                                toSend.PrevStation = 0;
+
+                                dl.UpdateLineStations(toSend);
+                            }
+                            else
+                            {
+                                toSendTo = lineStationDO.ElementAt(i - 1);
+                                toSend.PrevStation = a.ElementAt(0).PrevStation;
+                                toSendTo.NextStation = lineStationDO.ElementAt(i).StationCode;
+                                dl.UpdateLineStations(toSendTo);
+                                dl.UpdateLineStations(toSend);
+                            }
+
                         }
                         else
                         {
-                            toSendTo = lineStationDO.ElementAt(i - 1);
-                            toSend.PrevStation =a.ElementAt(0).PrevStation ;
-                            toSendTo.NextStation = lineStationDO.ElementAt(i).StationCode;
-                            dl.UpdateLineStations(toSendTo);
-                            dl.UpdateLineStations(toSendTo);
+                            if (i == indexChange - 2)
+                            {
+                                toSendTo = lineStationDO.ElementAt(place);
+                                toSend.NextStation = a.ElementAt(0).StationCode;
+                                toSendTo.PrevStation = lineStationDO.ElementAt(indexChange - 2).StationCode;
+
+                            }
+                            dl.UpdateLineStations(toSend);
                         }
 
+
                     }
-                    else
+                    if (indexChange == lineStationDO.Count())
                     {
-                        if(i== indexChange - 2)
-                        {
-                            toSendTo = lineStationDO.ElementAt(place);
-                            toSend.NextStation = a.ElementAt(0).StationCode;
-                            toSendTo.PrevStation = lineStationDO.ElementAt(indexChange - 2).StationCode;
-                            
-                        }
-                        dl.UpdateLineStations(toSend);
+                        toSendTo.NextStation = 0;
                     }
-
-
+                    else toSendTo.NextStation = lineStationDO.ElementAt(indexChange - 1).StationCode;
+                    dl.UpdateLineStations(toSendTo);
                 }
-                if (indexChange == lineStationDO.Count())
+
+                else
                 {
-                    toSendTo.NextStation = 0;
+                    for (int i = indexChange-1; i < oldPlaceIndex; i++)
+                    {
+                        toSend = lineStationDO.ElementAt(i);
+                        toSend.LineStationIndex++;
+                        if (i == indexChange-1)
+                        {
+
+                            if (i == 0)
+                            {
+                                toSendTo = lineStationDO.ElementAt(place);
+                                toSendTo.PrevStation = 0;
+                                toSendTo.NextStation = toSend.StationCode;
+
+                                toSend.PrevStation = lineStationDO.ElementAt(place).StationCode;
+                                dl.UpdateLineStations(toSendTo);
+                               // dl.UpdateLineStations(toSend);
+                            }
+                            else
+                            {
+                                toSendTo = lineStationDO.ElementAt(place);
+                                toSendTo.PrevStation = lineStationDO.ElementAt(i-1).StationCode;
+                                toSendTo.NextStation = lineStationDO.ElementAt(i).StationCode;
+                                toSend.PrevStation = a.ElementAt(0).StationCode;
+                                dl.UpdateLineStations(toSendTo);
+                               // dl.UpdateLineStations(toSend);
+                                toSendTo = lineStationDO.ElementAt(i - 1);
+                                toSendTo.NextStation= a.ElementAt(0).StationCode;
+                                dl.UpdateLineStations(toSendTo);
+
+                            }
+                            
+
+                        }
+                        else
+                        {
+                            if (i == oldPlaceIndex - 1)
+                            {
+                                if (oldPlaceIndex == lineStationDO.Count() - 1)
+                                {
+                                    
+                                    toSend.NextStation = 0;
+                                    
+                                }
+                                else
+                                {
+                                    toSendTo = lineStationDO.ElementAt(i + 1);
+                                    toSendTo.PrevStation = lineStationDO.ElementAt(i).StationCode;
+                                    toSend.NextStation = lineStationDO.ElementAt(i + 1).StationCode;
+                                    dl.UpdateLineStations(toSendTo);
+                                }
+
+                            }
+
+                            dl.UpdateLineStations(toSend);
+                        }
+
+
+                    }
+                    
                 }
-                else toSendTo.NextStation = lineStationDO.ElementAt(indexChange-1 ).StationCode;
-                dl.UpdateLineStations(toSendTo);
-
-
-
-
-
-
-
                 IEnumerable<DO.LineStation> tempDO2;
 
                 tempDO2 = from item in dl.GetAllStationsLine(line.IdNumber)               //the new line station
@@ -719,12 +777,12 @@ namespace BL
                         dl.UpdatelineTrip(lineTrip);
 
                     }
+            
 
-                    line.CopyPropertiesTo(lineTrip);
-                 //  dl.DeleteLineTrip1(temp);
-                 dl.AddLineTrip(lineTrip);
+                    dl.DeleteLineTrip1(temp);
+                    dl.AddLineTrip(lineTrip);
                 }
-                if (temp.FinishAt < line.FinishAt)
+                if (temp.FinishAt > line.FinishAt)
                 {
                     lineTrip.StartAt = line.FinishAt;
                     lineTrip.TripLineExist = true;
@@ -738,7 +796,6 @@ namespace BL
                     break;
 
                 }
-         
                 if (temp.StartAt > line.StartAt && temp.FinishAt < line.FinishAt)
                     dl.DeleteLineTrip1(tripDO1.ElementAt(i));
             }
