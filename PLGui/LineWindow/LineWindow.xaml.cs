@@ -1,4 +1,5 @@
 ﻿using BlAPI;
+using PL;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -26,7 +27,7 @@ namespace PLGui
        
         private ObservableCollection<BO.Line> egged = new ObservableCollection<BO.Line>();
         private ObservableCollection<object> lineStationOfLine = new ObservableCollection<object>();
-        private List<PL.LineStationUI> lineStationOfLineUI = new List<PL.LineStationUI>();
+        private List<LineStationUI> lineStationOfLineUI = new List<LineStationUI>();
 
         private BO.AREA area;
         public LineWindow()
@@ -42,6 +43,8 @@ namespace PLGui
          //   RefreshLine();
             comboBoxArea.ItemsSource = Enum.GetValues(typeof(BO.AREA));
             StationLineList.ItemsSource = lineStationOfLine;
+            NewLooz.Visibility = Visibility.Hidden;
+            NewLooz.DataContext = new  BO.LineTrip();
 
 
         }
@@ -62,7 +65,7 @@ namespace PLGui
             if (line != null)
             {
                 lineStationOfLine = Convert(bl.DetailsOfStation(line.StationsOfBus));
-
+                
                 Looz.ItemsSource = line.TimeLineTrip;
 
             }
@@ -168,20 +171,29 @@ namespace PLGui
 
         private void DeleteStationLine_Click(object sender, RoutedEventArgs e)
         {
+            var fxElt = sender as FrameworkElement; //get the licence of the bus to refulling. 
+            String ToDel = fxElt.DataContext.ToString();
+            convertFromObbject(ToDel);
+            bl.DeleteStation(line.IdNumber, TempLineStation.StationCode);
+            RefreshStationListView();
+        }
+        BO.LineStation TempLineStation = new BO.LineStation();
+        private void convertFromObbject(string StationLineData)
+        {
+            StationLineData = StationLineData.Remove(0, 16);
+            int index = StationLineData.IndexOf(",");
+            TempLineStation.StationCode = int.Parse(StationLineData.Substring(0, index));
+            index = StationLineData.IndexOf("= ");
+            StationLineData = StationLineData.Remove(0, index + 2);
+            TempLineStation.LineStationIndex = int.Parse(StationLineData.Substring(0, StationLineData.IndexOf(",")));
+
 
         }
-
         private void UpdataLineStation_Click(object sender, RoutedEventArgs e)
         {
             var fxElt = sender as FrameworkElement; //get the licence of the bus to refulling. 
           string StationLineData = fxElt.DataContext.ToString();//to get the line
-            BO.LineStation TempLineStation=new BO.LineStation();
-            StationLineData=StationLineData.Remove(0, 16);
-            int index = StationLineData.IndexOf(",");
-            TempLineStation.StationCode = int.Parse(StationLineData.Substring(0, index));
-             index = StationLineData.IndexOf("= ");
-            StationLineData = StationLineData.Remove(0, index+2);
-            TempLineStation.LineStationIndex = int.Parse(StationLineData.Substring(0, StationLineData.IndexOf(",")));
+            convertFromObbject(StationLineData);
 
             UpdataStationLineIndex updataStationLineIndex = new UpdataStationLineIndex(line, TempLineStation,bl);
 
@@ -194,11 +206,6 @@ namespace PLGui
                 RefreshStationListView();
                 comboBoxArea.SelectedItem = newline.Area;
                
-               
-
-
-
-
             }
 
 
@@ -206,12 +213,82 @@ namespace PLGui
 
         private void AddStation_Click(object sender, RoutedEventArgs e)
         {
-            
+            AddLine addStationTotheLine = new AddLine(line, bl);
+                addStationTotheLine.Show();
         }
 
         private void AddSchedules_Click(object sender, RoutedEventArgs e)
         {
+            NewLooz.Visibility = Visibility.Visible;
 
         }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+
+            System.Windows.Data.CollectionViewSource lineTripViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("lineTripViewSource")));
+            // Load data by setting the CollectionViewSource.Source property:
+            // lineTripViewSource.Source = [generic data source]
+        }
+
+        private void tripLineExistCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+           try
+            {
+                if (finishAtTextBox.Text != "" && frequencyTextBox.Text != "" && frequencyTextBox.Text != "" && startAtTextBox.Text != "")
+                {
+                    MessageBoxResult result = MessageBox.Show("You sure you want to add this line trip?", "Add Line trip Message", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                    switch (result)
+                    {
+                        case MessageBoxResult.Yes:
+                            {
+                                BO.LineTrip addLineTrip = new BO.LineTrip();
+                                addLineTrip.FinishAt = TimeSpan.Parse(finishAtTextBox.Text);
+                                addLineTrip.Frequency = double.Parse(frequencyTextBox.Text);
+                                addLineTrip.StartAt = TimeSpan.Parse(startAtTextBox.Text);
+                                addLineTrip.TripLineExist = true;
+                                addLineTrip.KeyId = line.IdNumber;
+                                bl.AddOneTripLine(addLineTrip);
+                                NewLooz.Visibility = Visibility.Hidden;
+                                MessageBox.Show("The line was successfully deleted from the system", "Success Message", MessageBoxButton.OK, MessageBoxImage.Asterisk);
+                                NewLooz.Visibility = Visibility.Hidden;
+                                NewLooz.DataContext = new BO.LineTrip();
+                                RefreshStationListView();
+                                break;
+                            }
+                        case MessageBoxResult.No:
+                            {
+                                break;
+                            }
+                    }
+                }
+                else
+                {
+                    MessageBoxResult result = MessageBox.Show("To add a new schedule you must fill in all the fields.", "Add Line trip Message", MessageBoxButton.OKCancel, MessageBoxImage.Error);
+                    switch (result)
+                    {
+                        case MessageBoxResult.OK:
+                            {
+                                break;
+                            }
+                        case MessageBoxResult.Cancel:
+                            {
+
+                                NewLooz.DataContext = null;
+                                NewLooz.Visibility = Visibility.Hidden;
+                                break;
+                            }
+                    }
+
+                }
+            }
+            catch (BO.BadIdException a)
+            {
+                MessageBox.Show(a.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+        }
+
+        
     }
 }

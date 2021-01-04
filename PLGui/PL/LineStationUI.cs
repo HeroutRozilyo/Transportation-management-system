@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PLGui.PL
+namespace PL
 {
-    class LineStationUI
+   public class LineStationUI
     {
 
 
@@ -17,6 +17,6 @@ namespace PLGui.PL
         public string Name { get; set; }
         public string Address { get; set; }
         //public GeoCoordinate Coordinate { get; set; }
-        
+
     }
 }

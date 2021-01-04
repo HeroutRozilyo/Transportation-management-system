@@ -249,7 +249,7 @@ namespace DL
         public IEnumerable<DO.LineStation> GetAllStationsLine(int idline) //return all the stations that we have with the same line
         {
             return from station in DataSource.ListLineStations
-                   where (station.LineId == idline)
+                   where (station.LineId == idline&&station.LineStationExist)
                    select station.Clone();
         }
 

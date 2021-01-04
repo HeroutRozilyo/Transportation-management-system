@@ -11,7 +11,7 @@
         <CollectionViewSource x:Key="stationViewSource"></CollectionViewSource>
     </Window.Resources>
     <Grid DataContext="{StaticResource stationViewSource}" Margin="0,0,-29.667,28.333">
-        <Grid x:Name="newStation" HorizontalAlignment="Left" Margin="94,27,0,0" VerticalAlignment="Top">
+        <Grid x:Name="newStation" HorizontalAlignment="Left" Margin="94,27,0,0"  Visibility="{Binding}" VerticalAlignment="Top">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>

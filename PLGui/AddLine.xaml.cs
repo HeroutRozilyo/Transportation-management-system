@@ -1,4 +1,5 @@
 ﻿using BlAPI;
+using BO;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -30,12 +31,23 @@ namespace PLGui
         static int add;
         int idLineFromDS = 0;
         BO.Line newLine = new BO.Line();
+        private BO.Line line;
+
         public BO.Line NewLine
         {
 
             get
             {
                 return newLine;
+            }
+
+        }
+        public List <BO.LineStation> StationList
+        {
+
+            get
+            {
+                return GetLineStations.ToList();
             }
 
         }
@@ -55,17 +67,59 @@ namespace PLGui
             this.bl = bl;
           
             GetStations = ConvertList(bl.GetAllStations());
-            allStations = ConvertList(bl.GetAllStations()); ;
+            allStations = ConvertList(bl.GetAllStations()); 
             RefreshStation();
             RefreshLineStation();
             add = 0;
             AreaComboBox.ItemsSource = Enum.GetValues(typeof(BO.AREA));
             this.DataContext = newLine;
-            
+            GridDataLine.Visibility = Visibility.Visible;
+            FinishAddLine.Visibility = Visibility.Visible;
+            updataStationLine.Visibility = Visibility.Hidden;
+
+
 
         }
+
+        public AddLine(BO.Line line, IBL bl)
+        {
+            InitializeComponent();
+            this.line = line;
+            this.bl = bl;
+            GridDataLine.Visibility = Visibility.Hidden;
+            FinishAddLine.Visibility = Visibility.Hidden;
+            GetStations = ConvertList(bl.GetAllStations());
+            allStations = ConvertList(bl.GetAllStations());
+            updataStationLine.Visibility = Visibility.Visible;
+            orderGrid();
+            RefreshStation();
+
+        }
+
+        private void orderGrid()
+        {
+            IEnumerable<Station> stations = from item in allStations
+                                            from linestation in line.StationsOfBus
+                                            where linestation.StationCode == item.Code
+                                            select item;
+           foreach (BO.Station stat in stations)
+            {
+                foreach (BO.LineStation lins in line.StationsOfBus)
+                    {  
+                    if(lins.StationCode==stat.Code)
+                    {
+                        convertStation = lins;
+                        addTOListLineStation(stat);
+                    }
+
+                
+                }
+            }
+        }
+
         private void RefreshStation()
         {
+            InitializeComponent();
             StationOfTheLine.ItemsSource = GetLineStations;
             StationOfTheLine.Items.Refresh();
             if(LineNumber.Text!=""&& AreaComboBox.SelectedIndex!=-1&&GetLineStations.Count()>=2)
@@ -163,14 +217,10 @@ namespace PLGui
                     convertStation.PrevStation = 0;
                     convertStation.NextStation = 0;
                 }
-                
-                convertStation.LineStationExist = true;
-                GetLineStations.Add(convertStation);
-                GetStations.Remove(ToAdd);
-                RefreshLineStation();
-                RefreshStation();
-               
 
+
+                addTOListLineStation(ToAdd);
+                
 
 
             }
@@ -180,6 +230,15 @@ namespace PLGui
                 add--;
             }
 
+        }
+
+        private void addTOListLineStation(BO.Station ToAdd)
+        {
+            convertStation.LineStationExist = true;
+            GetLineStations.Add(convertStation);
+            GetStations.Remove(ToAdd);
+            RefreshLineStation();
+            RefreshStation();
         }
 
         private void AreaComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -270,11 +329,11 @@ namespace PLGui
 
         private void AddNewStation_Click(object sender, RoutedEventArgs e)
         {
-                        
-             AddStation  addStation = new AddStation(bl);
 
-            addStation.ShowDialog();
 
+            
+                        AddStation  addStation = new AddStation(bl);
+            
             bool? result = addStation.ShowDialog();
 
             if (result != null)
@@ -282,8 +341,41 @@ namespace PLGui
                 RefreshStation();
 
             }
-        
 
         }
+
+        private void updataStationLine_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                MessageBoxResult result = MessageBox.Show("You sure you want to update that line station?", "update Message", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
+                switch (result)
+                {
+                    case MessageBoxResult.Yes:
+                        {
+                            line.StationsOfBus = GetLineStations;
+                            bl.UpdateLineStation(line);
+                            this.Close();
+                            break;
+                        }
+                    case MessageBoxResult.No:
+                        {
+                            break;
+                        }
+                    case MessageBoxResult.Cancel:
+                        {
+                            this.Close();
+                            break;
+                        }
+                }
+
+                }
+            
+                catch (BO.BadIdException a)
+            {
+                MessageBox.Show(a.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+        }
     }
-}
+

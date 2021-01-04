@@ -59,9 +59,10 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button x:Name="FinishAddLine" Content="Add line to the system" HorizontalAlignment="Left" Margin="20,171,0,0" VerticalAlignment="Top" Width="162" Click="FinishAddLine_Click"/>
-        
+        <Button x:Name="FinishAddLine"  Content = "Add line to the system" HorizontalAlignment="Left" Margin="20,171,0,0" VerticalAlignment="Top" Width="162" Click="FinishAddLine_Click" Height="26"/>
+
         <Button x:Name="AddNewStation" Content="Add Station" HorizontalAlignment="Left" Margin="700,359,0,0" VerticalAlignment="Top" Width="75"  Click="AddNewStation_Click"/>
+        <Button x:Name="updataStationLine" Content="Update list of stations" HorizontalAlignment="Left" Margin="20,171,0,0" VerticalAlignment="Top" Width="162" Height="26" Click="updataStationLine_Click"/>
 
     </Grid>
 </Window>
