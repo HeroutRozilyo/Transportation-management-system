@@ -4,6 +4,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Device.Location;
+using System.Collections.Generic;
+using BO;
 
 namespace PLGui
 {
@@ -14,6 +16,8 @@ namespace PLGui
     {
         private IBL bl;
         public BO.Station toAdd = new BO.Station();
+        private IEnumerable<LineStation> stationsOfBus;
+
         public BO.Station NewStation
         {
 
@@ -32,6 +36,13 @@ namespace PLGui
         public AddStation(IBL bl)
         {
             InitializeComponent();
+            this.bl = bl;
+            newStation.Visibility = Visibility.Hidden;
+        }
+
+        public AddStation(IEnumerable<LineStation> stationsOfBus, IBL bl)
+        {
+            this.stationsOfBus = stationsOfBus;
             this.bl = bl;
         }
 

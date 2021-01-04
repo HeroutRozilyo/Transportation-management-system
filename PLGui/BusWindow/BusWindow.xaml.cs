@@ -22,7 +22,7 @@ namespace PLGui
     public partial class BusWindow : Window
     {
         private IBL bl;
-        private BO.Bus bus,newbus;
+        private BO.Bus bus, newbus;
         private ObservableCollection<BO.Bus> egged = new ObservableCollection<BO.Bus>();
         private List<BO.Bus> temp = new List<BO.Bus>();
         private bool add = false;
@@ -30,66 +30,66 @@ namespace PLGui
         {
             InitializeComponent();
         }
-        
+
         public BusWindow(IBL _bl)
         {
             InitializeComponent();
             bl = _bl;
-            
+
             RefreshDataBus();
             StatusComboBox.ItemsSource = Enum.GetValues(typeof(BO.STUTUS));
             buses.IsReadOnly = true;
             buses.ItemsSource = egged;
             buses.SelectedIndex = 0;
-          
+
 
 
 
         }
 
-        public ObservableCollection<T> Convert<T>(IEnumerable<T>listFromBO)
+        public ObservableCollection<T> Convert<T>(IEnumerable<T> listFromBO)
         {
             return new ObservableCollection<T>(listFromBO);
         }
-        
+
         private void buses_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-           
-            
+
+
             bus = (buses.SelectedItem as BO.Bus);
-           busesData.DataContext = bus;
-            RefreshDataBus();
+            busesData.DataContext = bus;
+
             ////
         }
 
         private void RefreshDataBus()
         {
-            
-           
+
+
             egged = Convert<BO.Bus>(bl.GetAllBus());//to make ObservableCollection
             buses.ItemsSource = egged;
-            
+
 
         }
-      
+
 
         private void RefulingClick(object sender, RoutedEventArgs e)
         {
             bus = (buses.SelectedItem as BO.Bus);
-            if(bus!=null)
+            if (bus != null)
             {
                 try
                 {
                     bus = bl.Refuelling(bus);
                     FuelTextBox.Text = bus.FuellAmount.ToString();
-          
+
                 }
-                catch(BO.BadBusLicenceException a)
+                catch (BO.BadBusLicenceException a)
                 {
                     MessageBox.Show(a.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
-          
+
 
         }
 
@@ -134,16 +134,16 @@ namespace PLGui
                     bl.AddBus(newbus);
                     RefreshDataBus();
                     buses.SelectedIndex = egged.Count() - 1;
-                   
+
                     MessageBox.Show("The Bus Was Successfully added to the System", "Success Message", MessageBoxButton.OK, MessageBoxImage.Asterisk);
 
                 }
-                else  
+                else
                 {
-                  MessageBoxResult result=  MessageBox.Show("In order to create a bus, you need to fill in the license number   and Starting Date field. To cancel the process click cancel", "ERROR", MessageBoxButton.OKCancel, MessageBoxImage.Error);
-                    switch(result)
+                    MessageBoxResult result = MessageBox.Show("In order to create a bus, you need to fill in the license number   and Starting Date field. To cancel the process click cancel", "ERROR", MessageBoxButton.OKCancel, MessageBoxImage.Error);
+                    switch (result)
                     {
-                        case MessageBoxResult.OK:break;
+                        case MessageBoxResult.OK: break;
                         case MessageBoxResult.Cancel:
                             {
                                 buses.SelectedIndex = 0;
@@ -161,7 +161,7 @@ namespace PLGui
 
         }
 
-        
+
 
         private void Window_PreviewKeyDown(object sender, KeyEventArgs e)
         {
@@ -169,12 +169,12 @@ namespace PLGui
             {
                 if (e.Key == Key.Return && add && LincestextBox.Text != "" && StartingDate.Text != "")  //if enter            
                 {
-                    
+
                     add = false;
                     HelpAddBus();
                     bl.AddBus(newbus);
                     RefreshDataBus();
-                    buses.SelectedIndex = egged.Count()-1;
+                    buses.SelectedIndex = egged.Count() - 1;
                     MessageBox.Show("The Bus Was Successfully added to the System", "Success Message", MessageBoxButton.OK, MessageBoxImage.Asterisk);
                 }
                 if (e.Key == Key.Return && add && (LincestextBox == null || StartingDate.Text == ""))
@@ -190,8 +190,8 @@ namespace PLGui
                             break;
                     }
                 }
-                }
-            catch(BO.BadBusLicenceException a)
+            }
+            catch (BO.BadBusLicenceException a)
             {
                 buses.SelectedIndex = 0;
                 MessageBox.Show(a.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -202,12 +202,12 @@ namespace PLGui
         {
             try
             {
-                if(bus!=null)
-                   bl.UpdateBus(bus);
+                if (bus != null)
+                    bl.UpdateBus(bus);
                 int index = buses.SelectedIndex;
                 RefreshDataBus();
                 buses.SelectedIndex = index;
-              
+
                 MessageBox.Show("Bus details saved successfully", "Success Message", MessageBoxButton.OK, MessageBoxImage.Asterisk);
             }
             catch (BO.BadBusLicenceException a)
@@ -225,7 +225,7 @@ namespace PLGui
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
-           
+
 
         }
 
@@ -245,7 +245,7 @@ namespace PLGui
 
         }
 
-        public void  HelpAddBus()
+        public void HelpAddBus()
         {
             try
             {
@@ -261,7 +261,7 @@ namespace PLGui
                 newbus.KilometrFromLastTreat = double.Parse(NewKmTextboBox.Text);
                 newbus.BusExsis = true;
             }
-            catch  (BO.BadBusLicenceException a)
+            catch (BO.BadBusLicenceException a)
             {
                 MessageBox.Show(a.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
             }

@@ -450,26 +450,26 @@ namespace BL
 
                 foreach (var item in tempDO)
                 {
-                    if (item.LineStationIndex == (index - 1))
-                        adj1 = item.StationCode;
-                    if (item.LineStationIndex == (index + 1))
-                        adj2 = item.StationCode;
+                    //if (item.LineStationIndex == (index - 1))
+                    //    adj1 = item.StationCode;
+                    //if (item.LineStationIndex == (index + 1))
+                    //    adj2 = item.StationCode;
 
-                    if (adj1 != -1 && adj2 != -1)
-                    {
-                        try
-                        {
-                            if (dl.GetAllLineAt2Stations(adj1, code).Count() == 1)
-                                dl.DeleteAdjacentStationse(adj1, code);
-                            if (dl.GetAllLineAt2Stations(code, adj2).Count() == 1)
-                                dl.DeleteAdjacentStationse(code, adj2);
+                    //if (adj1 != -1 && adj2 != -1)
+                    //{
+                    //    try
+                    //    {
+                    //        if (dl.GetAllLineAt2Stations(adj1, code).Count() == 1)
+                    //            dl.DeleteAdjacentStationse(adj1, code);
+                    //        if (dl.GetAllLineAt2Stations(code, adj2).Count() == 1)
+                    //            dl.DeleteAdjacentStationse(code, adj2);
 
-                            CreatAdjStations(adj1, adj2);
-                        }
-                        catch (DO.WrongIDExeption ex) { string a = ""; a += ex; }
+                    //        CreatAdjStations(adj1, adj2);
+                    //    }
+                    //    catch (DO.WrongIDExeption ex) { string a = ""; a += ex; }
 
 
-                    }
+                    //}
 
                     if (item.LineStationIndex > index)
                         item.LineStationIndex--;
@@ -626,7 +626,7 @@ namespace BL
         }
 
 
-        public void AddOneTripLine(DO.LineTrip line) //func that get new lineTrip and update the list at DS
+        public void AddOneTripLine(LineTrip line) //func that get new lineTrip and update the list at DS
         {
 
             DO.LineTrip lineTrip = new DO.LineTrip();
