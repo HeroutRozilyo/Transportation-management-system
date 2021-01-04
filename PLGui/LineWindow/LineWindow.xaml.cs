@@ -243,9 +243,11 @@ namespace PLGui
                         case MessageBoxResult.Yes:
                             {
                                 BO.LineTrip addLineTrip = new BO.LineTrip();
-                                addLineTrip.FinishAt = TimeSpan.Parse(finishAtTextBox.Text);
+                                if (TimeSpan.Parse(finishAtTextBox.Text).Hours > 0 && TimeSpan.Parse(finishAtTextBox.Text).Hours < 6)
+                                    addLineTrip.FinishAt = TimeSpan.Parse(finishAtTextBox.Text).Add(new TimeSpan(24, 00, 00));
                                 addLineTrip.Frequency = double.Parse(frequencyTextBox.Text);
-                                addLineTrip.StartAt = TimeSpan.Parse(startAtTextBox.Text);
+                                if (TimeSpan.Parse(finishAtTextBox.Text).Hours > 0 && TimeSpan.Parse(finishAtTextBox.Text).Hours < 6)
+                                    addLineTrip.StartAt = TimeSpan.Parse(startAtTextBox.Text).Add(new TimeSpan(24, 00, 00));
                                 addLineTrip.TripLineExist = true;
                                 addLineTrip.KeyId = line.IdNumber;
                                 bl.AddOneTripLine(addLineTrip);
