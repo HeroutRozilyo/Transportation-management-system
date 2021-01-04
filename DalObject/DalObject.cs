@@ -326,7 +326,7 @@ namespace DL
 
         
 
-        public void UpdateStations(DO.LineStation linestations)
+        public void UpdateLineStations(DO.LineStation linestations)
         {
             DO.LineStation station = DataSource.ListLineStations.Find(b => b.StationCode == linestations.StationCode && b.LineId == linestations.LineId && b.LineStationExist);           
             if (station != null)

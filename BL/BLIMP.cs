@@ -494,56 +494,119 @@ namespace BL
             line.CopyPropertiesTo(lineDO);
             return true;
         }
+
+
+
+
         public bool UpdateLineStation(BO.Line line)
         {
-            DO.Line lineDO = new DO.Line();
-            line.CopyPropertiesTo(lineDO);
+            //keep the list of station
+            IEnumerable<DO.LineStation> lineStationDO;
+            lineStationDO = from st in line.StationsOfBus
+                            select (DO.LineStation)st.CopyPropertiesToNew(typeof(DO.LineStation));
 
-            IEnumerable<DO.LineStation> tempDO;
-            tempDO = from st in line.StationsOfBus
-                     select (DO.LineStation)st.CopyPropertiesToNew(typeof(DO.LineStation));
+            int place = line.StationsOfBus.Count() - 1;
+            int indexChange = line.StationsOfBus.ElementAt(place).LineStationIndex;
 
+            DO.LineStation lineDOPlace = new DO.LineStation();
 
-            IEnumerable<DO.LineStation> tempDO1;//lineStation
-            IEnumerable<DO.LineStation> tempDO2;//lineStation
+            //in order to find the place of this station beffore the diffreces
+            IEnumerable<DO.LineStation> OldtationDO;
+            OldtationDO = from st in dl.GetAllStationsLine(line.IdNumber)
+                          orderby st.LineStationIndex
+                          select st;
+
+            var a = from v in OldtationDO
+                    let cod = line.StationsOfBus.ElementAt(place).StationCode
+                    where v.StationCode == cod
+                    select v;
+            int oldPlaceIndex = a.ElementAt(0).LineStationIndex;
 
             try
             {
-
-                //for add update on line stations
-                tempDO1 = from item in dl.GetAllStationsLine(line.IdNumber) //the oldest line station
-                          orderby item.LineStationIndex
-                          select item;
-                tempDO2 = from item in tempDO //the new line station
-                          orderby item.LineStationIndex
-                          select item;
-                for (int i = 0; i < tempDO.Count(); i++)
+                for(int i=1;i<place+1;i++)
                 {
-                    if (tempDO1.ElementAt(i).StationCode != tempDO2.ElementAt(i).StationCode)
-                    {
-                        if (i == 0)
-                        {
-                            tempDO2.ElementAt(i).PrevStation = 0;
-                            tempDO2.ElementAt(i).NextStation = tempDO2.ElementAt(i + 1).StationCode;
-                            dl.UpdateStations(tempDO2.ElementAt(i));
-                        }
-                        if (i == tempDO.Count() - 1)
-                        {
-                            tempDO2.ElementAt(i).PrevStation = tempDO2.ElementAt(i - 1).StationCode;
-                            tempDO2.ElementAt(i).NextStation = 0;
-                            dl.UpdateStations(tempDO2.ElementAt(i));
-                        }
-                        else
-                        {
-                            tempDO2.ElementAt(i).PrevStation = tempDO2.ElementAt(i - 1).StationCode;
-                            tempDO2.ElementAt(i).NextStation = tempDO2.ElementAt(i + 1).StationCode;
-                            dl.UpdateStations(tempDO2.ElementAt(i));
+                    lineDOPlace.LineId = lineStationDO.ElementAt(i).LineId;
+                    lineDOPlace.LineStationExist = lineStationDO.ElementAt(i).LineStationExist;
+                    lineDOPlace.LineStationIndex = i;
+                    lineDOPlace.NextStation = lineStationDO.ElementAt(i).NextStation;
+                    lineDOPlace.PrevStation = lineStationDO.ElementAt(i).PrevStation;
+                    lineDOPlace.StationCode = lineStationDO.ElementAt(i).StationCode;
+                    dl.UpdateStations(lineDOPlace);
+                }
+                
+                //insert the station to the new index 
+                lineDOPlace.LineId = lineStationDO.ElementAt(place).LineId;
+                lineDOPlace.LineStationExist = lineStationDO.ElementAt(place).LineStationExist;
+                lineDOPlace.LineStationIndex = indexChange;
+                lineDOPlace.NextStation = lineStationDO.ElementAt(indexChange-1).StationCode;
+                lineDOPlace.PrevStation = lineStationDO.ElementAt(indexChange-2).StationCode;
+                lineDOPlace.StationCode = lineStationDO.ElementAt(place).StationCode;
+                dl.UpdateStations(lineDOPlace);
 
-                        }
+                //update the station befor 
+                lineDOPlace.LineId = lineStationDO.ElementAt(indexChange - 2).LineId;
+                lineDOPlace.LineStationExist = lineStationDO.ElementAt(indexChange - 2).LineStationExist;
+                lineDOPlace.LineStationIndex = indexChange-1;
+                lineDOPlace.NextStation = lineStationDO.ElementAt(place).StationCode;
+                lineDOPlace.PrevStation = lineStationDO.ElementAt(indexChange - 2).PrevStation;
+                lineDOPlace.StationCode = lineStationDO.ElementAt(indexChange - 2).StationCode;
+                dl.UpdateStations(lineDOPlace);
 
-                    }
+                if(indexChange<=place)
+                {
+                    //update the station after
+                    lineDOPlace.LineId = lineStationDO.ElementAt(indexChange - 1).LineId;
+                    lineDOPlace.LineStationExist = lineStationDO.ElementAt(indexChange - 1).LineStationExist;
+                    lineDOPlace.LineStationIndex = indexChange + 1;
+                    lineDOPlace.NextStation = lineStationDO.ElementAt(indexChange).StationCode;
+                    lineDOPlace.PrevStation = lineStationDO.ElementAt(place).StationCode;
+                    lineDOPlace.StationCode = lineStationDO.ElementAt(indexChange - 1).StationCode;
+                    dl.UpdateStations(lineDOPlace);
+                }
+    
+
+                //update the station befor the old place of the station
+                if(oldPlaceIndex!=1)
+                {
+                    lineDOPlace.LineId = lineStationDO.ElementAt(oldPlaceIndex - 2).LineId;
+                    lineDOPlace.LineStationExist = lineStationDO.ElementAt(oldPlaceIndex - 2).LineStationExist;
+                    lineDOPlace.LineStationIndex = oldPlaceIndex;
+                    lineDOPlace.NextStation = lineStationDO.ElementAt(oldPlaceIndex - 1).StationCode;
+                    lineDOPlace.PrevStation = lineStationDO.ElementAt(oldPlaceIndex - 2).PrevStation;
+                    lineDOPlace.StationCode = lineStationDO.ElementAt(oldPlaceIndex - 2).StationCode;
+                    dl.UpdateStations(lineDOPlace);
+
+
+                    //update the station after the old place of the station 
+                    lineDOPlace.LineId = lineStationDO.ElementAt(oldPlaceIndex - 1).LineId;
+                    lineDOPlace.LineStationExist = lineStationDO.ElementAt(oldPlaceIndex - 1).LineStationExist;
+                    lineDOPlace.LineStationIndex = lineStationDO.ElementAt(oldPlaceIndex - 1).LineStationIndex;
+                    lineDOPlace.NextStation = lineStationDO.ElementAt(oldPlaceIndex - 1).NextStation;
+                    lineDOPlace.PrevStation = lineStationDO.ElementAt(oldPlaceIndex - 2).StationCode;
+                    lineDOPlace.StationCode = lineStationDO.ElementAt(oldPlaceIndex - 1).StationCode;
+                    dl.UpdateStations(lineDOPlace);
 
                 }
+                else
+                {
+                    //update the station after the old place of the station 
+                    lineDOPlace.LineId = lineStationDO.ElementAt(oldPlaceIndex - 1).LineId;
+                    lineDOPlace.LineStationExist = lineStationDO.ElementAt(oldPlaceIndex - 1).LineStationExist;
+                    lineDOPlace.LineStationIndex = lineStationDO.ElementAt(oldPlaceIndex - 1).LineStationIndex;
+                    lineDOPlace.NextStation = lineStationDO.ElementAt(oldPlaceIndex - 1).NextStation;
+                    lineDOPlace.PrevStation = 0;
+                    lineDOPlace.StationCode = lineStationDO.ElementAt(oldPlaceIndex - 1).StationCode;
+                    dl.UpdateStations(lineDOPlace);
+                }
+
+                IEnumerable<DO.LineStation> tempDO2;
+
+                tempDO2 = from item in dl.GetAllStationsLine(line.IdNumber)               //the new line station
+                          orderby item.LineStationIndex
+                          select item;
+
+                return true;
 
 
             }
@@ -551,11 +614,14 @@ namespace BL
             {
                 throw new BO.BadIdException("ID not valid", ex);
             }
-            return true;
+
+
+
 
         }
 
 
+   
         public bool UpdateLine(BO.Line line)
         {
             DO.Line lineDO = new DO.Line();
@@ -732,7 +798,7 @@ namespace BL
 
         public IEnumerable<object> DetailsOfStation(IEnumerable<LineStation> lineStations)
         {
-            return from itemStation in dl.GetAllStations()
+            var v= from itemStation in dl.GetAllStations()
                    from itemLineStation in lineStations
                    where itemStation.Code == itemLineStation.StationCode
                    select new
@@ -744,6 +810,9 @@ namespace BL
                        Address = itemStation.Address,
                        //Coordinate = itemStation.Coordinate,
                    };
+            return from item in v
+                   orderby item.LineStationIndex
+                   select item;
 
         }
 
