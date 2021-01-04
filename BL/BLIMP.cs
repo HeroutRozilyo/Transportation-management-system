@@ -222,6 +222,7 @@ namespace BL
                                    orderby st.LineStationIndex
                                    select (BO.LineStation)st.CopyPropertiesToNew(typeof(BO.LineStation));
             lineBO.TimeLineTrip = from st in tripDO
+                                  orderby st.StartAt
                                   select (BO.LineTrip)st.CopyPropertiesToNew(typeof(BO.LineTrip));
             lineBO.TimeTravel = CalucateTravel(idLine);
 
@@ -579,6 +580,12 @@ namespace BL
                 else toSendTo.NextStation = lineStationDO.ElementAt(indexChange-1 ).StationCode;
                 dl.UpdateLineStations(toSendTo);
 
+
+
+
+
+
+
                 IEnumerable<DO.LineStation> tempDO2;
 
                 tempDO2 = from item in dl.GetAllStationsLine(line.IdNumber)               //the new line station
@@ -696,7 +703,7 @@ namespace BL
             tripDO1 = from item in dl.GetAllTripline(line.KeyId) //the oldest line trip
                       orderby item.StartAt
                       select item;
-            for (int i = 0; 0 < tripDO1.Count(); i++)
+            for (int i = 0; i < tripDO1.Count(); i++)
             {
                 temp = tripDO1.ElementAt(i);
                 if (temp.StartAt <= line.StartAt && temp.FinishAt > line.StartAt)
@@ -712,12 +719,12 @@ namespace BL
                         dl.UpdatelineTrip(lineTrip);
 
                     }
-            
 
-                    dl.DeleteLineTrip1(temp);
-                    dl.AddLineTrip(lineTrip);
+                    line.CopyPropertiesTo(lineTrip);
+                 //  dl.DeleteLineTrip1(temp);
+                 dl.AddLineTrip(lineTrip);
                 }
-                if (temp.FinishAt > line.FinishAt)
+                if (temp.FinishAt < line.FinishAt)
                 {
                     lineTrip.StartAt = line.FinishAt;
                     lineTrip.TripLineExist = true;
@@ -731,6 +738,7 @@ namespace BL
                     break;
 
                 }
+         
                 if (temp.StartAt > line.StartAt && temp.FinishAt < line.FinishAt)
                     dl.DeleteLineTrip1(tripDO1.ElementAt(i));
             }
