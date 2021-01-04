@@ -81,7 +81,7 @@ namespace PLGui
                                                  select item;
                             bl.UpdateLineStation(line);
                             this.Close();
-                            break;
+                            break;//
                         }
                     case MessageBoxResult.No:
                         {
