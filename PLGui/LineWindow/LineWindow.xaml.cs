@@ -186,7 +186,7 @@ namespace PLGui
 
         private void AddStation_Click(object sender, RoutedEventArgs e)
         {
-
+            
         }
 
         private void AddSchedules_Click(object sender, RoutedEventArgs e)
