@@ -1,12 +1,24 @@
-﻿<Window x:Class="PLGui.StationWindow"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PLGui"
+        xmlns:BO="clr-namespace:BO;assembly=BL" x:Class="PLGui.StationWindow"
         mc:Ignorable="d"
-        Title="StationWindow" Height="450" Width="800">
-    <Grid>
-        
+        Title="StationWindow" Height="450" Width="800" Loaded="Window_Loaded">
+    <Window.Resources>
+        <CollectionViewSource x:Key="stationViewSource" d:DesignSource="{d:DesignInstance {x:Type BO:Station}, CreateList=True}"/>
+    </Window.Resources>
+    <Grid DataContext="{StaticResource stationViewSource}">
+
+        <ListView x:Name="ListOfStations" HorizontalAlignment="Left" Height="245" Margin="10,81,0,0" VerticalAlignment="Top" Width="164" PreviewMouseDoubleClick="ListOfStations_PreviewMouseDoubleClick" >
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Code" Width="50" DisplayMemberBinding="{Binding Code}"/>
+                    <GridViewColumn Header="Name" Width="110" DisplayMemberBinding="{Binding Name}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 </Window>

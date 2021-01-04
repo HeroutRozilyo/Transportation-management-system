@@ -33,6 +33,7 @@ namespace PLGui
         {
             InitializeComponent();
             this.bl = bl;
+  //          this.DataContext = NewStation;
         }
 
         //private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -69,6 +70,8 @@ namespace PLGui
                             }
                         case MessageBoxResult.No:
                         {
+                                this.DialogResult = false;
+                                this.Close();
                                 break;
                             
                         }

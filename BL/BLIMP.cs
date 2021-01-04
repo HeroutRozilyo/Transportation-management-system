@@ -753,11 +753,13 @@ namespace BL
             BO.Station stationBO = new BO.Station();
             DO.Stations stationDO;
             IEnumerable<DO.LineStation> tempDO;
+            IEnumerable<DO.AdjacentStations> adjactDO;
 
             try
             {
                 stationDO = dl.GetStations(code);
                 tempDO = dl.GetAllStationsCode(code);
+                adjactDO = dl.GetAllAdjacentStations(code);
             }
             catch (DO.WrongIDExeption ex)
             {
@@ -769,10 +771,12 @@ namespace BL
 
             stationBO.LineAtStation = from st in tempDO
                                       select (BO.LineStation)st.CopyPropertiesToNew(typeof(BO.LineStation));
-
-
+            stationBO.StationAdjacent = from ad in adjactDO
+                                        select (BO.AdjacentStations)ad.CopyPropertiesToNew(typeof(BO.AdjacentStations));
             return stationBO;
         }
+
+       
 
         public IEnumerable<BO.Station> GetAllStations()
         {
@@ -784,6 +788,8 @@ namespace BL
                 {
                     temp.LineAtStation = from st in dl.GetAllStationsCode(temp.Code)
                                          select (BO.LineStation)st.CopyPropertiesToNew(typeof(BO.LineStation));
+                    temp.StationAdjacent = from ad in dl.GetAllAdjacentStations(temp.Code)
+                                           select (BO.AdjacentStations)ad.CopyPropertiesToNew(typeof(BO.AdjacentStations));
                 }
                 return v;
 

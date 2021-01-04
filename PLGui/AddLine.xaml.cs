@@ -270,11 +270,11 @@ namespace PLGui
 
         private void AddNewStation_Click(object sender, RoutedEventArgs e)
         {
-            
-            
-              
+                        
              AddStation  addStation = new AddStation(bl);
-            
+
+            addStation.ShowDialog();
+
             bool? result = addStation.ShowDialog();
 
             if (result != null)
@@ -282,6 +282,7 @@ namespace PLGui
                 RefreshStation();
 
             }
+        
 
         }
     }
