@@ -202,7 +202,7 @@ namespace PLGui
             if (result != null)
             {
                 BO.Line newline = updataStationLineIndex.NewLine;
-                line = newline;
+                line = bl.GetLineByLine(newline.IdNumber);
                 RefreshStationListView();
                 comboBoxArea.SelectedItem = newline.Area;
                

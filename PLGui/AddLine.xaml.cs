@@ -91,6 +91,7 @@ namespace PLGui
             GetStations = ConvertList(bl.GetAllStations());
             allStations = ConvertList(bl.GetAllStations());
             updataStationLine.Visibility = Visibility.Visible;
+            add = 0;
             orderGrid();
             RefreshStation();
 
@@ -109,6 +110,7 @@ namespace PLGui
                     if(lins.StationCode==stat.Code)
                     {
                         convertStation = lins;
+                        add++;
                         addTOListLineStation(stat);
                     }
 
@@ -355,6 +357,7 @@ namespace PLGui
                         {
                             line.StationsOfBus = GetLineStations;
                             bl.UpdateLineStation(line);
+                            this.DialogResult = true;
                             this.Close();
                             break;
                         }
