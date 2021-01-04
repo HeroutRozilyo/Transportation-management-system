@@ -274,6 +274,7 @@ namespace PLGui
             
               
              AddStation  addStation = new AddStation(bl);
+            
             bool? result = addStation.ShowDialog();
 
             if (result != null)
