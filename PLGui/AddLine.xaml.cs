@@ -28,6 +28,7 @@ namespace PLGui
         private ObservableCollection<BO.LineStation> GetLineStations = new ObservableCollection<BO.LineStation>();
         BO.LineStation convertStation = new BO.LineStation();
         static int add;
+        int idLineFromDS = 0;
         BO.Line newLine = new BO.Line();
         public BO.Line NewLine
         {
@@ -204,7 +205,9 @@ namespace PLGui
                             newLine.FirstStationCode = GetLineStations.ToList().ElementAt(0).StationCode;
                             newLine.LastStationCode = GetLineStations.ToList().ElementAt(GetLineStations.Count() - 1).StationCode;
                             newLine.LineExist = true;
-                            bl.AddLine(newLine);
+                            idLineFromDS=bl.AddLine(newLine);
+                            newLine.IdNumber = idLineFromDS;
+                           // newLine.TimeTravel = bl.CalucateTravel(idLineFromDS);
                             MessageBox.Show("The line was successfully added to the system", "Success Message", MessageBoxButton.OK, MessageBoxImage.Asterisk);
                             this.DialogResult = true;
                             this.Close();
