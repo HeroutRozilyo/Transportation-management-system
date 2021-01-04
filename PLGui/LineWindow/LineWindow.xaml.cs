@@ -24,7 +24,7 @@ namespace PLGui
     {
         private IBL bl;
         private BO.Line line;
-       
+
         private ObservableCollection<BO.Line> egged = new ObservableCollection<BO.Line>();
         private ObservableCollection<object> lineStationOfLine = new ObservableCollection<object>();
         private List<LineStationUI> lineStationOfLineUI = new List<LineStationUI>();
@@ -40,11 +40,11 @@ namespace PLGui
             InitializeComponent();
 
             this.bl = bl;
-         //   RefreshLine();
+            //   RefreshLine();
             comboBoxArea.ItemsSource = Enum.GetValues(typeof(BO.AREA));
             StationLineList.ItemsSource = lineStationOfLine;
             NewLooz.Visibility = Visibility.Hidden;
-            NewLooz.DataContext = new  BO.LineTrip();
+            NewLooz.DataContext = new BO.LineTrip();
 
 
         }
@@ -52,12 +52,12 @@ namespace PLGui
         {
             return new ObservableCollection<T>(listFromBO);
         }
-       
+
         private void RefreshLine()
         {
-            egged = Convert(bl.GetLineByArea(area)) ;//to make ObservableCollection
+            egged = Convert(bl.GetLineByArea(area));//to make ObservableCollection
             ListOfLine.ItemsSource = egged;
-            
+
 
         }
         private void RefreshStationListView()
@@ -65,7 +65,7 @@ namespace PLGui
             if (line != null)
             {
                 lineStationOfLine = Convert(bl.DetailsOfStation(line.StationsOfBus));
-                
+
                 Looz.ItemsSource = line.TimeLineTrip;
 
             }
@@ -76,7 +76,7 @@ namespace PLGui
             }
             StationLineList.ItemsSource = lineStationOfLine;
             GridDataLine.DataContext = line;
-          
+
         }
 
         private void comboBoxArea_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -86,7 +86,7 @@ namespace PLGui
             RefreshLine();
             line = null;
             RefreshStationListView();
-          //  busesData.DataContext = bus;
+            //  busesData.DataContext = bus;
         }
 
         private void ListOfLine_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -101,9 +101,9 @@ namespace PLGui
         {
             try
             {
-                
-                MessageBoxResult result= MessageBox.Show("You sure you want to delete that line?", "Delete Line Message", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                switch(result)
+
+                MessageBoxResult result = MessageBox.Show("You sure you want to delete that line?", "Delete Line Message", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                switch (result)
                 {
                     case MessageBoxResult.Yes:
                         {
@@ -119,7 +119,7 @@ namespace PLGui
                             break;
                         }
                 }
-               
+
             }
             catch (BO.BadIdException a)
             {
@@ -128,14 +128,14 @@ namespace PLGui
 
         }
 
-        
+
 
         private void AddLine_Click(object sender, RoutedEventArgs e)
         {
 
             AddLine addline = new AddLine(bl);
-           bool?result= addline.ShowDialog();
-            if(result!=null)
+            bool? result = addline.ShowDialog();
+            if (result != null)
             {
                 BO.Line newline = addline.NewLine;
                 line = newline;
@@ -192,12 +192,12 @@ namespace PLGui
         private void UpdataLineStation_Click(object sender, RoutedEventArgs e)
         {
             var fxElt = sender as FrameworkElement; //get the licence of the bus to refulling. 
-          string StationLineData = fxElt.DataContext.ToString();//to get the line
+            string StationLineData = fxElt.DataContext.ToString();//to get the line
             convertFromObbject(StationLineData);
 
-            UpdataStationLineIndex updataStationLineIndex = new UpdataStationLineIndex(line, TempLineStation,bl);
+            UpdataStationLineIndex updataStationLineIndex = new UpdataStationLineIndex(line, TempLineStation, bl);
 
-            
+
             bool? result = updataStationLineIndex.ShowDialog();
             if (result != null)
             {
@@ -205,7 +205,7 @@ namespace PLGui
                 line = bl.GetLineByLine(newline.IdNumber);
                 RefreshStationListView();
                 comboBoxArea.SelectedItem = newline.Area;
-               
+
             }
 
 
@@ -214,7 +214,7 @@ namespace PLGui
         private void AddStation_Click(object sender, RoutedEventArgs e)
         {
             AddLine addStationTotheLine = new AddLine(line, bl);
-                addStationTotheLine.Show();
+            addStationTotheLine.Show();
         }
 
         private void AddSchedules_Click(object sender, RoutedEventArgs e)
@@ -233,7 +233,7 @@ namespace PLGui
 
         private void tripLineExistCheckBox_Checked(object sender, RoutedEventArgs e)
         {
-           try
+            try
             {
                 if (finishAtTextBox.Text != "" && frequencyTextBox.Text != "" && frequencyTextBox.Text != "" && startAtTextBox.Text != "")
                 {
@@ -289,6 +289,6 @@ namespace PLGui
            
         }
 
-        
+
     }
 }
