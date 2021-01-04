@@ -174,14 +174,34 @@ namespace PLGui
         private void UpdataLineStation_Click(object sender, RoutedEventArgs e)
         {
             var fxElt = sender as FrameworkElement; //get the licence of the bus to refulling. 
-          object lineData = fxElt.DataContext as object;//to get the line
+          string StationLineData = fxElt.DataContext.ToString();//to get the line
+            BO.LineStation TempLineStation=new BO.LineStation();
+            StationLineData=StationLineData.Remove(0, 16);
+            int index = StationLineData.IndexOf(",");
+            TempLineStation.StationCode = int.Parse(StationLineData.Substring(0, index));
+             index = StationLineData.IndexOf("= ");
+            StationLineData = StationLineData.Remove(0, index+2);
+            TempLineStation.LineStationIndex = int.Parse(StationLineData.Substring(0, StationLineData.IndexOf(",")));
 
-         
-            UpdataStationLineIndex updataStationLineIndex = new UpdataStationLineIndex(line, lineData);
+            UpdataStationLineIndex updataStationLineIndex = new UpdataStationLineIndex(line, TempLineStation,bl);
 
-            updataStationLineIndex.ShowDialog();
-           
             
+            bool? result = updataStationLineIndex.ShowDialog();
+            if (result != null)
+            {
+                BO.Line newline = updataStationLineIndex.NewLine;
+                line = newline;
+                RefreshStationListView();
+                comboBoxArea.SelectedItem = newline.Area;
+               
+               
+
+
+
+
+            }
+
+
         }
 
         private void AddStation_Click(object sender, RoutedEventArgs e)

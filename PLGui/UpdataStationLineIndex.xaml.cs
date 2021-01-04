@@ -24,23 +24,33 @@ namespace PLGui
     {
         private IBL bl;
         private BO.Line line;
-        private object temp;
+        private BO.LineStation temp;
+       
 
         public UpdataStationLineIndex()
         {
             InitializeComponent();
         }
 
-        PL.LineStationUI UIstation;
-        public UpdataStationLineIndex(BO.Line line, object temp)
+       
+
+        public BO.Line NewLine
+        { get { return line; }
+            
+        }
+        IEnumerable<int> numberIndex;
+        public UpdataStationLineIndex(BO.Line line, BO.LineStation ToUpdate, IBL bl)
         {
             InitializeComponent();
            
             this.line = line;
-            this.temp = temp;
-            UIstation = (PL.LineStationUI)temp;
-             IndexCOmboBox.ItemsSource = Convert<BO.LineStation>(line.StationsOfBus);
-            IndexCOmboBox.SelectedIndex = UIstation.LineStationIndex;
+            this.temp = ToUpdate;
+            this.bl = bl;
+            DataContext = line;
+            numberIndex = from item in line.StationsOfBus
+                          select item.LineStationIndex;
+            IndexCOmboBox.ItemsSource = Convert<int>(numberIndex);
+            
 
 
 
@@ -53,9 +63,42 @@ namespace PLGui
 
         private void IndexCOmboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            
+            try
+            {
+                MessageBoxResult result = MessageBox.Show("Are you sure you want to save the changes?", "Updata Index Station Message", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                switch (result)
+                {
+                    case MessageBoxResult.Yes:
+                        {
+                            BO.LineStation change = line.StationsOfBus.ToList().Find(b => b.LineStationIndex == temp.LineStationIndex && b.StationCode == b.StationCode);
+                            List<BO.LineStation> help = line.StationsOfBus.ToList();
+                            help.RemoveAt(help.FindIndex(b => b.LineStationIndex == temp.LineStationIndex && b.StationCode == b.StationCode));
+                            change.LineStationIndex = IndexCOmboBox.SelectedIndex
+                                +1;
+                            help.Add(change);
 
+                            line.StationsOfBus = from item in help
+                                                 select item;
+                            bl.UpdateLineStation(line);
+                            this.Close();
+                            break;
+                        }
+                    case MessageBoxResult.No:
+                        {
+                            break;
+                        }
+                }
+            }
+            catch (BO.BadIdException a)
+            {
+
+                MessageBox.Show(a.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
             
         }
+
+
+
+        
     }
 }

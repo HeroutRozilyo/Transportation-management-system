@@ -500,8 +500,8 @@ namespace BL
                      select (DO.LineStation)st.CopyPropertiesToNew(typeof(DO.LineStation));
 
 
-            IEnumerable<DO.LineStation> tempDO1;
-            IEnumerable<DO.LineStation> tempDO2;
+            IEnumerable<DO.LineStation> tempDO1;//lineStation
+            IEnumerable<DO.LineStation> tempDO2;//lineStation
 
             try
             {
