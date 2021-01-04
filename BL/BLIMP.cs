@@ -442,8 +442,8 @@ namespace BL
         {
             try
             {
-                int index = dl.DeleteStationsFromLine(code, idline);
 
+                int index = dl.DeleteStationsFromLine(code, idline);
                 IEnumerable<DO.LineStation> tempDO;
                 tempDO = dl.GetAllStationsLine(idline);
                 int adj1 = -1, adj2 = -1;
@@ -472,9 +472,13 @@ namespace BL
                     //}
 
                     if (item.LineStationIndex > index)
+                    {
                         item.LineStationIndex--;
+                        
+                    }
 
                 }
+               
             }
             catch (DO.WrongIDExeption ex)
             {
