@@ -817,10 +817,10 @@ namespace BL
             station.CopyPropertiesTo(stationDO);
             try
             {
-                if (station.Coordinate.Latitude >= 29.3 && station.Coordinate.Latitude <= 33.5 && station.Coordinate.Longitude >= 33.7 && station.Coordinate.Longitude <= 36.3)
+                if (station.Coordinate.Latitude >= 33.7 && station.Coordinate.Latitude <= 36.3 && station.Coordinate.Longitude >= 29.3 && station.Coordinate.Longitude <= 33.5)
                     dl.AddStations(stationDO);
                 else
-                    throw new BO.BadCoordinateException(Convert.ToInt32(station.Coordinate), "Wrong coordinate");
+                    throw new BO.BadCoordinateException((station.Coordinate).ToString(), "Wrong coordinate");
             }
             catch (DO.WrongIDExeption ex)
             {

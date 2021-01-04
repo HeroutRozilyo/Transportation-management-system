@@ -186,10 +186,7 @@ namespace PLGui
             RefreshStation();
         }
 
-        private void button_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+        
 
         private void FinishAddLine_Click(object sender, RoutedEventArgs e)
         {
@@ -264,6 +261,24 @@ namespace PLGui
             //forbid letters and signs (#,$, %, ...)
             e.Handled = true; //ignore this key. mark event as handled, will not be routed to other controls
             return;
+        }
+      
+     
+
+        private void AddNewStation_Click(object sender, RoutedEventArgs e)
+        {
+            
+            
+              
+             AddStation  addStation = new AddStation(bl);
+            bool? result = addStation.ShowDialog();
+
+            if (result != null)
+            {
+                RefreshStation();
+
+            }
+
         }
     }
 }

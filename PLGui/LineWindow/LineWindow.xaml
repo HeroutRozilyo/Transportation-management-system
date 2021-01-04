@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PLGui"
         mc:Ignorable="d"
-        Title="LineWindow" Height="450" Width="1141.649">
+        Title="LineWindow" Height="450" Width="1141.649"  >
     <Grid Margin="0,0,-7.333,2.667" HorizontalAlignment="Left" Width="1142">
         <ComboBox x:Name="comboBoxArea" HorizontalAlignment="Left" Margin="266,10,0,0" VerticalAlignment="Top" Width="208" Height="30" SelectionChanged="comboBoxArea_SelectionChanged"/>
         <Label x:Name="Area" Content="Please select the desired area" HorizontalAlignment="Left" Margin="80,10,0,0" VerticalAlignment="Top" Height="40" Width="181"/>

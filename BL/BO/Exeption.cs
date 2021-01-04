@@ -29,7 +29,8 @@ namespace BO
     public class BadCoordinateException : Exception
     {
         public int cordinate;
-        public BadCoordinateException(int geo) : base() =>cordinate=geo;
+        public string cordinateS;
+        public BadCoordinateException(string geo, string v) : base() =>cordinateS=geo;
         public BadCoordinateException(int geo, string messege) : base(messege) => cordinate = geo;
         public BadCoordinateException(int geo, string messege, Exception innerException) : base(messege, innerException) => cordinate = geo;
         public override string ToString()
