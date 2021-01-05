@@ -37,7 +37,7 @@ namespace PLGui
         {
             InitializeComponent();
             this.bl = bl;
-            newStation.Visibility = Visibility.Hidden;
+           
         }
 
         public AddStation(IEnumerable<LineStation> stationsOfBus, IBL bl)
