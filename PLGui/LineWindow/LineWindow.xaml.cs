@@ -65,10 +65,10 @@ namespace PLGui
             if (line != null)
             {
                 lineStationOfLine = Convert(bl.DetailsOfStation(line.StationsOfBus));
-                Looz.ItemsSource = bl.GetLineByLine(line.IdNumber).TimeLineTrip;
-           
-                Looz.Items.Refresh();
 
+                Looz.ItemsSource = bl.GetLineByLine(line.IdNumber).TimeLineTrip;           
+                Looz.Items.Refresh();
+                //
             }
             else
             {
