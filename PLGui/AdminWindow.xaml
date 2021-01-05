@@ -5,16 +5,28 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PLGui"
         mc:Ignorable="d"
-        Title="AdminWindow" Height="300" Width="472.667">
-    <Grid Margin="0,0,0,-29.333" Height="212" VerticalAlignment="Top">
-        <GroupBox Header="Choose Option:" HorizontalAlignment="Left" Height="186" Margin="63,10,0,-13.333" VerticalAlignment="Top" Width="333" FontSize="16" FontStyle="Italic" FontWeight="SemiBold">
-            <StackPanel Margin="21,20,29,24">
-                <RadioButton x:Name ="rbBuses" Content="Buses" Height="24" />
-                <RadioButton x:Name ="rbLine" Content="Line" Height="23" Margin="0,0,-11,0"/>
-                <RadioButton x:Name ="rbStation" Content="Station" Height="25" Margin="0,0,0.333,0"/>
-                <RadioButton x:Name ="AdminUser" Content="Add New Admin-Users" Height="35"/>
-            </StackPanel>
-        </GroupBox>
-        <Button x:Name="Start" Content="Start Working" HorizontalAlignment="Left" Height="30" Margin="175,226,0,-44" VerticalAlignment="Top" Width="124" Click="Start_Click"/>
+        Title="AdminWindow" WindowState="Maximized"  WindowStartupLocation="CenterScreen" Width="1328.333" Height="686"   >
+    <Grid  Width="Auto" Margin="0,0,10.333,0" Height="651" VerticalAlignment="Top">
+        <Button x:Name="line" Content="Line" HorizontalAlignment="Left" Margin="0,185,0,442" VerticalAlignment="Stretch" Width="135" Click="line_Click"/>
+        <Frame x:Name="frame"   Content="" HorizontalAlignment="Left" Margin="220,81,0,41" VerticalAlignment="Stretch" Width="955" Navigated="frame_Navigated"  NavigationUIVisibility="Hidden" BorderBrush="#FF261515" Background="White" BorderThickness="1" />
+        <WrapPanel HorizontalAlignment="Left" Height="475" Margin="0,80,0,0" VerticalAlignment="Top" Width="145"/>
+        <Button x:Name="station" Content="station" HorizontalAlignment="Left" Margin="0,270,0,356" VerticalAlignment="Stretch" Width="135" Click="station_Click"/>
+        <Button x:Name="AddManeger" Content="Add new Manger User" HorizontalAlignment="Left" Margin="0,358,0,267" VerticalAlignment="Stretch" Width="135" Click="AddManeger_Click" RenderTransformOrigin="0.5,0.502"/>
+        <Separator HorizontalAlignment="Stretch" MinHeight="100" Margin="-256,245,691,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" BorderBrush="#FF190E0E" Background="#FF150909">
+            <Separator.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-90.207"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Separator.RenderTransform>
+
+        </Separator>
+        <Button x:Name="buses" Content="Buses" HorizontalAlignment="Left" Margin="0,99,0,527" VerticalAlignment="Stretch" Width="135" Click="buses_Click"/>
+
+
     </Grid>
+
+
 </Window>

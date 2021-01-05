@@ -1,5 +1,4 @@
 ﻿using BlAPI;
-using PL;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -13,29 +12,30 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace PLGui
 {
     /// <summary>
-    /// Interaction logic for LineWindow.xaml
+    /// Interaction logic for LineWindowP.xaml
     /// </summary>
-    public partial class LineWindow : Window
+    public partial class LineWindowP : Page
     {
         private IBL bl;
         private BO.Line line;
 
         private ObservableCollection<BO.Line> egged = new ObservableCollection<BO.Line>();
         private ObservableCollection<object> lineStationOfLine = new ObservableCollection<object>();
-        private List<LineStationUI> lineStationOfLineUI = new List<LineStationUI>();
+      
 
         private BO.AREA area;
-        public LineWindow()
+        public LineWindowP()
         {
             InitializeComponent();
         }
 
-        public LineWindow(IBL bl)
+        public LineWindowP(IBL bl)
         {
             InitializeComponent();
 
@@ -66,9 +66,9 @@ namespace PLGui
             {
                 lineStationOfLine = Convert(bl.DetailsOfStation(line.StationsOfBus));
 
-                Looz.ItemsSource = bl.GetLineByLine(line.IdNumber).TimeLineTrip;           
+                Looz.ItemsSource = bl.GetLineByLine(line.IdNumber).TimeLineTrip;
                 Looz.Items.Refresh();
-               
+
             }
             else
             {
@@ -222,19 +222,21 @@ namespace PLGui
         private void AddStation_Click(object sender, RoutedEventArgs e)
         {
             AddLine addStationTotheLine = new AddLine(line, bl);
-            bool ? result= addStationTotheLine.ShowDialog();
+            bool? result = addStationTotheLine.ShowDialog();
             if (result != null)
             {
                 RefreshStationListView();
             }
 
-              
-     
+
+
         }
 
         private void AddSchedules_Click(object sender, RoutedEventArgs e)
         {
             NewLooz.Visibility = Visibility.Visible;
+            Looz.Visibility = Visibility.Hidden;
+            AddSchedules.Visibility = Visibility.Hidden;
 
         }
 
@@ -312,5 +314,5 @@ namespace PLGui
         }
 
     }
-   
 }
+

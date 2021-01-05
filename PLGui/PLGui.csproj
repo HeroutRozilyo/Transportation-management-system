@@ -62,6 +62,12 @@
     <Compile Include="AddStation.xaml.cs">
       <DependentUpon>AddStation.xaml</DependentUpon>
     </Compile>
+    <Compile Include="BusWindowP.xaml.cs">
+      <DependentUpon>BusWindowP.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="LineWindowP.xaml.cs">
+      <DependentUpon>LineWindowP.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PO\LineStationUI.cs" />
     <Compile Include="StationWindow.xaml.cs">
       <DependentUpon>StationWindow.xaml</DependentUpon>
@@ -81,11 +87,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="BusWindow\BusWindow.xaml">
+    <Page Include="BusWindowP.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="LineWindow\LineWindow.xaml">
+    <Page Include="LineWindowP.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -103,12 +109,6 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="BusWindow\BusWindow.xaml.cs">
-      <DependentUpon>BusWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="LineWindow\LineWindow.xaml.cs">
-      <DependentUpon>LineWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
@@ -159,6 +159,10 @@
       <Project>{4ba9dbd1-b2eb-4ad2-baaf-5eb8b60a76bc}</Project>
       <Name>BL</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="BusWindow\" />
+    <Folder Include="LineWindow\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
