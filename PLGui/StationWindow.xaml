@@ -12,11 +12,12 @@
     </Window.Resources>
     <Grid DataContext="{StaticResource stationViewSource}">
 
-        <ListView x:Name="ListOfStations" HorizontalAlignment="Left" Height="245" Margin="10,81,0,0" VerticalAlignment="Top" Width="164" PreviewMouseDoubleClick="ListOfStations_PreviewMouseDoubleClick" >
+        <ListView x:Name="ListOfStations" HorizontalAlignment="Left" Height="353" Margin="10,58,0,0" VerticalAlignment="Top" Width="211" PreviewMouseDoubleClick="ListOfStations_PreviewMouseDoubleClick" >
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Code" Width="50" DisplayMemberBinding="{Binding Code}"/>
-                    <GridViewColumn Header="Name" Width="110" DisplayMemberBinding="{Binding Name}"/>
+                    <GridViewColumn Header="Name" Width="140" DisplayMemberBinding="{Binding Name}"/>
+                    <GridViewColumn Header="Code" Width="50"  DisplayMemberBinding="{Binding Code}"/>
+                   
                 </GridView>
             </ListView.View>
         </ListView>

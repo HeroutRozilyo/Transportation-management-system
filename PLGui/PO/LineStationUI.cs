@@ -10,7 +10,6 @@ namespace PL
    public class LineStationUI
     {
 
-
         public int StationCode { get; set; }
         public int LineStationIndex { get; set; }
         public bool LineStationExist { get; set; }

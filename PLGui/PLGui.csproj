@@ -62,7 +62,7 @@
     <Compile Include="AddStation.xaml.cs">
       <DependentUpon>AddStation.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PL\LineStationUI.cs" />
+    <Compile Include="PO\LineStationUI.cs" />
     <Compile Include="StationWindow.xaml.cs">
       <DependentUpon>StationWindow.xaml</DependentUpon>
     </Compile>

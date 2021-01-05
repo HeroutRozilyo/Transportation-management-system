@@ -281,7 +281,7 @@ namespace BL
 
         public IEnumerable<BO.Line> GetLineByArea(BO.AREA area) //return all the line according to their area
         {
-            double a = 0;
+     
           IEnumerable<BO.Line> help;
           help = from item in dl.GetAllLinesArea((DO.AREA)area)
                     select lineDoBoAdapter(item.IdNumber);

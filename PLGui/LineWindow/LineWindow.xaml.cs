@@ -65,8 +65,8 @@ namespace PLGui
             if (line != null)
             {
                 lineStationOfLine = Convert(bl.DetailsOfStation(line.StationsOfBus));
-
-                Looz.ItemsSource = line.TimeLineTrip;
+                Looz.ItemsSource = bl.GetLineByLine(line.IdNumber).TimeLineTrip;
+           
                 Looz.Items.Refresh();
 
             }
@@ -77,6 +77,9 @@ namespace PLGui
             }
             StationLineList.ItemsSource = lineStationOfLine;
             GridDataLine.DataContext = line;
+
+      
+
 
         }
 
