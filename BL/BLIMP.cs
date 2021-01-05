@@ -777,9 +777,10 @@ namespace BL
                         dl.UpdatelineTrip(lineTrip);
 
                     }
-            
 
-                    dl.DeleteLineTrip1(temp);
+
+                    //                    dl.DeleteLineTrip1(temp);
+                    line.CopyPropertiesTo(lineTrip);
                     dl.AddLineTrip(lineTrip);
                 }
                 if (temp.FinishAt > line.FinishAt)
@@ -788,17 +789,20 @@ namespace BL
                     lineTrip.TripLineExist = true;
                     lineTrip.KeyId = tripDO1.ElementAt(i).KeyId;
                     lineTrip.Frequency = tripDO1.ElementAt(i).Frequency;
-                    lineTrip.FinishAt = tripDO1.ElementAt(i).FinishAt;
+                    lineTrip.FinishAt = temp.FinishAt;
 
-                    dl.DeleteLineTrip1(temp);
+ //                   dl.DeleteLineTrip1(temp);
                     dl.AddLineTrip(lineTrip);
 
                     break;
 
                 }
                 if (temp.StartAt > line.StartAt && temp.FinishAt < line.FinishAt)
-                    dl.DeleteLineTrip1(tripDO1.ElementAt(i));
+                    dl.DeleteLineTrip1(temp);
             }
+            tripDO1 = from item in dl.GetAllTripline(line.KeyId) //the oldest line trip
+                      orderby item.StartAt
+                      select item;
 
         }
 
