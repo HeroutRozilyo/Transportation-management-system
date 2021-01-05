@@ -504,15 +504,53 @@ namespace BL
             return true;
         }
 
-
-
-
         public bool UpdateLineStation(BO.Line line)
+        {
+            IEnumerable<DO.LineStation> lineStationDO;
+            lineStationDO = from st in line.StationsOfBus
+                            select (DO.LineStation)st.CopyPropertiesToNew(typeof(DO.LineStation));
+            try
+            {
+                foreach (var item in lineStationDO)
+                {
+                    try
+                    {
+                        dl.UpdateLineStations(item);
+                        
+                    }
+                    catch(DO.WrongIDExeption ex) //when we inser to here its indicate that this is a new station that ae addd to the line.
+                    {
+                        dl.AddLineStations(item);
+                        string a = "";a += ex;
+                    }
+                  
+                }
+                for(int i=0;i<lineStationDO.Count()-1;i++)
+                {
+                    try { CreatAdjStations(lineStationDO.ElementAt(i).StationCode, lineStationDO.ElementAt(i + 1).StationCode); }
+                    catch (DO.WrongIDExeption ex) { string a = ""; a += ex; }
+
+
+                   
+                }
+            }
+            catch (DO.WrongIDExeption ex)
+            {
+                throw new BO.BadIdException("ID not valid", ex);
+            }
+            return true;
+        }
+
+
+        public bool UpdateLineStationForIndexChange(BO.Line line)
         {
             //keep the list of station
             IEnumerable<DO.LineStation> lineStationDO;
+      
             lineStationDO = from st in line.StationsOfBus// רשימת הליין תורגמה לדו
                             select (DO.LineStation)st.CopyPropertiesToNew(typeof(DO.LineStation));
+
+
 
             int place = line.StationsOfBus.Count() - 1;
             int indexChange = line.StationsOfBus.ElementAt(place).LineStationIndex;

@@ -68,7 +68,7 @@ namespace PLGui
 
                 Looz.ItemsSource = bl.GetLineByLine(line.IdNumber).TimeLineTrip;           
                 Looz.Items.Refresh();
-                //
+               
             }
             else
             {
@@ -78,7 +78,11 @@ namespace PLGui
             StationLineList.ItemsSource = lineStationOfLine;
             GridDataLine.DataContext = line;
 
-      
+            Looz.Visibility = Visibility.Visible;
+            AddSchedules.Visibility = Visibility.Visible;
+            NewLooz.Visibility = Visibility.Hidden;
+
+
 
 
         }
@@ -218,7 +222,14 @@ namespace PLGui
         private void AddStation_Click(object sender, RoutedEventArgs e)
         {
             AddLine addStationTotheLine = new AddLine(line, bl);
-            addStationTotheLine.Show();
+            bool ? result= addStationTotheLine.ShowDialog();
+            if (result != null)
+            {
+                RefreshStationListView();
+            }
+
+              
+     
         }
 
         private void AddSchedules_Click(object sender, RoutedEventArgs e)
@@ -256,6 +267,8 @@ namespace PLGui
                                 NewLooz.Visibility = Visibility.Hidden;
                                 MessageBox.Show("The line was successfully deleted from the system", "Success Message", MessageBoxButton.OK, MessageBoxImage.Asterisk);
                                 NewLooz.Visibility = Visibility.Hidden;
+                                Looz.Visibility = Visibility.Visible;
+                                AddSchedules.Visibility = Visibility.Visible;
                                 NewLooz.DataContext = new BO.LineTrip();
                                 RefreshStationListView();
                                 break;
@@ -290,9 +303,14 @@ namespace PLGui
             {
                 MessageBox.Show(a.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-
+        }
+        private void cancleTripLineAdd_Checked(object sender, RoutedEventArgs e)
+        {
+            Looz.Visibility = Visibility.Visible;
+            AddSchedules.Visibility = Visibility.Visible;
+            NewLooz.Visibility = Visibility.Hidden;
         }
 
-
     }
+   
 }

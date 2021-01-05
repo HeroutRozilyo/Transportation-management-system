@@ -79,7 +79,7 @@ namespace PLGui
 
                             line.StationsOfBus = from item in help
                                                  select item;
-                            bl.UpdateLineStation(line);
+                            bl.UpdateLineStationForIndexChange(line);
                             this.Close();
                             break;//
                         }

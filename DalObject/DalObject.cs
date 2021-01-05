@@ -203,6 +203,7 @@ namespace DL
         {
             if (DataSource.ListStations.FirstOrDefault(b => b.Code == station.Code) != null) //if != null its means that this licence is allready exsis
                 throw new DO.WrongIDExeption(station.Code, "This station not exsis");/////////////////////////////////////////////////////////////////
+            station.StationExist = true;
             DataSource.ListStations.Add(station.Clone());
         }
 

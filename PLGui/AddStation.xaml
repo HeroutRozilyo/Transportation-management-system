@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:PLGui"
         xmlns:BO="clr-namespace:BO;assembly=BL" x:Class="PLGui.AddStation"
 
-        Title="AddStation" Height="284.667" Width="323.333"  PreviewKeyDown="Window_PreviewKeyDown">
+        Title="AddStation" Height="284.667" Width="323.333" >
+    <!--PreviewKeyDown="Window_PreviewKeyDown"-->
     <Window.Resources>
         <CollectionViewSource x:Key="stationViewSource"></CollectionViewSource>
     </Window.Resources>
@@ -37,5 +38,6 @@
             <Label Content="Longitude:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="5" VerticalAlignment="Center"/>
             <TextBox x:Name="longitudeTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="5" Text="{Binding Coordinate.Longitude,  Mode=OneTime, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
         </Grid>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="10,204,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
     </Grid>
 </Window>
