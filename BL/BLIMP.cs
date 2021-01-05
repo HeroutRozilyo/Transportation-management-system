@@ -530,7 +530,7 @@ namespace BL
                     try { CreatAdjStations(lineStationDO.ElementAt(i).StationCode, lineStationDO.ElementAt(i + 1).StationCode); }
                     catch (DO.WrongIDExeption ex) { string a = ""; a += ex; }
 
-
+                    //
                    
                 }
             }
