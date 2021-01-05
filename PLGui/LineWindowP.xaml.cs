@@ -1,5 +1,4 @@
 ﻿using BlAPI;
-using PL;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -13,29 +12,30 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace PLGui
 {
     /// <summary>
-    /// Interaction logic for LineWindow.xaml
+    /// Interaction logic for LineWindowP.xaml
     /// </summary>
-    public partial class LineWindow : Window
+    public partial class LineWindowP : Page
     {
         private IBL bl;
         private BO.Line line;
 
         private ObservableCollection<BO.Line> egged = new ObservableCollection<BO.Line>();
         private ObservableCollection<object> lineStationOfLine = new ObservableCollection<object>();
-        private List<LineStationUI> lineStationOfLineUI = new List<LineStationUI>();
+      
 
         private BO.AREA area;
-        public LineWindow()
+        public LineWindowP()
         {
             InitializeComponent();
         }
 
-        public LineWindow(IBL bl)
+        public LineWindowP(IBL bl)
         {
             InitializeComponent();
 
@@ -66,9 +66,9 @@ namespace PLGui
             {
                 lineStationOfLine = Convert(bl.DetailsOfStation(line.StationsOfBus));
 
-                Looz.ItemsSource = bl.GetLineByLine(line.IdNumber).TimeLineTrip;           
+                Looz.ItemsSource = bl.GetLineByLine(line.IdNumber).TimeLineTrip;
                 Looz.Items.Refresh();
-                //
+
             }
             else
             {
@@ -78,7 +78,11 @@ namespace PLGui
             StationLineList.ItemsSource = lineStationOfLine;
             GridDataLine.DataContext = line;
 
-      
+            Looz.Visibility = Visibility.Visible;
+            AddSchedules.Visibility = Visibility.Visible;
+            NewLooz.Visibility = Visibility.Hidden;
+
+
 
 
         }
@@ -218,12 +222,21 @@ namespace PLGui
         private void AddStation_Click(object sender, RoutedEventArgs e)
         {
             AddLine addStationTotheLine = new AddLine(line, bl);
-            addStationTotheLine.Show();
+            bool? result = addStationTotheLine.ShowDialog();
+            if (result != null)
+            {
+                RefreshStationListView();
+            }
+
+
+
         }
 
         private void AddSchedules_Click(object sender, RoutedEventArgs e)
         {
             NewLooz.Visibility = Visibility.Visible;
+            Looz.Visibility = Visibility.Hidden;
+            AddSchedules.Visibility = Visibility.Hidden;
 
         }
 
@@ -256,6 +269,8 @@ namespace PLGui
                                 NewLooz.Visibility = Visibility.Hidden;
                                 MessageBox.Show("The line was successfully deleted from the system", "Success Message", MessageBoxButton.OK, MessageBoxImage.Asterisk);
                                 NewLooz.Visibility = Visibility.Hidden;
+                                Looz.Visibility = Visibility.Visible;
+                                AddSchedules.Visibility = Visibility.Visible;
                                 NewLooz.DataContext = new BO.LineTrip();
                                 RefreshStationListView();
                                 break;
@@ -290,9 +305,14 @@ namespace PLGui
             {
                 MessageBox.Show(a.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-
         }
-
+        private void cancleTripLineAdd_Checked(object sender, RoutedEventArgs e)
+        {
+            Looz.Visibility = Visibility.Visible;
+            AddSchedules.Visibility = Visibility.Visible;
+            NewLooz.Visibility = Visibility.Hidden;
+        }
 
     }
 }
+
