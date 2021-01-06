@@ -123,6 +123,7 @@ namespace BL
             busDO.Licence = te;
             try
             {
+                busDO.BusExist = true;
                 dl.UpdateBus(busDO);
             }
             catch (DO.WrongLicenceException ex)

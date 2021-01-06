@@ -62,6 +62,7 @@ namespace PLGui
 
                 bus = (buses.SelectedItem as BO.Bus);
                 busesData.DataContext = bus;
+            add = false;
 
                 ////
             }
@@ -72,6 +73,10 @@ namespace PLGui
 
                 egged = Convert<BO.Bus>(bl.GetAllBus());//to make ObservableCollection
                 buses.ItemsSource = egged;
+           
+
+
+
 
 
             }
@@ -133,8 +138,13 @@ namespace PLGui
                     }
                     else if (LincestextBox.Text != "" && StartingDate.Text != "")
                     {
+                   
                         add = false;
-                        HelpAddBus();
+                    // HelpAddBus();
+                    //if (KmtextBox.Text == "") KmtextBox.Text = "0";
+                    //if (lastTreatmentTextBox.Text == "") lastTreatmentTextBox.Text = DateTime.Now.ToString();
+                    //if (NewKmTextboBox.Text == "") NewKmTextboBox.Text = "0";
+                    newbus = GridDataBus.DataContext as BO.Bus;
                         bl.AddBus(newbus);
                         RefreshDataBus();
                         buses.SelectedIndex = egged.Count() - 1;
@@ -161,6 +171,7 @@ namespace PLGui
                 {
                     buses.SelectedIndex = 0;
                     MessageBox.Show(a.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                add = true;
                 }
 
             }
@@ -206,8 +217,12 @@ namespace PLGui
             {
                 try
                 {
-                    if (bus != null)
-                        bl.UpdateBus(bus);
+                if (bus != null)
+                {
+                    bus.BusExsis = true;
+                    bl.UpdateBus(bus);
+                    
+                }
                     int index = buses.SelectedIndex;
                     RefreshDataBus();
                     buses.SelectedIndex = index;
