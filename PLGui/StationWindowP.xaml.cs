@@ -12,28 +12,29 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace PLGui
 {
     /// <summary>
-    /// Interaction logic for StationWindow.xaml
+    /// Interaction logic for StationWindowP.xaml
     /// </summary>
-    public partial class StationWindow : Window
+    public partial class StationWindowP : Page
     {
         private IBL bl;
         private ObservableCollection<BO.Station> stations = new ObservableCollection<BO.Station>();
-        public StationWindow()
+        public StationWindowP()
         {
             InitializeComponent();
         }
 
-        public StationWindow(IBL bl)
+        public StationWindowP(IBL bl)
         {
             InitializeComponent();
             this.bl = bl;
             RefreshLine();
-          //  ListOfStations.ItemsSource = stations;
+            //  ListOfStations.ItemsSource = stations;
         }
 
         public ObservableCollection<T> Convert<T>(IEnumerable<T> listFromBO)
@@ -45,38 +46,6 @@ namespace PLGui
         {
             stations = Convert(bl.GetAllStations());//to make ObservableCollection
             ListOfStations.ItemsSource = stations;
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-
-            System.Windows.Data.CollectionViewSource stationViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("stationViewSource")));
-            // Load data by setting the CollectionViewSource.Source property:
-            // stationViewSource.Source = [generic data source]
-        }
-
-        private void stationListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
         }
 
         private void ListOfStations_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)

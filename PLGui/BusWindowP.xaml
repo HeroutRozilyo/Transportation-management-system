@@ -55,7 +55,7 @@
             <Label Content="Km from the last treatment:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,12.333,0,11.667" Grid.Row="8" VerticalAlignment="Center" Grid.ColumnSpan="3" Height="26" Width="156"/>
             <TextBox x:Name="NewKmTextboBox" Grid.Column="2" Text="{Binding KilometrFromLastTreat}" HorizontalAlignment="Left" Height="24"  Margin="65.333,17.333,0,8.667" Grid.Row="8" VerticalAlignment="Center"  Width="120" Grid.ColumnSpan="3" TextChanged="NewKmTextboBox_TextChanged" />
         </Grid>
-        <Label Content="Optional actions:" HorizontalAlignment="Center" Margin="717,74,10,0" VerticalAlignment="Top" RenderTransformOrigin="-0.868,0.436" Width="98"></Label>
+        <Label Content="Optional actions:" HorizontalAlignment="Center" Margin="657,84,70,0" VerticalAlignment="Top" RenderTransformOrigin="-0.868,0.436" Width="98"></Label>
 
         <GridSplitter x:Name="gridSplitter" HorizontalAlignment="Left" MinHeight="505" Margin="524,0,0,0" VerticalAlignment="Top" Width="0" RenderTransformOrigin="0.5,0.5" BorderBrush="#FF1D1515" Background="#FF221717">
             <GridSplitter.RenderTransform>
@@ -67,7 +67,7 @@
                 </TransformGroup>
             </GridSplitter.RenderTransform>
         </GridSplitter>
-        <Separator HorizontalAlignment="Stretch" MinHeight="100" Margin="439,219,110,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" BorderBrush="#FF190E0E" Background="#FF150909" Height="91">
+        <Separator HorizontalAlignment="Stretch" MinHeight="100" Margin="439,219,110,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" BorderBrush="#FF190E0E" Background="#FF150909" Height="91" Visibility="Hidden">
             <Separator.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform ScaleY="0.989" ScaleX="1.011"/>
@@ -78,23 +78,24 @@
             </Separator.RenderTransform>
 
         </Separator>
-        <Grid HorizontalAlignment="Left" Height="415" Margin="690,110,-75,0" VerticalAlignment="Top" Width="210">
+        <Grid HorizontalAlignment="Right" Height="415" Margin="0,110,-27,0" VerticalAlignment="Top" Width="210" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="15*"/>
                 <ColumnDefinition Width="20*"/>
-                <ColumnDefinition Width="129*"/>
+                <ColumnDefinition Width="100*"/>
+                <ColumnDefinition Width="29*"/>
                 <ColumnDefinition Width="21*"/>
                 <ColumnDefinition Width="11*"/>
                 <ColumnDefinition Width="5*"/>
                 <ColumnDefinition Width="10*"/>
             </Grid.ColumnDefinitions>
-            <Button Content="SEND TO &#xA;TREATMENT" HorizontalAlignment="Right" Margin="0,5,9.667,0" VerticalAlignment="Top" Width="180" Click="Treatment_Click" Background="#FFD89193" FontFamily="Segoe Print" IsEnabled="{Binding enable}"  Height="50" FontSize="9" TextOptions.TextFormattingMode="Display" TextOptions.TextHintingMode="Fixed" Grid.ColumnSpan="5"/>
-            <Button x:Name="Update2" Content="Update Bus" HorizontalAlignment="Right" Margin="0,65,4.667,0" VerticalAlignment="Top" Click="Update_Click" Height="65" Width="185" Grid.ColumnSpan="5"/>
-            <Button x:Name="DeleteBus1" Content="Delete Bus" HorizontalAlignment="Right" Margin="0,220,5.334,0" VerticalAlignment="Top"  Click="DeleteBus_Click" Height="65" Width="185" RenderTransformOrigin="0.217,0.5" Grid.ColumnSpan="5" />
+            <Button Content="SEND TO &#xA;TREATMENT" HorizontalAlignment="Right" Margin="0,5,9.667,0" VerticalAlignment="Top" Width="180" Click="Treatment_Click" Background="#FFD89193" FontFamily="Segoe Print" IsEnabled="{Binding enable}"  Height="50" FontSize="9" TextOptions.TextFormattingMode="Display" TextOptions.TextHintingMode="Fixed" Grid.ColumnSpan="6"/>
+            <Button x:Name="Update2" Content="Update Bus" HorizontalAlignment="Right" Margin="0,65,4.667,0" VerticalAlignment="Top" Click="Update_Click" Height="65" Width="185" Grid.ColumnSpan="6"/>
+            <Button x:Name="DeleteBus1" Content="Delete Bus" HorizontalAlignment="Right" Margin="0,220,5.667,0" VerticalAlignment="Top"  Click="DeleteBus_Click" Height="65" Width="185" RenderTransformOrigin="0.217,0.5" Grid.ColumnSpan="6" />
 
 
-            <Button x:Name="AddBus" Content="Add new bus" HorizontalAlignment="Right" Margin="0,295,5.334,0" VerticalAlignment="Top"  Click="AddBus_Click"  Height="70" Width="185" Grid.ColumnSpan="5"/>
-            <Button  Content="Fuel"  Margin="0,145,5.334,0" VerticalAlignment="Top"  Click="RefulingClick" Background="#FFF0F1B2"   HorizontalAlignment="Right" FontFamily="Segoe Print" FontSize="14" FontWeight="Bold" Width="185" Height="65" RenderTransformOrigin="0.057,0.571" Grid.ColumnSpan="5" />
+            <Button x:Name="AddBus" Content="Add new bus" HorizontalAlignment="Right" Margin="0,295,5.667,0" VerticalAlignment="Top"  Click="AddBus_Click"  Height="70" Width="185" Grid.ColumnSpan="6"/>
+            <Button  Content="Fuel"  Margin="0,145,5.667,0" VerticalAlignment="Top"  Click="RefulingClick" Background="#FFF0F1B2"   HorizontalAlignment="Right" FontFamily="Segoe Print" FontSize="14" FontWeight="Bold" Width="185" Height="65" RenderTransformOrigin="0.057,0.571" Grid.ColumnSpan="6" />
 
         </Grid>
 

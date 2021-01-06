@@ -69,8 +69,8 @@
       <DependentUpon>LineWindowP.xaml</DependentUpon>
     </Compile>
     <Compile Include="PO\LineStationUI.cs" />
-    <Compile Include="StationWindow.xaml.cs">
-      <DependentUpon>StationWindow.xaml</DependentUpon>
+    <Compile Include="StationWindowP.xaml.cs">
+      <DependentUpon>StationWindowP.xaml</DependentUpon>
     </Compile>
     <Compile Include="UpdataStationLineIndex.xaml.cs">
       <DependentUpon>UpdataStationLineIndex.xaml</DependentUpon>
@@ -117,7 +117,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="StationWindow.xaml">
+    <Page Include="StationWindowP.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -41,31 +41,6 @@ namespace PLGui
             Environment.Exit(Environment.ExitCode);
         }
 
-        
-
-        //private void Start_Click(object sender, RoutedEventArgs e)
-        //{
-        //    if(rbBuses.IsChecked==true)
-        //    {
-        //        BusWindow busWindow = new BusWindow(bl);
-        //        busWindow.Show();
-        //    }
-        //    else if(rbLine.IsChecked==true)
-        //    {
-        //        LineWindow lineWindow = new LineWindow(bl);
-        //        lineWindow.Show();
-        //    }
-        //    else if(rbStation.IsChecked==true)
-        //    {
-        //        StationWindow stationWindow = new StationWindow(bl);
-        //        stationWindow.Show();
-        //    }
-        //}
-
-       
-
-       
-
         private void frame_Navigated(object sender, System.Windows.Navigation.NavigationEventArgs e)
         {
             
@@ -85,7 +60,7 @@ namespace PLGui
 
         private void station_Click(object sender, RoutedEventArgs e)
         {
-
+            frame.Content = new StationWindowP(bl);
         }
 
         private void AddManeger_Click(object sender, RoutedEventArgs e)

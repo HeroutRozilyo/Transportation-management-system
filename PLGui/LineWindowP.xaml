@@ -10,9 +10,8 @@
 
 
     <Grid Margin="0,0,30,3" >
-        <ComboBox x:Name="comboBoxArea" HorizontalAlignment="Left" Margin="266,10,0,0" VerticalAlignment="Top" Width="208" Height="30" SelectionChanged="comboBoxArea_SelectionChanged"/>
-        <Label x:Name="Area" Content="Please select the desired area" HorizontalAlignment="Left" Margin="80,10,0,0" VerticalAlignment="Top" Height="40" Width="181"/>
-        <Grid x:Name="GridDataLine" Margin="315,85,465,0" VerticalAlignment="Top" Height="125">
+        <Label x:Name="Area" Content="Please select the desired area" HorizontalAlignment="Left" Margin="79,15,0,0" VerticalAlignment="Top" Height="40" Width="181"/>
+        <Grid x:Name="GridDataLine" Margin="325,110,455,0" VerticalAlignment="Top" Height="125">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="118.667"/>
@@ -31,25 +30,7 @@
             <TextBox x:Name="TimeTravlTextBox" Grid.Column="1" Text="{Binding TimeTravel}" HorizontalAlignment="Left" Height="26"  Margin="3.333,16.333,0,0.333" Grid.Row="2" VerticalAlignment="Center" Width="78"/>
             <TextBox x:Name="LineNumber" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="5.333,6,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="76" Text="{Binding NumberLine}"/>
         </Grid>
-        <ListView x:Name="ListOfLine" HorizontalAlignment="Left" Height="245" Margin="10,81,0,0" VerticalAlignment="Top" Width="164" PreviewMouseDoubleClick="ListOfLine_PreviewMouseDoubleClick" >
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Header="Number Line" Width="80" DisplayMemberBinding="{Binding NumberLine}"/>
-                    <GridViewColumn  Width="80" >
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button x:Name="DeleteLine" Content="Delete" Click="DeleteLine_Click"/>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                </GridView>
-
-            </ListView.View>
-
-        </ListView>
-        <Button x:Name="AddLine" Content="Add Line" HorizontalAlignment="Left" Margin="810,365,0,0" VerticalAlignment="Top" Width="125" Click="AddLine_Click" RenderTransformOrigin="2.418,0.935" Height="65"/>
-        <Button x:Name="UpdateLine" Content="Update Line" HorizontalAlignment="Left" Margin="810,283,0,0" VerticalAlignment="Top" Width="125" Click="UpdateLine_Click" Height="61"/>
-        <ListView x:Name="StationLineList" HorizontalAlignment="Left" Height="135" Margin="59,385,0,0" VerticalAlignment="Top" Width="656">
+        <ListView x:Name="StationLineList" HorizontalAlignment="Left" Height="145" Margin="104,380,0,0" VerticalAlignment="Top" Width="656">
             <ListView.View>
                 <GridView>
                     <GridViewColumn  Header="Station Code" Width="80" DisplayMemberBinding="{Binding StationCode}"/>
@@ -73,7 +54,7 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <ListView x:Name="Looz" HorizontalAlignment="Left" Height="100" Margin="290,255,0,0" VerticalAlignment="Top" Width="429" >
+        <ListView x:Name="Looz" HorizontalAlignment="Left" Height="80" Margin="280,250,0,0" VerticalAlignment="Top" Width="429" >
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Start time"  Width="100" DisplayMemberBinding="{Binding StartAt}" />
@@ -96,11 +77,8 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Label x:Name="label" Content="The Stations in this Line:" HorizontalAlignment="Left" Margin="81,354,0,0" VerticalAlignment="Top" Width="164"/>
-        <Label x:Name="label1" Content="The schedules of the line:" HorizontalAlignment="Left" Margin="456,64,0,0" VerticalAlignment="Top" Width="159" RenderTransformOrigin="0.434,-0.397"/>
-        <Button x:Name="AddStation" Content="Add Station to the line" HorizontalAlignment="Left" Margin="800,193,0,0" VerticalAlignment="Top" Width="140" Click="AddStation_Click" Height="72"/>
-        <Button x:Name="AddSchedules" Content="Add Schedule" HorizontalAlignment="Left" Margin="815,120,0,0" VerticalAlignment="Top" Width="110" Click="AddSchedules_Click" RenderTransformOrigin="0.167,0.742" Height="55"/>
-        <Grid x:Name="NewLooz" HorizontalAlignment="Left" Margin="405,250,0,0" VerticalAlignment="Top" >
+        <Label x:Name="label" Content="The Stations in this Line:" HorizontalAlignment="Left" Margin="100,359,0,0" VerticalAlignment="Top" Width="164"/>
+        <Grid x:Name="NewLooz" HorizontalAlignment="Left" Margin="338,252,0,0" VerticalAlignment="Top" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0"/>
                 <ColumnDefinition Width="0"/>
@@ -124,7 +102,7 @@
             <Label Content="cancle" Grid.Column="3" HorizontalAlignment="Right" Margin="0,3,56.667,3" Grid.Row="3" VerticalAlignment="Center"/>
             <CheckBox x:Name="cancleTripLineAdd" Content="" Grid.Column="3" HorizontalAlignment="Left"  Checked="cancleTripLineAdd_Checked"  Margin="65,8,0,8" Grid.Row="3" VerticalAlignment="Center" RenderTransformOrigin="3.065,0.688"/>
         </Grid>
-        <Separator HorizontalAlignment="Stretch" MinHeight="100" Margin="532,266,13,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" BorderBrush="#FF190E0E" Background="#FF150909">
+        <Separator HorizontalAlignment="Stretch" MinHeight="100" Margin="552,266,-7,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" BorderBrush="#FF190E0E" Background="#FF150909" Visibility="Hidden">
             <Separator.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -135,7 +113,37 @@
             </Separator.RenderTransform>
 
         </Separator>
-        <Label x:Name="label2" Content="Optional actions:" HorizontalAlignment="Left" Margin="785,70,0,0" VerticalAlignment="Top" Width="118"/>
+        <Label x:Name="label2" Content="Optional actions:" HorizontalAlignment="Left" Margin="765,75,0,0" VerticalAlignment="Top" Width="118"/>
+        <Grid HorizontalAlignment="Left" Height="375" Margin="756,105,0,0" VerticalAlignment="Top" Width="180">
+            <Button x:Name="AddSchedules" Content="Add Schedule" HorizontalAlignment="Left" Margin="49,10,0,0" VerticalAlignment="Top" Width="126" Click="AddSchedules_Click" RenderTransformOrigin="0.167,0.742" Height="75"/>
+            <Button x:Name="AddStation" Content="Add Station to the line" HorizontalAlignment="Left" Margin="49,95,0,0" VerticalAlignment="Top" Width="126" Click="AddStation_Click" Height="75"/>
+            <Button x:Name="UpdateLine" Content="Update Line" HorizontalAlignment="Left" Margin="49,180,0,0" VerticalAlignment="Top" Width="126" Click="UpdateLine_Click" Height="75"/>
+            <Button x:Name="AddLine" Content="Add Line" HorizontalAlignment="Left" Margin="49,270,0,0" VerticalAlignment="Top" Width="131" Click="AddLine_Click" RenderTransformOrigin="2.418,0.935" Height="75"/>
+        </Grid>
+        <Grid HorizontalAlignment="Left" Height="35" Margin="320,70,0,0" VerticalAlignment="Top" Width="295">
+            <Label x:Name="label1" Content="The schedules of the line:" Margin="15,4,140,0" VerticalAlignment="Top" RenderTransformOrigin="0.434,-0.397"/>
+        </Grid>
+        <Grid HorizontalAlignment="Left" Height="295" Margin="20,55,0,0" VerticalAlignment="Top" Width="200">
+            <ListView x:Name="ListOfLine" HorizontalAlignment="Left" Height="245" Margin="11,30,0,0" VerticalAlignment="Top" Width="164" PreviewMouseDoubleClick="ListOfLine_PreviewMouseDoubleClick" >
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Number Line" Width="80" DisplayMemberBinding="{Binding NumberLine}"/>
+                        <GridViewColumn  Width="80" >
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button x:Name="DeleteLine" Content="Delete" Click="DeleteLine_Click"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+
+                </ListView.View>
+
+            </ListView>
+        </Grid>
+        <Grid HorizontalAlignment="Left" Height="40" Margin="60,10,0,0" VerticalAlignment="Top" Width="480">
+            <ComboBox x:Name="comboBoxArea" HorizontalAlignment="Left" Margin="210,5,0,0" VerticalAlignment="Top" Width="208" Height="30" SelectionChanged="comboBoxArea_SelectionChanged"/>
+        </Grid>
 
 
 
