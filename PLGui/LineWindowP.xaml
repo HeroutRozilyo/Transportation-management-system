@@ -78,7 +78,7 @@
             </ListView.View>
         </ListView>
         <Label x:Name="label" Content="The Stations in this Line:" HorizontalAlignment="Left" Margin="100,359,0,0" VerticalAlignment="Top" Width="164"/>
-        <Grid x:Name="NewLooz" HorizontalAlignment="Left" Margin="338,252,0,0" VerticalAlignment="Top" >
+        <Grid x:Name="NewLooz" HorizontalAlignment="Left" Margin="553,235,0,0" VerticalAlignment="Top" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0"/>
                 <ColumnDefinition Width="0"/>

@@ -449,10 +449,10 @@ namespace BL
         }
         public void AddOneTripLine(LineTrip line) //func that get new lineTrip and update the list at DS
         {
-
+            try { 
             DO.LineTrip lineTrip = new DO.LineTrip();
             DO.LineTrip temp = new DO.LineTrip();
-
+            bool toAdd = false;
             IEnumerable<DO.LineTrip> tripDO1;
             tripDO1 = from item in dl.GetAllTripline(line.KeyId) //the oldest line trip
                       orderby item.StartAt
@@ -460,47 +460,71 @@ namespace BL
             for (int i = 0; i < tripDO1.Count(); i++)
             {
                 temp = tripDO1.ElementAt(i);
-                if (temp.StartAt <= line.StartAt && temp.FinishAt > line.StartAt)
-                {
-                    if (temp.StartAt != line.StartAt)
+                    if (line.StartAt <= temp.StartAt && line.FinishAt <= temp.StartAt || line.StartAt >= temp.FinishAt && line.FinishAt >= temp.FinishAt)
                     {
-                        lineTrip.StartAt = tripDO1.ElementAt(i).StartAt;
-                        lineTrip.TripLineExist = true;
-                        lineTrip.KeyId = tripDO1.ElementAt(i).KeyId;
-                        lineTrip.Frequency = tripDO1.ElementAt(i).Frequency;
-                        lineTrip.FinishAt = line.StartAt;
-
-                        dl.UpdatelineTrip(lineTrip);
-
+                        toAdd = true;
                     }
+                    else
+                    {
+                        toAdd = false;
+                        break;
+                    }
+                
+                //if (temp.StartAt <= line.StartAt && temp.FinishAt > line.StartAt)
+                //{
+                //    if (temp.StartAt != line.StartAt)
+                //    {
+                //        lineTrip.StartAt = tripDO1.ElementAt(i).StartAt;
+                //        lineTrip.TripLineExist = true;
+                //        lineTrip.KeyId = tripDO1.ElementAt(i).KeyId;
+                //        lineTrip.Frequency = tripDO1.ElementAt(i).Frequency;
+                //        lineTrip.FinishAt = line.StartAt;
+
+                //        dl.UpdatelineTrip(lineTrip);
+
+                //    }
 
 
-                    //                    dl.DeleteLineTrip1(temp);
-                    line.CopyPropertiesTo(lineTrip);
-                    dl.AddLineTrip(lineTrip);
-                }
-                if (temp.FinishAt > line.FinishAt)
-                {
-                    lineTrip.StartAt = line.FinishAt;
-                    lineTrip.TripLineExist = true;
-                    lineTrip.KeyId = tripDO1.ElementAt(i).KeyId;
-                    lineTrip.Frequency = tripDO1.ElementAt(i).Frequency;
-                    lineTrip.FinishAt = temp.FinishAt;
+                //    //                    dl.DeleteLineTrip1(temp);
+                //    line.CopyPropertiesTo(lineTrip);
+                //    dl.AddLineTrip(lineTrip);
+                //}
+                //if (temp.FinishAt > line.FinishAt)
+                //{
+                //    lineTrip.StartAt = line.FinishAt;
+                //    lineTrip.TripLineExist = true;
+                //    lineTrip.KeyId = tripDO1.ElementAt(i).KeyId;
+                //    lineTrip.Frequency = tripDO1.ElementAt(i).Frequency;
+                //    lineTrip.FinishAt = temp.FinishAt;
 
-                    //                   dl.DeleteLineTrip1(temp);
-                    dl.AddLineTrip(lineTrip);
+                //    //                   dl.DeleteLineTrip1(temp);
+                //    dl.AddLineTrip(lineTrip);
 
-                    break;
+                //    break;
 
-                }
-                if (temp.StartAt > line.StartAt && temp.FinishAt < line.FinishAt)
-                    dl.DeleteLineTrip1(temp);
+                //}
+                //if (temp.StartAt > line.StartAt && temp.FinishAt < line.FinishAt)
+                //    dl.DeleteLineTrip1(temp);
             }
             tripDO1 = from item in dl.GetAllTripline(line.KeyId) //the oldest line trip
                       orderby item.StartAt
                       select item;
-
+            if (toAdd == true)
+            {
+                    line.CopyPropertiesTo(lineTrip);
+                dl.AddLineTrip(lineTrip);
+            }
+           else
+                {
+                    throw new BO.BadIdException("זמני הלוח תפוסים,אנא הכנס זמנים חדשים")
+                }
+           }
+             catch (DO.WrongIDExeption ex)
+            {
+                throw new BO.BadIdException("ID not valid", ex);
+            }
         }
+        
 
         #endregion
 
