@@ -416,7 +416,7 @@ namespace DL
                 return linestations.Clone();
             }
             else
-                throw new DO.WrongIDExeption(Scode1, $"Code not valid:{Scode1}");/////////////////////////////////////////////////////////
+                throw new DO.WrongIDExeption(Scode1, "Code not valid");/////////////////////////////////////////////////////////
 
         }
 
@@ -440,7 +440,7 @@ namespace DL
 
         public void AddLineStations(DO.AdjacentStations adjacentStations)
         {
-            DO.AdjacentStations temp = DataSource.ListAdjacentStations.Find(b => b.Station1 == adjacentStations.Station1 && b.Station2 == adjacentStations.Station2|| b.Station1 == adjacentStations.Station2 && b.Station2 == adjacentStations.Station1);
+            DO.AdjacentStations temp = DataSource.ListAdjacentStations.Find(b => b.Station1 == adjacentStations.Station1 && b.Station2 == adjacentStations.Station2);
             if (temp != null)
                 throw new DO.WrongIDExeption(adjacentStations.Station1, "This adjacent station already exsis ");/////////////////////////////////////////////////////////////////
             DataSource.ListAdjacentStations.Add(adjacentStations.Clone());

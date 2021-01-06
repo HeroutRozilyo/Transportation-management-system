@@ -225,14 +225,19 @@ namespace BL
                                    select (BO.LineStation)st.CopyPropertiesToNew(typeof(BO.LineStation));
             lineBO.TimeLineTrip = from st in tripDO
                                   select (BO.LineTrip)st.CopyPropertiesToNew(typeof(BO.LineTrip));
-
-            for (int i = 0; i < (lineBO.StationsOfBus.Count() - 1); i++)
+            try
             {
-                adj = dl.GetAdjacentStations(lineBO.StationsOfBus.ElementAt(i).StationCode, lineBO.StationsOfBus.ElementAt((i + 1)).StationCode);
-                lineBO.StationsOfBus.ElementAt(i).DistanceFromNext = adj.Distance;
-                lineBO.StationsOfBus.ElementAt(i).TimeAverageFromNext = adj.TimeAverage;
-                sum += adj.TimeAverage.TotalMinutes;
+                for (int i = 0; i < (lineBO.StationsOfBus.Count() - 1); i++)
+                {
+                    adj = dl.GetAdjacentStations(lineBO.StationsOfBus.ElementAt(i).StationCode, lineBO.StationsOfBus.ElementAt((i + 1)).StationCode);
+                    lineBO.StationsOfBus.ElementAt(i).DistanceFromNext = adj.Distance;
+                    lineBO.StationsOfBus.ElementAt(i).TimeAverageFromNext = adj.TimeAverage;
+                    sum += adj.TimeAverage.TotalMinutes;
+                }
             }
+            catch (DO.WrongIDExeption ex) { string a = ""; a += ex; }
+
+
 
             lineBO.TimeTravel = sum;
             return lineBO;
@@ -298,7 +303,6 @@ namespace BL
             line.CopyPropertiesTo(lineDO);
 
             IEnumerable<DO.LineStation> tempDO;
-            IEnumerable<DO.LineTrip> tripDO;
 
             tempDO = from st in line.StationsOfBus
                      select (DO.LineStation)st.CopyPropertiesToNew(typeof(DO.LineStation));  //tempDO=line station
@@ -331,15 +335,13 @@ namespace BL
                 for (int i = 0; i < tempDO.Count() - 1; i++) //move on the line station list send 2 adj station to creat if they not exsis yet.
                 {
                     //if we have this both station at list adj station so we have throw. we catch the throw here in order to continue at the for.
-                    try
-                    {
+              
                         l1 = tempDO.ElementAt(i);
                         i++;
                         l2 = tempDO.ElementAt(i);
                         i--;
                         CreatAdjStations(l1.StationCode, l2.StationCode);
-                    }
-                    catch (DO.WrongIDExeption ex) { string a = ""; a += ex; }
+              
                 }
 
 
@@ -348,6 +350,7 @@ namespace BL
             {
                 throw new BO.BadIdException("ID not valid", ex);
             }
+            
             return id;
         }
 
@@ -972,7 +975,7 @@ namespace BL
             return stationBO;
         }
 
-
+       
 
         public IEnumerable<BO.Station> GetAllStations()
         {
@@ -1000,6 +1003,8 @@ namespace BL
         {
             DO.Stations stationDO = new DO.Stations();
             station.CopyPropertiesTo(stationDO);
+            stationDO.Coordinate = station.Coordinate;
+        
             try
             {
                 if (station.Coordinate.Latitude >= 33.7 && station.Coordinate.Latitude <= 36.3 && station.Coordinate.Longitude >= 29.3 && station.Coordinate.Longitude <= 33.5)
