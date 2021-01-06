@@ -234,7 +234,7 @@ namespace BL
                 sum += adj.TimeAverage.TotalMinutes;
             }
 
-            lineBO.TimeTravel = sum;     
+            lineBO.TimeTravel = sum;
             return lineBO;
         }
 
@@ -300,7 +300,7 @@ namespace BL
             IEnumerable<DO.LineStation> tempDO;
             IEnumerable<DO.LineTrip> tripDO;
 
-            tempDO = from st in line.StationsOfBus                                        
+            tempDO = from st in line.StationsOfBus
                      select (DO.LineStation)st.CopyPropertiesToNew(typeof(DO.LineStation));  //tempDO=line station
 
             //add line station to the list
@@ -311,7 +311,7 @@ namespace BL
             try
             {
                 id = dl.AddLine(lineDO);
-                foreach (var item in tempDO)        
+                foreach (var item in tempDO)
                 {
                     item.LineId = id;
                     try //in case that the we have tow same station in mistake.
@@ -325,8 +325,8 @@ namespace BL
 
                 //sorted the line station according to their index.
                 tempDO = from item in dl.GetAllStationsLine(id)
-                          orderby item.LineStationIndex
-                          select item;
+                         orderby item.LineStationIndex
+                         select item;
 
                 for (int i = 0; i < tempDO.Count() - 1; i++) //move on the line station list send 2 adj station to creat if they not exsis yet.
                 {
@@ -342,7 +342,7 @@ namespace BL
                     catch (DO.WrongIDExeption ex) { string a = ""; a += ex; }
                 }
 
-                
+
             }
             catch (DO.WrongIDExeption ex)
             {
@@ -367,7 +367,7 @@ namespace BL
         //    {
         //        //creat BO line
         //        lineBO = lineDoBoAdapter(station.LineId);
-               
+
         //        lineBO.CopyPropertiesTo(lineDO);
 
         //        for (int i = 0; i < lineBO.StationsOfBus.Count(); i++)
@@ -415,57 +415,97 @@ namespace BL
 
         public void AddOneTripLine(LineTrip line) //func that get new lineTrip and update the list at DS
         {
-
-            DO.LineTrip lineTrip = new DO.LineTrip();
-            DO.LineTrip temp = new DO.LineTrip();
-
-            IEnumerable<DO.LineTrip> tripDO1;
-            tripDO1 = from item in dl.GetAllTripline(line.KeyId) //the oldest line trip
-                      orderby item.StartAt
-                      select item;
-            for (int i = 0; i < tripDO1.Count(); i++)
+            try
             {
-                temp = tripDO1.ElementAt(i);
-                if (temp.StartAt <= line.StartAt && temp.FinishAt > line.StartAt)
+                DO.LineTrip lineTrip = new DO.LineTrip();
+                DO.LineTrip temp = new DO.LineTrip();
+                bool toAdd = false;
+                IEnumerable<DO.LineTrip> tripDO1;
+                tripDO1 = from item in dl.GetAllTripline(line.KeyId) //the oldest line trip
+                          orderby item.StartAt
+                          select item;
+                for (int i = 0; i < tripDO1.Count(); i++)
                 {
-                    if (temp.StartAt != line.StartAt)
+                    temp = tripDO1.ElementAt(i);
+                    if ((line.StartAt <= temp.StartAt && line.FinishAt <= temp.StartAt || line.StartAt >= temp.FinishAt && line.FinishAt >= temp.FinishAt) && (line.FinishAt != temp.FinishAt || line.StartAt != temp.StartAt))
                     {
-                        lineTrip.StartAt = tripDO1.ElementAt(i).StartAt;
-                        lineTrip.TripLineExist = true;
-                        lineTrip.KeyId = tripDO1.ElementAt(i).KeyId;
-                        lineTrip.Frequency = tripDO1.ElementAt(i).Frequency;
-                        lineTrip.FinishAt = line.StartAt;
-
-                        dl.UpdatelineTrip(lineTrip);
-
+                        toAdd = true;
                     }
+                    else
+                    {
+                        toAdd = false;
+                        break;
+                    }
+
+                    //if (temp.StartAt <= line.StartAt && temp.FinishAt > line.StartAt)
+                    //{
+                    //    if (temp.StartAt != line.StartAt)
+                    //    {
+                    //        lineTrip.StartAt = tripDO1.ElementAt(i).StartAt;
+                    //        lineTrip.TripLineExist = true;
+                    //        lineTrip.KeyId = tripDO1.ElementAt(i).KeyId;
+                    //        lineTrip.Frequency = tripDO1.ElementAt(i).Frequency;
+                    //        lineTrip.FinishAt = line.StartAt;
+
+                    //        dl.UpdatelineTrip(lineTrip);
+
+                    //    }
+
 
 
                     line.CopyPropertiesTo(lineTrip);
                     dl.AddLineTrip(lineTrip);
+
+                    if (temp.FinishAt > line.FinishAt)
+                    {
+                        lineTrip.StartAt = line.FinishAt;
+                        lineTrip.TripLineExist = true;
+                        lineTrip.KeyId = tripDO1.ElementAt(i).KeyId;
+                        lineTrip.Frequency = tripDO1.ElementAt(i).Frequency;
+                        lineTrip.FinishAt = temp.FinishAt;
+
+
+                        dl.AddLineTrip(lineTrip);
+
+                        //    //  dl.DeleteLineTrip1(temp);
+                        //    line.CopyPropertiesTo(lineTrip);
+                        //    dl.AddLineTrip(lineTrip);
+                        //}
+                        //if (temp.FinishAt > line.FinishAt)
+                        //{
+                        //    lineTrip.StartAt = line.FinishAt;
+                        //    lineTrip.TripLineExist = true;
+                        //    lineTrip.KeyId = tripDO1.ElementAt(i).KeyId;
+                        //    lineTrip.Frequency = tripDO1.ElementAt(i).Frequency;
+                        //    lineTrip.FinishAt = temp.FinishAt;
+
+                        //    //                   dl.DeleteLineTrip1(temp);
+                        //    dl.AddLineTrip(lineTrip);
+
+
+                        //    break;
+
+                        //}
+                        //if (temp.StartAt > line.StartAt && temp.FinishAt < line.FinishAt)
+                        //    dl.DeleteLineTrip1(temp);
+                    }
                 }
-                if (temp.FinishAt > line.FinishAt)
+                if (toAdd == true)
                 {
-                    lineTrip.StartAt = line.FinishAt;
-                    lineTrip.TripLineExist = true;
-                    lineTrip.KeyId = tripDO1.ElementAt(i).KeyId;
-                    lineTrip.Frequency = tripDO1.ElementAt(i).Frequency;
-                    lineTrip.FinishAt = temp.FinishAt;
-
-             
+                    line.CopyPropertiesTo(lineTrip);
                     dl.AddLineTrip(lineTrip);
-
-                    break;
-
                 }
-                if (temp.StartAt > line.StartAt && temp.FinishAt < line.FinishAt)
-                    dl.DeleteLineTrip1(temp);
+                else
+                {
+                    throw new BO.BadIdException("זמני הלוח תפוסים,אנא הכנס זמנים חדשים", line.KeyId);
+                }
             }
-            tripDO1 = from item in dl.GetAllTripline(line.KeyId) //the oldest line trip
-                      orderby item.StartAt
-                      select item;
-
+            catch (DO.WrongIDExeption ex)
+            {
+                throw new BO.BadIdException("ID not valid", ex);
+            }
         }
+
 
         #endregion
 
@@ -493,7 +533,7 @@ namespace BL
 
                 IEnumerable<DO.LineStation> tempDO;
                 tempDO = dl.GetAllStationsLine(idline).ToList();
-                if(index!=1)
+                if (index != 1)
                 {
                     CreatAdjStations(tempDO.ElementAt(index - 2).StationCode, tempDO.ElementAt(index - 1).StationCode);
                 }
@@ -520,11 +560,56 @@ namespace BL
         #endregion
 
         #region Update
-        public bool UpdateLineTrip(BO.Line line)
+        public bool UpdateLineTrip(int oldTripLineIndex, BO.LineTrip newLineTrip)
         {
-            DO.Line lineDO = new DO.Line();
-            line.CopyPropertiesTo(lineDO);
+            try
+            {
+                DO.LineTrip lineTrip = new DO.LineTrip();
+                DO.LineTrip temp = new DO.LineTrip();
+                bool toAdd = true;
+                IEnumerable<DO.LineTrip> tripDO1;
+                tripDO1 = from item in dl.GetAllTripline(newLineTrip.KeyId) //the oldest line trip
+                          orderby item.StartAt
+                          select item;
 
+
+                List<DO.LineTrip> a = tripDO1.ToList();
+
+
+                for (int i = 0; i < a.Count(); i++)
+                {
+                    if (i == oldTripLineIndex)
+                        continue;
+                    temp = tripDO1.ElementAt(i);
+
+                    if ((newLineTrip.StartAt <= temp.StartAt && newLineTrip.FinishAt <= temp.StartAt || newLineTrip.StartAt >= temp.FinishAt && newLineTrip.FinishAt >= temp.FinishAt) && (newLineTrip.FinishAt != temp.FinishAt || newLineTrip.StartAt != temp.StartAt))
+                    {
+                        toAdd = true;
+                    }
+                    else
+                    {
+                        toAdd = false;
+                        break;
+                    }
+
+                }
+                if (toAdd == true)
+                {
+                    temp = tripDO1.ElementAt(oldTripLineIndex);
+                    newLineTrip.TripLineExist = true;
+                    newLineTrip.CopyPropertiesTo(lineTrip);
+                    dl.DeleteLineTrip1(temp);
+                    dl.AddLineTrip(lineTrip);
+                }
+                else
+                {
+                    throw new BO.BadIdException("זמני הלוח תפוסים,אנא הכנס זמנים חדשים", newLineTrip.KeyId);
+                }
+            }
+            catch (DO.WrongIDExeption ex)
+            {
+                throw new BO.BadIdException("ID not valid", ex);
+            }
             return true;
         }
 
@@ -791,7 +876,7 @@ namespace BL
 
                 }
 
-  
+
             }
             catch (DO.WrongIDExeption ex)
             {
@@ -835,7 +920,7 @@ namespace BL
         {
             IEnumerable<DO.LineStation> tempDO;
             DO.AdjacentStations adj = new DO.AdjacentStations();
-            double sum=0;
+            double sum = 0;
             tempDO = dl.GetAllStationsLine(lineId);
             var v = from item in tempDO
                     orderby item.LineStationIndex
@@ -887,7 +972,7 @@ namespace BL
             return stationBO;
         }
 
-       
+
 
         public IEnumerable<BO.Station> GetAllStations()
         {
@@ -927,7 +1012,7 @@ namespace BL
                 throw new BO.BadIdException("code not valid", ex);
             }
         }
-        
+
         public void DeleteStation(int code)
         {
             try
@@ -961,10 +1046,10 @@ namespace BL
                     stationOldDO = dl.GetStations(station.Code);
                     dl.UpdateStations(stationDO);
 
-                    if(stationOldDO.Coordinate!=station.Coordinate)
+                    if (stationOldDO.Coordinate != station.Coordinate)
                     {
-                        IEnumerable<DO.AdjacentStations> adjacentStations=  dl.GetAllAdjacentStations(station.Code);
-                        foreach(var item in adjacentStations)
+                        IEnumerable<DO.AdjacentStations> adjacentStations = dl.GetAllAdjacentStations(station.Code);
+                        foreach (var item in adjacentStations)
                         {
                             if (item.Station1 != station.Code)
                             {
@@ -1009,7 +1094,7 @@ namespace BL
 
 
         #region User
-        BO.User userDoBoAdapter(string name) 
+        BO.User userDoBoAdapter(string name)
         {
             BO.User userBO = new BO.User();
             DO.User userDO;
