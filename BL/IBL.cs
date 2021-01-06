@@ -39,6 +39,7 @@ namespace BlAPI
          bool UpdateLineStationForIndexChange(BO.Line line);
         bool UpdateLineStation(BO.Line line);
        bool UpdateLineTrip(int oldTripLineIndex, BO.LineTrip newLineTrip);
+        void DeleteLineTrip(BO.LineTrip toDel);
 
         #endregion
 

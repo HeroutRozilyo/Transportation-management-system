@@ -119,6 +119,8 @@ namespace PLGui
                             BO.Line lineToDelete = fxElt.DataContext as BO.Line;
                             bl.DeleteLine(lineToDelete.IdNumber);
                             RefreshLine();
+                            line = null;
+                            RefreshStationListView();
                             MessageBox.Show("The line was successfully deleted from the system", "Success Message", MessageBoxButton.OK, MessageBoxImage.Asterisk);
                             break;
                         }
@@ -266,7 +268,9 @@ namespace PLGui
                                     addLineTrip.KeyId = line.IdNumber;
                                 if (addLineTrip.FinishAt < addLineTrip.StartAt)
                                 {
-                                  addLineTrip.FinishAt.Add(new TimeSpan(24, 0, 0));
+                                    int hour = 24 + addLineTrip.FinishAt.Hours;
+                                    TimeSpan toChange = new TimeSpan(hour, 0, 0);
+                                    addLineTrip.FinishAt = toChange;
                                 }
                                 if (!isUpdateLooz)
                                 {
@@ -352,6 +356,25 @@ namespace PLGui
 
 
         }
+
+        private void DeleteTripLine_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show("You sure you want to add this line trip?", "Add Line trip Message", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            switch (result)
+            {
+                case MessageBoxResult.Yes:
+                    {
+                        Button toconvert = sender as Button;
+                        thisLooz = toconvert.DataContext as BO.LineTrip;
+                        bl.DeleteLineTrip(thisLooz);
+                        RefreshStationListView();
+                        break;
+                    }
+                case MessageBoxResult.No:
+                    {
+                        break;
+                    }
+            }         }
     }
 }
 

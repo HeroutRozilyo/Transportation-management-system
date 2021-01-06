@@ -509,6 +509,13 @@ namespace BL
             
             if (toAdd == true)
             {
+                    if (line.FinishAt.Days > 0)
+                    {
+                        int hour = line.FinishAt.Days - line.FinishAt.Days + line.FinishAt.Hours;
+                        
+                        TimeSpan toChange = new TimeSpan(hour, 0, 0);
+                        line.FinishAt = toChange;
+                    }
                     line.CopyPropertiesTo(lineTrip);
                 dl.AddLineTrip(lineTrip);
             }
@@ -590,6 +597,19 @@ namespace BL
 
 
         }
+        public void DeleteLineTrip(BO.LineTrip toDel)
+        {
+            try
+            {
+                DO.LineTrip lineTrip = new DO.LineTrip();
+                toDel.CopyPropertiesTo(lineTrip);
+                dl.DeleteLineTrip1(lineTrip);
+            }
+            catch (DO.WrongIDExeption ex)
+            {
+                throw new BO.BadIdException("ID not valid", ex);
+            }
+        }
         //לוודא על תחנות עוקבות אם מוחקים אותם כשמסלול קו משתנה או לא ולהתאים את הפונקציה הזאת למה שצריך להיות
         #endregion
 
@@ -631,6 +651,13 @@ namespace BL
                 {
                     temp = tripDO1.ElementAt(oldTripLineIndex);
                     newLineTrip.TripLineExist = true;
+                    if(newLineTrip.FinishAt.Days>0)
+                    {
+                        int hour = newLineTrip.FinishAt.Days - newLineTrip.FinishAt.Days + newLineTrip.FinishAt.Hours;
+                        TimeSpan toChange = new TimeSpan(hour, 0, 0);
+                        newLineTrip.FinishAt = toChange;
+                    }
+
                     newLineTrip.CopyPropertiesTo(lineTrip);
                     dl.DeleteLineTrip1(temp);
                     dl.AddLineTrip(lineTrip);

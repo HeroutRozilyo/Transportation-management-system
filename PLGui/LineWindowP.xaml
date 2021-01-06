@@ -70,7 +70,7 @@
                     <GridViewColumn  Width="50" >
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Button x:Name="DeleteStationLine" Content="Delete" Click="DeleteStationLine_Click"/>
+                                <Button x:Name="DeleteTripLine" Content="Delete" Click="DeleteTripLine_Click"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
