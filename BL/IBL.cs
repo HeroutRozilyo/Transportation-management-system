@@ -28,7 +28,7 @@ namespace BlAPI
         IEnumerable<BO.Line> GetLineByArea(BO.AREA area); //return all the line according to their area
         BO.Line GetLineByLine(int lineid);//return line
         int AddLine(BO.Line line);
-        void AddStationLine(BO.LineStation station); //we add station to the bus travel
+       // void AddStationLine(BO.LineStation station); //we add station to the bus travel
         void DeleteLine(int idLine);
         void DeleteStation(int idline, int code); //delete station from the line travel
         bool UpdateLine(BO.Line line);

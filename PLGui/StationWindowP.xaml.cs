@@ -24,6 +24,7 @@ namespace PLGui
     {
         private IBL bl;
         private ObservableCollection<BO.Station> stations = new ObservableCollection<BO.Station>();
+        BO.Station stationData = new BO.Station();
         public StationWindowP()
         {
             InitializeComponent();
@@ -50,6 +51,8 @@ namespace PLGui
 
         private void ListOfStations_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
+          //  stationData=bl.gets
+
 
         }
     }
