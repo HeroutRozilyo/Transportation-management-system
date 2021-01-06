@@ -51,6 +51,8 @@ namespace PLGui
         private void ListOfStations_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
 
+
+
         }
     }
 }

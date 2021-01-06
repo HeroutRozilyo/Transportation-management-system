@@ -15,6 +15,9 @@ namespace BO
         public int PrevStation { get; set; } //opsionaly
         public int NextStation { get; set; } //opsionaly
 
+        public double DistanceFromNext { get; set; }
+        public TimeSpan TimeAverageFromNext { get; set; }
+
 
     }
 }

@@ -7,17 +7,18 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="StationWindowP">
-    
+
     <Grid >
 
         <ListView x:Name="ListOfStations" HorizontalAlignment="Left" Height="353" Margin="10,58,0,0" VerticalAlignment="Top" Width="211" PreviewMouseDoubleClick="ListOfStations_PreviewMouseDoubleClick" >
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Name" Width="140" DisplayMemberBinding="{Binding Name}"/>
-                    <GridViewColumn Header="Code" Width="50"  DisplayMemberBinding="{Binding Code}"/>
+                    <GridViewColumn Header="Name" Width="145" DisplayMemberBinding="{Binding Name}"/>
+                    <GridViewColumn Header="Code" Width="65"  DisplayMemberBinding="{Binding Code}"/>
 
                 </GridView>
             </ListView.View>
         </ListView>
+        <ListBox HorizontalAlignment="Left" Height="64" Margin="308,10,0,0" VerticalAlignment="Top" Width="329"/>
     </Grid>
 </Page>

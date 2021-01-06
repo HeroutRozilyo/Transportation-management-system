@@ -204,6 +204,8 @@ namespace BL
             DO.Line lineDO;
             IEnumerable<DO.LineStation> tempDO;
             IEnumerable<DO.LineTrip> tripDO;
+            DO.AdjacentStations adj = new DO.AdjacentStations();
+            double sum = 0;
             try
             {
                 lineDO = dl.GetLine(idLine);
@@ -223,8 +225,16 @@ namespace BL
                                    select (BO.LineStation)st.CopyPropertiesToNew(typeof(BO.LineStation));
             lineBO.TimeLineTrip = from st in tripDO
                                   select (BO.LineTrip)st.CopyPropertiesToNew(typeof(BO.LineTrip));
-            lineBO.TimeTravel = CalucateTravel(idLine);
 
+            for (int i = 0; i < (lineBO.StationsOfBus.Count() - 1); i++)
+            {
+                adj = dl.GetAdjacentStations(lineBO.StationsOfBus.ElementAt(i).StationCode, lineBO.StationsOfBus.ElementAt((i + 1)).StationCode);
+                lineBO.StationsOfBus.ElementAt(i).DistanceFromNext = adj.Distance;
+                lineBO.StationsOfBus.ElementAt(i).TimeAverageFromNext = adj.TimeAverage;
+                sum += adj.TimeAverage.TotalMinutes;
+            }
+
+            lineBO.TimeTravel = sum;     
             return lineBO;
         }
 
@@ -233,49 +243,18 @@ namespace BL
         {
             var v = from item in dl.GetAllLine()
                     select lineDoBoAdapter(item.IdNumber);
-            foreach (var temp in v)
-            {
-
-
-                temp.StationsOfBus = from st in dl.GetAllStationsLine(temp.IdNumber)
-                                     orderby st.LineStationIndex
-                                     select (BO.LineStation)st.CopyPropertiesToNew(typeof(BO.LineStation));
-
-
-
-                temp.TimeLineTrip = from st in dl.GetAllTripline(temp.IdNumber)
-                                    select (BO.LineTrip)st.CopyPropertiesToNew(typeof(BO.LineTrip));
-
-
-                temp.TimeTravel = CalucateTravel(temp.IdNumber);
-            }
-
             return v;
-
         }
         public IEnumerable<BO.Line> GetLineBy(int stationCode) //return all the lines according to predicate
         {
             var v = from item in dl.GetAllLineBy(x => x.FirstStationCode == stationCode)
                     select lineDoBoAdapter(item.IdNumber);
-            foreach (var temp in v)
-            {
-
-                temp.StationsOfBus = from st in dl.GetAllStationsLine(temp.IdNumber)
-                                     orderby st.LineStationIndex
-                                     select (BO.LineStation)st.CopyPropertiesToNew(typeof(BO.LineStation));
-
-                temp.TimeLineTrip = from st in dl.GetAllTripline(temp.IdNumber)
-                                    select (BO.LineTrip)st.CopyPropertiesToNew(typeof(BO.LineTrip));
-
-                temp.TimeTravel = CalucateTravel(temp.IdNumber);
-            }
             return v;
         }
 
-        public BO.Line GetLineByLine(int lineid) //return all the lines according to predicate
+        public BO.Line GetLineByLine(int lineid) //return line
         {
             Line line = lineDoBoAdapter(lineid);
-
             return line;
         }
         public IEnumerable<BO.Line> GetLineByArea(BO.AREA area) //return all the line according to their area
@@ -284,24 +263,10 @@ namespace BL
             IEnumerable<BO.Line> help;
             help = from item in dl.GetAllLinesArea((DO.AREA)area)
                    select lineDoBoAdapter(item.IdNumber);
-            foreach (var temp in help)
-            {
-
-                temp.StationsOfBus = from st in dl.GetAllStationsLine(temp.IdNumber)
-                                     orderby st.LineStationIndex
-                                     select (BO.LineStation)st.CopyPropertiesToNew(typeof(BO.LineStation));
-
-
-                temp.TimeLineTrip = from st in dl.GetAllTripline(temp.IdNumber)
-                                    select (BO.LineTrip)st.CopyPropertiesToNew(typeof(BO.LineTrip));
-
-
-
-
-            }
 
             return help;
         }
+
         public IEnumerable<object> DetailsOfStation(IEnumerable<LineStation> lineStations)
         {
             var v = from itemStation in dl.GetAllStations()
@@ -328,14 +293,17 @@ namespace BL
         public int AddLine(BO.Line line)
         {
             DO.Line lineDO = new DO.Line();
+
             //do the bus to be DO
             line.CopyPropertiesTo(lineDO);
 
             IEnumerable<DO.LineStation> tempDO;
+            IEnumerable<DO.LineTrip> tripDO;
 
-            tempDO = from st in line.StationsOfBus                                        //tempDO=line station
-                     select (DO.LineStation)st.CopyPropertiesToNew(typeof(DO.LineStation));
+            tempDO = from st in line.StationsOfBus                                        
+                     select (DO.LineStation)st.CopyPropertiesToNew(typeof(DO.LineStation));  //tempDO=line station
 
+            //add line station to the list
 
             DO.LineStation l1 = new DO.LineStation();
             DO.LineStation l2 = new DO.LineStation();
@@ -343,10 +311,10 @@ namespace BL
             try
             {
                 id = dl.AddLine(lineDO);
-                foreach (var item in tempDO)        ///////////////////////////לשאול את אליעזר איך כותבים את זה עם ביטוי למדה או לינק
+                foreach (var item in tempDO)        
                 {
                     item.LineId = id;
-                    try //in case that the we have to same station in mistake.
+                    try //in case that the we have tow same station in mistake.
                     {
                         dl.AddLineStations(item);
                     }
@@ -356,25 +324,25 @@ namespace BL
 
 
                 //sorted the line station according to their index.
-                IEnumerable<DO.LineStation> tempDO1;
-                tempDO1 = from item in dl.GetAllStationsLine(id)
+                tempDO = from item in dl.GetAllStationsLine(id)
                           orderby item.LineStationIndex
                           select item;
-                for (int i = 0; i < tempDO1.Count() - 1; i++) //move on the line station list send 2 adj station to creat if they not exsis yet.
+
+                for (int i = 0; i < tempDO.Count() - 1; i++) //move on the line station list send 2 adj station to creat if they not exsis yet.
                 {
                     //if we have this both station at list adj station so we have throw. we catch the throw here in order to continue at the for.
                     try
                     {
-                        l1 = tempDO1.ElementAt(i);
+                        l1 = tempDO.ElementAt(i);
                         i++;
-                        l2 = tempDO1.ElementAt(i);
+                        l2 = tempDO.ElementAt(i);
                         i--;
                         CreatAdjStations(l1.StationCode, l2.StationCode);
                     }
                     catch (DO.WrongIDExeption ex) { string a = ""; a += ex; }
                 }
 
-                line.TimeTravel = CalucateTravel(id);
+                
             }
             catch (DO.WrongIDExeption ex)
             {
@@ -382,71 +350,69 @@ namespace BL
             }
             return id;
         }
-        public void AddStationLine(BO.LineStation station) //we add station to the bus travel
-        {
-            int index = station.LineStationIndex;
-            DO.Line lineDO = new DO.Line();
-            BO.Line lineBO = new BO.Line();
-            IEnumerable<DO.LineStation> tempDO;
-            IEnumerable<DO.LineTrip> tripDO;
-            int adj1 = -1, adj2 = -1;
-
-            try
-            {
-                //creat BO line
-
-                lineDO = dl.GetLine(station.LineId);  //if the bus not exsis we will have exeption from DL
-                tempDO = dl.GetAllStationsLine(station.LineId);
-                tripDO = dl.GetAllTripline(station.LineId);
-
-                lineBO.StationsOfBus = from st in tempDO
-                                       select (BO.LineStation)st.CopyPropertiesToNew(typeof(BO.LineStation));
-
-                lineBO.TimeLineTrip = from st in tripDO
-                                      select (BO.LineTrip)st.CopyPropertiesToNew(typeof(BO.LineTrip));
-                lineBO.CopyPropertiesTo(lineDO);
-
-                for (int i = 0; i < lineBO.StationsOfBus.Count(); i++)
-                {
-                    try
-                    {
-                        // check if we need to delete the adjacted station after we add between them another station
-                        //find the require 2 stations
-
-                        if (lineBO.StationsOfBus.ElementAt(i).LineStationIndex == (index - 1))
-                            adj1 = lineBO.StationsOfBus.ElementAt(i).StationCode;
-                        if (lineBO.StationsOfBus.ElementAt(i).LineStationIndex == index)
-                            adj2 = lineBO.StationsOfBus.ElementAt(i).StationCode;
-                        //if we find them so check if they adjacted station for another bus. if not-delete
-                        if (adj1 != -1 && adj2 != -1)
-                            if (dl.GetAllLineAt2Stations(adj1, adj2).Count() == 1)
-                                dl.DeleteAdjacentStationse(adj1, adj2);
-
-                        // creat a new adj station if they not exsis yet
-                        if (lineBO.StationsOfBus.ElementAt(i).LineStationIndex == (index - 1) || lineBO.StationsOfBus.ElementAt(i).LineStationIndex == (index + 1))
-                        {
-                            CreatAdjStations(lineBO.StationsOfBus.ElementAt(i).StationCode, station.StationCode);
-                        }
-
-                        //in order to update the station index at line travel
-                        if (lineBO.StationsOfBus.ElementAt(i).LineStationIndex >= index)
-                            lineBO.StationsOfBus.ElementAt(i).LineStationIndex++;
 
 
-                    }
-                    catch (DO.WrongIDExeption ex) { string a = ""; a += ex; }
-
-                }
 
 
-            }
-            catch (DO.WrongIDExeption ex)
-            {
-                throw new BO.BadIdException("ID not valid", ex);
-            }
+        //public void AddStationLine(BO.LineStation station) //we add station to the bus travel
+        //{
+        //    int index = station.LineStationIndex;
+        //    DO.Line lineDO = new DO.Line();
+        //    BO.Line lineBO = new BO.Line();
+        //    IEnumerable<DO.LineStation> tempDO;
+        //    IEnumerable<DO.LineTrip> tripDO;
+        //    int adj1 = -1, adj2 = -1;
+
+        //    try
+        //    {
+        //        //creat BO line
+        //        lineBO = lineDoBoAdapter(station.LineId);
+               
+        //        lineBO.CopyPropertiesTo(lineDO);
+
+        //        for (int i = 0; i < lineBO.StationsOfBus.Count(); i++)
+        //        {
+        //            try
+        //            {
+        //                // check if we need to delete the adjacted station after we add between them another station
+        //                //find the require 2 stations
+
+        //                if (lineBO.StationsOfBus.ElementAt(i).LineStationIndex == (index - 1))
+        //                    adj1 = lineBO.StationsOfBus.ElementAt(i).StationCode;
+        //                if (lineBO.StationsOfBus.ElementAt(i).LineStationIndex == index)
+        //                    adj2 = lineBO.StationsOfBus.ElementAt(i).StationCode;
+        //                //if we find them so check if they adjacted station for another bus. if not-delete
+        //                if (adj1 != -1 && adj2 != -1)
+        //                    if (dl.GetAllLineAt2Stations(adj1, adj2).Count() == 1)
+        //                        dl.DeleteAdjacentStationse(adj1, adj2);
+
+        //                // creat a new adj station if they not exsis yet
+        //                if (lineBO.StationsOfBus.ElementAt(i).LineStationIndex == (index - 1) || lineBO.StationsOfBus.ElementAt(i).LineStationIndex == (index + 1))
+        //                {
+        //                    CreatAdjStations(lineBO.StationsOfBus.ElementAt(i).StationCode, station.StationCode);
+        //                }
+
+        //                //in order to update the station index at line travel
+        //                if (lineBO.StationsOfBus.ElementAt(i).LineStationIndex >= index)
+        //                    lineBO.StationsOfBus.ElementAt(i).LineStationIndex++;
 
 
-        }
+        //            }
+        //            catch (DO.WrongIDExeption ex) { string a = ""; a += ex; }
+
+        //        }
+
+
+        //    }
+        //    catch (DO.WrongIDExeption ex)
+        //    {
+        //        throw new BO.BadIdException("ID not valid", ex);
+        //    }
+
+
+        //}
+
+
         public void AddOneTripLine(LineTrip line) //func that get new lineTrip and update the list at DS
         {
 
@@ -475,7 +441,6 @@ namespace BL
                     }
 
 
-                    //                    dl.DeleteLineTrip1(temp);
                     line.CopyPropertiesTo(lineTrip);
                     dl.AddLineTrip(lineTrip);
                 }
@@ -487,7 +452,7 @@ namespace BL
                     lineTrip.Frequency = tripDO1.ElementAt(i).Frequency;
                     lineTrip.FinishAt = temp.FinishAt;
 
-                    //                   dl.DeleteLineTrip1(temp);
+             
                     dl.AddLineTrip(lineTrip);
 
                     break;
@@ -518,39 +483,23 @@ namespace BL
                 throw new BO.BadIdException("ID not valid", ex);
             }
         }
+
         public void DeleteStation(int idline, int code) //delete station from the line travel
         {
             try
             {
 
                 int index = dl.DeleteStationsFromLine(code, idline);
+
                 IEnumerable<DO.LineStation> tempDO;
                 tempDO = dl.GetAllStationsLine(idline).ToList();
-                //int adj1 = -1, adj2 = -1;
+                if(index!=1)
+                {
+                    CreatAdjStations(tempDO.ElementAt(index - 2).StationCode, tempDO.ElementAt(index - 1).StationCode);
+                }
 
                 foreach (var item in tempDO)
                 {
-                    //if (item.LineStationIndex == (index - 1))
-                    //    adj1 = item.StationCode;
-                    //if (item.LineStationIndex == (index + 1))
-                    //    adj2 = item.StationCode;
-
-                    //if (adj1 != -1 && adj2 != -1)
-                    //{
-                    //    try
-                    //    {
-                    //        if (dl.GetAllLineAt2Stations(adj1, code).Count() == 1)
-                    //            dl.DeleteAdjacentStationse(adj1, code);
-                    //        if (dl.GetAllLineAt2Stations(code, adj2).Count() == 1)
-                    //            dl.DeleteAdjacentStationse(code, adj2);
-
-                    //        CreatAdjStations(adj1, adj2);
-                    //    }
-                    //    catch (DO.WrongIDExeption ex) { string a = ""; a += ex; }
-
-
-                    //}
-
                     if (item.LineStationIndex > index)
                     {
                         item.LineStationIndex--;
@@ -568,7 +517,6 @@ namespace BL
 
 
         }
-        //לוודא על תחנות עוקבות אם מוחקים אותם כשמסלול קו משתנה או לא ולהתאים את הפונקציה הזאת למה שצריך להיות
         #endregion
 
         #region Update
@@ -576,8 +524,10 @@ namespace BL
         {
             DO.Line lineDO = new DO.Line();
             line.CopyPropertiesTo(lineDO);
+
             return true;
         }
+
         public bool UpdateLineStation(BO.Line line)
         {
             IEnumerable<DO.LineStation> lineStationDO;
@@ -841,14 +791,7 @@ namespace BL
 
                 }
 
-                //for update the line trip
-
-                //for (int i = 0; 0 < tripDO.Count(); i++)
-                //{
-                //    AddOneTripLine(tripDO.ElementAt(i));
-                //}
-
-                //line.TimeTravel = CalucateTravel(line.IdNumber);
+  
             }
             catch (DO.WrongIDExeption ex)
             {
@@ -907,6 +850,8 @@ namespace BL
 
 
         }
+
+
 
 
         #endregion

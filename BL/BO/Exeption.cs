@@ -10,6 +10,7 @@ namespace BO
     public class BadBusLicenceException : Exception
     {
         public int ID;
+        public BadBusLicenceException() : base() { }
         public BadBusLicenceException(string message,int licence) : base(message) => ID = licence;
         public BadBusLicenceException(string message, Exception innerException) :
             base(message, innerException) => ID = ((DO.WrongLicenceException)innerException).Licence;
@@ -20,6 +21,7 @@ namespace BO
     public class BadIdException : Exception
     {
         public int ID;
+        public BadIdException() : base() { }
         public BadIdException(string message, int id) : base() => ID = id;
         public BadIdException(string message, Exception innerException) :
             base(message, innerException) => ID = ((DO.WrongIDExeption)innerException).ID;
@@ -31,6 +33,7 @@ namespace BO
     {
         public int cordinate;
         public string cordinateS;
+        public BadCoordinateException() : base() { }
         public BadCoordinateException(string geo, string v) : base() =>cordinateS=geo;
         public BadCoordinateException(int geo, string messege) : base(messege) => cordinate = geo;
         public BadCoordinateException(int geo, string messege, Exception innerException) : base(messege, innerException) => cordinate = geo;
