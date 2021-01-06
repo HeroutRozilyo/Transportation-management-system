@@ -14,5 +14,7 @@ namespace BO
         public bool LineStationExist { get; set; }
         public int PrevStation { get; set; } //opsionaly
         public int NextStation { get; set; } //opsionaly
+
+
     }
 }
