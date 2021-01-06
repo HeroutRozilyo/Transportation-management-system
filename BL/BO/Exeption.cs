@@ -20,6 +20,7 @@ namespace BO
     public class BadIdException : Exception
     {
         public int ID;
+        public BadIdException(string message, int id) : base() => ID = id;
         public BadIdException(string message, Exception innerException) :
             base(message, innerException) => ID = ((DO.WrongIDExeption)innerException).ID;
         public override string ToString() => base.ToString() + $", bad identity number: {ID}";
