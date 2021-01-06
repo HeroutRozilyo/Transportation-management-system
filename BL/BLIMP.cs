@@ -227,6 +227,8 @@ namespace BL
 
             return lineBO;
         }
+
+        #region GetLine
         public IEnumerable<BO.Line> GetAllLine() //return all the lines that working 
         {
             var v = from item in dl.GetAllLine()
@@ -234,8 +236,6 @@ namespace BL
             foreach (var temp in v)
             {
 
-                //temp.StationsOfBus = from st in dl.GetAllStationsLine(temp.IdNumber)
-                //                     select (BO.LineStation)temp.CopyPropertiesToNew(typeof(BO.LineStation));
 
                 temp.StationsOfBus = from st in dl.GetAllStationsLine(temp.IdNumber)
                                      orderby st.LineStationIndex
@@ -274,17 +274,16 @@ namespace BL
 
         public BO.Line GetLineByLine(int lineid) //return all the lines according to predicate
         {
-             Line line= lineDoBoAdapter(lineid);
-            
+            Line line = lineDoBoAdapter(lineid);
+
             return line;
         }
-
         public IEnumerable<BO.Line> GetLineByArea(BO.AREA area) //return all the line according to their area
         {
-     
-          IEnumerable<BO.Line> help;
-          help = from item in dl.GetAllLinesArea((DO.AREA)area)
-                    select lineDoBoAdapter(item.IdNumber);
+
+            IEnumerable<BO.Line> help;
+            help = from item in dl.GetAllLinesArea((DO.AREA)area)
+                   select lineDoBoAdapter(item.IdNumber);
             foreach (var temp in help)
             {
 
@@ -297,13 +296,35 @@ namespace BL
                                     select (BO.LineTrip)st.CopyPropertiesToNew(typeof(BO.LineTrip));
 
 
-              
-          
+
+
             }
 
             return help;
         }
+        public IEnumerable<object> DetailsOfStation(IEnumerable<LineStation> lineStations)
+        {
+            var v = from itemStation in dl.GetAllStations()
+                    from itemLineStation in lineStations
+                    where itemStation.Code == itemLineStation.StationCode
+                    select new
+                    {
+                        StationCode = itemLineStation.StationCode,
+                        LineStationIndex = itemLineStation.LineStationIndex,
+                        LineStationExist = itemLineStation.LineStationExist,
+                        Name = itemStation.Name,
+                        Address = itemStation.Address,
+                        //Coordinate = itemStation.Coordinate,
+                    };
+            return from item in v
+                   orderby item.LineStationIndex
+                   select item;
 
+        }
+
+        #endregion
+
+        #region Add
         public int AddLine(BO.Line line)
         {
             DO.Line lineDO = new DO.Line();
@@ -315,13 +336,13 @@ namespace BL
             tempDO = from st in line.StationsOfBus                                        //tempDO=line station
                      select (DO.LineStation)st.CopyPropertiesToNew(typeof(DO.LineStation));
 
-     
+
             DO.LineStation l1 = new DO.LineStation();
             DO.LineStation l2 = new DO.LineStation();
             int id = 0;
             try
             {
-                 id = dl.AddLine(lineDO);
+                id = dl.AddLine(lineDO);
                 foreach (var item in tempDO)        ///////////////////////////לשאול את אליעזר איך כותבים את זה עם ביטוי למדה או לינק
                 {
                     item.LineId = id;
@@ -336,10 +357,10 @@ namespace BL
 
                 //sorted the line station according to their index.
                 IEnumerable<DO.LineStation> tempDO1;
-                tempDO1 = from item in dl.GetAllStationsLine(id)         
+                tempDO1 = from item in dl.GetAllStationsLine(id)
                           orderby item.LineStationIndex
                           select item;
-                for (int i = 0; i < tempDO1.Count()-1; i++) //move on the line station list send 2 adj station to creat if they not exsis yet.
+                for (int i = 0; i < tempDO1.Count() - 1; i++) //move on the line station list send 2 adj station to creat if they not exsis yet.
                 {
                     //if we have this both station at list adj station so we have throw. we catch the throw here in order to continue at the for.
                     try
@@ -361,12 +382,6 @@ namespace BL
             }
             return id;
         }
-
-
-
-
-
-
         public void AddStationLine(BO.LineStation station) //we add station to the bus travel
         {
             int index = station.LineStationIndex;
@@ -432,7 +447,64 @@ namespace BL
 
 
         }
+        public void AddOneTripLine(LineTrip line) //func that get new lineTrip and update the list at DS
+        {
 
+            DO.LineTrip lineTrip = new DO.LineTrip();
+            DO.LineTrip temp = new DO.LineTrip();
+
+            IEnumerable<DO.LineTrip> tripDO1;
+            tripDO1 = from item in dl.GetAllTripline(line.KeyId) //the oldest line trip
+                      orderby item.StartAt
+                      select item;
+            for (int i = 0; i < tripDO1.Count(); i++)
+            {
+                temp = tripDO1.ElementAt(i);
+                if (temp.StartAt <= line.StartAt && temp.FinishAt > line.StartAt)
+                {
+                    if (temp.StartAt != line.StartAt)
+                    {
+                        lineTrip.StartAt = tripDO1.ElementAt(i).StartAt;
+                        lineTrip.TripLineExist = true;
+                        lineTrip.KeyId = tripDO1.ElementAt(i).KeyId;
+                        lineTrip.Frequency = tripDO1.ElementAt(i).Frequency;
+                        lineTrip.FinishAt = line.StartAt;
+
+                        dl.UpdatelineTrip(lineTrip);
+
+                    }
+
+
+                    //                    dl.DeleteLineTrip1(temp);
+                    line.CopyPropertiesTo(lineTrip);
+                    dl.AddLineTrip(lineTrip);
+                }
+                if (temp.FinishAt > line.FinishAt)
+                {
+                    lineTrip.StartAt = line.FinishAt;
+                    lineTrip.TripLineExist = true;
+                    lineTrip.KeyId = tripDO1.ElementAt(i).KeyId;
+                    lineTrip.Frequency = tripDO1.ElementAt(i).Frequency;
+                    lineTrip.FinishAt = temp.FinishAt;
+
+                    //                   dl.DeleteLineTrip1(temp);
+                    dl.AddLineTrip(lineTrip);
+
+                    break;
+
+                }
+                if (temp.StartAt > line.StartAt && temp.FinishAt < line.FinishAt)
+                    dl.DeleteLineTrip1(temp);
+            }
+            tripDO1 = from item in dl.GetAllTripline(line.KeyId) //the oldest line trip
+                      orderby item.StartAt
+                      select item;
+
+        }
+
+        #endregion
+
+        #region Delete
         public void DeleteLine(int idLine)
         {
             try
@@ -483,11 +555,11 @@ namespace BL
                     {
                         item.LineStationIndex--;
                         dl.UpdateLineStations(item);
-                        
+
                     }
 
                 }
-               
+
             }
             catch (DO.WrongIDExeption ex)
             {
@@ -496,14 +568,16 @@ namespace BL
 
 
         }
+        //לוודא על תחנות עוקבות אם מוחקים אותם כשמסלול קו משתנה או לא ולהתאים את הפונקציה הזאת למה שצריך להיות
+        #endregion
 
+        #region Update
         public bool UpdateLineTrip(BO.Line line)
         {
             DO.Line lineDO = new DO.Line();
             line.CopyPropertiesTo(lineDO);
             return true;
         }
-
         public bool UpdateLineStation(BO.Line line)
         {
             IEnumerable<DO.LineStation> lineStationDO;
@@ -516,22 +590,22 @@ namespace BL
                     try
                     {
                         dl.UpdateLineStations(item);
-                        
+
                     }
-                    catch(DO.WrongIDExeption ex) //when we inser to here its indicate that this is a new station that ae addd to the line.
+                    catch (DO.WrongIDExeption ex) //when we inser to here its indicate that this is a new station that ae addd to the line.
                     {
                         dl.AddLineStations(item);
-                        string a = "";a += ex;
+                        string a = ""; a += ex;
                     }
-                  
+
                 }
-                for(int i=0;i<lineStationDO.Count()-1;i++)
+                for (int i = 0; i < lineStationDO.Count() - 1; i++)
                 {
                     try { CreatAdjStations(lineStationDO.ElementAt(i).StationCode, lineStationDO.ElementAt(i + 1).StationCode); }
                     catch (DO.WrongIDExeption ex) { string a = ""; a += ex; }
 
                     //
-                   
+
                 }
             }
             catch (DO.WrongIDExeption ex)
@@ -540,13 +614,11 @@ namespace BL
             }
             return true;
         }
-
-
         public bool UpdateLineStationForIndexChange(BO.Line line)
         {
             //keep the list of station
             IEnumerable<DO.LineStation> lineStationDO;
-      
+
             lineStationDO = from st in line.StationsOfBus// רשימת הליין תורגמה לדו
                             select (DO.LineStation)st.CopyPropertiesToNew(typeof(DO.LineStation));
 
@@ -564,10 +636,10 @@ namespace BL
                           select st;
 
             IEnumerable<DO.LineStation> a = from v in OldtationDO
-                    let cod = line.StationsOfBus.ElementAt(place).StationCode
-                    where v.StationCode == cod
-                    select v;
-            int oldPlaceIndex = a.ElementAt(0).LineStationIndex-1;
+                                            let cod = line.StationsOfBus.ElementAt(place).StationCode
+                                            where v.StationCode == cod
+                                            select v;
+            int oldPlaceIndex = a.ElementAt(0).LineStationIndex - 1;
 
             try
             {
@@ -622,11 +694,11 @@ namespace BL
 
                 else
                 {
-                    for (int i = indexChange-1; i < oldPlaceIndex; i++)
+                    for (int i = indexChange - 1; i < oldPlaceIndex; i++)
                     {
                         toSend = lineStationDO.ElementAt(i);
                         toSend.LineStationIndex++;
-                        if (i == indexChange-1)
+                        if (i == indexChange - 1)
                         {
 
                             if (i == 0)
@@ -637,22 +709,22 @@ namespace BL
 
                                 toSend.PrevStation = lineStationDO.ElementAt(place).StationCode;
                                 dl.UpdateLineStations(toSendTo);
-                               // dl.UpdateLineStations(toSend);
+                                // dl.UpdateLineStations(toSend);
                             }
                             else
                             {
                                 toSendTo = lineStationDO.ElementAt(place);
-                                toSendTo.PrevStation = lineStationDO.ElementAt(i-1).StationCode;
+                                toSendTo.PrevStation = lineStationDO.ElementAt(i - 1).StationCode;
                                 toSendTo.NextStation = lineStationDO.ElementAt(i).StationCode;
                                 toSend.PrevStation = a.ElementAt(0).StationCode;
                                 dl.UpdateLineStations(toSendTo);
-                               // dl.UpdateLineStations(toSend);
+                                // dl.UpdateLineStations(toSend);
                                 toSendTo = lineStationDO.ElementAt(i - 1);
-                                toSendTo.NextStation= a.ElementAt(0).StationCode;
+                                toSendTo.NextStation = a.ElementAt(0).StationCode;
                                 dl.UpdateLineStations(toSendTo);
 
                             }
-                            
+
 
                         }
                         else
@@ -661,9 +733,9 @@ namespace BL
                             {
                                 if (oldPlaceIndex == lineStationDO.Count() - 1)
                                 {
-                                    
+
                                     toSend.NextStation = 0;
-                                    
+
                                 }
                                 else
                                 {
@@ -680,23 +752,23 @@ namespace BL
 
 
                     }
-                    
+
                 }
                 IEnumerable<DO.LineStation> tempDO2;
 
                 tempDO2 = from item in dl.GetAllStationsLine(line.IdNumber)               //the new line station
                           orderby item.LineStationIndex
-                  select item;
+                          select item;
                 try
                 {
-                    for (int i = 0; i < tempDO2.Count()-1; i++)
+                    for (int i = 0; i < tempDO2.Count() - 1; i++)
                     {
-                        CreatAdjStations(tempDO2.ElementAt(i).StationCode, tempDO2.ElementAt(i+1).StationCode);
+                        CreatAdjStations(tempDO2.ElementAt(i).StationCode, tempDO2.ElementAt(i + 1).StationCode);
                     }
                 }
-                catch(DO.WrongIDExeption x)
+                catch (DO.WrongIDExeption x)
                 {
-                    string o="";o+=x;
+                    string o = ""; o += x;
                 }
 
 
@@ -713,8 +785,6 @@ namespace BL
 
         }
 
-
-   
         public bool UpdateLine(BO.Line line)
         {
             DO.Line lineDO = new DO.Line();
@@ -788,61 +858,7 @@ namespace BL
             return true;
         }
 
-
-        public void AddOneTripLine(LineTrip line) //func that get new lineTrip and update the list at DS
-        {
-
-            DO.LineTrip lineTrip = new DO.LineTrip();
-            DO.LineTrip temp = new DO.LineTrip();
-
-            IEnumerable<DO.LineTrip> tripDO1;
-            tripDO1 = from item in dl.GetAllTripline(line.KeyId) //the oldest line trip
-                      orderby item.StartAt
-                      select item;
-            for (int i = 0; i < tripDO1.Count(); i++)
-            {
-                temp = tripDO1.ElementAt(i);
-                if (temp.StartAt <= line.StartAt && temp.FinishAt > line.StartAt)
-                {
-                    if(temp.StartAt!= line.StartAt)
-                    {
-                        lineTrip.StartAt = tripDO1.ElementAt(i).StartAt;
-                        lineTrip.TripLineExist = true;
-                        lineTrip.KeyId = tripDO1.ElementAt(i).KeyId;
-                        lineTrip.Frequency = tripDO1.ElementAt(i).Frequency;
-                        lineTrip.FinishAt = line.StartAt;
-
-                        dl.UpdatelineTrip(lineTrip);
-
-                    }
-
-
-                    //                    dl.DeleteLineTrip1(temp);
-                    line.CopyPropertiesTo(lineTrip);
-                    dl.AddLineTrip(lineTrip);
-                }
-                if (temp.FinishAt > line.FinishAt)
-                {
-                    lineTrip.StartAt = line.FinishAt;
-                    lineTrip.TripLineExist = true;
-                    lineTrip.KeyId = tripDO1.ElementAt(i).KeyId;
-                    lineTrip.Frequency = tripDO1.ElementAt(i).Frequency;
-                    lineTrip.FinishAt = temp.FinishAt;
-
- //                   dl.DeleteLineTrip1(temp);
-                    dl.AddLineTrip(lineTrip);
-
-                    break;
-
-                }
-                if (temp.StartAt > line.StartAt && temp.FinishAt < line.FinishAt)
-                    dl.DeleteLineTrip1(temp);
-            }
-            tripDO1 = from item in dl.GetAllTripline(line.KeyId) //the oldest line trip
-                      orderby item.StartAt
-                      select item;
-
-        }
+        #endregion
 
         public void CreatAdjStations(int station1, int station2)
         {
@@ -872,7 +888,6 @@ namespace BL
 
         }
 
-
         public double CalucateTravel(int lineId)
         {
             IEnumerable<DO.LineStation> tempDO;
@@ -893,25 +908,6 @@ namespace BL
 
         }
 
-        public IEnumerable<object> DetailsOfStation(IEnumerable<LineStation> lineStations)
-        {
-            var v= from itemStation in dl.GetAllStations()
-                   from itemLineStation in lineStations
-                   where itemStation.Code == itemLineStation.StationCode
-                   select new
-                   {
-                       StationCode = itemLineStation.StationCode,
-                       LineStationIndex = itemLineStation.LineStationIndex,
-                       LineStationExist = itemLineStation.LineStationExist,
-                       Name = itemStation.Name,
-                       Address = itemStation.Address,
-                       //Coordinate = itemStation.Coordinate,
-                   };
-            return from item in v
-                   orderby item.LineStationIndex
-                   select item;
-
-        }
 
         #endregion
 
