@@ -264,10 +264,10 @@ namespace PLGui
                 {
                     case MessageBoxResult.Yes:
                         {
+                            newLine=GridDataLine.DataContext as BO.Line;
+                          
+                          newLine.StationsOfBus = GetLineStations;
                             
-                            newLine.NumberLine = Convert.ToInt32(LineNumber.Text);
-                            newLine.StationsOfBus = GetLineStations;
-                            newLine.Area = (BO.AREA)AreaComboBox.SelectedItem;
                             newLine.FirstStationCode = GetLineStations.ToList().ElementAt(0).StationCode;
                             newLine.LastStationCode = GetLineStations.ToList().ElementAt(GetLineStations.Count() - 1).StationCode;
                             newLine.LineExist = true;

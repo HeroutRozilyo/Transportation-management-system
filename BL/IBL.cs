@@ -38,6 +38,7 @@ namespace BlAPI
         IEnumerable<object> DetailsOfStation(IEnumerable<LineStation> lineStations); //creat a new object in order to return all data on station
          bool UpdateLineStationForIndexChange(BO.Line line);
         bool UpdateLineStation(BO.Line line);
+       bool UpdateLineTrip(int oldTripLineIndex, BO.LineTrip newLineTrip);
 
         #endregion
 
