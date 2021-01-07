@@ -35,6 +35,7 @@ namespace PLGui
             InitializeComponent();
             this.bl = bl;
             RefreshLine();
+            NotExist.Visibility = Visibility.Hidden;
             //  ListOfStations.ItemsSource = stations;
         }
 
@@ -54,6 +55,74 @@ namespace PLGui
           //  stationData=bl.gets
 
 
+        }
+
+        private void Search_Click(object sender, RoutedEventArgs e)
+        {
+            
+            TextBox text = sender as TextBox;
+            int lineSteation = int.Parse(text.Text);
+            BO.Station SearchResult = bl.GetStationByCode(lineSteation);
+            if (SearchResult != null)
+            {
+                ObservableCollection<BO.Station> a = new ObservableCollection<BO.Station>();
+                a.Add(SearchResult);
+                ListOfStations.ItemsSource = a;
+
+            }
+            else
+            {
+                ListOfStations.ItemsSource = stations;
+                NotExist.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void textBoxTextBox_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Return)
+            {
+                
+                TextBox text = sender as TextBox;
+                int lineSteation = int.Parse(text.Text) ;
+               BO.Station SearchResult= bl.GetStationByCode(lineSteation);
+                if (SearchResult != null)
+                {
+                    ObservableCollection<BO.Station> a = new ObservableCollection<BO.Station>();
+                    a.Add(SearchResult);
+                    ListOfStations.ItemsSource = a;
+
+                }
+                else
+                {
+                    ListOfStations.ItemsSource = stations;
+                    NotExist.Visibility = Visibility.Visible;
+                }
+               
+
+            }
+            if(e.Key==Key.Back)
+            {
+                NotExist.Visibility = Visibility.Hidden;
+                ListOfStations.ItemsSource = stations;
+            }
+        }
+
+        private void textBoxTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !e.Text.Any(x => Char.IsDigit(x));
+        }
+
+      
+        
+
+        private void textBoxTextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            textBoxTextBox.Text = null;
+        }
+
+        private void textBoxTextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            textBoxTextBox.Text = "Search Station here....";
         }
     }
 }

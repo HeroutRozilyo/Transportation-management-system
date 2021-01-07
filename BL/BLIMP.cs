@@ -1019,6 +1019,18 @@ namespace BL
                 throw new BO.BadIdException("code not valid", ex);
             }
         }
+        public BO.Station GetStationByCode(int Code)
+        {
+            try
+            {
+                BO.Station toReturn = stationDoBoAdapter(Code);
+                return toReturn;
+            }
+            catch (BO.BadIdException ex)
+            {
+                return null;
+            }
+        }
 
         public void AddStation(BO.Station station)///////////////////
         {
