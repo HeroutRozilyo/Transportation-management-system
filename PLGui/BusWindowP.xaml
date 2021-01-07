@@ -17,7 +17,7 @@
 
         <Label x:Name="Select" Content="Select Bus" HorizontalAlignment="Left" Margin="255,25,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.868,0.436"/>
 
-        <Grid x:Name="GridDataBus"   HorizontalAlignment="Left" Margin="211,145,0,80" VerticalAlignment="Stretch" Height="320" Width="314" PreviewKeyDown="Window_PreviewKeyDown" PreviewTextInput="GridDataBus_PreviewTextInput" >
+        <Grid x:Name="GridDataBus"   HorizontalAlignment="Left" Margin="211,145,0,80" VerticalAlignment="Stretch" Height="320" Width="314" PreviewKeyDown="Window_PreviewKeyDown" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="50.41"/>
@@ -89,13 +89,15 @@
                 <ColumnDefinition Width="5*"/>
                 <ColumnDefinition Width="10*"/>
             </Grid.ColumnDefinitions>
-            <Button Content="SEND TO &#xA;TREATMENT" HorizontalAlignment="Right" Margin="0,5,9.667,0" VerticalAlignment="Top" Width="180" Click="Treatment_Click" Background="#FFD89193" FontFamily="Segoe Print" IsEnabled="{Binding enable}"  Height="50" FontSize="9" TextOptions.TextFormattingMode="Display" TextOptions.TextHintingMode="Fixed" Grid.ColumnSpan="6"/>
+            <Button x:Name="send" Content="SEND TO &#xA;TREATMENT" HorizontalAlignment="Right" Margin="0,5,9.667,0" VerticalAlignment="Top" Width="180" Click="Treatment_Click" Background="#FFD89193" FontFamily="Segoe Print" IsEnabled="{Binding enable}"  Height="50" FontSize="9" TextOptions.TextFormattingMode="Display" TextOptions.TextHintingMode="Fixed" Grid.ColumnSpan="6"/>
+
+
             <Button x:Name="Update2" Content="Update Bus" HorizontalAlignment="Right" Margin="0,65,4.667,0" VerticalAlignment="Top" Click="Update_Click" Height="65" Width="185" Grid.ColumnSpan="6"/>
             <Button x:Name="DeleteBus1" Content="Delete Bus" HorizontalAlignment="Right" Margin="0,220,5.667,0" VerticalAlignment="Top"  Click="DeleteBus_Click" Height="65" Width="185" RenderTransformOrigin="0.217,0.5" Grid.ColumnSpan="6" />
 
 
             <Button x:Name="AddBus" Content="Add new bus" HorizontalAlignment="Right" Margin="0,295,5.667,0" VerticalAlignment="Top"  Click="AddBus_Click"  Height="70" Width="185" Grid.ColumnSpan="6"/>
-            <Button  Content="Fuel"  Margin="0,145,5.667,0" VerticalAlignment="Top"  Click="RefulingClick" Background="#FFF0F1B2"   HorizontalAlignment="Right" FontFamily="Segoe Print" FontSize="14" FontWeight="Bold" Width="185" Height="65" RenderTransformOrigin="0.057,0.571" Grid.ColumnSpan="6" />
+            <Button x:Name="fuel" Content="Fuel"  Margin="0,145,5.667,0" VerticalAlignment="Top"  Click="RefulingClick" Background="#FFF0F1B2"   HorizontalAlignment="Right" FontFamily="Segoe Print" FontSize="14" FontWeight="Bold" Width="185" Height="65" RenderTransformOrigin="0.057,0.571" Grid.ColumnSpan="6" />
 
         </Grid>
 

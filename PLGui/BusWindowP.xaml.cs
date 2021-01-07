@@ -28,7 +28,7 @@ namespace PLGui
         private BO.Bus bus, newbus;
         private ObservableCollection<BO.Bus> egged = new ObservableCollection<BO.Bus>();
         private List<BO.Bus> temp = new List<BO.Bus>();
-        private bool add = false;
+        public bool add = false;
 
 
         public BusWindowP()
@@ -133,7 +133,11 @@ namespace PLGui
                     RefreshDataBus();
 
                     add = true;
-
+                    Update2.IsEnabled = false;
+                    send.IsEnabled = false;
+                    fuel.IsEnabled = false;
+                    DeleteBus1.IsEnabled = false;
+                    AddBus.IsEnabled = false;
 
                 }
                 else
@@ -185,8 +189,12 @@ namespace PLGui
 
                 if (e.Key == Key.Return && add && LincestextBox.Text != "" && StartingDate.Text != "")  //if enter            
                 {
-
-                    add = false;
+                    Update2.IsEnabled = true;
+                    send.IsEnabled = true;
+                    fuel.IsEnabled = true;
+                    DeleteBus1.IsEnabled = true;
+                    AddBus.IsEnabled = true;
+                   add = false;
                     HelpAddBus();
                     bl.AddBus(newbus);
                     RefreshDataBus();
