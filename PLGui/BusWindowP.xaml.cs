@@ -172,38 +172,7 @@ namespace PLGui
             }
 
         }
-        /*
-            private void licenseTextBox_PreviewKeyDown(object sender, KeyEventArgs e)
-        {
-            TextBox text = sender as TextBox;
-            if (text == null) return;
-            if (e == null) return;
-
-
-            //allow list of system keys 
-            if (e.Key == Key.Escape || e.Key == Key.Back || e.Key == Key.Delete ||
-                e.Key == Key.CapsLock || e.Key == Key.LeftShift || e.Key == Key.Home
-             || e.Key == Key.End || e.Key == Key.Insert || e.Key == Key.Down || e.Key == Key.Right || e.Key == Key.Decimal)
-                return;
-
-            char c = (char)KeyInterop.VirtualKeyFromKey(e.Key);
-
-            //allow control system keys
-            if (Char.IsControl(c)) return;
-
-            //allow digits (without Shift or Alt)
-            if (Char.IsDigit(c))
-                if (!(Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightAlt)))
-                    return; //let this key be written inside the textbox
-
-            //forbid letters and signs (#,$, %, ...)
-            e.Handled = true; //ignore this key. mark event as handled, will not be routed to other controls
-            return;
-        }
-
-         
-               
-         */
+   
 
 
 
@@ -211,22 +180,8 @@ namespace PLGui
         {
             try
             {
-                ////allow list of system keys 
-                //if (e.Key == Key.Escape || e.Key == Key.Back || e.Key == Key.Delete ||
-                //    e.Key == Key.CapsLock || e.Key == Key.LeftShift || e.Key == Key.Home
-                // || e.Key == Key.End || e.Key == Key.Insert || e.Key == Key.Down || e.Key == Key.Right || e.Key == Key.Decimal)
-                //    return;
+         
 
-                //char c = (char)KeyInterop.VirtualKeyFromKey(e.Key);
-
-                ////allow digits (without Shift or Alt)
-                //if (Char.IsDigit(c))
-                //    if (!(Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightAlt)))
-                //        return; //let this key be written inside the textbox
-
-                ////forbid letters and signs (#,$, %, ...)
-                //e.Handled = true; //ignore this key. mark event as handled, will not be routed to other controls
-               
 
                 if (e.Key == Key.Return && add && LincestextBox.Text != "" && StartingDate.Text != "")  //if enter            
                 {
@@ -310,11 +265,24 @@ namespace PLGui
 
         }
 
-  
+
         private void LincestextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             Regex regex = new Regex("[^0-9]+");
             e.Handled = regex.IsMatch(e.Text);
+        }
+
+        private void KmtextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            foreach (var ch in e.Text)
+            {
+                if (!((Char.IsDigit(ch) || ch.Equals('.'))))
+                {
+                    e.Handled = true;
+
+                    break;
+                }
+            }
         }
 
         public void HelpAddBus()

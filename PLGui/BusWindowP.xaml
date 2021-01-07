@@ -38,14 +38,14 @@
                 <RowDefinition Height="Auto" MinHeight="11.333"/>
             </Grid.RowDefinitions>
             <Label Content="Starting Date:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,11,0,10.333" Grid.Row="0" VerticalAlignment="Center" Grid.ColumnSpan="2" Height="26" Width="82"/>
-            <DatePicker x:Name="StartingDate" Grid.Column="2" HorizontalAlignment="Left" Margin="60.333,10,0,12.333" Grid.Row="0" SelectedDate="{Binding StartingDate, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Height="25" Width="120" Grid.ColumnSpan="2"/>
+            <DatePicker x:Name="StartingDate" Grid.Column="2" HorizontalAlignment="Left" Margin="60.333,10,0,12.333" Grid.Row="0" SelectedDate="{Binding StartingDate, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Height="25" Width="120" Grid.ColumnSpan="2" />
             <Label Content="Linces:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,10.667,0,5.333" Grid.Row="1" VerticalAlignment="Center" Height="26" Width="45"/>
             <TextBox x:Name="LincestextBox" Grid.Column="2" HorizontalAlignment="Left" Height="24" Margin="60.333,12.667,0,5.333" Grid.Row="1"   Text="{Binding Licence, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" Grid.ColumnSpan="2" PreviewTextInput="LincestextBox_PreviewTextInput"/>
             <Label Content="KM:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,8.667,0,8" Grid.Row="2" VerticalAlignment="Center" Height="26" Width="31"/>
-            <TextBox x:Name="KmtextBox" Grid.Column="2" Text="{Binding Kilometrz}" HorizontalAlignment="Left" Height="19"  Margin="60.333,11.667,0,12" Grid.Row="2" VerticalAlignment="Center" Width="120" Grid.ColumnSpan="2"/>
+            <TextBox x:Name="KmtextBox" Grid.Column="2" Text="{Binding Kilometrz}" HorizontalAlignment="Left" Height="19"  Margin="60.333,11.667,0,12" Grid.Row="2" VerticalAlignment="Center" Width="120" Grid.ColumnSpan="2" PreviewTextInput="KmtextBox_PreviewTextInput"/>
 
             <Label Content="Fuel:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,6,0,10" Grid.Row="3" VerticalAlignment="Center" Height="26" Width="35"/>
-            <TextBox x:Name="FuelTextBox" Grid.Column="2" HorizontalAlignment="Left" Height="24" Margin="60.333,12,0,6" Grid.Row="3" Text="{Binding FuellAmount, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" Grid.ColumnSpan="2"/>
+            <TextBox x:Name="FuelTextBox" Grid.Column="2" HorizontalAlignment="Left" Height="24" Margin="60.333,12,0,6" Grid.Row="3" Text="{Binding FuellAmount, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" Grid.ColumnSpan="2" PreviewTextInput="KmtextBox_PreviewTextInput"/>
 
             <Label Content=" Status:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,10,0,7.333" Grid.Row="6" VerticalAlignment="Center" Grid.ColumnSpan="2" Height="26" Width="48"/>
             <ComboBox x:Name="StatusComboBox" Grid.Column="2"  SelectedItem="{Binding StatusBus}" HorizontalAlignment="Left" Height="22"  Margin="60.333,11,0,10.333" Grid.Row="6" VerticalAlignment="Center" Width="120" Grid.ColumnSpan="2"/>
@@ -53,7 +53,7 @@
             <Label Content="Last Treatment Date:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,7.667,0,7.667" Grid.Row="7" VerticalAlignment="Center" Grid.ColumnSpan="3" Height="26" Width="118" />
             <DatePicker x:Name="lastTreatmentTextBox" Grid.Column="2" HorizontalAlignment="Left" Height="24" Margin="60.333,8.667,0,8.667" Grid.Row="7"  VerticalAlignment="Center" Width="120" SelectedDate="{Binding LastTreatment, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.ColumnSpan="2"  DisplayDateStart="1/01/90"/>
             <Label Content="Km from the last treatment:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,12.333,0,11.667" Grid.Row="8" VerticalAlignment="Center" Grid.ColumnSpan="3" Height="26" Width="156"/>
-            <TextBox x:Name="NewKmTextboBox" Grid.Column="2" Text="{Binding KilometrFromLastTreat}" HorizontalAlignment="Left" Height="24"  Margin="65.333,17.333,0,8.667" Grid.Row="8" VerticalAlignment="Center"  Width="120" Grid.ColumnSpan="3" TextChanged="NewKmTextboBox_TextChanged" />
+            <TextBox x:Name="NewKmTextboBox" Grid.Column="2" Text="{Binding KilometrFromLastTreat}" HorizontalAlignment="Left" Height="24"  Margin="65.333,17.333,0,8.667" Grid.Row="8" VerticalAlignment="Center"  Width="120" Grid.ColumnSpan="3" TextChanged="NewKmTextboBox_TextChanged" PreviewTextInput="KmtextBox_PreviewTextInput"/>
         </Grid>
         <Label Content="Optional actions:" HorizontalAlignment="Center" Margin="657,84,70,0" VerticalAlignment="Top" RenderTransformOrigin="-0.868,0.436" Width="98"></Label>
 
