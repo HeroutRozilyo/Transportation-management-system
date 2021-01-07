@@ -66,12 +66,7 @@ namespace BL
                    select busDoBoAdapter(item.Licence);
             return v;
         }
-        //public IEnumerable<BO.Bus> GetBusByline(int licence) //return all the bus according to predicate
-        //{
-        //    bool okey = checkLicence(licence);
-        //    return from item in dl.GetAllBusesBy(x => x.Licence == licence)
-        //           select busDoBoAdapter(item.Licence);
-        //}
+
         public IEnumerable<BO.Bus> GetBusByStatus(BO.STUTUS stutus) //return all the bus according to their stutus
         {
             return from item in dl.GetAllBusesStusus((DO.STUTUS)stutus)
@@ -235,23 +230,7 @@ namespace BL
         {
             var v = from item in dl.GetAllLine()
                     select lineDoBoAdapter(item.IdNumber);
-            foreach (var temp in v)
-            {
-
-
-                temp.StationsOfBus = from st in dl.GetAllStationsLine(temp.IdNumber)
-                                     orderby st.LineStationIndex
-                                     select (BO.LineStation)st.CopyPropertiesToNew(typeof(BO.LineStation));
-
-
-
-                temp.TimeLineTrip = from st in dl.GetAllTripline(temp.IdNumber)
-                                    select (BO.LineTrip)st.CopyPropertiesToNew(typeof(BO.LineTrip));
-
-
-                temp.TimeTravel = CalucateTravel(temp.IdNumber);
-            }
-
+       
             return v;
 
         }
@@ -259,18 +238,7 @@ namespace BL
         {
             var v = from item in dl.GetAllLineBy(x => x.FirstStationCode == stationCode)
                     select lineDoBoAdapter(item.IdNumber);
-            foreach (var temp in v)
-            {
-
-                temp.StationsOfBus = from st in dl.GetAllStationsLine(temp.IdNumber)
-                                     orderby st.LineStationIndex
-                                     select (BO.LineStation)st.CopyPropertiesToNew(typeof(BO.LineStation));
-
-                temp.TimeLineTrip = from st in dl.GetAllTripline(temp.IdNumber)
-                                    select (BO.LineTrip)st.CopyPropertiesToNew(typeof(BO.LineTrip));
-
-                temp.TimeTravel = CalucateTravel(temp.IdNumber);
-            }
+   
             return v;
         }
 
@@ -286,22 +254,7 @@ namespace BL
             IEnumerable<BO.Line> help;
             help = from item in dl.GetAllLinesArea((DO.AREA)area)
                    select lineDoBoAdapter(item.IdNumber);
-            foreach (var temp in help)
-            {
-
-                temp.StationsOfBus = from st in dl.GetAllStationsLine(temp.IdNumber)
-                                     orderby st.LineStationIndex
-                                     select (BO.LineStation)st.CopyPropertiesToNew(typeof(BO.LineStation));
-
-
-                temp.TimeLineTrip = from st in dl.GetAllTripline(temp.IdNumber)
-                                    select (BO.LineTrip)st.CopyPropertiesToNew(typeof(BO.LineTrip));
-
-
-
-
-            }
-
+      
             return help;
         }
         public IEnumerable<object> DetailsOfStation(IEnumerable<LineStation> lineStations)
