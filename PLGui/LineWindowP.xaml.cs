@@ -383,6 +383,21 @@ namespace PLGui
                     }
             }
         }
+
+        private void EndTimeLooz_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !e.Text.Any(x => Char.IsDigit(x) || ':'.Equals(x));
+        }
+
+        private void frequencyTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !e.Text.Any(x => Char.IsDigit(x) || '.'.Equals(x));
+        }
+
+        private void startAtTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !e.Text.Any(x => Char.IsDigit(x) || ':'.Equals(x));
+        }
     }
 }
 

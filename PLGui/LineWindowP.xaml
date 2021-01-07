@@ -93,11 +93,11 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Label Content="Finish At:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,3,0,3" Grid.Row="0" VerticalAlignment="Center" Grid.ColumnSpan="3"/>
-            <TextBox x:Name="finishAtTextBox" Grid.Column="3" HorizontalAlignment="Left" Height="24" Margin="3,4,-0.333,4" Grid.Row="0" Text="{Binding FinishAt,Mode=Default}" VerticalAlignment="Center" Width="120"/>
-            <Label Content="Frequency:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,3,0,3" Grid.Row="1" VerticalAlignment="Center" Grid.ColumnSpan="3"/>
-            <TextBox x:Name="frequencyTextBox" Grid.Column="3" HorizontalAlignment="Left" Height="24" Margin="3,4,-0.333,4" Grid.Row="1" Text="{Binding Frequency, Mode=Default, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            <TextBox x:Name="finishAtTextBox" Grid.Column="3"  PreviewTextInput="EndTimeLooz_PreviewTextInput" HorizontalAlignment="Left" Height="24" Margin="3,4,-0.333,4" Grid.Row="0" Text="{Binding FinishAt,Mode=Default}" VerticalAlignment="Center" Width="120"/>
+            <Label Content="Frequency:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,3,0,3" Grid.Row="1" VerticalAlignment="Center" Grid.ColumnSpan="3" />
+            <TextBox x:Name="frequencyTextBox" Grid.Column="3" PreviewTextInput="frequencyTextBox_PreviewTextInput" HorizontalAlignment="Left" Height="24" Margin="3,4,-0.333,4" Grid.Row="1" Text="{Binding Frequency, Mode=Default, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
             <Label Content="Start At:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,3,0,3" Grid.Row="2" VerticalAlignment="Center" Grid.ColumnSpan="3"/>
-            <TextBox x:Name="startAtTextBox" Grid.Column="3" HorizontalAlignment="Left" Height="24" Margin="3,4,-0.333,4" Grid.Row="2" Text="{Binding StartAt,  Mode=Default, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            <TextBox x:Name="startAtTextBox" Grid.Column="3" HorizontalAlignment="Left" Height="24" Margin="3,4,-0.333,4" Grid.Row="2" Text="{Binding StartAt,  Mode=Default, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" PreviewTextInput="startAtTextBox_PreviewTextInput"/>
             <Label Content="Add line trip:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,3,0,3" Grid.Row="3" VerticalAlignment="Center" Grid.ColumnSpan="3"/>
             <CheckBox x:Name="tripLineExistCheckBox" Content="" Grid.Column="3" HorizontalAlignment="Left" IsChecked="{Binding TripLineExist,  Mode=Default, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Checked="tripLineExistCheckBox_Checked"   Margin="3,8,0,8" Grid.Row="3" VerticalAlignment="Center"/>
 

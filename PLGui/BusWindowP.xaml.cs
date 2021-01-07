@@ -317,6 +317,11 @@ namespace PLGui
             e.Handled = regex.IsMatch(e.Text);
         }
 
+        private void GridDataBus_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+
+        }
+
         public void HelpAddBus()
         {
             try
