@@ -30,7 +30,7 @@
             <TextBox x:Name="TimeTravlTextBox" Grid.Column="1" Text="{Binding TimeTravel}" HorizontalAlignment="Left" Height="26"  Margin="3.333,16.333,0,0.333" Grid.Row="2" VerticalAlignment="Center" Width="78"/>
             <TextBox x:Name="LineNumber" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="5.333,6,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="76" Text="{Binding NumberLine}"/>
         </Grid>
-        <ListView x:Name="StationLineList" HorizontalAlignment="Left" Height="145" Margin="104,380,0,0" VerticalAlignment="Top" Width="656">
+        <ListView x:Name="StationLineList"   HorizontalAlignment="Left" Height="145" Margin="104,380,0,0" VerticalAlignment="Top" Width="656">
             <ListView.View>
                 <GridView>
                     <GridViewColumn  Header="Station Code" Width="80" DisplayMemberBinding="{Binding StationCode}"/>
@@ -54,7 +54,7 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <ListView x:Name="Looz" HorizontalAlignment="Left" Height="80" Margin="280,250,0,0" VerticalAlignment="Top" Width="429"  >
+        <ListView x:Name="Looz" HorizontalAlignment="Left" Height="80" Margin="280,250,0,0"  VerticalAlignment="Top" Width="429"  >
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Start time"  Width="100" DisplayMemberBinding="{Binding StartAt}" />
@@ -102,8 +102,11 @@
             <CheckBox x:Name="tripLineExistCheckBox" Content="" Grid.Column="3" HorizontalAlignment="Left" IsChecked="{Binding TripLineExist,  Mode=Default, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Checked="tripLineExistCheckBox_Checked"   Margin="3,8,0,8" Grid.Row="3" VerticalAlignment="Center"/>
 
 
+
+
+
             <Label Content="cancle" Grid.Column="3" HorizontalAlignment="Right" Margin="0,3,56.667,3" Grid.Row="3" VerticalAlignment="Center"/>
-            <CheckBox x:Name="cancleTripLineAdd" Content="" Grid.Column="3" HorizontalAlignment="Left"  Checked="cancleTripLineAdd_Checked"  Margin="65,8,0,8" Grid.Row="3" VerticalAlignment="Center" RenderTransformOrigin="3.065,0.688"/>
+            <CheckBox x:Name="cancleTripLineAdd" Content="" Grid.Column="3" HorizontalAlignment="Left" IsChecked="False" Checked="cancleTripLineAdd_Checked"  Margin="65,8,0,8" Grid.Row="3" VerticalAlignment="Center" RenderTransformOrigin="3.065,0.688"/>
         </Grid>
         <Separator HorizontalAlignment="Stretch" MinHeight="100" Margin="552,266,-7,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" BorderBrush="#FF190E0E" Background="#FF150909" Visibility="Hidden">
             <Separator.RenderTransform>
@@ -118,9 +121,41 @@
         </Separator>
         <Label x:Name="label2" Content="Optional actions:" HorizontalAlignment="Left" Margin="765,75,0,0" VerticalAlignment="Top" Width="118"/>
         <Grid HorizontalAlignment="Left" Height="375" Margin="756,105,0,0" VerticalAlignment="Top" Width="180">
-            <Button x:Name="AddSchedules" Content="Add Schedule" HorizontalAlignment="Left" Margin="49,10,0,0" VerticalAlignment="Top" Width="126" Click="AddSchedules_Click" RenderTransformOrigin="0.167,0.742" Height="75"/>
-            <Button x:Name="AddStation" Content="Add Station to the line" HorizontalAlignment="Left" Margin="49,95,0,0" VerticalAlignment="Top" Width="126" Click="AddStation_Click" Height="75"/>
-            <Button x:Name="UpdateLine" Content="Update Line" HorizontalAlignment="Left" Margin="49,180,0,0" VerticalAlignment="Top" Width="126" Click="UpdateLine_Click" Height="75"/>
+            <Button x:Name="AddSchedules" Content="Add Schedule" HorizontalAlignment="Left" Margin="49,10,0,0" VerticalAlignment="Top" Width="126"   Click="AddSchedules_Click" RenderTransformOrigin="0.167,0.742" Height="75">
+                <Button.Style>
+                    <Style>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ElementName=LineNumber, Path=Text}" Value="">
+                                <Setter Property="Button.IsEnabled" Value="False"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                
+           
+            </Button>
+            <Button x:Name="AddStation" Content="Add Station to the line" HorizontalAlignment="Left" Margin="49,95,0,0" VerticalAlignment="Top" Width="126" Click="AddStation_Click" Height="75">
+                <Button.Style>
+                    <Style>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ElementName=LineNumber, Path=Text}" Value="">
+                                <Setter Property="Button.IsEnabled" Value="False"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+            <Button x:Name="UpdateLine" Content="Update Line" HorizontalAlignment="Left" Margin="49,180,0,0" VerticalAlignment="Top" Width="126" Click="UpdateLine_Click" Height="75">
+                <Button.Style>
+                    <Style>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ElementName=LineNumber, Path=Text}" Value="">
+                                <Setter Property="Button.IsEnabled" Value="False"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
             <Button x:Name="AddLine" Content="Add Line" HorizontalAlignment="Left" Margin="49,270,0,0" VerticalAlignment="Top" Width="131" Click="AddLine_Click" RenderTransformOrigin="2.418,0.935" Height="75"/>
         </Grid>
         <Grid HorizontalAlignment="Left" Height="35" Margin="320,70,0,0" VerticalAlignment="Top" Width="295">
