@@ -27,7 +27,7 @@ namespace PLGui
 
         private ObservableCollection<BO.Line> egged = new ObservableCollection<BO.Line>();
         private ObservableCollection<object> lineStationOfLine = new ObservableCollection<object>();
-      
+
 
         private BO.AREA area;
         public LineWindowP()
@@ -68,7 +68,7 @@ namespace PLGui
 
                 Looz.ItemsSource = bl.GetLineByLine(line.IdNumber).TimeLineTrip;
                 Looz.Items.Refresh();
-
+                NewLooz.DataContext = new BO.LineTrip();
             }
             else
             {
@@ -79,7 +79,7 @@ namespace PLGui
             GridDataLine.DataContext = line;
 
             Looz.Visibility = Visibility.Visible;
-          
+
             NewLooz.Visibility = Visibility.Hidden;
 
 
@@ -238,7 +238,7 @@ namespace PLGui
         {
             NewLooz.Visibility = Visibility.Visible;
             Looz.Visibility = Visibility.Hidden;
-           
+            // RefreshStationListView();
 
         }
 
@@ -262,10 +262,10 @@ namespace PLGui
                     {
                         case MessageBoxResult.Yes:
                             {
-                                
-                                    BO.LineTrip addLineTrip = new BO.LineTrip();
-                                    addLineTrip = NewLooz.DataContext as BO.LineTrip;
-                                    addLineTrip.KeyId = line.IdNumber;
+
+                                BO.LineTrip addLineTrip = new BO.LineTrip();
+                                addLineTrip = NewLooz.DataContext as BO.LineTrip;
+                                addLineTrip.KeyId = line.IdNumber;
                                 if (addLineTrip.FinishAt < addLineTrip.StartAt)
                                 {
                                     int hour = 24 + addLineTrip.FinishAt.Hours;
@@ -274,7 +274,7 @@ namespace PLGui
                                 }
                                 if (!isUpdateLooz)
                                 {
-                                    
+
                                     bl.AddOneTripLine(addLineTrip);
 
                                 }
@@ -282,17 +282,17 @@ namespace PLGui
                                 {
                                     isUpdateLooz = false;
                                     bl.UpdateLineTrip(indexLineTripOld, addLineTrip);
-                                    
+
                                 }
 
                                 MessageBox.Show("The line was successfully add to the system", "Success Message", MessageBoxButton.OK, MessageBoxImage.Asterisk);
-                                    Looz.Visibility = Visibility.Visible;
-                                    NewLooz.Visibility = Visibility.Hidden;
-                                    NewLooz.DataContext = new BO.LineTrip();
-                                    RefreshStationListView();
-                                    break;
-                               
-                                
+                                Looz.Visibility = Visibility.Visible;
+                                NewLooz.Visibility = Visibility.Hidden;
+                                NewLooz.DataContext = new BO.LineTrip();
+                                RefreshStationListView();
+                                break;
+
+
                             }
                         case MessageBoxResult.No:
                             {
@@ -311,7 +311,7 @@ namespace PLGui
                             }
                         case MessageBoxResult.Cancel:
                             {
-                                
+
                                 NewLooz.DataContext = null;
                                 NewLooz.Visibility = Visibility.Hidden;
                                 RefreshStationListView();
@@ -327,6 +327,7 @@ namespace PLGui
                 NewLooz.DataContext = null;
                 NewLooz.Visibility = Visibility.Hidden;
                 Looz.Visibility = Visibility.Visible;
+             
                 RefreshStationListView();
 
 
@@ -337,14 +338,18 @@ namespace PLGui
             Looz.Visibility = Visibility.Visible;
             AddSchedules.Visibility = Visibility.Visible;
             NewLooz.Visibility = Visibility.Hidden;
+       
+           RefreshStationListView();
         }
-         BO.LineTrip thisLooz = new BO.LineTrip();
+
+        BO.LineTrip thisLooz = new BO.LineTrip();
         BO.LineTrip thisLooz1 = new BO.LineTrip();
         int indexLineTripOld;
         private bool isUpdateLooz = false;
+
         private void UpdataLineTrip_Click(object sender, RoutedEventArgs e)
         {
-             Button toconvert=sender as Button;
+            Button toconvert = sender as Button;
             thisLooz = toconvert.DataContext as BO.LineTrip;
             indexLineTripOld = line.TimeLineTrip.ToList().FindIndex(b => thisLooz.StartAt == b.StartAt);
             thisLooz.TripLineExist = false;
@@ -374,7 +379,8 @@ namespace PLGui
                     {
                         break;
                     }
-            }         }
+            }
+        }
     }
 }
 

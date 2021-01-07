@@ -450,18 +450,22 @@ namespace BL
         }
         public void AddOneTripLine(LineTrip line) //func that get new lineTrip and update the list at DS
         {
-            try { 
-            DO.LineTrip lineTrip = new DO.LineTrip();
-            DO.LineTrip temp = new DO.LineTrip();
-            bool toAdd = false;
-            IEnumerable<DO.LineTrip> tripDO1;
-            tripDO1 = from item in dl.GetAllTripline(line.KeyId) //the oldest line trip
-                      orderby item.StartAt
-                      select item;
-            for (int i = 0; i < tripDO1.Count(); i++)
+            try
             {
-                temp = tripDO1.ElementAt(i);
-                    if ((line.StartAt <= temp.StartAt && line.FinishAt <= temp.StartAt || line.StartAt >= temp.FinishAt && line.FinishAt >= temp.FinishAt)&&(line.FinishAt!=temp.FinishAt||line.StartAt!=temp.StartAt))
+                DO.LineTrip lineTrip = new DO.LineTrip();
+                DO.LineTrip temp = new DO.LineTrip();
+                bool toAdd = false;
+                IEnumerable<DO.LineTrip> tripDO1;
+                tripDO1 = from item in dl.GetAllTripline(line.KeyId) //the oldest line trip
+                          orderby item.StartAt
+                          select item;
+                if(tripDO1.Count()==0)
+                    toAdd = true;
+
+                for (int i = 0; i < tripDO1.Count(); i++)
+                {
+                    temp = tripDO1.ElementAt(i);
+                    if ((line.StartAt <= temp.StartAt && line.FinishAt <= temp.StartAt || line.StartAt >= temp.FinishAt && line.FinishAt >= temp.FinishAt) && (line.FinishAt != temp.FinishAt || line.StartAt != temp.StartAt))
                     {
                         toAdd = true;
                     }
@@ -470,67 +474,67 @@ namespace BL
                         toAdd = false;
                         break;
                     }
-                
-                //if (temp.StartAt <= line.StartAt && temp.FinishAt > line.StartAt)
-                //{
-                //    if (temp.StartAt != line.StartAt)
-                //    {
-                //        lineTrip.StartAt = tripDO1.ElementAt(i).StartAt;
-                //        lineTrip.TripLineExist = true;
-                //        lineTrip.KeyId = tripDO1.ElementAt(i).KeyId;
-                //        lineTrip.Frequency = tripDO1.ElementAt(i).Frequency;
-                //        lineTrip.FinishAt = line.StartAt;
 
-                //        dl.UpdatelineTrip(lineTrip);
+                    //if (temp.StartAt <= line.StartAt && temp.FinishAt > line.StartAt)
+                    //{
+                    //    if (temp.StartAt != line.StartAt)
+                    //    {
+                    //        lineTrip.StartAt = tripDO1.ElementAt(i).StartAt;
+                    //        lineTrip.TripLineExist = true;
+                    //        lineTrip.KeyId = tripDO1.ElementAt(i).KeyId;
+                    //        lineTrip.Frequency = tripDO1.ElementAt(i).Frequency;
+                    //        lineTrip.FinishAt = line.StartAt;
 
-                //    }
+                    //        dl.UpdatelineTrip(lineTrip);
+
+                    //    }
 
 
-                //    //                    dl.DeleteLineTrip1(temp);
-                //    line.CopyPropertiesTo(lineTrip);
-                //    dl.AddLineTrip(lineTrip);
-                //}
-                //if (temp.FinishAt > line.FinishAt)
-                //{
-                //    lineTrip.StartAt = line.FinishAt;
-                //    lineTrip.TripLineExist = true;
-                //    lineTrip.KeyId = tripDO1.ElementAt(i).KeyId;
-                //    lineTrip.Frequency = tripDO1.ElementAt(i).Frequency;
-                //    lineTrip.FinishAt = temp.FinishAt;
+                    //    //                    dl.DeleteLineTrip1(temp);
+                    //    line.CopyPropertiesTo(lineTrip);
+                    //    dl.AddLineTrip(lineTrip);
+                    //}
+                    //if (temp.FinishAt > line.FinishAt)
+                    //{
+                    //    lineTrip.StartAt = line.FinishAt;
+                    //    lineTrip.TripLineExist = true;
+                    //    lineTrip.KeyId = tripDO1.ElementAt(i).KeyId;
+                    //    lineTrip.Frequency = tripDO1.ElementAt(i).Frequency;
+                    //    lineTrip.FinishAt = temp.FinishAt;
 
-                //    //                   dl.DeleteLineTrip1(temp);
-                //    dl.AddLineTrip(lineTrip);
+                    //    //                   dl.DeleteLineTrip1(temp);
+                    //    dl.AddLineTrip(lineTrip);
 
-                //    break;
+                    //    break;
 
-                //}
-                //if (temp.StartAt > line.StartAt && temp.FinishAt < line.FinishAt)
-                //    dl.DeleteLineTrip1(temp);
-            }
-            
-            if (toAdd == true)
-            {
+                    //}
+                    //if (temp.StartAt > line.StartAt && temp.FinishAt < line.FinishAt)
+                    //    dl.DeleteLineTrip1(temp);
+                }
+
+                if (toAdd == true)
+                {
                     if (line.FinishAt.Days > 0)
                     {
                         int hour = line.FinishAt.Days - line.FinishAt.Days + line.FinishAt.Hours;
-                        
+
                         TimeSpan toChange = new TimeSpan(hour, 0, 0);
                         line.FinishAt = toChange;
                     }
                     line.CopyPropertiesTo(lineTrip);
-                dl.AddLineTrip(lineTrip);
-            }
-           else
+                    dl.AddLineTrip(lineTrip);
+                }
+                else
                 {
                     throw new BO.BadIdException("זמני הלוח תפוסים,אנא הכנס זמנים חדשים", line.KeyId);
                 }
-           }
-             catch (DO.WrongIDExeption ex)
+            }
+            catch (DO.WrongIDExeption ex)
             {
                 throw new BO.BadIdException("ID not valid", ex);
             }
         }
-        
+
 
         #endregion
 
@@ -627,16 +631,16 @@ namespace BL
                           orderby item.StartAt
                           select item;
 
-                
+
                 List<DO.LineTrip> a = tripDO1.ToList();
-            
+
 
                 for (int i = 0; i < a.Count(); i++)
                 {
                     if (i == oldTripLineIndex)
                         continue;
                     temp = tripDO1.ElementAt(i);
-                    
+
                     if ((newLineTrip.StartAt <= temp.StartAt && newLineTrip.FinishAt <= temp.StartAt || newLineTrip.StartAt >= temp.FinishAt && newLineTrip.FinishAt >= temp.FinishAt) && (newLineTrip.FinishAt != temp.FinishAt || newLineTrip.StartAt != temp.StartAt))
                     {
                         toAdd = true;
@@ -646,13 +650,13 @@ namespace BL
                         toAdd = false;
                         break;
                     }
-                   
+
                 }
                 if (toAdd == true)
                 {
                     temp = tripDO1.ElementAt(oldTripLineIndex);
                     newLineTrip.TripLineExist = true;
-                    if(newLineTrip.FinishAt.Days>0)
+                    if (newLineTrip.FinishAt.Days > 0)
                     {
                         int hour = newLineTrip.FinishAt.Days - newLineTrip.FinishAt.Days + newLineTrip.FinishAt.Hours;
                         TimeSpan toChange = new TimeSpan(hour, 0, 0);
@@ -988,7 +992,7 @@ namespace BL
         {
             IEnumerable<DO.LineStation> tempDO;
             DO.AdjacentStations adj = new DO.AdjacentStations();
-            double sum=0;
+            double sum = 0;
             tempDO = dl.GetAllStationsLine(lineId);
             var v = from item in tempDO
                     orderby item.LineStationIndex
@@ -1038,7 +1042,7 @@ namespace BL
             return stationBO;
         }
 
-       
+
 
         public IEnumerable<BO.Station> GetAllStations()
         {
@@ -1078,7 +1082,7 @@ namespace BL
                 throw new BO.BadIdException("code not valid", ex);
             }
         }
-        
+
         public void DeleteStation(int code)
         {
             try
@@ -1112,10 +1116,10 @@ namespace BL
                     stationOldDO = dl.GetStations(station.Code);
                     dl.UpdateStations(stationDO);
 
-                    if(stationOldDO.Coordinate!=station.Coordinate)
+                    if (stationOldDO.Coordinate != station.Coordinate)
                     {
-                        IEnumerable<DO.AdjacentStations> adjacentStations=  dl.GetAllAdjacentStations(station.Code);
-                        foreach(var item in adjacentStations)
+                        IEnumerable<DO.AdjacentStations> adjacentStations = dl.GetAllAdjacentStations(station.Code);
+                        foreach (var item in adjacentStations)
                         {
                             if (item.Station1 != station.Code)
                             {
@@ -1160,7 +1164,7 @@ namespace BL
 
 
         #region User
-        BO.User userDoBoAdapter(string name) 
+        BO.User userDoBoAdapter(string name)
         {
             BO.User userBO = new BO.User();
             DO.User userDO;
