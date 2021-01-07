@@ -42,6 +42,7 @@ namespace PLGui
             this.bl = bl;
             //   RefreshLine();
             comboBoxArea.ItemsSource = Enum.GetValues(typeof(BO.AREA));
+            AreaUpdateLineTextBox.ItemsSource = Enum.GetValues(typeof(BO.AREA));
             StationLineList.ItemsSource = lineStationOfLine;
             NewLooz.Visibility = Visibility.Hidden;
             NewLooz.DataContext = new BO.LineTrip();
@@ -66,9 +67,11 @@ namespace PLGui
         {
             if (line != null)
             {
+                line = bl.GetLineByLine(line.IdNumber);
                 lineStationOfLine = Convert(bl.DetailsOfStation(line.StationsOfBus));
-
-                Looz.ItemsSource = bl.GetLineByLine(line.IdNumber).TimeLineTrip;
+                AreaUpdateLineTextBox.SelectedItem = line.Area;
+                Looz.ItemsSource = line.TimeLineTrip;
+                ListOfLine.SelectedIndex = egged.ToList().FindIndex(b => b.IdNumber == line.IdNumber);
                 Looz.Items.Refresh();
                 NewLooz.DataContext = new BO.LineTrip();
             }
@@ -94,9 +97,8 @@ namespace PLGui
 
             area = (BO.AREA)(comboBoxArea.SelectedItem);
             RefreshLine();
-            line = null;
             RefreshStationListView();
-            //  busesData.DataContext = bus;
+           
         }
 
         private void ListOfLine_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -167,9 +169,14 @@ namespace PLGui
             {
                 if (line != null)
                     bl.UpdateLine(line);
-                int index = comboBoxArea.SelectedIndex;
+                comboBoxArea.SelectedItem=line.Area;
+                ListOfLine.SelectedItem = line;
+               
+
                 RefreshLine();
-                comboBoxArea.SelectedIndex = index;
+                RefreshStationListView();
+               
+                // comboBoxArea.SelectedIndex = index;
 
 
 
@@ -183,11 +190,13 @@ namespace PLGui
 
         private void DeleteStationLine_Click(object sender, RoutedEventArgs e)
         {
+          
             var fxElt = sender as FrameworkElement; //get the licence of the bus to refulling. 
             String ToDel = fxElt.DataContext.ToString();
             convertFromObbject(ToDel);
             bl.DeleteStation(line.IdNumber, TempLineStation.StationCode);
             RefreshStationListView();
+       
         }
         BO.LineStation TempLineStation = new BO.LineStation();
         private void convertFromObbject(string StationLineData)
@@ -397,6 +406,11 @@ namespace PLGui
         private void startAtTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             e.Handled = !e.Text.Any(x => Char.IsDigit(x) || ':'.Equals(x));
+        }
+      
+        private void AreaTextBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            
         }
     }
 }

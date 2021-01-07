@@ -25,9 +25,9 @@
             </Grid.RowDefinitions>
             <Label Content="Line Number" Grid.Column="0" HorizontalAlignment="Left" Margin="3,3,0,12.333" Grid.Row="0" VerticalAlignment="Center" Height="26" Width="79"/>
             <Label Content="Area" Grid.Column="0" HorizontalAlignment="Left" Margin="3,7.667,0,7.667" Grid.Row="1" VerticalAlignment="Center" Width="116" Height="26"/>
-            <TextBox x:Name="AreaTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="24" Margin="3.333,8.667,0,8.667" Grid.Row="1"   Text="{Binding Area, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="78"/>
+            <ComboBox x:Name="AreaUpdateLineTextBox" Grid.Column="1" HorizontalAlignment="Left" SelectionChanged="AreaTextBox_SelectionChanged" Height="24" Margin="3.333,8.667,0,8.667" Grid.Row="1"   Text="{Binding Area, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="78"/>
             <Label Content="Travel Time" Grid.Column="0" HorizontalAlignment="Left" Margin="3,12.333,0,4.333" Grid.Row="2" VerticalAlignment="Center" Width="108" Height="26"/>
-            <TextBox x:Name="TimeTravlTextBox" Grid.Column="1" Text="{Binding TimeTravel}" HorizontalAlignment="Left" Height="26"  Margin="3.333,16.333,0,0.333" Grid.Row="2" VerticalAlignment="Center" Width="78"/>
+            <TextBlock x:Name="TimeTravlTextBox" Grid.Column="1" Text="{Binding TimeTravel}" HorizontalAlignment="Left" Height="26"  Margin="3.333,16.333,0,0.333" Grid.Row="2" VerticalAlignment="Center" Width="88"/>
             <TextBox x:Name="LineNumber" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="5.333,6,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="76" Text="{Binding NumberLine}"/>
         </Grid>
         <ListView x:Name="StationLineList"   HorizontalAlignment="Left" Height="145" Margin="104,380,0,0" VerticalAlignment="Top" Width="656">
@@ -40,14 +40,26 @@
                     <GridViewColumn  Width="50" >
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Button x:Name="UpdataLineStation" Content="Updata" Click="UpdataLineStation_Click"/>
+                                <Button x:Name="UpdataLineStation"   Content="Updata" Click="UpdataLineStation_Click"/>
+
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
                     <GridViewColumn  Width="50" >
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Button x:Name="DeleteStationLine" Content="Delete" Click="DeleteStationLine_Click"/>
+                                <Button x:Name="DeleteStationLine" Content="Delete" Click="DeleteStationLine_Click">
+                                    <Button.Style>
+                                        <Style>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding ElementName=StationLineList, Path=Items.Count }" Value="2">
+                                                    <Setter Property="Button.IsEnabled" Value="false"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+
+                                </Button>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>

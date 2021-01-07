@@ -401,6 +401,11 @@ namespace PLGui
                 MessageBox.Show(a.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-        } 
+
+        private void LineNumber_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !e.Text.Any(x => Char.IsDigit(x));
+        }
+    } 
     }
 
