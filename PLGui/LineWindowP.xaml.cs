@@ -45,6 +45,8 @@ namespace PLGui
             StationLineList.ItemsSource = lineStationOfLine;
             NewLooz.Visibility = Visibility.Hidden;
             NewLooz.DataContext = new BO.LineTrip();
+            
+
 
 
         }
@@ -338,7 +340,7 @@ namespace PLGui
             Looz.Visibility = Visibility.Visible;
             AddSchedules.Visibility = Visibility.Visible;
             NewLooz.Visibility = Visibility.Hidden;
-       
+            cancleTripLineAdd.IsChecked = false;
            RefreshStationListView();
         }
 
@@ -380,6 +382,21 @@ namespace PLGui
                         break;
                     }
             }
+        }
+
+        private void EndTimeLooz_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !e.Text.Any(x => Char.IsDigit(x) || ':'.Equals(x));
+        }
+
+        private void frequencyTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !e.Text.Any(x => Char.IsDigit(x) || '.'.Equals(x));
+        }
+
+        private void startAtTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !e.Text.Any(x => Char.IsDigit(x) || ':'.Equals(x));
         }
     }
 }
