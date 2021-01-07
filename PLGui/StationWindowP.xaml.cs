@@ -39,14 +39,14 @@ namespace PLGui
             //  ListOfStations.ItemsSource = stations;
         }
 
-        public ObservableCollection<T> Convert<T>(IEnumerable<T> listFromBO)
+        public ObservableCollection<T> ConvertList<T>(IEnumerable<T> listFromBO)
         {
             return new ObservableCollection<T>(listFromBO);
         }
 
         private void RefreshLine()
         {
-            stations = Convert(bl.GetAllStations());//to make ObservableCollection
+            stations = ConvertList(bl.GetAllStations());//to make ObservableCollection
             ListOfStations.ItemsSource = stations;
         }
 
@@ -59,21 +59,22 @@ namespace PLGui
 
         private void Search_Click(object sender, RoutedEventArgs e)
         {
-            
-            TextBox text = sender as TextBox;
-            int lineSteation = int.Parse(text.Text);
-            BO.Station SearchResult = bl.GetStationByCode(lineSteation);
-            if (SearchResult != null)
+            if (numberText != null)
             {
-                ObservableCollection<BO.Station> a = new ObservableCollection<BO.Station>();
-                a.Add(SearchResult);
-                ListOfStations.ItemsSource = a;
+                int Sera = Convert.ToInt32(numberText);
+                BO.Station SearchResult = bl.GetStationByCode(Sera);
+                if (SearchResult != null)
+                {
+                    ObservableCollection<BO.Station> a = new ObservableCollection<BO.Station>();
+                    a.Add(SearchResult);
+                    ListOfStations.ItemsSource = a;
 
-            }
-            else
-            {
-                ListOfStations.ItemsSource = stations;
-                NotExist.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    ListOfStations.ItemsSource = stations;
+                    NotExist.Visibility = Visibility.Visible;
+                }
             }
         }
 
@@ -117,11 +118,14 @@ namespace PLGui
 
         private void textBoxTextBox_GotFocus(object sender, RoutedEventArgs e)
         {
+            ListOfStations.ItemsSource = stations;
             textBoxTextBox.Text = null;
         }
-
+        string numberText;
         private void textBoxTextBox_LostFocus(object sender, RoutedEventArgs e)
         {
+            if (textBoxTextBox.Text != "Search Station here...." && textBoxTextBox.Text != "")
+                numberText = textBoxTextBox.Text;
             textBoxTextBox.Text = "Search Station here....";
         }
     }
