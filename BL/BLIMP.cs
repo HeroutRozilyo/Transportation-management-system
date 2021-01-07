@@ -34,7 +34,8 @@ namespace BL
             }
 
             busDO.CopyPropertiesTo(busBO);
-            // CopyToBo(busBO, busDO);
+            busBO.BusExsis = true;
+  
 
             string firstpart, middlepart, endpart, result;
             if (licence_.Length == 7)

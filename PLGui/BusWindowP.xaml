@@ -17,7 +17,7 @@
 
         <Label x:Name="Select" Content="Select Bus" HorizontalAlignment="Left" Margin="255,25,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.868,0.436"/>
 
-        <Grid x:Name="GridDataBus"   HorizontalAlignment="Left" Margin="211,145,0,80" VerticalAlignment="Stretch" Height="320" Width="314">
+        <Grid x:Name="GridDataBus"   HorizontalAlignment="Left" Margin="211,145,0,80" VerticalAlignment="Stretch" Height="320" Width="314" PreviewKeyDown="Window_PreviewKeyDown" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="50.41"/>
@@ -40,7 +40,7 @@
             <Label Content="Starting Date:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,11,0,10.333" Grid.Row="0" VerticalAlignment="Center" Grid.ColumnSpan="2" Height="26" Width="82"/>
             <DatePicker x:Name="StartingDate" Grid.Column="2" HorizontalAlignment="Left" Margin="60.333,10,0,12.333" Grid.Row="0" SelectedDate="{Binding StartingDate, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Height="25" Width="120" Grid.ColumnSpan="2"/>
             <Label Content="Linces:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,10.667,0,5.333" Grid.Row="1" VerticalAlignment="Center" Height="26" Width="45"/>
-            <TextBox x:Name="LincestextBox" Grid.Column="2" HorizontalAlignment="Left" Height="24" Margin="60.333,12.667,0,5.333" Grid.Row="1"   Text="{Binding Licence, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" Grid.ColumnSpan="2"/>
+            <TextBox x:Name="LincestextBox" Grid.Column="2" HorizontalAlignment="Left" Height="24" Margin="60.333,12.667,0,5.333" Grid.Row="1"   Text="{Binding Licence, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" Grid.ColumnSpan="2" PreviewTextInput="LincestextBox_PreviewTextInput"/>
             <Label Content="KM:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,8.667,0,8" Grid.Row="2" VerticalAlignment="Center" Height="26" Width="31"/>
             <TextBox x:Name="KmtextBox" Grid.Column="2" Text="{Binding Kilometrz}" HorizontalAlignment="Left" Height="19"  Margin="60.333,11.667,0,12" Grid.Row="2" VerticalAlignment="Center" Width="120" Grid.ColumnSpan="2"/>
 
