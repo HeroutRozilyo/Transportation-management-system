@@ -60,7 +60,7 @@ namespace PLGui
             {
 
 
-                bus = (buses.SelectedItem as BO.Bus);
+               bus = (buses.SelectedItem as BO.Bus);
                 busesData.DataContext = bus;
             add = false;
 
@@ -73,9 +73,8 @@ namespace PLGui
 
                 egged = Convert<BO.Bus>(bl.GetAllBus());//to make ObservableCollection
                 buses.ItemsSource = egged;
-           
-
-
+          
+          
 
 
 
@@ -128,50 +127,46 @@ namespace PLGui
             {
                 try
                 {
-                    if (!add)
-                    {
-
-                        RefreshDataBus();
-                        add = true;
-
-
-                    }
-                    else if (LincestextBox.Text != "" && StartingDate.Text != "")
-                    {
+                if (!add)
+                {
+                    RefreshDataBus();
                    
-                        add = false;
-                    // HelpAddBus();
-                    //if (KmtextBox.Text == "") KmtextBox.Text = "0";
-                    //if (lastTreatmentTextBox.Text == "") lastTreatmentTextBox.Text = DateTime.Now.ToString();
-                    //if (NewKmTextboBox.Text == "") NewKmTextboBox.Text = "0";
-                    newbus = GridDataBus.DataContext as BO.Bus;
-                        bl.AddBus(newbus);
-                        RefreshDataBus();
-                        buses.SelectedIndex = egged.Count() - 1;
+                    add = true;
 
-                        MessageBox.Show("The Bus Was Successfully added to the System", "Success Message", MessageBoxButton.OK, MessageBoxImage.Asterisk);
 
-                    }
-                    else
+                }
+                else if (LincestextBox.Text != "" && StartingDate.Text != "")
+                {
+                    add = false;
+                   // HelpAddBus();
+                     newbus = GridDataBus.DataContext as BO.Bus;
+                    bl.AddBus(newbus);
+                    RefreshDataBus();
+                    buses.SelectedIndex = egged.Count() - 1;
+
+                    MessageBox.Show("The Bus Was Successfully added to the System", "Success Message", MessageBoxButton.OK, MessageBoxImage.Asterisk);
+
+                }
+                else
+                {
+                    MessageBoxResult result = MessageBox.Show("In order to create a bus, you need to fill in the license number   and Starting Date field. To cancel the process click cancel", "ERROR", MessageBoxButton.OKCancel, MessageBoxImage.Error);
+                    switch (result)
                     {
-                        MessageBoxResult result = MessageBox.Show("In order to create a bus, you need to fill in the license number   and Starting Date field. To cancel the process click cancel", "ERROR", MessageBoxButton.OKCancel, MessageBoxImage.Error);
-                        switch (result)
-                        {
-                            case MessageBoxResult.OK: break;
-                            case MessageBoxResult.Cancel:
-                                {
-                                    buses.SelectedIndex = 0;
-                                }
-                                break;
-                        }
+                        case MessageBoxResult.OK: break;
+                        case MessageBoxResult.Cancel:
+                            {
+                                buses.SelectedIndex = 0;
+                            }
+                            break;
                     }
+                }
 
                 }
                 catch (BO.BadBusLicenceException a)
                 {
                     buses.SelectedIndex = 0;
                     MessageBox.Show(a.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
-                add = true;
+                add=true;
                 }
 
             }
@@ -279,6 +274,8 @@ namespace PLGui
                     if (NewKmTextboBox.Text == "") NewKmTextboBox.Text = "0";
                     newbus.KilometrFromLastTreat = double.Parse(NewKmTextboBox.Text);
                     newbus.BusExsis = true;
+                if (FuelTextBox.Text == "") FuelTextBox.Text = "1200";
+                newbus.FuellAmount = int.Parse(FuelTextBox.Text);
                 }
                 catch (BO.BadBusLicenceException a)
                 {

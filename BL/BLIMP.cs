@@ -61,9 +61,9 @@ namespace BL
 
         public IEnumerable<BO.Bus> GetAllBus() //return all the buses that working 
         {
-            return from item in dl.GetAllBuses()
+          var v= from item in dl.GetAllBuses()
                    select busDoBoAdapter(item.Licence);
-
+            return v;
         }
         //public IEnumerable<BO.Bus> GetBusByline(int licence) //return all the bus according to predicate
         //{
@@ -86,7 +86,7 @@ namespace BL
             bus.StatusBus = STUTUS.READT_TO_TRAVEL;
             string te = bus.Licence.Replace("-", "");
             busDO.Licence = te;
-            //CopyToBo(bus, busDO);
+            busDO=(DO.Bus)bus.CopyPropertiesToNew(typeof(DO.Bus));
 
             try
             {

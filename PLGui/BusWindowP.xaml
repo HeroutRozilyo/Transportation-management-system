@@ -17,7 +17,7 @@
 
         <Label x:Name="Select" Content="Select Bus" HorizontalAlignment="Left" Margin="255,25,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.868,0.436"/>
 
-        <Grid x:Name="GridDataBus"  HorizontalAlignment="Left" Margin="211,145,0,80" VerticalAlignment="Stretch" Height="320" Width="314">
+        <Grid x:Name="GridDataBus"   HorizontalAlignment="Left" Margin="211,145,0,80" VerticalAlignment="Stretch" Height="320" Width="314">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="50.41"/>
