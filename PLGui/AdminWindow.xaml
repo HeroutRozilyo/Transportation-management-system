@@ -8,7 +8,7 @@
         Title="AdminWindow" WindowState="Maximized"  WindowStartupLocation="CenterScreen" Width="1328.333" Height="686"   >
     <Grid  Width="Auto" Margin="0,0,10.333,0" Height="651" VerticalAlignment="Top">
         <Button x:Name="line" Content="Line" HorizontalAlignment="Left" Margin="0,185,0,442" VerticalAlignment="Stretch" Width="135" Click="line_Click"/>
-        <Frame x:Name="frame"   Content="" HorizontalAlignment="Left" Margin="220,81,0,41" VerticalAlignment="Stretch" Width="955" Navigated="frame_Navigated"  NavigationUIVisibility="Hidden" Background="White" BorderThickness="1" />
+        <Frame x:Name="frame"   Content="" HorizontalAlignment="Left" Margin="220,81,0,41" VerticalAlignment="Stretch" Width="1045" Navigated="frame_Navigated"  NavigationUIVisibility="Hidden" Background="White" BorderThickness="1" />
         <WrapPanel HorizontalAlignment="Left" Height="475" Margin="0,80,0,0" VerticalAlignment="Top" Width="145"/>
         <Button x:Name="station" Content="station" HorizontalAlignment="Left" Margin="0,270,0,356" VerticalAlignment="Stretch" Width="135" Click="station_Click"/>
         <Button x:Name="AddManeger" Content="Add new Manger User" HorizontalAlignment="Left" Margin="0,358,0,267" VerticalAlignment="Stretch" Width="135" Click="AddManeger_Click" RenderTransformOrigin="0.5,0.502"/>

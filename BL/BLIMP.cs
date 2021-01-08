@@ -993,6 +993,9 @@ namespace BL
                                       select (BO.LineStation)st.CopyPropertiesToNew(typeof(BO.LineStation));
             stationBO.StationAdjacent = from ad in adjactDO
                                         select (BO.AdjacentStations)ad.CopyPropertiesToNew(typeof(BO.AdjacentStations));
+            stationBO.Coordinate = new GeoCoordinate();
+            stationBO.Coordinate.Latitude = stationDO.Coordinate.Latitude;
+            stationBO.Coordinate.Longitude = stationDO.Coordinate.Longitude;
             return stationBO;
         }
 
@@ -1010,6 +1013,7 @@ namespace BL
                                          select (BO.LineStation)st.CopyPropertiesToNew(typeof(BO.LineStation));
                     temp.StationAdjacent = from ad in dl.GetAllAdjacentStations(temp.Code)
                                            select (BO.AdjacentStations)ad.CopyPropertiesToNew(typeof(BO.AdjacentStations));
+                   
                 }
                 return v;
 
@@ -1031,11 +1035,25 @@ namespace BL
                 return null;
             }
         }
+        public IEnumerable<BO.Line> GetAllLineIndStation(int StationCode)
+        {
+            IEnumerable<DO.LineStation> v = from item in dl.GetAllLineStationsBy(b => b.StationCode == StationCode)
+                                            select item;
+
+            var x = from s in v
+                    select  lineDoBoAdapter(s.LineId);
+            return x;
+             
+        }
+                  
+
+
 
         public void AddStation(BO.Station station)///////////////////
         {
             DO.Stations stationDO = new DO.Stations();
             station.CopyPropertiesTo(stationDO);
+            stationDO.Coordinate = new GeoCoordinate(station.Coordinate.Latitude, station.Coordinate.Longitude);
             try
             {
                 if (station.Coordinate.Latitude >= 33.7 && station.Coordinate.Latitude <= 36.3 && station.Coordinate.Longitude >= 29.3 && station.Coordinate.Longitude <= 33.5)

@@ -27,19 +27,24 @@ namespace BlAPI
         IEnumerable<BO.Line> GetLineBy(int stationCode); //return all the lines according to predicate
         IEnumerable<BO.Line> GetLineByArea(BO.AREA area); //return all the line according to their area
         BO.Line GetLineByLine(int lineid);//return line
-        int AddLine(BO.Line line);
-       // void AddStationLine(BO.LineStation station); //we add station to the bus travel
+        IEnumerable<BO.LineStation> AddLine(BO.Line line);
+
+        //  IEnumerable<BO.LineStation> AddStationLine(BO.LineStation station); //we add station to the bus travel
+
         void DeleteLine(int idLine);
-        void DeleteStation(int idline, int code); //delete station from the line travel
+        BO.LineStation DeleteStation(int idline, int code); //delete station from the line travel
         bool UpdateLine(BO.Line line);
         void AddOneTripLine(LineTrip line); //func that get new lineTrip and update the list at DS
-        void CreatAdjStations(int station1, int station2);
+        bool CreatAdjStations(int station1, int station2);
         double CalucateTravel(int lineId); //return the sum of time travel
         IEnumerable<object> DetailsOfStation(IEnumerable<LineStation> lineStations); //creat a new object in order to return all data on station
-         bool UpdateLineStationForIndexChange(BO.Line line);
-        bool UpdateLineStation(BO.Line line);
-       bool UpdateLineTrip(int oldTripLineIndex, BO.LineTrip newLineTrip);
+        IEnumerable<BO.LineStation> UpdateLineStationForIndexChange(BO.Line line);
+        // bool UpdateLineStation(BO.Line line);
+        IEnumerable<BO.LineStation> UpdateLineStation(BO.Line line);
+
+        bool UpdateLineTrip(int oldTripLineIndex, BO.LineTrip newLineTrip);
         void DeleteLineTrip(BO.LineTrip toDel);
+        IEnumerable<BO.Line> GetAllLineIndStation(int StationCode);
 
         #endregion
 

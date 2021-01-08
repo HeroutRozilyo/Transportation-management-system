@@ -1,15 +1,20 @@
-﻿<Page x:Class="PLGui.StationWindowP"
+﻿<Page
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:PLGui"
+      xmlns:BO="clr-namespace:BO;assembly=BL" x:Class="PLGui.StationWindowP"
       mc:Ignorable="d"
       Title="StationWindowP" Height="670" Width="935">
 
-    <Grid Margin="0,0,125,115" >
+    <Page.Resources>
+        <CollectionViewSource x:Key="stationViewSource" d:DesignSource="{d:DesignInstance {x:Type BO:Station}, CreateList=True}"/>
+    </Page.Resources>
 
-        <ListView x:Name="ListOfStations" HorizontalAlignment="Left" Height="353" Margin="35,160,0,0" VerticalAlignment="Top" Width="215" PreviewMouseDoubleClick="ListOfStations_PreviewMouseDoubleClick" >
+    <Grid Margin="0,0,125,115" DataContext="{StaticResource stationViewSource}" >
+
+        <ListView x:Name="ListOfStations" HorizontalAlignment="Left" Height="430" Margin="40,80,0,0" VerticalAlignment="Top" Width="215" PreviewMouseDoubleClick="ListOfStations_PreviewMouseDoubleClick" >
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Name" Width="145" DisplayMemberBinding="{Binding Name}"/>
@@ -18,10 +23,101 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button x:Name="Search" Content="Search" HorizontalAlignment="Left" Margin="175,135,0,0" VerticalAlignment="Top" Width="75" Click="Search_Click" DataContext="{Binding ElementName=textBoxTextBox, Path=Text}"/>
-        <TextBox x:Name="textBoxTextBox" HorizontalAlignment="Left" Height="30" Margin="40,130,0,0" TextWrapping="Wrap" Text="Search Station here...." PreviewKeyDown="textBoxTextBox_PreviewKeyDown" VerticalAlignment="Top" Width="130" PreviewTextInput="textBoxTextBox_PreviewTextInput" 
+        <Button x:Name="Search" Content="Search" HorizontalAlignment="Left" Margin="175,55,0,0" VerticalAlignment="Top" Width="75" Click="Search_Click" DataContext="{Binding Text, ElementName=textBoxTextBox}" RenderTransformOrigin="0.529,-0.194" Height="26"/>
+        <TextBox x:Name="textBoxTextBox" HorizontalAlignment="Left" Height="30" Margin="45,50,0,0" TextWrapping="Wrap" Text="Search Station here...." PreviewKeyDown="textBoxTextBox_PreviewKeyDown" VerticalAlignment="Top" Width="130" PreviewTextInput="textBoxTextBox_PreviewTextInput" 
            GotFocus="textBoxTextBox_GotFocus" LostFocus="textBoxTextBox_LostFocus"/>
-        <Label x:Name="NotExist" Content="מספר תחנה אינו קיים במערכת" HorizontalAlignment="Left" Height="35" Margin="105,90,0,0" VerticalAlignment="Top" Width="190" Foreground="#FFAC1515" RenderTransformOrigin="-0.367,1.99"/>
-        <ContentControl Content="ContentControl" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Label x:Name="NotExist" Content="מספר תחנה אינו קיים במערכת" HorizontalAlignment="Left" Height="35" Margin="56,20,0,0" VerticalAlignment="Top" Width="190" Foreground="#FFAC1515" RenderTransformOrigin="-0.367,1.99"/>
+        <Label x:Name="NOLine" Content=".בתחנה זו לא עוברים קווים עדיין" HorizontalAlignment="Left" Margin="595,153,0,0" VerticalAlignment="Top" Height="32" Width="180" Foreground="#FFAC1515"/>
+        <GroupBox x:Name="groupBox" Header="פרטי התחנה" HorizontalAlignment="Left" Height="245" Margin="270,60,0,0" VerticalAlignment="Top" Width="340">
+            <Grid x:Name="StationDataGrid" HorizontalAlignment="Left" Margin="56,23,0,0" VerticalAlignment="Top">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Label Content="Address:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+                <TextBox x:Name="addressTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="0" Text="{Binding Address, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                <Label Content="Code:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>
+                <TextBox x:Name="codeTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="1" Text="{Binding Code, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                <Label Content="Name:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
+                <TextBox x:Name="nameTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="2" Text="{Binding Name, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                <Label  Name="Sexist" Content="Add Station" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="5" VerticalAlignment="Center"/>
+                <CheckBox x:Name="stationExistCheckBox" Content="" Grid.Column="1" HorizontalAlignment="Left" IsChecked="{Binding StationExist, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="3" Grid.Row="5" VerticalAlignment="Center" Checked="stationExistCheckBox_Checked">
+                    <CheckBox.Style>
+                        <Style>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName= addressTextBox, Path=Text}" Value="">
+                                    <Setter Property="CheckBox.IsEnabled" Value="False"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding ElementName= codeTextBox, Path=Text}" Value="">
+                                    <Setter Property="CheckBox.IsEnabled" Value="False"/>
+                                </DataTrigger>
+
+                                <DataTrigger Binding="{Binding ElementName= nameTextBox, Path=Text}" Value="">
+                                    <Setter Property="CheckBox.IsEnabled" Value="False"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding ElementName= latitudeTextBox, Path=Text}" Value="">
+                                    <Setter Property="CheckBox.IsEnabled" Value="False"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding ElementName= longitudeTextBox, Path=Text}" Value="">
+                                    <Setter Property="CheckBox.IsEnabled" Value="False"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </CheckBox.Style>
+                    
+                </CheckBox>
+                <Label Content="Latitude:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="4" VerticalAlignment="Center"/>
+                <TextBox x:Name="latitudeTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="4" Text="{Binding Coordinate.Latitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                <Label Content="Longitude:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="3" VerticalAlignment="Center"/>
+                <TextBox x:Name="longitudeTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="3" Text="{Binding Coordinate.Longitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            </Grid>
+        </GroupBox>
+        <ListView x:Name="LineInStation" HorizontalAlignment="Right" Height="200" Margin="0,70,84.667,0" VerticalAlignment="Top" Width="90" >
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="קווים בתחנה"   DisplayMemberBinding="{Binding NumberLine}" Width="80"   />
+                </GridView>
+            </ListView.View>
+
+        </ListView>
+        <GroupBox x:Name="groupBox1" Header="תחנות עוקבות" HorizontalAlignment="Left" Height="190" Margin="270,310,0,0" VerticalAlignment="Top" Width="500"/>
+        <Grid HorizontalAlignment="Right" Height="415" Margin="0,110,-183.333,0" VerticalAlignment="Top" Width="210" >
+            <Grid.ColumnDefinitions>
+
+            </Grid.ColumnDefinitions>
+
+
+            <Button x:Name="UpdateStation" Content="עדכון פרטי תחנה" HorizontalAlignment="Right" Margin="0,65,4.667,0" VerticalAlignment="Top" Click="UpdateStation_Click" Height="65" Width="185" Grid.ColumnSpan="6"/>
+            <Button x:Name="DeleteStations" Content="מחיקת תחנה" HorizontalAlignment="Right" Margin="0,140,5,0" VerticalAlignment="Top"  Click="DeleteStations_Click" Height="65" Width="185" RenderTransformOrigin="0.217,0.5" />
+
+
+            <Button x:Name="AddStation" Content="הוספת תחנה" HorizontalAlignment="Right" Margin="0,220,5,0" VerticalAlignment="Top"  Click="AddStation_Click"  Height="70" Width="185">
+                <Button.Style>
+                    <Style>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ElementName= stationExistCheckBox, Path=!IsEnabled}" Value="false">
+                                <Setter Property="Button.IsEnabled" Value="False"/>
+                                </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+
+        </Grid>
+
+
+
+
+
+
+
     </Grid>
 </Page>

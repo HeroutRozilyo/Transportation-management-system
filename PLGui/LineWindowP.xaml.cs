@@ -58,7 +58,7 @@ namespace PLGui
 
         private void RefreshLine()
         {
-            egged = Convert(bl.GetLineByArea(area));//to make ObservableCollection
+            egged = Convert((bl.GetLineByArea(area)));//to make ObservableCollection
             ListOfLine.ItemsSource = egged;
 
 

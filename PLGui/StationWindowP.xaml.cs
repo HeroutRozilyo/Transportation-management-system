@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Device.Location;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,8 +24,12 @@ namespace PLGui
     public partial class StationWindowP : Page
     {
         private IBL bl;
+        IEnumerable<BO.Line> temp;
         private ObservableCollection<BO.Station> stations = new ObservableCollection<BO.Station>();
+
+        BO.Station addStation = new BO.Station();
         BO.Station stationData = new BO.Station();
+      
         public StationWindowP()
         {
             InitializeComponent();
@@ -34,8 +39,9 @@ namespace PLGui
         {
             InitializeComponent();
             this.bl = bl;
-            RefreshLine();
+            RefreshStation();
             NotExist.Visibility = Visibility.Hidden;
+         
             //  ListOfStations.ItemsSource = stations;
         }
 
@@ -44,15 +50,26 @@ namespace PLGui
             return new ObservableCollection<T>(listFromBO);
         }
 
-        private void RefreshLine()
+        private void RefreshStation()
         {
             stations = ConvertList(bl.GetAllStations());//to make ObservableCollection
             ListOfStations.ItemsSource = stations;
+            NOLine.Visibility = Visibility.Hidden;
+            LineInStation.Visibility = Visibility.Visible;
+            stationExistCheckBox.Visibility = Visibility.Hidden;
+            Sexist.Visibility = Visibility.Hidden;
+
+
+
         }
 
         private void ListOfStations_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-          //  stationData=bl.gets
+            add = true;
+            var list = (ListView)sender; //to get the line
+            stationData = list.SelectedItem as BO.Station;
+            RefreshLineInStation();
+
 
 
         }
@@ -76,6 +93,24 @@ namespace PLGui
                     NotExist.Visibility = Visibility.Visible;
                 }
             }
+        }
+        public void RefreshLineInStation()
+        {
+            
+            StationDataGrid.DataContext = stationData;
+            if (stationData != null)
+            {
+                 temp = bl.GetAllLineIndStation(stationData.Code);
+            }
+            if(temp!=null)
+            LineInStation.ItemsSource = temp;
+            else
+            {
+                NOLine.Visibility = Visibility.Visible;
+                LineInStation.Visibility = Visibility.Hidden;
+            }
+              
+
         }
 
         private void textBoxTextBox_PreviewKeyDown(object sender, KeyEventArgs e)
@@ -127,6 +162,89 @@ namespace PLGui
             if (textBoxTextBox.Text != "Search Station here...." && textBoxTextBox.Text != "")
                 numberText = textBoxTextBox.Text;
             textBoxTextBox.Text = "Search Station here....";
+        }
+
+        private void stationDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void UpdateStation_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void DeleteStations_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        bool add = false;
+        private void AddStation_Click(object sender, RoutedEventArgs e)
+        {
+            if (!add)
+            {
+               
+                stationData = null;
+                temp = null;
+                stationExistCheckBox.Visibility = Visibility.Visible;
+                Sexist.Visibility = Visibility.Visible;
+                add = true;
+                RefreshLineInStation();
+                
+            }
+            else
+            {
+                helpaAddStation();
+            }
+
+
+
+        }
+
+        private void helpaAddStation()
+        {
+            addStation.Address = addressTextBox.Text;
+            addStation.Code = Convert.ToInt32(codeTextBox.Text);
+            addStation.Coordinate = new GeoCoordinate(double.Parse((latitudeTextBox.Text)), double.Parse(longitudeTextBox.Text));
+            addStation.Name = nameTextBox.Text;
+            addStation.StationExist = (bool)stationExistCheckBox.IsChecked;
+        }
+
+        private void stationExistCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                BO.Station addStation = new BO.Station();
+                if (add == true)
+                {
+                    helpaAddStation();
+                    //addStation = StationDataGrid.DataContext as BO.Station;
+                    double latidude = double.Parse(latitudeTextBox.Text);
+                    double longi = double.Parse(longitudeTextBox.Text);
+                    addStation.Coordinate = new GeoCoordinate() ;
+                    addStation.Coordinate.Latitude = latidude;
+                    addStation.Coordinate.Longitude = longi;
+                    stationExistCheckBox.Visibility = Visibility.Hidden;
+                    Sexist.Visibility = Visibility.Hidden;
+                    bl.AddStation(addStation);
+                    stationData = addStation;
+                    RefreshStation();
+                    RefreshLineInStation();
+                    add = false;
+                }
+
+            }
+            catch(BO.BadCoordinateException a)
+            {
+                MessageBox.Show(a.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                Sexist.Visibility = Visibility.Visible;
+                stationExistCheckBox.Visibility = Visibility.Visible;
+                stationExistCheckBox.IsChecked = false;
+                add = true;
+            }
+            
+
+
         }
     }
 }

@@ -64,6 +64,11 @@ namespace PLGui
             bus = (buses.SelectedItem as BO.Bus);
             busesData.DataContext = bus;
             add = false;
+            Update2.IsEnabled = true;
+            send.IsEnabled = true;
+            fuel.IsEnabled = true;
+            DeleteBus1.IsEnabled = true;
+         
 
             ////
         }
@@ -137,15 +142,15 @@ namespace PLGui
                     send.IsEnabled = false;
                     fuel.IsEnabled = false;
                     DeleteBus1.IsEnabled = false;
-                    AddBus.IsEnabled = false;
+                   
 
                 }
                 else
                 if (LincestextBox.Text != "" && StartingDate.Text != "")
                 {
                     add = false;
-                    // HelpAddBus();
-                    newbus = GridDataBus.DataContext as BO.Bus;
+                     HelpAddBus();
+                   // newbus = GridDataBus.DataContext as BO.Bus;
                     bl.AddBus(newbus);
                     RefreshDataBus();
                     buses.SelectedIndex = egged.Count() - 1;
