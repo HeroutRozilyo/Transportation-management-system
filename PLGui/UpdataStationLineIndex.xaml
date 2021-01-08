@@ -4,11 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="UpdataStationLineIndex" Height="450" Width="800">
-    <Grid>
-        <Label x:Name="chooseIndex" Content="Choose the new Index of the Station in the Line" HorizontalAlignment="Left" Margin="247,85,0,0" VerticalAlignment="Top" Height="42" Width="308"/>
-        <ComboBox x:Name="IndexCOmboBox" HorizontalAlignment="Left" Margin="316,132,0,0" VerticalAlignment="Top" Width="120" ItemsSource="{Binding}"   SelectionChanged="IndexCOmboBox_SelectionChanged" />
-        
-     
+    
+        Title="UpdataStationLineIndex" Height="171.321" Width="374.547">
+    <Grid Height="116" VerticalAlignment="Top" HorizontalAlignment="Right" Width="320" Margin="0,0,36,0" >
+        <Label x:Name="chooseIndex" Content="Choose the new Index of the Station in the Line" HorizontalAlignment="Left" Margin="43,35,-31,0" VerticalAlignment="Top" Height="42" Width="308"/>
+        <ComboBox x:Name="IndexCOmboBox" Margin="129,72,107,0" VerticalAlignment="Top" ItemsSource="{Binding}"   SelectionChanged="IndexCOmboBox_SelectionChanged" />
+
+
     </Grid>
 </Window>

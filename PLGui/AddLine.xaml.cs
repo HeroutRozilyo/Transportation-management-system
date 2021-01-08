@@ -273,9 +273,29 @@ namespace PLGui
                             newLine.LineExist = true;
 
                           
-                            idLineFromDS = bl.AddLine(newLine);
+                         
+
+                            IEnumerable<BO.LineStation> insertAdjact = bl.AddLine(newLine);
+                            idLineFromDS = insertAdjact.ElementAt(0).LineId;
                             newLine.IdNumber = idLineFromDS;
-                           // newLine.TimeTravel = bl.CalucateTravel(idLineFromDS);
+
+                            int size = insertAdjact.Count();
+                            if (size != 0)
+                                MessageBox.Show(string.Format("כדי להשלים את הפעולה תצטרך להכניס פרטי מרחק וזמן נסיעה ל{0} תחנות העוקבות החדשות", size), "פרטי תחנה עוקבת", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                            foreach (var item in insertAdjact)
+                            {
+                                DataAdjact addl = new DataAdjact(item);
+                                
+                            
+                                bool? r = addl.ShowDialog();
+                                if (r != null)
+                                {
+                                    BO.LineStation newline = addl.NewLine;
+
+                                }
+                            }
+                    
                             MessageBox.Show("The line was successfully added to the system", "Success Message", MessageBoxButton.OK, MessageBoxImage.Asterisk);
                             this.DialogResult = true;
                             this.Close();
@@ -359,6 +379,7 @@ namespace PLGui
 
         private void updataStationLine_Click(object sender, RoutedEventArgs e)
         {
+           
             try
             {
                 MessageBoxResult result = MessageBox.Show("You sure you want to update that line station?", "update Message", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
@@ -373,7 +394,21 @@ namespace PLGui
                             }
                          
                         
-                            bl.UpdateLineStation(line);
+                            IEnumerable<BO.LineStation> insertAdjact= bl.UpdateLineStation(line);
+                            int size = insertAdjact.Count();
+                            if(size!=0)
+                                MessageBox.Show(string.Format("כדי להשלים את הפעולה תצטרך להכניס פרטי מרחק וזמן נסיעה ל{0} תחנות העוקבות החדשות",size),"פרטי תחנה עוקבת", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                            foreach (var item in insertAdjact)
+                            {
+                                DataAdjact addl = new DataAdjact(item);
+                                bool? r = addl.ShowDialog();
+                                if (r != null)
+                                {
+                                    BO.LineStation newline = addl.NewLine;
+                         
+                                }
+                            }
                             this.DialogResult = true;
                             this.Close();
 
