@@ -35,17 +35,18 @@ namespace PLGui
             InitializeComponent();
             this.bl = bl;
             RefreshLine();
+            NotExist.Visibility = Visibility.Hidden;
             //  ListOfStations.ItemsSource = stations;
         }
 
-        public ObservableCollection<T> Convert<T>(IEnumerable<T> listFromBO)
+        public ObservableCollection<T> ConvertList<T>(IEnumerable<T> listFromBO)
         {
             return new ObservableCollection<T>(listFromBO);
         }
 
         private void RefreshLine()
         {
-            stations = Convert(bl.GetAllStations());//to make ObservableCollection
+            stations = ConvertList(bl.GetAllStations());//to make ObservableCollection
             ListOfStations.ItemsSource = stations;
         }
 
@@ -54,6 +55,78 @@ namespace PLGui
           //  stationData=bl.gets
 
 
+        }
+
+        private void Search_Click(object sender, RoutedEventArgs e)
+        {
+            if (numberText != null)
+            {
+                int Sera = Convert.ToInt32(numberText);
+                BO.Station SearchResult = bl.GetStationByCode(Sera);
+                if (SearchResult != null)
+                {
+                    ObservableCollection<BO.Station> a = new ObservableCollection<BO.Station>();
+                    a.Add(SearchResult);
+                    ListOfStations.ItemsSource = a;
+
+                }
+                else
+                {
+                    ListOfStations.ItemsSource = stations;
+                    NotExist.Visibility = Visibility.Visible;
+                }
+            }
+        }
+
+        private void textBoxTextBox_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Return)
+            {
+                
+                TextBox text = sender as TextBox;
+                int lineSteation = int.Parse(text.Text) ;
+               BO.Station SearchResult= bl.GetStationByCode(lineSteation);
+                if (SearchResult != null)
+                {
+                    ObservableCollection<BO.Station> a = new ObservableCollection<BO.Station>();
+                    a.Add(SearchResult);
+                    ListOfStations.ItemsSource = a;
+
+                }
+                else
+                {
+                    ListOfStations.ItemsSource = stations;
+                    NotExist.Visibility = Visibility.Visible;
+                }
+               
+
+            }
+            if(e.Key==Key.Back)
+            {
+                NotExist.Visibility = Visibility.Hidden;
+                ListOfStations.ItemsSource = stations;
+            }
+        }
+
+        private void textBoxTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !e.Text.Any(x => Char.IsDigit(x));
+        }
+
+      
+        
+
+        private void textBoxTextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            ListOfStations.ItemsSource = stations;
+            textBoxTextBox.Text = null;
+        }
+        string numberText;
+        private void textBoxTextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (textBoxTextBox.Text != "Search Station here...." && textBoxTextBox.Text != "")
+                numberText = textBoxTextBox.Text;
+            textBoxTextBox.Text = "Search Station here....";
         }
     }
 }
