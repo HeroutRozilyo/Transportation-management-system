@@ -42,10 +42,10 @@ namespace BlAPI
         // bool UpdateLineStation(BO.Line line);
         IEnumerable<BO.LineStation> UpdateLineStation(BO.Line line);
 
-        bool UpdateLineTrip(int oldTripLineIndex, BO.LineTrip newLineTrip);
+       bool UpdateLineTrip(int oldTripLineIndex, BO.LineTrip newLineTrip);
         void DeleteLineTrip(BO.LineTrip toDel);
         IEnumerable<BO.Line> GetAllLineIndStation(int StationCode);
-
+        void AddAdjactStation(BO.LineStation line);
         #endregion
 
         #region Station

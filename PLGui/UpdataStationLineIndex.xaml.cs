@@ -50,7 +50,12 @@ namespace PLGui
             numberIndex = from item in line.StationsOfBus
                           select item.LineStationIndex;
             IndexCOmboBox.ItemsSource = Convert<int>(numberIndex);
-            
+
+          
+
+
+
+
 
 
 
@@ -73,13 +78,32 @@ namespace PLGui
                             BO.LineStation change = line.StationsOfBus.ToList().Find(b => b.LineStationIndex == temp.LineStationIndex && b.StationCode == b.StationCode);
                             List<BO.LineStation> help = line.StationsOfBus.ToList();
                             help.RemoveAt(help.FindIndex(b => b.LineStationIndex == temp.LineStationIndex && b.StationCode == b.StationCode));
-                            change.LineStationIndex = IndexCOmboBox.SelectedIndex
-                                +1;
+                            change.LineStationIndex = IndexCOmboBox.SelectedIndex+1;
                             help.Add(change);
 
                             line.StationsOfBus = from item in help
                                                  select item;
-                            bl.UpdateLineStationForIndexChange(line);
+                           IEnumerable<BO.LineStation> insertAdjact = bl.UpdateLineStationForIndexChange(line);
+
+                            int size = insertAdjact.Count();
+                            if (size != 0)
+                                MessageBox.Show(string.Format("כדי להשלים את הפעולה תצטרך להכניס פרטי מרחק וזמן נסיעה ל{0} תחנות העוקבות החדשות", size), "פרטי תחנה עוקבת", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                            foreach (var item in insertAdjact)
+                            {
+                                DataAdjact addl = new DataAdjact(item);
+                                bool? r = addl.ShowDialog();
+                                if (r != null)
+                                {
+                                    BO.LineStation newline = addl.NewLine;
+
+                                }
+                            }
+
+
+
+
+
                             this.Close();
                             break;//
                         }
