@@ -114,7 +114,7 @@ namespace PLGui
                 BeforAfter();
                 Befor.ItemsSource = beforAdj;
                 After.ItemsSource = afterAdj;
-
+                //
             }
 
 
