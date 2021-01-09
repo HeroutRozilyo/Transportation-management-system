@@ -1315,13 +1315,6 @@ namespace BL
             return userBO;
         }
 
-        //public BO.User GetUser(string name)
-        //{
-
-
-
-
-        //}
 
 
 
