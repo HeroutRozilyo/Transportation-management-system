@@ -1280,7 +1280,7 @@ namespace BL
 
                         dl.UpdateLineStationsCode(list.ElementAt(0), newCode);
                     }
-                }
+                }//
 
             }
             catch (DO.WrongIDExeption ex)
