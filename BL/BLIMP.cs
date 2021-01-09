@@ -1202,7 +1202,7 @@ namespace BL
             }
         }
 
-        public void UpdateStation(BO.Station station)
+        public void UpdateStation(BO.Station station,int oldCode)
         {
             double speed = 13.89;//m/s= 50 km/h
 
@@ -1215,18 +1215,19 @@ namespace BL
 
 
                 station.CopyPropertiesTo(stationDO);
+                stationDO.Coordinate = new GeoCoordinate(station.Coordinate.Latitude, station.Coordinate.Longitude);
 
                 if (station.Coordinate.Latitude >= 29.3 && station.Coordinate.Latitude <= 33.5 && station.Coordinate.Longitude >= 33.7 && station.Coordinate.Longitude <= 36.3)
                 {
-                    stationOldDO = dl.GetStations(station.Code);
-                    dl.UpdateStations(stationDO);
+                    stationOldDO = dl.GetStations(oldCode);
+                    dl.UpdateStations(stationDO,oldCode);
 
                     if (stationOldDO.Coordinate != station.Coordinate)
                     {
-                        IEnumerable<DO.AdjacentStations> adjacentStations = dl.GetAllAdjacentStations(station.Code);
+                        IEnumerable<DO.AdjacentStations> adjacentStations = dl.GetAllAdjacentStations(oldCode);
                         foreach (var item in adjacentStations)
                         {
-                            if (item.Station1 != station.Code)
+                            if (item.Station1 != oldCode)
                             {
                                 stationOldDO = dl.GetStations(item.Station1);
 
@@ -1243,10 +1244,10 @@ namespace BL
                                 ST = dl.GetStations(item.Station2);
                             }
 
-                            double d = (station.Coordinate).GetDistanceTo((ST.Coordinate));
-                            adjacent.Distance = d;
+                            //double d = (station.Coordinate).GetDistanceTo((ST.Coordinate));
+                            //adjacent.Distance = d;
 
-                            adjacent.TimeAverage = ((1.5 * d) / speed);
+                            //adjacent.TimeAverage = ((1.5 * d) / speed);
                             dl.UpdateAdjacentStations(adjacent);
                         }
 

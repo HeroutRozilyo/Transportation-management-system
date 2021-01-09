@@ -14,7 +14,7 @@
 
     <Grid Margin="0,0,125,115" DataContext="{StaticResource stationViewSource}" >
 
-        <ListView x:Name="ListOfStations" HorizontalAlignment="Left" Height="430" Margin="40,80,0,0" VerticalAlignment="Top" Width="215" PreviewMouseDoubleClick="ListOfStations_PreviewMouseDoubleClick" >
+        <ListView x:Name="ListOfStations" HorizontalAlignment="Left" Height="430" Margin="4,80,0,0" VerticalAlignment="Top" Width="215" PreviewMouseDoubleClick="ListOfStations_PreviewMouseDoubleClick" >
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Name" Width="145" DisplayMemberBinding="{Binding Name}"/>
@@ -23,12 +23,12 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button x:Name="Search" Content="Search" HorizontalAlignment="Left" Margin="175,55,0,0" VerticalAlignment="Top" Width="75" Click="Search_Click" DataContext="{Binding Text, ElementName=textBoxTextBox}" RenderTransformOrigin="0.529,-0.194" Height="26"/>
-        <TextBox x:Name="textBoxTextBox" HorizontalAlignment="Left" Height="30" Margin="45,50,0,0" TextWrapping="Wrap" Text="Search Station here...." PreviewKeyDown="textBoxTextBox_PreviewKeyDown" VerticalAlignment="Top" Width="130" PreviewTextInput="textBoxTextBox_PreviewTextInput" 
+        <Button x:Name="Search" Content="Search" HorizontalAlignment="Left" Margin="151,55,0,0" VerticalAlignment="Top" Width="75" Click="Search_Click" DataContext="{Binding Text, ElementName=textBoxTextBox}" RenderTransformOrigin="0.529,-0.194" Height="26"/>
+        <TextBox x:Name="textBoxTextBox" HorizontalAlignment="Left" Height="30" Margin="15,50,0,0" TextWrapping="Wrap" Text="Search Station here...." PreviewKeyDown="textBoxTextBox_PreviewKeyDown" VerticalAlignment="Top" Width="130" PreviewTextInput="textBoxTextBox_PreviewTextInput" 
            GotFocus="textBoxTextBox_GotFocus" LostFocus="textBoxTextBox_LostFocus"/>
-        <Label x:Name="NotExist" Content="מספר תחנה אינו קיים במערכת" HorizontalAlignment="Left" Height="35" Margin="56,20,0,0" VerticalAlignment="Top" Width="190" Foreground="#FFAC1515" RenderTransformOrigin="-0.367,1.99"/>
-        <Label x:Name="NOLine" Content=".בתחנה זו לא עוברים קווים עדיין" HorizontalAlignment="Left" Margin="595,153,0,0" VerticalAlignment="Top" Height="32" Width="180" Foreground="#FFAC1515"/>
-        <GroupBox x:Name="groupBox" Header="פרטי התחנה" HorizontalAlignment="Left" Height="245" Margin="270,60,0,0" VerticalAlignment="Top" Width="340">
+        <Label x:Name="NotExist" Content="מספר תחנה אינו קיים במערכת" HorizontalAlignment="Left" Height="35" Margin="22,20,0,0" VerticalAlignment="Top" Width="190" Foreground="#FFAC1515" RenderTransformOrigin="-0.367,1.99"/>
+        <Label x:Name="NOLine" Content=".בתחנה זו לא עוברים קווים עדיין" HorizontalAlignment="Left" Margin="593,152,0,0" VerticalAlignment="Top" Height="32" Width="180" Foreground="#FFAC1515"/>
+        <GroupBox x:Name="groupBox" Header="פרטי התחנה" HorizontalAlignment="Left" Height="245" Margin="254,60,0,0" VerticalAlignment="Top" Width="340">
             <Grid x:Name="StationDataGrid" HorizontalAlignment="Left" Margin="56,23,0,0" VerticalAlignment="Top">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
@@ -48,7 +48,7 @@
                 <TextBox x:Name="codeTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="1" Text="{Binding Code, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
                 <Label Content="Name:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
                 <TextBox x:Name="nameTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="2" Text="{Binding Name, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-                <Label  Name="Sexist" Content="Add Station" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="5" VerticalAlignment="Center"/>
+                <Label  Name="Sexist" Content="הוספה" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="5" VerticalAlignment="Center"/>
                 <CheckBox x:Name="stationExistCheckBox" Content="" Grid.Column="1" HorizontalAlignment="Left" IsChecked="{Binding StationExist, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="3" Grid.Row="5" VerticalAlignment="Center" Checked="stationExistCheckBox_Checked">
                     <CheckBox.Style>
                         <Style>
@@ -74,13 +74,15 @@
                     </CheckBox.Style>
                     
                 </CheckBox>
+                
+                
                 <Label Content="Latitude:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="4" VerticalAlignment="Center"/>
                 <TextBox x:Name="latitudeTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="4" Text="{Binding Coordinate.Latitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
                 <Label Content="Longitude:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="3" VerticalAlignment="Center"/>
                 <TextBox x:Name="longitudeTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="3" Text="{Binding Coordinate.Longitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
             </Grid>
         </GroupBox>
-        <ListView x:Name="LineInStation" HorizontalAlignment="Right" Height="200" Margin="0,70,84.667,0" VerticalAlignment="Top" Width="90" >
+        <ListView x:Name="LineInStation" HorizontalAlignment="Right" Height="200" Margin="0,70,104.667,0" VerticalAlignment="Top" Width="90" >
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="קווים בתחנה"   DisplayMemberBinding="{Binding NumberLine}" Width="80"   />
@@ -88,7 +90,7 @@
             </ListView.View>
 
         </ListView>
-        <GroupBox x:Name="groupBox1" Header="תחנות עוקבות" HorizontalAlignment="Left" Height="190" Margin="270,310,0,0" VerticalAlignment="Top" Width="500"/>
+        <GroupBox x:Name="groupBox1" Header="תחנות עוקבות" HorizontalAlignment="Left" Height="190" Margin="238,310,0,0" VerticalAlignment="Top" Width="500"/>
         <Grid HorizontalAlignment="Right" Height="415" Margin="0,110,-183.333,0" VerticalAlignment="Top" Width="210" >
             <Grid.ColumnDefinitions>
 
@@ -103,7 +105,7 @@
                 <Button.Style>
                     <Style>
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding ElementName= stationExistCheckBox, Path=!IsEnabled}" Value="false">
+                            <DataTrigger Binding="{Binding ElementName= stationExistCheckBox, Path=Visibility}" Value="Visible">
                                 <Setter Property="Button.IsEnabled" Value="False"/>
                                 </DataTrigger>
                         </Style.Triggers>

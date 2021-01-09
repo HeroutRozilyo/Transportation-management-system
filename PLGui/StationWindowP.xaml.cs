@@ -26,7 +26,7 @@ namespace PLGui
         private IBL bl;
         IEnumerable<BO.Line> temp;
         private ObservableCollection<BO.Station> stations = new ObservableCollection<BO.Station>();
-
+        int oldCode;
         BO.Station addStation = new BO.Station();
         BO.Station stationData = new BO.Station();
       
@@ -65,7 +65,7 @@ namespace PLGui
 
         private void ListOfStations_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            add = true;
+            add = false;
             var list = (ListView)sender; //to get the line
             stationData = list.SelectedItem as BO.Station;
             RefreshLineInStation();
@@ -98,18 +98,23 @@ namespace PLGui
         {
             
             StationDataGrid.DataContext = stationData;
+           
             if (stationData != null)
             {
-                 temp = bl.GetAllLineIndStation(stationData.Code);
+                oldCode = stationData.Code;
+                temp = bl.GetAllLineIndStation(stationData.Code);
+               
             }
-            if(temp!=null)
-            LineInStation.ItemsSource = temp;
+            if (temp!=null&&temp.Count() > 0)
+                LineInStation.ItemsSource = temp;
             else
             {
                 NOLine.Visibility = Visibility.Visible;
                 LineInStation.Visibility = Visibility.Hidden;
             }
-              
+
+
+
 
         }
 
@@ -169,14 +174,38 @@ namespace PLGui
 
         }
 
-        private void UpdateStation_Click(object sender, RoutedEventArgs e)
+        private void UpdateStation_Click(object sender, RoutedEventArgs e)//////////
         {
+            try
+            {
+              
+                helpaAddStation();
+                bl.UpdateStation(addStation,oldCode);
+            }
+            catch (BO.BadCoordinateException a)
+            {
+                MessageBox.Show(a.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                Sexist.Visibility = Visibility.Visible;
+                stationExistCheckBox.Visibility = Visibility.Visible;
+                stationExistCheckBox.IsChecked = false;
+                add = true;
+            }
 
         }
 
         private void DeleteStations_Click(object sender, RoutedEventArgs e)
         {
-
+            try
+            {
+                bl.DeleteStation(oldCode);
+                RefreshStation();
+                RefreshLineInStation();
+            }
+            catch (BO.BadCoordinateException a)
+            {
+                MessageBox.Show(a.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+               
+            }
         }
         bool add = false;
         private void AddStation_Click(object sender, RoutedEventArgs e)
@@ -192,10 +221,7 @@ namespace PLGui
                 RefreshLineInStation();
                 
             }
-            else
-            {
-                helpaAddStation();
-            }
+            
 
 
 
@@ -214,16 +240,12 @@ namespace PLGui
         {
             try
             {
-                BO.Station addStation = new BO.Station();
+                
                 if (add == true)
                 {
                     helpaAddStation();
                     //addStation = StationDataGrid.DataContext as BO.Station;
-                    double latidude = double.Parse(latitudeTextBox.Text);
-                    double longi = double.Parse(longitudeTextBox.Text);
-                    addStation.Coordinate = new GeoCoordinate() ;
-                    addStation.Coordinate.Latitude = latidude;
-                    addStation.Coordinate.Longitude = longi;
+                    
                     stationExistCheckBox.Visibility = Visibility.Hidden;
                     Sexist.Visibility = Visibility.Hidden;
                     bl.AddStation(addStation);

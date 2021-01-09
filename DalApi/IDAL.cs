@@ -37,7 +37,7 @@ namespace DALAPI
         IEnumerable<DO.Stations> GetAllStationsBy(Predicate<DO.Stations> Stationscondition);
         void AddStations(DO.Stations station);
         void DeleteStations(int code);
-        void UpdateStations(DO.Stations stations);
+        void UpdateStations(DO.Stations stations,int oldCode);
         #endregion Stations
 
         #region LineTrip

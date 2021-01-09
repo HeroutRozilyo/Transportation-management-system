@@ -220,16 +220,16 @@ namespace DL
                 throw new DO.WrongIDExeption(code, "Code station not exsis");//////////////////////////////////////////////////////
         }
 
-        public void UpdateStations(DO.Stations stations)
+        public void UpdateStations(DO.Stations stations1,int OldCode)
         {
-            DO.Stations station = DataSource.ListStations.Find(b => b.Code == stations.Code && b.StationExist);
+            DO.Stations station = DataSource.ListStations.Find(b => b.Code == OldCode && b.StationExist);
             if (station != null)
             {
                 DataSource.ListStations.Remove(station);
-                DataSource.ListStations.Add(stations.Clone());
+                DataSource.ListStations.Add(stations1.Clone());
             }
             else
-                throw new DO.WrongIDExeption(stations.Code, "Code station not exsis");///////////////////////////////////////////////////////
+                throw new DO.WrongIDExeption(OldCode, "Code station not exsis");///////////////////////////////////////////////////////
         }
 
         #endregion Stations
@@ -456,13 +456,17 @@ namespace DL
             else
                 throw new DO.WrongIDExeption(Scode1, "Code not exsis");//////////////////////////////////////////////////////
         }
-        public void DeleteAdjacentStationseBStation(int Scode1)
+        public void DeleteAdjacentStationseBStation(int Scode1)////
         {
-            foreach (DO.AdjacentStations item in DataSource.ListAdjacentStations)
+
+            var v = from item in DataSource.ListAdjacentStations
+                    where (item.Station1 == Scode1 || item.Station2 == Scode1)
+                    select item.Clone();
+            foreach (DO.AdjacentStations item in v)
             {
-                if (item.Station1 == Scode1 || item.Station2 == Scode1)
-                    DataSource.ListAdjacentStations.Remove(item);
+                DataSource.ListAdjacentStations.Remove(item);
             }
+
 
         }
 
