@@ -69,6 +69,8 @@ namespace DALAPI
         void DeleteStationsOfLine(int idline); //we use here at foreach because it more effective. when we delete line we need delete all his stations
 
         void UpdateLineStations(DO.LineStation linestations);
+
+        void UpdateLineStationsCode(DO.LineStation linestations, int oldCode);
         #endregion LineStation
 
         #region AdjeacentStations
