@@ -41,8 +41,8 @@ namespace PLGui
             this.bl = bl;
             RefreshStation();
             NotExist.Visibility = Visibility.Hidden;
-         
-            //  ListOfStations.ItemsSource = stations;
+
+       
         }
 
         public ObservableCollection<T> ConvertList<T>(IEnumerable<T> listFromBO)
@@ -54,10 +54,12 @@ namespace PLGui
         {
             stations = ConvertList(bl.GetAllStations());//to make ObservableCollection
             ListOfStations.ItemsSource = stations;
-            NOLine.Visibility = Visibility.Hidden;
-            LineInStation.Visibility = Visibility.Visible;
+           // NOLine.Visibility = Visibility.Hidden;
+           // LineInStation.Visibility = Visibility.Visible;
             stationExistCheckBox.Visibility = Visibility.Hidden;
             Sexist.Visibility = Visibility.Hidden;
+           
+         
 
 
 
@@ -68,6 +70,7 @@ namespace PLGui
             add = false;
             var list = (ListView)sender; //to get the line
             stationData = list.SelectedItem as BO.Station;
+           
             RefreshLineInStation();
 
 
@@ -96,22 +99,22 @@ namespace PLGui
         }
         public void RefreshLineInStation()
         {
-            
-            StationDataGrid.DataContext = stationData;
            
+            StationDataGrid.DataContext = stationData;
+            temp = null;
             if (stationData != null)
             {
                 oldCode = stationData.Code;
                 temp = bl.GetAllLineIndStation(stationData.Code);
                
             }
-            if (temp!=null&&temp.Count() > 0)
+
+          
                 LineInStation.ItemsSource = temp;
-            else
-            {
-                NOLine.Visibility = Visibility.Visible;
-                LineInStation.Visibility = Visibility.Hidden;
-            }
+           
+
+
+
 
 
 
@@ -160,6 +163,10 @@ namespace PLGui
         {
             ListOfStations.ItemsSource = stations;
             textBoxTextBox.Text = null;
+            ListOfStations.SelectedIndex = -1;
+            stationData = null;
+            RefreshLineInStation();
+
         }
         string numberText;
         private void textBoxTextBox_LostFocus(object sender, RoutedEventArgs e)
@@ -180,7 +187,23 @@ namespace PLGui
             {
               
                 helpaAddStation();
-                bl.UpdateStation(addStation,oldCode);
+                IEnumerable<BO.AdjacentStations> insertAdjact = bl.UpdateStation(addStation, oldCode);
+
+                int size = insertAdjact.Count();
+                if (size != 0)
+                    MessageBox.Show(string.Format("כדי להשלים את הפעולה תצטרך להכניס פרטי מרחק וזמן נסיעה ל{0} תחנות העוקבות החדשות", size), "פרטי תחנה עוקבת", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                foreach (var item in insertAdjact)
+                {
+                    DataAdjact addl = new DataAdjact(item);
+
+                    bool? r = addl.ShowDialog();
+                    if (r != null)
+                    {
+                        //     BO.LineStation newline = addl.NewLine;
+
+                    }
+                }
             }
             catch (BO.BadCoordinateException a)
             {
@@ -198,8 +221,10 @@ namespace PLGui
             try
             {
                 bl.DeleteStation(oldCode);
+                stationData = null;
                 RefreshStation();
                 RefreshLineInStation();
+               
             }
             catch (BO.BadCoordinateException a)
             {
@@ -212,8 +237,8 @@ namespace PLGui
         {
             if (!add)
             {
-               
-                stationData = null;
+                ListOfStations.SelectedIndex = -1;
+                 stationData = null;
                 temp = null;
                 stationExistCheckBox.Visibility = Visibility.Visible;
                 Sexist.Visibility = Visibility.Visible;
@@ -234,6 +259,7 @@ namespace PLGui
             addStation.Coordinate = new GeoCoordinate(double.Parse((latitudeTextBox.Text)), double.Parse(longitudeTextBox.Text));
             addStation.Name = nameTextBox.Text;
             addStation.StationExist = (bool)stationExistCheckBox.IsChecked;
+          
         }
 
         private void stationExistCheckBox_Checked(object sender, RoutedEventArgs e)
@@ -268,5 +294,23 @@ namespace PLGui
 
 
         }
+
+        private void codeTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !e.Text.Any(x => Char.IsDigit(x) );
+        }
+
+        private void longitudeTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !e.Text.Any(x => Char.IsDigit(x) || '.'.Equals(x));
+        }
+
+        private void latitudeTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !e.Text.Any(x => Char.IsDigit(x) || '.'.Equals(x));
+           
+        }
+
+       
     }
 }
