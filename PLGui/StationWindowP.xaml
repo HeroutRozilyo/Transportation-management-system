@@ -8,7 +8,7 @@
       mc:Ignorable="d"
       Title="StationWindowP" Height="670" Width="935">
 
-    
+
 
     <Grid Margin="0,0,125,115">
 
@@ -90,10 +90,10 @@
                             </Style.Triggers>
                         </Style>
                     </CheckBox.Style>
-                    
+
                 </CheckBox>
-                
-                
+
+
                 <Label Content="Latitude:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="4" VerticalAlignment="Center"/>
                 <TextBox x:Name="latitudeTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="4" Text="{Binding Coordinate.Latitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" PreviewTextInput="latitudeTextBox_PreviewTextInput"/>
                 <Label Content="Longitude:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="3" VerticalAlignment="Center"/>
@@ -119,7 +119,47 @@
                 </Style>
             </ListView.Style>
         </ListView>
-        <GroupBox x:Name="groupBox1" Header="תחנות עוקבות" HorizontalAlignment="Left" Height="190" Margin="206,310,0,0" VerticalAlignment="Top" Width="500"/>
+        <GroupBox x:Name="AdjStation" Header="תחנות עוקבות" HorizontalAlignment="Left" Height="215" Margin="211,325,0,0" VerticalAlignment="Top" Width="584" >
+            <Grid HorizontalAlignment="Left" Height="185" Margin="-1,15,-7,-8.667" VerticalAlignment="Top" Width="580">
+                <ListView x:Name="Befor" Height="150" Margin="284,27,21,0" VerticalAlignment="Top">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="מספר תחנה"  Width="70" DisplayMemberBinding="{Binding Station1}"/>
+                            <GridViewColumn Header="מרחק"  Width="70" DisplayMemberBinding="{Binding Distance}"/>
+                            <GridViewColumn Header="זמן נסיעה"  Width="70" DisplayMemberBinding="{Binding TimeAverage}"/>
+                            <GridViewColumn  Width="70">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button x:Name="UpdataDT" Content="עדכון" Click="UpdataDT_Click"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                <ListView x:Name="After" Height="150" Margin="4,27,301,0" VerticalAlignment="Top">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="מספר תחנה"  Width="70" DisplayMemberBinding="{Binding Station2}"/>
+                            <GridViewColumn Header="מרחק"  Width="70" DisplayMemberBinding="{Binding Distance}"/>
+                            <GridViewColumn Header="זמן נסיעה"  Width="70" DisplayMemberBinding="{Binding TimeAverage}"/>
+                            <GridViewColumn  Width="70">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button x:Name="UpdataDT" Content="עדכון" Click="UpdataDT_Click"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                <Label x:Name="labelBefor" Content=":לפני" HorizontalAlignment="Left" Margin="520,3,-30,0" VerticalAlignment="Top" Height="30" Width="90"/>
+                <Label x:Name="labelAfter" Content=":אחרי" HorizontalAlignment="Left" Margin="235,3,0,0" VerticalAlignment="Top" Height="30" Width="90"/>
+            </Grid>
+        </GroupBox>
+
         <Grid HorizontalAlignment="Right" Height="415" Margin="0,110,-183.333,0" VerticalAlignment="Top" Width="210" >
             <Grid.ColumnDefinitions>
 
@@ -155,7 +195,7 @@
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding ElementName= stationExistCheckBox, Path=Visibility}" Value="Visible">
                                 <Setter Property="Button.IsEnabled" Value="False"/>
-                                </DataTrigger>
+                            </DataTrigger>
                         </Style.Triggers>
                     </Style>
                 </Button.Style>

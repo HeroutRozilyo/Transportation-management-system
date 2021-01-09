@@ -242,7 +242,8 @@ namespace PLGui
         {
             convertStation.LineStationExist = true;
             GetLineStations.Add(convertStation);
-            GetStations.Remove(ToAdd);
+            Station check = GetStations.ToList().Find(b => b.StationExist && b.Code == ToAdd.Code);
+            GetStations.Remove(check);
             RefreshLineStation();
             RefreshStation();
         }
