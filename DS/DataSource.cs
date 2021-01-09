@@ -28,7 +28,7 @@ namespace DS
 
         static void InitAllLists()
         {
-            double speed = 13.89;//m/s- 50 km/h
+            double speed = 666.66;//m/s- 40 km/h
 
 
 

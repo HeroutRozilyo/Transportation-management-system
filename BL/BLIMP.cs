@@ -1033,6 +1033,8 @@ namespace BL
 
         }
 
+
+
         public double CalucateTravel(int lineId)
         {
             IEnumerable<DO.LineStation> tempDO;
@@ -1044,8 +1046,9 @@ namespace BL
                     select item;
             for (int i = 0; i < (tempDO.Count() - 1); i++)
             {
-                adj = dl.GetAdjacentStations(v.ElementAt(i).StationCode, v.ElementAt((i + 1)).StationCode);
+               adj = dl.GetAdjacentStations(v.ElementAt(i).StationCode, v.ElementAt((i + 1)).StationCode);               
                 sum += adj.TimeAverage;
+               
             }
 
             return sum;
