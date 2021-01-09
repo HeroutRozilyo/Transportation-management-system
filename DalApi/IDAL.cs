@@ -86,6 +86,8 @@ namespace DALAPI
 
         void UpdateAdjacentStations(DO.AdjacentStations adjacentStations);
 
+        void UpdateAdjacentStations(int code1, int code2, int codeChange,int oldCode); //when we change the number code of the station
+
         #endregion AdjeacentStations
 
         #region User

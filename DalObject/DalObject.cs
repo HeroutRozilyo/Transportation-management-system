@@ -422,9 +422,10 @@ namespace DL
 
         public IEnumerable<DO.AdjacentStations> GetAllAdjacentStations(int stationCode) //return all the AdjacentStations that we have for this station code
         {
-            return from station in DataSource.ListAdjacentStations
+            var v =from station in DataSource.ListAdjacentStations
                    where (stationCode == station.Station1|| stationCode == station.Station2)
                    select station.Clone();
+            return v;
         }
 
 
@@ -481,10 +482,28 @@ namespace DL
             else
                 throw new DO.WrongIDExeption(adjacentStations.Station1, "Code not exsis");///////////////////////////////////////////////////////
         }
+
+
+        public void UpdateAdjacentStations(int code1,int code2,int codeChange, int oldCode)
+        {
+            DO.AdjacentStations station = DataSource.ListAdjacentStations.Find(b => b.Station1 == code1 && b.Station2 == code2);
+            if (station != null)
+            {
+                DataSource.ListAdjacentStations.Remove(station);
+                if (station.Station1 == oldCode)
+                    station.Station1 = codeChange;
+                else
+                    station.Station2 = codeChange;
+
+                DataSource.ListAdjacentStations.Add(station);
+            }
+            else
+                throw new DO.WrongIDExeption(code1, "Code not exsis");///////////////////////////////////////////////////////
+        }
         #endregion AdjacentStations
 
         #region User
-     
+
         public DO.User GetUser(string name) //check if the user exsis according to the name
         {
             DO.User user = DataSource.ListUsers.Find(b => b.UserName == name && b.UserExist);

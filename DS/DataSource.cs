@@ -2000,33 +2000,10 @@ namespace DS
 #endregion LineId1
                 
                 #region lineId2
-                new AdjacentStations
-                {
-                    Station1=85,
-                    Station2= 86,
-                   Distance=181.343172558381,
-                    TimeAverage= ((1.5*181.343172558381)/speed)
-                },
-
-                new AdjacentStations
-                {
-                    Station1=86,
-                    Station2= 88,
-                   Distance=338.193775824042,
-                    TimeAverage= ((1.5*338.193775824042)/speed)
 
 
-                },
 
-                new AdjacentStations
-                {
-                    Station1=88,
-                    Station2= 89,
-                   Distance=839.108713036705,
-                    TimeAverage=((1.5*839.108713036705)/speed)
-
-
-                },
+        
 
                 new AdjacentStations
                 {
@@ -2204,54 +2181,8 @@ namespace DS
 
                 },
 
-                new AdjacentStations
-                {
-                    Station1=1524,
-                    Station2= 1523,
-                   Distance=140.492280736979,
-                   TimeAverage=((1.5*140.492280736979)/speed)
-
-
-                },
-
-                new AdjacentStations
-                {
-                    Station1=1523,
-                    Station2= 1522,
-                   Distance=710.578511572254,
-                   TimeAverage= ((1.5*710.578511572254)/speed)
-
-
-                },
-
-                new AdjacentStations
-                {
-                    Station1=1522,
-                    Station2= 1518,
-                   Distance=2265.21319232095,
-                   TimeAverage=((1.5*2265.21319232095)/speed)
-
-
-                },
-
-                new AdjacentStations
-                {
-                    Station1=1518,
-                    Station2= 1514,
-                   Distance=16.6091664944544,
-                   TimeAverage=((1.5*16.6091664944544)/speed)
-
-
-                },
-                new AdjacentStations
-                {
-                    Station1=1514,
-                    Station2= 1512,
-                   Distance=1034.11608174677,
-                   TimeAverage=((1.5*1034.11608174677)/speed)
-
-
-                },
+      
+    
                 new AdjacentStations
                 {
                     Station1=1512,
@@ -2419,24 +2350,8 @@ namespace DS
 
 
                 },
-                new AdjacentStations
-                {
-                    Station1=119,
-                    Station2= 1485,
-                   Distance=5719.48141855948,
-                    TimeAverage= ((1.5*5719.48141855948)/speed)
+  
 
-
-                },
-                new AdjacentStations
-                {
-                    Station1=1485,
-                    Station2= 1486,
-                   Distance=179.006776536478,
-                   TimeAverage= ((1.5*179.006776536478)/speed)
-
-
-                },
 #endregion LineId6
 
                 #region lineId7
@@ -2526,82 +2441,14 @@ namespace DS
 #endregion LineId7
 
                 #region lineId8
-                new AdjacentStations
-                {
-                    Station1=102,
-                    Station2= 103,
-                   Distance=554.235295622813,
-                   TimeAverage= ((1.5*554.235295622813)/speed)
-                },
+   
+         
 
-                new AdjacentStations
-                {
-                    Station1=103,
-                    Station2= 105,
-                   Distance=383.45864939499,
-                   TimeAverage= ((1.5*383.45864939499)/speed)
+      
+             
+           
 
-
-                },
-
-                new AdjacentStations
-                {
-                    Station1=105,
-                    Station2= 106,
-                   Distance=20.551585590077,
-                   TimeAverage=((1.5*20.551585590077)/speed)
-
-
-                },
-
-                new AdjacentStations
-                {
-                    Station1=106,
-                    Station2= 108,
-                   Distance=314.882994150425,
-                   TimeAverage= ((1.5*314.882994150425)/speed)
-
-
-                },
-
-                new AdjacentStations
-                {
-                    Station1=108,
-                    Station2= 109,
-                   Distance=109.450560373063,
-                   TimeAverage= ((1.5*109.450560373063)/speed)
-
-
-                },
-
-                new AdjacentStations
-                {
-                    Station1=109,
-                    Station2= 110,
-                   Distance=79.9157986778367,
-                    TimeAverage=((1.5*79.9157986778367)/speed)
-
-
-                },
-
-                new AdjacentStations
-                {
-                    Station1=110,
-                    Station2= 111,
-                   Distance=195.920342315088,
-                   TimeAverage= ((1.5*195.920342315088)/speed)
-
-
-                },
-                new AdjacentStations
-                {
-                    Station1=111,
-                    Station2= 112,
-                   Distance=50.4574978208662,
-                    TimeAverage= ((1.5*50.4574978208662)/speed)
-
-
-                },
+       
                 new AdjacentStations
                 {
                     Station1=112,
@@ -2614,82 +2461,12 @@ namespace DS
 #endregion LineId8
 
                 #region lineId9
-                new AdjacentStations
-                {
-                    Station1=85,
-                    Station2= 86,
-                   Distance=181.343172558381,
-                    TimeAverage= ((1.5*181.343172558381)/speed)
-                },
+          
+      
 
-                new AdjacentStations
-                {
-                    Station1=86,
-                    Station2= 88,
-                   Distance=338.193775824042,
-                    TimeAverage= ((1.5*338.193775824042)/speed)
-
-
-                },
-
-                new AdjacentStations
-                {
-                    Station1=88,
-                    Station2= 89,
-                   Distance=839.108713036705,
-                    TimeAverage= ((1.5*839.108713036705)/speed)
-
-
-                },
-
-                new AdjacentStations
-                {
-                    Station1=89,
-                    Station2= 90,
-                   Distance=4972.12709975181,
-                    TimeAverage= ((1.5*4972.12709975181)/speed)
-
-
-                },
-
-                new AdjacentStations
-                {
-                    Station1=90,
-                    Station2= 91,
-                   Distance=4978.59764273959,
-                    TimeAverage= ((1.5*4978.59764273959)/speed)
-
-
-                },
-
-                new AdjacentStations
-                {
-                    Station1=91,
-                    Station2= 93,
-                   Distance=178.858161402408,
-                    TimeAverage= ((1.5*178.858161402408)/speed)
-
-
-                },
-
-                new AdjacentStations
-                {
-                    Station1=93,
-                    Station2= 94,
-                   Distance=20.9542368918975,
-                    TimeAverage= ((1.5*20.9542368918975)/speed)
-
-
-                },
-                new AdjacentStations
-                {
-                    Station1=94,
-                    Station2= 95,
-                   Distance=329058.161860042,
-                   TimeAverage= ((1.5*329058.161860042)/speed)
-
-
-                },
+      
+        
+   
                 new AdjacentStations
                 {
                     Station1=95,
@@ -2702,81 +2479,14 @@ namespace DS
 #endregion LineId9
 
                 #region lineId10
-                new AdjacentStations
-                {
-                    Station1=111,
-                    Station2= 112,
-                   Distance=50.4574978208662,
-                    TimeAverage= ((1.5*50.4574978208662)/speed)
-                },
+   
+   
 
-                new AdjacentStations
-                {
-                    Station1=112,
-                    Station2= 113,
-                   Distance=143.276626873244,
-                     TimeAverage=((1.5*143.276626873244)/speed)
+     
+
+    
 
 
-                },
-
-                new AdjacentStations
-                {
-                    Station1=113,
-                    Station2= 115,
-                   Distance=279.425185419296,
-                     TimeAverage= ((1.5*279.425185419296)/speed)
-
-
-                },
-
-                new AdjacentStations
-                {
-                    Station1=115,
-                    Station2= 116,
-                   Distance=72.2684666055651,
-                     TimeAverage= ((1.5*72.2684666055651)/speed)
-
-
-                },
-
-                new AdjacentStations
-                {
-                    Station1=116,
-                    Station2= 117,
-                   Distance=192.809573417871,
-                    TimeAverage= ((1.5*192.809573417871)/speed)
-
-                },
-
-                new AdjacentStations
-                {
-                    Station1=117,
-                    Station2= 119,
-                   Distance=193.971761810414,
-                    TimeAverage= ((1.5*193.971761810414)/speed)
-
-
-                },
-
-                new AdjacentStations
-                {
-                    Station1=119,
-                    Station2= 1485,
-                   Distance=5719.48141855948,
-                    TimeAverage= ((1.5*5719.48141855948)/speed)
-
-
-                },
-                new AdjacentStations
-                {
-                    Station1=1485,
-                    Station2= 1486,
-                   Distance=179.006776536478,
-                     TimeAverage= ((1.5*179.006776536478)/speed)
-
-
-                },
                 new AdjacentStations
                 {
                     Station1=1486,

@@ -52,7 +52,7 @@ namespace BlAPI
         IEnumerable<BO.Station> GetAllStations();
         void AddStation(BO.Station station);
         void DeleteStation(int code);
-        void UpdateStation(BO.Station station, int oldCode);
+        IEnumerable<BO.AdjacentStations> UpdateStation(BO.Station station, int oldCode);
         BO.Station GetStationByCode(int Code);
         #endregion
     }

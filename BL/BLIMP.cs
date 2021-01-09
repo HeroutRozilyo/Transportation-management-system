@@ -1201,17 +1201,19 @@ namespace BL
             }
         }
 
-        public void UpdateStation(BO.Station station,int oldCode)
+        public IEnumerable<BO.AdjacentStations> UpdateStation(BO.Station station,int oldCode)
         {
-            double speed = 13.89;//m/s= 50 km/h
-
+            int newCode = station.Code;
+            DO.Stations stationDO = new DO.Stations();
+            DO.Stations stationOldDO = new DO.Stations();
+            BO.AdjacentStations adjacent = new BO.AdjacentStations();
+            List<BO.AdjacentStations> adjactToChange = new List<BO.AdjacentStations>();
+            IEnumerable<DO.AdjacentStations> adjacentStations;
+   
             try
             {
-                DO.Stations stationDO = new DO.Stations();
-                DO.Stations stationOldDO = new DO.Stations();
-                DO.AdjacentStations adjacent = new DO.AdjacentStations();
-                DO.Stations ST = new DO.Stations();
-
+                adjacentStations =  dl.GetAllAdjacentStations(oldCode); //get all adjacted stations with this code station
+           
 
                 station.CopyPropertiesTo(stationDO);
                 stationDO.Coordinate = new GeoCoordinate(station.Coordinate.Latitude, station.Coordinate.Longitude);
@@ -1220,34 +1222,40 @@ namespace BL
                 {
                     stationOldDO = dl.GetStations(oldCode);
                     dl.UpdateStations(stationDO,oldCode);
-
-                    if (stationOldDO.Coordinate != station.Coordinate)
+                    if(newCode!= oldCode)
                     {
-                        IEnumerable<DO.AdjacentStations> adjacentStations = dl.GetAllAdjacentStations(oldCode);
+        
+                        for(int i=0;i< adjacentStations.Count()+1;i++)
+                            dl.UpdateAdjacentStations(adjacentStations.ElementAt(0).Station1, adjacentStations.ElementAt(0).Station2, newCode, oldCode);
+                    }
+       
+                    if (stationOldDO.Coordinate != station.Coordinate) //if we change the place of tje station we need to ask to insert again data on distance and time travel
+                    {
+                        adjacentStations = dl.GetAllAdjacentStations(oldCode);
                         foreach (var item in adjacentStations)
                         {
-                            if (item.Station1 != oldCode)
+                            if (item.Station1 == oldCode) //if this station is the first station
                             {
-                                stationOldDO = dl.GetStations(item.Station1);
+                                stationOldDO = dl.GetStations(item.Station2);
 
-                                adjacent.Station1 = item.Station1;
-                                adjacent.Station2 = station.Code;
-                                ST = dl.GetStations(item.Station1);
+                                adjacent.Station1 = oldCode;
+                                adjacent.Station2 = stationOldDO.Code;                            
 
                             }
                             else
                             {
-                                stationOldDO = dl.GetStations(item.Station2);
-                                adjacent.Station1 = station.Code;
-                                adjacent.Station2 = item.Station2;
-                                ST = dl.GetStations(item.Station2);
+                                stationOldDO = dl.GetStations(item.Station1);
+
+                                adjacent.Station1 = stationOldDO.Code;
+                                adjacent.Station2 = oldCode;
+                       
                             }
 
-                            //double d = (station.Coordinate).GetDistanceTo((ST.Coordinate));
-                            //adjacent.Distance = d;
+                            adjactToChange.Add(adjacent);
 
-                            //adjacent.TimeAverage = ((1.5 * d) / speed);
-                            dl.UpdateAdjacentStations(adjacent);
+                        //    UpdateAdjacentStations
+
+                    
                         }
 
                     }
@@ -1263,6 +1271,8 @@ namespace BL
             {
                 throw new BO.BadIdException("code not valid", ex);
             }
+
+            return adjactToChange.AsEnumerable();
 
         }
         #endregion

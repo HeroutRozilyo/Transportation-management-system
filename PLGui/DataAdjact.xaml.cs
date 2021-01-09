@@ -38,6 +38,16 @@ namespace PLGui
             blockStation2.Text = station.NextStation.ToString();
 
         }
+        public DataAdjact(BO.AdjacentStations station)
+        {
+            InitializeComponent();
+
+            blickStation1.Text = station.Station1.ToString();
+            blockStation2.Text = station.Station2.ToString();
+        }
+
+
+
         public BO.LineStation NewLine
         {
             get
