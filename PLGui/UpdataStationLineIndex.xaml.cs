@@ -83,22 +83,24 @@ namespace PLGui
 
                             line.StationsOfBus = from item in help
                                                  select item;
-                           IEnumerable<BO.LineStation> insertAdjact = bl.UpdateLineStationForIndexChange(line);
 
-                            int size = insertAdjact.Count();
-                            if (size != 0)
-                                MessageBox.Show(string.Format("כדי להשלים את הפעולה תצטרך להכניס פרטי מרחק וזמן נסיעה ל{0} תחנות העוקבות החדשות", size), "פרטי תחנה עוקבת", MessageBoxButton.OK, MessageBoxImage.Information);
+                            bl.UpdateLineStationForIndexChange(line);
+                            //   IEnumerable<BO.LineStation> insertAdjact =
 
-                            foreach (var item in insertAdjact)
-                            {
-                                DataAdjact addl = new DataAdjact(item);
-                                bool? r = addl.ShowDialog();
-                                if (r != null)
-                                {
-                                    BO.LineStation newline = addl.NewLine;
+                            //int size = insertAdjact.Count();
+                            //if (size != 0)
+                            //    MessageBox.Show(string.Format("כדי להשלים את הפעולה תצטרך להכניס פרטי מרחק וזמן נסיעה ל{0} תחנות העוקבות החדשות", size), "פרטי תחנה עוקבת", MessageBoxButton.OK, MessageBoxImage.Information);
 
-                                }
-                            }
+                            //foreach (var item in insertAdjact)
+                            //{
+                            //    DataAdjact addl = new DataAdjact(item);
+                            //    bool? r = addl.ShowDialog();
+                            //    if (r != null)
+                            //    {
+                            //        BO.LineStation newline = addl.NewLine;
+
+                            //    }
+                            //}
 
 
 

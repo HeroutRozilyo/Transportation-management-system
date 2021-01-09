@@ -13,6 +13,7 @@ namespace BL
 {
     class BlImp : IBL
     {
+        static Random random = new Random(DateTime.Now.Millisecond);
         private IDAL dl = DalFactory.GetDL();
 
         #region Bus
@@ -293,13 +294,15 @@ namespace BL
         #endregion
 
         #region Add
-        public IEnumerable<BO.LineStation> AddLine(BO.Line line)
+        //public IEnumerable<BO.LineStation> AddLine(BO.Line line)
+        public int AddLine(BO.Line line)
+
         {
             DO.Line lineDO = new DO.Line();            
             line.CopyPropertiesTo(lineDO);//do the bus to be DO
 
             List<BO.LineStation> adja = new List<LineStation>();
-            BO.LineStation adjacent;
+        //    BO.LineStation adjacent;
 
             IEnumerable<DO.LineStation> tempDO;
             tempDO = from st in line.StationsOfBus                                        //tempDO=line station
@@ -336,15 +339,15 @@ namespace BL
                     try //if return false its mean that we need to add this adjact station to our DS.
                     {
                         exsit = CreatAdjStations(tempDO1.ElementAt(i).StationCode, tempDO1.ElementAt(i + 1).StationCode);
-                        if (!exsit)
-                        {
-                            adjacent = new LineStation();
-                            adjacent.StationCode = tempDO1.ElementAt(i).StationCode;
-                            adjacent.NextStation = tempDO1.ElementAt(i + 1).StationCode;
-                            adjacent.LineId = id;
-                            adja.Add(adjacent);
+                        //if (!exsit)
+                        //{
+                        //    adjacent = new LineStation();
+                        //    adjacent.StationCode = tempDO1.ElementAt(i).StationCode;
+                        //    adjacent.NextStation = tempDO1.ElementAt(i + 1).StationCode;
+                        //    adjacent.LineId = id;
+                        //    adja.Add(adjacent);
 
-                        }
+                        //}
                     }
                     catch (DO.WrongIDExeption ex)
                     { string a = ""; a += ex; }
@@ -357,7 +360,8 @@ namespace BL
             {
                 throw new BO.BadIdException("ID not valid", ex);
             }
-            return adja.AsEnumerable();
+            //return adja.AsEnumerable();
+            return id;
         }
 
         //public IEnumerable<BO.LineStation> AddStationLine(BO.LineStation station) //we add station to the bus travel
@@ -542,9 +546,9 @@ namespace BL
             }
         }
 
-        public BO.LineStation DeleteStation(int idline, int code) //delete station from the line travel
+        public void DeleteStation(int idline, int code) //delete station from the line travel
         {
-            BO.LineStation adjacent=new LineStation();
+          //  BO.LineStation adjacent=new LineStation();
             try
             {
                 int index = dl.DeleteStationsFromLine(code, idline);
@@ -565,12 +569,12 @@ namespace BL
                     if (adj1 != -1 && adj2 != -1)
                     {
                         exsit = CreatAdjStations(adj1, adj2);
-                        if (!exsit)
-                        {
-                            adjacent = new LineStation();
-                            adjacent.StationCode = adj1;
-                            adjacent.NextStation = adj2;
-                        }
+                        //if (!exsit)
+                        //{
+                        //    adjacent = new LineStation();
+                        //    adjacent.StationCode = adj1;
+                        //    adjacent.NextStation = adj2;
+                        //}
                     }
 
                     if (item.LineStationIndex > index)
@@ -588,7 +592,7 @@ namespace BL
                 throw new BO.BadIdException("ID not valid", ex);
             }
 
-            return adjacent;
+            //return adjacent;
 
         }
 
@@ -669,13 +673,13 @@ namespace BL
             return true;
         }
 
-        public IEnumerable<BO.LineStation> UpdateLineStation(BO.Line line)
+        public bool UpdateLineStation(BO.Line line)
         {
             IEnumerable<DO.LineStation> lineStationDO;
-            List<BO.LineStation> adja = new List<LineStation>();
+        //    List<BO.LineStation> adja = new List<LineStation>();
             
 
-            BO.LineStation adjacent;
+          //  BO.LineStation adjacent;
             lineStationDO = from st in line.StationsOfBus
                             select (DO.LineStation)st.CopyPropertiesToNew(typeof(DO.LineStation));
             try
@@ -701,14 +705,14 @@ namespace BL
                     try //if return false its mean that we need to add this adjact station to our DS.
                     {
                         exsit = CreatAdjStations(lineStationDO.ElementAt(i).StationCode, lineStationDO.ElementAt(i + 1).StationCode);
-                        if (!exsit)
-                        {
-                            adjacent = new LineStation();
-                            adjacent.StationCode = lineStationDO.ElementAt(i).StationCode;
-                            adjacent.NextStation = lineStationDO.ElementAt(i + 1).StationCode;
-                            adja.Add(adjacent);
+                        //if (!exsit)
+                        //{
+                        //    adjacent = new LineStation();
+                        //    adjacent.StationCode = lineStationDO.ElementAt(i).StationCode;
+                        //    adjacent.NextStation = lineStationDO.ElementAt(i + 1).StationCode;
+                        //    adja.Add(adjacent);
 
-                        }
+                        //}
                     }
                     catch (DO.WrongIDExeption ex)
                     { string a = ""; a += ex; }
@@ -721,15 +725,15 @@ namespace BL
             {
                 throw new BO.BadIdException("ID not valid", ex);
             }
-            return adja.AsEnumerable();
-
+            //  return adja.AsEnumerable();
+            return true;
 
         }
 
-        public IEnumerable<BO.LineStation> UpdateLineStationForIndexChange(BO.Line line)
+        public void UpdateLineStationForIndexChange(BO.Line line)
         {
-            List<BO.LineStation> adja = new List<LineStation>();
-            BO.LineStation adjacent;
+           // List<BO.LineStation> adja = new List<LineStation>();
+           // BO.LineStation adjacent;
 
             //keep the list of station
             IEnumerable<DO.LineStation> lineStationDO;
@@ -906,14 +910,14 @@ namespace BL
                     for (int i = 0; i < tempDO2.Count() - 1; i++)   //move on the line station list send 2 adj station to creat if they not exsis yet.
                     {
                         exsit= CreatAdjStations(tempDO2.ElementAt(i).StationCode, tempDO2.ElementAt(i + 1).StationCode);
-                        if (!exsit)
-                        {
-                            adjacent = new LineStation();
-                            adjacent.StationCode = tempDO2.ElementAt(i).StationCode;
-                            adjacent.NextStation = tempDO2.ElementAt(i + 1).StationCode;
-                            adja.Add(adjacent);
+                        //if (!exsit)
+                        //{
+                        //    adjacent = new LineStation();
+                        //    adjacent.StationCode = tempDO2.ElementAt(i).StationCode;
+                        //    adjacent.NextStation = tempDO2.ElementAt(i + 1).StationCode;
+                        //    adja.Add(adjacent);
 
-                        }
+                        //}
                     }
                 }
                 catch (DO.WrongIDExeption x)
@@ -928,7 +932,7 @@ namespace BL
                 throw new BO.BadIdException("ID not valid", ex);
             }
 
-            return adja.AsEnumerable();
+            //return adja.AsEnumerable();
 
         }
 
@@ -1002,7 +1006,7 @@ namespace BL
 
         public bool CreatAdjStations(int station1, int station2)
         {
-            //  double speed = 13.89;//m/s= 50 km/h
+            double speed = 666.66;//m/s= 50 km/h
             DO.AdjacentStations adjacent = new DO.AdjacentStations();
             adjacent.Station1 = station1;
             adjacent.Station2 = station2;
@@ -1014,24 +1018,26 @@ namespace BL
                 // in order to freat adj station we need the "real" station in order to calucate distance and travel time.
                 ST1 = dl.GetStations(station1);
                 ST2 = dl.GetStations(station2);
-                //   double d = (ST1.Coordinate).GetDistanceTo((ST2.Coordinate));
+                double d = (ST1.Coordinate).GetDistanceTo((ST2.Coordinate));
                 adjacent.Distance = 1;
-
-                adjacent.TimeAverage = 0; //TimeSpan.FromSeconds((1.5 * d) / speed);
-                //      dl.AddLineStations(adjacent);
-                dl.GetAdjacentStations(station1, station2);
+              
+                adjacent.TimeAverage = (((random.NextDouble() + 1) * d) / speed);
+                dl.AddLineStations(adjacent);
+                //dl.GetAdjacentStations(station1, station2);
 
                 return true;
             }
             catch (DO.WrongIDExeption ex)
             {
                 string a = ""; a += ex;
-                dl.AddLineStations(adjacent);
+           //     dl.AddLineStations(adjacent);
 
             }
             return false;
 
         }
+
+
 
         public double CalucateTravel(int lineId)
         {
@@ -1044,8 +1050,9 @@ namespace BL
                     select item;
             for (int i = 0; i < (tempDO.Count() - 1); i++)
             {
-                adj = dl.GetAdjacentStations(v.ElementAt(i).StationCode, v.ElementAt((i + 1)).StationCode);
+               adj = dl.GetAdjacentStations(v.ElementAt(i).StationCode, v.ElementAt((i + 1)).StationCode);               
                 sum += adj.TimeAverage;
+               
             }
 
             return sum;
@@ -1208,7 +1215,7 @@ namespace BL
             DO.Stations stationOldDO = new DO.Stations();
             BO.AdjacentStations adjacent = new BO.AdjacentStations();
             List<BO.AdjacentStations> adjactToChange = new List<BO.AdjacentStations>();
-           IEnumerable<DO.AdjacentStations> adjacentStations;
+            IEnumerable<DO.AdjacentStations> adjacentStations;
    
             try
             {
@@ -1263,19 +1270,17 @@ namespace BL
                 }
                 else
                     throw new BO.BadCoordinateException(Convert.ToInt32(station.Coordinate), "Wrong coordinate");
-                
-                if(station.Code!=oldCode)
+                if (station.Code != oldCode)
                 {
                     IEnumerable<DO.LineStation> list = from item in dl.GetAllStationsCode(oldCode)
                                                        select item;
-                    for (int i=0;i<list.Count()+1;i++)
+                    for (int i = 0; i < list.Count() + 1; i++)
                     {
-                       // list.ElementAt(0).StationCode= station.Code;
-                     
+                        // list.ElementAt(0).StationCode= station.Code;
+
                         dl.UpdateLineStationsCode(list.ElementAt(0), newCode);
                     }
                 }
-
 
             }
             catch (DO.WrongIDExeption ex)
