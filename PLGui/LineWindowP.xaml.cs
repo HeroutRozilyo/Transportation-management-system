@@ -194,19 +194,20 @@ namespace PLGui
             var fxElt = sender as FrameworkElement; //get the licence of the bus to refulling. 
             String ToDel = fxElt.DataContext.ToString();
             convertFromObbject(ToDel);
-            BO.LineStation station=  bl.DeleteStation(line.IdNumber, TempLineStation.StationCode);
-             
-            if(station.StationCode!=0)
-            {
-                MessageBox.Show(string.Format("כדי להשלים את הפעולה תצטרך להכניס פרטי מרחק וזמן נסיעה ל {0} תחנות העוקבות החדשות", 1), "פרטי תחנה עוקבת", MessageBoxButton.OK, MessageBoxImage.Information);
-                DataAdjact addl = new DataAdjact(station);
-                bool? r = addl.ShowDialog();
-                if (r != null)
-                {
-                    BO.LineStation newline = addl.NewLine;
+            //  BO.LineStation station=  
+            bl.DeleteStation(line.IdNumber, TempLineStation.StationCode);
 
-                }
-            }
+            ////if (station.StationCode!=0)
+            ////{
+            ////    MessageBox.Show(string.Format("כדי להשלים את הפעולה תצטרך להכניס פרטי מרחק וזמן נסיעה ל {0} תחנות העוקבות החדשות", 1), "פרטי תחנה עוקבת", MessageBoxButton.OK, MessageBoxImage.Information);
+            ////    DataAdjact addl = new DataAdjact(station);
+            ////    bool? r = addl.ShowDialog();
+            ////    if (r != null)
+            ////    {
+            ////        BO.LineStation newline = addl.NewLine;
+
+            ////    }
+            ////}
 
 
         

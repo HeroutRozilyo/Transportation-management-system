@@ -242,7 +242,8 @@ namespace PLGui
         {
             convertStation.LineStationExist = true;
             GetLineStations.Add(convertStation);
-            GetStations.Remove(ToAdd);
+            Station check = GetStations.ToList().Find(b => b.StationExist && b.Code == ToAdd.Code);
+            GetStations.Remove(check);
             RefreshLineStation();
             RefreshStation();
         }
@@ -272,30 +273,32 @@ namespace PLGui
                             newLine.LastStationCode = GetLineStations.ToList().ElementAt(GetLineStations.Count() - 1).StationCode;
                             newLine.LineExist = true;
 
-                          
-                         
 
-                            IEnumerable<BO.LineStation> insertAdjact = bl.AddLine(newLine);
-                            idLineFromDS = insertAdjact.ElementAt(0).LineId;
-                            newLine.IdNumber = idLineFromDS;
+                            int idnumber =bl.AddLine(newLine);
+                            idLineFromDS = idnumber;
+                            newLine.IdNumber = idnumber;
 
-                            int size = insertAdjact.Count();
-                            if (size != 0)
-                                MessageBox.Show(string.Format("כדי להשלים את הפעולה תצטרך להכניס פרטי מרחק וזמן נסיעה ל{0} תחנות העוקבות החדשות", size), "פרטי תחנה עוקבת", MessageBoxButton.OK, MessageBoxImage.Information);
+                            //IEnumerable<BO.LineStation> insertAdjact = 
+                            //idLineFromDS = insertAdjact.ElementAt(0).LineId;
+                            //newLine.IdNumber = idLineFromDS;
 
-                            foreach (var item in insertAdjact)
-                            {
-                                DataAdjact addl = new DataAdjact(item);
-                                
-                            
-                                bool? r = addl.ShowDialog();
-                                if (r != null)
-                                {
-                                    BO.LineStation newline = addl.NewLine;
+                            //int size = insertAdjact.Count();
+                            //if (size != 0)
+                            //    MessageBox.Show(string.Format("כדי להשלים את הפעולה תצטרך להכניס פרטי מרחק וזמן נסיעה ל{0} תחנות העוקבות החדשות", size), "פרטי תחנה עוקבת", MessageBoxButton.OK, MessageBoxImage.Information);
 
-                                }
-                            }
-                    
+                            //foreach (var item in insertAdjact)
+                            //{
+                            //    DataAdjact addl = new DataAdjact(item);
+
+
+                            //    bool? r = addl.ShowDialog();
+                            //    if (r != null)
+                            //    {
+                            //        BO.LineStation newline = addl.NewLine;
+
+                            //    }
+                            //}
+
                             MessageBox.Show("The line was successfully added to the system", "Success Message", MessageBoxButton.OK, MessageBoxImage.Asterisk);
                             this.DialogResult = true;
                             this.Close();
@@ -392,23 +395,23 @@ namespace PLGui
                             {
                                 item.LineId = line.IdNumber;
                             }
-                         
-                        
-                            IEnumerable<BO.LineStation> insertAdjact= bl.UpdateLineStation(line);
-                            int size = insertAdjact.Count();
-                            if(size!=0)
-                                MessageBox.Show(string.Format("כדי להשלים את הפעולה תצטרך להכניס פרטי מרחק וזמן נסיעה ל{0} תחנות העוקבות החדשות",size),"פרטי תחנה עוקבת", MessageBoxButton.OK, MessageBoxImage.Information);
 
-                            foreach (var item in insertAdjact)
-                            {
-                                DataAdjact addl = new DataAdjact(item);
-                                bool? r = addl.ShowDialog();
-                                if (r != null)
-                                {
-                                    BO.LineStation newline = addl.NewLine;
-                         
-                                }
-                            }
+                            bool a = bl.UpdateLineStation(line);
+                            //IEnumerable<BO.LineStation> insertAdjact=
+                            //int size = insertAdjact.Count();
+                            //if(size!=0)
+                            //    MessageBox.Show(string.Format("כדי להשלים את הפעולה תצטרך להכניס פרטי מרחק וזמן נסיעה ל{0} תחנות העוקבות החדשות",size),"פרטי תחנה עוקבת", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                            //foreach (var item in insertAdjact)
+                            //{
+                            //    DataAdjact addl = new DataAdjact(item);
+                            //    bool? r = addl.ShowDialog();
+                            //    if (r != null)
+                            //    {
+                            //        BO.LineStation newline = addl.NewLine;
+
+                            //    }
+                            //}
                             this.DialogResult = true;
                             this.Close();
 
