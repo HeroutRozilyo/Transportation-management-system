@@ -1069,7 +1069,6 @@ namespace BL
                 throw new BO.BadIdException("error", ex);
             }
 
-
         }
 
         public IEnumerable<BO.Line> GetAllLineIndStation(int StationCode)

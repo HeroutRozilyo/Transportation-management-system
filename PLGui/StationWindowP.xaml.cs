@@ -186,29 +186,29 @@ namespace PLGui
                
                 stationData = null;
                 temp = null;
-                stationExistCheckBox.Visibility = Visibility.Visible;
-                Sexist.Visibility = Visibility.Visible;
+               // stationExistCheckBox.Visibility = Visibility.Visible;
+                //Sexist.Visibility = Visibility.Visible;
                 add = true;
                 RefreshLineInStation();
                 
             }
             else
             {
-                helpaAddStation();
+                //helpaAddStation();
             }
 
 
 
         }
 
-        private void helpaAddStation()
-        {
-            addStation.Address = addressTextBox.Text;
-            addStation.Code = Convert.ToInt32(codeTextBox.Text);
-            addStation.Coordinate = new GeoCoordinate(double.Parse((latitudeTextBox.Text)), double.Parse(longitudeTextBox.Text));
-            addStation.Name = nameTextBox.Text;
-            addStation.StationExist = (bool)stationExistCheckBox.IsChecked;
-        }
+        //private void helpaAddStation()
+        //{
+        //    addStation.Address = addressTextBox.Text;
+        //    addStation.Code = Convert.ToInt32(codeTextBox.Text);
+        //    addStation.Coordinate = new GeoCoordinate(double.Parse((latitudeTextBox.Text)), double.Parse(longitudeTextBox.Text));
+        //    addStation.Name = nameTextBox.Text;
+        //    addStation.StationExist = (bool)stationExistCheckBox.IsChecked;
+        //}
 
         private void stationExistCheckBox_Checked(object sender, RoutedEventArgs e)
         {
@@ -217,21 +217,21 @@ namespace PLGui
                 BO.Station addStation = new BO.Station();
                 if (add == true)
                 {
-                    helpaAddStation();
-                    //addStation = StationDataGrid.DataContext as BO.Station;
-                    double latidude = double.Parse(latitudeTextBox.Text);
-                    double longi = double.Parse(longitudeTextBox.Text);
-                    addStation.Coordinate = new GeoCoordinate() ;
-                    addStation.Coordinate.Latitude = latidude;
-                    addStation.Coordinate.Longitude = longi;
-                    stationExistCheckBox.Visibility = Visibility.Hidden;
-                    Sexist.Visibility = Visibility.Hidden;
-                    bl.AddStation(addStation);
-                    stationData = addStation;
-                    RefreshStation();
-                    RefreshLineInStation();
-                    add = false;
-                }
+                //    helpaAddStation();
+                //    //addStation = StationDataGrid.DataContext as BO.Station;
+                //    double latidude = double.Parse(latitudeTextBox.Text);
+                //    double longi = double.Parse(longitudeTextBox.Text);
+                //    addStation.Coordinate = new GeoCoordinate() ;
+                //    addStation.Coordinate.Latitude = latidude;
+                //    addStation.Coordinate.Longitude = longi;
+                //    stationExistCheckBox.Visibility = Visibility.Hidden;
+                //    Sexist.Visibility = Visibility.Hidden;
+                //    bl.AddStation(addStation);
+                //    stationData = addStation;
+                //    RefreshStation();
+                //    RefreshLineInStation();
+                //    add = false;
+                //}
 
             }
             catch(BO.BadCoordinateException a)
