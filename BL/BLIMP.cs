@@ -1291,6 +1291,23 @@ namespace BL
             return adjactToChange.AsEnumerable();
 
         }
+        public void UpdateAdjac(BO.AdjacentStations adjacBO)
+        {
+            DO.AdjacentStations adjacDO = new DO.AdjacentStations();
+
+            try
+            {
+                adjacBO.CopyPropertiesTo(adjacDO);
+               
+                dl.UpdateAdjacentStations(adjacDO);
+
+            }
+            catch (DO.WrongIDExeption ex)
+            {
+                throw new BO.BadIdException("ID not valid", ex);
+            }
+
+        }
         #endregion
 
 
