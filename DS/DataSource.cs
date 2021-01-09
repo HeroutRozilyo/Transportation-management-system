@@ -28,7 +28,7 @@ namespace DS
 
         static void InitAllLists()
         {
-            double speed = 13.89;//m/s- 50 km/h
+            double speed = 666.66;//m/s- 50 km/h
 
 
 
@@ -164,8 +164,9 @@ namespace DS
                     Name = "דרך בית לחם הישנה א",
                     Address = " רחוב:דרך בית לחם הישנה  עיר: ירושלים",
                     StationExist=true,
-                    Coordinate= new GeoCoordinate(31.768759,31.768759)
-                    
+                    Coordinate= new GeoCoordinate(31.768759,35.24368
+)
+
                 },
                 new Stations
                 {
@@ -1924,8 +1925,8 @@ namespace DS
                 {
                     Station1=76,
                     Station2= 77,
-                   Distance=10291.789644608,
-                  TimeAverage= ((1.5*10291.789644608)/speed)
+                   Distance=197.059830127369,
+                  TimeAverage= ((1.5*197.059830127369)/speed)
 
 
                 },
@@ -2048,8 +2049,8 @@ namespace DS
                 {
                     Station1=94,
                     Station2= 95,
-                   Distance=329058.161860042,
-                    TimeAverage= ((1.5*329058.161860042)/speed)
+                   Distance=337.617552547299,
+                    TimeAverage= ((1.5*337.617552547299)/speed)
 
 
                 },
@@ -2057,8 +2058,8 @@ namespace DS
                 {
                     Station1=95,
                     Station2= 97,
-                   Distance=328752.547331663,
-                    TimeAverage= ((1.5*328752.547331663)/speed)
+                   Distance=141.607925499495,
+                    TimeAverage= ((1.5*141.607925499495)/speed)
 
 
                 },
@@ -2471,8 +2472,8 @@ namespace DS
                 {
                     Station1=95,
                     Station2= 102,
-                   Distance=325385.905757283,
-                    TimeAverage= ((1.5*325385.905757283)/speed)
+                   Distance=4852.96580098656,
+                    TimeAverage= ((1.5*4852.96580098656)/speed)
 
 
                 },
