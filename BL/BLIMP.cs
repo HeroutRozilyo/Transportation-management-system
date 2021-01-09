@@ -1266,7 +1266,10 @@ namespace BL
                 }
                 else
                     throw new BO.BadCoordinateException(Convert.ToInt32(station.Coordinate), "Wrong coordinate");
+                if(station.Code!=oldCode)
+                {
 
+                }
 
 
             }
