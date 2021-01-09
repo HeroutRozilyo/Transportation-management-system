@@ -29,7 +29,10 @@ namespace PLGui
         int oldCode;
         BO.Station addStation = new BO.Station();
         BO.Station stationData = new BO.Station();
-      
+        ObservableCollection<BO.AdjacentStations> beforAdj = new ObservableCollection<BO.AdjacentStations>();
+        ObservableCollection<BO.AdjacentStations> afterAdj = new ObservableCollection<BO.AdjacentStations>();
+
+
         public StationWindowP()
         {
             InitializeComponent();
@@ -42,7 +45,7 @@ namespace PLGui
             RefreshStation();
             NotExist.Visibility = Visibility.Hidden;
 
-       
+
         }
 
         public ObservableCollection<T> ConvertList<T>(IEnumerable<T> listFromBO)
@@ -54,12 +57,12 @@ namespace PLGui
         {
             stations = ConvertList(bl.GetAllStations());//to make ObservableCollection
             ListOfStations.ItemsSource = stations;
-           // NOLine.Visibility = Visibility.Hidden;
-           // LineInStation.Visibility = Visibility.Visible;
+            // NOLine.Visibility = Visibility.Hidden;
+            // LineInStation.Visibility = Visibility.Visible;
             stationExistCheckBox.Visibility = Visibility.Hidden;
             Sexist.Visibility = Visibility.Hidden;
-           
-         
+
+
 
 
 
@@ -99,27 +102,39 @@ namespace PLGui
         }
         public void RefreshLineInStation()
         {
-           
+            beforAdj.Clear();
+            afterAdj.Clear();
             StationDataGrid.DataContext = stationData;
+
             temp = null;
             if (stationData != null)
             {
                 oldCode = stationData.Code;
                 temp = bl.GetAllLineIndStation(stationData.Code);
-               
+                BeforAfter();
+                Befor.ItemsSource = beforAdj;
+                After.ItemsSource = afterAdj;
+                //
             }
 
-          
-                LineInStation.ItemsSource = temp;
-           
 
-
-
-
-
-
+            LineInStation.ItemsSource = temp;
+            
+            updateTS.Visibility = Visibility.Hidden;
 
         }
+        private void BeforAfter()
+        {
+            foreach(BO.AdjacentStations item in stationData.StationAdjacent)
+            {
+                if (item.Station1 == stationData.Code)
+                {
+                    afterAdj.Add(item);
+                }
+                else beforAdj.Add(item);
+            }
+        }
+
 
         private void textBoxTextBox_PreviewKeyDown(object sender, KeyEventArgs e)
         {
@@ -311,6 +326,36 @@ namespace PLGui
            
         }
 
-       
+        private void UpdataDT_Click(object sender, RoutedEventArgs e)
+        {
+            updateTS.Visibility = Visibility.Visible;
+            var list = sender as FrameworkElement; //to get the line
+            BO.AdjacentStations tem = list.DataContext as BO.AdjacentStations;
+            updateTS.DataContext = tem;
+        }
+
+        private void okeyUpdate_Checked(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                BO.AdjacentStations a = updateTS.DataContext as BO.AdjacentStations;
+                bl.UpdateAdjac(a);
+                okeyUpdate.IsChecked = true;
+                updateTS.Visibility = Visibility.Hidden;
+            }
+            catch(BO.BadIdException a)
+            {
+                MessageBox.Show(a.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                updateTS.Visibility = Visibility.Visible;
+                okeyUpdate.IsChecked = false;
+            }
+        }
+
+        
+
+        private void timeAverageTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !e.Text.Any(x => Char.IsDigit(x) || '.'.Equals(x));
+        }
     }
 }
