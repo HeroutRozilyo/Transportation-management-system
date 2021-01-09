@@ -1208,7 +1208,7 @@ namespace BL
             DO.Stations stationOldDO = new DO.Stations();
             BO.AdjacentStations adjacent = new BO.AdjacentStations();
             List<BO.AdjacentStations> adjactToChange = new List<BO.AdjacentStations>();
-            IEnumerable<DO.AdjacentStations> adjacentStations;
+           IEnumerable<DO.AdjacentStations> adjacentStations;
    
             try
             {
@@ -1263,9 +1263,17 @@ namespace BL
                 }
                 else
                     throw new BO.BadCoordinateException(Convert.ToInt32(station.Coordinate), "Wrong coordinate");
+                
                 if(station.Code!=oldCode)
                 {
-
+                    IEnumerable<DO.LineStation> list = from item in dl.GetAllStationsCode(oldCode)
+                                                       select item;
+                    for (int i=0;i<list.Count()+1;i++)
+                    {
+                       // list.ElementAt(0).StationCode= station.Code;
+                     
+                        dl.UpdateLineStationsCode(list.ElementAt(0), newCode);
+                    }
                 }
 
 

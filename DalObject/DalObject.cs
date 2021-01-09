@@ -338,6 +338,18 @@ namespace DL
             else
                 throw new DO.WrongIDExeption(linestations.StationCode, "Code not exsis");///////////////////////////////////////////////////////
         }
+        public void UpdateLineStationsCode(DO.LineStation linestations,int oldCode)
+        {
+            DO.LineStation station = DataSource.ListLineStations.Find(b => b.StationCode == linestations.StationCode && b.LineId == linestations.LineId && b.LineStationExist);
+            if (station != null)
+            {
+                linestations.StationCode = oldCode;
+                DataSource.ListLineStations.Remove(station);
+                DataSource.ListLineStations.Add(linestations.Clone());
+            }
+            else
+                throw new DO.WrongIDExeption(linestations.StationCode, "Code not exsis");///////////////////////////////////////////////////////
+        }
 
 
         #endregion LineStation
