@@ -23,7 +23,10 @@ namespace PLGui
     public partial class User : Page
     {
         IBL bl = factoryBL.GetBl();
-        IEnumerable<BO.Line> temp;
+        private ObservableCollection<BO.Line> temp = new ObservableCollection<BO.Line>();
+        private ObservableCollection<BO.Line> line1 = new ObservableCollection<BO.Line>();
+        private ObservableCollection<BO.Line> line2 = new ObservableCollection<BO.Line>();
+        private ObservableCollection<BO.Line> empty = new ObservableCollection<BO.Line>();
         BO.Station stationData1 = new BO.Station();
         private IEnumerable<BO.Line> temp1;
         BO.Station stationData2 = new BO.Station();
@@ -84,7 +87,7 @@ namespace PLGui
             int codStation = getNum1(a);
 
             temp1 = bl.GetAllLineIndStation(codStation);
-            LineInStation1.ItemsSource = temp1;
+           // LineInStation1.ItemsSource = temp1;
 
         }
         private int getNum1(string a)
@@ -109,7 +112,7 @@ namespace PLGui
             int codStation = getNum2(a);
 
             temp2 = bl.GetAllLineIndStation(codStation);
-            LineInStation2.ItemsSource = temp2;
+          //  LineInStation2.ItemsSource = temp2;
 
         }
         private int getNum2(string a)
@@ -140,9 +143,46 @@ namespace PLGui
         {
             int cod1 = getNum1(station1.SelectedItem.ToString());
             int cod2 = getNum2(station2.SelectedItem.ToString());
+            
+            temp = ConvertList(bl.TravelPath(cod1, cod2));
+            if (temp.Count()>0)
+            {
+                BO.Line help = temp2.FirstOrDefault(b => b.IdNumber == temp.ElementAt(0).IdNumber);
+                if (help != null) //so we have a dierect line cetween the station
+                {
+                    tryoneline.ItemsSource = empty;
+                    tryoneline.ItemsSource = temp;
+                    tryotowline.ItemsSource = empty;
+                    checkOkey.IsChecked = false;
+                }
+                else
+                {
+                    tryoneline.ItemsSource = empty;
 
+                    for (int i = 0; i < temp.Count(); i++)
+                    {
+                        if (i % 2 == 0 && line1.FirstOrDefault(b => b.IdNumber == temp.ElementAt(i).IdNumber) == null)
+                            line1.Add(temp.ElementAt(i));
+                        if (i % 2 != 0 && line2.FirstOrDefault(b => b.IdNumber == temp.ElementAt(i).IdNumber) == null)
+                            line2.Add(temp.ElementAt(i));
+                    }
+                    tryotowline.ItemsSource = line2;
+                    tryoneline.ItemsSource = line1;
+                    checkOkey.IsChecked = false;
 
-           IEnumerable<BO.Line> r= bl.TravelPath(cod1, cod2);
+                }
+            }
+            else
+            {
+                tryoneline.ItemsSource = empty;
+                tryotowline.ItemsSource = empty;
+                checkOkey.IsChecked = false;
+            }
+        }
+
+        private void tryoneline_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

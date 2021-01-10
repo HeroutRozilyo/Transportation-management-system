@@ -1312,52 +1312,48 @@ namespace BL
                 foreach(var tt in v)
                 {
                     l = new BO.Line();
-                    l = lineDoBoAdapter(tt.LineId);
-                    lineToSend.Add(l);
+                    if(lineToSend.FirstOrDefault(y=>y.IdNumber==tt.LineId)==null)
+                    {
+                        l = lineDoBoAdapter(tt.LineId);
+                        lineToSend.Add(l);
+                    }
+               
                 }
 
-                ///////////////////////////////
-                ///
 
-                //var a= from tem1 in stationsBO1
-                //       let j= dl.GetAllLineStationsBy(b => b.StationCode ==tem1.StationCode)
-                //       from te1 in j
-                //        from tem2 in stationsBO2
-                //        where te1.LineId == tem2.LineId
-                //        where te1.LineStationIndex < tem2.LineStationIndex
-                //       select te1;
-                foreach(var co1 in stationsBO1)
+                if (v.Count()<1)
                 {
-                    var temp = dl.GetAllStationsLine(co1.LineId);
-                    foreach(var te in temp)
+                    foreach (var co1 in stationsBO1)
                     {
-                        var d = dl.GetAllLineStationsBy(b => b.StationCode == te.StationCode);
-                        foreach (var z in d)
+                        var temp = dl.GetAllStationsLine(co1.LineId);
+                        foreach (var te in temp)
                         {
-                            foreach (var sh in stationsBO2)
+                            var d = dl.GetAllLineStationsBy(b => b.StationCode == te.StationCode);
+                            foreach (var z in d)
                             {
-                                if (z.LineId == sh.LineId)
-                                    if (z.LineStationIndex < sh.LineStationIndex)
-                                    {
-                                        l = new BO.Line();
-                                        l = lineDoBoAdapter(te.LineId);
-                                        lineToSend.Add(l);
-                                        l = new BO.Line();
-                                        l = lineDoBoAdapter(z.LineId);
-                                        lineToSend.Add(l);
-                                    }
+                                foreach (var sh in stationsBO2)
+                                {
+                                    if (z.LineId == sh.LineId)
+                                        if (z.LineStationIndex < sh.LineStationIndex)
+                                        {
+
+                                            if (lineToSend.FirstOrDefault(n => n.IdNumber == z.LineId) == null)
+                                            {
+                                                l = new BO.Line();
+                                                l = lineDoBoAdapter(te.LineId);
+                                                lineToSend.Add(l);
+                                                l = new BO.Line();
+                                                l = lineDoBoAdapter(z.LineId);
+                                                lineToSend.Add(l);
+                                            }
+
+                                        }
+                                }
                             }
                         }
                     }
+
                 }
-
-                //foreach (var tt in v)
-                //{
-                //    l = new BO.Line();
-                //    l = lineDoBoAdapter(tt.LineId);
-                //    lineToSend.Add(l);
-                //}
-
 
 
 

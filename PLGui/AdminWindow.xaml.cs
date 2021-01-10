@@ -63,7 +63,9 @@ namespace PLGui
             frame.Content = (new  StationWindowP(bl));
         }
 
-        private void user_Click(object sender, RoutedEventArgs e)
+     
+
+        private void user_Click_1(object sender, RoutedEventArgs e)
         {
             frame.Content = new User();
         }

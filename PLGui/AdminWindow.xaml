@@ -22,6 +22,8 @@
         <WrapPanel HorizontalAlignment="Left" Height="475" Margin="0,80,0,0" VerticalAlignment="Top" Width="145"/>
         <Button x:Name="station" Content="ניהול תחנות" HorizontalAlignment="Left" Margin="15,345,0,226" VerticalAlignment="Stretch" Click="station_Click"  Style="{DynamicResource AdminWindow}"  Width="145"/>
         <Button x:Name="AddManeger" Content="הוספת מנהל &#xD;&#xA;חדש למערכת" HorizontalAlignment="Left" Margin="15,443,0,123" VerticalAlignment="Stretch"  Style="{DynamicResource AdminWindow}" Width="145" RenderTransformOrigin="0.717,0.385" Height="Auto" TextOptions.TextHintingMode="Fixed"/>
+        <Button x:Name="user" Content="משתמש" HorizontalAlignment="Left" Margin="10,543,0,24" VerticalAlignment="Stretch"  Style="{DynamicResource AdminWindow}" Width="145" RenderTransformOrigin="0.717,0.385" Height="Auto" TextOptions.TextHintingMode="Fixed" Click="user_Click_1"/>
+
         <Separator HorizontalAlignment="Stretch" MinHeight="100" Margin="-256,245,691,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" BorderBrush="#FF190E0E" Background="#FF150909">
             <Separator.RenderTransform>
                 <TransformGroup>
