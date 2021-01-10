@@ -44,6 +44,7 @@ namespace PLGui
             this.bl = bl;
             RefreshStation();
             NotExist.Visibility = Visibility.Hidden;
+            updateTS.Visibility = Visibility.Hidden;
 
 
         }
@@ -435,6 +436,11 @@ namespace PLGui
         private void timeAverageTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             e.Handled = !e.Text.Any(x => Char.IsDigit(x) || '.'.Equals(x));
+        }
+
+        private void ListOfStations_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

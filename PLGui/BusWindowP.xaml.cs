@@ -46,6 +46,9 @@ namespace PLGui
             buses.IsReadOnly = true;
             buses.ItemsSource = egged;
             buses.SelectedIndex = 0;
+            StartingDate.DisplayDateEnd = DateTime.Today;
+            lastTreatmentTextBox.DisplayDateStart = DateTime.Today.AddYears(-3);
+            lastTreatmentTextBox.DisplayDateEnd = DateTime.Today;
 
 
 

@@ -13,27 +13,16 @@
 
 
 
-    <Grid Margin="0,0,125,115">
+    <Grid Margin="-50,0,-60.333,115">
         <Grid.RowDefinitions>
             <RowDefinition Height="10*"/>
             <RowDefinition Height="27*"/>
         </Grid.RowDefinitions>
-        <Label x:Name="NOLine" Content=".בתחנה זו לא עוברים קווים עדיין" HorizontalAlignment="Left" Margin="535,48,0,0" VerticalAlignment="Top" Height="32" Width="180" Foreground="#FFAC1515">
-            <Label.Style>
-                <Style>
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding ElementName= LineInStation, Path=HasItems}" Value="true">
-                            <Setter Property="Label.Visibility" Value="Hidden"/>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </Label.Style>
-        </Label>
-        <GroupBox x:Name="groupBox" Header="פרטי התחנה" HorizontalAlignment="Left" Height="245" Margin="170,15,0,0" VerticalAlignment="Top" Width="340" Grid.RowSpan="2">
-            <Grid x:Name="StationDataGrid" HorizontalAlignment="Left" Margin="56,23,0,0" VerticalAlignment="Top">
+        <GroupBox x:Name="groupBox" Header="פרטי התחנה" HorizontalAlignment="Left" Height="245" Margin="245,20,0,0" VerticalAlignment="Top" Width="320" Grid.RowSpan="2" Style="{DynamicResource allGrpuoBox}">
+            <Grid x:Name="StationDataGrid" HorizontalAlignment="Left" Margin="56,23,0,0" VerticalAlignment="Top" >
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto" MinWidth="133.333"/>
+                    <ColumnDefinition Width="Auto" MinWidth="122.667"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -43,14 +32,14 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <Label Content="Address:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
-                <TextBox x:Name="addressTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="0" Text="{Binding Address, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-                <Label Content="Code:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>
-                <TextBox x:Name="codeTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="1" Text="{Binding Code, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" PreviewTextInput="codeTextBox_PreviewTextInput"/>
-                <Label Content="Name:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
-                <TextBox x:Name="nameTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="2" Text="{Binding Name, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-                <Label  Name="Sexist" Content="הוספה" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="5" VerticalAlignment="Center"/>
-                <CheckBox x:Name="stationExistCheckBox" Content="" Grid.Column="1" HorizontalAlignment="Left" IsChecked="{Binding StationExist, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="3" Grid.Row="5" VerticalAlignment="Center" Checked="stationExistCheckBox_Checked">
+                <Label Content=":כתובת" Grid.Column="1" HorizontalAlignment="Left" Margin="29.667,3,0,3" Grid.Row="1" VerticalAlignment="Center" Height="26" Width="55"/>
+                <TextBox x:Name="addressTextBox" HorizontalAlignment="Left" Height="24" Margin="8,3,0,5" Grid.Row="1" Text="{Binding Address, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                <Label Content=":קוד תחנה" Grid.Column="1" HorizontalAlignment="Left" Margin="19.667,0,0,6" VerticalAlignment="Center" Height="26" Width="75"/>
+                <TextBox x:Name="codeTextBox" HorizontalAlignment="Left" Height="24" Margin="8,5,0,3" Text="{Binding Code, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" PreviewTextInput="codeTextBox_PreviewTextInput"/>
+                <Label Content=":שם תחנה" Grid.Column="1" HorizontalAlignment="Left" Margin="24.667,1,0,5" Grid.Row="2" VerticalAlignment="Center" Height="26" Width="70"/>
+                <TextBox x:Name="nameTextBox" HorizontalAlignment="Left" Height="24" Margin="8,6,0,2" Grid.Row="2" Text="{Binding Name, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" RenderTransformOrigin="0.458,0.222"/>
+                <Label  Name="Sexist" Content="הוספה" Grid.Column="1" HorizontalAlignment="Left" Margin="29.667,4,0,2" Grid.Row="5" VerticalAlignment="Center" Height="26" Width="45" RenderTransformOrigin="1.452,0.679"/>
+                <CheckBox x:Name="stationExistCheckBox" Content="" HorizontalAlignment="Left" IsChecked="{Binding StationExist, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="108,9,0,7" Grid.Row="5" VerticalAlignment="Center" Checked="stationExistCheckBox_Checked" Height="16" Width="21" RenderTransformOrigin="-0.857,0.771">
                     <CheckBox.Style>
                         <Style>
                             <Style.Triggers>
@@ -77,39 +66,20 @@
                 </CheckBox>
 
 
-                <Label Content="Latitude:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="4" VerticalAlignment="Center"/>
-                <TextBox x:Name="latitudeTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="4" Text="{Binding Coordinate.Latitude, Mode=OneWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" PreviewTextInput="latitudeTextBox_PreviewTextInput"/>
-                <Label Content="Longitude:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="3" VerticalAlignment="Center"/>
-                <TextBox x:Name="longitudeTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="3" Text="{Binding Coordinate.Longitude, Mode=OneWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" PreviewTextInput="longitudeTextBox_PreviewTextInput"/>
+                <Label Content=":קו רוחב" Grid.Column="1" HorizontalAlignment="Left" Margin="24.667,4,0,2" Grid.Row="3" VerticalAlignment="Center" Height="26" Width="55"/>
+                <TextBox x:Name="latitudeTextBox" HorizontalAlignment="Left" Height="24" Margin="8,4,0,4" Grid.Row="3" Text="{Binding Coordinate.Latitude, Mode=OneWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" PreviewTextInput="latitudeTextBox_PreviewTextInput"/>
+                <Label Content=":קו אורך" Grid.Column="1" HorizontalAlignment="Left" Margin="24.667,1,0,5" Grid.Row="4" VerticalAlignment="Center" Height="26" Width="66"/>
+                <TextBox x:Name="longitudeTextBox" HorizontalAlignment="Left" Height="24" Margin="3,3,0,5" Grid.Row="4" Text="{Binding Coordinate.Longitude, Mode=OneWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" PreviewTextInput="longitudeTextBox_PreviewTextInput"/>
             </Grid>
         </GroupBox>
-        <ListView x:Name="LineInStation" HorizontalAlignment="Right" Height="200" Margin="0,70,104.667,0" VerticalAlignment="Top" Width="160" Grid.RowSpan="2"  >
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Header="קווים בתחנה"   DisplayMemberBinding="{Binding NumberLine}" Width="80"/>
-                    <GridViewColumn Header="תחנה אחרונה"   DisplayMemberBinding="{Binding LastStationCode}" Width="80"/>
-                </GridView>
-            </ListView.View>
-            <ListView.Style>
-                <Style>
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding ElementName= LineInStation, Path=HasItems}" Value="false">
-                            <Setter Property="ListView.Visibility" Value="Hidden"/>
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding ElementName= LineInStation, Path=HasItems}" Value="true">
-                            <Setter Property="ListView.Visibility" Value="Visible"/>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </ListView.Style>
-        </ListView>
-        <GroupBox x:Name="AdjStation" Header="תחנות עוקבות" HorizontalAlignment="Left" Height="325" Margin="166,120,0,-39.667" VerticalAlignment="Top" Width="584" Grid.Row="1" >
-            <Grid HorizontalAlignment="Left" Height="230" Margin="-1,15,-7,-3" VerticalAlignment="Top" Width="580">
+        <GroupBox x:Name="AdjStation" Header="תחנות עוקבות" HorizontalAlignment="Left" Height="325" Margin="240,115,0,-34.667" VerticalAlignment="Top" Width="584" Grid.Row="1" Style="{DynamicResource allGrpuoBox}" >
+            <Grid HorizontalAlignment="Left" Height="230" Margin="19,15,-27,0" VerticalAlignment="Top" Width="580">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="2*"/>
-                    <ColumnDefinition Width="27*"/>
+                    <ColumnDefinition Width="40*"/>
+                    <ColumnDefinition Width="540*"/>
+                    <ColumnDefinition Width="9*"/>
                 </Grid.ColumnDefinitions>
-                <ListView x:Name="Befor" Height="150" Margin="244.333,27,21,0" VerticalAlignment="Top" Grid.Column="1">
+                <ListView x:Name="Befor" Height="150" Margin="244,27,21,0" VerticalAlignment="Top" Grid.Column="1">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="מספר תחנה"  Width="70" DisplayMemberBinding="{Binding Station1}"/>
@@ -118,7 +88,7 @@
                             <GridViewColumn  Width="70">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Button x:Name="UpdataDT" Content="עדכון" Click="UpdataDT_Click"/>
+                                        <Button x:Name="UpdataDT" Content="עדכון" Click="UpdataDT_Click" Style="{DynamicResource miniButton}"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
 
@@ -135,7 +105,7 @@
                             <GridViewColumn  Width="70">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Button x:Name="UpdataDT" Content="עדכון" Click="UpdataDT_Click"/>
+                                        <Button x:Name="UpdataDT" Content="עדכון" Click="UpdataDT_Click" Style="{DynamicResource miniButton}"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
 
@@ -143,16 +113,16 @@
                         </GridView>
                     </ListView.View>
                 </ListView>
-                <Label x:Name="labelBefor" Content=":לפני" HorizontalAlignment="Left" Margin="480.333,3,-30,0" VerticalAlignment="Top" Height="30" Width="90" Grid.Column="1"/>
-                <Label x:Name="labelAfter" Content=":אחרי" HorizontalAlignment="Left" Margin="195.333,3,0,0" VerticalAlignment="Top" Height="30" Width="90" Grid.Column="1"/>
-                <Grid x:Name="updateTS" DataContext="{StaticResource adjacentStationsViewSource}" HorizontalAlignment="Left" Margin="19,173,-19,-8" VerticalAlignment="Top" Width="580" Height="65" Grid.ColumnSpan="2">
+                <Label x:Name="labelBefor" Content=":לפני" HorizontalAlignment="Left" Margin="480,3,-20.667,0" VerticalAlignment="Top" Height="30" Width="90" Grid.Column="1" Grid.ColumnSpan="2"/>
+                <Label x:Name="labelAfter" Content=":אחרי" HorizontalAlignment="Left" Margin="195,3,0,0" VerticalAlignment="Top" Height="30" Width="90" Grid.Column="1"/>
+                <Grid x:Name="updateTS" DataContext="{StaticResource adjacentStationsViewSource}" HorizontalAlignment="Left" Margin="19,173,-9.667,-8" VerticalAlignment="Top" Width="580" Height="65" Grid.ColumnSpan="3">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" MinWidth="65.333"/>
-                        <ColumnDefinition Width="0"/>
-                        <ColumnDefinition Width="130"/>
-                        <ColumnDefinition Width="132*"/>
-                        <ColumnDefinition Width="113*"/>
-                        <ColumnDefinition Width="150*"/>
+                        <ColumnDefinition Width="60.667"/>
+                        <ColumnDefinition Width="69.333"/>
+                        <ColumnDefinition Width="129*"/>
+                        <ColumnDefinition Width="110*"/>
+                        <ColumnDefinition Width="146*"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -160,87 +130,90 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <Label Content="Distance:" Grid.Column="0" HorizontalAlignment="Left" Margin="7,3.333,0,3.333" Grid.Row="1" VerticalAlignment="Center" Height="26" Width="58"/>
-                    <TextBox x:Name="distanceTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="24" Margin="4.667,4.333,0,4.333" Grid.Row="1" Text="{Binding Distance, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" Grid.ColumnSpan="2" PreviewTextInput="timeAverageTextBox_PreviewTextInput"/>
-                    <Label Content="Station 1:" Grid.Column="0" HorizontalAlignment="Left" Margin="1,5,0,1.667" VerticalAlignment="Center" Height="26" Width="59"/>
-                    <TextBlock x:Name="station1TextBlock" Grid.Column="2" HorizontalAlignment="Left" Margin="9.667,9,0,7.667" Text="{Binding Station1}" VerticalAlignment="Center" Height="16" Width="22"/>
-                    <Label Content="Station 2:" Grid.Column="3" Margin="10.667,5,19.333,0" VerticalAlignment="Top" Height="26" RenderTransformOrigin="1.401,0.308"/>
-                    <TextBlock x:Name="station2TextBlock" Grid.Column="4" HorizontalAlignment="Left" Margin="5.667,7,0,0" Text="{Binding Station2}" VerticalAlignment="Top" Height="23" Width="32" RenderTransformOrigin="1.479,0.638"/>
-                    <Label Content="Time Average:" Grid.Column="3" HorizontalAlignment="Left" Margin="4.667,3.333,0,3.333" Grid.Row="1" VerticalAlignment="Center" Height="26" Width="85"/>
-                    <TextBox x:Name="timeAverageTextBox" Grid.Column="4" HorizontalAlignment="Left" Height="24" Margin="5.667,4.333,0,4.333" Grid.Row="1" Text="{Binding TimeAverage, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="101" PreviewTextInput="timeAverageTextBox_PreviewTextInput"/>
-                    <CheckBox x:Name="okeyUpdate" Content="אישור" Grid.Column="5" HorizontalAlignment="Left" Margin="5,12.333,0,0" Grid.Row="1" VerticalAlignment="Top" Width="20" Height="16" Checked="okeyUpdate_Checked"/>
-                    <Label x:Name="label" Content="אישור" Grid.Column="5" HorizontalAlignment="Left" Margin="25,7.333,0,-0.667" Grid.Row="1" VerticalAlignment="Top" Width="60" Grid.RowSpan="3" Height="26"/>
+                    <Label Content=":מרחק" Grid.Column="2" HorizontalAlignment="Left" Margin="9,4.333,0,2.333" Grid.Row="1" VerticalAlignment="Center" Height="26" Width="58"/>
+                    <TextBox x:Name="distanceTextBox" HorizontalAlignment="Left" Height="24" Margin="24,5.333,0,3.333" Grid.Row="1" Text="{Binding Distance, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="101" Grid.ColumnSpan="2" PreviewTextInput="timeAverageTextBox_PreviewTextInput"/>
+                    <Label Content=":תחנה 1" Grid.Column="2" HorizontalAlignment="Left" Margin="2,7,0,32.333" VerticalAlignment="Center" Height="26" Width="59" Grid.RowSpan="2"/>
+                    <TextBlock x:Name="station1TextBlock" HorizontalAlignment="Left" Margin="36.667,16,0,0.667" Text="{Binding Station1}" VerticalAlignment="Center" Height="16" Width="22" Grid.Column="1"/>
+                    <Label Content=":תחנה 2" Grid.Column="4" Margin="0,7,12,0" VerticalAlignment="Top" Height="26" RenderTransformOrigin="1.401,0.308" Grid.RowSpan="2"/>
+                    <TextBlock x:Name="station2TextBlock" Grid.Column="3" HorizontalAlignment="Left" Margin="93.667,8,0,0" Text="{Binding Station2}" VerticalAlignment="Top" Height="23" Width="32" RenderTransformOrigin="1.479,0.638"/>
+                    <Label Content=":זמן נסיעה ממוצע" Grid.Column="4" HorizontalAlignment="Left" Margin="3,4.333,0,2.333" Grid.Row="1" VerticalAlignment="Center" Height="26" Width="105"/>
+                    <TextBox x:Name="timeAverageTextBox" Grid.Column="3" HorizontalAlignment="Left" Height="24" Margin="26.667,5.333,0,3.333" Grid.Row="1" Text="{Binding TimeAverage, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="101" PreviewTextInput="timeAverageTextBox_PreviewTextInput"/>
+                    <CheckBox x:Name="okeyUpdate" Content="אישור" Grid.Column="5" HorizontalAlignment="Left" Margin="5,24,0,0" VerticalAlignment="Top" Width="20" Height="16" Checked="okeyUpdate_Checked" Grid.RowSpan="2"/>
+                    <Label x:Name="label" Content="אישור" Grid.Column="5" HorizontalAlignment="Left" Margin="25,22,0,0" VerticalAlignment="Top" Width="60" Height="26" Grid.RowSpan="2"/>
                 </Grid>
             </Grid>
         </GroupBox>
 
-        <Grid HorizontalAlignment="Right" Height="415" Margin="0,110,-183.333,0" VerticalAlignment="Top" Width="210" Grid.RowSpan="2" >
+        <Grid HorizontalAlignment="Right" Height="415" Margin="0,145,15,-4.667" VerticalAlignment="Top" Width="210" Grid.RowSpan="2" >
             <Grid.ColumnDefinitions>
 
             </Grid.ColumnDefinitions>
 
 
-            <Button x:Name="UpdateStation" Content="עדכון פרטי תחנה" HorizontalAlignment="Right" Margin="0,65,4.667,0" VerticalAlignment="Top" Click="UpdateStation_Click" Height="65" Width="185" Grid.ColumnSpan="6">
-                <Button.Style>
-                    <Style>
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding ElementName= ListOfStations, Path=SelectedIndex}" Value="-1">
-                                <Setter Property="Button.IsEnabled" Value="False"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </Button.Style>
-            </Button>
-            <Button x:Name="DeleteStations" Content="מחיקת תחנה" HorizontalAlignment="Right" Margin="0,140,5,0" VerticalAlignment="Top"  Click="DeleteStations_Click" Height="65" Width="185" RenderTransformOrigin="0.217,0.5" >
-                <Button.Style>
-                    <Style>
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding ElementName= ListOfStations, Path=SelectedIndex}" Value="-1">
-                                <Setter Property="Button.IsEnabled" Value="False"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </Button.Style>
-            </Button>
+            <Button x:Name="UpdateStation" Content="עדכון פרטי תחנה" HorizontalAlignment="Right" Margin="0,65,4.667,0" VerticalAlignment="Top" Click="UpdateStation_Click" Height="65" Width="185" Grid.ColumnSpan="6"  Style="{DynamicResource ButtonStyle1}" BorderBrush="#FF0E0E0E" Padding="3,3,3,-1"/>
+            <Button x:Name="DeleteStations" Content="מחיקת תחנה" HorizontalAlignment="Right" Margin="0,140,5,0" VerticalAlignment="Top"  Click="DeleteStations_Click" Height="65" Width="185"  Style="{DynamicResource ButtonStyle1}"/>
 
-            <Button x:Name="AddStation" Content="הוספת תחנה" HorizontalAlignment="Right" Margin="0,220,5,0" VerticalAlignment="Top"  Click="AddStation_Click"  Height="70" Width="185">
-                <Button.Style>
-                    <Style>
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding ElementName= stationExistCheckBox, Path=Visibility}" Value="Visible">
-                                <Setter Property="Button.IsEnabled" Value="False"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </Button.Style>
-            </Button>
+
+
+            <Button x:Name="AddStation" Content="הוספת תחנה" HorizontalAlignment="Right" Margin="0,220,5,0" VerticalAlignment="Top"  Click="AddStation_Click"  Height="70" Width="185" Style="{DynamicResource ButtomAddStation}"/>
+
 
         </Grid>
         <Grid HorizontalAlignment="Left" Height="530" Margin="-65,-34,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="240">
-            <Button x:Name="Search" Content="Search" HorizontalAlignment="Left" Margin="160,45,0,0" VerticalAlignment="Top" Width="75" Click="Search_Click" DataContext="{Binding Text, ElementName=textBoxTextBox}" RenderTransformOrigin="0.529,-0.194" Height="26">
-                <Button.Style>
-                    <Style>
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding Text, ElementName=textBoxTextBox}" Value="">
-                                <Setter Property="UIElement.IsEnabled" Value="False"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </Button.Style>
-            </Button>
-            <TextBox x:Name="textBoxTextBox" HorizontalAlignment="Left" Height="30" Margin="20,44,0,0" TextWrapping="Wrap" Text="Search Station here...." PreviewKeyDown="textBoxTextBox_PreviewKeyDown" VerticalAlignment="Top" Width="130" PreviewTextInput="textBoxTextBox_PreviewTextInput" 
-           GotFocus="textBoxTextBox_GotFocus" LostFocus="textBoxTextBox_LostFocus"/>
-            <ListView x:Name="ListOfStations" HorizontalAlignment="Left" Height="430" Margin="10,85,0,0" VerticalAlignment="Top" Width="215" PreviewMouseDoubleClick="ListOfStations_PreviewMouseDoubleClick"  >
+            <Button x:Name="Search" Content="חיפוש" HorizontalAlignment="Left" Margin="205,74,-40,0" VerticalAlignment="Top" Width="75" Click="Search_Click" DataContext="{Binding Text, ElementName=textBoxTextBox}" RenderTransformOrigin="0.5,0.5" Height="26" Style="{DynamicResource SerchStation}"/>
+
+
+
+            <TextBox x:Name="textBoxTextBox" HorizontalAlignment="Left" Height="25" Margin="65,74,0,0" TextWrapping="Wrap" Text="...הקלד מספר קו כאן" PreviewKeyDown="textBoxTextBox_PreviewKeyDown" VerticalAlignment="Top" Width="140" PreviewTextInput="textBoxTextBox_PreviewTextInput" 
+           GotFocus="textBoxTextBox_GotFocus" LostFocus="textBoxTextBox_LostFocus" FontSize="13" FontFamily="Copperplate Gothic Bold"/>
+            <ListView x:Name="ListOfStations" HorizontalAlignment="Left" Height="474" Margin="30,100,-50,-44" VerticalAlignment="Top" Width="260" PreviewMouseDoubleClick="ListOfStations_PreviewMouseDoubleClick" Style="{DynamicResource allListView}" SelectionChanged="ListOfStations_SelectionChanged"  >
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="Name" Width="145" DisplayMemberBinding="{Binding Name}"/>
-                        <GridViewColumn Header="Code" Width="65"  DisplayMemberBinding="{Binding Code}"/>
+                        <GridViewColumn Header="קוד" Width="65"  DisplayMemberBinding="{Binding Code}"/>
+                        <GridViewColumn Header="שם תחנה" Width="190" DisplayMemberBinding="{Binding Name}"/>
+
+
 
                     </GridView>
                 </ListView.View>
             </ListView>
             <Label x:Name="NotExist" Content="מספר תחנה אינו קיים במערכת" HorizontalAlignment="Left" Height="35" Margin="40,10,0,0" VerticalAlignment="Top" Width="190" Foreground="#FFAC1515" RenderTransformOrigin="-0.367,1.99"/>
         </Grid>
+        <GroupBox x:Name="groupBox1" Header="קווים העוברים בתחנה" HorizontalAlignment="Left" Height="245" Margin="570,20,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="250" Style="{DynamicResource allGrpuoBox}">
+            <Grid HorizontalAlignment="Left" Height="167" Margin="9,13,0,0" VerticalAlignment="Top" Width="220">
+                <ListView x:Name="LineInStation" HorizontalAlignment="Right" Height="200" Margin="0,20,35,0"  VerticalAlignment="Top" Width="160"  >
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="קווים בתחנה"   DisplayMemberBinding="{Binding NumberLine}" Width="80"/>
+                            <GridViewColumn Header="תחנה אחרונה"   DisplayMemberBinding="{Binding LastStationCode}" Width="80"/>
+                        </GridView>
+                    </ListView.View>
+                    <ListView.Style>
+                        <Style>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding HasItems, ElementName=LineInStation}" Value="false">
+                                    <Setter Property="UIElement.Visibility" Value="Hidden"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding HasItems, ElementName=LineInStation}" Value="true">
+                                    <Setter Property="UIElement.Visibility" Value="Visible"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ListView.Style>
+                </ListView>
+                <Label x:Name="NOLine" Content=".בתחנה זו לא עוברים קווים עדיין" HorizontalAlignment="Left" Margin="15,55,0,0" VerticalAlignment="Top" Height="32" Width="180" Foreground="#FFAC1515">
+                    <Label.Style>
+                        <Style>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding HasItems, ElementName=LineInStation}" Value="true">
+                                    <Setter Property="UIElement.Visibility" Value="Hidden"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Label.Style>
+                </Label>
+            </Grid>
+        </GroupBox>
 
 
 

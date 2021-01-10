@@ -7,11 +7,21 @@
         mc:Ignorable="d"
         Title="AdminWindow" WindowState="Maximized"  WindowStartupLocation="CenterScreen" Width="1328.333" Height="686"   >
     <Grid  Width="Auto" Margin="0,0,10.333,0" Height="651" VerticalAlignment="Top">
-        <Button x:Name="line" Content="Line" HorizontalAlignment="Left" Margin="0,185,0,442" VerticalAlignment="Stretch" Width="135" Click="line_Click"/>
-        <Frame x:Name="frame"   Content="" HorizontalAlignment="Left" Margin="190,55,0,41" VerticalAlignment="Stretch" Width="1075" Navigated="frame_Navigated"  NavigationUIVisibility="Hidden" Background="White" BorderThickness="1" />
+        <Grid.Background>
+            <ImageBrush ImageSource="PO/Back.jpg" Opacity="0.5"/>
+        </Grid.Background>
+        <Button x:Name="line" Content="ניהול קווים" HorizontalAlignment="Left" Margin="15,180,0,406" VerticalAlignment="Stretch"  Click="line_Click" Style="{DynamicResource AdminWindow}" Width="145"/>
+        <Frame x:Name="frame"   Content="" HorizontalAlignment="Left" Margin="160,30,-4,1" VerticalAlignment="Stretch" Width="1155" Navigated="frame_Navigated" NavigationUIVisibility="Hidden" BorderThickness="1" >
+            <Frame.Background>
+                <ImageBrush ImageSource="GMG.png" Opacity="0.1"/>
+            </Frame.Background>
+            <Frame.BorderBrush>
+                <ImageBrush ImageSource="GMG.png"/>
+            </Frame.BorderBrush>
+        </Frame>
         <WrapPanel HorizontalAlignment="Left" Height="475" Margin="0,80,0,0" VerticalAlignment="Top" Width="145"/>
-        <Button x:Name="station" Content="station" HorizontalAlignment="Left" Margin="0,270,0,356" VerticalAlignment="Stretch" Width="135" Click="station_Click"/>
-        <Button x:Name="AddManeger" Content="Add new Manger User" HorizontalAlignment="Left" Margin="0,358,0,267" VerticalAlignment="Stretch" Width="135" Click="AddManeger_Click" RenderTransformOrigin="0.5,0.502"/>
+        <Button x:Name="station" Content="ניהול תחנות" HorizontalAlignment="Left" Margin="15,345,0,226" VerticalAlignment="Stretch" Click="station_Click"  Style="{DynamicResource AdminWindow}"  Width="145"/>
+        <Button x:Name="AddManeger" Content="הוספת מנהל &#xD;&#xA;חדש למערכת" HorizontalAlignment="Left" Margin="15,443,0,123" VerticalAlignment="Stretch"  Style="{DynamicResource AdminWindow}" Width="145" RenderTransformOrigin="0.717,0.385" Height="Auto" TextOptions.TextHintingMode="Fixed"/>
         <Separator HorizontalAlignment="Stretch" MinHeight="100" Margin="-256,245,691,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" BorderBrush="#FF190E0E" Background="#FF150909">
             <Separator.RenderTransform>
                 <TransformGroup>
@@ -23,18 +33,7 @@
             </Separator.RenderTransform>
 
         </Separator>
-        <Button x:Name="buses" Content="Buses" HorizontalAlignment="Left" Margin="0,99,0,527" VerticalAlignment="Stretch" Width="135" Click="buses_Click"/>
-        <Separator HorizontalAlignment="Stretch" MinHeight="100" Margin="657,266,-112,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" BorderBrush="#FF190E0E" Background="#FF150909">
-            <Separator.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-90.207"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Separator.RenderTransform>
-
-        </Separator>
+        <Button x:Name="buses" Content="ניהול אוטובוסים" HorizontalAlignment="Left" Margin="15,262,0,324" VerticalAlignment="Stretch"  Click="buses_Click" Style="{DynamicResource AdminWindow}" Width="145"/>
 
     </Grid>
 

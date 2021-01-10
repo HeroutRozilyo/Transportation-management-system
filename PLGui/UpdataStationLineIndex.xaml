@@ -6,9 +6,9 @@
         mc:Ignorable="d"
     
         Title="UpdataStationLineIndex" Height="171.321" Width="374.547">
-    <Grid Height="116" VerticalAlignment="Top" HorizontalAlignment="Right" Width="320" Margin="0,0,36,0" >
-        <Label x:Name="chooseIndex" Content="Choose the new Index of the Station in the Line" HorizontalAlignment="Left" Margin="43,35,-31,0" VerticalAlignment="Top" Height="42" Width="308"/>
-        <ComboBox x:Name="IndexCOmboBox" Margin="129,72,107,0" VerticalAlignment="Top" ItemsSource="{Binding}"   SelectionChanged="IndexCOmboBox_SelectionChanged" />
+    <Grid Height="126" VerticalAlignment="Top" HorizontalAlignment="Right" Width="353" Margin="0,0,3,0" >
+        <Label x:Name="chooseIndex" Content=" בחר את המיקום החדש לתחנה בקו" HorizontalAlignment="Left" Margin="62,25,-47,0" VerticalAlignment="Top" Height="42" Width="338" FontSize="13" FontFamily="Copperplate Gothic Bold"/>
+        <ComboBox x:Name="IndexCOmboBox" Margin="105,60,131,0" VerticalAlignment="Top" ItemsSource="{Binding}"   SelectionChanged="IndexCOmboBox_SelectionChanged" FontSize="13" FontFamily="Copperplate Gothic Bold" />
 
 
     </Grid>

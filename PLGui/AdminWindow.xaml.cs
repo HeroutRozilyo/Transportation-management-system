@@ -60,12 +60,7 @@ namespace PLGui
 
         private void station_Click(object sender, RoutedEventArgs e)
         {
-            frame.Content = new StationWindowP(bl);
-        }
-
-        private void AddManeger_Click(object sender, RoutedEventArgs e)
-        {
-
+            frame.Content = (new  StationWindowP(bl));
         }
     }
 }
