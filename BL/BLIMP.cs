@@ -31,7 +31,7 @@ namespace BL
             }
             catch (DO.WrongLicenceException ex)
             {
-                throw new BO.BadBusLicenceException("Licence is illegal", ex);
+                throw new BO.BadBusLicenceException("מספר רישוי לא חוקי", ex);
             }
 
             busDO.CopyPropertiesTo(busBO);
@@ -91,7 +91,7 @@ namespace BL
             }
             catch (DO.WrongLicenceException ex)
             {
-                throw new BO.BadBusLicenceException("Licence not valid", ex);
+                throw new BO.BadBusLicenceException("מספר רישוי לא חוקי או שקיים כבר במערכת", ex);
 
             }
             return 1;
@@ -106,7 +106,7 @@ namespace BL
             }
             catch (DO.WrongLicenceException ex)
             {
-                throw new BO.BadBusLicenceException("Licence not valid", ex);
+                throw new BO.BadBusLicenceException("מספר הרישוי המבוקש לא נמצא במערכת", ex);
 
             }
             return true;
@@ -125,7 +125,7 @@ namespace BL
             }
             catch (DO.WrongLicenceException ex)
             {
-                throw new BO.BadBusLicenceException("Licence not valid", ex);
+                throw new BO.BadBusLicenceException("מספר רישוי לא חוקי או שלא נמצאו פרטים במערכת עבורו", ex);
             }
             IEnumerable<DO.Bus> temp = dl.GetAllBuses();
             return bus;
@@ -142,9 +142,9 @@ namespace BL
             else
             {
                 if (bus.StartingDate.Year >= 2018)
-                    throw new BO.BadBusLicenceException("The new licence is not valid,\n please enter again number licence with 8 digite", Convert.ToInt32(bus.Licence));
+                    throw new BO.BadBusLicenceException("מספר הרישוי שהוכנס אינו חוקי, בבקשה אכנס מספר רישוי בעל 8 ספרות", Convert.ToInt32(bus.Licence));
                 else
-                    throw new BO.BadBusLicenceException("The new licence is not valid,\n please enter again number licence with 7 digite", Convert.ToInt32(bus.Licence));
+                    throw new BO.BadBusLicenceException("מספר הרישוי שהוכנס אינו חוקי, בבקשה אכנס מספר רישוי חדש עם 7 ספרות", Convert.ToInt32(bus.Licence));
             }
         }
 
@@ -154,7 +154,7 @@ namespace BL
             if (licence.Length == 7 || licence.Length == 8)
                 return true;
             else
-                throw new BO.BadBusLicenceException("The new licence is not valid,\n please enter again number licence with 8 or 7 digite", Convert.ToInt32(licence));
+                throw new BO.BadBusLicenceException("מספר הרישוי שהוכנס אינו חוקי, בבקשה אכנס מספר רישוי בעל 7 או 8 ספרות בהתאם לשנת הייצור", Convert.ToInt32(licence));
         }
 
 
@@ -211,7 +211,7 @@ namespace BL
             }
             catch (DO.WrongIDExeption ex)
             {
-                throw new BO.BadIdException("ID not valid", ex);
+                throw new BO.BadIdException("מזהה קו לא תקין", ex);
             }
 
             lineBO.TimeTravel = 0;
@@ -346,15 +346,7 @@ namespace BL
                     try //if return false its mean that we need to add this adjact station to our DS.
                     {
                         exsit = CreatAdjStations(tempDO1.ElementAt(i).StationCode, tempDO1.ElementAt(i + 1).StationCode);
-                        //if (!exsit)
-                        //{
-                        //    adjacent = new LineStation();
-                        //    adjacent.StationCode = tempDO1.ElementAt(i).StationCode;
-                        //    adjacent.NextStation = tempDO1.ElementAt(i + 1).StationCode;
-                        //    adjacent.LineId = id;
-                        //    adja.Add(adjacent);
-
-                        //}
+             
                     }
                     catch (DO.WrongIDExeption ex)
                     { string a = ""; a += ex; }
@@ -365,7 +357,7 @@ namespace BL
             }
             catch (DO.WrongIDExeption ex)
             {
-                throw new BO.BadIdException("ID not valid", ex);
+                throw new BO.BadIdException("מזהה קו לא תקין או שקיים כבר במערכת", ex);
             }
             //return adja.AsEnumerable();
             return id;
@@ -475,41 +467,7 @@ namespace BL
                         break;
                     }
 
-                    //if (temp.StartAt <= line.StartAt && temp.FinishAt > line.StartAt)
-                    //{
-                    //    if (temp.StartAt != line.StartAt)
-                    //    {
-                    //        lineTrip.StartAt = tripDO1.ElementAt(i).StartAt;
-                    //        lineTrip.TripLineExist = true;
-                    //        lineTrip.KeyId = tripDO1.ElementAt(i).KeyId;
-                    //        lineTrip.Frequency = tripDO1.ElementAt(i).Frequency;
-                    //        lineTrip.FinishAt = line.StartAt;
-
-                    //        dl.UpdatelineTrip(lineTrip);
-
-                    //    }
-
-
-                    //    //                    dl.DeleteLineTrip1(temp);
-                    //    line.CopyPropertiesTo(lineTrip);
-                    //    dl.AddLineTrip(lineTrip);
-                    //}
-                    //if (temp.FinishAt > line.FinishAt)
-                    //{
-                    //    lineTrip.StartAt = line.FinishAt;
-                    //    lineTrip.TripLineExist = true;
-                    //    lineTrip.KeyId = tripDO1.ElementAt(i).KeyId;
-                    //    lineTrip.Frequency = tripDO1.ElementAt(i).Frequency;
-                    //    lineTrip.FinishAt = temp.FinishAt;
-
-                    //    //                   dl.DeleteLineTrip1(temp);
-                    //    dl.AddLineTrip(lineTrip);
-
-                    //    break;
-
-                    //}
-                    //if (temp.StartAt > line.StartAt && temp.FinishAt < line.FinishAt)
-                    //    dl.DeleteLineTrip1(temp);
+                   
                 }
 
                 if (toAdd == true)
@@ -526,12 +484,12 @@ namespace BL
                 }
                 else
                 {
-                    throw new BO.BadIdException("זמני הלוח תפוסים,אנא הכנס זמנים חדשים", line.KeyId);
+                    throw new BO.BadLineTripExeption("זמני הלוח תפוסים,אנא הכנס זמנים חדשים", line.KeyId);
                 }
             }
             catch (DO.WrongIDExeption ex)
             {
-                throw new BO.BadIdException("ID not valid", ex);
+                throw new BO.BadIdException("מזהה קו לא תקין", ex);
             }
         }
 
@@ -549,7 +507,7 @@ namespace BL
             }
             catch (DO.WrongIDExeption ex)
             {
-                throw new BO.BadIdException("ID not valid", ex);
+                throw new BO.BadIdException("מזהה קו לא תקין או שלא נמצאו פרטים עליו במערכת", ex);
             }
         }
 
@@ -576,12 +534,7 @@ namespace BL
                     if (adj1 != -1 && adj2 != -1)
                     {
                         exsit = CreatAdjStations(adj1, adj2);
-                        //if (!exsit)
-                        //{
-                        //    adjacent = new LineStation();
-                        //    adjacent.StationCode = adj1;
-                        //    adjacent.NextStation = adj2;
-                        //}
+               
                     }
 
                     if (item.LineStationIndex > index)
@@ -596,7 +549,7 @@ namespace BL
             }
             catch (DO.WrongIDExeption ex)
             {
-                throw new BO.BadIdException("ID not valid", ex);
+                throw new BO.BadIdException("מזהה קו לא תקין", ex);
             }
 
             //return adjacent;
@@ -613,7 +566,7 @@ namespace BL
             }
             catch (DO.WrongIDExeption ex)
             {
-                throw new BO.BadIdException("ID not valid", ex);
+                throw new BO.BadIdException("מזהה קו לא תקין", ex);
             }
         }
        
@@ -670,12 +623,12 @@ namespace BL
                 }
                 else
                 {
-                    throw new BO.BadIdException("זמני הלוח תפוסים,אנא הכנס זמנים חדשים", newLineTrip.KeyId);
+                    throw new BO.BadLineTripExeption("זמני הלוח תפוסים,אנא הכנס זמנים חדשים", newLineTrip.KeyId);
                 }
             }
             catch (DO.WrongIDExeption ex)
             {
-                throw new BO.BadIdException("ID not valid", ex);
+                throw new BO.BadIdException("מזהה קו לא תקין", ex);
             }
             return true;
         }
@@ -683,10 +636,7 @@ namespace BL
         public bool UpdateLineStation(BO.Line line)
         {
             IEnumerable<DO.LineStation> lineStationDO;
-        //    List<BO.LineStation> adja = new List<LineStation>();
-            
-
-          //  BO.LineStation adjacent;
+      
             lineStationDO = from st in line.StationsOfBus
                             select (DO.LineStation)st.CopyPropertiesToNew(typeof(DO.LineStation));
             try
@@ -712,14 +662,7 @@ namespace BL
                     try //if return false its mean that we need to add this adjact station to our DS.
                     {
                         exsit = CreatAdjStations(lineStationDO.ElementAt(i).StationCode, lineStationDO.ElementAt(i + 1).StationCode);
-                        //if (!exsit)
-                        //{
-                        //    adjacent = new LineStation();
-                        //    adjacent.StationCode = lineStationDO.ElementAt(i).StationCode;
-                        //    adjacent.NextStation = lineStationDO.ElementAt(i + 1).StationCode;
-                        //    adja.Add(adjacent);
-
-                        //}
+                    
                     }
                     catch (DO.WrongIDExeption ex)
                     { string a = ""; a += ex; }
@@ -730,9 +673,9 @@ namespace BL
             }
             catch (DO.WrongIDExeption ex)
             {
-                throw new BO.BadIdException("ID not valid", ex);
+                throw new BO.BadIdException("מזהה קו לא תקין", ex);
             }
-            //  return adja.AsEnumerable();
+          
             return true;
 
         }
@@ -917,14 +860,7 @@ namespace BL
                     for (int i = 0; i < tempDO2.Count() - 1; i++)   //move on the line station list send 2 adj station to creat if they not exsis yet.
                     {
                         exsit= CreatAdjStations(tempDO2.ElementAt(i).StationCode, tempDO2.ElementAt(i + 1).StationCode);
-                        //if (!exsit)
-                        //{
-                        //    adjacent = new LineStation();
-                        //    adjacent.StationCode = tempDO2.ElementAt(i).StationCode;
-                        //    adjacent.NextStation = tempDO2.ElementAt(i + 1).StationCode;
-                        //    adja.Add(adjacent);
-
-                        //}
+           
                     }
                 }
                 catch (DO.WrongIDExeption x)
@@ -936,10 +872,10 @@ namespace BL
             }
             catch (DO.WrongIDExeption ex)
             {
-                throw new BO.BadIdException("ID not valid", ex);
+                throw new BO.BadIdException("מזהה קו לא תקין", ex);
             }
 
-            //return adja.AsEnumerable();
+            
 
         }
 
@@ -1030,14 +966,14 @@ namespace BL
               
                 adjacent.TimeAverage = (((random.NextDouble() + 1) * d) / speed);
                 dl.AddLineStations(adjacent);
-                //dl.GetAdjacentStations(station1, station2);
+               
 
                 return true;
             }
             catch (DO.WrongIDExeption ex)
             {
                 string a = ""; a += ex;
-           //     dl.AddLineStations(adjacent);
+       
 
             }
             return false;
@@ -1080,7 +1016,7 @@ namespace BL
             }
             catch (DO.WrongIDExeption ex)
             {
-                throw new BO.BadIdException("error", ex);
+                throw new BO.BadIdException("בעיה", ex);
             }
 
         }
@@ -1117,7 +1053,7 @@ namespace BL
             }
             catch (DO.WrongIDExeption ex)
             {
-                throw new BO.BadIdException("ID not valid", ex);
+                throw new BO.BadIdException("מזהה תחנה לא חוקי", ex);
             }
 
 
@@ -1154,7 +1090,7 @@ namespace BL
             }
             catch (DO.WrongIDExeption ex)
             {
-                throw new BO.BadIdException("code not valid", ex);
+                throw new BO.BadIdException("מזהה תחנה לא חוקי", ex);
             }
         }
         public BO.Station GetStationByCode(int Code)
@@ -1166,6 +1102,7 @@ namespace BL
             }
             catch (BO.BadIdException ex)
             {
+                string a = ""; a += ex;
                 return null;
             }
         }
@@ -1193,11 +1130,11 @@ namespace BL
                 if (station.Coordinate.Latitude >= 33.7 && station.Coordinate.Latitude <= 36.3 && station.Coordinate.Longitude >= 29.3 && station.Coordinate.Longitude <= 33.5)
                     dl.AddStations(stationDO);
                 else
-                    throw new BO.BadCoordinateException((station.Coordinate).ToString(), "Wrong coordinate");
+                    throw new BO.BadCoordinateException((station.Coordinate).ToString(), "הקורדינטה שהוכנסה אינה תקינה");
             }
             catch (DO.WrongIDExeption ex)
             {
-                throw new BO.BadIdException("code not valid", ex);
+                throw new BO.BadIdException("מזהה קו לא חוקי", ex);
             }
         }
 
@@ -1211,7 +1148,7 @@ namespace BL
             }
             catch (DO.WrongIDExeption ex)
             {
-                throw new BO.BadIdException("code not valid", ex);
+                throw new BO.BadIdException("קוד התחנה המבוקש לא נמצא במערכת כדי למוחקו", ex);
             }
         }
 
@@ -1293,14 +1230,14 @@ namespace BL
 
                 }
                 else
-                    throw new BO.BadCoordinateException(Convert.ToInt32(station.Coordinate), "Wrong coordinate");
+                    throw new BO.BadCoordinateException(Convert.ToInt32(station.Coordinate), "הקורדינטה אינה נכונה");
               
                 }//
 
             }
             catch (DO.WrongIDExeption ex)
             {
-                throw new BO.BadIdException("code not valid", ex);
+                throw new BO.BadIdException("קוד התחנה אינו חוקי", ex);
             }
 
           
@@ -1319,7 +1256,7 @@ namespace BL
             }
             catch (DO.WrongIDExeption ex)
             {
-                throw new BO.BadIdException("ID not valid", ex);
+                throw new BO.BadIdException("קוד התחנה אינו חוקי או אינו נמצא במערכת", ex);
             }
 
         }
