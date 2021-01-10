@@ -1076,10 +1076,11 @@ namespace BL
             try
             {
                 var v = from item in dl.GetAllStations()
+                        orderby item.Code
                         select stationDoBoAdapter(item.Code);
                 foreach (var temp in v)
                 {
-                    temp.LineAtStation = from st in dl.GetAllStationsCode(temp.Code)
+                    temp.LineAtStation = from st in dl.GetAllStationsCode(temp.Code)                                       
                                          select (BO.LineStation)st.CopyPropertiesToNew(typeof(BO.LineStation));
                     temp.StationAdjacent = from ad in dl.GetAllAdjacentStations(temp.Code)
                                            select (BO.AdjacentStations)ad.CopyPropertiesToNew(typeof(BO.AdjacentStations));
@@ -1168,7 +1169,7 @@ namespace BL
                     var a = from item in dl.GetAllStations()
                             where station.Code == item.Code
                             select item;
-                    if (a.ToList().Count()!=0)
+                    if (a.ToList().Count() != 0)
                         throw new BO.BadIdException("קוד תחנה כבר קיים במערכת ", station.Code);
                     IEnumerable<DO.LineStation> list = from item in dl.GetAllStationsCode(oldCode)
                                                        select item;
@@ -1176,18 +1177,18 @@ namespace BL
                     for (int i = 0; i < list.Count() + 1; i++)
                     {
 
-
                         dl.UpdateLineStationsCode(list.ElementAt(0), newCode);
                     }
-
+                }
+                    
                     adjacentStations =  dl.GetAllAdjacentStations(oldCode); //get all adjacted stations with this code station
            
 
-                station.CopyPropertiesTo(stationDO);
-                stationDO.Coordinate = new GeoCoordinate(station.Coordinate.Latitude, station.Coordinate.Longitude);
+                     station.CopyPropertiesTo(stationDO);
+                     stationDO.Coordinate = new GeoCoordinate(station.Coordinate.Latitude, station.Coordinate.Longitude);
 
-                if (station.Coordinate.Latitude >= 29.3 && station.Coordinate.Latitude <= 33.5 && station.Coordinate.Longitude >= 33.7 && station.Coordinate.Longitude <= 36.3)
-                {
+                  if (station.Coordinate.Latitude >= 29.3 && station.Coordinate.Latitude <= 33.5 && station.Coordinate.Longitude >= 33.7 && station.Coordinate.Longitude <= 36.3)
+                  {
                     stationOldDO = dl.GetStations(oldCode);
                     dl.UpdateStations(stationDO,oldCode);
                     if(newCode!= oldCode)
@@ -1196,7 +1197,7 @@ namespace BL
                         for(int i=0;i< adjacentStations.Count()+1;i++)
                             dl.UpdateAdjacentStations(adjacentStations.ElementAt(0).Station1, adjacentStations.ElementAt(0).Station2, newCode, oldCode);
                     }
-       
+                      
                     if (stationOldDO.Coordinate != station.Coordinate) //if we change the place of tje station we need to ask to insert again data on distance and time travel
                     {
                         adjacentStations = dl.GetAllAdjacentStations(oldCode);
@@ -1228,11 +1229,11 @@ namespace BL
 
                     }
 
-                }
-                else
-                    throw new BO.BadCoordinateException(Convert.ToInt32(station.Coordinate), "הקורדינטה אינה נכונה");
+                  }
+                  else
+                      throw new BO.BadCoordinateException(Convert.ToInt32(station.Coordinate.Latitude), Convert.ToInt32(station.Coordinate.Longitude), "הקורדינטה אינה נכונה");
               
-                }//
+                
 
             }
             catch (DO.WrongIDExeption ex)

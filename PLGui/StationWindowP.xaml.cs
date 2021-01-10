@@ -186,9 +186,9 @@ namespace PLGui
         string numberText;
         private void textBoxTextBox_LostFocus(object sender, RoutedEventArgs e)
         {
-            if (textBoxTextBox.Text != "Search Station here...." && textBoxTextBox.Text != "")
+            if (textBoxTextBox.Text != "חפש תחנה כאן..." && textBoxTextBox.Text != "")
                 numberText = textBoxTextBox.Text;
-            textBoxTextBox.Text = "Search Station here....";
+            textBoxTextBox.Text = "חפש תחנה כאן...";
         }
 
         private void stationDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -200,12 +200,14 @@ namespace PLGui
         {
             try
             {
-              
-                helpaAddStation();
-                
-              bl.UpdateStation(addStation, oldCode);
 
-               
+                helpaAddStation();
+                bl.UpdateStation(addStation, oldCode);
+
+                RefreshStation();
+                RefreshLineInStation();
+
+
             }
             catch (BO.BadCoordinateException a)
             {
@@ -214,6 +216,7 @@ namespace PLGui
                 stationExistCheckBox.Visibility = Visibility.Visible;
                 stationExistCheckBox.IsChecked = false;
                 add = true;
+              
             }
             catch (BO.BadIdException a)
             {
@@ -222,6 +225,7 @@ namespace PLGui
                 stationExistCheckBox.Visibility = Visibility.Visible;
                 stationExistCheckBox.IsChecked = false;
                 add = true;
+                
             }
 
         }
