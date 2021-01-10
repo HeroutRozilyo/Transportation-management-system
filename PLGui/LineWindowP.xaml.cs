@@ -181,7 +181,7 @@ namespace PLGui
             try
             {
 
-                MessageBoxResult result = MessageBox.Show("You sure you want to delete that line?", "Delete Line Message", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                MessageBoxResult result = MessageBox.Show("אתה בטוח שברצונך למחוק קו זה?", "Delete Line Message", MessageBoxButton.YesNo, MessageBoxImage.Question);
                 switch (result)
                 {
                     case MessageBoxResult.Yes:
@@ -192,7 +192,7 @@ namespace PLGui
                             RefreshLine();
                             line = null;
                             RefreshStationListView();
-                            MessageBox.Show("The line was successfully deleted from the system", "Success Message", MessageBoxButton.OK, MessageBoxImage.Asterisk);
+                            MessageBox.Show("הקו נוסף בהצלחה למערכת", "Success Message", MessageBoxButton.OK, MessageBoxImage.Asterisk);
                             break;
                         }
                     case MessageBoxResult.No:
@@ -247,7 +247,7 @@ namespace PLGui
 
 
 
-                MessageBox.Show("Line details saved successfully", "Success Message", MessageBoxButton.OK, MessageBoxImage.Asterisk);
+                MessageBox.Show("פרטי הקו נשמרו בהצלחה", "Success Message", MessageBoxButton.OK, MessageBoxImage.Asterisk);
             }
             catch (BO.BadIdException a)
             {
@@ -333,8 +333,7 @@ namespace PLGui
         {
 
             System.Windows.Data.CollectionViewSource lineTripViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("lineTripViewSource")));
-            // Load data by setting the CollectionViewSource.Source property:
-            // lineTripViewSource.Source = [generic data source]
+         
         }
 
         private void tripLineExistCheckBox_Checked(object sender, RoutedEventArgs e)

@@ -155,12 +155,12 @@ namespace PLGui
                     RefreshDataBus();
                     buses.SelectedIndex = egged.Count() - 1;
 
-                    MessageBox.Show("The Bus Was Successfully added to the System", "Success Message", MessageBoxButton.OK, MessageBoxImage.Asterisk);
+                    MessageBox.Show("האוטובוס נוסף בהצלחה למערכת", "Success Message", MessageBoxButton.OK, MessageBoxImage.Asterisk);
 
                 }
                 else
                 {
-                    MessageBoxResult result = MessageBox.Show("In order to create a bus, you need to fill in the license number   and Starting Date field. To cancel the process click cancel", "ERROR", MessageBoxButton.OKCancel, MessageBoxImage.Error);
+                    MessageBoxResult result = MessageBox.Show("כדי להוסיף אוטובוס, בבקשה אכנס מספר רישוי ותאריך התחלה. כדי לבטל לחץ cancle", "ERROR", MessageBoxButton.OKCancel, MessageBoxImage.Error);
                     switch (result)
                     {
                         case MessageBoxResult.OK: break;
@@ -204,11 +204,11 @@ namespace PLGui
                     bl.AddBus(newbus);
                     RefreshDataBus();
                     buses.SelectedIndex = egged.Count() - 1;
-                    MessageBox.Show("The Bus Was Successfully added to the System", "Success Message", MessageBoxButton.OK, MessageBoxImage.Asterisk);
+                    MessageBox.Show("האוטובוס נוסף בהצלחה למירכת", "Success Message", MessageBoxButton.OK, MessageBoxImage.Asterisk);
                 }
                 if (e.Key == Key.Return && add && (LincestextBox == null || StartingDate.Text == ""))
                 {
-                    MessageBoxResult result = MessageBox.Show("In order to create a bus, you need to fill in the license number   and Starting Date field. To cancel the process click cancel", "ERROR", MessageBoxButton.OKCancel, MessageBoxImage.Error);
+                    MessageBoxResult result = MessageBox.Show("כדי להוסיף אוטובוס, נא אכנס מספר רישוי ותאריך תחילת פעילות . לביטול לחץ בטל", "ERROR", MessageBoxButton.OKCancel, MessageBoxImage.Error);
                     switch (result)
                     {
                         case MessageBoxResult.OK: break;

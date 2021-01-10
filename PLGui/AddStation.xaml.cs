@@ -69,7 +69,7 @@ namespace PLGui
 
             helpData();
             bl.AddStation(toAdd);
-            MessageBox.Show("The Bus Was Successfully added to the System", "Success Message", MessageBoxButton.OK, MessageBoxImage.Asterisk);
+            MessageBox.Show("האוטובוס נוסף בהצלחה למערכת", "Success Message", MessageBoxButton.OK, MessageBoxImage.Asterisk);
             this.DialogResult = true;
             this.Close();
          
