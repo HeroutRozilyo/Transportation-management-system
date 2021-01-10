@@ -53,7 +53,7 @@ namespace BlAPI
         IEnumerable<BO.Station> GetAllStations();
         void AddStation(BO.Station station);
         void DeleteStation(int code);
-        IEnumerable<BO.AdjacentStations> UpdateStation(BO.Station station, int oldCode);
+        void UpdateStation(BO.Station station, int oldCode);
         BO.Station GetStationByCode(int Code);
         void UpdateAdjac(BO.AdjacentStations adjacBO);
         #endregion
