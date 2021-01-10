@@ -26,6 +26,7 @@ namespace BlAPI
         IEnumerable<BO.Line> GetAllLine(); //return all the lines that working 
         IEnumerable<BO.Line> GetLineBy(int stationCode); //return all the lines according to predicate
         IEnumerable<BO.Line> GetLineByArea(BO.AREA area); //return all the line according to their area
+        IEnumerable<IGrouping<BO.AREA, BO.Line>> GetLinesByAreaG();
         BO.Line GetLineByLine(int lineid);//return line
         int AddLine(BO.Line line);
 

@@ -27,6 +27,13 @@ namespace PLGui
 
         private ObservableCollection<BO.Line> egged = new ObservableCollection<BO.Line>();
         private ObservableCollection<object> lineStationOfLine = new ObservableCollection<object>();
+        private ObservableCollection<BO.Line> GENERAL= new ObservableCollection<BO.Line>();
+        private ObservableCollection<BO.Line> SOUTH = new ObservableCollection<BO.Line>();
+        private ObservableCollection<BO.Line> CENTER = new ObservableCollection<BO.Line>();
+        private ObservableCollection<BO.Line> JERUSALEM = new ObservableCollection<BO.Line>();
+        private ObservableCollection<BO.Line> NORTH = new ObservableCollection<BO.Line>();
+        private ObservableCollection<BO.Line> YOSH = new ObservableCollection<BO.Line>();
+
 
 
         private BO.AREA area;
@@ -58,8 +65,41 @@ namespace PLGui
 
         private void RefreshLine()
         {
-            egged = Convert((bl.GetLineByArea(area)));//to make ObservableCollection
-            ListOfLine.ItemsSource = egged;
+         
+            switch (area)
+            {
+                case BO.AREA.CENTER:
+                    {
+                        egged = CENTER;
+                        break;
+                    }
+                case BO.AREA.GENERAL:
+                    {
+                        egged = GENERAL;
+                        break;
+                    }
+                case BO.AREA.JERUSALEM:
+                    {
+                        egged = JERUSALEM;
+                        break;
+                    }
+                case BO.AREA.NORTH:
+                    {
+                        egged = NORTH;
+                        break;
+                    }
+                case BO.AREA.SOUTH:
+                    {
+                        egged = SOUTH;
+                        break;
+                    }
+                case BO.AREA.YOSH:
+                    {
+                        egged = YOSH;
+                        break;
+                    }
+            }
+                    ListOfLine.ItemsSource = egged;
 
 
         }
@@ -91,11 +131,38 @@ namespace PLGui
 
 
         }
+        private void listArea()
+        {
+            foreach(var group in bl.GetLinesByAreaG())
+            {
+                if (group.Key == BO.AREA.CENTER)
+                    foreach (var line in group)
+                        CENTER.Add(line);
+                if (group.Key == BO.AREA.GENERAL)
+                    foreach (var line in group)
+                        GENERAL.Add(line);
+                if (group.Key == BO.AREA.JERUSALEM)
+                    foreach (var line in group)
+                        JERUSALEM.Add(line);
+                if (group.Key == BO.AREA.NORTH)
+                    foreach (var line in group)
+                        NORTH.Add(line);
+                if (group.Key == BO.AREA.SOUTH)
+                    foreach (var line in group)
+                        SOUTH.Add(line);
+                if (group.Key == BO.AREA.YOSH)
+                    foreach (var line in group)
+                        YOSH.Add(line);
+
+            }
+        }
 
         private void comboBoxArea_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            CENTER.Clear();GENERAL.Clear();NORTH.Clear();SOUTH.Clear();YOSH.Clear(); JERUSALEM.Clear();
+            listArea();
+             area = (BO.AREA)(comboBoxArea.SelectedItem);
 
-            area = (BO.AREA)(comboBoxArea.SelectedItem);
             RefreshLine();
             RefreshStationListView();
            

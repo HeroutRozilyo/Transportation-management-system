@@ -255,6 +255,13 @@ namespace BL
 
             return v;
         }
+         public IEnumerable<IGrouping<BO.AREA,BO.Line>>GetLinesByAreaG()
+        {
+             var list = from line in GetAllLine()
+                       group line by line.Area into g
+                       select g;
+            return list;
+        }
 
         public BO.Line GetLineByLine(int lineid) //return all the lines according to predicate
         {
