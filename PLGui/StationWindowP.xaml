@@ -83,10 +83,11 @@
                 <TextBox x:Name="longitudeTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="3" Text="{Binding Coordinate.Longitude, Mode=OneWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" PreviewTextInput="longitudeTextBox_PreviewTextInput"/>
             </Grid>
         </GroupBox>
-        <ListView x:Name="LineInStation" HorizontalAlignment="Right" Height="200" Margin="0,70,104.667,0" VerticalAlignment="Top" Width="90" Grid.RowSpan="2"  >
+        <ListView x:Name="LineInStation" HorizontalAlignment="Right" Height="200" Margin="0,70,104.667,0" VerticalAlignment="Top" Width="160" Grid.RowSpan="2"  >
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="קווים בתחנה"   DisplayMemberBinding="{Binding NumberLine}" Width="80"   />
+                    <GridViewColumn Header="קווים בתחנה"   DisplayMemberBinding="{Binding NumberLine}" Width="80"/>
+                    <GridViewColumn Header="תחנה אחרונה"   DisplayMemberBinding="{Binding LastStationCode}" Width="80"/>
                 </GridView>
             </ListView.View>
             <ListView.Style>

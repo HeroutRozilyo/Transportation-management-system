@@ -835,7 +835,7 @@ namespace DS
                 {
                  KeyId=1,
                  StartAt=new TimeSpan(06,00,00),
-                 FinishAt=new TimeSpan(24,00,00),
+                 FinishAt=new TimeSpan(23,59,59),
                  TripLineExist=true,
                  Frequency=19,
                  },
@@ -851,7 +851,7 @@ namespace DS
                 {
                  KeyId=3,
                  StartAt=new TimeSpan(06,00,00),
-                 FinishAt=new TimeSpan(24,00,00),
+                 FinishAt=new TimeSpan(23,59,59),
                  TripLineExist=true,
                  Frequency=15,
                  },
@@ -867,7 +867,7 @@ namespace DS
                 {
                  KeyId=4,
                  StartAt=new TimeSpan(19,00,00),
-                 FinishAt=new TimeSpan(24,00,00),
+                 FinishAt=new TimeSpan(23,59,59),
                  TripLineExist=true,
                  Frequency=30,
                  },
@@ -891,7 +891,7 @@ namespace DS
                 {
                  KeyId=5,
                  StartAt=new TimeSpan(14,00,00),
-                 FinishAt=new TimeSpan(24,00,00),
+                 FinishAt=new TimeSpan(23,59,59),
                  TripLineExist=true,
                  Frequency=20,
                  },
@@ -899,7 +899,7 @@ namespace DS
                 {
                  KeyId=6,
                  StartAt=new TimeSpan(06,00,00),
-                 FinishAt=new TimeSpan(24,00,00),
+                 FinishAt=new TimeSpan(23,59,59),
                  TripLineExist=true,
                  Frequency=17,
                  },
@@ -907,7 +907,7 @@ namespace DS
                 {
                  KeyId=7,
                  StartAt=new TimeSpan(08,00,00),
-                 FinishAt=new TimeSpan(24,00,00),
+                 FinishAt=new TimeSpan(23,59,59),
                  TripLineExist=true,
                  Frequency=30,
                  },
@@ -931,7 +931,7 @@ namespace DS
                 {
                  KeyId=9,
                  StartAt=new TimeSpan(10,00,00),
-                 FinishAt=new TimeSpan(24,00,00),
+                 FinishAt=new TimeSpan(23,59,59),
                  TripLineExist=true,
                  Frequency=40,
                  },
@@ -939,7 +939,7 @@ namespace DS
                 {
                  KeyId=10,
                  StartAt=new TimeSpan(6,00,00),
-                 FinishAt=new TimeSpan(24,00,00),
+                 FinishAt=new TimeSpan(23,59,59),
                  TripLineExist=true,
                  Frequency=40,
                  }

@@ -186,9 +186,9 @@ namespace PLGui
         string numberText;
         private void textBoxTextBox_LostFocus(object sender, RoutedEventArgs e)
         {
-            if (textBoxTextBox.Text != "חפש תחנה כאן..." && textBoxTextBox.Text != "")
+            if (textBoxTextBox.Text != "Search Station here...." && textBoxTextBox.Text != "")
                 numberText = textBoxTextBox.Text;
-            textBoxTextBox.Text = "חפש תחנה כאן...";
+            textBoxTextBox.Text = "Search Station here....";
         }
 
         private void stationDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -200,15 +200,28 @@ namespace PLGui
         {
             try
             {
+                MessageBoxResult result = MessageBox.Show("?האם לשמור שינויים\n פעולה זו בלתי הפיכה", "Update", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
-                helpaAddStation();
-                bl.UpdateStation(addStation, oldCode);
+                switch (result)
+                {
+                    case MessageBoxResult.Yes:
+                        {
+                            helpaAddStation();
 
-                RefreshStation();
-                RefreshLineInStation();
+                            bl.UpdateStation(addStation, oldCode);
+                            RefreshStation();
+                            RefreshLineInStation();
+                            break;
+                        }
+                    case MessageBoxResult.No:
+                        {
+
+                            break;
+                        }
+                }
 
 
-            }
+                }
             catch (BO.BadCoordinateException a)
             {
                 MessageBox.Show(a.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -216,7 +229,6 @@ namespace PLGui
                 stationExistCheckBox.Visibility = Visibility.Visible;
                 stationExistCheckBox.IsChecked = false;
                 add = true;
-              
             }
             catch (BO.BadIdException a)
             {
@@ -225,7 +237,6 @@ namespace PLGui
                 stationExistCheckBox.Visibility = Visibility.Visible;
                 stationExistCheckBox.IsChecked = false;
                 add = true;
-                
             }
 
         }
@@ -234,12 +245,29 @@ namespace PLGui
         {
             try
             {
-                bl.DeleteStation(oldCode);
-                stationData = null;
-                RefreshStation();
-                RefreshLineInStation();
-               
-            }
+              
+                
+                    MessageBoxResult result = MessageBox.Show("?האם למחוק תחנה זו\n פעולה זו בלתי הפיכה", "Update", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+                switch (result)
+                {
+                    case MessageBoxResult.Yes:
+                        {
+                            bl.DeleteStation(oldCode);
+                            stationData = null;
+                            RefreshStation();
+                            RefreshLineInStation();
+                            break;
+                        }
+                    case MessageBoxResult.No:
+                        {
+
+                            break;
+                        }
+                }
+
+
+                }
             catch (BO.BadCoordinateException a)
             {
                 MessageBox.Show(a.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -251,6 +279,7 @@ namespace PLGui
         {
             if (!add)
             {
+
                 ListOfStations.SelectedIndex = -1;
                  stationData = null;
                 temp = null;
@@ -283,17 +312,42 @@ namespace PLGui
                 
                 if (add == true)
                 {
-                    helpaAddStation();
-                    //addStation = StationDataGrid.DataContext as BO.Station;
-                    
-                    stationExistCheckBox.Visibility = Visibility.Hidden;
-                    Sexist.Visibility = Visibility.Hidden;
-                    bl.AddStation(addStation);
-                    stationData = addStation;
-                    RefreshStation();
-                    RefreshLineInStation();
-                    add = false;
-                }
+                    MessageBoxResult result = MessageBox.Show("?האם לשמור שינויים", "Update", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
+
+                    switch (result)
+                    {
+                        case MessageBoxResult.Yes:
+                            {
+                                helpaAddStation();
+                                //addStation = StationDataGrid.DataContext as BO.Station;
+
+                                stationExistCheckBox.Visibility = Visibility.Hidden;
+                                Sexist.Visibility = Visibility.Hidden;
+                                bl.AddStation(addStation);
+                                stationData = addStation;
+                                RefreshStation();
+                                RefreshLineInStation();
+                                add = false;
+                                break;
+                            }
+                        case MessageBoxResult.No:
+                            {
+                                stationExistCheckBox.IsChecked = false;
+                                break;
+                            }
+                        case MessageBoxResult.Cancel:
+                            {
+                                StationDataGrid.DataContext = new BO.Station();
+                                stationExistCheckBox.IsChecked = false;
+                              
+                                stationExistCheckBox.Visibility = Visibility.Hidden;
+                                Sexist.Visibility = Visibility.Hidden;
+                                add = false;
+                                break;
+
+                            }
+                    }
+                    }
 
             }
             catch(BO.BadCoordinateException a)
@@ -337,11 +391,37 @@ namespace PLGui
         {
             try
             {
-                BO.AdjacentStations a = updateTS.DataContext as BO.AdjacentStations;
-                bl.UpdateAdjac(a);
-                okeyUpdate.IsChecked = true;
-                updateTS.Visibility = Visibility.Hidden;
-            }
+
+                MessageBoxResult result = MessageBox.Show("?האם לשמור שינויים", "Update", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
+
+                switch (result)
+                {
+                    case MessageBoxResult.Yes:
+                        {
+                            BO.AdjacentStations a = updateTS.DataContext as BO.AdjacentStations;
+
+                            bl.UpdateAdjac(a);
+                            okeyUpdate.IsChecked = true;
+                            updateTS.Visibility = Visibility.Hidden;
+                            break;
+                        }
+                    case MessageBoxResult.No:
+                        {
+
+                            okeyUpdate.IsChecked = false;
+
+                            break;
+                        }
+                    case MessageBoxResult.Cancel:
+                        {
+                            
+                            okeyUpdate.IsChecked = false;
+                            updateTS.Visibility = Visibility.Hidden;
+                            break;
+                            //
+                        }
+                }
+                }
             catch(BO.BadIdException a)
             {
                 MessageBox.Show(a.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);

@@ -343,6 +343,7 @@ namespace PLGui
 
                 if (finishAtTextBox.Text != "" && frequencyTextBox.Text != "" && frequencyTextBox.Text != "" && startAtTextBox.Text != "")
                 {
+                   
                     MessageBoxResult result = MessageBox.Show("You sure you want to add this line trip?", "Add Line trip Message", MessageBoxButton.YesNo, MessageBoxImage.Question);
                     switch (result)
                     {
@@ -352,7 +353,8 @@ namespace PLGui
                                 BO.LineTrip addLineTrip = new BO.LineTrip();
                                 addLineTrip = NewLooz.DataContext as BO.LineTrip;
                                 addLineTrip.KeyId = line.IdNumber;
-                                if (addLineTrip.FinishAt < addLineTrip.StartAt)
+                                if (addLineTrip.Frequency == 0) addLineTrip.FinishAt = addLineTrip.StartAt;
+                                    if (addLineTrip.FinishAt < addLineTrip.StartAt)
                                 {
                                     int hour = 24 + addLineTrip.FinishAt.Hours;
                                     TimeSpan toChange = new TimeSpan(hour, 0, 0);
