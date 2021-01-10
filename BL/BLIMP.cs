@@ -1208,7 +1208,7 @@ namespace BL
             }
         }
 
-        public IEnumerable<BO.AdjacentStations> UpdateStation(BO.Station station,int oldCode)
+        public void UpdateStation(BO.Station station,int oldCode)
         {
             int newCode = station.Code;
             DO.Stations stationDO = new DO.Stations();
@@ -1219,7 +1219,24 @@ namespace BL
    
             try
             {
-                adjacentStations =  dl.GetAllAdjacentStations(oldCode); //get all adjacted stations with this code station
+                if (station.Code != oldCode)
+                {
+                    var a = from item in dl.GetAllStations()
+                            where station.Code == item.Code
+                            select item;
+                    if (a.ToList().Count()!=0)
+                        throw new BO.BadIdException("קוד תחנה כבר קיים במערכת ", station.Code);
+                    IEnumerable<DO.LineStation> list = from item in dl.GetAllStationsCode(oldCode)
+                                                       select item;
+
+                    for (int i = 0; i < list.Count() + 1; i++)
+                    {
+
+
+                        dl.UpdateLineStationsCode(list.ElementAt(0), newCode);
+                    }
+
+                    adjacentStations =  dl.GetAllAdjacentStations(oldCode); //get all adjacted stations with this code station
            
 
                 station.CopyPropertiesTo(stationDO);
@@ -1270,16 +1287,7 @@ namespace BL
                 }
                 else
                     throw new BO.BadCoordinateException(Convert.ToInt32(station.Coordinate), "Wrong coordinate");
-                if (station.Code != oldCode)
-                {
-                    IEnumerable<DO.LineStation> list = from item in dl.GetAllStationsCode(oldCode)
-                                                       select item;
-                    for (int i = 0; i < list.Count() + 1; i++)
-                    {
-                        // list.ElementAt(0).StationCode= station.Code;
-
-                        dl.UpdateLineStationsCode(list.ElementAt(0), newCode);
-                    }
+              
                 }//
 
             }
@@ -1288,7 +1296,7 @@ namespace BL
                 throw new BO.BadIdException("code not valid", ex);
             }
 
-            return adjactToChange.AsEnumerable();
+          
 
         }
         public void UpdateAdjac(BO.AdjacentStations adjacBO)
