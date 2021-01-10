@@ -5,57 +5,17 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:PLGui"
       mc:Ignorable="d" 
-      d:DesignHeight="535" d:DesignWidth="790"
+      d:DesignHeight="535" d:DesignWidth="1155"
       Title="busTry">
 
     <Grid x:Name="busesData" Margin="0,0,-35,-10.333"  >
-        <ComboBox x:Name="buses" HorizontalAlignment="Left" Margin="330,30,0,0" VerticalAlignment="Top" Width="102" ItemsSource="{Binding}" DisplayMemberPath="Licence" SelectedValuePath="Licence"  SelectionChanged="buses_SelectionChanged"  />
+        <ComboBox x:Name="buses" HorizontalAlignment="Left" Margin="390,30,0,0" VerticalAlignment="Top" Width="147" ItemsSource="{Binding}" DisplayMemberPath="Licence" SelectedValuePath="Licence"  SelectionChanged="buses_SelectionChanged" FontSize="13" FontFamily="Copperplate Gothic Bold" Height="35"  />
 
 
 
 
 
-        <Label x:Name="Select" Content="Select Bus" HorizontalAlignment="Left" Margin="255,25,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.868,0.436"/>
-
-        <Grid x:Name="GridDataBus"   HorizontalAlignment="Left" Margin="211,145,0,80" VerticalAlignment="Stretch" Height="320" Width="314" PreviewKeyDown="Window_PreviewKeyDown" >
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="50.41"/>
-                <ColumnDefinition Width="75.59"/>
-                <ColumnDefinition Width="23*"/>
-                <ColumnDefinition Width="7*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto" MinHeight="50"/>
-                <RowDefinition Height="Auto" MinHeight="11.333"/>
-            </Grid.RowDefinitions>
-            <Label Content="Starting Date:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,11,0,10.333" Grid.Row="0" VerticalAlignment="Center" Grid.ColumnSpan="2" Height="26" Width="82"/>
-            <DatePicker x:Name="StartingDate" Grid.Column="2" HorizontalAlignment="Left" Margin="60.333,10,0,12.333" Grid.Row="0" SelectedDate="{Binding StartingDate, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Height="25" Width="120" Grid.ColumnSpan="2" />
-            <Label Content="Linces:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,10.667,0,5.333" Grid.Row="1" VerticalAlignment="Center" Height="26" Width="45"/>
-            <TextBox x:Name="LincestextBox" Grid.Column="2" HorizontalAlignment="Left" Height="24" Margin="60.333,12.667,0,5.333" Grid.Row="1"   Text="{Binding Licence, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" Grid.ColumnSpan="2" PreviewTextInput="LincestextBox_PreviewTextInput"/>
-            <Label Content="KM:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,8.667,0,8" Grid.Row="2" VerticalAlignment="Center" Height="26" Width="31"/>
-            <TextBox x:Name="KmtextBox" Grid.Column="2" Text="{Binding Kilometrz}" HorizontalAlignment="Left" Height="19"  Margin="60.333,11.667,0,12" Grid.Row="2" VerticalAlignment="Center" Width="120" Grid.ColumnSpan="2" PreviewTextInput="KmtextBox_PreviewTextInput"/>
-
-            <Label Content="Fuel:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,6,0,10" Grid.Row="3" VerticalAlignment="Center" Height="26" Width="35"/>
-            <TextBox x:Name="FuelTextBox" Grid.Column="2" HorizontalAlignment="Left" Height="24" Margin="60.333,12,0,6" Grid.Row="3" Text="{Binding FuellAmount, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" Grid.ColumnSpan="2" PreviewTextInput="KmtextBox_PreviewTextInput"/>
-
-            <Label Content=" Status:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,10,0,7.333" Grid.Row="6" VerticalAlignment="Center" Grid.ColumnSpan="2" Height="26" Width="48"/>
-            <ComboBox x:Name="StatusComboBox" Grid.Column="2"  SelectedItem="{Binding StatusBus}" HorizontalAlignment="Left" Height="22"  Margin="60.333,11,0,10.333" Grid.Row="6" VerticalAlignment="Center" Width="120" Grid.ColumnSpan="2"/>
-
-            <Label Content="Last Treatment Date:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,7.667,0,7.667" Grid.Row="7" VerticalAlignment="Center" Grid.ColumnSpan="3" Height="26" Width="118" />
-            <DatePicker x:Name="lastTreatmentTextBox" Grid.Column="2" HorizontalAlignment="Left" Height="24" Margin="60.333,8.667,0,8.667" Grid.Row="7"  VerticalAlignment="Center" Width="120" SelectedDate="{Binding LastTreatment, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.ColumnSpan="2"  DisplayDateStart="1/01/90"/>
-            <Label Content="Km from the last treatment:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,12.333,0,11.667" Grid.Row="8" VerticalAlignment="Center" Grid.ColumnSpan="3" Height="26" Width="156"/>
-            <TextBox x:Name="NewKmTextboBox" Grid.Column="2" Text="{Binding KilometrFromLastTreat}" HorizontalAlignment="Left" Height="24"  Margin="65.333,17.333,0,8.667" Grid.Row="8" VerticalAlignment="Center"  Width="120" Grid.ColumnSpan="3" TextChanged="NewKmTextboBox_TextChanged" PreviewTextInput="KmtextBox_PreviewTextInput"/>
-        </Grid>
-        <Label Content="Optional actions:" HorizontalAlignment="Center" Margin="657,84,70,0" VerticalAlignment="Top" RenderTransformOrigin="-0.868,0.436" Width="98"></Label>
+        <Label x:Name="Select" Content="בחר מספר רישוי" HorizontalAlignment="Left" Margin="540,35,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.868,0.436" FontSize="13" FontFamily="Copperplate Gothic Bold"/>
 
         <GridSplitter x:Name="gridSplitter" HorizontalAlignment="Left" MinHeight="505" Margin="524,0,0,0" VerticalAlignment="Top" Width="0" RenderTransformOrigin="0.5,0.5" BorderBrush="#FF1D1515" Background="#FF221717">
             <GridSplitter.RenderTransform>
@@ -78,7 +38,7 @@
             </Separator.RenderTransform>
 
         </Separator>
-        <Grid HorizontalAlignment="Right" Height="415" Margin="0,110,-27,0" VerticalAlignment="Top" Width="210" >
+        <Grid HorizontalAlignment="Right" Height="415" Margin="0,105,110,0" VerticalAlignment="Top" Width="210" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="15*"/>
                 <ColumnDefinition Width="20*"/>
@@ -89,17 +49,59 @@
                 <ColumnDefinition Width="5*"/>
                 <ColumnDefinition Width="10*"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="send" Content="SEND TO &#xA;TREATMENT" HorizontalAlignment="Right" Margin="0,5,9.667,0" VerticalAlignment="Top" Width="180" Click="Treatment_Click" Background="#FFD89193" FontFamily="Segoe Print" IsEnabled="{Binding enable}"  Height="50" FontSize="9" TextOptions.TextFormattingMode="Display" TextOptions.TextHintingMode="Fixed" Grid.ColumnSpan="6"/>
+            <Button x:Name="send" Content="שליחה לטיפול" HorizontalAlignment="Right" Margin="0,-4,4.667,0" VerticalAlignment="Top"  Height="70" Width="185" Click="Treatment_Click"  IsEnabled="{Binding enable}"   TextOptions.TextFormattingMode="Display" TextOptions.TextHintingMode="Fixed" Grid.ColumnSpan="6"  Style="{DynamicResource AdminWindow}"/>
 
 
-            <Button x:Name="Update2" Content="Update Bus" HorizontalAlignment="Right" Margin="0,65,4.667,0" VerticalAlignment="Top" Click="Update_Click" Height="65" Width="185" Grid.ColumnSpan="6"/>
-            <Button x:Name="DeleteBus1" Content="Delete Bus" HorizontalAlignment="Right" Margin="0,220,5.667,0" VerticalAlignment="Top"  Click="DeleteBus_Click" Height="65" Width="185" RenderTransformOrigin="0.217,0.5" Grid.ColumnSpan="6" />
+            <Button x:Name="Update2" Content="עדכון פרטי&#xD;&#xA; האוטובוס" HorizontalAlignment="Right" Margin="0,80,4.333,0" VerticalAlignment="Top" Click="Update_Click"  Height="70" Width="185" Grid.ColumnSpan="6" Style="{DynamicResource AdminWindow}"/>
 
 
-            <Button x:Name="AddBus" Content="Add new bus" HorizontalAlignment="Right" Margin="0,295,5.667,0" VerticalAlignment="Top"  Click="AddBus_Click"  Height="70" Width="185" Grid.ColumnSpan="6"/>
-            <Button x:Name="fuel" Content="Fuel"  Margin="0,145,5.667,0" VerticalAlignment="Top"  Click="RefulingClick" Background="#FFF0F1B2"   HorizontalAlignment="Right" FontFamily="Segoe Print" FontSize="14" FontWeight="Bold" Width="185" Height="65" RenderTransformOrigin="0.057,0.571" Grid.ColumnSpan="6" />
+            <Button x:Name="DeleteBus1" Content="מחיקת אוטובוס " HorizontalAlignment="Right" Margin="0,246,4.333,0" VerticalAlignment="Top"  Click="DeleteBus_Click"  Height="70" Width="185" RenderTransformOrigin="0.217,0.5" Grid.ColumnSpan="6" Style="{DynamicResource AdminWindow}" />
+
+
+            <Button x:Name="AddBus" Content="הוספת אוטובוס &#xD;&#xA;          חדש" HorizontalAlignment="Right" Margin="0,330,4.333,0" VerticalAlignment="Top"  Click="AddBus_Click"   Height="70" Width="185" Grid.ColumnSpan="6" Style="{DynamicResource AdminWindow}"/>
+            <Button x:Name="fuel" Content="שליחה לתדלוק"  Margin="0,161,4.333,0" VerticalAlignment="Top"  Click="RefulingClick"   HorizontalAlignment="Right" FontFamily="Segoe Print" FontSize="14" FontWeight="Bold"  Height="70" Width="185" RenderTransformOrigin="0.057,0.571" Grid.ColumnSpan="6"  Style="{DynamicResource AdminWindow}"/>
 
         </Grid>
+        <GroupBox x:Name="groupBox" Header="פרטי האטובוס" HorizontalAlignment="Left" Height="405" Margin="265,85,0,0" VerticalAlignment="Top" Width="375" Style="{DynamicResource allGrpuoBox}">
+            <Grid x:Name="GridDataBus"   HorizontalAlignment="Left" Margin="40,24,0,40.667" VerticalAlignment="Stretch" Height="320" Width="325" PreviewKeyDown="Window_PreviewKeyDown" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="50.41"/>
+                    <ColumnDefinition Width="75.59"/>
+                    <ColumnDefinition Width="23*"/>
+                    <ColumnDefinition Width="7*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto" MinHeight="50"/>
+                    <RowDefinition Height="Auto" MinHeight="11.333"/>
+                </Grid.RowDefinitions>
+                <Label Content=":תאריך כניסה לשירות" HorizontalAlignment="Left" Margin="1,7.667,0,10.333" Grid.Row="1" VerticalAlignment="Center" Height="26" Width="130" Grid.Column="3" Grid.ColumnSpan="2"/>
+                <DatePicker x:Name="StartingDate" HorizontalAlignment="Left" Margin="37,7.667,0,11.333" Grid.Row="1" SelectedDate="{Binding StartingDate, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Height="25" Width="120" DisplayDateStart="1,1,1990" Grid.ColumnSpan="3"   />
+                <Label Content=":מספר רישוי" Grid.Column="3" HorizontalAlignment="Left" Margin="5,15,0,6.333" VerticalAlignment="Center" Height="26" Width="81"/>
+                <TextBox x:Name="LincestextBox" HorizontalAlignment="Left" Height="24" Margin="37,15,0,8.333"   Text="{Binding Licence, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" Grid.ColumnSpan="3" PreviewTextInput="LincestextBox_PreviewTextInput" RenderTransformOrigin="0.792,0.611"/>
+                <Label Content=":סה&quot;כ קילומטרים" Grid.Column="3" HorizontalAlignment="Left" Margin="0.667,8.667,0,13.333" Grid.Row="2" VerticalAlignment="Center" Height="26" Width="106"/>
+                <TextBox x:Name="KmtextBox" Text="{Binding Kilometrz}" HorizontalAlignment="Left" Height="24"  Margin="38,13.667,0,10.333" Grid.Row="2" VerticalAlignment="Center" Width="120" PreviewTextInput="KmtextBox_PreviewTextInput" Grid.ColumnSpan="3"/>
+
+                <Label Content=":כמות דלק" Grid.Column="3" HorizontalAlignment="Left" Margin="5.333,4.667,0,11.333" Grid.Row="3" VerticalAlignment="Center" Height="26" Width="80"/>
+                <TextBox x:Name="FuelTextBox" HorizontalAlignment="Left" Height="24" Margin="38,6.667,0,11.333" Grid.Row="3" Text="{Binding FuellAmount, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" PreviewTextInput="KmtextBox_PreviewTextInput" Grid.ColumnSpan="3"/>
+
+                <Label Content=":סטטוס" Grid.Column="3" HorizontalAlignment="Left" Margin="0.333,8.667,0,8.667" Grid.Row="6" VerticalAlignment="Center" Height="26" Width="55" RenderTransformOrigin="-0.667,1.167"/>
+                <ComboBox x:Name="StatusComboBox" Grid.Column="1"  SelectedItem="{Binding StatusBus}" HorizontalAlignment="Left" Height="22"  Margin="37,12.667,0,8.667" Grid.Row="6" VerticalAlignment="Center" Width="120" Grid.ColumnSpan="2"/>
+
+                <Label Content=":תאריך טיפול אחרון" Grid.Column="3" HorizontalAlignment="Right" Margin="0,10.333,46.333,5" Grid.Row="7" VerticalAlignment="Center" Grid.ColumnSpan="2" Height="26" Width="118" />
+                <DatePicker x:Name="lastTreatmentTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="24" Margin="39,10.333,0,7" Grid.Row="7"  VerticalAlignment="Center" Width="120" SelectedDate="{Binding LastTreatment, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.ColumnSpan="3"  />
+                <Label Content=":סה&quot;כ ק&quot;מ מהטיפול האחרון" Grid.Column="2" HorizontalAlignment="Left" Margin="87.333,13,0,11" Grid.Row="8" VerticalAlignment="Center" Grid.ColumnSpan="3" Height="26" Width="170"/>
+                <TextBox x:Name="NewKmTextboBox" Grid.Column="1" Text="{Binding KilometrFromLastTreat}" HorizontalAlignment="Left" Height="24"  Margin="38,14,0,12" Grid.Row="8" VerticalAlignment="Center"  Width="120" Grid.ColumnSpan="2" TextChanged="NewKmTextboBox_TextChanged" PreviewTextInput="KmtextBox_PreviewTextInput" RenderTransformOrigin="-0.358,0.681"/>
+            </Grid>
+        </GroupBox>
 
 
 

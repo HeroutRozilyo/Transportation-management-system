@@ -131,6 +131,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="res\languages\AppStrings_EN.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="StationWindowP.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -163,6 +167,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="Properties\DataSources\BO.AdjacentStations.datasource" />
+    <None Include="Properties\DataSources\BO.Line.datasource" />
     <None Include="Properties\DataSources\BO.LineTrip.datasource" />
     <None Include="Properties\DataSources\BO.Station.datasource" />
     <None Include="Properties\Settings.settings">
@@ -182,6 +187,12 @@
   <ItemGroup>
     <Folder Include="BusWindow\" />
     <Folder Include="LineWindow\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="GMG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="PO\Back.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -53,7 +53,9 @@ namespace PLGui
             StationLineList.ItemsSource = lineStationOfLine;
             NewLooz.Visibility = Visibility.Hidden;
             NewLooz.DataContext = new BO.LineTrip();
-            
+            comboBoxArea.SelectedIndex = 0;
+
+
 
 
 
