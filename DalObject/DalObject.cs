@@ -31,7 +31,7 @@ namespace DL
                 return DataSource.ListBus[indexBus].Clone();
             }
             else
-                throw new DO.WrongLicenceException(int.Parse(licence), $"Licence not valid:{licence}");
+                throw new DO.WrongLicenceException(int.Parse(licence), $"{licence}:מספר רישוי לא תקין");
 
         }
         public IEnumerable<DO.Bus> GetAllBuses() //return all the buses that we have
@@ -58,14 +58,13 @@ namespace DL
         public int AddBus(DO.Bus bus)
         {
             if (DataSource.ListBus.FirstOrDefault(b => b.Licence == bus.Licence) != null) //if != null its means that this licence is allready exsis
-                throw new DO.WrongLicenceException(int.Parse(bus.Licence), "This licence already exsis");
+                throw new DO.WrongLicenceException(int.Parse(bus.Licence), "המספר רישוי כבר קיים במערכת");
             bus.BusExist = true;
             DataSource.ListBus.Add(bus.Clone());
             return 1;
         }
 
-        ///===================================================================
-        ///לבדוק איך מעדכנים נתון בתוך הרשימה שלי
+   
         public bool DeleteBus(string licence)
         {
            int indexOfBus = DataSource.ListBus.FindIndex(b => b.Licence == licence);
@@ -77,7 +76,7 @@ namespace DL
                 return true;
             }
             else
-                throw new DO.WrongLicenceException(int.Parse(licence), "Licence not exsis");
+                throw new DO.WrongLicenceException(int.Parse(licence), "מספר הרישוי לא קיים במערכת");
         }
         public bool UpdateBus(DO.Bus bus)
         {
@@ -92,7 +91,7 @@ namespace DL
                 return true;
             }
             else
-                throw new DO.WrongLicenceException(int.Parse(bus.Licence), "Licence not exsis");
+                throw new DO.WrongLicenceException(int.Parse(bus.Licence), "מספר הרישוי לא קיים במערכת");
         }
 
 
@@ -107,7 +106,7 @@ namespace DL
             if (line != null && line.LineExist)
                 return line.Clone();
             else
-                throw new DO.WrongIDExeption(idline, "The line not exsis ");
+                throw new DO.WrongIDExeption(idline, " הקו לא קיים במערכת ");
 
         }
 
@@ -156,7 +155,7 @@ namespace DL
                 DataSource.ListLine.Add(line.Clone());
             }
             else
-                throw new DO.WrongIDExeption(line.IdNumber, "Licence not exsis");
+                throw new DO.WrongIDExeption(line.IdNumber, " הקו לא קיין במערכת ");
         }
 
 
@@ -181,7 +180,7 @@ namespace DL
                 return stations.Clone();
             }
             else
-                throw new DO.WrongIDExeption(code, $"Licence not valid:{code}");
+                throw new DO.WrongIDExeption(code, $"{code} התחנה לא קיימת במערכת:");
 
         }
         public IEnumerable<DO.Stations> GetAllStations() //return all the stations that we have
@@ -202,7 +201,7 @@ namespace DL
         public void AddStations(DO.Stations station)
         {
             if (DataSource.ListStations.FirstOrDefault(b => b.Code == station.Code) != null) //if != null its means that this licence is allready exsis
-                throw new DO.WrongIDExeption(station.Code, "This station not exsis");/////////////////////////////////////////////////////////////////
+                throw new DO.WrongIDExeption(station.Code, "התחנה לא קיימת במערכת");/////////////////////////////////////////////////////////////////
             station.StationExist = true;
             DataSource.ListStations.Add(station.Clone());
         }
@@ -217,7 +216,7 @@ namespace DL
 
             }
             else
-                throw new DO.WrongIDExeption(code, "Code station not exsis");//////////////////////////////////////////////////////
+                throw new DO.WrongIDExeption(code, "התחנה לא קיימת במערכת");//////////////////////////////////////////////////////
         }
 
         public void UpdateStations(DO.Stations stations1,int OldCode)
@@ -229,7 +228,7 @@ namespace DL
                 DataSource.ListStations.Add(stations1.Clone());
             }
             else
-                throw new DO.WrongIDExeption(OldCode, "Code station not exsis");///////////////////////////////////////////////////////
+                throw new DO.WrongIDExeption(OldCode, "התחנה לא קיימת במערכת");///////////////////////////////////////////////////////
         }
 
         #endregion Stations
@@ -243,7 +242,7 @@ namespace DL
                 return linestations.Clone();
             }
             else
-                throw new DO.WrongIDExeption(Scode, $"Station code not exsis:{Scode}");/////////////////////////////////////////////////////////
+                throw new DO.WrongIDExeption(Scode, $"{Scode} לא נמצאו פרטים במערכת על התחנה המבוקשת");/////////////////////////////////////////////////////////
 
         }
 
@@ -291,7 +290,7 @@ namespace DL
         {
             DO.LineStation temp = DataSource.ListLineStations.Find(b => b.StationCode == station.StationCode && b.LineId == station.LineId && b.LineStationExist);
             if (temp != null)
-                throw new DO.WrongIDExeption(station.StationCode, "This station already exsis");/////////////////////////////////////////////////////////////////
+                throw new DO.WrongIDExeption(station.StationCode, "  מצטערים! קוד התחנה קיים כבר במערכת");/////////////////////////////////////////////////////////////////
             DataSource.ListLineStations.Add(station.Clone());
         }
 
@@ -304,7 +303,7 @@ namespace DL
                 return stations.LineStationIndex;
             }
             else
-                throw new DO.WrongIDExeption(Scode, "Code not exsis");//////////////////////////////////////////////////////
+                throw new DO.WrongIDExeption(Scode, "התחנה המבוקשת לא נמצאה במערכת");//////////////////////////////////////////////////////
         }
         public void DeleteStationsFromLine(int Scode) //we use here at foreach because it more effective.
         {
@@ -336,7 +335,7 @@ namespace DL
                 DataSource.ListLineStations.Add(linestations.Clone());
             }
             else
-                throw new DO.WrongIDExeption(linestations.StationCode, "Code not exsis");///////////////////////////////////////////////////////
+                throw new DO.WrongIDExeption(linestations.StationCode, "מצטערים! לא נמצאו פרטים על התחנה המבוקשת");///////////////////////////////////////////////////////
         }
         public void UpdateLineStationsCode(DO.LineStation linestations,int oldCode)
         {
@@ -348,7 +347,7 @@ namespace DL
                 DataSource.ListLineStations.Add(linestations.Clone());
             }
             else
-                throw new DO.WrongIDExeption(linestations.StationCode, "Code not exsis");///////////////////////////////////////////////////////
+                throw new DO.WrongIDExeption(linestations.StationCode, "לא קיים פרטים במערכת על התחנה המבוקשת או שאחד מהנתוונים שהכנסת שגוי");///////////////////////////////////////////////////////
         }
 
 
@@ -364,7 +363,7 @@ namespace DL
                 return linetrip.Clone();
             }
             else
-                throw new DO.WrongIDExeption(idline, $"Wrong ID:{start}");/////////////////////////////////////////////////////////
+                throw new DO.WrongLineTripExeption(idline, $"{start} לא נמצאו פרטים עבור הקו המבוקש בשעה זו");/////////////////////////////////////////////////////////
 
         }
 
@@ -412,7 +411,7 @@ namespace DL
                 DataSource.ListLineTrip.Add(lineTrip.Clone());
             }
             else
-                throw new DO.WrongIDExeption(lineTrip.KeyId, "LineTrip not exsis");///////////////////////////////////////////////////////
+                throw new DO.WrongLineTripExeption(lineTrip.KeyId, "לא נמצאו זמני נסיעות עבור קו זה");///////////////////////////////////////////////////////
         }
 
 
@@ -428,7 +427,7 @@ namespace DL
                 return linestations.Clone();
             }
             else
-                throw new DO.WrongIDExeption(Scode1, "Code not valid");/////////////////////////////////////////////////////////
+                throw new DO.WrongIDExeption(Scode1, "לא נמצאו פרטים במערכת עבור זוג התחנות המבוקש");/////////////////////////////////////////////////////////
 
         }
 
@@ -455,7 +454,7 @@ namespace DL
         {
             DO.AdjacentStations temp = DataSource.ListAdjacentStations.Find(b => b.Station1 == adjacentStations.Station1 && b.Station2 == adjacentStations.Station2);
             if (temp != null)
-                throw new DO.WrongIDExeption(adjacentStations.Station1, "This adjacent station already exsis ");/////////////////////////////////////////////////////////////////
+                throw new DO.WrongIDExeption(adjacentStations.Station1, " התחנה עוקבת כבר קיימת במערכת");/////////////////////////////////////////////////////////////////
             DataSource.ListAdjacentStations.Add(adjacentStations.Clone());
         }
 
@@ -467,7 +466,7 @@ namespace DL
                 DataSource.ListAdjacentStations.Remove(stations);
             }
             else
-                throw new DO.WrongIDExeption(Scode1, "Code not exsis");//////////////////////////////////////////////////////
+                throw new DO.WrongIDExeption(Scode1, "לא נמצאו פרטים עבור התחנה עוקבת המבוקשת");//////////////////////////////////////////////////////
         }
         public void DeleteAdjacentStationseBStation(int Scode1)////
         {
@@ -492,7 +491,7 @@ namespace DL
                 DataSource.ListAdjacentStations.Add(adjacentStations.Clone());
             }
             else
-                throw new DO.WrongIDExeption(adjacentStations.Station1, "Code not exsis");///////////////////////////////////////////////////////
+                throw new DO.WrongIDExeption(adjacentStations.Station1, "לא נמצאו פרטים עבור התחנה עוקבת המבוקשת");///////////////////////////////////////////////////////
         }
 
 
@@ -510,7 +509,7 @@ namespace DL
                 DataSource.ListAdjacentStations.Add(station);
             }
             else
-                throw new DO.WrongIDExeption(code1, "Code not exsis");///////////////////////////////////////////////////////
+                throw new DO.WrongIDExeption(code1, "לא נמצאו פרטים עבור התחנה עוקבת המבוקשת");///////////////////////////////////////////////////////
         }
         #endregion AdjacentStations
 
@@ -524,7 +523,7 @@ namespace DL
                 return user.Clone();
             }
             else
-                throw new DO.WrongNameExeption(name, $"Name not valid:{1}");/////////////////////////////////////////////////////////
+                throw new DO.WrongNameExeption(name, $"{1}השם לא קיים במערכת או אחד מהפרטים שהזנת שגוי");/////////////////////////////////////////////////////////
 
         }
         public IEnumerable<DO.User> GetAlluser() //return all the user that we have
@@ -557,7 +556,7 @@ namespace DL
         public void AddUser(DO.User user)
         {
             if (DataSource.ListUsers.FirstOrDefault(b => b.UserName == user.UserName) != null) //if != null its means that this name is allready exsis
-                throw new DO.WrongNameExeption(user.UserName, "This name already exsis");/////////////////////////////////////////////////////////////////
+                throw new DO.WrongNameExeption(user.UserName, "שם משתמש כבר קיים במערכת, בבקשה הכנס שם אחר");/////////////////////////////////////////////////////////////////
             DataSource.ListUsers.Add(user.Clone());
         }
 
@@ -571,7 +570,7 @@ namespace DL
 
             }
             else
-                throw new DO.WrongNameExeption(name, "Name not exsis");//////////////////////////////////////////////////////
+                throw new DO.WrongNameExeption(name, "לא נמצאו פרטים במערכת עבור משתמש זה");//////////////////////////////////////////////////////
         }
 
         public void UpdateUser(DO.User user)
@@ -583,7 +582,7 @@ namespace DL
                 DataSource.ListUsers.Add(user.Clone());
             }
             else
-                throw new DO.WrongNameExeption(user.UserName, "Name not exsis");///////////////////////////////////////////////////////
+                throw new DO.WrongNameExeption(user.UserName, "לא נמצאו פרטים במערכת עבור שם זה");///////////////////////////////////////////////////////
         }
 
         #endregion User

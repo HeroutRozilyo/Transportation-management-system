@@ -16,7 +16,7 @@ namespace DO
         public WrongLicenceException(int licence, string messege, Exception innerException) : base(messege, innerException) => Licence = licence;
         public override string ToString()
         {
-            return base.ToString() + $",Licence not valid:{Licence} ";
+            return base.ToString() + $",{Licence} מספר רישוי לא תקין";
         }
     }
 
@@ -31,7 +31,7 @@ namespace DO
         public WrongIDExeption(int idline, string messege, Exception innerException) : base(messege, innerException) => ID = idline;
         public override string ToString()
         {
-            return base.ToString() + $",ID line not valid:{ID} ";
+            return base.ToString() + $",{ID} מספר הקו לא תקין";
         }
 
     }
@@ -47,7 +47,22 @@ namespace DO
         public WrongNameExeption(string name, string messege, Exception innerException) : base(messege, innerException) => Name = name;
         public override string ToString()
         {
-            return base.ToString() + $",Name user not valid:{Name} ";
+            return base.ToString() + $",{Name} השם שהוכנס לא תקין";
+        }
+    }
+
+    [Serializable]
+    public class WrongLineTripExeption : Exception //if name user wrong
+    {
+        public int ID;
+        public WrongLineTripExeption() : base() { }
+
+        public WrongLineTripExeption(int idline) : base() => ID = idline;
+        public WrongLineTripExeption(int idline, string messege) : base(messege) => ID = idline;
+        public WrongLineTripExeption(int idline, string messege, Exception innerException) : base(messege, innerException) => ID = idline;
+        public override string ToString()
+        {
+            return base.ToString() + $"{ID} מצטערים, לא נמצאו זמני נסיעה עבור ";
         }
     }
 
