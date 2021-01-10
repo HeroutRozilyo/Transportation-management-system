@@ -1286,6 +1286,92 @@ namespace BL
         }
 
 
+        public IEnumerable<BO.Line> TravelPath(int code1,int code2)
+        {
+            List<BO.Line> lineToSend =new List<Line>();
+            BO.Line l;
+            
+            IEnumerable<BO.LineStation> stationsBO1;
+            IEnumerable<BO.LineStation> stationsBO2;
+            try
+            {
+               
+                stationsBO1 = from item1 in dl.GetAllLineStationsBy(b => b.StationCode == code1)  //get all the line that move at the first station. 
+                              orderby item1.LineId
+                              select (BO.LineStation)item1.CopyPropertiesToNew((typeof(BO.LineStation)));
+                stationsBO2 = from item2 in dl.GetAllLineStationsBy(b => b.StationCode == code2) //get all the kine that move at the second station
+                              orderby item2.LineId
+                              select (BO.LineStation)item2.CopyPropertiesToNew((typeof(BO.LineStation)));
+
+              var v=  from temp1 in stationsBO1
+                      from temp2 in stationsBO2
+                      where temp1.LineId == temp2.LineId
+                      where temp1.LineStationIndex < temp2.LineStationIndex
+                      select temp1;
+
+                foreach(var tt in v)
+                {
+                    l = new BO.Line();
+                    l = lineDoBoAdapter(tt.LineId);
+                    lineToSend.Add(l);
+                }
+
+                ///////////////////////////////
+                ///
+
+                //var a= from tem1 in stationsBO1
+                //       let j= dl.GetAllLineStationsBy(b => b.StationCode ==tem1.StationCode)
+                //       from te1 in j
+                //        from tem2 in stationsBO2
+                //        where te1.LineId == tem2.LineId
+                //        where te1.LineStationIndex < tem2.LineStationIndex
+                //       select te1;
+                foreach(var co1 in stationsBO1)
+                {
+                    var temp = dl.GetAllStationsLine(co1.LineId);
+                    foreach(var te in temp)
+                    {
+                        var d = dl.GetAllLineStationsBy(b => b.StationCode == te.StationCode);
+                        foreach (var z in d)
+                        {
+                            foreach (var sh in stationsBO2)
+                            {
+                                if (z.LineId == sh.LineId)
+                                    if (z.LineStationIndex < sh.LineStationIndex)
+                                    {
+                                        l = new BO.Line();
+                                        l = lineDoBoAdapter(te.LineId);
+                                        lineToSend.Add(l);
+                                        l = new BO.Line();
+                                        l = lineDoBoAdapter(z.LineId);
+                                        lineToSend.Add(l);
+                                    }
+                            }
+                        }
+                    }
+                }
+
+                //foreach (var tt in v)
+                //{
+                //    l = new BO.Line();
+                //    l = lineDoBoAdapter(tt.LineId);
+                //    lineToSend.Add(l);
+                //}
+
+
+
+
+
+
+                return lineToSend.AsEnumerable();
+
+            }
+            catch (DO.WrongIDExeption ex)
+            {
+                throw new BO.BadIdException("ID not valid", ex);
+            }
+        }
+
 
 
 

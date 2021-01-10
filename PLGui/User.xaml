@@ -1,0 +1,45 @@
+﻿<Page x:Class="PLGui.User"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:PLGui"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="User">
+
+    <Grid>
+
+        <Label Content="בחר מוצא ויעד" HorizontalAlignment="Left" Margin="676,18,0,0" VerticalAlignment="Top" Height="34" Width="100"/>
+        <ComboBox x:Name="station1"   HorizontalAlignment="Left" Margin="474,93,0,0" VerticalAlignment="Top" Width="295" SelectionChanged="station1_SelectionChanged" Height="31" />
+        <ComboBox x:Name="station2" HorizontalAlignment="Left" Margin="474,287,0,0" VerticalAlignment="Top" Width="295" SelectionChanged="station2_SelectionChanged" Height="34"/>
+        <Label Content="תחנת מוצא" HorizontalAlignment="Left" Margin="678,57,0,0" VerticalAlignment="Top" RenderTransformOrigin="3.653,2.116" Height="27" Width="91"/>
+        <Label Content="תחנת יעד" HorizontalAlignment="Left" Margin="709,260,0,0" VerticalAlignment="Top" Height="38"/>
+        <TabControl HorizontalAlignment="Left" Height="125" Margin="62,93,0,0" VerticalAlignment="Top" Width="332">
+            <TabItem Header="קו 1" Width="70">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+            <TabItem Header=" 2 קווים" Width="70" Height="22" Margin="0,-2,0,0" VerticalAlignment="Top">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+        </TabControl>
+
+        <ListView x:Name="LineInStation1" HorizontalAlignment="Left" Height="126" Margin="676,129,0,0" VerticalAlignment="Top" Width="93" RenderTransformOrigin="-0.155,-0.254">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="קווים בתחנה"   DisplayMemberBinding="{Binding NumberLine}" Width="90"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <ListView x:Name="LineInStation2" HorizontalAlignment="Right" Height="114" Margin="0,326,32,0" VerticalAlignment="Top" Width="92" RenderTransformOrigin="0.399,1.127"  >
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="קווים בתחנה"   DisplayMemberBinding="{Binding NumberLine}" Width="90"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <CheckBox x:Name="checkOkey" Content="חיפוש" HorizontalAlignment="Left" Margin="474,367,0,0" VerticalAlignment="Top" Click="checkOkey_Click"/>
+
+    </Grid>
+</Page>

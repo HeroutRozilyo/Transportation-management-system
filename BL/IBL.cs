@@ -58,5 +58,9 @@ namespace BlAPI
         BO.Station GetStationByCode(int Code);
         void UpdateAdjac(BO.AdjacentStations adjacBO);
         #endregion
+
+        #region User
+        IEnumerable<BO.Line> TravelPath(int code1, int code2);
+        #endregion
     }
 }

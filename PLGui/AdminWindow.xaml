@@ -12,6 +12,8 @@
         <WrapPanel HorizontalAlignment="Left" Height="475" Margin="0,80,0,0" VerticalAlignment="Top" Width="145"/>
         <Button x:Name="station" Content="station" HorizontalAlignment="Left" Margin="0,270,0,356" VerticalAlignment="Stretch" Width="135" Click="station_Click"/>
         <Button x:Name="AddManeger" Content="Add new Manger User" HorizontalAlignment="Left" Margin="0,358,0,267" VerticalAlignment="Stretch" Width="135" Click="AddManeger_Click" RenderTransformOrigin="0.5,0.502"/>
+        <Button x:Name="user" Content="user" HorizontalAlignment="Left" Margin="0,462,0,163" VerticalAlignment="Stretch" Width="135" Click="user_Click" RenderTransformOrigin="0.5,0.502"/>
+
         <Separator HorizontalAlignment="Stretch" MinHeight="100" Margin="-256,245,691,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" BorderBrush="#FF190E0E" Background="#FF150909">
             <Separator.RenderTransform>
                 <TransformGroup>
