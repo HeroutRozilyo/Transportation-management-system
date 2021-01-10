@@ -47,10 +47,6 @@ namespace PLGui
         }
 
 
-        private void stationDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
 
         
 
@@ -60,7 +56,7 @@ namespace PLGui
             toAdd.Code = Convert.ToInt32(codeTextBox.Text);
             toAdd.Coordinate = new GeoCoordinate(double.Parse((latitudeTextBox.Text)), double.Parse(longitudeTextBox.Text));
             toAdd.Name = nameTextBox.Text;
-            toAdd.StationExist = (bool)stationExistCheckBox.IsChecked;
+            toAdd.StationExist = true;
             
         }
 

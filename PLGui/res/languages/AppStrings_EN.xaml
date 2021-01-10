@@ -104,8 +104,6 @@
         <Setter Property="BorderBrush" Value="#FF638BB7"/>
         <Setter Property="Foreground" Value="#FF212223"/>
     </Style>
-    
-
 
 </ResourceDictionary>
     

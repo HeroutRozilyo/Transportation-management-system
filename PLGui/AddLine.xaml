@@ -5,64 +5,70 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PLGui"
         mc:Ignorable="d"
-        Title="AddLine" Height="450" Width="800">
+        Title="AddLine" Height="450" Width="800" WindowStartupLocation="CenterScreen">
     <Grid Margin="0,0,-6.667,-1.333" Height="422" VerticalAlignment="Top">
-        <Grid x:Name="GridDataLine" Margin="20,57,510.333,0" VerticalAlignment="Top" Height="88" >
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="118.667"/>
-                <ColumnDefinition Width="18"/>
-                <ColumnDefinition Width="0"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-
-            </Grid.RowDefinitions>
-            <Label Content="Line Number" Grid.Column="0" HorizontalAlignment="Left" Margin="3,3,0,12.333" Grid.Row="0" VerticalAlignment="Center" Height="26" Width="79"/>
-            <Label Content="Area" Grid.Column="0" HorizontalAlignment="Left" Margin="3,7.667,0,7.667" Grid.Row="1" VerticalAlignment="Center" Width="116" Height="26"/>
-            <ComboBox x:Name="AreaComboBox" Grid.Column="1" HorizontalAlignment="Left" Height="24" Margin="3.667,8.667,0,8.667" Grid.Row="1"   Text="{Binding Area, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" Grid.ColumnSpan="2" SelectionChanged="AreaComboBox_SelectionChanged"/>
-            <TextBox x:Name="LineNumber" PreviewTextInput="LineNumber_PreviewTextInput" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="5.667,6,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="{Binding NumberLine}" Grid.ColumnSpan="2" TextChanged="LineNumber_TextChanged" PreviewKeyDown="LineNumber_PreviewKeyDown" />
-        </Grid>
-        <ListView x:Name="StationOfTheLine" HorizontalAlignment="Left" Height="159" Margin="288,38,0,0" VerticalAlignment="Top" Width="407">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Header="Station Code" Width="80" DisplayMemberBinding="{Binding StationCode}" />
-                    <GridViewColumn  x:Name="Index" Header="Index" Width="80" DisplayMemberBinding="{Binding LineStationIndex}" />
-
-                    <GridViewColumn Width="80">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button x:Name="CancelStation" Content="Cancel" Click="CancelStation_Click"/>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-
-                    </GridViewColumn>
-                </GridView>
-            </ListView.View>
-        </ListView>
-
-        <ListView x:Name="Station" HorizontalAlignment="Left" Height="159" Margin="50,221,0,0" VerticalAlignment="Top" Width="645">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Header="Station Code" Width="80" DisplayMemberBinding="{Binding Code}" />
-                    <GridViewColumn Header="Name" Width="200" DisplayMemberBinding="{Binding Name}" />
-                    <GridViewColumn Header="Address" Width="200" DisplayMemberBinding="{Binding Address}" />
-                    <GridViewColumn Width="80">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button x:Name="AddStation" Content="Add Station" Click="AddStation_Click"/>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-
-                    </GridViewColumn>
-                </GridView>
-            </ListView.View>
-        </ListView>
         <Button x:Name="FinishAddLine"  Content = "Add line to the system" HorizontalAlignment="Left" Margin="20,171,0,0" VerticalAlignment="Top" Width="162" Click="FinishAddLine_Click" Height="26"/>
+        <Button x:Name="updataStationLine" Content="עדכון רשימת תחנות" HorizontalAlignment="Left" Margin="20,171,0,0" VerticalAlignment="Top" Width="162" Height="26" Click="updataStationLine_Click" Style="{DynamicResource AdminWindow}"/>
+        <GroupBox x:Name="groupBox" Header="תחנות בקו" HorizontalAlignment="Left" Height="190" Margin="415,20,0,0" VerticalAlignment="Top" Width="300" Style="{DynamicResource allGrpuoBox}">
+            <ListView x:Name="StationOfTheLine" Height="159" Margin="20,5,21,0" VerticalAlignment="Top">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="קוד תחנה" Width="80" DisplayMemberBinding="{Binding StationCode}" />
+                        <GridViewColumn  x:Name="Index" Header="מיקום בקו" Width="80" DisplayMemberBinding="{Binding LineStationIndex}" />
 
-        <Button x:Name="AddNewStation" Content="Add Station" HorizontalAlignment="Left" Margin="700,359,0,0" VerticalAlignment="Top" Width="75"  Click="AddNewStation_Click"/>
-        <Button x:Name="updataStationLine" Content="Update list of stations" HorizontalAlignment="Left" Margin="20,171,0,0" VerticalAlignment="Top" Width="162" Height="26" Click="updataStationLine_Click"/>
+                        <GridViewColumn Width="80">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button x:Name="CancelStation" Content="ביטול" Click="CancelStation_Click" Style="{DynamicResource miniButton}"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </GroupBox>
+        <GroupBox x:Name="groupBox1" Header="הכנס פרטי קו" HorizontalAlignment="Left" Height="125" Margin="15,25,0,0" VerticalAlignment="Top" Width="270" Style="{DynamicResource allGrpuoBox}">
+            <Grid x:Name="GridDataLine" Margin="5,12,7,0" VerticalAlignment="Top" Height="88" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" MinWidth="144"/>
+                    <ColumnDefinition Width="0"/>
+                    <ColumnDefinition Width="102"/>
+                    <ColumnDefinition Width="0"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+
+                </Grid.RowDefinitions>
+                <Label Content=":מספר קו" Grid.Column="2" HorizontalAlignment="Left" Margin="6,7,0,11.667" Grid.Row="0" VerticalAlignment="Center" Height="26" Width="79"/>
+                <Label Content=":אזור" Grid.Column="2" HorizontalAlignment="Left" Margin="9,10.333,0,7" Grid.Row="1" VerticalAlignment="Center" Width="51" Height="26"/>
+                <ComboBox x:Name="AreaComboBox" HorizontalAlignment="Left" Height="24" Margin="24,8.333,0,11" Grid.Row="1"   Text="{Binding Area, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" SelectionChanged="AreaComboBox_SelectionChanged"/>
+                <TextBox x:Name="LineNumber" PreviewTextInput="LineNumber_PreviewTextInput" HorizontalAlignment="Left" Height="23" Margin="24,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="{Binding NumberLine}" TextChanged="LineNumber_TextChanged" PreviewKeyDown="LineNumber_PreviewKeyDown" />
+            </Grid>
+        </GroupBox>
+        <GroupBox x:Name="groupBox2" Header="תחנות במערכת- בחר לפחות 2 תחנות לקו" HorizontalAlignment="Left" Height="185" Margin="30,220,0,0" VerticalAlignment="Top" Width="720" Style="{DynamicResource allGrpuoBox}">
+            <Grid HorizontalAlignment="Left" Height="170" Margin="10,0,0,-5.333" VerticalAlignment="Top" Width="690">
+                <ListView x:Name="Station" HorizontalAlignment="Left" Height="159" Margin="20,5,0,0" VerticalAlignment="Top" Width="594" >
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="מספר תחנה" Width="80" DisplayMemberBinding="{Binding Code}" />
+                            <GridViewColumn Header="שם תחנה" Width="200" DisplayMemberBinding="{Binding Name}" />
+                            <GridViewColumn Header="כתובת" Width="200" DisplayMemberBinding="{Binding Address}" />
+                            <GridViewColumn Width="80">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button x:Name="AddStation" Content="הוספה לקו" Click="AddStation_Click" Style="{DynamicResource miniButton}"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                <Button x:Name="AddNewStation" Content="הוספת תחנה&#xA;    למערכת" HorizontalAlignment="Left" Margin="619,120,-4,0" VerticalAlignment="Top" Width="75"  Click="AddNewStation_Click" Style="{DynamicResource AdminWindow}" Height="45" FontSize="11" RenderTransformOrigin="-0.404,0.496"/>
+            </Grid>
+        </GroupBox>
 
     </Grid>
 </Window>

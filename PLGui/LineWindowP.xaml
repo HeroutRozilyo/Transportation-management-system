@@ -80,7 +80,7 @@
                 <TextBox x:Name="LineNumber" HorizontalAlignment="Left" Height="23" Margin="5,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" Text="{Binding NumberLine}"/>
             </Grid>
         </GroupBox>
-        <GroupBox x:Name="groupBox" Header="תחנות בקו" HorizontalAlignment="Left" Height="190" Margin="85,415,0,0" VerticalAlignment="Top" Width="695" Style="{DynamicResource allGrpuoBox}">
+        <GroupBox x:Name="groupBox" Header="תחנות בקו" HorizontalAlignment="Left" Height="190" Margin="30,430,0,0" VerticalAlignment="Top" Width="700" Style="{DynamicResource allGrpuoBox}">
             <ListView x:Name="StationLineList"   HorizontalAlignment="Left" Height="145" Margin="19,13,0,0" VerticalAlignment="Top" Width="656">
                 <ListView.View>
                     <GridView>

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
     
-        Title="UpdataStationLineIndex" Height="171.321" Width="374.547">
+        Title="UpdataStationLineIndex" Height="171.321" Width="374.547" WindowStartupLocation="CenterScreen">
     <Grid Height="126" VerticalAlignment="Top" HorizontalAlignment="Right" Width="353" Margin="0,0,3,0" >
         <Label x:Name="chooseIndex" Content=" בחר את המיקום החדש לתחנה בקו" HorizontalAlignment="Left" Margin="62,25,-47,0" VerticalAlignment="Top" Height="42" Width="338" FontSize="13" FontFamily="Copperplate Gothic Bold"/>
         <ComboBox x:Name="IndexCOmboBox" Margin="105,60,131,0" VerticalAlignment="Top" ItemsSource="{Binding}"   SelectionChanged="IndexCOmboBox_SelectionChanged" FontSize="13" FontFamily="Copperplate Gothic Bold" />

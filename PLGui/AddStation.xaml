@@ -6,38 +6,77 @@
         xmlns:local="clr-namespace:PLGui"
         xmlns:BO="clr-namespace:BO;assembly=BL" x:Class="PLGui.AddStation"
 
-        Title="AddStation" Height="284.667" Width="323.333" >
+        Title="AddStation" Height="309" Width="323.333" WindowStartupLocation="CenterScreen" >
     <!--PreviewKeyDown="Window_PreviewKeyDown"-->
-    <Window.Resources>
-        <CollectionViewSource x:Key="stationViewSource"></CollectionViewSource>
-    </Window.Resources>
-    <Grid DataContext="{StaticResource stationViewSource}" Margin="0,0,-29.667,28.333">
-        <Grid x:Name="newStation" HorizontalAlignment="Left" Margin="94,27,0,0"  Visibility="{Binding}" VerticalAlignment="Top">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <Label Content="Address:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
-            <TextBox x:Name="addressTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="0" Text="{Binding Address, Mode=OneTime, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-            <Label Content="Code:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>
-            <TextBox x:Name="codeTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="1" Text="{Binding Code,  Mode=OneTime, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-            <Label Content="Name:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
-            <TextBox x:Name="nameTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="2" Text="{Binding Name,  Mode=OneTime, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-            <Label Content="Station Exist:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="3" VerticalAlignment="Center"/>
-            <CheckBox x:Name="stationExistCheckBox" Content="" Grid.Column="1" HorizontalAlignment="Left" IsChecked="{Binding StationExist, Mode=OneTime, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="3" Grid.Row="3" VerticalAlignment="Center"/>
-            <Label Content="Latitude:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="4" VerticalAlignment="Center"/>
-            <TextBox x:Name="latitudeTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="4" Text="{Binding Coordinate.Latitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-            <Label Content="Longitude:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="5" VerticalAlignment="Center"/>
-            <TextBox x:Name="longitudeTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="5" Text="{Binding Coordinate.Longitude,  Mode=OneTime, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-        </Grid>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="10,204,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+
+    <Grid  Margin="-4,8,-4.333,-4">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="270*"/>
+            <ColumnDefinition Width="77*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="155*"/>
+            <RowDefinition Height="72*"/>
+        </Grid.RowDefinitions>
+        <GroupBox x:Name="groupBox" Header="הכנס פרטי תחנה" HorizontalAlignment="Left" Height="235" Margin="20,15,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="270" Style="{DynamicResource allGrpuoBox}" Grid.ColumnSpan="2">
+            <Grid HorizontalAlignment="Left" Height="210" Margin="25,10,0,-6" VerticalAlignment="Top" Width="225">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="22*"/>
+                    <ColumnDefinition Width="37*"/>
+                </Grid.ColumnDefinitions>
+                <Grid x:Name="newStation" HorizontalAlignment="Left" Margin="21,20,0,0"  Visibility="{Binding}" VerticalAlignment="Top" Grid.ColumnSpan="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" MinWidth="130.667"/>
+                        <ColumnDefinition Width="Auto" MinWidth="133.333"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Label Content=":כתובת" Grid.Column="1" HorizontalAlignment="Left" Margin="0.333,3,0,3" Grid.Row="0" VerticalAlignment="Center" RenderTransformOrigin="2.048,0.603" Height="26" Width="62"/>
+                    <TextBox x:Name="addressTextBox" HorizontalAlignment="Left" Height="23" Margin="11,5,0,4" Grid.Row="0" Text="{Binding Address, Mode=OneTime, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" RenderTransformOrigin="0.625,0.58" Grid.ColumnSpan="2"/>
+                    <Label Content=":קוד תחנה" Grid.Column="1" HorizontalAlignment="Left" Margin="5.333,5,0,1" Grid.Row="1" VerticalAlignment="Center" Height="26" Width="80" RenderTransformOrigin="3.008,0.718"/>
+                    <TextBox x:Name="codeTextBox" HorizontalAlignment="Left" Height="24" Margin="11,6,0,2" Text="{Binding Code, Mode=OneTime, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" Grid.ColumnSpan="2" Grid.Row="1"/>
+                    <Label Content=":שם תחנה" Grid.Column="1" HorizontalAlignment="Left" Margin="5.333,3,0,3" Grid.Row="2" VerticalAlignment="Center" Height="26" Width="83"/>
+                    <TextBox x:Name="nameTextBox" HorizontalAlignment="Left" Height="24" Margin="11,4,0,4" Grid.Row="2" Text="{Binding Name, Mode=OneTime, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" Grid.ColumnSpan="2"/>
+                    <Label Content=":קו רוחב" Grid.Column="1" HorizontalAlignment="Left" Margin="10.333,2,0,4" Grid.Row="4" VerticalAlignment="Center" Height="26" Width="55"/>
+                    <TextBox x:Name="latitudeTextBox" HorizontalAlignment="Left" Height="24" Margin="11,3,0,5" Grid.Row="4" Text="{Binding Coordinate.Latitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" Grid.ColumnSpan="2"/>
+                    <Label Content=":קו אורך" Grid.Column="1" HorizontalAlignment="Left" Margin="10.333,4,0,2" Grid.Row="5" VerticalAlignment="Center" Height="26" Width="66"/>
+                    <TextBox x:Name="longitudeTextBox" HorizontalAlignment="Left" Height="24" Margin="11,1,0,7" Grid.Row="5" Text="{Binding Coordinate.Longitude, Mode=OneTime, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" Grid.ColumnSpan="2"/>
+                </Grid>
+                <Button Content="אישור" HorizontalAlignment="Left" Margin="40,185,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click" Grid.ColumnSpan="2"  Background="#FF638BB7" FontFamily="Cooper Black"  FontSize="11" OpacityMask="#FFFFFCFC"  Foreground="#FFF9FFFF">
+                    <Button.Style>
+                        <Style>
+                            <Style.Triggers>
+                                
+                     <DataTrigger Binding="{Binding ElementName=addressTextBox, Path=Text}" Value="">
+                                    <Setter Property="Button.IsEnabled" Value="False"/>
+                                    </DataTrigger>
+                                <DataTrigger Binding="{Binding ElementName=codeTextBox, Path=Text}" Value="">
+                                    <Setter Property="Button.IsEnabled" Value="False"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding ElementName=nameTextBox, Path=Text}" Value="">
+                                    <Setter Property="Button.IsEnabled" Value="False"/>
+                                </DataTrigger>
+
+                                <DataTrigger Binding="{Binding ElementName=latitudeTextBox, Path=Text}" Value="">
+                                    <Setter Property="Button.IsEnabled" Value="False"/>
+                                </DataTrigger>
+
+                                <DataTrigger Binding="{Binding ElementName=longitudeTextBox, Path=Text}" Value="">
+                                    <Setter Property="Button.IsEnabled" Value="False"/>
+                                </DataTrigger>
+
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+
+            </Grid>
+        </GroupBox>
     </Grid>
 </Window>

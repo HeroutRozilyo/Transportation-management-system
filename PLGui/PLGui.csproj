@@ -69,9 +69,6 @@
     <Compile Include="BusWindowP.xaml.cs">
       <DependentUpon>BusWindowP.xaml</DependentUpon>
     </Compile>
-    <Compile Include="DataAdjact.xaml.cs">
-      <DependentUpon>DataAdjact.xaml</DependentUpon>
-    </Compile>
     <Compile Include="LineWindowP.xaml.cs">
       <DependentUpon>LineWindowP.xaml</DependentUpon>
     </Compile>
@@ -98,10 +95,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="BusWindowP.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="DataAdjact.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

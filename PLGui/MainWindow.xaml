@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PLGui"
         mc:Ignorable="d"
-        Title="MainWindow" Height="212" Width="472.667">
+        Title="MainWindow" Height="212" Width="472.667" WindowStartupLocation="CenterScreen">
     <Grid Margin="0,0,19.333,18">
         <Button x:Name="Login" Content="Login" HorizontalAlignment="Left" Margin="46,128,0,0" Click="Login_Click" Width="75" Height="27" VerticalAlignment="Top" RenderTransformOrigin="0.249,0.765"/>
         <Button x:Name="NewUser" Content="New User" HorizontalAlignment="Left" Margin="339,128,0,0" VerticalAlignment="Top" Width="75" Click="NewUser_Click"/>
