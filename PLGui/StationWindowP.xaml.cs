@@ -77,8 +77,6 @@ namespace PLGui
            
             RefreshLineInStation();
 
-
-
         }
 
         private void Search_Click(object sender, RoutedEventArgs e)
