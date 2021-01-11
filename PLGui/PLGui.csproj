@@ -215,5 +215,11 @@
   <ItemGroup>
     <Resource Include="goforward.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="RgbBack.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="newnewBack.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

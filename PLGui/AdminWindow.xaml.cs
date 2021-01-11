@@ -68,7 +68,8 @@ namespace PLGui
 
         private void user_Click_1(object sender, RoutedEventArgs e)
         {
-      
+            UserWindow userWindow = new UserWindow(bl);
+            userWindow.Show();
         }
 
         private void Back_Click(object sender, RoutedEventArgs e)
