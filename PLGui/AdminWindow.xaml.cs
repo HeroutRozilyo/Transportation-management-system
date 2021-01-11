@@ -81,5 +81,23 @@ namespace PLGui
             if(frame.CanGoForward)
             frame.GoForward();
         }
+
+        private void Disengagement_Click(object sender, RoutedEventArgs e)
+        {
+           
+            LoginWindow wnd = new LoginWindow();
+            this.Close();
+            wnd.Show();
+        }
+
+        private void contantUs_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void accountDatiels_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
