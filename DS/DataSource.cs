@@ -952,24 +952,24 @@ namespace DS
                #region User
                 new User
                 {
-                    UserName="RonDavid123",
-                    Password="20934h584",
+                    UserName="Herout",
+                    Password="12345",
                     Admin=true,
                     UserExist=true,
                 },
 
                 new User
                 {
-                    UserName="TheKing99",
-                    Password="1qazxsw2",
-                    Admin=false,
+                    UserName="Dafna",
+                    Password="12345",
+                    Admin=true,
                     UserExist=true,
                 },
                 new User
                 {
-                    UserName="Michal_Work",
-                    Password="21071999M",
-                    Admin=true,
+                    UserName="notUs",
+                    Password="12345",
+                    Admin=false,
                     UserExist=true,
                 },
                 new User

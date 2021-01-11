@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BlAPI;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,19 +20,48 @@ namespace PLGui
     /// </summary>
     public partial class LoginWindow : Window
     {
+        private IBL bl;
+
         public LoginWindow()
         {
-//            InitializeComponent();
+         InitializeComponent();
             BO.User user = new BO.User();
             
         }
 
+        public LoginWindow(IBL bl)
+        {
+            InitializeComponent();
+            this.bl = bl;
+            BO.User user = new BO.User();
+        }
+
         private void Click_Submit(object sender, RoutedEventArgs e)
         {
-            BO.User user = new BO.User();
-            user =(this.DataContext as BO.User);
-            
-            this.Close();
+            try
+            {
+                BO.User users = new BO.User();
+                users.UserName = txtUserName.Text;
+                users.Password = txtPassword.Password;
+                bool ex = bl.findUser(users);
+                if (ex)
+                {
+                    AdminWindow wnd = new AdminWindow(bl);
+                    wnd.Show();
+
+                }
+                else
+                {
+                    UserWindow wnd = new UserWindow(bl);
+                    wnd.Show();
+                }
+
+                this.Close();
+            }
+            catch(BO.BadNameExeption a)
+            {
+                MessageBox.Show(a.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 

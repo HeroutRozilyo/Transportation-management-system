@@ -1290,6 +1290,38 @@ namespace BL
             return userBO;
         }
 
+        public bool findUser(BO.User a)
+        {
+            try
+            {
+                User specUser = new User();
+                (dl.GetUser(a.UserName)).CopyPropertiesTo(specUser);
+                if (specUser.UserName != "" && specUser.Password == a.Password)
+                {
+                    return specUser.Admin;
+                }
+                else throw new BO.BadNameExeption("אחד הנתונים שגויים", a.UserName);
+            }
+            catch (DO.WrongNameExeption b)
+            {
+                throw new BadNameExeption(b.Message, a.UserName);
+            }
+        }
+
+
+        
+        //public void update(BO.User a)
+        //{
+        //    //User specUser = new User();
+        //    //(dl.GetUser(a.UserName)).CopyPropertiesTo(specUser);
+        //    //if (specUser.UserName != "" && specUser.Password == a.Password)
+        //    //{
+        //    //    return a.Admin;
+        //    //}
+        //    //else throw new BO.BadNameExeption("אחד הנתונים שגויים", a.UserName);
+
+        //}
+
 
         public IEnumerable<BO.Line> TravelPath(int code1,int code2)
         {

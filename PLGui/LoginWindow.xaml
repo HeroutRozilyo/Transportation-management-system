@@ -14,7 +14,23 @@
             <TextBox Name="txtUserName"></TextBox>
             <Label Content="Password"></Label>
             <PasswordBox Name="txtPassword"></PasswordBox>
-            <Button Name="btnSubmit" Content="Submit" Click="Click_Submit"></Button>
+            <Button Name="btnSubmit" Content="Submit" Click="Click_Submit" Margin="260,0,293.333,0">
+                <Button.Style>
+                    <Style>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ElementName=txtUserName, Path=Password}" Value="">
+                                <Setter Property="Button.IsEnabled" Value="False"/>
+                            </DataTrigger>
+
+                            <DataTrigger Binding="{Binding ElementName=PasswordBox, Path=Text}" Value="">
+                                <Setter Property="Button.IsEnabled" Value="False"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                
+                
+            </Button>
         </StackPanel>
     </Grid>
 </Window>
