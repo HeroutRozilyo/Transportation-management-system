@@ -735,11 +735,21 @@ namespace DS
                 new Line
                 {
                 IdNumber = ++DS.Config.idLineCounter,
-                NumberLine=18,
+                NumberLine=10,
                 FirstStationCode=73,
                 LastStationCode=89,
                 Area=DO.AREA.CENTER,
                 
+                LineExist=true,
+                },
+
+                new Line
+                {
+                IdNumber = ++DS.Config.idLineCounter,
+                NumberLine=10,
+                FirstStationCode=85,
+                LastStationCode=97,
+                Area=DO.AREA.GENERAL,
                 LineExist=true,
                 },
                 new Line

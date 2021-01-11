@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="UserWindow" WindowState="Maximized"  WindowStartupLocation="CenterScreen" Width="1328.333" Height="686">
     <Grid>
-        <Frame x:Name="frame"   Content="" HorizontalAlignment="Left" Margin="160,35,0,7" VerticalAlignment="Stretch" Width="1150" Navigated="frame_Navigated" NavigationUIVisibility="Hidden" BorderThickness="1" >
+        <Frame x:Name="frame"   Content="" HorizontalAlignment="Left" Margin="160,35,0,7" VerticalAlignment="Stretch" Width="1150"  NavigationUIVisibility="Hidden" BorderThickness="1" >
             <Frame.Background>
                 <ImageBrush ImageSource="GMG.png" Opacity="0.1"/>
             </Frame.Background>
@@ -58,6 +58,10 @@
                 </Button>
             </Grid>
         </ToolBar>
+        <WrapPanel HorizontalAlignment="Left" Height="475" Margin="15,155,0,0" VerticalAlignment="Top" Width="145">
+            <Button x:Name="line" Content=" קווים" HorizontalAlignment="Left" VerticalAlignment="Stretch"  Click="line_Click" Style="{DynamicResource AdminWindow}" Width="145" RenderTransformOrigin="1.623,0.232" Height="65"/>
+            <Button x:Name="station" Content=" תחנות" HorizontalAlignment="Left" VerticalAlignment="Stretch" Click="station_Click"  Style="{DynamicResource AdminWindow}"  Width="145" Height="80"/>
+        </WrapPanel>
 
     </Grid>
 </Window>
