@@ -7,13 +7,11 @@
         mc:Ignorable="d"
         Title="UserWindow" WindowState="Maximized"  WindowStartupLocation="CenterScreen" Width="1328.333" Height="686">
     <Grid>
-        <Frame x:Name="frame"   Content="" HorizontalAlignment="Left" Margin="160,35,0,7" VerticalAlignment="Stretch" Width="1150"  NavigationUIVisibility="Hidden" BorderThickness="1" >
-            <Frame.Background>
-                <ImageBrush ImageSource="GMG.png" Opacity="0.1"/>
-            </Frame.Background>
-            <Frame.BorderBrush>
-                <ImageBrush ImageSource="GMG.png"/>
-            </Frame.BorderBrush>
+        <Grid.Background>
+            <ImageBrush ImageSource="newnewBack.jpg"/>
+        </Grid.Background>
+        <Frame x:Name="frame"   Content="" HorizontalAlignment="Left" Margin="235,20,-63.667,21.667" VerticalAlignment="Stretch" Width="1150"  NavigationUIVisibility="Hidden" BorderThickness="1" >
+            
         </Frame>
         <ToolBar Background="#FFDADFE5" ToolBar.OverflowMode="Never" Margin="-25,5,-8.667,607">
             <Button x:Name="forward" Height="35.3333333333333" VerticalAlignment="Top" Width="75"   Click="forward_Click" ToolTip="עבור לדף הבא">

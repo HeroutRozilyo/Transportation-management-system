@@ -10,9 +10,18 @@
     <Grid>
 
 
-        <TabControl x:Name="Stations" HorizontalAlignment="Left" Height="657" VerticalAlignment="Top" Width="1238" Margin="0,0,-438,-207">
+        <TabControl x:Name="Stations" HorizontalAlignment="Left" Height="657" VerticalAlignment="Top" Width="1238" Margin="0,0,-438,-207" Background="{x:Null}">
+            <TabControl.BorderBrush>
+                <SolidColorBrush Color="#FFACACAC" Opacity="0"/>
+            </TabControl.BorderBrush>
             <TabItem Name="DataStation" Header="תחנות" Margin="-2,25,-30.667,-32">
-                <Grid Background="#FFE5E5E5" Margin="-6,27,0.333,-0.333">
+                <TabItem.Background>
+                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                        <GradientStop Color="#FFF0F0F0" Offset="0"/>
+                        <GradientStop Color="#FF638BB7" Offset="1"/>
+                    </LinearGradientBrush>
+                </TabItem.Background>
+                <Grid Margin="-6,27,0.333,-0.333">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="87*"/>
                         <ColumnDefinition Width="706*"/>
@@ -29,7 +38,7 @@
                         </ListView.View>
                     </ListView>
                     <GroupBox x:Name="groupBox" Header="פרטי התחנה" HorizontalAlignment="Left" Height="235" Margin="229,45,0,0" VerticalAlignment="Top" Width="346" Style="{DynamicResource allGrpuoBox}" Grid.Column="1">
-                        <Grid x:Name="StationDataGrid" HorizontalAlignment="Left" Margin="10,10,-2.333,-11" VerticalAlignment="Top" Height="215" Width="275" >
+                        <Grid x:Name="StationDataGrid" HorizontalAlignment="Left" Margin="47,15,0,0" VerticalAlignment="Top" Height="177" Width="275" >
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" MinWidth="154"/>
                                 <ColumnDefinition Width="Auto" MinWidth="111.333"/>
@@ -63,9 +72,9 @@
                     </GroupBox>
 
 
-                    <GroupBox x:Name="groupBox1" Header="קווים העוברים בתחנה" HorizontalAlignment="Left" Height="235" Margin="587,50,0,0" VerticalAlignment="Top" Width="364" Style="{DynamicResource allGrpuoBox}" Grid.Column="1">
+                    <GroupBox x:Name="groupBox1" Header="קווים העוברים בתחנה" HorizontalAlignment="Left" Height="235" Margin="237,297,0,0" VerticalAlignment="Top" Width="364" Style="{DynamicResource allGrpuoBox}" Grid.Column="1">
                         <Grid HorizontalAlignment="Left" Height="212" Margin="0,13,-2.333,-11" VerticalAlignment="Top" Width="365">
-                            <ListView x:Name="LineInStation" HorizontalAlignment="Right" Height="300" Margin="0,20,35,0"  VerticalAlignment="Top"  Width="240" >
+                            <ListView x:Name="LineInStation" HorizontalAlignment="Right" Height="185" Margin="0,12,72,0"  VerticalAlignment="Top"  Width="240" >
                                 <ListView.View>
                                     <GridView>
                                         <GridViewColumn Header="קווים בתחנה"   DisplayMemberBinding="{Binding NumberLine}" Width="Auto"/>
@@ -105,7 +114,13 @@
 
                 </Grid>
             </TabItem>
-            <TabItem Name="searchTravel" Header="חיפוש מסלול" Margin="22.667,25,-50.333,-28.333">
+            <TabItem Name="searchTravel" Header="חיפוש מסלול" Margin="22.667,25,-50.333,-28.333" BorderBrush="#FF638BB7">
+                <TabItem.Background>
+                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                        <GradientStop Color="#FFF0F0F0" Offset="0"/>
+                        <GradientStop Color="#FF638BB7" Offset="1"/>
+                    </LinearGradientBrush>
+                </TabItem.Background>
                 <Grid Background="#FFE5E5E5" Margin="0,-12,0.333,-3.333">
                     <Label Content="בחר מוצא ויעד" HorizontalAlignment="Left" Margin="764,43,0,0" VerticalAlignment="Top" Height="46" Width="173"/>
                     <ComboBox x:Name="station1"   HorizontalAlignment="Left" Margin="405,126,0,0" VerticalAlignment="Top" Width="441" SelectionChanged="station1_SelectionChanged" Height="36" />
