@@ -1318,7 +1318,7 @@ namespace BL
         }
 
 
-        
+
         //public void update(BO.User a)
         //{
         //    //User specUser = new User();
@@ -1330,13 +1330,24 @@ namespace BL
         //    //else throw new BO.BadNameExeption("אחד הנתונים שגויים", a.UserName);
 
         //}
+        public double CalucateTime(BO.Line line, int cod1, int cod2)
+        {
+            double time = 0;
+            int index1 = line.StationsOfBus.FirstOrDefault(c => c.StationCode == cod1).LineStationIndex;
+            int index2 = line.StationsOfBus.FirstOrDefault(c => c.StationCode == cod2).LineStationIndex;
 
+            for (int i = index1; i < index2; i++)
+            {
+                time += line.StationsOfBus.ElementAt(i).TimeAverageFromNext;
+            }
+            return time;
+        }
 
-        public IEnumerable<BO.Line> TravelPath(int code1,int code2)
+        public IEnumerable<object> TravelPath(int code1,int code2)
         {
             List<BO.Line> lineToSend =new List<Line>();
             BO.Line l;
-            
+           List<object> toReturn=new List<object>();
             IEnumerable<BO.LineStation> stationsBO1;
             IEnumerable<BO.LineStation> stationsBO2;
             try
@@ -1351,46 +1362,69 @@ namespace BL
 
               var v=  from temp1 in stationsBO1
                       from temp2 in stationsBO2
-                      where temp1.LineId == temp2.LineId
-                      where temp1.LineStationIndex < temp2.LineStationIndex
+                      where temp1.LineId == temp2.LineId && temp1.LineStationIndex < temp2.LineStationIndex
                       select temp1;
 
-                foreach(var tt in v)
+                foreach(var tt in v)//if i foun direct
                 {
                     l = new BO.Line();
                     if(lineToSend.FirstOrDefault(y=>y.IdNumber==tt.LineId)==null)
                     {
                         l = lineDoBoAdapter(tt.LineId);
                         lineToSend.Add(l);
+                        toReturn.Add(new
+                        {
+                           
+                            numberLine1 = l.NumberLine,
+                            numberLine2 = l.NumberLine,
+                            direct = true,
+                            replaceStation = code2,
+                            timeTravel = l.TimeTravel
+
+                        }
+                        ) ;
+                       
                     }
                
                 }
 
-
-                if (v.Count()<1)
+                int replace;
+             //   if (v.Count()<1)
                 {
-                    foreach (var co1 in stationsBO1)
+                    foreach (var co1 in stationsBO1)//over all the line in the first Station
                     {
-                        var temp = dl.GetAllStationsLine(co1.LineId);
-                        foreach (var te in temp)
+                        var temp = dl.GetAllStationsLine(co1.LineId);//all the staion for this line
+                        foreach (var te in temp)//over the staion list
                         {
-                            var d = dl.GetAllLineStationsBy(b => b.StationCode == te.StationCode);
-                            foreach (var z in d)
+                            var d = dl.GetAllLineStationsBy(b => b.StationCode == te.StationCode);//gets all the line in this staion
+                            foreach (var z in d)//over al the line in this spesific line
                             {
-                                foreach (var sh in stationsBO2)
+                                replace=z.StationCode;
+                                foreach (var sh in stationsBO2)//over all the line in the station 2
                                 {
-                                    if (z.LineId == sh.LineId)
-                                        if (z.LineStationIndex < sh.LineStationIndex)
+                                    if (z.LineId == sh.LineId)//if i found the same line
+                                        if (z.LineStationIndex < sh.LineStationIndex)//if station 1 before station 2 like i need
                                         {
 
-                                            if (lineToSend.FirstOrDefault(n => n.IdNumber == z.LineId) == null)
+                                            if (lineToSend.FirstOrDefault(n => n.IdNumber == z.LineId) == null)//line 2 not in my list yet
                                             {
                                                 l = new BO.Line();
-                                                l = lineDoBoAdapter(te.LineId);
-                                                lineToSend.Add(l);
+                                               Line one = lineDoBoAdapter(te.LineId);
+                                                lineToSend.Add(one);
                                                 l = new BO.Line();
                                                 l = lineDoBoAdapter(z.LineId);
                                                 lineToSend.Add(l);
+                                                toReturn.Add(new
+                                                {
+
+                                                    numberLine1 = one.NumberLine,
+                                                    numberLine2 = l.NumberLine,
+                                                    direct =false,
+                                                    replaceStation = replace,
+                                                    timeTravel = CalucateTime(one,code1,replace)+ CalucateTime(l, replace, code2)
+
+                                                }
+                        );
                                             }
 
                                         }
@@ -1405,7 +1439,7 @@ namespace BL
 
 
 
-                return lineToSend.AsEnumerable();
+                return toReturn.AsEnumerable();
 
             }
             catch (DO.WrongIDExeption ex)

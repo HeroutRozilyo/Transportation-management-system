@@ -746,7 +746,7 @@ namespace DS
                 new Line
                 {
                 IdNumber = ++DS.Config.idLineCounter,
-                NumberLine=10,
+                NumberLine=27,
                 FirstStationCode=85,
                 LastStationCode=97,
                 Area=DO.AREA.GENERAL,

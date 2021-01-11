@@ -23,7 +23,7 @@
             <Button x:Name="buses" Content="ניהול אוטובוסים" HorizontalAlignment="Left" VerticalAlignment="Stretch"  Click="buses_Click" Style="{DynamicResource AdminWindow}" Width="145" Height="65"/>
             <Button x:Name="station" Content="ניהול תחנות" HorizontalAlignment="Left" VerticalAlignment="Stretch" Click="station_Click"  Style="{DynamicResource AdminWindow}"  Width="145" Height="80"/>
             <Button x:Name="AddManeger" Content="הוספת מנהל &#xA;חדש למערכת" HorizontalAlignment="Left" VerticalAlignment="Stretch"  Style="{DynamicResource AdminWindow}" Width="145" RenderTransformOrigin="0.717,0.385" Height="85" TextOptions.TextHintingMode="Fixed" Click="AddManeger_Click"/>
-            <Button x:Name="user" Content="משתמש" HorizontalAlignment="Left" VerticalAlignment="Stretch"  Style="{DynamicResource AdminWindow}" Width="145" RenderTransformOrigin="0.717,0.385" Height="84" TextOptions.TextHintingMode="Fixed" Click="user_Click_1"/>
+            <Button x:Name="user" Content="תצוגת משתמש" HorizontalAlignment="Left" VerticalAlignment="Stretch"  Style="{DynamicResource AdminWindow}" Width="145" RenderTransformOrigin="0.717,0.385" Height="84" TextOptions.TextHintingMode="Fixed" Click="user_Click_1"/>
         </WrapPanel>
 
         <Separator HorizontalAlignment="Stretch" MinHeight="100" Margin="-256,245,691,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" BorderBrush="#FF190E0E" Background="#FF150909">
