@@ -22,7 +22,8 @@ namespace PLGui
     public partial class MainWindow : Window
     {
         IBL bl = factoryBL.GetBl();
-        LoginWindow wnd; 
+        LoginWindow wnd;
+        AddUser addUser;
         public MainWindow()
         {
            IBL bl = factoryBL.GetBl();
@@ -44,8 +45,17 @@ namespace PLGui
 
         private void NewUser_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("This feature is not valid for this step", "Soon...", MessageBoxButton.OK, MessageBoxImage.Information);
+            //  MessageBox.Show("This feature is not valid for this step", "Soon...", MessageBoxButton.OK, MessageBoxImage.Information);
+            addUser = new AddUser();
+           
+            bool?result = addUser.ShowDialog();
+            if(result==true)
+            {
                
-        }
+                wnd = new LoginWindow(bl);
+                wnd.Show();
+                this.Close();
+            }
+        }    
     }
 }
