@@ -1369,7 +1369,7 @@ namespace BL
 
                 if (v.Count()<1)
                 {
-                    foreach (var co1 in stationsBO1)
+                    foreach (var co1 in stationsBO1) 
                     {
                         var temp = dl.GetAllStationsLine(co1.LineId);
                         foreach (var te in temp)
@@ -1377,6 +1377,7 @@ namespace BL
                             var d = dl.GetAllLineStationsBy(b => b.StationCode == te.StationCode);
                             foreach (var z in d)
                             {
+                             
                                 foreach (var sh in stationsBO2)
                                 {
                                     if (z.LineId == sh.LineId)
@@ -1435,7 +1436,18 @@ namespace BL
             IEnumerable<DO.User> users = dl.GetAlluser();
         }
 
-        
+        public double CalucateTime(BO.Line line,int cod1,int cod2)
+        {
+            double time = 0;
+            int index1= line.StationsOfBus.FirstOrDefault(c => c.StationCode == cod1).LineStationIndex;
+            int index2 = line.StationsOfBus.FirstOrDefault(c => c.StationCode == cod2).LineStationIndex;
+
+            for (int i=index1;i<index2;i++)
+            {
+                time+=line.StationsOfBus.ElementAt(i).TimeAverageFromNext;
+            }
+            return time;
+        }
 
         #endregion
 
