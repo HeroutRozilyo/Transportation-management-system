@@ -67,7 +67,7 @@ namespace PLGui
 
     /* public partial class Bus_Data : Window
     {
-        public Bus temp = new Bus();
+        public Bus temp = new Bus();//
      
     
         public Bus_Data(Bus v) //constructor that get bus to show
