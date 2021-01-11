@@ -959,6 +959,7 @@ namespace DS
                     Password="12345",
                     Admin=true,
                     UserExist=true,
+                    MailAddress="heroot12@gmail.com"
                 },
 
                 new User
@@ -967,6 +968,8 @@ namespace DS
                     Password="12345",
                     Admin=true,
                     UserExist=true,
+                     MailAddress="da0773412369@gmail.com"
+
                 },
                 new User
                 {
@@ -974,6 +977,7 @@ namespace DS
                     Password="12345",
                     Admin=false,
                     UserExist=true,
+                     MailAddress="heroot12@gmail.com"
                 },
                 new User
                 {
@@ -981,6 +985,7 @@ namespace DS
                     Password="busbus123",
                     Admin=false,
                     UserExist=true,
+                     MailAddress="heroot12@gmail.com"
                 },
                  #endregion User
             };

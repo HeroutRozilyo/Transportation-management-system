@@ -559,6 +559,13 @@ namespace DL
                 throw new DO.WrongNameExeption(user.UserName, "שם משתמש כבר קיים במערכת, בבקשה הכנס שם אחר");/////////////////////////////////////////////////////////////////
             DataSource.ListUsers.Add(user.Clone());
         }
+       public DO.User getUserBy(Predicate<DO.User> userConditions)
+        {
+            var users = from u in DataSource.ListUsers
+                        where (u.UserExist && userConditions(u))
+                        select u.Clone();
+            return users.ElementAt(0);
+        }
 
 
         public void DeleteUser(string name)

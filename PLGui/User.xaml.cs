@@ -15,6 +15,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+
+//...
+
 namespace PLGui
 {
     /// <summary>
@@ -152,7 +155,7 @@ namespace PLGui
 
         private void tryoneline_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            
         }
 
 

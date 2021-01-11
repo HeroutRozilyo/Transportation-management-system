@@ -6,35 +6,38 @@
         xmlns:local="clr-namespace:PLGui"
         xmlns:BO="clr-namespace:BO;assembly=BL" x:Class="PLGui.AddUser"
         mc:Ignorable="d"
-        Title="AddUser" WindowStartupLocation="CenterScreen" Height="245.874" Width="562.176" >
+        Title="AddUser" WindowStartupLocation="CenterScreen" Height="305.937" Width="619.333" >
     <Window.Resources>
         <CollectionViewSource x:Key="userViewSource" d:DesignSource="{d:DesignInstance {x:Type BO:User}, CreateList=True}"/>
     </Window.Resources>
-    <Grid Margin="-4,0,-2.667,-4.333">
+    <Grid Margin="-4,0,-6.333,-4.333">
         <Grid.Background>
             <ImageBrush ImageSource="newnewBack.jpg"/>
         </Grid.Background>
 
-        <Grid x:Name="add" VerticalAlignment="Top" Margin="-25,20,0,0" HorizontalAlignment="Left" DataContext="{StaticResource userViewSource}" Width="520" Height="160">
+        <Grid x:Name="add" VerticalAlignment="Top" Margin="-25,20,0,0" HorizontalAlignment="Left" DataContext="{StaticResource userViewSource}" Width="520" Height="225">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" MinHeight="60"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="45.333"/>
-                <RowDefinition Height="68"/>
+                <RowDefinition Height="67"/>
+                <RowDefinition Height="1.667"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" MinWidth="391.333"/>
                 <ColumnDefinition Width="Auto" MinWidth="370.667"/>
             </Grid.ColumnDefinitions>
-            <Label VerticalAlignment="Center" Margin="1.667,35,0,44.333" HorizontalAlignment="Left" Grid.Column="1" Style="{DynamicResource Label}"  Content="שם משתמש" Height="26" Width="82" RenderTransformOrigin="-2.477,-0.352" Grid.RowSpan="4"/>
-            <PasswordBox x:Name="passwordTextBox" Width="215" VerticalAlignment="Center"  Margin="173,16,0,0.333" Height="29" HorizontalAlignment="Left" Grid.Row="3" />
-            <Label VerticalAlignment="Center"  Style="{DynamicResource Label}"  Grid.Row="3" Margin="6.667,16,0,0.333" HorizontalAlignment="Left" Grid.Column="1" Content="סיסמא" RenderTransformOrigin="2.168,-0.316" Height="29" Width="119"/>
-            <TextBox x:Name="userNameTextBox" Width="215" VerticalAlignment="Center" Text="{Binding UserName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="173,30,0,2" Height="28" HorizontalAlignment="Left" />
-            <Label x:Name="label" Content="הכנס סיסמא שוב"  Style="{DynamicResource Label}" Grid.Column="1" HorizontalAlignment="Left" Margin="6.667,24.667,0,0" Grid.Row="4" VerticalAlignment="Top" Width="117" Height="26"/>
-            <PasswordBox x:Name="passwordBox2" HorizontalAlignment="Left" Margin="173,20.667,0,18.333" Grid.Row="4" Width="215"/>
+            <Label VerticalAlignment="Center" Margin="1.667,36,0,0" HorizontalAlignment="Left" Grid.Column="1" Style="{DynamicResource Label}"  Content="שם משתמש" Height="26" Width="82" RenderTransformOrigin="-2.477,-0.352" Grid.RowSpan="3"/>
+            <PasswordBox x:Name="passwordTextBox" Width="215" VerticalAlignment="Center"  Margin="173,16,0,1" Height="29" HorizontalAlignment="Left" Grid.Row="3" />
+            <Label VerticalAlignment="Center"  Style="{DynamicResource Label}"  Grid.Row="3" Margin="6.667,16,0,1" HorizontalAlignment="Left" Grid.Column="1" Content="סיסמא" RenderTransformOrigin="2.168,-0.316" Height="29" Width="119"/>
+            <TextBox x:Name="userNameTextBox" Width="215" VerticalAlignment="Center" Text="{Binding UserName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="173,30,0,2.667" Height="28" HorizontalAlignment="Left" />
+            <Label x:Name="label" Content="הכנס סיסמא שוב"  Style="{DynamicResource Label}" Grid.Column="1" HorizontalAlignment="Left" Margin="6.667,25,0,0" Grid.Row="4" VerticalAlignment="Top" Width="117" Height="26"/>
+            <PasswordBox x:Name="passwordBox2" HorizontalAlignment="Left" Margin="173,21,0,17" Grid.Row="4" Width="215"/>
+            <Label VerticalAlignment="Center" Margin="3.667,16,0,-39.333" HorizontalAlignment="Left" Style="{DynamicResource Label}"  Content="כתובת אימייל" Height="26" Width="95" RenderTransformOrigin="-2.477,-0.352" Grid.Row="5" Grid.Column="1"/>
+            <TextBox x:Name="Mail" Width="215" VerticalAlignment="Center" Text="{Binding MailAddress, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="170,14,0,-39.333" Height="28" HorizontalAlignment="Left" Grid.Row="5" />
         </Grid>
-        <Button x:Name="okey" Content="הירשם" HorizontalAlignment="Left" Margin="35,169,0,0" VerticalAlignment="Top" Width="75" Click="okey_Click"  Style="{DynamicResource AdminWindow}" />
+        <Button x:Name="okey" Content="הירשם" HorizontalAlignment="Left" Margin="25,245,0,0" VerticalAlignment="Top" Width="75" Click="okey_Click"  Style="{DynamicResource AdminWindow}" RenderTransformOrigin="0.404,2.452" />
 
     </Grid>
 </Window>

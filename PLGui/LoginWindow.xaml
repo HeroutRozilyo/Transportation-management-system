@@ -7,30 +7,35 @@
         mc:Ignorable="d"
         Title="Login" Height="450" Width="800" FontSize="14">
     <Grid>
-        <StackPanel Margin="20">
-            <Label Content="Login" FontSize="25" HorizontalAlignment="Center"/>
-            <Separator></Separator>
-            <Label Content="UserName"></Label>
-            <TextBox Name="txtUserName"></TextBox>
-            <Label Content="Password"></Label>
-            <PasswordBox Name="txtPassword"></PasswordBox>
-            <Button Name="btnSubmit" Content="Submit" Click="Click_Submit" Margin="260,0,293.333,0">
-                <Button.Style>
-                    <Style>
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding ElementName=txtUserName, Path=Password}" Value="">
-                                <Setter Property="Button.IsEnabled" Value="False"/>
-                            </DataTrigger>
+        <Label Content="Login" FontSize="25" HorizontalAlignment="Center" Margin="424,14,298.333,355.667"/>
+        <Separator Margin="0,35,0.333,350.667"></Separator>
+        <Label Content="UserName" Margin="475,75,228.333,310.667"></Label>
+        <TextBox Name="txtUserName" Margin="195,80,347.333,310.667"></TextBox>
+        <Label Content="Password" Margin="475,135,113.333,245.667"></Label>
+        <PasswordBox Name="txtPassword" Margin="165,130,330.333,255.667"></PasswordBox>
+        <Button Name="btnSubmit" Content="Submit" Click="Click_Submit" Margin="20,260,603.333,115.667">
+            <Button.Style>
+                <Style>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ElementName=txtUserName, Path=Password}" Value="">
+                            <Setter Property="Button.IsEnabled" Value="False"/>
+                        </DataTrigger>
 
-                            <DataTrigger Binding="{Binding ElementName=PasswordBox, Path=Text}" Value="">
-                                <Setter Property="Button.IsEnabled" Value="False"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </Button.Style>
-                
-                
-            </Button>
-        </StackPanel>
+                        <DataTrigger Binding="{Binding ElementName=PasswordBox, Path=Text}" Value="">
+                            <Setter Property="Button.IsEnabled" Value="False"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+
+
+        </Button>
+        <Button x:Name="forgetPassword" Content="שכחתי סיסמא" HorizontalAlignment="Left" Height="25" Margin="30,0,0,0" Width="165" Click="forgetPassword_Click"/>
+        <GroupBox x:Name="passEmail" Header="הכנס כתובת מייל לשחזור סיסמא" HorizontalAlignment="Left" Height="215" Margin="320,190,0,0" VerticalAlignment="Top" Width="440">
+            <Grid HorizontalAlignment="Left" Height="175" Margin="114,30,0,0" VerticalAlignment="Top" Width="460">
+                <TextBox x:Name="emailTextBOx" Height="30" Margin="30,40,280,0" TextWrapping="Wrap" Text="xxx@xxx.xxx" VerticalAlignment="Top"/>
+                <Button x:Name="button" Content="שלח אימייל" HorizontalAlignment="Left" Height="25" Margin="40,105,0,0" VerticalAlignment="Top" Width="140" Click="button_Click" RenderTransformOrigin="1.712,0.787"/>
+            </Grid>
+        </GroupBox>
     </Grid>
 </Window>

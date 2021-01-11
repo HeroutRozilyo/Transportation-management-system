@@ -108,6 +108,7 @@ namespace DALAPI
         void DeleteUser(string name);
 
         void UpdateUser(DO.User user);
+        DO.User getUserBy(Predicate<DO.User> userConditions);
         #endregion User
 
         #region Trip

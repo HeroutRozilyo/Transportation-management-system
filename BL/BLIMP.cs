@@ -237,7 +237,7 @@ namespace BL
             lineBO.TimeTravel = CalucateTravel(idLine);
 
             return lineBO;
-        }//
+        }
 
         #region GetLine
         public IEnumerable<BO.Line> GetAllLine() //return all the lines that working 
@@ -1298,7 +1298,26 @@ namespace BL
 
             return userBO;
         }
-
+        public BO.User getUserByEmail(string email)
+        {
+            BO.User temp = new User();
+           dl.getUserBy(b => b.MailAddress == email).CopyPropertiesTo(temp);
+            return temp;
+        }
+        public IEnumerable<BO.User> GetAllUsers()
+        {
+            var v = from us in dl.GetAlluser()
+                    where us.UserExist
+                    select (BO.User)us.CopyPropertiesToNew(typeof(BO.User));
+            return v;
+        }
+        public bool EmailExsit(string mail)
+        {
+            var v = getUserByEmail(mail);
+            if (v != null)
+                return true;
+            return false;
+        }
         public bool findUser(BO.User a)
         {
             try
@@ -1319,17 +1338,7 @@ namespace BL
 
 
 
-        //public void update(BO.User a)
-        //{
-        //    //User specUser = new User();
-        //    //(dl.GetUser(a.UserName)).CopyPropertiesTo(specUser);
-        //    //if (specUser.UserName != "" && specUser.Password == a.Password)
-        //    //{
-        //    //    return a.Admin;
-        //    //}
-        //    //else throw new BO.BadNameExeption("אחד הנתונים שגויים", a.UserName);
-
-        //}
+        
         public double CalucateTime(BO.Line line, int cod1, int cod2)
         {
             double time = 0;
@@ -1448,13 +1457,14 @@ namespace BL
             }
         }
 
-        public void AddUser(string name,string pas, bool admin)
+        public void AddUser(string name,string pas, bool admin,string email)
         {
             DO.User userDO = new DO.User();
             userDO.UserName = name;
             userDO.Admin = admin;
             userDO.Password = pas;
             userDO.UserExist = true;
+            userDO.MailAddress = email;
 
             try
             {

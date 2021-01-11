@@ -12,6 +12,6 @@ namespace BO
         public string Password { get; set; }
         public bool Admin { get; set; }
         public bool UserExist { get; set; }
-
+        public string MailAddress { get; set; }
     }
 }

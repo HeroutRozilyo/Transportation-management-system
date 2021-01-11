@@ -12,6 +12,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Net;
+using System.Net.Mail;
+using System.Text.RegularExpressions;
 
 namespace PLGui
 {
@@ -24,9 +27,9 @@ namespace PLGui
 
         public LoginWindow()
         {
-         InitializeComponent();
+            InitializeComponent();
             BO.User user = new BO.User();
-            
+            passEmail.Visibility = Visibility.Hidden;
         }
 
         public LoginWindow(IBL bl)
@@ -34,6 +37,7 @@ namespace PLGui
             InitializeComponent();
             this.bl = bl;
             BO.User user = new BO.User();
+            passEmail.Visibility = Visibility.Hidden;
         }
 
         private void Click_Submit(object sender, RoutedEventArgs e)
@@ -58,56 +62,66 @@ namespace PLGui
 
                 this.Close();
             }
-            catch(BO.BadNameExeption a)
+            catch (BO.BadNameExeption a)
             {
                 MessageBox.Show(a.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
+        private void forgetPassword_Click(object sender, RoutedEventArgs e)
+        {
+            passEmail.Visibility = Visibility.Visible;
+        }
+
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+            if(check())
+            {
+                try
+                {
+                   
+                    BO.User user = new BO.User();
+                    user = bl.getUserByEmail(emailTextBOx.Text);
+                    using (MailMessage mail = new MailMessage())
+                    {
+                        mail.From = new MailAddress("rozilyo@g.jct.ac.il.com");
+                        mail.To.Add(user.MailAddress);
+                        mail.Subject = "שחזור סיסמא";
+                        mail.Body =string.Format("Your Password is-{0}",user.Password);
+                        mail.IsBodyHtml = true;
+                       
+                       
+
+                        using (SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587))
+                        {
+                            smtp.Credentials = new NetworkCredential("rozilyo@g.jct.ac.il", "h209179647");
+                            smtp.EnableSsl = true;
+                            smtp.Send(mail);
+                        }
+                        MessageBox.Show("סיסמתך נשלחה לכתובת האימייל בהצלחה", "", MessageBoxButton.OK);
+                    }
+                }
+                catch (SmtpFailedRecipientException ex)
+                {
+                    MessageBox.Show(ex.Message, "שגיאת מייל", MessageBoxButton.OK);
+                   
+                }
+                catch (SmtpException ex)
+                {
+                    MessageBox.Show(ex.Message, "שגיאת מייל", MessageBoxButton.OK);
+                }
+                passEmail.Visibility = Visibility.Hidden;
+
+               
+            }
+            else MessageBox.Show("הכנס כתובת אימייל תיקנית", "שגיאת מייל", MessageBoxButton.OK);
+
+        }
+        public bool check()
+        //הפונקציה בודקת את נכונות הפרטים שהמשתמש הכניס למערכת
+        {//בדיקה למייל
+            Regex regex = new Regex(@"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$");
+            return regex.IsMatch(emailTextBOx.Text);
+        }
     }
-
-    /* public partial class Bus_Data : Window
-    {
-        public Bus temp = new Bus();//
-     
-    
-        public Bus_Data(Bus v) //constructor that get bus to show
-        {
-            InitializeComponent();
-            temp = v;
-            this.DataContext = temp;
-        }
-
-        public Bus_Data(object item) //constructor that get object to show
-        {
-            InitializeComponent();
-
-            this.DataContext = item;
-      
-        }
-
-
-        private void treat_Click(object sender, RoutedEventArgs e) //send the bus to treatment
-        {         
-            (this.DataContext as Bus).treatment();
-            this.Close();
-        }
-
-        private void fuel_Click(object sender, RoutedEventArgs e) //send the bus to refulling
-        {
-            (this.DataContext as Bus).Refuelling();
-            this.Close();
-
-
-        }
-
-        private void Window_Loaded_1(object sender, RoutedEventArgs e)
-        {
-
-
-
-
-        }
-    }
-}
-*/
 }

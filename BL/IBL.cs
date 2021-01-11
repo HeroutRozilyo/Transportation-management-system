@@ -63,8 +63,11 @@ namespace BlAPI
         #region User
         IEnumerable<object> TravelPath(int code1, int code2);
         bool findUser(BO.User a);
-        void AddUser(string name, string pas, bool admin);
+        void AddUser(string name, string pas, bool admin, string mail);
         double CalucateTime(BO.Line line, int cod1, int cod2);
+        BO.User getUserByEmail(string email);
+        IEnumerable<BO.User> GetAllUsers();
+        bool EmailExsit(string mail);
         #endregion
     }
 }
