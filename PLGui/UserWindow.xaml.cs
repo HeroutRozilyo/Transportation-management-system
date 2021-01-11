@@ -73,7 +73,7 @@ namespace PLGui
 
         private void station_Click(object sender, RoutedEventArgs e)
         {
-
+            frame.Navigate(new User());
         }
     }
 }

@@ -67,7 +67,7 @@ namespace PLGui
 
         private void user_Click_1(object sender, RoutedEventArgs e)
         {
-            frame.Content = new User();
+      
         }
 
         private void Back_Click(object sender, RoutedEventArgs e)
