@@ -105,5 +105,13 @@
         <Setter Property="Foreground" Value="#FF212223"/>
     </Style>
 
+    <Style x:Key="Label" TargetType="{x:Type Label}">
+
+        <Setter Property="FontFamily" Value="Copperplate Gothic Bold"/>
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="BorderBrush" Value="#FF638BB7"/>
+        <Setter Property="Foreground" Value="#FF212223"/>
+    </Style>
+
 </ResourceDictionary>
     

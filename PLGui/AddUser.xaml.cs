@@ -44,14 +44,34 @@ namespace PLGui
             try
             {
                 name = userNameTextBox.Text;
-                pas = passwordTextBox.Text;
-                if(admin)
-                    bl.AddUser(name, pas, true);
+                pas = passwordTextBox.Password;
+                string pas2 = passwordBox2.Password;
+                if (pas != pas2)
+                {
+                   MessageBoxResult result= MessageBox.Show(".הכנס סיסמא זהה בשני השדות ונסה שוב", "New User", MessageBoxButton.OKCancel, MessageBoxImage.Error);
+                   switch(result)
+                    {
+                        case MessageBoxResult.OK:
+                        {
+                           break;
+                        }
+                        case MessageBoxResult.Cancel:
+                            {
+                                this.Close();
+                                return;
+                            }
+                    }
+                }
                 else
-                    bl.AddUser(name, pas, false);
-               
-                this.DialogResult = true;
-                this.Close();
+                {
+                    if (admin)
+                        bl.AddUser(name, pas, true);
+                    else
+                        bl.AddUser(name, pas, false);
+
+                    this.DialogResult = true;
+                    this.Close();
+                }
             }
             catch(BO.BadNameExeption ex)
             {
@@ -60,14 +80,6 @@ namespace PLGui
             
         }
 
-        private void userNameTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
-        {
-            e.Handled = !e.Text.Any(x => Char.IsLetter(x));
-        }
-
-        private void passwordTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
-        {
-            e.Handled = !e.Text.Any(x => Char.IsDigit(x));
-        }
+        
     }
 }

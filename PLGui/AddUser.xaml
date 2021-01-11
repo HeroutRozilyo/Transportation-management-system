@@ -6,29 +6,35 @@
         xmlns:local="clr-namespace:PLGui"
         xmlns:BO="clr-namespace:BO;assembly=BL" x:Class="PLGui.AddUser"
         mc:Ignorable="d"
-        Title="AddUser" Height="190.414" Width="562.176" >
+        Title="AddUser" WindowStartupLocation="CenterScreen" Height="245.874" Width="562.176" >
     <Window.Resources>
         <CollectionViewSource x:Key="userViewSource" d:DesignSource="{d:DesignInstance {x:Type BO:User}, CreateList=True}"/>
     </Window.Resources>
-    <Grid Margin="0,0,0.333,10.667">
+    <Grid Margin="-4,0,-2.667,-4.333">
+        <Grid.Background>
+            <ImageBrush ImageSource="newnewBack.jpg"/>
+        </Grid.Background>
 
-        <Grid x:Name="add" VerticalAlignment="Top" Margin="47,10,0,0" HorizontalAlignment="Left" DataContext="{StaticResource userViewSource}" Width="508" Height="111">
+        <Grid x:Name="add" VerticalAlignment="Top" Margin="-25,20,0,0" HorizontalAlignment="Left" DataContext="{StaticResource userViewSource}" Width="520" Height="160">
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" MinHeight="60"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="45.333"/>
+                <RowDefinition Height="68"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" MinWidth="391.333"/>
                 <ColumnDefinition Width="Auto" MinWidth="370.667"/>
             </Grid.ColumnDefinitions>
-            <Label VerticalAlignment="Center" Margin="24.667,10,0,24" HorizontalAlignment="Left" Grid.Column="1" Content="שם משתמש" Height="26" Width="75" RenderTransformOrigin="-2.477,-0.352"/>
-            <TextBox x:Name="passwordTextBox" Width="215" VerticalAlignment="Center" Text="{Binding Password, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="90,10,0,74.333" Height="29" HorizontalAlignment="Left" Grid.Row="3" PreviewTextInput="passwordTextBox_PreviewTextInput"/>
-            <Label VerticalAlignment="Center" Grid.Row="3" Margin="21.667,10,0,73.667" HorizontalAlignment="Left" Grid.Column="1" Content="סיסמא" RenderTransformOrigin="2.168,-0.316" Height="29" Width="119"/>
-            <TextBox x:Name="userNameTextBox" Width="215" VerticalAlignment="Center" Text="{Binding UserName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="90,14,0,10" Height="36" HorizontalAlignment="Left" PreviewTextInput="userNameTextBox_PreviewTextInput"/>
+            <Label VerticalAlignment="Center" Margin="1.667,35,0,44.333" HorizontalAlignment="Left" Grid.Column="1" Style="{DynamicResource Label}"  Content="שם משתמש" Height="26" Width="82" RenderTransformOrigin="-2.477,-0.352" Grid.RowSpan="4"/>
+            <PasswordBox x:Name="passwordTextBox" Width="215" VerticalAlignment="Center"  Margin="173,16,0,0.333" Height="29" HorizontalAlignment="Left" Grid.Row="3" />
+            <Label VerticalAlignment="Center"  Style="{DynamicResource Label}"  Grid.Row="3" Margin="6.667,16,0,0.333" HorizontalAlignment="Left" Grid.Column="1" Content="סיסמא" RenderTransformOrigin="2.168,-0.316" Height="29" Width="119"/>
+            <TextBox x:Name="userNameTextBox" Width="215" VerticalAlignment="Center" Text="{Binding UserName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="173,30,0,2" Height="28" HorizontalAlignment="Left" />
+            <Label x:Name="label" Content="הכנס סיסמא שוב"  Style="{DynamicResource Label}" Grid.Column="1" HorizontalAlignment="Left" Margin="6.667,24.667,0,0" Grid.Row="4" VerticalAlignment="Top" Width="117" Height="26"/>
+            <PasswordBox x:Name="passwordBox2" HorizontalAlignment="Left" Margin="173,20.667,0,18.333" Grid.Row="4" Width="215"/>
         </Grid>
-        <Button x:Name="okey" Content="הירשם" HorizontalAlignment="Left" Margin="47,120,0,0" VerticalAlignment="Top" Width="75" Click="okey_Click"/>
+        <Button x:Name="okey" Content="הירשם" HorizontalAlignment="Left" Margin="35,169,0,0" VerticalAlignment="Top" Width="75" Click="okey_Click"  Style="{DynamicResource AdminWindow}" />
 
     </Grid>
 </Window>
