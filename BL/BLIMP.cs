@@ -270,13 +270,7 @@ namespace BL
             return list;
         }
 
-        public IEnumerable<IGrouping<BO.AREA, BO.Line>> GetLinesBylineCodeG(int a)
-        {
-            var list = from line in GetLineByLineCode(a)
-                       group line by line.Area into g
-                       select g;
-            return list;
-        }
+        
 
         public BO.Line GetLineByLine(int lineid) //return all the lines according to predicate
         {
