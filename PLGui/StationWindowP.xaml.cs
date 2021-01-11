@@ -187,7 +187,7 @@ namespace PLGui
         {
             if (textBoxTextBox.Text != "Search Station here...." && textBoxTextBox.Text != "")
                 numberText = textBoxTextBox.Text;
-            textBoxTextBox.Text = "Search Station here....";
+            textBoxTextBox.Text = "Search Station here....";//
         }
 
         private void stationDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)

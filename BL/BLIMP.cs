@@ -255,9 +255,24 @@ namespace BL
 
             return v;
         }
-         public IEnumerable<IGrouping<BO.AREA,BO.Line>>GetLinesByAreaG()
+        public IEnumerable<BO.Line> GetLineByLineCode(int LineCodeCode) //return all the lines according to predicate
+        {
+            var v = from item in dl.GetAllLineBy(x => x.NumberLine == LineCodeCode)
+                    select lineDoBoAdapter(item.IdNumber);
+
+            return v;
+        }
+        public IEnumerable<IGrouping<BO.AREA,BO.Line>>GetLinesByAreaG()
         {
              var list = from line in GetAllLine()
+                       group line by line.Area into g
+                       select g;
+            return list;
+        }
+
+        public IEnumerable<IGrouping<BO.AREA, BO.Line>> GetLinesBylineCodeG(int a)
+        {
+            var list = from line in GetLineByLineCode(a)
                        group line by line.Area into g
                        select g;
             return list;

@@ -29,7 +29,51 @@ namespace PLGui
 
         public UserWindow(IBL bl)
         {
+            InitializeComponent();
             this.bl = bl;
+        }
+           
+        
+
+        private void Back_Click(object sender, RoutedEventArgs e)
+        {
+            if(frame.CanGoBack)
+            {
+                frame.GoBack();
+            }
+        }
+
+        private void Disengagement_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void forward_Click(object sender, RoutedEventArgs e)
+        {
+            if (frame.CanGoForward)
+            {
+                frame.GoForward();
+            }
+        }
+
+        private void accountDatiels_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void contantUs_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void line_Click(object sender, RoutedEventArgs e)
+        {
+            frame.Navigate(new LineUser(bl));
+        }
+
+        private void station_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

@@ -29,7 +29,8 @@ namespace BlAPI
         IEnumerable<IGrouping<BO.AREA, BO.Line>> GetLinesByAreaG();
         BO.Line GetLineByLine(int lineid);//return line
         int AddLine(BO.Line line);
-
+         IEnumerable<BO.Line> GetLineByLineCode(int LineCodeCode);
+        IEnumerable<IGrouping<BO.AREA, BO.Line>> GetLinesBylineCodeG(int a);
         //  IEnumerable<BO.LineStation> AddStationLine(BO.LineStation station); //we add station to the bus travel
 
         void DeleteLine(int idLine);
