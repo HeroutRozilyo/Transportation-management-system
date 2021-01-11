@@ -196,6 +196,69 @@ namespace BL
         #endregion
 
         #region Line
+        //BO.Line lineDoBoAdapter(int idLine) // return the line from dl according to licence
+        //{
+        //    BO.Line lineBO = new BO.Line();
+        //    DO.Line lineDO;
+        //    IEnumerable<DO.LineStation> tempDO;
+        //    IEnumerable<DO.LineStation> tempDO1;
+        //    IEnumerable<DO.LineTrip> tripDO;
+        //    DO.AdjacentStations adj = new DO.AdjacentStations();
+        //    try
+        //    {
+        //        lineDO = dl.GetLine(idLine);
+        //        tempDO = dl.GetAllStationsLine(idLine);
+        //        tripDO = dl.GetAllTripline(idLine);
+        //    }
+        //    catch (DO.WrongIDExeption ex)
+        //    {
+        //        throw new BO.BadIdException("מזהה קו לא תקין", ex);
+        //    }
+
+        //    lineBO.TimeTravel = 0;
+        //    lineDO.CopyPropertiesTo(lineBO); //go to a deep copy. all field is copied to a same field at bo.
+
+
+
+        //    tempDO1= from st in tempDO
+        //                           orderby st.LineStationIndex
+        //                           select st;
+
+
+        //    List<LineStation> kkk = new List<LineStation>();
+        //    LineStation mmm = new LineStation();
+        //    int code1, code2 = 0;
+        //    for (int i = 0; i < tempDO.Count() - 1; i++)
+        //    {
+
+        //        code1 = tempDO1.ElementAt(i).StationCode;
+        //        code2 = tempDO1.ElementAt(i + 1).StationCode;
+        //        adj = dl.GetAdjacentStations(code1, code2);
+
+        //        mmm = new LineStation()
+        //        {
+        //            LineId = tempDO.ElementAt(i).LineId,
+        //            LineStationIndex = tempDO.ElementAt(i).LineStationIndex,
+        //            LineStationExist = tempDO.ElementAt(i).LineStationExist,
+        //            NextStation = tempDO.ElementAt(i).NextStation,
+        //            PrevStation = tempDO.ElementAt(i).PrevStation,
+        //            StationCode = tempDO.ElementAt(i).StationCode,
+        //            DistanceFromNext = adj.Distance,
+        //            TimeAverageFromNext = Convert.ToDouble(adj.TimeAverage),
+        //        };
+        //        kkk.Add(mmm);
+
+        //    }
+        //   lineBO.StationsOfBus = kkk.AsEnumerable();
+
+
+        //    lineBO.TimeLineTrip = from st in tripDO
+        //                          select (BO.LineTrip)st.CopyPropertiesToNew(typeof(BO.LineTrip));
+        //    lineBO.TimeTravel = CalucateTravel(idLine);
+
+        //    return lineBO;
+        //}
+
         BO.Line lineDoBoAdapter(int idLine) // return the line from dl according to licence
         {
             BO.Line lineBO = new BO.Line();
@@ -238,6 +301,8 @@ namespace BL
 
             return lineBO;
         }
+
+
 
         #region GetLine
         public IEnumerable<BO.Line> GetAllLine() //return all the lines that working 
@@ -1319,24 +1384,14 @@ namespace BL
 
 
 
-        //public void update(BO.User a)
-        //{
-        //    //User specUser = new User();
-        //    //(dl.GetUser(a.UserName)).CopyPropertiesTo(specUser);
-        //    //if (specUser.UserName != "" && specUser.Password == a.Password)
-        //    //{
-        //    //    return a.Admin;
-        //    //}
-        //    //else throw new BO.BadNameExeption("אחד הנתונים שגויים", a.UserName);
-
-        //}
+    
         public double CalucateTime(BO.Line line, int cod1, int cod2)
         {
             double time = 0;
             int index1 = line.StationsOfBus.FirstOrDefault(c => c.StationCode == cod1).LineStationIndex;
             int index2 = line.StationsOfBus.FirstOrDefault(c => c.StationCode == cod2).LineStationIndex;
 
-            for (int i = index1; i < index2; i++)
+            for (int i = index1-1; i < index2; i++)
             {
                 time += line.StationsOfBus.ElementAt(i).TimeAverageFromNext;
             }
@@ -1408,9 +1463,10 @@ namespace BL
 
                                             if (lineToSend.FirstOrDefault(n => n.IdNumber == z.LineId) == null)//line 2 not in my list yet
                                             {
-                                                l = new BO.Line();
-                                               Line one = lineDoBoAdapter(te.LineId);
+                                                Line one = new BO.Line();
+                                                one = lineDoBoAdapter(te.LineId);
                                                 lineToSend.Add(one);
+
                                                 l = new BO.Line();
                                                 l = lineDoBoAdapter(z.LineId);
                                                 lineToSend.Add(l);
@@ -1423,8 +1479,8 @@ namespace BL
                                                     replaceStation = replace,
                                                     timeTravel = CalucateTime(one,code1,replace)+ CalucateTime(l, replace, code2)
 
-                                                }
-                        );
+                                                });
+
                                             }
 
                                         }
