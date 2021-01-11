@@ -113,7 +113,7 @@ namespace PLGui
                 wnd.Show();
                 this.Close();
                 
-            }
+            }//
         }
     }
 }
