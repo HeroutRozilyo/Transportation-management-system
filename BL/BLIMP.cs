@@ -1414,9 +1414,28 @@ namespace BL
             }
         }
 
+        public void AddUser(string name,string pas, bool admin)
+        {
+            DO.User userDO = new DO.User();
+            userDO.UserName = name;
+            userDO.Admin = admin;
+            userDO.Password = pas;
+            userDO.UserExist = true;
 
+            try
+            {
+                dl.AddUser(userDO);
+            }
+            catch(DO.WrongNameExeption ex)
+            {
+                throw new BO.BadNameExeption("שם משתמש קיים כבר במערכת", ex);
 
+            }
 
+            IEnumerable<DO.User> users = dl.GetAlluser();
+        }
+
+        
 
         #endregion
 

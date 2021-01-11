@@ -22,6 +22,7 @@ namespace PLGui
     public partial class AdminWindow : Window
     {
         private IBL bl;
+        private AddUser addUser;
 
         public AdminWindow()
         {
@@ -98,6 +99,21 @@ namespace PLGui
         private void accountDatiels_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void AddManeger_Click(object sender, RoutedEventArgs e)
+        {
+            addUser = new AddUser(bl);
+
+            bool? result = addUser.ShowDialog();
+            if (result == true)
+            {
+
+                AdminWindow wnd = new AdminWindow(bl);
+                wnd.Show();
+                this.Close();
+                
+            }//
         }
     }
 }
