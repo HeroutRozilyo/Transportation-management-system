@@ -10,11 +10,11 @@
     <Grid>
 
 
-        <TabControl x:Name="Stations" HorizontalAlignment="Left" Height="657" VerticalAlignment="Top" Width="1238" Margin="0,0,-438,-207" Background="{x:Null}">
+        <TabControl x:Name="Stations" HorizontalAlignment="Left" Height="637" VerticalAlignment="Top" Width="1238" Margin="0,20,0,-0.333" Background="{x:Null}">
             <TabControl.BorderBrush>
                 <SolidColorBrush Color="#FFACACAC" Opacity="0"/>
             </TabControl.BorderBrush>
-            <TabItem Name="DataStation" Header="תחנות" Margin="-2,25,-30.667,-32">
+            <TabItem Name="DataStation" Header="תחנות" Margin="750,244,-828,-276" RenderTransformOrigin="0.872,2.525">
                 <TabItem.Background>
                     <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
                         <GradientStop Color="#FFF0F0F0" Offset="0"/>
@@ -114,53 +114,62 @@
 
                 </Grid>
             </TabItem>
-            <TabItem Name="searchTravel" Header="חיפוש מסלול" Margin="22.667,25,-50.333,-28.333" BorderBrush="#FF638BB7">
+            <TabItem Name="searchTravel" Header="חיפוש מסלול" Margin="672,160,-744.667,-187" BorderBrush="#FF638BB7" RenderTransformOrigin="1.681,0.306">
                 <TabItem.Background>
                     <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
                         <GradientStop Color="#FFF0F0F0" Offset="0"/>
                         <GradientStop Color="#FF638BB7" Offset="1"/>
                     </LinearGradientBrush>
                 </TabItem.Background>
-                <Grid Margin="0,-12,0.333,-3.333">
-                    <Label Content="בחר מוצא ויעד" HorizontalAlignment="Left" Margin="764,43,0,0" VerticalAlignment="Top" Height="46" Width="173"/>
-                    <ComboBox x:Name="station1"   HorizontalAlignment="Left" Margin="405,126,0,0" VerticalAlignment="Top" Width="441" SelectionChanged="station1_SelectionChanged" Height="36" />
-                    <ComboBox x:Name="station2" HorizontalAlignment="Left" Margin="405,264,0,0" VerticalAlignment="Top" Width="441" SelectionChanged="station2_SelectionChanged" Height="36"/>
-                    <Label Content="תחנת מוצא" HorizontalAlignment="Left" Margin="786,94,0,0" VerticalAlignment="Top" RenderTransformOrigin="3.653,2.116" Height="27" Width="60"/>
-                    <Label Content="תחנת יעד" HorizontalAlignment="Left" Margin="786,200,0,0" VerticalAlignment="Top" Height="38" RenderTransformOrigin="0.689,3.772"/>
+                <Grid Margin="-6,-13,6.333,-3">
+                    <GroupBox x:Name="groupBox2" Header="מסלולי נסיעה אופציונלים" HorizontalAlignment="Left" Height="175" Margin="168,341,0,0" VerticalAlignment="Top" Width="465" Style="{DynamicResource allGrpuoBox}">
+                        <Grid HorizontalAlignment="Left" Height="175" Margin="9,3,0,-26.667" VerticalAlignment="Top" Width="435">
+                            <ListView x:Name="OpsiaLine" HorizontalAlignment="Left" Height="130" Margin="19,10,0,0" VerticalAlignment="Top" Width="380">
+                                <ListView.View>
+                                    <GridView>
+                                        <GridViewColumn Header="קו התחלתי" Width="80" DisplayMemberBinding="{Binding numberLine1}"/>
+                                        <GridViewColumn Header="ישיר" Width="50" DisplayMemberBinding="{Binding direct}"/>
+                                        <GridViewColumn Header="תחנת החלפה"  Width="80" DisplayMemberBinding="{Binding replaceStation}"/>
+                                        <GridViewColumn Header="קו סופי" Width="80" DisplayMemberBinding="{Binding numberLine2}"/>
+                                        <GridViewColumn Header="זמן נסיעה" Width="80" DisplayMemberBinding="{Binding timeTravel}"/>
 
 
-                    <CheckBox x:Name="checkOkey" Content="חיפוש" HorizontalAlignment="Left" Margin="350,331,0,0" VerticalAlignment="Top" Click="checkOkey_Click" Height="23" Width="57"/>
-                    <Label Name="noline" Content="לא נמצא מידע לגבי המסלול המבוקש" HorizontalAlignment="Left" Margin="549,489,0,0" VerticalAlignment="Top"  RenderTransformOrigin="0.5,0.5" Width="246" Foreground="#FFAC1515">
-                        <Label.Style>
-                            <Style>
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding HasItems, ElementName=tryoneline}" Value="true">
-                                        <Setter Property="UIElement.Visibility" Value="Hidden"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Label.Style>
-                        <Label.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform/>
-                                <SkewTransform/>
-                                <RotateTransform Angle="0.314"/>
-                                <TranslateTransform/>
-                            </TransformGroup>
-                        </Label.RenderTransform>
-                    </Label>
-                    <ListView x:Name="OpsiaLine" HorizontalAlignment="Left" Height="130" Margin="417,411,0,0" VerticalAlignment="Top" Width="535">
-                        <ListView.View>
-                            <GridView>
-                                <GridViewColumn Header="קו התחלתי" Width="80" DisplayMemberBinding="{Binding numberLine1}"/>
-                                <GridViewColumn Header="ישיר" Width="50" DisplayMemberBinding="{Binding direct}"/>
-                                <GridViewColumn Header="תחנת החלפה"  Width="80" DisplayMemberBinding="{Binding replaceStation}"/>
-                                <GridViewColumn Header="קו סופי" Width="80" DisplayMemberBinding="{Binding numberLine2}"/>
-                                <GridViewColumn Header="זמן נסיעה" Width="80" DisplayMemberBinding="{Binding timeTravel}"/>
+                                    </GridView>
+                                </ListView.View>
+                                <ListView.Style>
+                                    <Style>
+                                        <Style.Triggers>
+                                            <Trigger Property="ListView.HasItems"  Value="false">
+                                                <Setter Property="ListView.Visibility" Value="Hidden"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </ListView.Style>
+                            </ListView>
+                            <Label x:Name="noline" Content="לא נמצא מידע לגבי המסלול המבוקש" HorizontalAlignment="Left" Margin="90,59,0,0" VerticalAlignment="Top"  RenderTransformOrigin="0.5,0.5" Width="246" Foreground="#FFAC1515">
+                                <Label.Style>
+                                    <Style>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding HasItems, ElementName=OpsiaLine}" Value="true">
+                                                <Setter Property="UIElement.Visibility" Value="Hidden"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Label.Style>
 
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
+                            </Label>
+                        </Grid>
+                    </GroupBox>
+                    <StackPanel HorizontalAlignment="Left" Height="100" Margin="1073,102,0,0" VerticalAlignment="Top" Width="100"/>
+                    <GroupBox x:Name="groupBox3" Header="בחר תחנה מוצא ויעד" HorizontalAlignment="Left" Height="280" Margin="108,36,0,0" VerticalAlignment="Top" Width="575" Style="{DynamicResource allGrpuoBox}">
+                        <Grid HorizontalAlignment="Left" Height="237" Margin="19,23,0,-3.333" VerticalAlignment="Top" Width="510">
+                            <Label Content="תחנת מוצא" HorizontalAlignment="Left" Margin="405,15,0,0" VerticalAlignment="Top" RenderTransformOrigin="3.653,2.116" Height="27" Width="75"/>
+                            <ComboBox x:Name="station1"   HorizontalAlignment="Left" Margin="29,54,0,0" VerticalAlignment="Top" Width="441" SelectionChanged="station1_SelectionChanged" Height="36" />
+                            <ComboBox x:Name="station2" HorizontalAlignment="Left" Margin="33,150,0,0" VerticalAlignment="Top" Width="441" SelectionChanged="station2_SelectionChanged" Height="36"/>
+                            <Label Content="תחנת יעד" HorizontalAlignment="Left" Margin="415,112,0,0" VerticalAlignment="Top" Height="40" RenderTransformOrigin="0.689,3.772" Width="70"/>
+                            <Button x:Name="checkOkey" Content="חיפוש" HorizontalAlignment="Left" Margin="18,200,0,0" VerticalAlignment="Top" Click="checkOkey_Click" Height="23" Width="57" Style="{DynamicResource AdminWindow}" />
+                        </Grid>
+                    </GroupBox>
 
                 </Grid>
             </TabItem>

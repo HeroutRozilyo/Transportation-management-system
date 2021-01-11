@@ -300,7 +300,7 @@ namespace BL
             lineBO.TimeTravel = CalucateTravel(idLine);
 
             return lineBO;
-        }
+        }//
 
 
 

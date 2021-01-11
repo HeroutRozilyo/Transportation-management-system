@@ -752,24 +752,8 @@ namespace DS
                 Area=DO.AREA.GENERAL,
                 LineExist=true,
                 },
-                new Line
-                {
-                IdNumber = ++DS.Config.idLineCounter,
-                NumberLine=10,
-                FirstStationCode=85,
-                LastStationCode=97,
-                Area=DO.AREA.GENERAL,
-                LineExist=true,
-                },
-                 new Line
-                {
-                IdNumber = ++DS.Config.idLineCounter,
-                NumberLine=10,
-                FirstStationCode=86,
-                LastStationCode=97,
-                Area=DO.AREA.GENERAL,
-                LineExist=true,
-                },
+               
+                
                 new Line
                 {
                 IdNumber = ++DS.Config.idLineCounter,
