@@ -22,7 +22,9 @@ namespace PLGui
     /// </summary>
     public partial class LineUser : Page
     {
-        IEnumerable<IGrouping<BO.AREA, BO.Line>> searchResult;
+        IEnumerable< BO.Line> searchResult;
+        private ObservableCollection<object> lineStationOfLine = new ObservableCollection<object>();
+        BO.Line line = new BO.Line();
         public LineUser()
         {
             InitializeComponent();
@@ -32,6 +34,7 @@ namespace PLGui
         {
             InitializeComponent();
             this.bl = bl;
+            NotExist.Visibility = Visibility.Hidden;
         }
 
         private void Search_Click(object sender, RoutedEventArgs e)
@@ -41,17 +44,24 @@ namespace PLGui
             if (numberText != null)
             {
                 int Sera = Convert.ToInt32(numberText);
-                searchResult = bl.GetLinesBylineCodeG(Sera);
-                if (searchResult != null)
+                searchResult = bl.GetLineByLineCode(Sera);
+                if (searchResult.Count()> 0)
                 {
-                    treeViewKav.ItemsSource = searchResult;
+                    numberLineSearchRes.ItemsSource = searchResult;
+
+                    CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(numberLineSearchRes.ItemsSource);
+                    PropertyGroupDescription groupDescription = new PropertyGroupDescription("Area");
+                    view.GroupDescriptions.Add(groupDescription);
+                   
 
                 }
                 else
                 {
-
+                    
+                    numberLineSearchRes.ItemsSource = searchResult;
                     NotExist.Visibility = Visibility.Visible;
                 }
+               
             }
 
         }
@@ -61,7 +71,9 @@ namespace PLGui
        
         private void textBoxSeaarchLine_GotFocus(object sender, RoutedEventArgs e)
         {
-            
+            line = null;
+            numberLineSearchRes.SelectedIndex = -1;
+            refreshLineData();
             textBoxSeaarchLine.Text = null;
             
 
@@ -76,9 +88,82 @@ namespace PLGui
 
         private void numberLine_Click(object sender, RoutedEventArgs e)
         {
+          
+        }
+
+        private void textBoxSeaarchLine_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Return)
+            {
+
+                TextBox text = sender as TextBox;
+                int Sera = Convert.ToInt32(text.Text);
+                searchResult = bl.GetLineByLineCode(Sera);
+                if (searchResult.Count()> 0)
+                {
+                    numberLineSearchRes.ItemsSource = searchResult;
+
+                    CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(numberLineSearchRes.ItemsSource);
+                    PropertyGroupDescription groupDescription = new PropertyGroupDescription("Area");
+                    view.GroupDescriptions.Add(groupDescription);
+
+                }
+                else
+                {
+                    
+                    numberLineSearchRes.ItemsSource = searchResult;
+                    NotExist.Visibility = Visibility.Visible;
+
+                }
+
+               
+            }
+            if (e.Key == Key.Back)
+            {
+                numberLineSearchRes.ItemsSource = searchResult;
+                
+               
+            }
+           
+
+        }
+
+        private void textBoxSeaarchLine_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !e.Text.Any(x => Char.IsDigit(x));
+        }
+
+        private void numberLineSearchRes_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            var list = (ListView)sender; //to get the line
+            line = list.SelectedItem as BO.Line;
+            refreshLineData();
+        }
+
+        public ObservableCollection<T> ConvertList<T>(IEnumerable<T> listFromBO)
+        {
+            return new ObservableCollection<T>(listFromBO);
+        }
+         public void refreshLineData()
+        {
+            if (line != null)
+            {
+               
+                Looz.ItemsSource = line.TimeLineTrip;
+                lineStationOfLine = ConvertList(bl.DetailsOfStation(line.StationsOfBus));
+                
+            }
+            else
+            {
+                Looz.ItemsSource =null;
+                lineStationOfLine = null;
+            }
+            GridDataLine.DataContext = line;
+            StationLineList.ItemsSource = lineStationOfLine;
 
         }
     }
+
 }
     
     

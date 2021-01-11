@@ -9,24 +9,90 @@
       Title="LineUser">
 
     <Grid>
-        <TextBox x:Name="textBoxSeaarchLine" HorizontalAlignment="Left" Height="35" Margin="225,30,0,0" TextWrapping="Wrap" Text="...חפש מספר קו כאן" VerticalAlignment="Top" Width="145" GotFocus="textBoxSeaarchLine_GotFocus" LostFocus="textBoxSeaarchLine_LostFocus" />
-        <Button x:Name="Search" Content="חפש" HorizontalAlignment="Left" Height="35" Margin="375,30,0,0" VerticalAlignment="Top" Width="85" Click="Search_Click"/>
-        <TreeView x:Name="treeViewKav" HorizontalAlignment="Left" Height="270" Margin="135,115,0,0" VerticalAlignment="Top" Width="175">
-            <TreeView.ItemTemplate>
-                <HierarchicalDataTemplate >
-                    <StackPanel>
-                        <TextBlock Text="{Binding Key}"/>
-                        <TreeViewItem >
-                            <TreeViewItem.Header>
-                                <Button Name="LineNumberB" Click="numberLine_Click" Content="{Binding NumberLine}"/>
-                            </TreeViewItem.Header>
-                        </TreeViewItem>
-                    </StackPanel>
-                </HierarchicalDataTemplate>
-            </TreeView.ItemTemplate>
-        </TreeView>
-        <Label x:Name="NotExist" Content="מספר תחנה אינו קיים במערכת" HorizontalAlignment="Left" Height="35" Margin="40,30,0,0" VerticalAlignment="Top" Width="190" Foreground="#FFAC1515" RenderTransformOrigin="-0.367,1.99">
-           
+        <TextBox x:Name="textBoxSeaarchLine" HorizontalAlignment="Left" Height="35" Margin="15,85,0,0" TextWrapping="Wrap" Text="...חפש מספר קו כאן" VerticalAlignment="Top" Width="145" GotFocus="textBoxSeaarchLine_GotFocus" LostFocus="textBoxSeaarchLine_LostFocus" PreviewKeyDown="textBoxSeaarchLine_PreviewKeyDown" PreviewTextInput="textBoxSeaarchLine_PreviewTextInput" FontSize="13" FontFamily="Copperplate Gothic Bold"/>
+        <Button x:Name="Search" Content="חפש" HorizontalAlignment="Left" Height="35" Margin="170,80,0,0" VerticalAlignment="Top" Width="85" Click="Search_Click" RenderTransformOrigin="-1.231,2.429" Style="{DynamicResource SerchStation}"/>
+        <Label x:Name="NotExist" Content="מספר תחנה אינו קיים במערכת" HorizontalAlignment="Left" Height="35" Margin="60,45,0,0" VerticalAlignment="Top" Width="190" Foreground="#FFAC1515" RenderTransformOrigin="-0.367,1.99">
+            <Label.Style>
+                <Style>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ElementName=numberLineSearchRes, Path=Items.Count}" Value="0">
+                            <Setter Property="Label.Visibility" Value="Visible"/>
+                        </DataTrigger>
+
+                    </Style.Triggers>
+                </Style>
+            </Label.Style>
+
         </Label>
+        <ListView x:Name="numberLineSearchRes" HorizontalAlignment="Left" Height="360" Margin="15,130,0,-40" VerticalAlignment="Top" Width="250" MouseDoubleClick="numberLineSearchRes_MouseDoubleClick" Style="{DynamicResource allListView}" >
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header=" מספר קו" DisplayMemberBinding="{ Binding NumberLine}" Width="80"/>
+                    <GridViewColumn Header=" תחנה ראשונה" DisplayMemberBinding="{ Binding FirstStationCode}" Width="80"/>
+                    <GridViewColumn Header=" תחנה אחרונה" DisplayMemberBinding="{ Binding LastStationCode}" Width="80"/>
+                </GridView>
+            </ListView.View>
+            <ListView.GroupStyle>
+                <GroupStyle>
+                    <GroupStyle.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock FontWeight="Bold" FontSize="14" Text="{Binding Name}"/>
+                        </DataTemplate>
+                    </GroupStyle.HeaderTemplate>
+                </GroupStyle>
+            </ListView.GroupStyle>
+        </ListView>
+        <GroupBox x:Name="DataLine" Header="פרטי הקו" HorizontalAlignment="Left" Height="165" Margin="285,80,0,0" VerticalAlignment="Top" Width="255" Style="{DynamicResource allGrpuoBox}" FontFamily="Copperplate Gothic Bold">
+            <Grid x:Name="GridDataLine" Margin="15,20,22.667,0" VerticalAlignment="Top" Height="125">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="118.667"/>
+                    <ColumnDefinition Width="18"/>
+                    <ColumnDefinition Width="0"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Label Content=":מספר קו" Grid.Column="1" HorizontalAlignment="Left" Margin="11.333,5,0,10.333" Grid.Row="0" VerticalAlignment="Center" Height="26" Width="79"/>
+                <Label Content=":אזור" Grid.Column="1" HorizontalAlignment="Left" Margin="14,10.667,0,4.667" Grid.Row="1" VerticalAlignment="Center" Width="55" Height="26"/>
+                <TextBlock x:Name="AreaUpdateLineTextBox" HorizontalAlignment="Left"  Height="24" Margin="7,9.667,0,7.667"   Text="{Binding Area, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="78" Grid.Row="1"/>
+                <Label Content=":(זמן נסיעה (דקות" Grid.Column="1" HorizontalAlignment="Left" Margin="10,7.333,0,9.333" Grid.Row="2" VerticalAlignment="Center" Width="108" Height="26"/>
+                <TextBlock x:Name="TimeTravlTextBox" Text="{Binding TimeTravel}" HorizontalAlignment="Left" Height="26"  Margin="0,9.333,0,7.333" Grid.Row="2" VerticalAlignment="Center" Width="88"/>
+                <TextBlock x:Name="LineNumber" HorizontalAlignment="Left" Height="23" Margin="5,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" Text="{Binding NumberLine}"/>
+            </Grid>
+        </GroupBox>
+        <GroupBox x:Name="groupBox1" Header="לוחות הזמנים של הקו " HorizontalAlignment="Left" Height="165" Margin="565,80,-120,0" VerticalAlignment="Top" Width="355" Style="{DynamicResource allGrpuoBox}">
+            <Grid x:Name="toLooz" HorizontalAlignment="Left" Height="165" Margin="19,8,0,-28.333" VerticalAlignment="Top" Width="326">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0*"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <ListView x:Name="Looz" HorizontalAlignment="Left" Height="115" Margin="15,5,0,0"  VerticalAlignment="Top" Width="305" Grid.ColumnSpan="2"  >
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="זמן התחלה"  Width="100" DisplayMemberBinding="{Binding StartAt}" />
+                            <GridViewColumn Header="זמן סיום"  Width="100" DisplayMemberBinding="{Binding FinishAt}" />
+                            <GridViewColumn Header="(m) תדירות"  Width="120" DisplayMemberBinding="{Binding Frequency}" />
+
+                        </GridView>
+                    </ListView.View>
+
+                </ListView>
+            </Grid>
+        </GroupBox>
+        <GroupBox x:Name="groupBox" Header=",תחנות בקו" HorizontalAlignment="Left" Height="255" Margin="280,265,-120,-70" VerticalAlignment="Top" Width="640" Style="{DynamicResource allGrpuoBox}">
+            <ListView x:Name="StationLineList"   HorizontalAlignment="Left" Height="205" Margin="15,10,0,0" VerticalAlignment="Top" Width="605">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn  Header="קוד תחנה" Width="80" DisplayMemberBinding="{Binding StationCode}"/>
+                        <GridViewColumn  Header="מיקום בקו" Width="80" DisplayMemberBinding="{Binding LineStationIndex}"/>
+                        <GridViewColumn Header="כתובת"  Width="230" DisplayMemberBinding="{Binding Address}" FrameworkElement.FlowDirection="RightToLeft"/>
+                        <GridViewColumn Header="שם התחנה"  Width="200" DisplayMemberBinding="{Binding Name}" FrameworkElement.FlowDirection="RightToLeft"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </GroupBox>
     </Grid>
 </Page>
