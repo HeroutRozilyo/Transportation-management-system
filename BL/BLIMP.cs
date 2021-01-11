@@ -237,7 +237,7 @@ namespace BL
             lineBO.TimeTravel = CalucateTravel(idLine);
 
             return lineBO;
-        }
+        }//
 
         #region GetLine
         public IEnumerable<BO.Line> GetAllLine() //return all the lines that working 
