@@ -6,12 +6,11 @@
         xmlns:local="clr-namespace:PLGui"
         mc:Ignorable="d"
         Title="AdminWindow" WindowState="Maximized"  WindowStartupLocation="CenterScreen" Width="1328.333" Height="686"   >
-    <Grid  Width="Auto" Margin="0,0,10.333,0" Height="651" VerticalAlignment="Top">
+    <Grid  Width="Auto" Margin="-2,0,10.333,0" Height="651" VerticalAlignment="Top">
         <Grid.Background>
-            <ImageBrush ImageSource="PO/Back.jpg" Opacity="0.5"/>
+            <ImageBrush ImageSource="Back.jpg" Opacity="0.5"/>
         </Grid.Background>
-        <Button x:Name="line" Content="ניהול קווים" HorizontalAlignment="Left" Margin="15,180,0,406" VerticalAlignment="Stretch"  Click="line_Click" Style="{DynamicResource AdminWindow}" Width="145"/>
-        <Frame x:Name="frame"   Content="" HorizontalAlignment="Left" Margin="160,30,-4,1" VerticalAlignment="Stretch" Width="1155" Navigated="frame_Navigated" NavigationUIVisibility="Hidden" BorderThickness="1" >
+        <Frame x:Name="frame"   Content="" HorizontalAlignment="Left" Margin="160,35,0,1" VerticalAlignment="Stretch" Width="1150" Navigated="frame_Navigated" NavigationUIVisibility="Hidden" BorderThickness="1" >
             <Frame.Background>
                 <ImageBrush ImageSource="GMG.png" Opacity="0.1"/>
             </Frame.Background>
@@ -19,10 +18,13 @@
                 <ImageBrush ImageSource="GMG.png"/>
             </Frame.BorderBrush>
         </Frame>
-        <WrapPanel HorizontalAlignment="Left" Height="475" Margin="0,80,0,0" VerticalAlignment="Top" Width="145"/>
-        <Button x:Name="station" Content="ניהול תחנות" HorizontalAlignment="Left" Margin="15,345,0,226" VerticalAlignment="Stretch" Click="station_Click"  Style="{DynamicResource AdminWindow}"  Width="145"/>
-        <Button x:Name="AddManeger" Content="הוספת מנהל &#xD;&#xA;חדש למערכת" HorizontalAlignment="Left" Margin="15,443,0,123" VerticalAlignment="Stretch"  Style="{DynamicResource AdminWindow}" Width="145" RenderTransformOrigin="0.717,0.385" Height="Auto" TextOptions.TextHintingMode="Fixed"/>
-        <Button x:Name="user" Content="משתמש" HorizontalAlignment="Left" Margin="10,543,0,24" VerticalAlignment="Stretch"  Style="{DynamicResource AdminWindow}" Width="145" RenderTransformOrigin="0.717,0.385" Height="Auto" TextOptions.TextHintingMode="Fixed" Click="user_Click_1"/>
+        <WrapPanel HorizontalAlignment="Left" Height="475" Margin="15,90,0,0" VerticalAlignment="Top" Width="145">
+            <Button x:Name="line" Content="ניהול קווים" HorizontalAlignment="Left" VerticalAlignment="Stretch"  Click="line_Click" Style="{DynamicResource AdminWindow}" Width="145" RenderTransformOrigin="1.623,0.232" Height="65"/>
+            <Button x:Name="buses" Content="ניהול אוטובוסים" HorizontalAlignment="Left" VerticalAlignment="Stretch"  Click="buses_Click" Style="{DynamicResource AdminWindow}" Width="145" Height="65"/>
+            <Button x:Name="station" Content="ניהול תחנות" HorizontalAlignment="Left" VerticalAlignment="Stretch" Click="station_Click"  Style="{DynamicResource AdminWindow}"  Width="145" Height="80"/>
+            <Button x:Name="AddManeger" Content="הוספת מנהל &#xA;חדש למערכת" HorizontalAlignment="Left" VerticalAlignment="Stretch"  Style="{DynamicResource AdminWindow}" Width="145" RenderTransformOrigin="0.717,0.385" Height="85" TextOptions.TextHintingMode="Fixed"/>
+            <Button x:Name="user" Content="משתמש" HorizontalAlignment="Left" VerticalAlignment="Stretch"  Style="{DynamicResource AdminWindow}" Width="145" RenderTransformOrigin="0.717,0.385" Height="84" TextOptions.TextHintingMode="Fixed" Click="user_Click_1"/>
+        </WrapPanel>
 
         <Separator HorizontalAlignment="Stretch" MinHeight="100" Margin="-256,245,691,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" BorderBrush="#FF190E0E" Background="#FF150909">
             <Separator.RenderTransform>
@@ -35,7 +37,25 @@
             </Separator.RenderTransform>
 
         </Separator>
-        <Button x:Name="buses" Content="ניהול אוטובוסים" HorizontalAlignment="Left" Margin="15,262,0,324" VerticalAlignment="Stretch"  Click="buses_Click" Style="{DynamicResource AdminWindow}" Width="145"/>
+        <ToolBarTray x:Name="toolBar" HorizontalAlignment="Left" Height="40" Margin="10,-5,-9,0" VerticalAlignment="Top" Width="1310" Background="#FFDADFE5">
+            <ToolBar Background="#FFDADFE5" ToolBar.OverflowMode="Never" Margin="-25,5,-1330,-5">
+                <Button x:Name="forward" Height="35.3333333333333" VerticalAlignment="Top" Width="75"   Click="forward_Click" ToolTip="עבור לדף הבא">
+                    <Image Source="goforward.png"></Image>
+                </Button>
+                <Button x:Name="Back" Height="35.3333333333333" VerticalAlignment="Top" Width="75" ToolTip=" חזור לדף הקודם" Click="Back_Click" Background="#FFDADFE5">
+                    <Image Source="goforward.png" RenderTransformOrigin="0.5,0.5">
+                        <Image.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform Angle="181.273"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Image.RenderTransform>
+                    </Image>
+                </Button>
+            </ToolBar>
+        </ToolBarTray>
 
     </Grid>
 

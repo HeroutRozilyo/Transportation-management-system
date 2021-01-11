@@ -1128,6 +1128,11 @@ namespace BL
             stationDO.Coordinate = new GeoCoordinate(station.Coordinate.Latitude, station.Coordinate.Longitude);
             try
             {
+                var a = from item in dl.GetAllStations()
+                        where station.Code == item.Code
+                        select item;
+                if (a.ToList().Count() != 0)
+                    throw new BO.BadIdException("קוד תחנה כבר קיים במערכת ", station.Code);
                 if (station.Coordinate.Latitude >= 33.7 && station.Coordinate.Latitude <= 36.3 && station.Coordinate.Longitude >= 29.3 && station.Coordinate.Longitude <= 33.5)
                     dl.AddStations(stationDO);
                 else

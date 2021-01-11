@@ -359,6 +359,14 @@ namespace PLGui
                 stationExistCheckBox.IsChecked = false;
                 add = true;
             }
+            catch(BO.BadIdException a)
+            {
+                MessageBox.Show(a.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                Sexist.Visibility = Visibility.Visible;
+                stationExistCheckBox.Visibility = Visibility.Visible;
+                stationExistCheckBox.IsChecked = false;
+                add = true;
+            }
             
 
 

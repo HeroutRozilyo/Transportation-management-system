@@ -185,7 +185,13 @@
     <Resource Include="GMG.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="PO\Back.jpg" />
+    <Resource Include="goBack.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Back.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="goforward.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

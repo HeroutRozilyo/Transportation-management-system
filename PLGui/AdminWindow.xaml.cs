@@ -69,5 +69,17 @@ namespace PLGui
         {
             frame.Content = new User();
         }
+
+        private void Back_Click(object sender, RoutedEventArgs e)
+        {
+            if(frame.CanGoBack)
+            frame.GoBack();
+        }
+
+        private void forward_Click(object sender, RoutedEventArgs e)
+        {
+            if(frame.CanGoForward)
+            frame.GoForward();
+        }
     }
 }

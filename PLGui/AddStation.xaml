@@ -7,7 +7,7 @@
         xmlns:BO="clr-namespace:BO;assembly=BL" x:Class="PLGui.AddStation"
 
         Title="AddStation" Height="309" Width="323.333" WindowStartupLocation="CenterScreen" >
-    <!--PreviewKeyDown="Window_PreviewKeyDown"-->
+   
 
     <Grid  Margin="-4,8,-4.333,-4">
         <Grid.ColumnDefinitions>

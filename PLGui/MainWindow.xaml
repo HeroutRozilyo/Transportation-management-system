@@ -5,10 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PLGui"
         mc:Ignorable="d"
-        Title="MainWindow" Height="212" Width="472.667" WindowStartupLocation="CenterScreen">
-    <Grid Margin="0,0,19.333,18">
-        <Button x:Name="Login" Content="Login" HorizontalAlignment="Left" Margin="46,128,0,0" Click="Login_Click" Width="75" Height="27" VerticalAlignment="Top" RenderTransformOrigin="0.249,0.765"/>
-        <Button x:Name="NewUser" Content="New User" HorizontalAlignment="Left" Margin="339,128,0,0" VerticalAlignment="Top" Width="75" Click="NewUser_Click"/>
-        <TextBlock x:Name="textBlock" HorizontalAlignment="Center" Margin="289,92,0,0" TextWrapping="Wrap" Text="Do not have an account? Click here" VerticalAlignment="Top" Width="148" Cursor="None" UseLayoutRounding="False" TextAlignment="Center"/>
+        Title="MainWindow" Height="331" Width="498.333" WindowStartupLocation="CenterScreen">
+    <Grid Margin="0,0,-6.667,-4.667">
+        <Grid.Background>
+            <ImageBrush ImageSource="GMG.png" Opacity="0.3"/>
+        </Grid.Background>
+        <Button x:Name="Login" Content="התחברות" HorizontalAlignment="Left" Margin="170,110,0,0" Click="Login_Click" Width="125" Height="50" VerticalAlignment="Top" RenderTransformOrigin="0.249,0.765" Style="{DynamicResource miniButton}"/>
+        <Button x:Name="NewUser" Content="משתמש חדש" HorizontalAlignment="Left" Margin="170,170,0,0" VerticalAlignment="Top" Width="125" Click="NewUser_Click" Style="{DynamicResource miniButton}" Height="50"/>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Center" Margin="267,185,83,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="148" Cursor="None" UseLayoutRounding="False" TextAlignment="Center" FontFamily="Copperplate Gothic Bold" Foreground="#FF131516" OpacityMask="#FF5A5656"><Run Text="  "/><Run FlowDirection="RightToLeft" Text="?"/><Run Text="עדיין אין חשבון&#xA;לחץ כאן"/></TextBlock>
+        <Label x:Name="label" Content="   ברוך הבא&#xD;&#xA;למערכת GNG " HorizontalAlignment="Left" Margin="110,30,0,0" VerticalAlignment="Top" Height="80" Width="205" FontFamily="Franklin Gothic Heavy" FontSize="24" BorderBrush="Black" Foreground="#FF638BB7" FontWeight="Bold" Padding="7" FlowDirection="RightToLeft" FontStyle="Italic" OpacityMask="#FF241D1D"/>
     </Grid>
 </Window>
