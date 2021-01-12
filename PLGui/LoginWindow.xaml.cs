@@ -55,13 +55,13 @@ namespace PLGui
                     bool ex = bl.findUser(users);
                     if (ex)
                     {
-                        AdminWindow wnd = new AdminWindow(bl);
+                        AdminWindow wnd = new AdminWindow(bl,users);
                         wnd.Show();
 
                     }
                     else
                     {
-                        UserWindow wnd = new UserWindow(bl);
+                        UserWindow wnd = new UserWindow(bl,users);
                         wnd.Show();
                     }
 
