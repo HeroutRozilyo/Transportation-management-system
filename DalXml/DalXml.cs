@@ -346,26 +346,38 @@ namespace DL
         #region Station
 
         /*
+       
+
+          public int Code { get; set; }
+        public string Name { get; set; }
+         public double Latitude { get; set; }
+        public double Longtitude { get; set; }
+        public string Address { get; set; }
+        public bool StationExist { get; set; }
          
-           public DO.Stations GetStations(int code) //check if the Stations exsis according to the code
+   
+          public void AddStations(DO.Stations station)
+        {
+            if (DataSource.ListStations.FirstOrDefault(b => b.Code == station.Code) != null) //if != null its means that this licence is allready exsis
+                throw new DO.WrongIDExeption(station.Code, "התחנה לא קיימת במערכת");/////////////////////////////////////////////////////////////////
+            station.StationExist = true;
+            DataSource.ListStations.Add(station.Clone());
+        }
+
+
+        public void DeleteStations(int code)
         {
             DO.Stations stations = DataSource.ListStations.Find(b => b.Code == code && b.StationExist);
             if (stations != null)
             {
-                return stations.Clone();
+                stations.StationExist = false;
+
             }
             else
-                throw new DO.WrongIDExeption(code, $"{code} התחנה לא קיימת במערכת:");
-
+                throw new DO.WrongIDExeption(code, "התחנה לא קיימת במערכת");//////////////////////////////////////////////////////
         }
+        
 
-          public int Code { get; set; }
-        public string Name { get; set; }
-        public  GeoCoordinate Coordinate { get; set; }
-        public string Address { get; set; }
-        public bool StationExist { get; set; }
-         
-         
          */
         public Stations GetStations(int code)
         {
@@ -375,26 +387,81 @@ namespace DL
                              select new DO.Stations()
                              {
                                  Code = Convert.ToInt32(station.Element("Code").Value),
-
                                  Name = station.Element("Name").Value,
                                  Address = station.Element("Address").Value,
-                        //         Coordinate = new GeoCoordinate(Convert.ToDouble(station.Element("Coordinate").Value)),
-                         
-
-
-
-                            StationExist = Boolean.Parse(station.Element("StationExist").Value)
+                                 Latitude= Convert.ToDouble(station.Element("Latitude").Value),
+                                 Longtitude = Convert.ToDouble(station.Element("Longtitude").Value),
+                                 StationExist = Boolean.Parse(station.Element("StationExist").Value)
 
                              }
             ) .FirstOrDefault();
 
             if (b == null)
-               // throw new DO.WrongLicenceException(Convert.ToInt32(licence), "האוטובוס המבוקש לא נמצא במערכת");
+                throw new DO.WrongLicenceException(code, "התחנה המבוקש לא נמצא במערכת");
             return b;
 
 
         }
 
+        public IEnumerable<Stations> GetAllStations()
+        {
+            XElement stationRootElem = XMLTools.LoadListFromXMLElement(stationPath); //get the data from xml
+
+            return (from station in stationRootElem.Elements()
+                    where Convert.ToBoolean(station.Element("StationExist").Value) == true
+                    select new DO.Stations()
+                    {
+                        Code = Convert.ToInt32(station.Element("Code").Value),
+                        Name = station.Element("Name").Value,
+                        Address = station.Element("Address").Value,
+                        Latitude = Convert.ToDouble(station.Element("Latitude").Value),
+                        Longtitude = Convert.ToDouble(station.Element("Longtitude").Value),
+                        StationExist = Boolean.Parse(station.Element("StationExist").Value)
+
+                    }
+              );
+
+        }
+
+        public IEnumerable<Stations> GetAllStationsBy(Predicate<Stations> Stationscondition)
+        {
+            XElement stationRootElem = XMLTools.LoadListFromXMLElement(stationPath); //get the data from xml
+            return from station in stationRootElem.Elements()
+                   let b1 = new DO.Stations()
+                   {
+                       Code = Convert.ToInt32(station.Element("Code").Value),
+                       Name = station.Element("Name").Value,
+                       Address = station.Element("Address").Value,
+                       Latitude = Convert.ToDouble(station.Element("Latitude").Value),
+                       Longtitude = Convert.ToDouble(station.Element("Longtitude").Value),
+                       StationExist = Boolean.Parse(station.Element("StationExist").Value)
+                   }
+                   where Stationscondition(b1) && Convert.ToBoolean(station.Element("StationExist").Value) == true
+                   select b1;
+        }
+
+        public void AddStations(Stations station)
+        {
+            XElement stationRootElem = XMLTools.LoadListFromXMLElement(stationPath); //get the data from xml
+            XElement stationBus = (from b in stationRootElem.Elements()
+                                   where b.Element("Code").Value == station.Code.ToString() && Convert.ToBoolean(b.Element("StationExist").Value) == true
+                                   select b).FirstOrDefault();
+            if (stationBus != null)
+                throw new DO.WrongIDExeption(station.Code, "תחנה זו כבר קיימת במערכת, באפשרותך לעדכן נתונים עליו במקום המתאים");
+
+            XElement stationToAdd = new XElement("Stations",
+                    new XElement("Code", station.Code),
+                    new XElement("Name", station.Name),
+                    new XElement("Address", station.Address),
+                    new XElement("Latitude", station.Latitude),
+                    new XElement("Longtitude", station.Longtitude),
+                    new XElement("StationExist", station.StationExist));
+
+
+            stationRootElem.Add(stationToAdd);
+            XMLTools.SaveListToXMLElement(stationRootElem, stationPath);
+ 
+        }
 
         #endregion
 
@@ -413,12 +480,7 @@ namespace DL
             throw new NotImplementedException();
         }
 
-        public void AddStations(Stations station)
-        {
-            XElement stationXml = station.ToXML();
-
-
-        }
+        
 
         public void AddTrip(Trip trip)
         {
@@ -519,15 +581,9 @@ namespace DL
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Stations> GetAllStations()
-        {
-            throw new NotImplementedException();
-        }
+      
 
-        public IEnumerable<Stations> GetAllStationsBy(Predicate<Stations> Stationscondition)
-        {
-            throw new NotImplementedException();
-        }
+   
 
         public IEnumerable<LineStation> GetAllStationsCode(int code)
         {
