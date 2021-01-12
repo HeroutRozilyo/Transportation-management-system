@@ -40,7 +40,8 @@ namespace DS
                     Code = 73,
                     Name = "שדרות גולדה מאיר/המשורר אצ''ג",
                     Address = "שדרות גולדה מאיר ,ירושלים ",
-                    Coordinate= new GeoCoordinate( 31.825302,35.188624),
+                    Latitude=31.825302,
+                    Longtitude=35.188624,
                     StationExist=true,
 
                 },
@@ -49,7 +50,8 @@ namespace DS
                     Code = 76,
                     Name = "בית ספר צור באהר בנות/אלמדינה אלמונוורה",
                     Address = "רחוב:אל מדינה אל מונאוורה  עיר: ירושלים",
-                     Coordinate= new GeoCoordinate(31.738425,35.228765),
+                    Latitude=31.738425,
+                    Longtitude=35.228765,
                      StationExist=true,
                 },
                 new Stations
@@ -57,7 +59,9 @@ namespace DS
                     Code = 77,
                     Name = "בית ספר אבן רשד/אלמדינה אלמונוורה",
                     Address = "רחוב:אל מדינה אל מונאוורה  עיר: ירושלים ",
-                    Coordinate= new GeoCoordinate(31.738676,35.226704),
+                     Latitude=31.738676,
+                    Longtitude=35.226704,
+                 
                     StationExist=true,
                 },
                 new Stations
@@ -65,7 +69,9 @@ namespace DS
                     Code = 78,
                     Name = "שרי ישראל/יפו",
                     Address = "רחוב:שדרות שרי ישראל 15 עיר: ירושלים",
-                    Coordinate= new GeoCoordinate(31.789128,35.206146),
+                     Latitude=31.789128,
+                    Longtitude=35.206146,
+                  
                     StationExist=true,
                 },
                 new Stations
@@ -74,7 +80,9 @@ namespace DS
                     Name = "בטן אלהווא/חוש אל מרג",
                     Address = "רחוב:בטן אל הווא  עיר: ירושלים",
                     StationExist=true,
-                     Coordinate= new GeoCoordinate(31.766358,35.240417)
+                     Latitude=31.766358,
+                    Longtitude=35.240417,
+                    
 
                 },
                 new Stations
@@ -83,7 +91,9 @@ namespace DS
                     Name = "מלכי ישראל/הטורים",
                     Address = " רחוב:מלכי ישראל 77 עיר: ירושלים ",
                     StationExist=true,
-                    Coordinate= new GeoCoordinate(31.790758,35.209791)
+                     Latitude=31.790758,
+                    Longtitude=35.209791,
+                    
 
                 },
                 new Stations
@@ -92,7 +102,9 @@ namespace DS
                     Name = "בית ספר לבנים/אלמדארס",
                     Address = "רחוב:אלמדארס  עיר: ירושלים",
                     StationExist=true,
-                     Coordinate= new GeoCoordinate(31.768643,35.238509)
+                     Latitude=31.768643,
+                    Longtitude=35.238509,
+                    
 
                 },
                 new Stations
@@ -101,7 +113,9 @@ namespace DS
                     Name = "מגרש כדורגל/אלמדארס",
                     Address = "רחוב:אלמדארס  עיר: ירושלים",
                     StationExist=true,
-                    Coordinate= new GeoCoordinate(31.769899,35.23973)
+                     Latitude=31.769899,
+                    Longtitude=35.23973,
+                  
 
                 },
                 new Stations
@@ -110,7 +124,9 @@ namespace DS
                     Name = "בית ספר לבנות/בטן אלהוא",
                     Address = " רחוב:בטן אל הווא  עיר: ירושלים",
                     StationExist=true,
-                     Coordinate= new GeoCoordinate(31.767064,35.238443)
+                     Latitude=31.767064,
+                    Longtitude=35.238443,
+                    
 
                 },
                 new Stations
@@ -119,7 +135,9 @@ namespace DS
                     Name = "דרך בית לחם הישה/ואדי קדום",
                     Address = " רחוב:דרך בית לחם הישנה  עיר: ירושלים ",
                     StationExist=true,
-                    Coordinate= new GeoCoordinate(31.765863,35.247198)
+                     Latitude=31.765863,
+                    Longtitude=35.247198,
+                  
 
                 },
                 new Stations
@@ -128,7 +146,9 @@ namespace DS
                     Name = "גולדה/הרטום",
                     Address = "רחוב:דרך בית לחם הישנה  עיר: ירושלים",
                     StationExist=true,
-                     Coordinate= new GeoCoordinate(31.799804,35.213021)
+                     Latitude=31.799804,
+                    Longtitude=35.213021,
+                    
 
                 },
                 new Stations
@@ -137,7 +157,9 @@ namespace DS
                     Name = "דרך בית לחם הישה/ואדי קדום",
                     Address = " רחוב:דרך בית לחם הישנה  עיר: ירושלים ",
                     StationExist=true,
-                    Coordinate= new GeoCoordinate(31.765717,35.247102)
+                     Latitude=31.765717,
+                    Longtitude=35.247102,
+                   
                     
                 },
                 new Stations
@@ -146,8 +168,9 @@ namespace DS
                     Name = "חוש סלימה 1",
                     Address = " רחוב:דרך בית לחם הישנה  עיר: ירושלים",
                     StationExist=true,
-                    Coordinate= new GeoCoordinate(31.767265,35.246594)
-                    
+                     Latitude=31.767265,
+                    Longtitude=35.246594,
+                
                 },
                 new Stations
                 {
@@ -155,7 +178,9 @@ namespace DS
                     Name = "דרך בית לחם הישנה ב",
                     Address = " רחוב:דרך בית לחם הישנה  עיר: ירושלים",
                     StationExist=true,
-                    Coordinate= new GeoCoordinate(31.767084,35.246655)
+                    Latitude=31.767084,
+                    Longtitude=35.246655,
+                  
                    
                 },
                 new Stations
@@ -164,8 +189,10 @@ namespace DS
                     Name = "דרך בית לחם הישנה א",
                     Address = " רחוב:דרך בית לחם הישנה  עיר: ירושלים",
                     StationExist=true,
-                    Coordinate= new GeoCoordinate(31.768759,35.24368
-)
+                     Latitude=31.768759,
+                    Longtitude=35.24368
+                    
+
 
                 },
                 new Stations
@@ -174,8 +201,9 @@ namespace DS
                     Name = "שכונת בזבז 2",
                     Address = " רחוב:דרך בית לחם הישנה  עיר: ירושלים",
                     StationExist=true,
-                    Coordinate= new GeoCoordinate(31.77002,35.24348)
-                    
+                     Latitude=31.77002,
+                    Longtitude=35.24348,
+                
                 },
                 new Stations
                 {
@@ -183,7 +211,9 @@ namespace DS
                     Name = "גולדה/שלמה הלוי",
                     Address = " רחוב:שדרות גולדה מאיר  עיר: ירושלים",
                     StationExist=true,
-                    Coordinate= new GeoCoordinate(31.8003,35.208257)
+                     Latitude=31.8003,
+                    Longtitude=35.208257,
+                  
                     
                 },
                 new Stations
@@ -192,7 +222,9 @@ namespace DS
                     Name = "גולדה/הרטום",
                     Address = " רחוב:שדרות גולדה מאיר  עיר: ירושלים",
                     StationExist=true,
-                    Coordinate= new GeoCoordinate(31.8,35.214106)
+                     Latitude=31.8,
+                    Longtitude=35.214106,
+                  
                    
                 },
                 new Stations
@@ -201,8 +233,9 @@ namespace DS
                     Name = "גבעת משה",
                     Address = " רחוב:גבעת משה 2 עיר: ירושלים",
                     StationExist=true,
-                    Coordinate= new GeoCoordinate(31.797708,35.217133)
-                    
+                     Latitude=31.797708,
+                    Longtitude=35.217133,
+                 
                 },
                 new Stations
                 {
@@ -210,7 +243,9 @@ namespace DS
                     Name = "גבעת משה",
                     Address = " רחוב:גבעת משה 3 עיר: ירושלים",
                     StationExist=true,
-                    Coordinate= new GeoCoordinate(31.797535,35.217057)
+                     Latitude=31.797535,
+                    Longtitude=35.217057,
+                   
                     
                 },
                 //20
@@ -220,7 +255,9 @@ namespace DS
                     Name = "עזרת תורה/עלי הכהן",
                     Address = "  רחוב:עזרת תורה 25 עיר: ירושלים",
                     StationExist=true,
-                    Coordinate= new GeoCoordinate(31.797535,35.213728)
+                     Latitude=31.797535,
+                    Longtitude=35.213728,
+                  
                     
                 },
                 new Stations
@@ -229,7 +266,9 @@ namespace DS
                     Name = "עזרת תורה/דורש טוב",
                     Address = "  רחוב:עזרת תורה 21 עיר: ירושלים ",
                     StationExist=true,
-                    Coordinate= new GeoCoordinate(31.796818,35.212936)
+                     Latitude=31.796818,
+                    Longtitude=35.212936,
+                   
                     
                 },
                 new Stations
@@ -238,7 +277,9 @@ namespace DS
                     Name = "עזרת תורה/דורש טוב",
                     Address = " רחוב:עזרת תורה 12 עיר: ירושלים",
                     StationExist=true,
-                    Coordinate= new GeoCoordinate(31.796129,35.212698)
+                     Latitude=31.796129,
+                    Longtitude=35.212698,
+                   
                     
                 },
                 new Stations
@@ -247,7 +288,9 @@ namespace DS
                     Name = "יעקובזון/עזרת תורה",
                     Address = "  רחוב:יעקובזון 1 עיר: ירושלים",
                     StationExist=true,
-                    Coordinate= new GeoCoordinate(31.794631,35.21161)
+                     Latitude=31.794631,
+                    Longtitude=35.21161,
+                   
                     
                 },
                 new Stations
@@ -256,7 +299,9 @@ namespace DS
                     Name = "יעקובזון/עזרת תורה",
                     Address = " רחוב:יעקובזון  עיר: ירושלים",
                     StationExist=true,
-                    Coordinate= new GeoCoordinate(31.79508,35.211684)
+                     Latitude=31.79508,
+                    Longtitude=35.211684,
+                  
                    
                 },
                 //25
@@ -266,7 +311,9 @@ namespace DS
                     Name = "זית רענן/אוהל יהושע",
                     Address = "  רחוב:זית רענן 1 עיר: ירושלים",
                     StationExist=true,
-                    Coordinate= new GeoCoordinate(31.796255,35.211065)
+                     Latitude=31.796255,
+                    Longtitude=35.211065,
+                  
                    
                 },
                 new Stations
@@ -275,7 +322,9 @@ namespace DS
                     Name = "זית רענן/תורת חסד",
                     Address = " רחוב:זית רענן  עיר: ירושלים",
                     StationExist=true,
-                    Coordinate= new GeoCoordinate(31.798423,35.209575)
+                     Latitude=31.798423,
+                    Longtitude=35.209575,
+                   
                     
                 },
                 new Stations
@@ -284,7 +333,9 @@ namespace DS
                     Name = "זית רענן/תורת חסד",
                     Address = "  רחוב:הרב סורוצקין 48 עיר: ירושלים ",
                     StationExist=true,
-                    Coordinate= new GeoCoordinate(31.798689,35.208878)
+                     Latitude=31.798689,
+                    Longtitude=35.208878,
+                   
                     
                 },
                 new Stations
@@ -293,8 +344,9 @@ namespace DS
                     Name = "קרית הילד/סורוצקין",
                     Address = "  רחוב:הרב סורוצקין  עיר: ירושלים",
                     StationExist=true,
-                    Coordinate= new GeoCoordinate(31.799165,35.206918)
-                    
+                     Latitude=31.799165,
+                    Longtitude=35.206918,
+                   
                 },
                 new Stations
                 {
@@ -302,7 +354,9 @@ namespace DS
                     Name = "סורוצקין/שנירר",
                     Address = "  רחוב:הרב סורוצקין 31 עיר: ירושלים",
                     StationExist=true,
-                    Coordinate= new GeoCoordinate(31.797829,35.205601)
+                     Latitude=31.797829,
+                    Longtitude=35.205601,
+                   
                     
                 },
 
@@ -313,7 +367,9 @@ namespace DS
                     Name = "שדרות נווה יעקוב/הרב פרדס ",
                     Address = "רחוב: שדרות נווה יעקוב  עיר:ירושלים ",
                     StationExist=true,
-                    Coordinate= new GeoCoordinate(31.840063,35.240062)
+                     Latitude=31.840063,
+                    Longtitude=35.240062,
+                   
                     
 
                 },
@@ -323,7 +379,9 @@ namespace DS
                     Name = "מרכז קהילתי /שדרות נווה יעקוב",
                     Address = "רחוב:שדרות נווה יעקוב ירושלים עיר:ירושלים ",
                     StationExist=true,
-                    Coordinate= new GeoCoordinate(31.838481,35.23972)
+                     Latitude=31.838481,
+                    Longtitude=35.23972,
+                    
                    
                 },
 
@@ -334,7 +392,9 @@ namespace DS
                     Name = " מסוף 700 /שדרות נווה יעקוב ",
                     StationExist=true,
             Address = "רחוב:שדרות נווה יעקב 7 עיר: ירושלים  ",
-            Coordinate= new GeoCoordinate(31.837748,35.231598)
+             Latitude=31.837748,
+                    Longtitude=35.231598,
+           
                    
                 },
                 new Stations
@@ -343,7 +403,8 @@ namespace DS
                     Name = " הרב פרדס/אסטורהב ",
                     StationExist=true,
                     Address = "רחוב:מעגלות הרב פרדס  עיר: ירושלים רציף  ",
-                    Coordinate= new GeoCoordinate(31.840279,35.246272)
+                     Latitude=31.840279,
+                    Longtitude=35.246272,
                     
                 },
                 new Stations
@@ -352,8 +413,9 @@ namespace DS
                     Name = "הרב פרדס/צוקרמן ",
                     Address = "רחוב:מעגלות הרב פרדס 24 עיר: ירושלים   ",
                     StationExist=true,
-                    Coordinate= new GeoCoordinate(31.843598,35.243639)
-                    
+                     Latitude=31.843598,
+                    Longtitude=35.243639,
+
                 },
                 new Stations
                 {
@@ -361,8 +423,9 @@ namespace DS
                     Name = "ברזיל ",
                     Address = "רחוב:ברזיל 14 עיר: ירושלים",
                     StationExist=true,
-                    Coordinate= new GeoCoordinate(31.766256,35.173)
-                   
+                     Latitude=31.766256,
+                    Longtitude=35.173,
+
                 },
                 new Stations
                 {
@@ -370,8 +433,9 @@ namespace DS
                     Name = "בית וגן/הרב שאג ",
                     Address = "רחוב:בית וגן 61 עיר: ירושלים ",
                     StationExist=true,
-                    Coordinate= new GeoCoordinate(31.76736,35.184771)
-                    
+                     Latitude=31.76736,
+                    Longtitude=35.184771,
+
                 },
                 new Stations
                 {
@@ -379,8 +443,9 @@ namespace DS
                     Name = "בית וגן/עוזיאל ",
                     Address = "רחוב:בית וגן 21 עיר: ירושלים    ",
                     StationExist=true,
-                    Coordinate= new GeoCoordinate(31.770543,35.183999)
-                    
+                     Latitude=31.770543,
+                    Longtitude=35.183999,
+
                 },
                 new Stations
                 {
@@ -388,8 +453,9 @@ namespace DS
                     Name = " קרית יובל/שמריהו לוין ",
                     Address = "רחוב:ארתור הנטקה  עיר: ירושלים    ",
                     StationExist=true,
-                    Coordinate= new GeoCoordinate(31.768465,35.178701)
-                    
+                     Latitude=31.768465,
+                    Longtitude=35.178701,
+
                 },
                 new Stations
                 {
@@ -397,8 +463,9 @@ namespace DS
                     Name = " קורצ'אק / רינגלבלום ",
                     StationExist=true,
                     Address = "רחוב:יאנוש קורצ'אק 7 עיר: ירושלים",
-                    Coordinate= new GeoCoordinate(31.759534,35.173688)
-                   
+                     Latitude=31.759534,
+                    Longtitude=35.173688,
+
                 },
                 new Stations
                 {
@@ -406,8 +473,9 @@ namespace DS
                     Name = " טהון/גולומב ",
                     Address = "רחוב:יעקב טהון  עיר: ירושלים     ",
                     StationExist=true,
-                    Coordinate= new GeoCoordinate(31.761447,35.175929)
-                   
+                     Latitude=31.761447,
+                    Longtitude=35.175929,
+
                 },
                 new Stations
                 {
@@ -415,8 +483,10 @@ namespace DS
                     Name = "הרב הרצוג/שח''ל ",
                     Address = "רחוב:הרב הרצוג  עיר: ירושלים רציף",
                     StationExist=true,
-                    Coordinate= new GeoCoordinate(31.761447,35.199936)
-                    
+                   
+                     Latitude=31.761447,
+                    Longtitude=35.199936,
+
                 },
                 new Stations
                 {
@@ -424,7 +494,9 @@ namespace DS
                     Name = "פרץ ברנשטיין/נזר דוד ",
                     Address = "רחוב:הרב הרצוג  עיר: ירושלים רציף",
                     StationExist=true,
-                    Coordinate= new GeoCoordinate(31.759186,35.189336)
+                   
+                     Latitude=31.759186,
+                    Longtitude=35.189336,
                 },
 
 
@@ -434,8 +506,10 @@ namespace DS
             Name = "פרץ ברנשטיין/נזר דוד",
             Address = " רחוב:פרץ ברנשטיין 56 עיר: ירושלים ",
             StationExist=true,
-            Coordinate= new GeoCoordinate(31.759121,35.189178)
            
+             Latitude=31.759121,
+                    Longtitude=35.189178,
+
         },
               new Stations
               {
@@ -443,8 +517,10 @@ namespace DS
             Name = "מוזיאון ישראל/רופין",
             Address = "  רחוב:דרך רופין  עיר: ירושלים ",
             StationExist=true,
-            Coordinate= new GeoCoordinate(31.774484,35.204882)
-            
+           
+             Latitude=31.774484,
+                    Longtitude=35.204882,
+
                 },
 
              new Stations
@@ -453,7 +529,9 @@ namespace DS
             Name = "הרצוג/טשרניחובסקי",
             Address = "   רחוב:הרב הרצוג 21  עיר: ירושלים  ",
             StationExist=true,
-            Coordinate= new GeoCoordinate(31.769609,35.209732)
+         
+             Latitude=31.769609,
+                    Longtitude=35.209732,
 
                 },
               new Stations
@@ -462,8 +540,9 @@ namespace DS
             Name = "רופין/שד' הזז",
             Address = "    רחוב:הרב הרצוג  עיר: ירושלים   ",
             StationExist=true,
-            Coordinate= new GeoCoordinate(31.769652,35.208248)
-           
+             Latitude=31.769652,
+                    Longtitude=35.208248,
+
                  },
                 new Stations
                 {
@@ -471,8 +550,10 @@ namespace DS
                     Name = "מרכז סולם/סורוצקין ",
                     Address = " רחוב:הרב סורוצקין 13 עיר: ירושלים",
                     StationExist=true,
-                    Coordinate= new GeoCoordinate(31.796033,35.206094)
-                    
+                 
+                     Latitude=31.796033,
+                    Longtitude=35.206094,
+
                 },
                 new Stations
                 {
@@ -480,8 +561,10 @@ namespace DS
                     Name = "אוהל דוד/סורוצקין ",
                     Address = "  רחוב:הרב סורוצקין 9 עיר: ירושלים",
                     StationExist=true,
-                    Coordinate= new GeoCoordinate(31.794958,35.205216)
                    
+                     Latitude=31.794958,
+                    Longtitude=35.205216,
+
                 },
                 new Stations
                 {
@@ -489,7 +572,9 @@ namespace DS
                     Name = "מרכז סולם/סורוצקין ",
                     Address = "  רחוב:הרב סורוצקין 28 עיר: ירושלים",
                     StationExist=true,
-                    Coordinate= new GeoCoordinate(31.79617,35.206158)
+                   
+                     Latitude=31.79617,
+                    Longtitude=35.206158,
                     
                 }
 

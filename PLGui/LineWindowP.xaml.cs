@@ -155,6 +155,7 @@ namespace PLGui
                 if (group.Key == BO.AREA.YOSH)
                     foreach (var line in group)
                         YOSH.Add(line);
+                
                
             }
         }
