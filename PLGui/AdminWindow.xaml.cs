@@ -23,7 +23,7 @@ namespace PLGui
     {
         private IBL bl;
         private AddUser addUser;
-
+        private BO.User userNow = new BO.User();
         public AdminWindow()
         {
             InitializeComponent();
@@ -31,10 +31,12 @@ namespace PLGui
             
         }
 
-        public AdminWindow(IBL _bl)
+        public AdminWindow(IBL _bl, BO.User users)
         {
             InitializeComponent();
+            userNow = users;
             this.bl = _bl;
+            NameTextBlock.Text = userNow.UserName;
         }
 
         private void AdminWindow_Closing(object sender, CancelEventArgs e)
@@ -68,7 +70,7 @@ namespace PLGui
 
         private void user_Click_1(object sender, RoutedEventArgs e)
         {
-            UserWindow userWindow = new UserWindow(bl);
+            UserWindow userWindow = new UserWindow(bl,userNow);
             userWindow.Show();
         }
 
@@ -107,14 +109,7 @@ namespace PLGui
             addUser = new AddUser(bl);
 
             bool? result = addUser.ShowDialog();
-            if (result == true)
-            {
-
-                AdminWindow wnd = new AdminWindow(bl);
-                wnd.Show();
-                this.Close();
-                
-            }//
+            
         }
     }
 }

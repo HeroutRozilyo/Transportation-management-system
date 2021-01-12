@@ -21,16 +21,18 @@ namespace PLGui
     public partial class UserWindow : Window
     {
         private IBL bl;
-
+        private BO.User userNow=new BO.User();
         public UserWindow()
         {
             InitializeComponent();
         }
 
-        public UserWindow(IBL bl)
+        public UserWindow(IBL bl, BO.User users)
         {
             InitializeComponent();
             this.bl = bl;
+            userNow = users;
+            NameTextBlock.Text = users.UserName;
         }
            
         
