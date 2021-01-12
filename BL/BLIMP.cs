@@ -1527,7 +1527,7 @@ namespace BL
                     }
 
                 }
-
+                bool equal = false;
                 int replace;
                 //   if (v.Count()<1)
                 {
@@ -1554,17 +1554,30 @@ namespace BL
                                                 l = new BO.Line();
                                                 l = lineDoBoAdapter(z.LineId);
                                                 lineToSend.Add(l);
-                                                toReturn.Add(new
+
+                                                if (one.IdNumber == l.IdNumber)
+                                                    equal = true;
+                                                else
+                                                    equal = false;
+
+
+
+                                                    toReturn.Add(new
                                                 {
 
                                                     numberLine1 = one.NumberLine,
                                                     numberLine2 = l.NumberLine,
-                                                    direct = false,
+                                            
+
+                                                    direct = equal,
                                                     replaceStation = replace,
                                                     timeTravel = CalucateTime(one, code1, replace) + CalucateTime(l, replace, code2)
 
-                                                }
-                        );
+                                                    });
+                                         
+                                                    
+
+
                                             }
 
                                         }

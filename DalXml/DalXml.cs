@@ -356,13 +356,7 @@ namespace DL
         public bool StationExist { get; set; }
          
    
-          public void AddStations(DO.Stations station)
-        {
-            if (DataSource.ListStations.FirstOrDefault(b => b.Code == station.Code) != null) //if != null its means that this licence is allready exsis
-                throw new DO.WrongIDExeption(station.Code, "התחנה לא קיימת במערכת");/////////////////////////////////////////////////////////////////
-            station.StationExist = true;
-            DataSource.ListStations.Add(station.Clone());
-        }
+    
 
 
         public void DeleteStations(int code)
