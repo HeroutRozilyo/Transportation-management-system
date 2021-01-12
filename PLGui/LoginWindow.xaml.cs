@@ -84,7 +84,7 @@ namespace PLGui
                     user = bl.getUserByEmail(emailTextBOx.Text);
                     using (MailMessage mail = new MailMessage())
                     {
-                        mail.From = new MailAddress("rozilyo@g.jct.ac.il.com");
+                        mail.From = new MailAddress("projectdh209@gmail.com");
                         mail.To.Add(user.MailAddress);
                         mail.Subject = "שחזור סיסמא";
                         mail.Body =string.Format("Your Password is-{0}",user.Password);
@@ -94,7 +94,7 @@ namespace PLGui
 
                         using (SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587))
                         {
-                            smtp.Credentials = new NetworkCredential("rozilyo@g.jct.ac.il", "h209179647");
+                            smtp.Credentials = new NetworkCredential("projectdh209@gmail.com", "h0558828934");
                             smtp.EnableSsl = true;
                             smtp.Send(mail);
                         }
