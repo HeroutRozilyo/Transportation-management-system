@@ -30,6 +30,7 @@ namespace PLGui
             InitializeComponent();
             BO.User user = new BO.User();
             passEmail.Visibility = Visibility.Hidden;
+
         }
 
         public LoginWindow(IBL bl)
@@ -38,35 +39,42 @@ namespace PLGui
             this.bl = bl;
             BO.User user = new BO.User();
             passEmail.Visibility = Visibility.Hidden;
+
         }
+
 
         private void Click_Submit(object sender, RoutedEventArgs e)
         {
             try
             {
-                BO.User users = new BO.User();
-                users.UserName = txtUserName.Text;
-                users.Password = txtPassword.Password;
-                bool ex = bl.findUser(users);
-                if (ex)
+                if (txtPassword.Password.Length != 0)
                 {
-                    AdminWindow wnd = new AdminWindow(bl);
-                    wnd.Show();
+                    BO.User users = new BO.User();
+                    users.UserName = txtUserName.Text;
+                    users.Password = txtPassword.Password;
+                    bool ex = bl.findUser(users);
+                    if (ex)
+                    {
+                        AdminWindow wnd = new AdminWindow(bl);
+                        wnd.Show();
 
-                }
-                else
-                {
-                    UserWindow wnd = new UserWindow(bl);
-                    wnd.Show();
-                }
+                    }
+                    else
+                    {
+                        UserWindow wnd = new UserWindow(bl);
+                        wnd.Show();
+                    }
 
-                this.Close();
+                    this.Close();
+                }
             }
             catch (BO.BadNameExeption a)
             {
                 MessageBox.Show(a.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+    
+       
 
         private void forgetPassword_Click(object sender, RoutedEventArgs e)
         {
