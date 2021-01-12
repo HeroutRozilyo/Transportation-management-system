@@ -12,26 +12,164 @@ namespace DL
 {
     sealed class DalXml : IDAL
     {
+        private XElement serials;
+
         #region singelton
         static readonly DalXml instance = new DalXml();
         static DalXml() { }// static ctor to ensure instance init is done just before first usage
-        DalXml() { } // default => private
+        DalXml() { }   // default => private
         public static DalXml Instance { get => instance; }// The public Instance property to use
         #endregion
+
+        #region DS XML Files
+        string busPath = @"BusXML.xml"; //XElement        
+                                        //string studentsPath = @"StudentsXml.xml"; //XMLSerializer
+                                        //string coursesPath = @"CoursesXml.xml"; //XMLSerializer
+                                        //string lecturersPath = @"LecturersXml.xml"; //XMLSerializer
+                                        //string lectInCoursesPath = @"LecturerInCourseXml.xml"; //XMLSerializer
+                                        //string studInCoursesPath = @"StudentInCoureseXml.xml"; //XMLSerializer
+        #endregion
+
+
+        /*    
+       public int AddBus(DO.Bus bus)
+        {
+            if (DataSource.ListBus.FirstOrDefault(b => b.Licence == bus.Licence) != null) //if != null its means that this licence is allready exsis
+                throw new DO.WrongLicenceException(int.Parse(bus.Licence), "המספר רישוי כבר קיים במערכת");
+            bus.BusExist = true;
+            DataSource.ListBus.Add(bus.Clone());
+            return 1;
+        }
+   */
+        #region Bus
+        public Bus GetBus(string licence)
+        {
+            XElement busRootElem = XMLTools.LoadListFromXMLElement(busPath); //get the data from xml
+            DO.Bus b = (from bus in busRootElem.Elements()
+                        where bus.Element("Licence").Value == licence && Convert.ToBoolean(bus.Element("BusExist").Value) == true
+                        select new DO.Bus()
+                        {
+                            Licence = bus.Element("Licence").Value,
+                            StartingDate = DateTime.Parse(bus.Element("StartingDate").Value),
+                            Kilometrz = Double.Parse(bus.Element("Kilometrz").Value),
+                            KilometrFromLastTreat = Double.Parse(bus.Element("KilometrFromLastTreat").Value),
+                            FuellAmount = Double.Parse(bus.Element("FuellAmount").Value),
+                            StatusBus = (STUTUS)Enum.Parse(typeof(STUTUS), bus.Element("StatusBus").Value),
+                            BusExist = Boolean.Parse(bus.Element("BusExist").Value),
+                            LastTreatment = DateTime.Parse(bus.Element("LastTreatment").Value)
+                        }
+            ).FirstOrDefault();
+
+            if (b == null)
+                throw new DO.WrongLicenceException(Convert.ToInt32(licence), "האוטובוס המבוקש לא נמצא במערכת");
+            return b;
+        }
+
+        public IEnumerable<Bus> GetAllBuses()
+        {
+            XElement busRootElem = XMLTools.LoadListFromXMLElement(busPath); //get the data from xml
+
+            return (from bus in busRootElem.Elements()
+                    where Convert.ToBoolean(bus.Element("BusExist").Value) == true
+                    select new DO.Bus()
+                    {
+                        Licence = bus.Element("Licence").Value,
+                        StartingDate = DateTime.Parse(bus.Element("StartingDate").Value),
+                        Kilometrz = Double.Parse(bus.Element("Kilometrz").Value),
+                        KilometrFromLastTreat = Double.Parse(bus.Element("KilometrFromLastTreat").Value),
+                        FuellAmount = Double.Parse(bus.Element("FuellAmount").Value),
+                        StatusBus = (STUTUS)Enum.Parse(typeof(STUTUS), bus.Element("StatusBus").Value),
+                        BusExist = Boolean.Parse(bus.Element("BusExist").Value),
+                        LastTreatment = DateTime.Parse(bus.Element("LastTreatment").Value)
+                    }
+              );
+
+        }
+
+        public IEnumerable<Bus> GetAllBusesStusus(STUTUS stusus)
+        {
+            XElement busRootElem = XMLTools.LoadListFromXMLElement(busPath); //get the data from xml
+
+            return (from bus in busRootElem.Elements()
+                    where (STUTUS)Enum.Parse(typeof(STUTUS), bus.Element("StatusBus").Value) == stusus && Convert.ToBoolean(bus.Element("BusExist").Value) == true
+                    select new DO.Bus()
+                    {
+                        Licence = bus.Element("Licence").Value,
+                        StartingDate = DateTime.Parse(bus.Element("StartingDate").Value),
+                        Kilometrz = Double.Parse(bus.Element("Kilometrz").Value),
+                        KilometrFromLastTreat = Double.Parse(bus.Element("KilometrFromLastTreat").Value),
+                        FuellAmount = Double.Parse(bus.Element("FuellAmount").Value),
+                        StatusBus = (STUTUS)Enum.Parse(typeof(STUTUS), bus.Element("StatusBus").Value),
+                        BusExist = Boolean.Parse(bus.Element("BusExist").Value),
+                        LastTreatment = DateTime.Parse(bus.Element("LastTreatment").Value)
+                    }
+              );
+        }
+
+        public IEnumerable<Bus> GetAllBusesBy(Predicate<Bus> buscondition)
+        {
+            XElement busRootElem = XMLTools.LoadListFromXMLElement(busPath); //get the data from xml
+            return from bus in busRootElem.Elements()
+                   let b1 = new DO.Bus()
+                   {
+                       Licence = bus.Element("Licence").Value,
+                       StartingDate = DateTime.Parse(bus.Element("StartingDate").Value),
+                       Kilometrz = Double.Parse(bus.Element("Kilometrz").Value),
+                       KilometrFromLastTreat = Double.Parse(bus.Element("KilometrFromLastTreat").Value),
+                       FuellAmount = Double.Parse(bus.Element("FuellAmount").Value),
+                       StatusBus = (STUTUS)Enum.Parse(typeof(STUTUS), bus.Element("StatusBus").Value),
+                       BusExist = Boolean.Parse(bus.Element("BusExist").Value),
+                       LastTreatment = DateTime.Parse(bus.Element("LastTreatment").Value)
+                   }
+                   where buscondition(b1) && Convert.ToBoolean(bus.Element("BusExist").Value) == true
+                   select b1;
+        }
+
+
+
         public int AddBus(Bus bus)
         {
-            throw new NotImplementedException();
+            XElement busRootElem = XMLTools.LoadListFromXMLElement(busPath); //get the data from xml
+            XElement findBus = (from b in busRootElem.Elements()
+                                where b.Element("Licence").Value == bus.Licence && Convert.ToBoolean(b.Element("BusExist").Value) == true
+                                select b).FirstOrDefault();
+            if (findBus != null)
+                throw new DO.WrongLicenceException(Convert.ToInt32(bus.Licence), "אוטובוס זה כבר קיים במערכת, באפשרותך לעדכן נתונים עליו במקום המתאים");
+            XElement busToAdd = new XElement("Bus",
+                     new XElement("StartingDate", bus.StartingDate),
+                     new XElement("Kilometrz", bus.Kilometrz),
+                     new XElement("KilometrFromLastTreat", bus.KilometrFromLastTreat),
+                     new XElement("FuellAmount", bus.FuellAmount),
+                     new XElement("StatusBus", bus.StatusBus.ToString()),
+                     new XElement("BusExist", bus.BusExist),
+                     new XElement("LastTreatment", bus.LastTreatment));
+
+            busRootElem.Add(busToAdd);
+            XMLTools.SaveListToXMLElement(busRootElem, busPath);
+            return 1;
+
         }
+
+
+        #endregion
+
+
 
         public int AddLine(Line line)
         {
+
+            serials = XElement.Load(@"Serials.xml");
+
+            int seialLine = int.Parse(serials.Element("LineCounter").Value);
             List<Line> lines = XMLTools.LoadListFromXMLSerializer<Line>(@"lines.xml");
-            line.IdNumber = 100; //++ lastLineIdNuber;
+            serials.Element("LineCounter").Value = (++seialLine).ToString();
+            line.IdNumber = seialLine;
             lines.Add(line);
             XMLTools.SaveListToXMLSerializer(lines, @"lines.xml");
+            serials.Save(@"Serials.xml");
             throw new NotImplementedException();
         }
-        
+
         public void AddLineStations(LineStation station)
         {
             throw new NotImplementedException();
@@ -139,20 +277,8 @@ namespace DL
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Bus> GetAllBuses()
-        {
-            throw new NotImplementedException();
-        }
 
-        public IEnumerable<Bus> GetAllBusesBy(Predicate<Bus> buscondition)
-        {
-            throw new NotImplementedException();
-        }
 
-        public IEnumerable<Bus> GetAllBusesStusus(STUTUS stusus)
-        {
-            throw new NotImplementedException();
-        }
 
         public IEnumerable<Line> GetAllLine()
         {
@@ -244,10 +370,6 @@ namespace DL
             throw new NotImplementedException();
         }
 
-        public Bus GetBus(string licence)
-        {
-            throw new NotImplementedException();
-        }
 
         public Line GetLine(int idline)
         {
