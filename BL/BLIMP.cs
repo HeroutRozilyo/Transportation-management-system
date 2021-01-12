@@ -1041,8 +1041,11 @@ namespace BL
                 // in order to freat adj station we need the "real" station in order to calucate distance and travel time.
                 ST1 = dl.GetStations(station1);
                 ST2 = dl.GetStations(station2);
-                double d = (ST1.Coordinate).GetDistanceTo((ST2.Coordinate));
-                adjacent.Distance = 1;
+                GeoCoordinate CoordinateST1 = new GeoCoordinate(ST1.Latitude, ST1.Longtitude);
+                GeoCoordinate CoordinateST2 = new GeoCoordinate(ST2.Latitude, ST2.Longtitude);
+
+                double d = (CoordinateST1).GetDistanceTo((CoordinateST2));
+                adjacent.Distance = d;
               
                 adjacent.TimeAverage = (((random.NextDouble() + 1) * d) / speed);
                 dl.AddLineStations(adjacent);
@@ -1157,9 +1160,8 @@ namespace BL
                                       select (BO.LineStation)st.CopyPropertiesToNew(typeof(BO.LineStation));
             stationBO.StationAdjacent = from ad in adjactDO
                                         select (BO.AdjacentStations)ad.CopyPropertiesToNew(typeof(BO.AdjacentStations));
-            stationBO.Coordinate = new GeoCoordinate();
-            stationBO.Coordinate.Latitude = stationDO.Coordinate.Latitude;
-            stationBO.Coordinate.Longitude = stationDO.Coordinate.Longitude;
+            stationBO.Coordinate = new GeoCoordinate(stationDO.Latitude, stationDO.Longtitude);
+
             return stationBO;
         }
 
@@ -1214,11 +1216,13 @@ namespace BL
         /// add new station.find if we have this code station and if yes so throw
         /// </summary>
         /// <param name="station"></param>
+        /// 
         public void AddStation(BO.Station station)///////////////////
         {
             DO.Stations stationDO = new DO.Stations();
             station.CopyPropertiesTo(stationDO);
-            stationDO.Coordinate = new GeoCoordinate(station.Coordinate.Latitude, station.Coordinate.Longitude);
+            stationDO.Latitude = station.Coordinate.Latitude;
+            stationDO.Longtitude = station.Coordinate.Longitude;
             try
             {
                 var a = from item in dl.GetAllStations()
@@ -1294,9 +1298,10 @@ namespace BL
            
 
                      station.CopyPropertiesTo(stationDO);
-                     stationDO.Coordinate = new GeoCoordinate(station.Coordinate.Latitude, station.Coordinate.Longitude);
+                     stationDO.Latitude = station.Coordinate.Latitude;
+                     stationDO.Longtitude = station.Coordinate.Longitude;
 
-                  if (station.Coordinate.Latitude >= 29.3 && station.Coordinate.Latitude <= 33.5 && station.Coordinate.Longitude >= 33.7 && station.Coordinate.Longitude <= 36.3)
+                if (station.Coordinate.Latitude >= 29.3 && station.Coordinate.Latitude <= 33.5 && station.Coordinate.Longitude >= 33.7 && station.Coordinate.Longitude <= 36.3)
                   {
                     stationOldDO = dl.GetStations(oldCode);
                     dl.UpdateStations(stationDO,oldCode);
@@ -1307,7 +1312,7 @@ namespace BL
                             dl.UpdateAdjacentStations(adjacentStations.ElementAt(0).Station1, adjacentStations.ElementAt(0).Station2, newCode, oldCode);
                     }
                       
-                    if (stationOldDO.Coordinate != station.Coordinate) //if we change the place of tje station we need to ask to insert again data on distance and time travel
+                    if (stationOldDO.Latitude != station.Coordinate.Latitude&& stationOldDO.Longtitude != station.Coordinate.Longitude) //if we change the place of tje station we need to ask to insert again data on distance and time travel
                     {
                         adjacentStations = dl.GetAllAdjacentStations(oldCode);
                         foreach (var item in adjacentStations)
@@ -1331,7 +1336,7 @@ namespace BL
 
                             adjactToChange.Add(adjacent);
 
-                        //    UpdateAdjacentStations
+                    
 
                     
                         }

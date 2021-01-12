@@ -134,11 +134,11 @@ namespace DL
                    select line.Clone();
         }
 
-        public IEnumerable<object> GetLineFields(Func<int, bool, object> generate)//return all the lines on the country that exsis and withe the sme lineNumber
-        {
-            return from line in DataSource.ListLine
-                   select generate(line.IdNumber, line.LineExist);
-        }
+        //public IEnumerable<object> GetLineFields(Func<int, bool, object> generate)//return all the lines on the country that exsis and withe the sme lineNumber
+        //{
+        //    return from line in DataSource.ListLine
+        //           select generate(line.IdNumber, line.LineExist);
+        //}
         public IEnumerable<DO.Line> GetAllLinesArea(DO.AREA area) //return all the buses that we have
         {
             return from line in DataSource.ListLine

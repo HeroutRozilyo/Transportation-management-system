@@ -12,7 +12,10 @@ namespace DO
     {
         public int Code { get; set; }
         public string Name { get; set; }
-        public  GeoCoordinate Coordinate { get; set; }
+     //   public  GeoCoordinate Coordinate { get; set; }
+        public double Latitude { get; set; }
+        public double Longtitude { get; set; }
+
         public string Address { get; set; }
         public bool StationExist { get; set; }
     }
