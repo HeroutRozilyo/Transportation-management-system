@@ -39,6 +39,12 @@ namespace PLGui
             NameTextBlock.Text = userNow.UserName;
         }
 
+        public AdminWindow(IBL bl)
+        {
+            InitializeComponent();
+            this.bl = bl;
+        }
+
         private void AdminWindow_Closing(object sender, CancelEventArgs e)
         {
             Environment.Exit(Environment.ExitCode);

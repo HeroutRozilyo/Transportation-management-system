@@ -31,14 +31,14 @@ namespace DL
             }
         }
 
-        public static XElement ToXML(this DO.Stations st)
-        {
-            XElement result = new XElement("Stations",
-                                    new XElement("Code", st.Code),
-                                    new XElement("Latitude", st.Coordinate.Latitude),
-                                    new XElement("Longitude", st.Coordinate.Longitude));
-            return result;
-        }
+        //public static XElement ToXML(this DO.Stations st)
+        //{
+        //    XElement result = new XElement("Stations",
+        //                            new XElement("Code", st.Code),
+        //                            new XElement("Latitude", st.Coordinate.Latitude),
+        //                            new XElement("Longitude", st.Coordinate.Longitude));
+        //    return result;
+        //}
 
         public static XElement LoadListFromXMLElement(string filePath)
         {

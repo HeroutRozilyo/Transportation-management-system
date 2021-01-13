@@ -37,8 +37,10 @@ namespace PLGui
         private void Login_Click(object sender, RoutedEventArgs e)
         {
             // You do not need to log in to this stage yet so we will go straight to the admin window
-            wnd = new LoginWindow(bl);
-            wnd.Show();
+            //wnd = new LoginWindow(bl);
+            AdminWindow a = new AdminWindow(bl);
+            a.Show();
+           // wnd.Show();
             this.Close();
 
         }
