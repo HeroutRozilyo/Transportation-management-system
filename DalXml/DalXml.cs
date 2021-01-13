@@ -6,6 +6,7 @@ using System.Device.Location;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 using System.Xml.Linq;
 //https://www.gov.il/he/Departments/General/gtfs_general_transit_feed_specifications
 
@@ -603,51 +604,84 @@ namespace DL
         #region LineTrip
 
 
+    
         public LineTrip GetLineTrip(TimeSpan start, int idline)
         {
-            List<LineTrip> ListLineTrip = XMLTools.LoadListFromXMLSerializer<LineTrip>(lineTripPath);
+            XElement ListLineTrip = XMLTools.LoadListFromXMLElement(lineTripPath); //get the data from xml
+            DO.LineTrip b = (from line in ListLineTrip.Elements()
+                             where line.Element("KeyId").Value == idline.ToString() && Convert.ToBoolean(line.Element("TripLineExist").Value) == true
+                             select new DO.LineTrip
+                             {
+                                 KeyId = Convert.ToInt32( line.Element("KeyId").Value),
+                                 StartAt = XmlConvert.ToTimeSpan(line.Element("StartAt").Value),
+                                 Frequency = Double.Parse(line.Element("Frequency").Value),
+                                 FinishAt = XmlConvert.ToTimeSpan(line.Element("FinishAt").Value),
+                                 TripLineExist = Convert.ToBoolean( line.Element("TripLineExist").Value),
+                               
+        }).FirstOrDefault();
 
-            DO.LineTrip linetrip = ListLineTrip.Find(b => b.KeyId == idline && b.StartAt == start && b.TripLineExist == true);
-            if (linetrip != null)
-            {
-                return linetrip;
-            }
-            else
+            if (b == null)
                 throw new DO.WrongLineTripExeption(idline, $"{start} לא נמצאו פרטים עבור הקו המבוקש בשעה זו");
+          return b;
+               
         }
 
         public IEnumerable<LineTrip> GetAllTripline(int idline)
         {
-            List<LineTrip> ListLineTrip = XMLTools.LoadListFromXMLSerializer<LineTrip>(lineTripPath);
+            XElement ListLineTrip = XMLTools.LoadListFromXMLElement(lineTripPath); //get the data from xml
+            return (from line in ListLineTrip.Elements()
+                    where line.Element("KeyId").Value == idline.ToString() && Convert.ToBoolean(line.Element("TripLineExist").Value) == true
+                    select new DO.LineTrip
+                    {
+                        KeyId = Convert.ToInt32(line.Element("KeyId").Value),
+                        StartAt = XmlConvert.ToTimeSpan(line.Element("StartAt").Value),
+                        Frequency = Double.Parse(line.Element("Frequency").Value),
+                        FinishAt = XmlConvert.ToTimeSpan(line.Element("FinishAt").Value),
+                        TripLineExist = Convert.ToBoolean(line.Element("TripLineExist").Value),
 
-            return from linetrip in ListLineTrip
-                   where (linetrip.KeyId == idline && linetrip.TripLineExist == true)
-                   select linetrip;
-
+                    });
         }
+
+
 
         public IEnumerable<LineTrip> GetAllLineTripsBy(Predicate<LineTrip> StationsLinecondition)
         {
-            List<LineTrip> ListLineTrip = XMLTools.LoadListFromXMLSerializer<LineTrip>(lineTripPath);
 
-            return from linetrip in ListLineTrip
-                   where (StationsLinecondition(linetrip) && linetrip.TripLineExist == true)
-                   select linetrip;
-            
+            XElement ListLineTrip = XMLTools.LoadListFromXMLElement(lineTripPath); //get the data from xml
+            return from line in ListLineTrip.Elements()
+                   let l1 = new DO.LineTrip
+                   {
+                       KeyId = Convert.ToInt32(line.Element("KeyId").Value),
+                       StartAt = XmlConvert.ToTimeSpan(line.Element("StartAt").Value),
+                       Frequency = Double.Parse(line.Element("Frequency").Value),
+                       FinishAt = XmlConvert.ToTimeSpan(line.Element("FinishAt").Value),
+                       TripLineExist = Convert.ToBoolean(line.Element("TripLineExist").Value),
+
+
+                   }
+                   where StationsLinecondition(l1) && Convert.ToBoolean(line.Element("TripLineExist").Value) == true
+                   select l1;
+                    
 
         }
 
         public void AddLineTrip(LineTrip lineTrip)
         {
-            List<LineTrip> ListLineTrip = XMLTools.LoadListFromXMLSerializer<LineTrip>(lineTripPath);
-            ListLineTrip.Add(lineTrip);
-            XMLTools.SaveListToXMLSerializer(ListLineTrip, lineTripPath);
+ 
+
+
+            XElement ListLineTrip = XMLTools.LoadListFromXMLElement(lineTripPath); //get the data from xml
+            XElement lineToAdd = XMLTools.ToXML(lineTrip);
+
+            ListLineTrip.Add(lineToAdd);
+            XMLTools.SaveListToXMLElement(ListLineTrip, lineTripPath);
 
         }
 
 
         public void DeleteLineTrip(int idline)
-        {
+        {    
+
             List<LineTrip> ListLineTrip = XMLTools.LoadListFromXMLSerializer<LineTrip>(lineTripPath);
 
             foreach (var item in ListLineTrip)
@@ -671,18 +705,38 @@ namespace DL
 
         public void UpdatelineTrip(LineTrip lineTrip)
         {
-            List<LineTrip> ListLineTrip = XMLTools.LoadListFromXMLSerializer<LineTrip>(lineTripPath);
+            XElement ListLineTrip = XMLTools.LoadListFromXMLElement(lineTripPath); //get the data from xml
+            XElement findLine = (from b in ListLineTrip.Elements()
+                                where b.Element("KeyId").Value == lineTrip.KeyId.ToString() && Convert.ToBoolean(b.Element("TripLineExist").Value) == true
+                                select b).FirstOrDefault();
 
-
-            DO.LineTrip station = ListLineTrip.Find(b => b.KeyId == lineTrip.KeyId && lineTrip.StartAt == b.StartAt && lineTrip.TripLineExist == true);
-            if (station != null)
-            {
-                ListLineTrip.Remove(station);
-                ListLineTrip.Add(lineTrip);
-            }
-            else
+            if (findLine == null) //we not find the bus
                 throw new DO.WrongLineTripExeption(lineTrip.KeyId, "לא נמצאו זמני נסיעות עבור קו זה");
-            XMLTools.SaveListToXMLSerializer(ListLineTrip, lineTripPath);
+            else
+            {
+                findLine.Element("KeyId").Value = lineTrip.KeyId.ToString();
+                findLine.Element("StartAt").Value = lineTrip.StartAt.ToString();
+                findLine.Element("Frequency").Value = lineTrip.Frequency.ToString();
+                findLine.Element("FinishAt").Value = lineTrip.FinishAt.ToString();
+                findLine.Element("TripLineExist").Value = lineTrip.TripLineExist.ToString();
+
+                XMLTools.SaveListToXMLElement(ListLineTrip, lineTripPath);
+            }
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         }
 
@@ -690,7 +744,7 @@ namespace DL
         #endregion
 
         #region AdjacentStations
-    
+
         public AdjacentStations GetAdjacentStations(int Scode1, int Scode2)
         {
             List<AdjacentStations> ListAdjacentStations = XMLTools.LoadListFromXMLSerializer<AdjacentStations>(adjacentStationsPath);
