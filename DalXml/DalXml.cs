@@ -746,7 +746,7 @@ namespace DL
         }
 
         public IEnumerable<LineTrip> GetAllTripline(int idline)
-        {
+        {//
 
             XElement a=new XElement(lineTripPath);
             List<LineTrip> ListLineTrip1 = new List<LineTrip>
