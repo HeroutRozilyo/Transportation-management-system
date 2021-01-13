@@ -793,7 +793,7 @@ namespace DL
             XMLTools.SaveListToXMLSerializer(ListAdjacentStations, adjacentStationsPath);
 
 
-
+            //
         }
 
         public void DeleteAdjacentStationse(int Scode1, int Scode2)
