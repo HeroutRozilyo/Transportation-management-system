@@ -29,6 +29,9 @@ namespace DL
         string lineStationPath = @"lineStationXml.xml"; //XMLSerializer
          string lineTripPath = @"lineTripXml.xml"; //XMLSerializer
        string adjacentStationsPath = @"AdjacentStationsXml.xml"; //XMLSerializer
+        string userPath = @"UserXml.xml"; //XMLSerializer
+
+
         #endregion
 
 
@@ -687,12 +690,7 @@ namespace DL
         #endregion
 
         #region AdjacentStations
-        /*
-   
-         
-         
-         */
-
+    
         public AdjacentStations GetAdjacentStations(int Scode1, int Scode2)
         {
             List<AdjacentStations> ListAdjacentStations = XMLTools.LoadListFromXMLSerializer<AdjacentStations>(adjacentStationsPath);
@@ -824,129 +822,116 @@ namespace DL
 
 
 
+        #region User
 
-    
-        
-
-        public void AddTrip(Trip trip)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void AddUser(User user)
-        {
-            throw new NotImplementedException();
-        }
-
-
-  
       
-     
-       
-     
-
-
-        public void DeleteTrip(int id)
+        public DO.User GetUser(string name) //check if the user exsis according to the name
         {
-            throw new NotImplementedException();
+            List<User> userStations = XMLTools.LoadListFromXMLSerializer<User>(userPath);
+
+            DO.User user = userStations.Find(b => b.UserName == name && b.UserExist);
+            if (user != null)
+            {
+                return user;
+            }
+            else
+                throw new DO.WrongNameExeption(name, $"{1}השם לא קיים במערכת או אחד מהפרטים שהזנת שגוי");/////////////////////////////////////////////////////////
+
         }
+        public IEnumerable<DO.User> GetAlluser() //return all the user that we have
+        {
+            List<User> userStations = XMLTools.LoadListFromXMLSerializer<User>(userPath);
+
+            return from user in userStations
+                   where (user.UserExist)
+                   select user;
+        }
+        public IEnumerable<DO.User> GetAlluserAdmin() //return all the user Admin we have
+        {
+            List<User> userStations = XMLTools.LoadListFromXMLSerializer<User>(userPath);
+
+            return from user in userStations
+                   where (user.UserExist && user.Admin)
+                   select user;
+        }
+        public IEnumerable<DO.User> GetAlluserNAdmin() //return all the user not Admin we have
+        {
+            List<User> userStations = XMLTools.LoadListFromXMLSerializer<User>(userPath);
+
+            return from user in userStations
+                   where (user.UserExist && !user.Admin)
+                   select user;
+        }
+
+        public IEnumerable<DO.User> GetAlluserBy(Predicate<DO.User> userConditions) //איך כותבים??
+        {
+            List<User> userStations = XMLTools.LoadListFromXMLSerializer<User>(userPath);
+
+            return from u in userStations
+                        where (u.UserExist && userConditions(u))
+                        select u;
+           
+        }
+
+        public void AddUser(DO.User user)
+        {
+            List<User> userStations = XMLTools.LoadListFromXMLSerializer<User>(userPath);
+
+            if (userStations.FirstOrDefault(b => b.UserName == user.UserName) != null) //if != null its means that this name is allready exsis
+                throw new DO.WrongNameExeption(user.UserName, "שם משתמש כבר קיים במערכת, בבקשה הכנס שם אחר");/////////////////////////////////////////////////////////////////
+            userStations.Add(user);
+            XMLTools.SaveListToXMLSerializer(userStations, userPath);
+
+
+        }
+        public DO.User getUserBy(Predicate<DO.User> userConditions)
+        {
+            List<User> userStations = XMLTools.LoadListFromXMLSerializer<User>(userPath);
+
+            var users = from u in userStations
+                        where (u.UserExist && userConditions(u))
+                        select u;
+            return users.ElementAt(0);
+        }
+
 
         public void DeleteUser(string name)
         {
-            throw new NotImplementedException();
+            List<User> userStations = XMLTools.LoadListFromXMLSerializer<User>(userPath);
+
+            DO.User userDelete = userStations.Find(b => b.UserName == name && b.UserExist);
+            if (userDelete != null)
+            {
+                userDelete.UserExist = false;
+
+            }
+            else
+                throw new DO.WrongNameExeption(name, "לא נמצאו פרטים במערכת עבור משתמש זה");
+            XMLTools.SaveListToXMLSerializer(userStations, userPath);
+
         }
 
-
-
-
-
-  
-  
-  
-
-     
- 
-   
-
-
-        public IEnumerable<Trip> GetAllTrip()
+        public void UpdateUser(DO.User user)
         {
-            throw new NotImplementedException();
+            List<User> userStations = XMLTools.LoadListFromXMLSerializer<User>(userPath);
+
+            DO.User u = userStations.Find(b => b.UserName == user.UserName && b.UserExist);
+            if (u != null)
+            {
+                userStations.Remove(u);
+                userStations.Add(user);
+            }
+            else
+                throw new DO.WrongNameExeption(user.UserName, "לא נמצאו פרטים במערכת עבור שם זה");
+            XMLTools.SaveListToXMLSerializer(userStations, userPath);
+
         }
 
-    
+        #endregion User
 
-        public IEnumerable<Trip> GetAllTripLine(int line)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<Trip> GetAllTripsBy(Predicate<Trip> Tripcondition)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<User> GetAlluser()
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<User> GetAlluserAdmin()
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<User> GetAlluserBy(Predicate<User> userConditions)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<User> GetAlluserNAdmin()
-        {
-            throw new NotImplementedException();
-        }
 
 
      
 
-        public IEnumerable<object> GetLineFields(Func<int, bool, object> generate)
-        {
-            throw new NotImplementedException();
-        }
-
-    
-
-       
-
-        public Trip GetTrip(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public User GetUser(string name)
-        {
-            throw new NotImplementedException();
-        }
-
-        public User getUserBy(Predicate<User> userConditions)
-        {
-            throw new NotImplementedException();
-        }
-
- 
-  
-      
-
- 
-
-        public void UpdateStations(Trip trip)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void UpdateUser(User user)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
