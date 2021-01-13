@@ -111,21 +111,21 @@ namespace DALAPI
         DO.User getUserBy(Predicate<DO.User> userConditions);
         #endregion User
 
-        #region Trip
-        DO.Trip GetTrip(int id); //check if the Trip exsis according to the id
+        //#region Trip
+        //DO.Trip GetTrip(int id); //check if the Trip exsis according to the id
 
-        IEnumerable<DO.Trip> GetAllTrip(); //return all the stations that we have
+        //IEnumerable<DO.Trip> GetAllTrip(); //return all the stations that we have
 
-        IEnumerable<DO.Trip> GetAllTripLine(int line); //return all the trip that we have in thid line
+        //IEnumerable<DO.Trip> GetAllTripLine(int line); //return all the trip that we have in thid line
 
-        IEnumerable<DO.Trip> GetAllTripsBy(Predicate<DO.Trip> Tripcondition);
+        //IEnumerable<DO.Trip> GetAllTripsBy(Predicate<DO.Trip> Tripcondition);
 
-        void AddTrip(DO.Trip trip);
+        //void AddTrip(DO.Trip trip);
 
-        void DeleteTrip(int id);
+        //void DeleteTrip(int id);
 
-        void UpdateStations(DO.Trip trip);
+        //void UpdateStations(DO.Trip trip);
 
-        #endregion Trip
+        //#endregion Trip
     }
 }

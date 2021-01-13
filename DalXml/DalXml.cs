@@ -6,6 +6,7 @@ using System.Device.Location;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 using System.Xml.Linq;
 //https://www.gov.il/he/Departments/General/gtfs_general_transit_feed_specifications
 
@@ -29,6 +30,9 @@ namespace DL
         string lineStationPath = @"lineStationXml.xml"; //XMLSerializer
          string lineTripPath = @"lineTripXml.xml"; //XMLSerializer
        string adjacentStationsPath = @"AdjacentStationsXml.xml"; //XMLSerializer
+        string userPath = @"UserXml.xml"; //XMLSerializer
+
+
         #endregion
 
 
@@ -58,9 +62,6 @@ namespace DL
 
         public IEnumerable<Bus> GetAllBuses()
         {
-
-          
-            
             XElement busRootElem = XMLTools.LoadListFromXMLElement(busPath); //get the data from xml
 
             return (from bus in busRootElem.Elements()
@@ -374,8 +375,6 @@ namespace DL
 
         public IEnumerable<Stations> GetAllStations()
         {
-            
-           
             XElement stationRootElem = XMLTools.LoadListFromXMLElement(stationPath); //get the data from xml
 
             return (from station in stationRootElem.Elements()
@@ -474,7 +473,6 @@ namespace DL
 
         public LineStation GetLineStation(int Scode, int idline)
         {
-          
             List<LineStation> ListLineStation = XMLTools.LoadListFromXMLSerializer<LineStation>(lineStationPath);
             DO.LineStation sta = ListLineStation.Find((b => b.StationCode == Scode && b.LineId == idline && b.LineStationExist == true));
             if (sta != null)
@@ -487,7 +485,6 @@ namespace DL
 
         public IEnumerable<LineStation> GetAllStationsLine(int idline)
         {
-           
             List<LineStation> ListLineStation = XMLTools.LoadListFromXMLSerializer<LineStation>(lineStationPath);
 
             return from station in ListLineStation
@@ -607,52 +604,84 @@ namespace DL
         #region LineTrip
 
 
+    
         public LineTrip GetLineTrip(TimeSpan start, int idline)
         {
-            List<LineTrip> ListLineTrip = XMLTools.LoadListFromXMLSerializer<LineTrip>(lineTripPath);
+            XElement ListLineTrip = XMLTools.LoadListFromXMLElement(lineTripPath); //get the data from xml
+            DO.LineTrip b = (from line in ListLineTrip.Elements()
+                             where line.Element("KeyId").Value == idline.ToString() && Convert.ToBoolean(line.Element("TripLineExist").Value) == true
+                             select new DO.LineTrip
+                             {
+                                 KeyId = Convert.ToInt32( line.Element("KeyId").Value),
+                                 StartAt = XmlConvert.ToTimeSpan(line.Element("StartAt").Value),
+                                 Frequency = Double.Parse(line.Element("Frequency").Value),
+                                 FinishAt = XmlConvert.ToTimeSpan(line.Element("FinishAt").Value),
+                                 TripLineExist = Convert.ToBoolean( line.Element("TripLineExist").Value),
+                               
+        }).FirstOrDefault();
 
-            DO.LineTrip linetrip = ListLineTrip.Find(b => b.KeyId == idline && b.StartAt == start && b.TripLineExist == true);
-            if (linetrip != null)
-            {
-                return linetrip;
-            }
-            else
+            if (b == null)
                 throw new DO.WrongLineTripExeption(idline, $"{start} לא נמצאו פרטים עבור הקו המבוקש בשעה זו");
+          return b;
+               
         }
 
         public IEnumerable<LineTrip> GetAllTripline(int idline)
         {
-           
-            List<LineTrip> ListLineTrip = XMLTools.LoadListFromXMLSerializer<LineTrip>(lineTripPath);
+            XElement ListLineTrip = XMLTools.LoadListFromXMLElement(lineTripPath); //get the data from xml
+            return (from line in ListLineTrip.Elements()
+                    where line.Element("KeyId").Value == idline.ToString() && Convert.ToBoolean(line.Element("TripLineExist").Value) == true
+                    select new DO.LineTrip
+                    {
+                        KeyId = Convert.ToInt32(line.Element("KeyId").Value),
+                        StartAt = XmlConvert.ToTimeSpan(line.Element("StartAt").Value),
+                        Frequency = Double.Parse(line.Element("Frequency").Value),
+                        FinishAt = XmlConvert.ToTimeSpan(line.Element("FinishAt").Value),
+                        TripLineExist = Convert.ToBoolean(line.Element("TripLineExist").Value),
 
-            return from linetrip in ListLineTrip
-                   where (linetrip.KeyId == idline && linetrip.TripLineExist == true)
-                   select linetrip;
-
+                    });
         }
+
+
 
         public IEnumerable<LineTrip> GetAllLineTripsBy(Predicate<LineTrip> StationsLinecondition)
         {
-            List<LineTrip> ListLineTrip = XMLTools.LoadListFromXMLSerializer<LineTrip>(lineTripPath);
 
-            return from linetrip in ListLineTrip
-                   where (StationsLinecondition(linetrip) && linetrip.TripLineExist == true)
-                   select linetrip;
-            
+            XElement ListLineTrip = XMLTools.LoadListFromXMLElement(lineTripPath); //get the data from xml
+            return from line in ListLineTrip.Elements()
+                   let l1 = new DO.LineTrip
+                   {
+                       KeyId = Convert.ToInt32(line.Element("KeyId").Value),
+                       StartAt = XmlConvert.ToTimeSpan(line.Element("StartAt").Value),
+                       Frequency = Double.Parse(line.Element("Frequency").Value),
+                       FinishAt = XmlConvert.ToTimeSpan(line.Element("FinishAt").Value),
+                       TripLineExist = Convert.ToBoolean(line.Element("TripLineExist").Value),
+
+
+                   }
+                   where StationsLinecondition(l1) && Convert.ToBoolean(line.Element("TripLineExist").Value) == true
+                   select l1;
+                    
 
         }
 
         public void AddLineTrip(LineTrip lineTrip)
         {
-            List<LineTrip> ListLineTrip = XMLTools.LoadListFromXMLSerializer<LineTrip>(lineTripPath);
-            ListLineTrip.Add(lineTrip);
-            XMLTools.SaveListToXMLSerializer(ListLineTrip, lineTripPath);
+ 
+
+
+            XElement ListLineTrip = XMLTools.LoadListFromXMLElement(lineTripPath); //get the data from xml
+            XElement lineToAdd = XMLTools.ToXML(lineTrip);
+
+            ListLineTrip.Add(lineToAdd);
+            XMLTools.SaveListToXMLElement(ListLineTrip, lineTripPath);
 
         }
 
 
         public void DeleteLineTrip(int idline)
-        {
+        {    
+
             List<LineTrip> ListLineTrip = XMLTools.LoadListFromXMLSerializer<LineTrip>(lineTripPath);
 
             foreach (var item in ListLineTrip)
@@ -676,18 +705,38 @@ namespace DL
 
         public void UpdatelineTrip(LineTrip lineTrip)
         {
-            List<LineTrip> ListLineTrip = XMLTools.LoadListFromXMLSerializer<LineTrip>(lineTripPath);
+            XElement ListLineTrip = XMLTools.LoadListFromXMLElement(lineTripPath); //get the data from xml
+            XElement findLine = (from b in ListLineTrip.Elements()
+                                where b.Element("KeyId").Value == lineTrip.KeyId.ToString() && Convert.ToBoolean(b.Element("TripLineExist").Value) == true
+                                select b).FirstOrDefault();
 
-
-            DO.LineTrip station = ListLineTrip.Find(b => b.KeyId == lineTrip.KeyId && lineTrip.StartAt == b.StartAt && lineTrip.TripLineExist == true);
-            if (station != null)
-            {
-                ListLineTrip.Remove(station);
-                ListLineTrip.Add(lineTrip);
-            }
-            else
+            if (findLine == null) //we not find the bus
                 throw new DO.WrongLineTripExeption(lineTrip.KeyId, "לא נמצאו זמני נסיעות עבור קו זה");
-            XMLTools.SaveListToXMLSerializer(ListLineTrip, lineTripPath);
+            else
+            {
+                findLine.Element("KeyId").Value = lineTrip.KeyId.ToString();
+                findLine.Element("StartAt").Value = lineTrip.StartAt.ToString();
+                findLine.Element("Frequency").Value = lineTrip.Frequency.ToString();
+                findLine.Element("FinishAt").Value = lineTrip.FinishAt.ToString();
+                findLine.Element("TripLineExist").Value = lineTrip.TripLineExist.ToString();
+
+                XMLTools.SaveListToXMLElement(ListLineTrip, lineTripPath);
+            }
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         }
 
@@ -695,11 +744,6 @@ namespace DL
         #endregion
 
         #region AdjacentStations
-        /*
-   
-         
-         
-         */
 
         public AdjacentStations GetAdjacentStations(int Scode1, int Scode2)
         {
@@ -749,7 +793,7 @@ namespace DL
             XMLTools.SaveListToXMLSerializer(ListAdjacentStations, adjacentStationsPath);
 
 
-
+            //
         }
 
         public void DeleteAdjacentStationse(int Scode1, int Scode2)
@@ -832,129 +876,116 @@ namespace DL
 
 
 
+        #region User
 
-    
-        
-
-        public void AddTrip(Trip trip)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void AddUser(User user)
-        {
-            throw new NotImplementedException();
-        }
-
-
-  
       
-     
-       
-     
-
-
-        public void DeleteTrip(int id)
+        public DO.User GetUser(string name) //check if the user exsis according to the name
         {
-            throw new NotImplementedException();
+            List<User> userStations = XMLTools.LoadListFromXMLSerializer<User>(userPath);
+
+            DO.User user = userStations.Find(b => b.UserName == name && b.UserExist);
+            if (user != null)
+            {
+                return user;
+            }
+            else
+                throw new DO.WrongNameExeption(name, $"{1}השם לא קיים במערכת או אחד מהפרטים שהזנת שגוי");/////////////////////////////////////////////////////////
+
         }
+        public IEnumerable<DO.User> GetAlluser() //return all the user that we have
+        {
+            List<User> userStations = XMLTools.LoadListFromXMLSerializer<User>(userPath);
+
+            return from user in userStations
+                   where (user.UserExist)
+                   select user;
+        }
+        public IEnumerable<DO.User> GetAlluserAdmin() //return all the user Admin we have
+        {
+            List<User> userStations = XMLTools.LoadListFromXMLSerializer<User>(userPath);
+
+            return from user in userStations
+                   where (user.UserExist && user.Admin)
+                   select user;
+        }
+        public IEnumerable<DO.User> GetAlluserNAdmin() //return all the user not Admin we have
+        {
+            List<User> userStations = XMLTools.LoadListFromXMLSerializer<User>(userPath);
+
+            return from user in userStations
+                   where (user.UserExist && !user.Admin)
+                   select user;
+        }
+
+        public IEnumerable<DO.User> GetAlluserBy(Predicate<DO.User> userConditions) //איך כותבים??
+        {
+            List<User> userStations = XMLTools.LoadListFromXMLSerializer<User>(userPath);
+
+            return from u in userStations
+                        where (u.UserExist && userConditions(u))
+                        select u;
+           
+        }
+
+        public void AddUser(DO.User user)
+        {
+            List<User> userStations = XMLTools.LoadListFromXMLSerializer<User>(userPath);
+
+            if (userStations.FirstOrDefault(b => b.UserName == user.UserName) != null) //if != null its means that this name is allready exsis
+                throw new DO.WrongNameExeption(user.UserName, "שם משתמש כבר קיים במערכת, בבקשה הכנס שם אחר");/////////////////////////////////////////////////////////////////
+            userStations.Add(user);
+            XMLTools.SaveListToXMLSerializer(userStations, userPath);
+
+
+        }
+        public DO.User getUserBy(Predicate<DO.User> userConditions)
+        {
+            List<User> userStations = XMLTools.LoadListFromXMLSerializer<User>(userPath);
+
+            var users = from u in userStations
+                        where (u.UserExist && userConditions(u))
+                        select u;
+            return users.ElementAt(0);
+        }
+
 
         public void DeleteUser(string name)
         {
-            throw new NotImplementedException();
+            List<User> userStations = XMLTools.LoadListFromXMLSerializer<User>(userPath);
+
+            DO.User userDelete = userStations.Find(b => b.UserName == name && b.UserExist);
+            if (userDelete != null)
+            {
+                userDelete.UserExist = false;
+
+            }
+            else
+                throw new DO.WrongNameExeption(name, "לא נמצאו פרטים במערכת עבור משתמש זה");
+            XMLTools.SaveListToXMLSerializer(userStations, userPath);
+
         }
 
-
-
-
-
-  
-  
-  
-
-     
- 
-   
-
-
-        public IEnumerable<Trip> GetAllTrip()
+        public void UpdateUser(DO.User user)
         {
-            throw new NotImplementedException();
+            List<User> userStations = XMLTools.LoadListFromXMLSerializer<User>(userPath);
+
+            DO.User u = userStations.Find(b => b.UserName == user.UserName && b.UserExist);
+            if (u != null)
+            {
+                userStations.Remove(u);
+                userStations.Add(user);
+            }
+            else
+                throw new DO.WrongNameExeption(user.UserName, "לא נמצאו פרטים במערכת עבור שם זה");
+            XMLTools.SaveListToXMLSerializer(userStations, userPath);
+
         }
 
-    
+        #endregion User
 
-        public IEnumerable<Trip> GetAllTripLine(int line)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<Trip> GetAllTripsBy(Predicate<Trip> Tripcondition)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<User> GetAlluser()
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<User> GetAlluserAdmin()
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<User> GetAlluserBy(Predicate<User> userConditions)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<User> GetAlluserNAdmin()
-        {
-            throw new NotImplementedException();
-        }
 
 
      
 
-        public IEnumerable<object> GetLineFields(Func<int, bool, object> generate)
-        {
-            throw new NotImplementedException();
-        }
-
-    
-
-       
-
-        public Trip GetTrip(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public User GetUser(string name)
-        {
-            throw new NotImplementedException();
-        }
-
-        public User getUserBy(Predicate<User> userConditions)
-        {
-            throw new NotImplementedException();
-        }
-
- 
-  
-      
-
- 
-
-        public void UpdateStations(Trip trip)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void UpdateUser(User user)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
