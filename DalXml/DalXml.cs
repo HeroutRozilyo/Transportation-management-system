@@ -606,7 +606,126 @@ namespace DL
 
     
         public LineTrip GetLineTrip(TimeSpan start, int idline)
+
         {
+            List<LineTrip> ListLineTrip1 = new List<LineTrip>
+            {
+                 #region LineTrip
+                new LineTrip
+                {
+                 KeyId=1,
+                 StartAt=new TimeSpan(06,00,00),
+                 FinishAt=new TimeSpan(23,59,59),
+                 TripLineExist=true,
+                 Frequency=19,
+                 },
+                new LineTrip
+                {
+                 KeyId=2,
+                 StartAt=new TimeSpan(06,00,00),
+                 FinishAt=new TimeSpan(24,00,00),
+                 TripLineExist=true,
+                 Frequency=13,
+                 },
+                new LineTrip
+                {
+                 KeyId=3,
+                 StartAt=new TimeSpan(06,00,00),
+                 FinishAt=new TimeSpan(23,59,59),
+                 TripLineExist=true,
+                 Frequency=15,
+                 },
+                new LineTrip
+                {
+                 KeyId=4,
+                 StartAt=new TimeSpan(06,00,00),
+                 FinishAt=new TimeSpan(19,00,00),
+                 TripLineExist=true,
+                 Frequency=10,
+                 },
+                new LineTrip
+                {
+                 KeyId=4,
+                 StartAt=new TimeSpan(19,00,00),
+                 FinishAt=new TimeSpan(23,59,59),
+                 TripLineExist=true,
+                 Frequency=30,
+                 },
+                new LineTrip
+                {
+                 KeyId=5,
+                 StartAt=new TimeSpan(06,00,00),
+                 FinishAt=new TimeSpan(08,30,00),
+                 TripLineExist=true,
+                 Frequency=3,
+                 },
+                new LineTrip
+                {
+                 KeyId=5,
+                 StartAt=new TimeSpan(08,30,00),
+                 FinishAt=new TimeSpan(14,00,00),
+                 TripLineExist=true,
+                 Frequency=60,
+                 },
+                new LineTrip
+                {
+                 KeyId=5,
+                 StartAt=new TimeSpan(14,00,00),
+                 FinishAt=new TimeSpan(23,59,59),
+                 TripLineExist=true,
+                 Frequency=20,
+                 },
+                new LineTrip
+                {
+                 KeyId=6,
+                 StartAt=new TimeSpan(06,00,00),
+                 FinishAt=new TimeSpan(23,59,59),
+                 TripLineExist=true,
+                 Frequency=17,
+                 },
+                new LineTrip
+                {
+                 KeyId=7,
+                 StartAt=new TimeSpan(08,00,00),
+                 FinishAt=new TimeSpan(23,59,59),
+                 TripLineExist=true,
+                 Frequency=30,
+                 },
+                new LineTrip
+                {
+                 KeyId=8,
+                 StartAt=new TimeSpan(01,00,00),
+                 FinishAt=new TimeSpan(06,00,00),
+                 TripLineExist=true,
+                 Frequency=60,
+                 },
+                new LineTrip
+                {
+                 KeyId=9,
+                 StartAt=new TimeSpan(05,00,00),
+                 FinishAt=new TimeSpan(10,00,00),
+                 TripLineExist=true,
+                 Frequency=20,
+                 },
+                new LineTrip
+                {
+                 KeyId=9,
+                 StartAt=new TimeSpan(10,00,00),
+                 FinishAt=new TimeSpan(23,59,59),
+                 TripLineExist=true,
+                 Frequency=40,
+                 },
+                new LineTrip
+                {
+                 KeyId=10,
+                 StartAt=new TimeSpan(6,00,00),
+                 FinishAt=new TimeSpan(23,59,59),
+                 TripLineExist=true,
+                 Frequency=40,
+                 }
+                 #endregion LineTrip
+            };
+            XMLTools.SaveListToXMLSerializer(ListLineTrip1, lineTripPath);
             XElement ListLineTrip = XMLTools.LoadListFromXMLElement(lineTripPath); //get the data from xml
             DO.LineTrip b = (from line in ListLineTrip.Elements()
                              where line.Element("KeyId").Value == idline.ToString() && Convert.ToBoolean(line.Element("TripLineExist").Value) == true
