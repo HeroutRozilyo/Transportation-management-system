@@ -1,99 +1,101 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<LineTrip>
-  <KeyId>1</KeyId>
-  <Frequency>19</Frequency>
-  <StartAt>06:00:00</StartAt>
-  <FinishAt>23:59:59</FinishAt>
-  <TripLineExist>true</TripLineExist>
+<?xml version="1.0"?>
+<ArrayOfLineTrip xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <LineTrip>
+    <KeyId>1</KeyId>
+    <StartAt />
+    <Frequency>19</Frequency>
+    <FinishAt />
+    <TripLineExist>true</TripLineExist>
+  </LineTrip>
   <LineTrip>
     <KeyId>2</KeyId>
+    <StartAt />
     <Frequency>13</Frequency>
-    <StartAt>06:00:00</StartAt>
-    <FinishAt>1.00:00:00</FinishAt>
+    <FinishAt />
     <TripLineExist>true</TripLineExist>
   </LineTrip>
   <LineTrip>
     <KeyId>3</KeyId>
+    <StartAt />
     <Frequency>15</Frequency>
-    <StartAt>06:00:00</StartAt>
-    <FinishAt>23:59:59</FinishAt>
+    <FinishAt />
     <TripLineExist>true</TripLineExist>
   </LineTrip>
   <LineTrip>
     <KeyId>4</KeyId>
+    <StartAt />
     <Frequency>10</Frequency>
-    <StartAt>06:00:00</StartAt>
-    <FinishAt>19:00:00</FinishAt>
+    <FinishAt />
     <TripLineExist>true</TripLineExist>
   </LineTrip>
   <LineTrip>
     <KeyId>4</KeyId>
+    <StartAt />
     <Frequency>30</Frequency>
-    <StartAt>19:00:00</StartAt>
-    <FinishAt>23:59:59</FinishAt>
+    <FinishAt />
     <TripLineExist>true</TripLineExist>
   </LineTrip>
   <LineTrip>
     <KeyId>5</KeyId>
+    <StartAt />
     <Frequency>3</Frequency>
-    <StartAt>06:00:00</StartAt>
-    <FinishAt>08:30:00</FinishAt>
+    <FinishAt />
     <TripLineExist>true</TripLineExist>
   </LineTrip>
   <LineTrip>
     <KeyId>5</KeyId>
+    <StartAt />
     <Frequency>60</Frequency>
-    <StartAt>08:30:00</StartAt>
-    <FinishAt>14:00:00</FinishAt>
+    <FinishAt />
     <TripLineExist>true</TripLineExist>
   </LineTrip>
   <LineTrip>
     <KeyId>5</KeyId>
+    <StartAt />
     <Frequency>20</Frequency>
-    <StartAt>14:00:00</StartAt>
-    <FinishAt>23:59:59</FinishAt>
+    <FinishAt />
     <TripLineExist>true</TripLineExist>
   </LineTrip>
   <LineTrip>
     <KeyId>6</KeyId>
+    <StartAt />
     <Frequency>17</Frequency>
-    <StartAt>06:00:00</StartAt>
-    <FinishAt>23:59:59</FinishAt>
+    <FinishAt />
     <TripLineExist>true</TripLineExist>
   </LineTrip>
   <LineTrip>
     <KeyId>7</KeyId>
+    <StartAt />
     <Frequency>30</Frequency>
-    <StartAt>08:00:00</StartAt>
-    <FinishAt>23:59:59</FinishAt>
+    <FinishAt />
     <TripLineExist>true</TripLineExist>
   </LineTrip>
   <LineTrip>
     <KeyId>8</KeyId>
+    <StartAt />
     <Frequency>60</Frequency>
-    <StartAt>01:00:00</StartAt>
-    <FinishAt>06:00:00</FinishAt>
+    <FinishAt />
     <TripLineExist>true</TripLineExist>
   </LineTrip>
   <LineTrip>
     <KeyId>9</KeyId>
+    <StartAt />
     <Frequency>20</Frequency>
-    <StartAt>05:00:00</StartAt>
-    <FinishAt>10:00:00</FinishAt>
+    <FinishAt />
     <TripLineExist>true</TripLineExist>
   </LineTrip>
   <LineTrip>
     <KeyId>9</KeyId>
+    <StartAt />
     <Frequency>40</Frequency>
-    <StartAt>10:00:00</StartAt>
-    <FinishAt>23:59:59</FinishAt>
+    <FinishAt />
     <TripLineExist>true</TripLineExist>
   </LineTrip>
   <LineTrip>
     <KeyId>10</KeyId>
+    <StartAt />
     <Frequency>40</Frequency>
-    <StartAt>06:00:00</StartAt>
-    <FinishAt>23:59:59</FinishAt>
+    <FinishAt />
     <TripLineExist>true</TripLineExist>
   </LineTrip>
-</LineTrip>
+</ArrayOfLineTrip>

@@ -1,24 +1,24 @@
-<?xml version="1.0"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <ArrayOfBus xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Bus>
     <Licence>5267008</Licence>
-    <StartingDate>2013-02-05T00:00:00</StartingDate>
-    <Kilometrz>22000</Kilometrz>
-    <KilometrFromLastTreat>2000</KilometrFromLastTreat>
-    <FuellAmount>200</FuellAmount>
-    <StatusBus>READT_TO_TRAVEL</StatusBus>
-    <BusExist>true</BusExist>
-    <LastTreatment>0001-01-01T00:00:00</LastTreatment>
+    <StartingDate>05/02/2013 00:00:00</StartingDate>
+    <Kilometrz>0</Kilometrz>
+    <KilometrFromLastTreat>0</KilometrFromLastTreat>
+    <FuellAmount>1200</FuellAmount>
+    <StatusBus>REFULLING</StatusBus>
+    <BusExist>false</BusExist>
+    <LastTreatment>13/01/2021 00:00:00</LastTreatment>
   </Bus>
   <Bus>
     <Licence>2784562</Licence>
-    <StartingDate>2014-03-05T00:00:00</StartingDate>
+    <StartingDate>05/03/2014 00:00:00</StartingDate>
     <Kilometrz>22000</Kilometrz>
     <KilometrFromLastTreat>2000</KilometrFromLastTreat>
-    <FuellAmount>700</FuellAmount>
-    <StatusBus>READT_TO_TRAVEL</StatusBus>
-    <BusExist>true</BusExist>
-    <LastTreatment>0001-01-01T00:00:00</LastTreatment>
+    <FuellAmount>1200</FuellAmount>
+    <StatusBus>IN_TREATMENT</StatusBus>
+    <BusExist>True</BusExist>
+    <LastTreatment>01/01/0001 00:00:00</LastTreatment>
   </Bus>
   <Bus>
     <Licence>12345678</Licence>
@@ -199,5 +199,25 @@
     <StatusBus>READT_TO_TRAVEL</StatusBus>
     <BusExist>true</BusExist>
     <LastTreatment>0001-01-01T00:00:00</LastTreatment>
+  </Bus>
+  <Bus>
+    <Licence>1234123</Licence>
+    <StartingDate>2014-03-11T00:00:00</StartingDate>
+    <Kilometrz>0</Kilometrz>
+    <KilometrFromLastTreat>0</KilometrFromLastTreat>
+    <FuellAmount>0</FuellAmount>
+    <StatusBus>READT_TO_TRAVEL</StatusBus>
+    <BusExist>false</BusExist>
+    <LastTreatment>2020-06-24T00:00:00</LastTreatment>
+  </Bus>
+  <Bus>
+    <Licence>1231231</Licence>
+    <StartingDate>2014-03-10T00:00:00</StartingDate>
+    <Kilometrz>0</Kilometrz>
+    <KilometrFromLastTreat>9</KilometrFromLastTreat>
+    <FuellAmount>0</FuellAmount>
+    <StatusBus>READT_TO_TRAVEL</StatusBus>
+    <BusExist>true</BusExist>
+    <LastTreatment>2018-01-31T00:00:00</LastTreatment>
   </Bus>
 </ArrayOfBus>

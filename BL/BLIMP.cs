@@ -91,7 +91,7 @@ namespace BL
             string te = bus.Licence.Replace("-", "");
             busDO.Licence = te;
             busDO = (DO.Bus)bus.CopyPropertiesToNew(typeof(DO.Bus));
-
+            busDO.BusExist = true;
             try
             {
                 dl.AddBus(busDO);

@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <ArrayOfLine xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Line>
     <IdNumber>1</IdNumber>
@@ -6,7 +6,7 @@
     <FirstStationCode>73</FirstStationCode>
     <LastStationCode>89</LastStationCode>
     <Area>JERUSALEM</Area>
-    <LineExist>true</LineExist>
+    <LineExist>True</LineExist>
   </Line>
   <Line>
     <IdNumber>2</IdNumber>

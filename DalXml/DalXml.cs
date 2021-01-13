@@ -612,10 +612,10 @@ namespace DL
                              where line.Element("KeyId").Value == idline.ToString() && Convert.ToBoolean(line.Element("TripLineExist").Value) == true
                              select new DO.LineTrip
                              {
-                                 KeyId = Convert.ToInt32( line.Element("KeyId").Value),
-                                 StartAt = XmlConvert.ToTimeSpan(line.Element("StartAt").Value),
+                                 KeyId = int.Parse( line.Element("KeyId").Value),
+                                 StartAt = TimeSpan.Parse(line.Element("StartAt").Value),
                                  Frequency = Double.Parse(line.Element("Frequency").Value),
-                                 FinishAt = XmlConvert.ToTimeSpan(line.Element("FinishAt").Value),
+                                 FinishAt = TimeSpan.Parse(line.Element("FinishAt").Value),
                                  TripLineExist = Convert.ToBoolean( line.Element("TripLineExist").Value),
                                
         }).FirstOrDefault();
@@ -628,18 +628,37 @@ namespace DL
 
         public IEnumerable<LineTrip> GetAllTripline(int idline)
         {
+
             XElement ListLineTrip = XMLTools.LoadListFromXMLElement(lineTripPath); //get the data from xml
-            return (from line in ListLineTrip.Elements()
-                    where line.Element("KeyId").Value == idline.ToString() && Convert.ToBoolean(line.Element("TripLineExist").Value) == true
-                    select new DO.LineTrip
+            //return (from line in ListLineTrip.Elements()
+            //        where line.Element("KeyId").Value == idline.ToString() && Convert.ToBoolean(line.Element("TripLineExist").Value) == true
+            //        select new DO.LineTrip
+            //        {
+            //            KeyId = int.Parse(line.Element("KeyId").Value),
+            //            StartAt = TimeSpan.Parse(line.Element("StartAt").Value),
+            //            Frequency = Double.Parse(line.Element("Frequency").Value),
+            //            FinishAt = TimeSpan.Parse(line.Element("FinishAt").Value),
+            //            TripLineExist = Convert.ToBoolean(line.Element("TripLineExist").Value),
+
+            //        });
+            List<DO.LineTrip> a = new List<LineTrip>();
+            foreach( var line in ListLineTrip.Elements())
+            {
+                if(line.Element("KeyId").Value == idline.ToString() && Convert.ToBoolean(line.Element("TripLineExist").Value) == true)
+                {
+                    a.Add(new DO.LineTrip()
                     {
-                        KeyId = Convert.ToInt32(line.Element("KeyId").Value),
-                        StartAt = XmlConvert.ToTimeSpan(line.Element("StartAt").Value),
+                        KeyId = int.Parse(line.Element("KeyId").Value),
+                        StartAt = TimeSpan.Parse(line.Element("StartAt").Value),
                         Frequency = Double.Parse(line.Element("Frequency").Value),
-                        FinishAt = XmlConvert.ToTimeSpan(line.Element("FinishAt").Value),
+                        FinishAt = TimeSpan.Parse(line.Element("FinishAt").Value),
                         TripLineExist = Convert.ToBoolean(line.Element("TripLineExist").Value),
 
                     });
+                }
+
+            }
+            return a;
         }
 
 
@@ -651,10 +670,10 @@ namespace DL
             return from line in ListLineTrip.Elements()
                    let l1 = new DO.LineTrip
                    {
-                       KeyId = Convert.ToInt32(line.Element("KeyId").Value),
-                       StartAt = XmlConvert.ToTimeSpan(line.Element("StartAt").Value),
+                       KeyId = int.Parse(line.Element("KeyId").Value),
+                       StartAt = TimeSpan.Parse(line.Element("StartAt").Value),
                        Frequency = Double.Parse(line.Element("Frequency").Value),
-                       FinishAt = XmlConvert.ToTimeSpan(line.Element("FinishAt").Value),
+                       FinishAt = TimeSpan.Parse(line.Element("FinishAt").Value),
                        TripLineExist = Convert.ToBoolean(line.Element("TripLineExist").Value),
 
 
@@ -747,6 +766,7 @@ namespace DL
 
         public AdjacentStations GetAdjacentStations(int Scode1, int Scode2)
         {
+           
             List<AdjacentStations> ListAdjacentStations = XMLTools.LoadListFromXMLSerializer<AdjacentStations>(adjacentStationsPath);
             DO.AdjacentStations linestations = ListAdjacentStations.Find(b => b.Station1 == Scode1 && b.Station2 == Scode2);//|| b.Station1 == Scode2 && b.Station2 == Scode1);
             if (linestations != null)
@@ -761,6 +781,9 @@ namespace DL
 
         public IEnumerable<AdjacentStations> GetAllAdjacentStations(int stationCode) //return all the AdjacentStations that we have for this station code
         {
+           
+
+
             List<AdjacentStations> ListAdjacentStations = XMLTools.LoadListFromXMLSerializer<AdjacentStations>(adjacentStationsPath);
 
             return from station in ListAdjacentStations
@@ -881,6 +904,46 @@ namespace DL
       
         public DO.User GetUser(string name) //check if the user exsis according to the name
         {
+            List<User> ListUsers = new List<User>
+            {
+               #region User
+                new User
+                {
+                    UserName="Herout",
+                    Password="12345",
+                    Admin=true,
+                    UserExist=true,
+                    MailAddress="heroot12@gmail.com"
+                },
+
+                new User
+                {
+                    UserName="Dafna",
+                    Password="12345",
+                    Admin=true,
+                    UserExist=true,
+                     MailAddress="da0773412369@gmail.com"
+
+                },
+                new User
+                {
+                    UserName="notUs",
+                    Password="12345",
+                    Admin=false,
+                    UserExist=true,
+                     MailAddress="heroot12@gmail.com"
+                },
+                new User
+                {
+                    UserName="OriyaShmoel",
+                    Password="busbus123",
+                    Admin=false,
+                    UserExist=true,
+                     MailAddress="heroot12@gmail.com"
+                },
+                 #endregion User
+            };
+            XMLTools.SaveListToXMLSerializer(ListUsers, userPath);
             List<User> userStations = XMLTools.LoadListFromXMLSerializer<User>(userPath);
 
             DO.User user = userStations.Find(b => b.UserName == name && b.UserExist);
