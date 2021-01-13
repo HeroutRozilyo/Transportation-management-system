@@ -4,9 +4,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.30611.23
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dotNet5781_00_4789_9647", "dotNet5781_00_4789_9647\dotNet5781_00_4789_9647.csproj", "{EC4400EA-6BB4-44D1-93C2-C2014CDFFE0E}"
-	ProjectSection(ProjectDependencies) = postProject
-		{6DCED467-99D7-4DB3-A54B-04F1451A33C9} = {6DCED467-99D7-4DB3-A54B-04F1451A33C9}
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dotNet5781_01_9647_4789", "dotNet5781_01_9647_4789\dotNet5781_01_9647_4789.csproj", "{93CE2059-E5B0-4B74-AF03-3CC6C446EDE7}"
 EndProject
@@ -19,6 +16,7 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BL", "BL\BL.csproj", "{4BA9DBD1-B2EB-4AD2-BAAF-5EB8B60A76BC}"
 	ProjectSection(ProjectDependencies) = postProject
 		{2567D62B-AB1B-44A0-807C-16A201DFE5A2} = {2567D62B-AB1B-44A0-807C-16A201DFE5A2}
+		{6DCED467-99D7-4DB3-A54B-04F1451A33C9} = {6DCED467-99D7-4DB3-A54B-04F1451A33C9}
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DALAPI", "DalApi\DALAPI.csproj", "{39F55534-B208-47B9-8CFD-89E162390580}"
@@ -31,7 +29,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		bin\xml\BusXML.xml = bin\xml\BusXML.xml
 		bin\config.xml = bin\config.xml
+		bin\xml\lineStationXml.xml = bin\xml\lineStationXml.xml
+		bin\xml\LineXml.xml = bin\xml\LineXml.xml
 		serials.xml = serials.xml
+		bin\xml\StationXml.xml = bin\xml\StationXml.xml
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PLGui", "PLGui\PLGui.csproj", "{C0C0B23E-147E-4000-B4E7-BA36FC4086BE}"

@@ -5,7 +5,7 @@
     <NumberLine>10</NumberLine>
     <FirstStationCode>73</FirstStationCode>
     <LastStationCode>89</LastStationCode>
-    <Area>CENTER</Area>
+    <Area>JERUSALEM</Area>
     <LineExist>true</LineExist>
   </Line>
   <Line>
@@ -13,7 +13,7 @@
     <NumberLine>27</NumberLine>
     <FirstStationCode>85</FirstStationCode>
     <LastStationCode>97</LastStationCode>
-    <Area>GENERAL</Area>
+    <Area>JERUSALEM</Area>
     <LineExist>true</LineExist>
   </Line>
   <Line>
@@ -29,7 +29,7 @@
     <NumberLine>6</NumberLine>
     <FirstStationCode>121</FirstStationCode>
     <LastStationCode>1491</LastStationCode>
-    <Area>NORTH</Area>
+    <Area>JERUSALEM</Area>
     <LineExist>true</LineExist>
   </Line>
   <Line>
@@ -37,7 +37,7 @@
     <NumberLine>33</NumberLine>
     <FirstStationCode>119</FirstStationCode>
     <LastStationCode>1491</LastStationCode>
-    <Area>SOUTH</Area>
+    <Area>JERUSALEM</Area>
     <LineExist>true</LineExist>
   </Line>
   <Line>
@@ -45,7 +45,7 @@
     <NumberLine>67</NumberLine>
     <FirstStationCode>110</FirstStationCode>
     <LastStationCode>1486</LastStationCode>
-    <Area>YOSH</Area>
+    <Area>JERUSALEM</Area>
     <LineExist>true</LineExist>
   </Line>
   <Line>

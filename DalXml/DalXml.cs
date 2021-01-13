@@ -59,237 +59,8 @@ namespace DL
         public IEnumerable<Bus> GetAllBuses()
         {
 
-           List<DO.Bus> ListBus = new List<Bus>
-            {
-                #region initialization buses
-                new Bus
-                {
-                    Licence="5267008",
-                    StartingDate= new DateTime(2013, 02, 05),
-                    Kilometrz=22000,
-                    KilometrFromLastTreat=2000,
-                    FuellAmount=200,
-                    StatusBus=DO.STUTUS.READT_TO_TRAVEL,
-                    LastTreatment=new DateTime(12/12/2020),
-                    BusExist=true
-                },
-
-
-                new Bus
-                {
-                    Licence="2784562",
-                    StartingDate= new DateTime(2014, 03, 05),
-                    Kilometrz=22000,
-                    KilometrFromLastTreat=2000,
-                    FuellAmount=700,
-                       LastTreatment=new DateTime(12/12/2020),
-                    StatusBus=DO.STUTUS.READT_TO_TRAVEL,
-                    BusExist=true
-
-                },
-                new Bus
-                {
-                    Licence="12345678",
-                    StartingDate= new DateTime(2019, 02, 05),
-                       LastTreatment=new DateTime(12/12/2020),
-                    Kilometrz=10000,
-                    KilometrFromLastTreat=10000,
-                    FuellAmount=340,
-                    StatusBus=DO.STUTUS.READT_TO_TRAVEL,
-                    BusExist=true
-                },
-                new Bus
-                {
-                    //
-                    Licence="5267408",
-                    StartingDate= new DateTime(2013, 02, 05),
-                       LastTreatment=new DateTime(12/12/2020),
-                    Kilometrz=22000,
-                    KilometrFromLastTreat=2000,
-                    FuellAmount=200,
-                    StatusBus=DO.STUTUS.READT_TO_TRAVEL,
-                    BusExist=true
-                },
-                new Bus
-                {
-                    Licence="1234567",
-                    StartingDate= new DateTime(2013, 09, 21),
-                       LastTreatment=new DateTime(12/12/2020),
-                    Kilometrz=70000,
-                    KilometrFromLastTreat=1500.34,
-                    FuellAmount=643.98,
-                    StatusBus=DO.STUTUS.READT_TO_TRAVEL,
-                    BusExist=true
-                },
-                new Bus
-                {
-                    Licence="7654321",
-                    StartingDate= new DateTime(2013, 02, 05),
-                    Kilometrz=22000,
-                       LastTreatment=new DateTime(12/12/2020),
-                    KilometrFromLastTreat=2000,
-                    FuellAmount=200,
-                    StatusBus=DO.STUTUS.READT_TO_TRAVEL,
-                    BusExist=true
-                },
-                new Bus
-                {
-                    Licence="5463728",
-                    StartingDate= new DateTime(2013, 06, 20),
-                       LastTreatment=new DateTime(12/12/2020),
-                    Kilometrz=22000,
-                    KilometrFromLastTreat=78500,
-                    FuellAmount=350,
-                    StatusBus=DO.STUTUS.READT_TO_TRAVEL,
-                    BusExist=true
-                },
-                new Bus
-                {
-                    Licence="8216542",
-                    StartingDate= new DateTime(2010, 04, 15),
-                    Kilometrz=100000,
-                       LastTreatment=new DateTime(12/12/2020),
-                    KilometrFromLastTreat=15000,
-                    FuellAmount=900,
-                    StatusBus=DO.STUTUS.READT_TO_TRAVEL,
-                    BusExist=true
-                },
-                new Bus
-                {
-                    Licence="34509814",
-                    StartingDate= new DateTime(2019, 02, 20),
-                       LastTreatment=new DateTime(12/12/2020),
-                    Kilometrz=10500,
-                    KilometrFromLastTreat=1400,
-                    FuellAmount=300,
-                    StatusBus=DO.STUTUS.READT_TO_TRAVEL,
-                    BusExist=true
-                },
-                new Bus
-                {
-                    Licence="10926574",
-                    StartingDate= new DateTime(2020, 04, 15),
-                       LastTreatment=new DateTime(12/12/2020),
-                    Kilometrz=100000,
-                    KilometrFromLastTreat=15000,
-                    FuellAmount=900,
-                    StatusBus=DO.STUTUS.READT_TO_TRAVEL,
-                    BusExist=true
-                },
-               new Bus
-                {
-                    Licence="1192657",
-                    StartingDate= new DateTime(2010, 12, 15),
-                       LastTreatment=new DateTime(12/12/2020),
-                    Kilometrz=28970,
-                    KilometrFromLastTreat=8970,
-                    FuellAmount=1000,
-                    StatusBus=DO.STUTUS.READT_TO_TRAVEL,
-                    BusExist=true
-                },
-             new Bus
-                {
-                    Licence="1265473",
-                    StartingDate= new DateTime(2009, 07, 18),
-                       LastTreatment=new DateTime(12/12/2020),
-                    Kilometrz=20000,
-                    KilometrFromLastTreat=100,
-                    FuellAmount=900,
-                    StatusBus=DO.STUTUS.READT_TO_TRAVEL,
-                      BusExist=true
-                },
-                new Bus
-                {
-                    Licence="89712365",
-                    StartingDate= new DateTime(2020, 03, 15),
-                       LastTreatment=new DateTime(12/12/2020),
-                    Kilometrz=100000,
-                    KilometrFromLastTreat=15000,
-                    FuellAmount=900,
-                    StatusBus=DO.STUTUS.READT_TO_TRAVEL,
-                    BusExist=true
-                },
-                new Bus
-                {
-                    Licence="1778328",
-                    StartingDate= new DateTime(2010, 02, 15),
-                       LastTreatment=new DateTime(12/12/2020),
-                    Kilometrz=100000,
-                    KilometrFromLastTreat=15000,
-                    FuellAmount=900,
-                    StatusBus=DO.STUTUS.READT_TO_TRAVEL,
-                    BusExist=true
-                },
-              new Bus
-                {
-                    Licence="5059589",
-                    StartingDate= new DateTime(1999, 04, 15),
-                       LastTreatment=new DateTime(12/12/2020),
-                    Kilometrz=100000,
-                    KilometrFromLastTreat=15000,
-                    FuellAmount=900,
-                    StatusBus=DO.STUTUS.READT_TO_TRAVEL,
-                    BusExist=true
-                },
-                                                                                                                          new Bus
-                {
-                    Licence="12845999",
-                    StartingDate= new DateTime(2020, 01, 15),
-                       LastTreatment=new DateTime(12/12/2020),
-                    Kilometrz=100000,
-                    KilometrFromLastTreat=15000,
-                    FuellAmount=900,
-                    StatusBus=DO.STUTUS.READT_TO_TRAVEL,
-                    BusExist=true
-                },
-                                                                                                                          new Bus
-                {
-                    Licence="2000000",
-                       LastTreatment=new DateTime(12/12/2020),
-                    StartingDate= new DateTime(2012, 07, 25),
-                    Kilometrz=109283,
-                    KilometrFromLastTreat=15000,
-                    FuellAmount=900,
-                    StatusBus=DO.STUTUS.READT_TO_TRAVEL,
-                    BusExist=true
-                },
-                                                                                                                      new Bus
-                {
-                    Licence="11119999",
-                    StartingDate= new DateTime(2020, 08, 15),
-                       LastTreatment=new DateTime(12/12/2020),
-                    Kilometrz=100000,
-                    KilometrFromLastTreat=15000,
-                    FuellAmount=900,
-                    StatusBus=DO.STUTUS.READT_TO_TRAVEL,
-                    BusExist=true
-                },
-                                                                                                                            new Bus
-                {
-                    Licence="8576669",
-                    StartingDate= new DateTime(2017, 04, 15),
-                       LastTreatment=new DateTime(12/12/2020),
-                    Kilometrz=100000,
-                    KilometrFromLastTreat=15000,
-                    FuellAmount=900,
-                    StatusBus=DO.STUTUS.READT_TO_TRAVEL,
-                     BusExist=true
-                },
-                                                                                                                          new Bus
-                {
-                   Licence="10928300",
-                    StartingDate= new DateTime(2020, 09, 22),
-                       LastTreatment=new DateTime(12/12/2020),
-                    Kilometrz=100000,
-                    KilometrFromLastTreat=15000,
-                    FuellAmount=900,
-                    StatusBus=DO.STUTUS.READT_TO_TRAVEL,
-                    BusExist=true
-                },
-
-                #endregion
-            };
-            XMLTools.SaveListToXMLSerializer(ListBus, busPath);
+          
+            
             XElement busRootElem = XMLTools.LoadListFromXMLElement(busPath); //get the data from xml
 
             return (from bus in busRootElem.Elements()
@@ -603,6 +374,8 @@ namespace DL
 
         public IEnumerable<Stations> GetAllStations()
         {
+            
+           
             XElement stationRootElem = XMLTools.LoadListFromXMLElement(stationPath); //get the data from xml
 
             return (from station in stationRootElem.Elements()
@@ -701,6 +474,7 @@ namespace DL
 
         public LineStation GetLineStation(int Scode, int idline)
         {
+          
             List<LineStation> ListLineStation = XMLTools.LoadListFromXMLSerializer<LineStation>(lineStationPath);
             DO.LineStation sta = ListLineStation.Find((b => b.StationCode == Scode && b.LineId == idline && b.LineStationExist == true));
             if (sta != null)
@@ -713,6 +487,7 @@ namespace DL
 
         public IEnumerable<LineStation> GetAllStationsLine(int idline)
         {
+           
             List<LineStation> ListLineStation = XMLTools.LoadListFromXMLSerializer<LineStation>(lineStationPath);
 
             return from station in ListLineStation
@@ -847,6 +622,7 @@ namespace DL
 
         public IEnumerable<LineTrip> GetAllTripline(int idline)
         {
+           
             List<LineTrip> ListLineTrip = XMLTools.LoadListFromXMLSerializer<LineTrip>(lineTripPath);
 
             return from linetrip in ListLineTrip
