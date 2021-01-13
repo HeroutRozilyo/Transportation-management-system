@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<ArrayOfUser xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <User>
+    <UserName>Herout</UserName>
+    <Password>12345</Password>
+    <Admin>true</Admin>
+    <UserExist>true</UserExist>
+    <MailAddress>heroot12@gmail.com</MailAddress>
+  </User>
+  <User>
+    <UserName>Dafna</UserName>
+    <Password>12345</Password>
+    <Admin>true</Admin>
+    <UserExist>true</UserExist>
+    <MailAddress>da0773412369@gmail.com</MailAddress>
+  </User>
+  <User>
+    <UserName>notUs</UserName>
+    <Password>12345</Password>
+    <Admin>false</Admin>
+    <UserExist>true</UserExist>
+    <MailAddress>heroot12@gmail.com</MailAddress>
+  </User>
+  <User>
+    <UserName>OriyaShmoel</UserName>
+    <Password>busbus123</Password>
+    <Admin>false</Admin>
+    <UserExist>true</UserExist>
+    <MailAddress>heroot12@gmail.com</MailAddress>
+  </User>
+</ArrayOfUser>
