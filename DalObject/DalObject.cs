@@ -268,23 +268,23 @@ namespace DL
             return list;
         }
 
-        public IEnumerable<DO.LineStation> GetAllLineAt2Stations(int code1, int cod2) //get 2 stations and return all the lines this 2 stations is adjacted at them
-        {
-            IEnumerable<DO.LineStation> lines = GetAllStationsCode(code1); //get all the lines that move at this station
-            IEnumerable<DO.LineStation> stations;
-            IEnumerable<DO.LineStation> stline = (IEnumerable<DO.LineStation>)new DO.LineStation(); ///???????? ככה כותבים
+        //public IEnumerable<DO.LineStation> GetAllLineAt2Stations(int code1, int cod2) //get 2 stations and return all the lines this 2 stations is adjacted at them
+        //{
+        //    IEnumerable<DO.LineStation> lines = GetAllStationsCode(code1); //get all the lines that move at this station
+        //    IEnumerable<DO.LineStation> stations;
+        //    IEnumerable<DO.LineStation> stline = (IEnumerable<DO.LineStation>)new DO.LineStation(); ///???????? ככה כותבים
 
-            foreach (var item in lines)
-            {
-                stations = GetAllStationsLine(item.LineId);  //get all the station of the line that move at station with cod1
+        //    foreach (var item in lines)
+        //    {
+        //        stations = GetAllStationsLine(item.LineId);  //get all the station of the line that move at station with cod1
 
-                //return all the line that move at these 2 stations
-                stline = from temp in stations
-                         where (temp.StationCode == cod2 &&temp.LineStationIndex-1==item.LineStationIndex )
-                         select temp.Clone();
-            }
-            return stline;
-        }
+        //        //return all the line that move at these 2 stations
+        //        stline = from temp in stations
+        //                 where (temp.StationCode == cod2 &&temp.LineStationIndex-1==item.LineStationIndex )
+        //                 select temp.Clone();
+        //    }
+        //    return stline;
+        //}
 
         public void AddLineStations(DO.LineStation station)
         {
