@@ -26,9 +26,9 @@ namespace DL
         string busPath = @"BusXML.xml"; //XElement        
         string linePath = @"LineXml.xml"; //XMLSerializer
         string stationPath = @"StationXml.xml"; //XMLSerializer
-                                        //string lecturersPath = @"LecturersXml.xml"; //XMLSerializer
-                                        //string lectInCoursesPath = @"LecturerInCourseXml.xml"; //XMLSerializer
-                                        //string studInCoursesPath = @"StudentInCoureseXml.xml"; //XMLSerializer
+        string lineStationPath = @"lineStationXml.xml"; //XMLSerializer
+         string lineTripPath = @"lineTripXml.xml"; //XMLSerializer
+       string adjacentStationsPath = @"AdjacentStationsXml.xml"; //XMLSerializer
         #endregion
 
 
@@ -345,34 +345,6 @@ namespace DL
 
         #region Station
 
-        /*
-       
-
-          public int Code { get; set; }
-        public string Name { get; set; }
-         public double Latitude { get; set; }
-        public double Longtitude { get; set; }
-        public string Address { get; set; }
-        public bool StationExist { get; set; }
-         
-   
-    
-
-
-        public void DeleteStations(int code)
-        {
-            DO.Stations stations = DataSource.ListStations.Find(b => b.Code == code && b.StationExist);
-            if (stations != null)
-            {
-                stations.StationExist = false;
-
-            }
-            else
-                throw new DO.WrongIDExeption(code, "התחנה לא קיימת במערכת");//////////////////////////////////////////////////////
-        }
-        
-
-         */
         public Stations GetStations(int code)
         {
             XElement stationRootElem = XMLTools.LoadListFromXMLElement(stationPath); //get the data from xml
@@ -457,23 +429,403 @@ namespace DL
  
         }
 
+
+        public void DeleteStations(int code)
+        {
+            List<Stations> ListStation = XMLTools.LoadListFromXMLSerializer<Stations>(stationPath);
+            DO.Stations sta = ListStation.Find(p => p.Code == code&&p.StationExist==true);
+            if (sta != null)
+            {
+                sta.StationExist = false;
+            }
+            else
+                throw new DO.WrongIDExeption(code, "לא נמצאו פרטים עבור התחנה המבוקשת");
+
+            XMLTools.SaveListToXMLSerializer(ListStation, stationPath);
+
+
+        }
+
+        public void UpdateStations(Stations stations, int oldCode)
+        {
+            List<Stations> ListStation = XMLTools.LoadListFromXMLSerializer<Stations>(stationPath);
+            DO.Stations sta = ListStation.Find(p => p.Code == oldCode && p.StationExist == true);
+            if (sta != null)
+            {
+                ListStation.Remove(sta);
+                ListStation.Add(stations);
+            }
+            else
+                throw new DO.WrongIDExeption(oldCode, "לא נמצאו פרטים עבור התחנה המבוקשת");
+            XMLTools.SaveListToXMLSerializer(ListStation, stationPath);
+
+        }
+
         #endregion
+
+
+        #region LineStation
+
+
+        public LineStation GetLineStation(int Scode, int idline)
+        {
+            List<LineStation> ListLineStation = XMLTools.LoadListFromXMLSerializer<LineStation>(lineStationPath);
+            DO.LineStation sta = ListLineStation.Find((b => b.StationCode == Scode && b.LineId == idline && b.LineStationExist == true));
+            if (sta != null)
+                return sta;
+            else
+                throw new DO.WrongIDExeption(Scode, "לא נמצאו פרטים עבור התחנה המבוקשת");
+
+        }
+
+
+        public IEnumerable<LineStation> GetAllStationsLine(int idline)
+        {
+            List<LineStation> ListLineStation = XMLTools.LoadListFromXMLSerializer<LineStation>(lineStationPath);
+
+            return from station in ListLineStation
+                   where (station.LineId == idline && station.LineStationExist)
+                   select station;
+
+        }
+
+
+
+        public IEnumerable<LineStation> GetAllStationsCode(int code)
+        {
+            List<LineStation> ListLineStation = XMLTools.LoadListFromXMLSerializer<LineStation>(lineStationPath);
+
+            return from station in ListLineStation
+                   where (station.StationCode == code)
+                   select station;
+        }
+
+        public IEnumerable<LineStation> GetAllLineStationsBy(Predicate<LineStation> StationsLinecondition)
+        {
+            List<LineStation> ListLineStation = XMLTools.LoadListFromXMLSerializer<LineStation>(lineStationPath);
+            return from stations in ListLineStation
+                   where (stations.LineStationExist && StationsLinecondition(stations))
+                   select stations;
+        }
+
 
         public void AddLineStations(LineStation station)
         {
-            throw new NotImplementedException();
+          List<LineStation> ListLineStation = XMLTools.LoadListFromXMLSerializer<LineStation>(lineStationPath);
+          if(ListLineStation.FirstOrDefault(b => b.StationCode == station.StationCode && b.LineId == station.LineId && b.LineStationExist)!=null)
+                throw new DO.WrongIDExeption(station.StationCode, "התחנה המבוקשת קיימת כבר במערכת");
+            ListLineStation.Add(station);
+
+            XMLTools.SaveListToXMLSerializer(ListLineStation, lineStationPath);
         }
 
-        public void AddLineStations(AdjacentStations adjacentStations)
+        public int DeleteStationsFromLine(int Scode, int idline)
         {
-            throw new NotImplementedException();
+            List<LineStation> ListLineStation = XMLTools.LoadListFromXMLSerializer<LineStation>(lineStationPath);
+            DO.LineStation stations = ListLineStation.FirstOrDefault(b => b.StationCode == Scode && b.LineId == idline && b.LineStationExist);
+            if (stations != null)
+                stations.LineStationExist = false;
+            else
+                throw new DO.WrongIDExeption(Scode, "התחנה המבוקשת לא נמצאה במערכת");
+            XMLTools.SaveListToXMLSerializer(ListLineStation, lineStationPath);
+            return stations.LineStationIndex;
+        }
+
+
+        public void DeleteStationsFromLine(int Scode)
+        {
+            List<LineStation> ListLineStation = XMLTools.LoadListFromXMLSerializer<LineStation>(lineStationPath);
+
+            foreach (DO.LineStation item in ListLineStation)
+            {
+                if (item.StationCode == Scode)
+                    item.LineStationExist = false;
+            }
+
+            XMLTools.SaveListToXMLSerializer(ListLineStation, lineStationPath);
+        }
+
+        public void DeleteStationsOfLine(int idline)
+        {
+            List<LineStation> ListLineStation = XMLTools.LoadListFromXMLSerializer<LineStation>(lineStationPath);
+
+            foreach (DO.LineStation item in ListLineStation)
+            {
+                if (item.LineId == idline)
+                    item.LineStationExist = false;
+            }
+
+            XMLTools.SaveListToXMLSerializer(ListLineStation, lineStationPath);
+
+        }
+
+
+        public void UpdateLineStations(LineStation linestations)
+        {
+            List<LineStation> ListLineStation = XMLTools.LoadListFromXMLSerializer<LineStation>(lineStationPath);
+            DO.LineStation station = ListLineStation.FirstOrDefault(b => b.StationCode == linestations.StationCode && b.LineId == linestations.LineId && b.LineStationExist);
+            if(station!=null)
+            {
+                ListLineStation.Remove(station);
+                ListLineStation.Add(linestations);
+            }    
+            else
+                throw new DO.WrongIDExeption(linestations.StationCode, "התחנה המבוקשת לא נמצאה במערכת");
+            XMLTools.SaveListToXMLSerializer(ListLineStation, lineStationPath);
+
+        }
+
+        public void UpdateLineStationsCode(LineStation linestations, int newCode)
+        {
+            List<LineStation> ListLineStation = XMLTools.LoadListFromXMLSerializer<LineStation>(lineStationPath);
+            DO.LineStation station = ListLineStation.FirstOrDefault(b => b.StationCode == linestations.StationCode && b.LineId == linestations.LineId && b.LineStationExist);
+            if (station != null)
+            {
+                linestations.StationCode = newCode;
+                ListLineStation.Remove(station);
+                ListLineStation.Add(linestations);
+            }
+
+            XMLTools.SaveListToXMLSerializer(ListLineStation, lineStationPath);
+
+
+
+
+        }
+
+
+
+        #endregion
+
+        #region LineTrip
+
+
+        public LineTrip GetLineTrip(TimeSpan start, int idline)
+        {
+            List<LineTrip> ListLineTrip = XMLTools.LoadListFromXMLSerializer<LineTrip>(lineTripPath);
+
+            DO.LineTrip linetrip = ListLineTrip.Find(b => b.KeyId == idline && b.StartAt == start && b.TripLineExist == true);
+            if (linetrip != null)
+            {
+                return linetrip;
+            }
+            else
+                throw new DO.WrongLineTripExeption(idline, $"{start} לא נמצאו פרטים עבור הקו המבוקש בשעה זו");
+        }
+
+        public IEnumerable<LineTrip> GetAllTripline(int idline)
+        {
+            List<LineTrip> ListLineTrip = XMLTools.LoadListFromXMLSerializer<LineTrip>(lineTripPath);
+
+            return from linetrip in ListLineTrip
+                   where (linetrip.KeyId == idline && linetrip.TripLineExist == true)
+                   select linetrip;
+
+        }
+
+        public IEnumerable<LineTrip> GetAllLineTripsBy(Predicate<LineTrip> StationsLinecondition)
+        {
+            List<LineTrip> ListLineTrip = XMLTools.LoadListFromXMLSerializer<LineTrip>(lineTripPath);
+
+            return from linetrip in ListLineTrip
+                   where (StationsLinecondition(linetrip) && linetrip.TripLineExist == true)
+                   select linetrip;
+            
+
         }
 
         public void AddLineTrip(LineTrip lineTrip)
         {
-            throw new NotImplementedException();
+            List<LineTrip> ListLineTrip = XMLTools.LoadListFromXMLSerializer<LineTrip>(lineTripPath);
+            ListLineTrip.Add(lineTrip);
+            XMLTools.SaveListToXMLSerializer(ListLineTrip, lineTripPath);
+
         }
 
+
+        public void DeleteLineTrip(int idline)
+        {
+            List<LineTrip> ListLineTrip = XMLTools.LoadListFromXMLSerializer<LineTrip>(lineTripPath);
+
+            foreach (var item in ListLineTrip)
+                if (item.KeyId == idline)
+                    item.TripLineExist = false;
+            XMLTools.SaveListToXMLSerializer(ListLineTrip, lineTripPath);
+
+        }
+
+        public void DeleteLineTrip1(LineTrip lineTrip)
+        {
+            List<LineTrip> ListLineTrip = XMLTools.LoadListFromXMLSerializer<LineTrip>(lineTripPath);
+
+            int index = ListLineTrip.FindIndex(b => b.KeyId == lineTrip.KeyId && b.StartAt == lineTrip.StartAt && b.FinishAt == lineTrip.FinishAt);
+            ListLineTrip[index].TripLineExist = false;
+            XMLTools.SaveListToXMLSerializer(ListLineTrip, lineTripPath);
+
+        }
+
+
+
+        public void UpdatelineTrip(LineTrip lineTrip)
+        {
+            List<LineTrip> ListLineTrip = XMLTools.LoadListFromXMLSerializer<LineTrip>(lineTripPath);
+
+
+            DO.LineTrip station = ListLineTrip.Find(b => b.KeyId == lineTrip.KeyId && lineTrip.StartAt == b.StartAt && lineTrip.TripLineExist == true);
+            if (station != null)
+            {
+                ListLineTrip.Remove(station);
+                ListLineTrip.Add(lineTrip);
+            }
+            else
+                throw new DO.WrongLineTripExeption(lineTrip.KeyId, "לא נמצאו זמני נסיעות עבור קו זה");
+            XMLTools.SaveListToXMLSerializer(ListLineTrip, lineTripPath);
+
+        }
+
+
+        #endregion
+
+        #region AdjacentStations
+        /*
+   
+         
+         
+         */
+
+        public AdjacentStations GetAdjacentStations(int Scode1, int Scode2)
+        {
+            List<AdjacentStations> ListAdjacentStations = XMLTools.LoadListFromXMLSerializer<AdjacentStations>(adjacentStationsPath);
+            DO.AdjacentStations linestations = ListAdjacentStations.Find(b => b.Station1 == Scode1 && b.Station2 == Scode2);//|| b.Station1 == Scode2 && b.Station2 == Scode1);
+            if (linestations != null)
+            {
+                return linestations;
+            }
+            else
+                throw new DO.WrongIDExeption(Scode1, "לא נמצאו פרטים במערכת עבור זוג התחנות המבוקש");
+
+        }
+
+
+        public IEnumerable<AdjacentStations> GetAllAdjacentStations(int stationCode) //return all the AdjacentStations that we have for this station code
+        {
+            List<AdjacentStations> ListAdjacentStations = XMLTools.LoadListFromXMLSerializer<AdjacentStations>(adjacentStationsPath);
+
+            return from station in ListAdjacentStations
+                   where (stationCode == station.Station1 || stationCode == station.Station2)
+                   select station;            
+        }
+
+        public IEnumerable<AdjacentStations> GetAllAdjacentStationsBy(Predicate<AdjacentStations> StationsLinecondition)
+        {
+            List<AdjacentStations> ListAdjacentStations = XMLTools.LoadListFromXMLSerializer<AdjacentStations>(adjacentStationsPath);
+
+
+            return from stations in ListAdjacentStations
+                   where (StationsLinecondition(stations))
+                   select stations;
+            
+        }
+
+
+    
+        public void AddLineStations(DO.AdjacentStations adjacentStations)
+        {
+            List<AdjacentStations> ListAdjacentStations = XMLTools.LoadListFromXMLSerializer<AdjacentStations>(adjacentStationsPath);
+
+            DO.AdjacentStations temp = ListAdjacentStations.Find(b => b.Station1 == adjacentStations.Station1 && b.Station2 == adjacentStations.Station2);
+            if (temp != null)
+                throw new DO.WrongIDExeption(adjacentStations.Station1, " התחנה עוקבת כבר קיימת במערכת");/////////////////////////////////////////////////////////////////
+            ListAdjacentStations.Add(adjacentStations);
+
+            XMLTools.SaveListToXMLSerializer(ListAdjacentStations, adjacentStationsPath);
+
+
+
+        }
+
+        public void DeleteAdjacentStationse(int Scode1, int Scode2)
+        {
+            List<AdjacentStations> ListAdjacentStations = XMLTools.LoadListFromXMLSerializer<AdjacentStations>(adjacentStationsPath);
+
+            DO.AdjacentStations stations = ListAdjacentStations.Find(b => b.Station1 == Scode1 && b.Station2 == Scode2);
+            if (stations != null)
+            {
+                ListAdjacentStations.Remove(stations);
+            }
+            else
+                throw new DO.WrongIDExeption(Scode1, "לא נמצאו פרטים עבור התחנה עוקבת המבוקשת");
+
+            XMLTools.SaveListToXMLSerializer(ListAdjacentStations, adjacentStationsPath);
+
+
+        }
+
+        public void DeleteAdjacentStationseBStation(int Scode1)////
+        {
+            List<AdjacentStations> ListAdjacentStations = XMLTools.LoadListFromXMLSerializer<AdjacentStations>(adjacentStationsPath);
+
+            var v = from item in ListAdjacentStations
+                    where (item.Station1 == Scode1 || item.Station2 == Scode1)
+                    select item;
+            foreach (DO.AdjacentStations item in v)
+            {
+                ListAdjacentStations.Remove(item);
+            }
+
+            XMLTools.SaveListToXMLSerializer(ListAdjacentStations, adjacentStationsPath);
+
+        }
+
+        public void UpdateAdjacentStations(DO.AdjacentStations adjacentStations)
+        {
+            List<AdjacentStations> ListAdjacentStations = XMLTools.LoadListFromXMLSerializer<AdjacentStations>(adjacentStationsPath);
+
+            DO.AdjacentStations station = ListAdjacentStations.Find(b => b.Station1 == adjacentStations.Station1 && b.Station2 == adjacentStations.Station2);
+            if (station != null)
+            {
+                ListAdjacentStations.Remove(station);
+                ListAdjacentStations.Add(adjacentStations);
+            }
+            else
+                throw new DO.WrongIDExeption(adjacentStations.Station1, "לא נמצאו פרטים עבור התחנה עוקבת המבוקשת");
+
+            XMLTools.SaveListToXMLSerializer(ListAdjacentStations, adjacentStationsPath);
+
+        }
+
+
+        public void UpdateAdjacentStations(int code1, int code2, int codeChange, int oldCode)
+        {
+            List<AdjacentStations> ListAdjacentStations = XMLTools.LoadListFromXMLSerializer<AdjacentStations>(adjacentStationsPath);
+
+            DO.AdjacentStations station = ListAdjacentStations.Find(b => b.Station1 == code1 && b.Station2 == code2);
+            if (station != null)
+            {
+                ListAdjacentStations.Remove(station);
+                if (station.Station1 == oldCode)
+                    station.Station1 = codeChange;
+                else
+                    station.Station2 = codeChange;
+
+                ListAdjacentStations.Add(station);
+            }
+            else
+                throw new DO.WrongIDExeption(code1, "לא נמצאו פרטים עבור התחנה עוקבת המבוקשת");
+
+            XMLTools.SaveListToXMLSerializer(ListAdjacentStations, adjacentStationsPath);
+
+        }
+
+
+
+
+        #endregion
+
+
+
+
+    
         
 
         public void AddTrip(Trip trip)
@@ -486,47 +838,13 @@ namespace DL
             throw new NotImplementedException();
         }
 
-        public void DeleteAdjacentStationse(int Scode1, int Scode2)
-        {
-            throw new NotImplementedException();
-        }
 
-        public void DeleteAdjacentStationseBStation(int Scode1)
-        {
-            throw new NotImplementedException();
-        }
-
+  
       
      
-        public void DeleteLineTrip(int idline)
-        {
-            throw new NotImplementedException();
-        }
+       
+     
 
-        public void DeleteLineTrip1(LineTrip lineTrip)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void DeleteStations(int code)
-        {
-            throw new NotImplementedException();
-        }
-
-        public int DeleteStationsFromLine(int Scode, int idline)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void DeleteStationsFromLine(int Scode)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void DeleteStationsOfLine(int idline)
-        {
-            throw new NotImplementedException();
-        }
 
         public void DeleteTrip(int id)
         {
@@ -538,66 +856,25 @@ namespace DL
             throw new NotImplementedException();
         }
 
-        public AdjacentStations GetAdjacentStations(int Scode1, int Scode2)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<AdjacentStations> GetAllAdjacentStations(int stationCode)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<AdjacentStations> GetAllAdjacentStationsBy(Predicate<AdjacentStations> StationsLinecondition)
-        {
-            throw new NotImplementedException();
-        }
 
 
 
 
   
-        public IEnumerable<LineStation> GetAllLineAt2Stations(int code1, int cod2)
-        {
-            throw new NotImplementedException();
-        }
-
-      
+  
   
 
-        public IEnumerable<LineStation> GetAllLineStationsBy(Predicate<LineStation> StationsLinecondition)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<LineTrip> GetAllLineTripsBy(Predicate<LineTrip> StationsLinecondition)
-        {
-            throw new NotImplementedException();
-        }
-
-      
-
+     
+ 
    
 
-        public IEnumerable<LineStation> GetAllStationsCode(int code)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<LineStation> GetAllStationsLine(int idline)
-        {
-            throw new NotImplementedException();
-        }
 
         public IEnumerable<Trip> GetAllTrip()
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<LineTrip> GetAllTripline(int idline)
-        {
-            throw new NotImplementedException();
-        }
+    
 
         public IEnumerable<Trip> GetAllTripLine(int line)
         {
@@ -637,15 +914,7 @@ namespace DL
             throw new NotImplementedException();
         }
 
-        public LineStation GetLineStation(int Scode, int idline)
-        {
-            throw new NotImplementedException();
-        }
-
-        public LineTrip GetLineTrip(TimeSpan start, int idline)
-        {
-            throw new NotImplementedException();
-        }
+    
 
        
 
@@ -664,38 +933,11 @@ namespace DL
             throw new NotImplementedException();
         }
 
-        public void UpdateAdjacentStations(AdjacentStations adjacentStations)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void UpdateAdjacentStations(int code1, int code2, int codeChange, int oldCode)
-        {
-            throw new NotImplementedException();
-        }
-
-    
+ 
+  
       
 
-        public void UpdateLineStations(LineStation linestations)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void UpdateLineStationsCode(LineStation linestations, int oldCode)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void UpdatelineTrip(LineTrip lineTrip)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void UpdateStations(Stations stations, int oldCode)
-        {
-            throw new NotImplementedException();
-        }
+ 
 
         public void UpdateStations(Trip trip)
         {
