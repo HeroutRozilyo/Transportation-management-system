@@ -215,7 +215,7 @@ namespace BL
         /// </summary>
         /// <identity number="idLine"></>
         /// <returns></returns>
-        BO.Line lineDoBoAdapter(int idLine) 
+        BO.Line lineDoBoAdapter(int idLine)
         {
             BO.Line lineBO = new BO.Line();
             DO.Line lineDO;
@@ -246,9 +246,10 @@ namespace BL
             List<LineStation> lineStations = new List<LineStation>();
             LineStation line = new LineStation();
             int code1, code2 = 0;
-            for (int i = 0; i < tempDO.Count()-1; i++)
+            bool timtum = false;
+            for (int i = 0; i < tempDO.Count() - 1; i++)
             {
-                
+                timtum = true;
                 code1 = tempDO1.ElementAt(i).StationCode;
                 code2 = tempDO1.ElementAt(i + 1).StationCode;
                 adj = dl.GetAdjacentStations(code1, code2);
@@ -267,18 +268,21 @@ namespace BL
                 lineStations.Add(line);
 
             }
-            line = new LineStation()  //restart the last linebus
+            if (timtum)
             {
-                LineId = tempDO.ElementAt(tempDO.Count()-1).LineId,
-                LineStationIndex = tempDO.ElementAt(tempDO.Count() - 1).LineStationIndex,
-                LineStationExist = tempDO.ElementAt(tempDO.Count() - 1).LineStationExist,
-                NextStation = tempDO.ElementAt(tempDO.Count() - 1).NextStation,
-                PrevStation = tempDO.ElementAt(tempDO.Count() - 1).PrevStation,
-                StationCode = tempDO.ElementAt(tempDO.Count() - 1).StationCode,
-                DistanceFromNext = 0,
-                TimeAverageFromNext =0,
-            };
-            lineStations.Add(line);
+                line = new LineStation()  //restart the last linebus
+                {
+                    LineId = tempDO.ElementAt(tempDO.Count() - 1).LineId,
+                    LineStationIndex = tempDO.ElementAt(tempDO.Count() - 1).LineStationIndex,
+                    LineStationExist = tempDO.ElementAt(tempDO.Count() - 1).LineStationExist,
+                    NextStation = tempDO.ElementAt(tempDO.Count() - 1).NextStation,
+                    PrevStation = tempDO.ElementAt(tempDO.Count() - 1).PrevStation,
+                    StationCode = tempDO.ElementAt(tempDO.Count() - 1).StationCode,
+                    DistanceFromNext = 0,
+                    TimeAverageFromNext = 0,
+                };
+                lineStations.Add(line);
+            }
             lineBO.StationsOfBus = lineStations.AsEnumerable();
 
 
@@ -1367,7 +1371,7 @@ namespace BL
             try
             {
                 adjacBO.CopyPropertiesTo(adjacDO);
-               
+                adjacDO.AdjacExsis = true;
                 dl.UpdateAdjacentStations(adjacDO);
 
             }
@@ -1380,12 +1384,6 @@ namespace BL
         #endregion
 
 
-        
-
-
-    
-  
-    
 
 
 
@@ -1393,7 +1391,13 @@ namespace BL
 
 
 
-     
+
+
+
+
+
+
+
         #region User
         BO.User userDoBoAdapter(string name)
         {
