@@ -355,7 +355,7 @@
     <Station2>110</Station2>
     <Distance>79.9157986778367</Distance>
     <TimeAverage>0.17981234514858407</TimeAverage>
-    <AdjacExsis>trueh</AdjacExsis>
+    <AdjacExsis>true</AdjacExsis>
   </AdjacentStations>
   <AdjacentStations>
     <Station1>110</Station1>
