@@ -12,6 +12,6 @@ namespace DO
         public int Station2 { get; set; }
         public double Distance { get; set; }
         public double TimeAverage { get; set; }
-
+        public bool AdjacExsis { get; set; }
     }
 }
