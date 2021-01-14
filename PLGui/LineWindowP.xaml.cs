@@ -347,7 +347,7 @@ namespace PLGui
                 if (finishAtTextBox.Text != "" && frequencyTextBox.Text != "" && frequencyTextBox.Text != "" && startAtTextBox.Text != "")
                 {
                    
-                    MessageBoxResult result = MessageBox.Show("You sure you want to add this line trip?", "Add Line trip Message", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                    MessageBoxResult result = MessageBox.Show("?לשמור שינויים ", "הודעת מערכת", MessageBoxButton.YesNo, MessageBoxImage.Question);
                     switch (result)
                     {
                         case MessageBoxResult.Yes:
@@ -376,7 +376,7 @@ namespace PLGui
 
                                 }
 
-                                MessageBox.Show("The line was successfully add to the system", "Success Message", MessageBoxButton.OK, MessageBoxImage.Asterisk);
+                                MessageBox.Show("השינויים נשמרו בהצלחה", "Success Message", MessageBoxButton.OK, MessageBoxImage.Asterisk);
                                 Looz.Visibility = Visibility.Visible;
                                 NewLooz.Visibility = Visibility.Hidden;
                                 NewLooz.DataContext = new BO.LineTrip();
@@ -393,7 +393,7 @@ namespace PLGui
                 }
                 else
                 {
-                    MessageBoxResult result = MessageBox.Show("To add a new schedule you must fill in all the fields.", "Add Line trip Message", MessageBoxButton.OKCancel, MessageBoxImage.Error);
+                    MessageBoxResult result = MessageBox.Show("אנא מלא את כל השדות", "הודעת מערכת" , MessageBoxButton.OKCancel, MessageBoxImage.Error);
                     switch (result)
                     {
                         case MessageBoxResult.OK:
@@ -449,13 +449,13 @@ namespace PLGui
             NewLooz.DataContext = thisLooz;
 
             NewLooz.Visibility = Visibility.Visible;
-
+           
 
         }
 
         private void DeleteTripLine_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult result = MessageBox.Show("You sure you want to add this line trip?", "Add Line trip Message", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            MessageBoxResult result = MessageBox.Show("האם למחוק לוח זמנים? פעולה זו בלתי הפיכה", "Add Line trip Message", MessageBoxButton.YesNo, MessageBoxImage.Question);
             switch (result)
             {
                 case MessageBoxResult.Yes:
@@ -463,7 +463,9 @@ namespace PLGui
                         Button toconvert = sender as Button;
                         thisLooz = toconvert.DataContext as BO.LineTrip;
                         bl.DeleteLineTrip(thisLooz);
+                        RefreshLine();
                         RefreshStationListView();
+                        MessageBox.Show("לוח הזמנים נמחק בהצלחה", "הודעת מערכת", MessageBoxButton.OK, MessageBoxImage.Information);
                         break;
                     }
                 case MessageBoxResult.No:
