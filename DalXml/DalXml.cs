@@ -746,153 +746,13 @@ namespace DL
         }
 
         public IEnumerable<LineTrip> GetAllTripline(int idline)
-        {//
-
-            XElement a=new XElement(lineTripPath);
-            List<LineTrip> ListLineTrip1 = new List<LineTrip>
-            {
-                 #region LineTrip
-                new LineTrip
-                {
-                 KeyId=1,
-                 StartAt=new TimeSpan(06,00,00),
-                 FinishAt=new TimeSpan(23,59,59),
-                 TripLineExist=true,
-                 Frequency=19,
-                 },
-                new LineTrip
-                {
-                 KeyId=2,
-                 StartAt=new TimeSpan(06,00,00),
-                 FinishAt=new TimeSpan(24,00,00),
-                 TripLineExist=true,
-                 Frequency=13,
-                 },
-                new LineTrip
-                {
-                 KeyId=3,
-                 StartAt=new TimeSpan(06,00,00),
-                 FinishAt=new TimeSpan(23,59,59),
-                 TripLineExist=true,
-                 Frequency=15,
-                 },
-                new LineTrip
-                {
-                 KeyId=4,
-                 StartAt=new TimeSpan(06,00,00),
-                 FinishAt=new TimeSpan(19,00,00),
-                 TripLineExist=true,
-                 Frequency=10,
-                 },
-                new LineTrip
-                {
-                 KeyId=4,
-                 StartAt=new TimeSpan(19,00,00),
-                 FinishAt=new TimeSpan(23,59,59),
-                 TripLineExist=true,
-                 Frequency=30,
-                 },
-                new LineTrip
-                {
-                 KeyId=5,
-                 StartAt=new TimeSpan(06,00,00),
-                 FinishAt=new TimeSpan(08,30,00),
-                 TripLineExist=true,
-                 Frequency=3,
-                 },
-                new LineTrip
-                {
-                 KeyId=5,
-                 StartAt=new TimeSpan(08,30,00),
-                 FinishAt=new TimeSpan(14,00,00),
-                 TripLineExist=true,
-                 Frequency=60,
-                 },
-                new LineTrip
-                {
-                 KeyId=5,
-                 StartAt=new TimeSpan(14,00,00),
-                 FinishAt=new TimeSpan(23,59,59),
-                 TripLineExist=true,
-                 Frequency=20,
-                 },
-                new LineTrip
-                {
-                 KeyId=6,
-                 StartAt=new TimeSpan(06,00,00),
-                 FinishAt=new TimeSpan(23,59,59),
-                 TripLineExist=true,
-                 Frequency=17,
-                 },
-                new LineTrip
-                {
-                 KeyId=7,
-                 StartAt=new TimeSpan(08,00,00),
-                 FinishAt=new TimeSpan(23,59,59),
-                 TripLineExist=true,
-                 Frequency=30,
-                 },
-                new LineTrip
-                {
-                 KeyId=8,
-                 StartAt=new TimeSpan(01,00,00),
-                 FinishAt=new TimeSpan(06,00,00),
-                 TripLineExist=true,
-                 Frequency=60,
-                 },
-                new LineTrip
-                {
-                 KeyId=9,
-                 StartAt=new TimeSpan(05,00,00),
-                 FinishAt=new TimeSpan(10,00,00),
-                 TripLineExist=true,
-                 Frequency=20,
-                 },
-                new LineTrip
-                {
-                 KeyId=9,
-                 StartAt=new TimeSpan(10,00,00),
-                 FinishAt=new TimeSpan(23,59,59),
-                 TripLineExist=true,
-                 Frequency=40,
-                 },
-                new LineTrip
-                {
-                 KeyId=10,
-                 StartAt=new TimeSpan(6,00,00),
-                 FinishAt=new TimeSpan(23,59,59),
-                 TripLineExist=true,
-                 Frequency=40,
-                 }
-                 #endregion LineTrip
-            };
-             a.Add(XMLTools.ToXML(ListLineTrip1[0]));
-            for (int i = 1; i < ListLineTrip1.Count(); i++)
-            {
-
-                a.Add( XMLTools.ToXML(ListLineTrip1[i]));
-            }
-            XMLTools.SaveListToXMLElement(a, lineTripPath);
+        {
 
 
             XElement ListLineTrip = XMLTools.LoadListFromXMLElement(lineTripPath); //get the data from xml
-            //return (from line in ListLineTrip.Elements()
-            //        where line.Element("KeyId").Value == idline.ToString() && Convert.ToBoolean(line.Element("TripLineExist").Value) == true
-            //        select new DO.LineTrip
-            //        {
-            //            KeyId = int.Parse(line.Element("KeyId").Value),
-            //            StartAt = TimeSpan.Parse(line.Element("StartAt").Value),
-            //            Frequency = Double.Parse(line.Element("Frequency").Value),
-            //            FinishAt = TimeSpan.Parse(line.Element("FinishAt").Value),
-            //            TripLineExist = Convert.ToBoolean(line.Element("TripLineExist").Value),
-
-            //        });
-            List<DO.LineTrip> b = new List<LineTrip>();
-            foreach( var line in ListLineTrip.Elements())
-            {
-                if(line.Element("KeyId").Value == idline.ToString() && Convert.ToBoolean(line.Element("TripLineExist").Value) == true)
-                {
-                    b.Add(new DO.LineTrip()
+            return (from line in ListLineTrip.Elements()
+                    where line.Element("KeyId").Value == idline.ToString() && Convert.ToBoolean(line.Element("TripLineExist").Value) == true
+                    select new DO.LineTrip
                     {
                         KeyId = int.Parse(line.Element("KeyId").Value),
                         StartAt = TimeSpan.Parse(line.Element("StartAt").Value),
@@ -901,10 +761,7 @@ namespace DL
                         TripLineExist = Convert.ToBoolean(line.Element("TripLineExist").Value),
 
                     });
-                }
-
-            }
-            return b.AsEnumerable();
+ 
         }
 
 
@@ -945,14 +802,50 @@ namespace DL
 
 
         public void DeleteLineTrip(int idline)
-        {    
+        {
+            XElement ListLineTrip = XMLTools.LoadListFromXMLElement(lineTripPath); //get the data from xml
+               = from line in ListLineTrip.Elements()
+                          where line.Element("KeyId").Value == idline.ToString() && Convert.ToBoolean(line.Element("TripLineExist").Value) == true
+                          select line;
+                     //select new DO.LineTrip
+                     //{
+                     //    KeyId = int.Parse(line.Element("KeyId").Value),
+                     //    StartAt = TimeSpan.Parse(line.Element("StartAt").Value),
+                     //    Frequency = Double.Parse(line.Element("Frequency").Value),
+                     //    FinishAt = TimeSpan.Parse(line.Element("FinishAt").Value),
+                     //    TripLineExist = false,
 
-            List<LineTrip> ListLineTrip = XMLTools.LoadListFromXMLSerializer<LineTrip>(lineTripPath);
+                     //});
+            XMLTools.SaveListToXMLElement(ListLineTrip, lineTripPath);
 
-            foreach (var item in ListLineTrip)
-                if (item.KeyId == idline)
-                    item.TripLineExist = false;
-            XMLTools.SaveListToXMLSerializer(ListLineTrip, lineTripPath);
+
+
+            //XElement findBus = (from b in busRootElem.Elements()
+            //                    where b.Element("Licence").Value == bus.Licence && Convert.ToBoolean(b.Element("BusExist").Value) == true
+            //                    select b).FirstOrDefault();
+            //if (findBus == null) //we not find the bus
+            //    throw new DO.WrongLicenceException(Convert.ToInt32(bus.Licence), "אוטובוס זה כבר קיים במערכת, באפשרותך לעדכן נתונים עליו במקום המתאים");
+            //else
+            //{
+            //    findBus.Element("Licence").Value = bus.Licence;
+            //    findBus.Element("StartingDate").Value = bus.StartingDate.ToString();
+            //    findBus.Element("Kilometrz").Value = bus.Kilometrz.ToString();
+            //    findBus.Element("KilometrFromLastTreat").Value = bus.KilometrFromLastTreat.ToString();
+            //    findBus.Element("FuellAmount").Value = bus.FuellAmount.ToString();
+            //    findBus.Element("StatusBus").Value = bus.StatusBus.ToString();
+            //    findBus.Element("BusExist").Value = bus.BusExist.ToString();
+            //    findBus.Element("LastTreatment").Value = bus.LastTreatment.ToString();
+
+            //    XMLTools.SaveListToXMLElement(busRootElem, busPath);
+
+
+            //    return true;
+
+            //}
+
+
+
+
 
         }
 
