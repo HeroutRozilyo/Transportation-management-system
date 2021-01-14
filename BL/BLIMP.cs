@@ -224,7 +224,7 @@ namespace BL
             IEnumerable<DO.LineTrip> tripDO;
             DO.AdjacentStations adj = new DO.AdjacentStations();
             try
-            {
+            {//
                 lineDO = dl.GetLine(idLine);
                 tempDO = dl.GetAllStationsLine(idLine);
                 tripDO = dl.GetAllTripline(idLine);
