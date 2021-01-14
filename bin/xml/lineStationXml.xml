@@ -90,11 +90,75 @@
   </LineStation>
   <LineStation>
     <LineId>2</LineId>
+    <StationCode>86</StationCode>
+    <LineStationIndex>2</LineStationIndex>
+    <LineStationExist>true</LineStationExist>
+    <PrevStation>85</PrevStation>
+    <NextStation>88</NextStation>
+  </LineStation>
+  <LineStation>
+    <LineId>2</LineId>
     <StationCode>88</StationCode>
     <LineStationIndex>3</LineStationIndex>
     <LineStationExist>true</LineStationExist>
     <PrevStation>86</PrevStation>
     <NextStation>89</NextStation>
+  </LineStation>
+  <LineStation>
+    <LineId>2</LineId>
+    <StationCode>89</StationCode>
+    <LineStationIndex>4</LineStationIndex>
+    <LineStationExist>true</LineStationExist>
+    <PrevStation>88</PrevStation>
+    <NextStation>90</NextStation>
+  </LineStation>
+  <LineStation>
+    <LineId>2</LineId>
+    <StationCode>90</StationCode>
+    <LineStationIndex>5</LineStationIndex>
+    <LineStationExist>true</LineStationExist>
+    <PrevStation>89</PrevStation>
+    <NextStation>91</NextStation>
+  </LineStation>
+  <LineStation>
+    <LineId>2</LineId>
+    <StationCode>91</StationCode>
+    <LineStationIndex>6</LineStationIndex>
+    <LineStationExist>true</LineStationExist>
+    <PrevStation>90</PrevStation>
+    <NextStation>93</NextStation>
+  </LineStation>
+  <LineStation>
+    <LineId>2</LineId>
+    <StationCode>93</StationCode>
+    <LineStationIndex>7</LineStationIndex>
+    <LineStationExist>true</LineStationExist>
+    <PrevStation>91</PrevStation>
+    <NextStation>94</NextStation>
+  </LineStation>
+  <LineStation>
+    <LineId>2</LineId>
+    <StationCode>94</StationCode>
+    <LineStationIndex>8</LineStationIndex>
+    <LineStationExist>true</LineStationExist>
+    <PrevStation>93</PrevStation>
+    <NextStation>95</NextStation>
+  </LineStation>
+  <LineStation>
+    <LineId>2</LineId>
+    <StationCode>95</StationCode>
+    <LineStationIndex>9</LineStationIndex>
+    <LineStationExist>true</LineStationExist>
+    <PrevStation>94</PrevStation>
+    <NextStation>97</NextStation>
+  </LineStation>
+  <LineStation>
+    <LineId>2</LineId>
+    <StationCode>97</StationCode>
+    <LineStationIndex>10</LineStationIndex>
+    <LineStationExist>true</LineStationExist>
+    <PrevStation>95</PrevStation>
+    <NextStation>0</NextStation>
   </LineStation>
   <LineStation>
     <LineId>3</LineId>
@@ -735,69 +799,5 @@
     <LineStationExist>true</LineStationExist>
     <PrevStation>1486</PrevStation>
     <NextStation>0</NextStation>
-  </LineStation>
-  <LineStation>
-    <LineId>2</LineId>
-    <StationCode>89</StationCode>
-    <LineStationIndex>3</LineStationIndex>
-    <LineStationExist>true</LineStationExist>
-    <PrevStation>88</PrevStation>
-    <NextStation>90</NextStation>
-  </LineStation>
-  <LineStation>
-    <LineId>2</LineId>
-    <StationCode>90</StationCode>
-    <LineStationIndex>4</LineStationIndex>
-    <LineStationExist>true</LineStationExist>
-    <PrevStation>89</PrevStation>
-    <NextStation>91</NextStation>
-  </LineStation>
-  <LineStation>
-    <LineId>2</LineId>
-    <StationCode>91</StationCode>
-    <LineStationIndex>5</LineStationIndex>
-    <LineStationExist>true</LineStationExist>
-    <PrevStation>90</PrevStation>
-    <NextStation>93</NextStation>
-  </LineStation>
-  <LineStation>
-    <LineId>2</LineId>
-    <StationCode>93</StationCode>
-    <LineStationIndex>6</LineStationIndex>
-    <LineStationExist>true</LineStationExist>
-    <PrevStation>91</PrevStation>
-    <NextStation>94</NextStation>
-  </LineStation>
-  <LineStation>
-    <LineId>2</LineId>
-    <StationCode>94</StationCode>
-    <LineStationIndex>7</LineStationIndex>
-    <LineStationExist>true</LineStationExist>
-    <PrevStation>93</PrevStation>
-    <NextStation>95</NextStation>
-  </LineStation>
-  <LineStation>
-    <LineId>2</LineId>
-    <StationCode>95</StationCode>
-    <LineStationIndex>8</LineStationIndex>
-    <LineStationExist>true</LineStationExist>
-    <PrevStation>94</PrevStation>
-    <NextStation>97</NextStation>
-  </LineStation>
-  <LineStation>
-    <LineId>2</LineId>
-    <StationCode>97</StationCode>
-    <LineStationIndex>1</LineStationIndex>
-    <LineStationExist>true</LineStationExist>
-    <PrevStation>0</PrevStation>
-    <NextStation>85</NextStation>
-  </LineStation>
-  <LineStation>
-    <LineId>2</LineId>
-    <StationCode>86</StationCode>
-    <LineStationIndex>3</LineStationIndex>
-    <LineStationExist>true</LineStationExist>
-    <PrevStation>85</PrevStation>
-    <NextStation>88</NextStation>
   </LineStation>
 </ArrayOfLineStation>
