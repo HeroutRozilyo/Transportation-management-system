@@ -282,8 +282,9 @@ namespace DL
 
         public int AddLine(Line line)
         {  //eliezer told us that we can do here not checking because check according to idnumber is meaningless
+         
+            serials = XMLTools.LoadListFromXMLElement(@"serials.xml");
 
-            serials = XElement.Load(@"Serials.xml");
             int idLine = int.Parse(serials.Element("LineCounter").Value);
 
             serials.Element("LineCounter").Value = (++idLine).ToString();
@@ -294,7 +295,8 @@ namespace DL
             lines.Add(line);
             XMLTools.SaveListToXMLSerializer(lines, linePath);
 
-            serials.Save(@"Serials.xml");
+            XMLTools.SaveListToXMLElement(serials, @"serials.xml");
+
             return idLine;
         }
 
@@ -1576,7 +1578,9 @@ namespace DL
                     select item;
             foreach (DO.AdjacentStations item in v)
             {
-                ListAdjacentStations.Remove(item);
+                item.AdjacExsis = false;
+
+                //ListAdjacentStations.Remove(item);
             }
 
             XMLTools.SaveListToXMLSerializer(ListAdjacentStations, adjacentStationsPath);

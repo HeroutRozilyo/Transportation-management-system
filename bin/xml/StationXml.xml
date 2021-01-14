@@ -6,7 +6,7 @@
     <Latitude>31.825302</Latitude>
     <Longtitude>35.188624</Longtitude>
     <Address>שדרות גולדה מאיר ,ירושלים </Address>
-    <StationExist>true</StationExist>
+    <StationExist>false</StationExist>
   </Stations>
   <Stations>
     <Code>76</Code>

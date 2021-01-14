@@ -392,4 +392,25 @@
     <TimeAverage>1.4647106798185718</TimeAverage>
     <AdjacExsis>true</AdjacExsis>
   </AdjacentStations>
+  <AdjacentStations>
+    <Station1>89</Station1>
+    <Station2>91</Station2>
+    <Distance>18.615150883643107</Distance>
+    <TimeAverage>0.037627593676905442</TimeAverage>
+    <AdjacExsis>true</AdjacExsis>
+  </AdjacentStations>
+  <AdjacentStations>
+    <Station1>89</Station1>
+    <Station2>93</Station2>
+    <Distance>166.16698307092108</Distance>
+    <TimeAverage>0.33406247356899665</TimeAverage>
+    <AdjacExsis>true</AdjacExsis>
+  </AdjacentStations>
+  <AdjacentStations>
+    <Station1>97</Station1>
+    <Station2>1524</Station2>
+    <Distance>3333.7695498156195</Distance>
+    <TimeAverage>9.6837833620906384</TimeAverage>
+    <AdjacExsis>true</AdjacExsis>
+  </AdjacentStations>
 </ArrayOfAdjacentStations>
