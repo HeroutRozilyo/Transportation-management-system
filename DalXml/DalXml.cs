@@ -1570,7 +1570,7 @@ namespace DL
             List<AdjacentStations> ListAdjacentStations = XMLTools.LoadListFromXMLSerializer<AdjacentStations>(adjacentStationsPath);
 
             var v = from item in ListAdjacentStations
-                    where (item.Station1 == Scode1 || item.Station2 == Scode1)
+                    where ((item.Station1 == Scode1 || item.Station2 == Scode1)&&item.AdjacExsis)
                     select item;
             foreach (DO.AdjacentStations item in v)
             {
@@ -1585,7 +1585,7 @@ namespace DL
         {
             List<AdjacentStations> ListAdjacentStations = XMLTools.LoadListFromXMLSerializer<AdjacentStations>(adjacentStationsPath);
 
-            DO.AdjacentStations station = ListAdjacentStations.Find(b => b.Station1 == adjacentStations.Station1 && b.Station2 == adjacentStations.Station2);
+            DO.AdjacentStations station = ListAdjacentStations.Find(b => b.Station1 == adjacentStations.Station1 && b.Station2 == adjacentStations.Station2&&adjacentStations.AdjacExsis);
             if (station != null)
             {
                 ListAdjacentStations.Remove(station);
@@ -1603,7 +1603,7 @@ namespace DL
         {
             List<AdjacentStations> ListAdjacentStations = XMLTools.LoadListFromXMLSerializer<AdjacentStations>(adjacentStationsPath);
 
-            DO.AdjacentStations station = ListAdjacentStations.Find(b => b.Station1 == code1 && b.Station2 == code2);
+            DO.AdjacentStations station = ListAdjacentStations.Find(b => b.Station1 == code1 && b.Station2 == code2&&b.AdjacExsis);
             if (station != null)
             {
                 ListAdjacentStations.Remove(station);
