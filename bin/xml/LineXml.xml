@@ -80,12 +80,4 @@
     <Area>JERUSALEM</Area>
     <LineExist>true</LineExist>
   </Line>
-  <Line>
-    <IdNumber>12</IdNumber>
-    <NumberLine>12</NumberLine>
-    <FirstStationCode>76</FirstStationCode>
-    <LastStationCode>86</LastStationCode>
-    <Area>GENERAL</Area>
-    <LineExist>true</LineExist>
-  </Line>
 </ArrayOfLine>

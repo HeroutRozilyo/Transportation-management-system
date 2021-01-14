@@ -6,7 +6,7 @@
     <Latitude>31.825302</Latitude>
     <Longtitude>35.188624</Longtitude>
     <Address>שדרות גולדה מאיר ,ירושלים </Address>
-    <StationExist>false</StationExist>
+    <StationExist>true</StationExist>
   </Stations>
   <Stations>
     <Code>76</Code>
@@ -86,7 +86,7 @@
     <Latitude>31.799804</Latitude>
     <Longtitude>35.213021</Longtitude>
     <Address>רחוב:דרך בית לחם הישנה  עיר: ירושלים</Address>
-    <StationExist>false</StationExist>
+    <StationExist>true</StationExist>
   </Stations>
   <Stations>
     <Code>91</Code>
