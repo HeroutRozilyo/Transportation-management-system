@@ -2206,7 +2206,7 @@ namespace DL
         }
 
         public IEnumerable<LineTrip> GetAllTripline(int idline)
-        {//
+        {
 
             XElement a = new XElement(lineTripPath);
             List<LineTrip> ListLineTrip1 = new List<LineTrip>
@@ -2347,6 +2347,7 @@ namespace DL
             //            TripLineExist = Convert.ToBoolean(line.Element("TripLineExist").Value),
 
             //        });
+
             List<DO.LineTrip> b = new List<LineTrip>();
             foreach( var line in ListLineTrip.Elements())
             {
@@ -3087,8 +3088,11 @@ namespace DL
                     };
             #endregion AdjacentStations
             XMLTools.SaveListToXMLSerializer(ListAdjacentStations1, adjacentStationsPath);
+
+
+
             List<AdjacentStations> ListAdjacentStations = XMLTools.LoadListFromXMLSerializer<AdjacentStations>(adjacentStationsPath);
-            DO.AdjacentStations linestations = ListAdjacentStations.Find(b => b.Station1 == Scode1 && b.Station2 == Scode2);//|| b.Station1 == Scode2 && b.Station2 == Scode1);
+            DO.AdjacentStations linestations = ListAdjacentStations.Find(b => b.Station1 == Scode1 && b.Station2 == Scode2&&b.AdjacExsis);//|| b.Station1 == Scode2 && b.Station2 == Scode1);
             if (linestations != null)
             {
                 return linestations;
@@ -3105,7 +3109,7 @@ namespace DL
             List<AdjacentStations> ListAdjacentStations = XMLTools.LoadListFromXMLSerializer<AdjacentStations>(adjacentStationsPath);
 
             return from station in ListAdjacentStations
-                   where (stationCode == station.Station1 || stationCode == station.Station2)
+                   where ((stationCode == station.Station1 || stationCode == station.Station2)&&station.AdjacExsis)
                    select station;            
         }
 
@@ -3115,7 +3119,7 @@ namespace DL
 
 
             return from stations in ListAdjacentStations
-                   where (StationsLinecondition(stations))
+                   where (StationsLinecondition(stations)&&stations.AdjacExsis)
                    select stations;
             
         }
@@ -3126,25 +3130,25 @@ namespace DL
         {
             List<AdjacentStations> ListAdjacentStations = XMLTools.LoadListFromXMLSerializer<AdjacentStations>(adjacentStationsPath);
 
-            DO.AdjacentStations temp = ListAdjacentStations.Find(b => b.Station1 == adjacentStations.Station1 && b.Station2 == adjacentStations.Station2);
+            DO.AdjacentStations temp = ListAdjacentStations.Find(b => b.Station1 == adjacentStations.Station1 && b.Station2 == adjacentStations.Station2&&adjacentStations.AdjacExsis);
             if (temp != null)
-                throw new DO.WrongIDExeption(adjacentStations.Station1, " התחנה עוקבת כבר קיימת במערכת");/////////////////////////////////////////////////////////////////
+                throw new DO.WrongIDExeption(adjacentStations.Station1, " התחנה עוקבת כבר קיימת במערכת");
             ListAdjacentStations.Add(adjacentStations);
 
             XMLTools.SaveListToXMLSerializer(ListAdjacentStations, adjacentStationsPath);
 
 
-            //
         }
 
         public void DeleteAdjacentStationse(int Scode1, int Scode2)
         {
             List<AdjacentStations> ListAdjacentStations = XMLTools.LoadListFromXMLSerializer<AdjacentStations>(adjacentStationsPath);
 
-            DO.AdjacentStations stations = ListAdjacentStations.Find(b => b.Station1 == Scode1 && b.Station2 == Scode2);
+            DO.AdjacentStations stations = ListAdjacentStations.Find(b => b.Station1 == Scode1 && b.Station2 == Scode2&&b.AdjacExsis);
             if (stations != null)
             {
-                ListAdjacentStations.Remove(stations);
+                stations.AdjacExsis = false;
+              //  ListAdjacentStations.Remove(stations);
             }
             else
                 throw new DO.WrongIDExeption(Scode1, "לא נמצאו פרטים עבור התחנה עוקבת המבוקשת");
