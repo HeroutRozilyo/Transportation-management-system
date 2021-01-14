@@ -2356,7 +2356,7 @@ namespace DL
             //            FinishAt = TimeSpan.Parse(line.Element("FinishAt").Value),
             //            TripLineExist = Convert.ToBoolean(line.Element("TripLineExist").Value),
 
-            //        });
+            //        });//
 
             List<DO.LineTrip> b = new List<LineTrip>();
             foreach( var line in ListLineTrip.Elements())
