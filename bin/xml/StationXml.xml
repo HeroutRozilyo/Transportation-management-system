@@ -86,7 +86,7 @@
     <Latitude>31.799804</Latitude>
     <Longtitude>35.213021</Longtitude>
     <Address>רחוב:דרך בית לחם הישנה  עיר: ירושלים</Address>
-    <StationExist>true</StationExist>
+    <StationExist>false</StationExist>
   </Stations>
   <Stations>
     <Code>91</Code>
