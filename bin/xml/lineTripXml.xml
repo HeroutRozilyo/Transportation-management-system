@@ -12,7 +12,7 @@
     <Frequency>13</Frequency>
     <StartAt>06:00:00</StartAt>
     <FinishAt>1.00:00:00</FinishAt>
-    <TripLineExist>true</TripLineExist>
+    <TripLineExist>false</TripLineExist>
   </LineTrip>
   <LineTrip>
     <KeyId>3</KeyId>
