@@ -252,7 +252,7 @@ namespace PLGui
                 {
                     case MessageBoxResult.Yes:
                         {
-                            bl.DeleteStation(oldCode);
+                            bl.DeleteStation(oldCode,stationData.LineAtStation);
                             stationData = null;
                             RefreshStation();
                             RefreshLineInStation();

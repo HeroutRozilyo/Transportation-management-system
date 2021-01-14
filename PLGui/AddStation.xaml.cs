@@ -62,12 +62,18 @@ namespace PLGui
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-
-            helpData();
-            bl.AddStation(toAdd);
-            MessageBox.Show("האוטובוס נוסף בהצלחה למערכת", "Success Message", MessageBoxButton.OK, MessageBoxImage.Asterisk);
-            this.DialogResult = true;
-            this.Close();
+            try
+            {
+                helpData();
+                bl.AddStation(toAdd);
+                MessageBox.Show("האוטובוס נוסף בהצלחה למערכת", "Success Message", MessageBoxButton.OK, MessageBoxImage.Asterisk);
+                this.DialogResult = true;
+                this.Close();
+            }
+            catch(BO.BadCoordinateException a)
+            {
+                MessageBox.Show(a.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
          
         }
     }

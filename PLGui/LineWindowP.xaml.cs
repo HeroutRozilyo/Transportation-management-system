@@ -102,6 +102,7 @@ namespace PLGui
                     }
             }
                     ListOfLine.ItemsSource = egged;
+            ListOfLine.Items.Refresh();
 
 
         }
@@ -135,7 +136,8 @@ namespace PLGui
         }
         private void listArea()
         {
-            foreach(var group in bl.GetLinesByAreaG())
+            CENTER.Clear(); GENERAL.Clear(); NORTH.Clear(); SOUTH.Clear(); YOSH.Clear(); JERUSALEM.Clear();
+            foreach (var group in bl.GetLinesByAreaG())
             {
                 if (group.Key == BO.AREA.CENTER)
                     foreach (var line in group)
@@ -162,7 +164,7 @@ namespace PLGui
 
         private void comboBoxArea_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            CENTER.Clear();GENERAL.Clear();NORTH.Clear();SOUTH.Clear();YOSH.Clear(); JERUSALEM.Clear();
+           
             listArea();
              area = (BO.AREA)(comboBoxArea.SelectedItem);
 
@@ -192,10 +194,12 @@ namespace PLGui
                             var fxElt = sender as FrameworkElement; //get the licence of the bus to refulling. 
                             BO.Line lineToDelete = fxElt.DataContext as BO.Line;
                             bl.DeleteLine(lineToDelete.IdNumber);
-                            RefreshLine();
+                          
                             line = null;
+                            listArea();
+                            RefreshLine();
                             RefreshStationListView();
-                            MessageBox.Show("הקו נוסף בהצלחה למערכת", "Success Message", MessageBoxButton.OK, MessageBoxImage.Asterisk);
+                            MessageBox.Show("הקו נמחק בהצלחה", "Success Message", MessageBoxButton.OK, MessageBoxImage.Asterisk);
                             break;
                         }
                     case MessageBoxResult.No:
@@ -223,6 +227,7 @@ namespace PLGui
             {
                 BO.Line newline = addline.NewLine;
                 line = newline;
+                listArea();
                 RefreshStationListView();
                 comboBoxArea.SelectedItem = newline.Area;
                 RefreshLine();

@@ -85,11 +85,11 @@ namespace PLGui
                                                  select item;
 
                             bl.UpdateLineStationForIndexChange(line);
-                    
 
 
 
 
+                            this.DialogResult = true;
 
                             this.Close();
                             break;//
