@@ -244,7 +244,7 @@ namespace DL
 
         public IEnumerable<Line> GetAllLine()
         {
-            
+
             XElement lineRootElem = XMLTools.LoadListFromXMLElement(linePath); //get the data from xml
 
             return (from line in lineRootElem.Elements()
@@ -264,7 +264,6 @@ namespace DL
 
         public IEnumerable<Line> GetAllLinesArea(AREA area)
         {
-
             XElement lineRootElem = XMLTools.LoadListFromXMLElement(linePath); //get the data from xml
 
             return (from line in lineRootElem.Elements()
@@ -376,7 +375,6 @@ namespace DL
 
         public IEnumerable<Stations> GetAllStations()
         {
-            
             XElement stationRootElem = XMLTools.LoadListFromXMLElement(stationPath); //get the data from xml
 
             return (from station in stationRootElem.Elements()
@@ -487,932 +485,6 @@ namespace DL
 
         public IEnumerable<LineStation> GetAllStationsLine(int idline)
         {
-            List<LineStation> ListLineStations1 = new List<LineStation>
-            {
-                #region line station
-                //line number 18
-                new LineStation
-                {
-                    LineId=1,
-                    StationCode=73,
-                    LineStationIndex=1,
-                    LineStationExist=true,
-                    PrevStation=0,
-                    NextStation=76,
-                },
-                new LineStation
-                {
-                    LineId=1,
-                    StationCode=76,
-                    LineStationIndex=2,
-                    LineStationExist=true,
-                    PrevStation=73,
-                    NextStation=77,
-                },
-                new LineStation
-                {
-                    LineId=1,
-                    StationCode=77,
-                    LineStationIndex=3,
-                    LineStationExist=true,
-                    PrevStation=76,
-                    NextStation=78,
-                },
-                new LineStation
-                {
-                    LineId=1,
-                    StationCode=78,
-                    LineStationIndex=4,
-                    LineStationExist=true,
-                    PrevStation=77,
-                    NextStation=83,
-                },
-                new LineStation
-                {
-                    LineId=1,
-                    StationCode=83,
-                    LineStationIndex=5,
-                    LineStationExist=true,
-                    PrevStation=78,
-                    NextStation=84,
-                },
-                new LineStation
-                {
-                    LineId=1,
-                    StationCode=84,
-                    LineStationIndex=6,
-                    LineStationExist=true,
-                    PrevStation=83,
-                    NextStation=85,
-                },
-                new LineStation
-                {
-                    LineId=1,
-                    StationCode=85,
-                    LineStationIndex=7,
-                    LineStationExist=true,
-                    PrevStation=84,
-                    NextStation=86,
-                },
-                new LineStation
-                {
-                    LineId=1,
-                    StationCode=86,
-                    LineStationIndex=8,
-                    LineStationExist=true,
-                    PrevStation=85,
-                    NextStation=88,
-                },
-                new LineStation
-                {
-                    LineId=1,
-                    StationCode=88,
-                    LineStationIndex=9,
-                    LineStationExist=true,
-                    PrevStation=86,
-                    NextStation=89,
-                },
-                new LineStation
-                {
-                    LineId=1,
-                    StationCode=89,
-                    LineStationIndex=10,
-                    LineStationExist=true,
-                    PrevStation=88,
-                    NextStation=0,
-                },
-
-             //line 10
-                new LineStation
-                {
-                    LineId=2,
-                    StationCode=85,
-                    LineStationIndex=1,
-                    LineStationExist=true,
-                    PrevStation=0,
-                    NextStation=86,
-                },
-                new LineStation
-                {
-                    LineId=2,
-                    StationCode=86,
-                    LineStationIndex=2,
-                    LineStationExist=true,
-                    PrevStation=85,
-                    NextStation=88,
-                },
-                new LineStation
-                {
-                    LineId=2,
-                    StationCode=88,
-                    LineStationIndex=3,
-                    LineStationExist=true,
-                    PrevStation=86,
-                    NextStation=89,
-                },
-                new LineStation
-                {
-                    LineId=2,
-                    StationCode=89,
-                    LineStationIndex=4,
-                    LineStationExist=true,
-                    PrevStation=88,
-                    NextStation=90,
-                },
-                new LineStation
-                {
-                    LineId=2,
-                    StationCode=90,
-                    LineStationIndex=5,
-                    LineStationExist=true,
-                    PrevStation=89,
-                    NextStation=91,
-                },
-                new LineStation
-                {
-                    LineId=2,
-                    StationCode=91,
-                    LineStationIndex=6,
-                    LineStationExist=true,
-                    PrevStation=90,
-                    NextStation=93,
-                },
-                new LineStation
-                {
-                    LineId=2,
-                    StationCode=93,
-                    LineStationIndex=7,
-                    LineStationExist=true,
-                    PrevStation=91,
-                    NextStation=94,
-                },
-                new LineStation
-                {
-                    LineId=2,
-                    StationCode=94,
-                    LineStationIndex=8,
-                    LineStationExist=true,
-                    PrevStation=93,
-                    NextStation=95,
-                },
-                new LineStation
-                {
-                    LineId=2,
-                    StationCode=95,
-                    LineStationIndex=9,
-                    LineStationExist=true,
-                    PrevStation=94,
-                    NextStation=97,
-                },
-                new LineStation
-                {
-                    LineId=2,
-                    StationCode=97,
-                    LineStationIndex=10,
-                    LineStationExist=true,
-                    PrevStation=95,
-                    NextStation=0,
-                }, 
-             //line 5         
-                new LineStation
-                {
-                    LineId=3,
-                    StationCode=122,
-                    LineStationIndex=1,
-                    LineStationExist=true,
-                    PrevStation=0,
-                    NextStation=123,
-                },
-                new LineStation
-                {
-                    LineId=3,
-                    StationCode=123,
-                    LineStationIndex=2,
-                    LineStationExist=true,
-                    PrevStation=122,
-                    NextStation=121,
-                },
-                new LineStation
-                {
-                    LineId=3,
-                    StationCode=121,
-                    LineStationIndex=3,
-                    LineStationExist=true,
-                    PrevStation=123,
-                    NextStation=1524,
-                },
-                new LineStation
-                {
-                    LineId=3,
-                    StationCode=1524,
-                    LineStationIndex=4,
-                    LineStationExist=true,
-                    PrevStation=121,
-                    NextStation=1523,
-                },
-                new LineStation
-                {
-                    LineId=3,
-                    StationCode=1523,
-                    LineStationIndex=5,
-                    LineStationExist=true,
-                    PrevStation=1524,
-                    NextStation=1522,
-                },
-                new LineStation
-                {
-                    LineId=3,
-                    StationCode=1522,
-                    LineStationIndex=6,
-                    LineStationExist=true,
-                    PrevStation=1523,
-                    NextStation=1518,
-                },
-                new LineStation
-                {
-                    LineId=3,
-                    StationCode=1518,
-                    LineStationIndex=7,
-                    LineStationExist=true,
-                    PrevStation=1522,
-                    NextStation=1514,
-                },
-                new LineStation
-                {
-                    LineId=3,
-                    StationCode=1514,
-                    LineStationIndex=8,
-                    LineStationExist=true,
-                    PrevStation=1518,
-                    NextStation=1512,
-                },
-                new LineStation
-                {
-                    LineId=3,
-                    StationCode=1512,
-                    LineStationIndex=9,
-                    LineStationExist=true,
-                    PrevStation=1514,
-                    NextStation=1511,
-                },
-                new LineStation
-                {
-                    LineId=3,
-                    StationCode=1511,
-                    LineStationIndex=10,
-                    LineStationExist=true,
-                    PrevStation=1512,
-                    NextStation=0,
-                },
-
-                //line=6
-                new LineStation
-                {
-                    LineId=4,
-                    StationCode=121,
-                    LineStationIndex=1,
-                    LineStationExist=true,
-                    PrevStation=0,
-                    NextStation=123,
-                },
-                new LineStation
-                {
-                    LineId=4,
-                    StationCode=123,
-                    LineStationIndex=2,
-                    LineStationExist=true,
-                    PrevStation=121,
-                    NextStation=122,
-                },
-                new LineStation
-                {
-                    LineId=4,
-                    StationCode=122,
-                    LineStationIndex=3,
-                    LineStationExist=true,
-                    PrevStation=123,
-                    NextStation=1524,
-                },
-                new LineStation
-                {
-                    LineId=4,
-                    StationCode=1524,
-                    LineStationIndex=4,
-                    LineStationExist=true,
-                    PrevStation=122,
-                    NextStation=1523,
-                },
-                new LineStation
-                {
-                    LineId=4,
-                    StationCode=1523,
-                    LineStationIndex=5,
-                    LineStationExist=true,
-                    PrevStation=1524,
-                    NextStation=1522,
-                },
-                new LineStation
-                {
-                    LineId=4,
-                    StationCode=1522,
-                    LineStationIndex=6,
-                    LineStationExist=true,
-                    PrevStation=1523,
-                    NextStation=1518,
-                },
-                new LineStation
-                {
-                    LineId=4,
-                    StationCode=1518,
-                    LineStationIndex=7,
-                    LineStationExist=true,
-                    PrevStation=1522,
-                    NextStation=1514,
-                },
-                new LineStation
-                {
-                    LineId=4,
-                    StationCode=1514,
-                    LineStationIndex=8,
-                    LineStationExist=true,
-                    PrevStation=1518,
-                    NextStation=1512,
-                },
-                new LineStation
-                {
-                    LineId=4,
-                    StationCode=1512,
-                    LineStationIndex=9,
-                    LineStationExist=true,
-                    PrevStation=1514,
-                    NextStation=1491,
-                },
-                new LineStation
-                {
-                    LineId=4,
-                    StationCode=1491,
-                    LineStationIndex=10,
-                    LineStationExist=true,
-                    PrevStation=1512,
-                    NextStation=0,
-                }, 
-
-                //line=33
-                new LineStation
-                {
-                    LineId=5,
-                    StationCode=119,
-                    LineStationIndex=1,
-                    LineStationExist=true,
-                    PrevStation=0,
-                    NextStation=1485,
-                },
-                new LineStation
-                {
-                    LineId=5,
-                    StationCode=1485,
-                    LineStationIndex=2,
-                    LineStationExist=true,
-                    PrevStation=119,
-                    NextStation=1486,
-                },
-                new LineStation
-                {
-                    LineId=5,
-                    StationCode=1486,
-                    LineStationIndex=3,
-                    LineStationExist=true,
-                    PrevStation=1485,
-                    NextStation=1487,
-                },
-                new LineStation
-                {
-                    LineId=5,
-                    StationCode=1487,
-                    LineStationIndex=4,
-                    LineStationExist=true,
-                    PrevStation=1486,
-                    NextStation=1488,
-                },
-                new LineStation
-                {
-                    LineId=5,
-                    StationCode=1488,
-                    LineStationIndex=5,
-                    LineStationExist=true,
-                    PrevStation=1487,
-                    NextStation=1490,
-                },
-                new LineStation
-                {
-                    LineId=5,
-                    StationCode=1490,
-                    LineStationIndex=6,
-                    LineStationExist=true,
-                    PrevStation=1488,
-                    NextStation=1494,
-                },
-                new LineStation
-                {
-                    LineId=5,
-                    StationCode=1494,
-                    LineStationIndex=7,
-                    LineStationExist=true,
-                    PrevStation=1490,
-                    NextStation=1492,
-                },
-                new LineStation
-                {
-                    LineId=5,
-                    StationCode=1492,
-                    LineStationIndex=8,
-                    LineStationExist=true,
-                    PrevStation=1494,
-                    NextStation=1493,
-                },
-                new LineStation
-                {
-                    LineId=5,
-                    StationCode=1493,
-                    LineStationIndex=9,
-                    LineStationExist=true,
-                    PrevStation=1492,
-                    NextStation=1491,
-                },
-                new LineStation
-                {
-                    LineId=5,
-                    StationCode=1491,
-                    LineStationIndex=10,
-                    LineStationExist=true,
-                    PrevStation=1493,
-                    NextStation=0,
-                },
-
-                //line=67,
-                new LineStation
-                {
-                    LineId=6,
-                    StationCode=110,
-                    LineStationIndex=1,
-                    LineStationExist=true,
-                    PrevStation=0,
-                    NextStation=111,
-                },
-                new LineStation
-                {
-                    LineId=6,
-                    StationCode=111,
-                    LineStationIndex=2,
-                    LineStationExist=true,
-                    PrevStation=110,
-                    NextStation=112,
-                },
-                new LineStation
-                {
-                    LineId=6,
-                    StationCode=112,
-                    LineStationIndex=3,
-                    LineStationExist=true,
-                    PrevStation=111,
-                    NextStation=113,
-                },
-                new LineStation
-                {
-                    LineId=6,
-                    StationCode=113,
-                    LineStationIndex=4,
-                    LineStationExist=true,
-                    PrevStation=112,
-                    NextStation=115,
-                },
-                new LineStation
-                {
-                    LineId=6,
-                    StationCode=115,
-                    LineStationIndex=5,
-                    LineStationExist=true,
-                    PrevStation=113,
-                    NextStation=116,
-                },
-                new LineStation
-                {
-                    LineId=6,
-                    StationCode=116,
-                    LineStationIndex=6,
-                    LineStationExist=true,
-                    PrevStation=115,
-                    NextStation=117,
-                },
-                new LineStation
-                {
-                    LineId=6,
-                    StationCode=117,
-                    LineStationIndex=7,
-                    LineStationExist=true,
-                    PrevStation=116,
-                    NextStation=119,
-                },
-                new LineStation
-                {
-                    LineId=6,
-                    StationCode=119,
-                    LineStationIndex=8,
-                    LineStationExist=true,
-                    PrevStation=117,
-                    NextStation=1485,
-                },
-                new LineStation
-                {
-                    LineId=6,
-                    StationCode=1485,
-                    LineStationIndex=9,
-                    LineStationExist=true,
-                    PrevStation=119,
-                    NextStation=1486,
-                },
-                new LineStation
-                {
-                    LineId=6,
-                    StationCode=1486,
-                    LineStationIndex=10,
-                    LineStationExist=true,
-                    PrevStation=1485,
-                    NextStation=0,
-                },
-
-                //line=24,
-                new LineStation
-                {
-                    LineId=7,
-                    StationCode=97,
-                    LineStationIndex=1,
-                    LineStationExist=true,
-                    PrevStation=0,
-                    NextStation=102,
-                },
-                new LineStation
-                {
-                    LineId=7,
-                    StationCode=102,
-                    LineStationIndex=2,
-                    LineStationExist=true,
-                    PrevStation=97,
-                    NextStation=103,
-                },
-                new LineStation
-                {
-                    LineId=7,
-                    StationCode=103,
-                    LineStationIndex=3,
-                    LineStationExist=true,
-                    PrevStation=102,
-                    NextStation=105,
-                },
-                new LineStation
-                {
-                    LineId=7,
-                    StationCode=105,
-                    LineStationIndex=4,
-                    LineStationExist=true,
-                    PrevStation=103,
-                    NextStation=106,
-                },
-                new LineStation
-                {
-                    LineId=7,
-                    StationCode=106,
-                    LineStationIndex=5,
-                    LineStationExist=true,
-                    PrevStation=105,
-                    NextStation=108,
-                },
-                new LineStation
-                {
-                    LineId=7,
-                    StationCode=108,
-                    LineStationIndex=6,
-                    LineStationExist=true,
-                    PrevStation=106,
-                    NextStation=109,
-                },
-                new LineStation
-                {
-                    LineId=7,
-                    StationCode=109,
-                    LineStationIndex=7,
-                    LineStationExist=true,
-                    PrevStation=108,
-                    NextStation=110,
-                },
-                new LineStation
-                {
-                    LineId=7,
-                    StationCode=110,
-                    LineStationIndex=8,
-                    LineStationExist=true,
-                    PrevStation=109,
-                    NextStation=112,
-                },
-                new LineStation
-                {
-                    LineId=7,
-                    StationCode=112,
-                    LineStationIndex=9,
-                    LineStationExist=true,
-                    PrevStation=110,
-                    NextStation=111,
-                },
-                new LineStation
-                {
-                    LineId=7,
-                    StationCode=111,
-                    LineStationIndex=10,
-                    LineStationExist=true,
-                    PrevStation=112,
-                    NextStation=0,
-                },
-                
-                //  NumberLine=20
-                new LineStation
-                {
-                    LineId=8,
-                    StationCode=102,
-                    LineStationIndex=1,
-                    LineStationExist=true,
-                    PrevStation=0,
-                    NextStation=103,
-                },
-                new LineStation
-                {
-                    LineId=8,
-                    StationCode=103,
-                    LineStationIndex=2,
-                    LineStationExist=true,
-                    PrevStation=102,
-                    NextStation=105,
-                },
-                new LineStation
-                {
-                    LineId=8,
-                    StationCode=105,
-                    LineStationIndex=3,
-                    LineStationExist=true,
-                    PrevStation=103,
-                    NextStation=106,
-                },
-                new LineStation
-                {
-                    LineId=8,
-                    StationCode=106,
-                    LineStationIndex=4,
-                    LineStationExist=true,
-                    PrevStation=105,
-                    NextStation=108,
-                },
-                new LineStation
-                {
-                    LineId=8,
-                    StationCode=108,
-                    LineStationIndex=5,
-                    LineStationExist=true,
-                    PrevStation=106,
-                    NextStation=109,
-                },
-                new LineStation
-                {
-                    LineId=8,
-                    StationCode=109,
-                    LineStationIndex=6,
-                    LineStationExist=true,
-                    PrevStation=108,
-                    NextStation=110,
-                },
-                new LineStation
-                {
-                    LineId=8,
-                    StationCode=110,
-                    LineStationIndex=7,
-                    LineStationExist=true,
-                    PrevStation=109,
-                    NextStation=111,
-                },
-                new LineStation
-                {
-                    LineId=8,
-                    StationCode=111,
-                    LineStationIndex=8,
-                    LineStationExist=true,
-                    PrevStation=110,
-                    NextStation=112,
-                },
-                new LineStation
-                {
-                    LineId=8,
-                    StationCode=112,
-                    LineStationIndex=9,
-                    LineStationExist=true,
-                    PrevStation=111,
-                    NextStation=116,
-                },
-                new LineStation
-                {
-                    LineId=8,
-                    StationCode=116,
-                    LineStationIndex=10,
-                    LineStationExist=true,
-                    PrevStation=112,
-                    NextStation=0,
-                },
-
-                //line=27
-                new LineStation
-                {
-                    LineId=9,
-                    StationCode=85,
-                    LineStationIndex=1,
-                    LineStationExist=true,
-                    PrevStation=0,
-                    NextStation=86,
-                },
-                new LineStation
-                {
-                    LineId=9,
-                    StationCode=86,
-                    LineStationIndex=2,
-                    LineStationExist=true,
-                    PrevStation=85,
-                    NextStation=88,
-                },
-                new LineStation
-                {
-                    LineId=9,
-                    StationCode=88,
-                    LineStationIndex=3,
-                    LineStationExist=true,
-                    PrevStation=86,
-                    NextStation=89,
-                },
-                new LineStation
-                {
-                    LineId=9,
-                    StationCode=89,
-                    LineStationIndex=4,
-                    LineStationExist=true,
-                    PrevStation=88,
-                    NextStation=90,
-                },
-                new LineStation
-                {
-                    LineId=9,
-                    StationCode=90,
-                    LineStationIndex=5,
-                    LineStationExist=true,
-                    PrevStation=89,
-                    NextStation=91,
-                },
-                new LineStation
-                {
-                    LineId=9,
-                    StationCode=91,
-                    LineStationIndex=6,
-                    LineStationExist=true,
-                    PrevStation=90,
-                    NextStation=93,
-                },
-                new LineStation
-                {
-                    LineId=9,
-                    StationCode=93,
-                    LineStationIndex=7,
-                    LineStationExist=true,
-                    PrevStation=91,
-                    NextStation=94,
-                },
-                new LineStation
-                {
-                    LineId=9,
-                    StationCode=94,
-                    LineStationIndex=8,
-                    LineStationExist=true,
-                    PrevStation=93,
-                    NextStation=95,
-                },
-                new LineStation
-                {
-                    LineId=9,
-                    StationCode=95,
-                    LineStationIndex=9,
-                    LineStationExist=true,
-                    PrevStation=94,
-                    NextStation=102,
-                },
-                new LineStation
-                {
-                    LineId=9,
-                    StationCode=102,
-                    LineStationIndex=10,
-                    LineStationExist=true,
-                    PrevStation=95,
-                    NextStation=0,
-                },
-
-                //line=21,
-                new LineStation
-                {
-                    LineId=10,
-                    StationCode=111,
-                    LineStationIndex=1,
-                    LineStationExist=true,
-                    PrevStation=0,
-                    NextStation=112,
-                },
-                new LineStation
-                {
-                    LineId=10,
-                    StationCode=112,
-                    LineStationIndex=2,
-                    LineStationExist=true,
-                    PrevStation=111,
-                    NextStation=113,
-                },
-                new LineStation
-                {
-                    LineId=10,
-                    StationCode=113,
-                    LineStationIndex=3,
-                    LineStationExist=true,
-                    PrevStation=112,
-                    NextStation=115,
-                },
-                new LineStation
-                {
-                    LineId=10,
-                    StationCode=115,
-                    LineStationIndex=4,
-                    LineStationExist=true,
-                    PrevStation=113,
-                    NextStation=116,
-                },
-                new LineStation
-                {
-                    LineId=10,
-                    StationCode=116,
-                    LineStationIndex=5,
-                    LineStationExist=true,
-                    PrevStation=115,
-                    NextStation=117,
-                },
-                new LineStation
-                {
-                    LineId=10,
-                    StationCode=117,
-                    LineStationIndex=6,
-                    LineStationExist=true,
-                    PrevStation=116,
-                    NextStation=119,
-                },
-                new LineStation
-                {
-                    LineId=10,
-                    StationCode=119,
-                    LineStationIndex=7,
-                    LineStationExist=true,
-                    PrevStation=117,
-                    NextStation=1485,
-                },
-                new LineStation
-                {
-                    LineId=10,
-                    StationCode=1485,
-                    LineStationIndex=8,
-                    LineStationExist=true,
-                    PrevStation=119,
-                    NextStation=1486,
-                },
-                new LineStation
-                {
-                    LineId=10,
-                    StationCode=1486,
-                    LineStationIndex=9,
-                    LineStationExist=true,
-                    PrevStation=1485,
-                    NextStation=1488,
-                },
-                new LineStation
-                {
-                    LineId=10,
-                    StationCode=1488,
-                    LineStationIndex=10,
-                    LineStationExist=true,
-                    PrevStation=1486,
-                    NextStation=0,
-                },
-
-               #endregion
-
-            };
-            XMLTools.SaveListToXMLSerializer(ListLineStations1, lineStationPath);
             List<LineStation> ListLineStation = XMLTools.LoadListFromXMLSerializer<LineStation>(lineStationPath);
 
             return from station in ListLineStation
@@ -1559,7 +631,7 @@ namespace DL
         public IEnumerable<LineTrip> GetAllTripline(int idline)
         {
             #region
-            //XElement a = new XElement(lineTripPath);
+            //XElement a=new XElement(lineTripPath);
             //List<LineTrip> ListLineTrip1 = new List<LineTrip>
             //{
             //     #region LineTrip
@@ -1677,13 +749,14 @@ namespace DL
             //     }
             //     #endregion LineTrip
             //};
-            //a.Add(XMLTools.ToXML(ListLineTrip1[0]));
+            // a.Add(XMLTools.ToXML(ListLineTrip1[0]));
             //for (int i = 1; i < ListLineTrip1.Count(); i++)
             //{
 
-            //    a.Add(XMLTools.ToXML(ListLineTrip1[i]));
+            //    a.Add( XMLTools.ToXML(ListLineTrip1[i]));
             //}
             //XMLTools.SaveListToXMLElement(a, lineTripPath);
+
             #endregion
 
             XElement ListLineTrip = XMLTools.LoadListFromXMLElement(lineTripPath); //get the data from xml
@@ -1828,9 +901,604 @@ namespace DL
 
         public AdjacentStations GetAdjacentStations(int Scode1, int Scode2)
         {
+           // double speed = 666.66;//m/s- 50 km/h
+            #region
+//            List<AdjacentStations> ListAdjacentStations1 = new List<AdjacentStations>
+//            {
+                
+//#region AdjacentStations  
+//                #region lineId1
+//                new AdjacentStations
+//                {
+//                    Station1=73,
+//                    Station2= 76,
+//                   Distance=10387.6464817987,
+//                   TimeAverage= ((1.5*10387.6464817987)/speed),//i.5- air to ground
+//                },
+
+//                new AdjacentStations
+//                {
+//                    Station1=76,
+//                    Station2= 77,
+//                   Distance=197.059830127369,
+//                  TimeAverage= ((1.5*197.059830127369)/speed)
+
+
+//                },
+
+//                new AdjacentStations
+//                {
+//                    Station1=77,
+//                    Station2= 78,
+//                   Distance=5942.26478400092,
+//                    TimeAverage= ((1.5*5942.26478400092)/speed)
+
+
+//                },
+
+//                new AdjacentStations
+//                {
+//                    Station1=78,
+//                    Station2= 83,
+//                   Distance=4115.12303761144,
+//                    TimeAverage=((1.5*4115.12303761144)/speed)
+
+
+//                },
+
+//                new AdjacentStations
+//                {
+//                    Station1=83,
+//                    Station2= 84,
+//                   Distance=3971.03321849724,
+//                    TimeAverage=((1.5*3971.03321849724)/speed)
+
+
+//                },
+
+//                new AdjacentStations
+//                {
+//                    Station1=84,
+//                    Station2= 85,
+//                   Distance=3665.92895953549,
+//                    TimeAverage=((1.5*3665.92895953549)/speed)
+
+
+//                },
+
+//                new AdjacentStations
+//                {
+//                    Station1=85,
+//                    Station2= 86,
+//                   Distance=181.343172558381,
+//                   TimeAverage= ((1.5*181.343172558381)/speed)
+
+
+//                },
+//                new AdjacentStations
+//                {
+//                    Station1=86,
+//                    Station2= 88,
+//                   Distance=338.193775824042,
+//                   TimeAverage= ((1.5*338.193775824042)/speed)
+
+
+//                },
+//                new AdjacentStations
+//                {
+//                    Station1=88,
+//                    Station2= 89,
+//                   Distance=839.108713036705,
+//                    TimeAverage= ((1.5*839.108713036705)/speed)
+
+
+//                },
+//#endregion LineId1
+                
+//                #region lineId2
+
+
+
+        
+
+//                new AdjacentStations
+//                {
+//                    Station1=89,
+//                    Station2= 90,
+//                   Distance=4972.12709975181,
+//                    TimeAverage= ((1.5*4972.12709975181)/speed)
+
+
+//                },
+
+//                new AdjacentStations
+//                {
+//                    Station1=90,
+//                    Station2= 91,
+//                   Distance=4978.59764273959,
+//                    TimeAverage= ((1.5*4978.59764273959)/speed)
+
+
+//                },
+
+//                new AdjacentStations
+//                {
+//                    Station1=91,
+//                    Station2= 93,
+//                   Distance=178.858161402408,
+//                   TimeAverage= ((1.5*178.858161402408)/speed)
+
+
+//                },
+
+//                new AdjacentStations
+//                {
+//                    Station1=93,
+//                    Station2= 94,
+//                   Distance=20.9542368918975,
+//                    TimeAverage= ((1.5*20.9542368918975)/speed)
+
+
+//                },
+//                new AdjacentStations
+//                {
+//                    Station1=94,
+//                    Station2= 95,
+//                   Distance=337.617552547299,
+//                    TimeAverage= ((1.5*337.617552547299)/speed)
+
+
+//                },
+//                new AdjacentStations
+//                {
+//                    Station1=95,
+//                    Station2= 97,
+//                   Distance=141.607925499495,
+//                    TimeAverage= ((1.5*141.607925499495)/speed)
+
+
+//                },
+//#endregion LineId2
+
+//                #region lineId3 
+//                new AdjacentStations
+//                {
+//                    Station1=122,
+//                    Station2= 123,
+//                   Distance=161.658025824811,
+//                    TimeAverage= ((1.5*161.658025824811)/speed)
+//                },
+
+//                new AdjacentStations
+//                {
+//                    Station1=123,
+//                    Station2= 121,
+//                   Distance=145.638205945867,
+//                    TimeAverage= ((1.5*145.638205945867)/speed)
+
+
+//                },
+
+//                new AdjacentStations
+//                {
+//                    Station1=121,
+//                    Station2= 1524,
+//                   Distance=2943.02888382813,
+//                   TimeAverage= ((1.5*2943.02888382813)/speed)
+
+
+//                },
+
+//                new AdjacentStations
+//                {
+//                    Station1=1524,
+//                    Station2= 1523,
+//                   Distance=140.492280736979,
+//                   TimeAverage= ((1.5*140.492280736979)/speed)
+
+
+//                },
+
+//                new AdjacentStations
+//                {
+//                    Station1=1523,
+//                    Station2= 1522,
+//                   Distance=710.578511572254,
+//                   TimeAverage= ((1.5*710.578511572254)/speed)
+
+
+//                },
+
+//                new AdjacentStations
+//                {
+//                    Station1=1522,
+//                    Station2= 1518,
+//                   Distance=2265.21319232095,
+//                   TimeAverage= ((1.5*2265.21319232095)/speed)
+
+
+//                },
+
+//                new AdjacentStations
+//                {
+//                    Station1=1518,
+//                    Station2= 1514,
+//                   Distance=16.6091664944544,
+//                    TimeAverage= ((1.5*16.6091664944544)/speed)
+
+
+//                },
+//                new AdjacentStations
+//                {
+//                    Station1=1514,
+//                    Station2= 1512,
+//                   Distance=1034.11608174677,
+//                    TimeAverage= ((1.5*1034.11608174677)/speed)
+
+
+//                },
+//                new AdjacentStations
+//                {
+//                    Station1=1512,
+//                    Station2= 1511,
+//                   Distance=2271.65706974387,
+//                    TimeAverage= ((1.5*2271.65706974387)/speed)
+
+
+//                },
+//#endregion LineId3
+
+//                #region lineId4
+//                new AdjacentStations
+//                {
+//                    Station1=121,
+//                    Station2= 123,
+//                   Distance=145.638205945867,
+//                   TimeAverage= ((1.5*145.638205945867)/speed)
+//                },
+
+//                new AdjacentStations
+//                {
+//                    Station1=123,
+//                    Station2= 122,
+//                   Distance=161.658025824811,
+//                   TimeAverage=((1.5*161.658025824811)/speed)
+
+
+//                },
+
+//                new AdjacentStations
+//                {
+//                    Station1=122,
+//                    Station2= 1524,
+//                   Distance=2957.82843148296,
+//                  TimeAverage= ((1.5*2957.82843148296)/speed)
+
+
+//                },
+
+
+
+//                new AdjacentStations
+//                {
+//                    Station1=1512,
+//                    Station2= 1491,
+//                   Distance=2604.33240816743,
+//                   TimeAverage=((1.5*2604.33240816743)/speed)
+
+
+//                },
+//#endregion LineId4
+
+//                #region lineId5
+//                new AdjacentStations
+//                {
+//                    Station1=119,
+//                    Station2= 1485,
+//                   Distance=5719.48141855948,
+//                 TimeAverage= ((1.5*5719.48141855948)/speed)
+//                },
+
+//                new AdjacentStations
+//                {
+//                    Station1=1485,
+//                    Station2= 1486,
+//                   Distance=179.006776536478,
+//                  TimeAverage= ((1.5*179.006776536478)/speed)
+
+
+//                },
+
+//                new AdjacentStations
+//                {
+//                    Station1=1486,
+//                    Station2= 1487,
+//                   Distance=772.225954779688,
+//                   TimeAverage= ((1.5*772.225954779688)/speed)
+
+
+//                },
+
+//                new AdjacentStations
+//                {
+//                    Station1=1487,
+//                    Station2= 1488,
+//                   Distance=1415.66487905204,
+//                   TimeAverage= ((1.5*1415.66487905204)/speed)
+
+
+//                },
+
+//                new AdjacentStations
+//                {
+//                    Station1=1488,
+//                    Station2= 1490,
+//                   Distance=445.425376124488,
+//                   TimeAverage= ((1.5*445.425376124488)/speed)
+
+
+//                },
+
+//                new AdjacentStations
+//                {
+//                    Station1=1490,
+//                    Station2= 1494,
+//                   Distance=10374.8817694688,
+//                   TimeAverage= ((1.5*10374.8817694688)/speed)
+
+
+//                },
+
+//                new AdjacentStations
+//                {
+//                    Station1=1494,
+//                    Station2= 1492,
+//                   Distance=587.350643701609,
+//                   TimeAverage= ((1.5*587.350643701609)/speed)
+
+
+//                },
+//                new AdjacentStations
+//                {
+//                    Station1=1492,
+//                    Station2= 1493,
+//                   Distance=361.691515745432,
+//                   TimeAverage= ((1.5*361.691515745432)/speed)
+
+
+//                },
+//                new AdjacentStations
+//                {
+//                    Station1=1493,
+//                    Station2= 1491,
+//                   Distance=1144.85124079156,
+//                   TimeAverage= ((1.5*1144.85124079156)/speed)
+
+
+//                },
+//#endregion LineId5
+
+//                #region lineId6
+//                new AdjacentStations
+//                {
+//                    Station1=110,
+//                    Station2= 111,
+//                   Distance=195.920342315088,
+//                    TimeAverage= ((1.5*195.920342315088)/speed)
+//                },
+
+//                new AdjacentStations
+//                {
+//                    Station1=111,
+//                    Station2= 112,
+//                    Distance=50.4574978208662,
+//                    TimeAverage= ((1.5*50.4574978208662)/speed)
+
+
+//                },
+
+//                new AdjacentStations
+//                {
+//                    Station1=112,
+//                    Station2= 113,
+//                   Distance=143.276626873244,
+//                    TimeAverage= ((1.5*143.276626873244)/speed)
+
+
+//                },
+
+//                new AdjacentStations
+//                {
+//                    Station1=113,
+//                    Station2= 115,
+//                    Distance=279.425185419296,
+//                   TimeAverage= ((1.5*279.425185419296)/speed)
+
+
+//                },
+
+//                new AdjacentStations
+//                {
+//                    Station1=115,
+//                    Station2= 116,
+//                   Distance=72.2684666055651,
+//                   TimeAverage= ((1.5*72.2684666055651)/speed)
+
+
+//                },
+
+//                new AdjacentStations
+//                {
+//                    Station1=116,
+//                    Station2= 117,
+//                   Distance=192.809573417871,
+//                    TimeAverage= ((1.5*192.809573417871)/speed)
+
+
+//                },
+
+//                new AdjacentStations
+//                {
+//                    Station1=117,
+//                    Station2= 119,
+//                   Distance=193.971761810414,
+//                   TimeAverage= ((1.5*193.971761810414)/speed)
+
+
+//                },
+  
+
+//#endregion LineId6
+
+//                #region lineId7
+//                new AdjacentStations
+//                {
+//                    Station1=97,
+//                    Station2= 102,
+//                   Distance=4739.1072386442,
+//                     TimeAverage= ((1.5*4739.1072386442)/speed)
+//                },
+
+//                new AdjacentStations
+//                {
+//                    Station1=102,
+//                    Station2= 103,
+//                   Distance=554.235295622813,
+//                    TimeAverage= ((1.5*554.235295622813)/speed)
+
+
+//                },
+
+//                new AdjacentStations
+//                {
+//                    Station1=103,
+//                    Station2= 105,
+//                   Distance=383.45864939499,
+//                     TimeAverage= ((1.5*383.45864939499)/speed)
+
+//                },
+
+//                new AdjacentStations
+//                {
+//                    Station1=105,
+//                    Station2= 106,
+//                   Distance=20.551585590077,
+//                    TimeAverage= ((1.5*20.551585590077)/speed)
+
+
+//                },
+
+//                new AdjacentStations
+//                {
+//                    Station1=106,
+//                    Station2= 108,
+//                   Distance=314.882994150425,
+//                    TimeAverage= ((1.5*314.882994150425)/speed)
+
+
+//                },
+
+//                new AdjacentStations
+//                {
+//                    Station1=108,
+//                    Station2= 109,
+//                   Distance=109.450560373063,
+//                     TimeAverage= ((1.5*109.450560373063)/speed)
+
+
+//                },
+
+//                new AdjacentStations
+//                {
+//                    Station1=109,
+//                    Station2= 110,
+//                   Distance=79.9157986778367,
+//                     TimeAverage= ((1.5*79.9157986778367)/speed)
+
+//                },
+//                new AdjacentStations
+//                {
+//                    Station1=110,
+//                    Station2= 112,
+//                   Distance=151.091747503085,
+//                     TimeAverage= ((1.5*151.091747503085)/speed)
+
+
+//                },
+//                new AdjacentStations
+//                {
+//                    Station1=112,
+//                    Station2= 111,
+//                   Distance=50.4574978208662,
+//                     TimeAverage= ((1.5*50.4574978208662)/speed)
+
+
+//                },
+//#endregion LineId7
+
+//                #region lineId8
+   
+         
+
+      
+             
            
 
+       
+//                new AdjacentStations
+//                {
+//                    Station1=112,
+//                    Station2= 116,
+//                   Distance=481.422062665161,
+//                    TimeAverage= ((1.5*481.422062665161)/speed)
 
+
+//                },
+//#endregion LineId8
+
+//                #region lineId9
+          
+      
+
+      
+        
+   
+//                new AdjacentStations
+//                {
+//                    Station1=95,
+//                    Station2= 102,
+//                   Distance=4852.96580098656,
+//                    TimeAverage= ((1.5*4852.96580098656)/speed)
+
+
+//                },
+//#endregion LineId9
+
+//                #region lineId10
+   
+   
+
+     
+
+    
+
+
+//                new AdjacentStations
+//                {
+//                    Station1=1486,
+//                    Station2= 1488,
+//                   Distance=650.976014538566,
+//                     TimeAverage= ((1.5*650.976014538566)/speed)
+
+
+//                },
+//#endregion LineId10
+
+//                    };
+//            #endregion AdjacentStations
+//            XMLTools.SaveListToXMLSerializer(ListAdjacentStations1, adjacentStationsPath);
+
+            #endregion
 
             List<AdjacentStations> ListAdjacentStations = XMLTools.LoadListFromXMLSerializer<AdjacentStations>(adjacentStationsPath);
             DO.AdjacentStations linestations = ListAdjacentStations.Find(b => b.Station1 == Scode1 && b.Station2 == Scode2&&b.AdjacExsis);//|| b.Station1 == Scode2 && b.Station2 == Scode1);
@@ -1904,7 +1572,7 @@ namespace DL
             List<AdjacentStations> ListAdjacentStations = XMLTools.LoadListFromXMLSerializer<AdjacentStations>(adjacentStationsPath);
 
             var v = from item in ListAdjacentStations
-                    where (item.Station1 == Scode1 || item.Station2 == Scode1)
+                    where ((item.Station1 == Scode1 || item.Station2 == Scode1)&&item.AdjacExsis)
                     select item;
             foreach (DO.AdjacentStations item in v)
             {
@@ -1919,7 +1587,7 @@ namespace DL
         {
             List<AdjacentStations> ListAdjacentStations = XMLTools.LoadListFromXMLSerializer<AdjacentStations>(adjacentStationsPath);
 
-            DO.AdjacentStations station = ListAdjacentStations.Find(b => b.Station1 == adjacentStations.Station1 && b.Station2 == adjacentStations.Station2);
+            DO.AdjacentStations station = ListAdjacentStations.Find(b => b.Station1 == adjacentStations.Station1 && b.Station2 == adjacentStations.Station2&&adjacentStations.AdjacExsis);
             if (station != null)
             {
                 ListAdjacentStations.Remove(station);
@@ -1937,7 +1605,7 @@ namespace DL
         {
             List<AdjacentStations> ListAdjacentStations = XMLTools.LoadListFromXMLSerializer<AdjacentStations>(adjacentStationsPath);
 
-            DO.AdjacentStations station = ListAdjacentStations.Find(b => b.Station1 == code1 && b.Station2 == code2);
+            DO.AdjacentStations station = ListAdjacentStations.Find(b => b.Station1 == code1 && b.Station2 == code2&&b.AdjacExsis);
             if (station != null)
             {
                 ListAdjacentStations.Remove(station);

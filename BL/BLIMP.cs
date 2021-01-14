@@ -1033,7 +1033,7 @@ namespace BL
             DO.AdjacentStations adjacent = new DO.AdjacentStations();
             adjacent.Station1 = station1;
             adjacent.Station2 = station2;
-
+            adjacent.AdjacExsis = true;
             DO.Stations ST1 = new DO.Stations();
             DO.Stations ST2 = new DO.Stations();
             try
