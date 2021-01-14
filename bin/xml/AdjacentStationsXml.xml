@@ -5,335 +5,391 @@
     <Station2>76</Station2>
     <Distance>10387.6464817987</Distance>
     <TimeAverage>23.372438308430159</TimeAverage>
+    <AdjacExsis>true</AdjacExsis>
   </AdjacentStations>
   <AdjacentStations>
     <Station1>76</Station1>
     <Station2>77</Station2>
     <Distance>197.059830127369</Distance>
     <TimeAverage>0.44338905167709708</TimeAverage>
+    <AdjacExsis>true</AdjacExsis>
   </AdjacentStations>
   <AdjacentStations>
     <Station1>77</Station1>
     <Station2>78</Station2>
     <Distance>5942.26478400092</Distance>
     <TimeAverage>13.370229466296735</TimeAverage>
+    <AdjacExsis>true</AdjacExsis>
   </AdjacentStations>
   <AdjacentStations>
     <Station1>78</Station1>
     <Station2>83</Station2>
     <Distance>4115.12303761144</Distance>
     <TimeAverage>9.259119425819998</TimeAverage>
+    <AdjacExsis>true</AdjacExsis>
   </AdjacentStations>
   <AdjacentStations>
     <Station1>83</Station1>
     <Station2>84</Station2>
     <Distance>3971.03321849724</Distance>
     <TimeAverage>8.9349140907596976</TimeAverage>
+    <AdjacExsis>true</AdjacExsis>
   </AdjacentStations>
   <AdjacentStations>
     <Station1>84</Station1>
     <Station2>85</Station2>
     <Distance>3665.92895953549</Distance>
     <TimeAverage>8.2484226431812839</TimeAverage>
+    <AdjacExsis>true</AdjacExsis>
   </AdjacentStations>
   <AdjacentStations>
     <Station1>85</Station1>
     <Station2>86</Station2>
     <Distance>181.343172558381</Distance>
     <TimeAverage>0.40802621851854254</TimeAverage>
+    <AdjacExsis>true</AdjacExsis>
   </AdjacentStations>
   <AdjacentStations>
     <Station1>86</Station1>
     <Station2>88</Station2>
     <Distance>338.193775824042</Distance>
     <TimeAverage>0.760943605040145</TimeAverage>
+    <AdjacExsis>true</AdjacExsis>
   </AdjacentStations>
   <AdjacentStations>
     <Station1>88</Station1>
     <Station2>89</Station2>
     <Distance>839.108713036705</Distance>
     <TimeAverage>1.888013484467431</TimeAverage>
+    <AdjacExsis>true</AdjacExsis>
   </AdjacentStations>
   <AdjacentStations>
     <Station1>89</Station1>
     <Station2>90</Station2>
     <Distance>4972.12709975181</Distance>
     <TimeAverage>11.187397848420057</TimeAverage>
+    <AdjacExsis>true</AdjacExsis>
   </AdjacentStations>
   <AdjacentStations>
     <Station1>90</Station1>
     <Station2>91</Station2>
     <Distance>4978.59764273959</Distance>
     <TimeAverage>11.201956715731235</TimeAverage>
+    <AdjacExsis>true</AdjacExsis>
   </AdjacentStations>
   <AdjacentStations>
     <Station1>91</Station1>
     <Station2>93</Station2>
     <Distance>178.858161402408</Distance>
     <TimeAverage>0.40243488750429307</TimeAverage>
+    <AdjacExsis>true</AdjacExsis>
   </AdjacentStations>
   <AdjacentStations>
     <Station1>93</Station1>
     <Station2>94</Station2>
     <Distance>20.9542368918975</Distance>
     <TimeAverage>0.0471475044818142</TimeAverage>
+    <AdjacExsis>true</AdjacExsis>
   </AdjacentStations>
   <AdjacentStations>
     <Station1>94</Station1>
     <Station2>95</Station2>
     <Distance>337.617552547299</Distance>
     <TimeAverage>0.75964708970231976</TimeAverage>
+    <AdjacExsis>true</AdjacExsis>
   </AdjacentStations>
   <AdjacentStations>
     <Station1>95</Station1>
     <Station2>97</Station2>
     <Distance>141.607925499495</Distance>
     <TimeAverage>0.31862101858404962</TimeAverage>
+    <AdjacExsis>true</AdjacExsis>
   </AdjacentStations>
   <AdjacentStations>
     <Station1>122</Station1>
     <Station2>123</Station2>
     <Distance>161.658025824811</Distance>
     <TimeAverage>0.36373419544777924</TimeAverage>
+    <AdjacExsis>true</AdjacExsis>
   </AdjacentStations>
   <AdjacentStations>
     <Station1>123</Station1>
     <Station2>121</Station2>
     <Distance>145.638205945867</Distance>
     <TimeAverage>0.32768924027060348</TimeAverage>
+    <AdjacExsis>true</AdjacExsis>
   </AdjacentStations>
   <AdjacentStations>
     <Station1>121</Station1>
     <Station2>1524</Station2>
     <Distance>2943.02888382813</Distance>
     <TimeAverage>6.6218812074253668</TimeAverage>
+    <AdjacExsis>true</AdjacExsis>
   </AdjacentStations>
   <AdjacentStations>
     <Station1>1524</Station1>
     <Station2>1523</Station2>
     <Distance>140.492280736979</Distance>
     <TimeAverage>0.31611079276613047</TimeAverage>
+    <AdjacExsis>true</AdjacExsis>
   </AdjacentStations>
   <AdjacentStations>
     <Station1>1523</Station1>
     <Station2>1522</Station2>
     <Distance>710.578511572254</Distance>
     <TimeAverage>1.5988176392139639</TimeAverage>
+    <AdjacExsis>true</AdjacExsis>
   </AdjacentStations>
   <AdjacentStations>
     <Station1>1522</Station1>
     <Station2>1518</Station2>
     <Distance>2265.21319232095</Distance>
     <TimeAverage>5.0967806505286433</TimeAverage>
+    <AdjacExsis>true</AdjacExsis>
   </AdjacentStations>
   <AdjacentStations>
     <Station1>1518</Station1>
     <Station2>1514</Station2>
     <Distance>16.6091664944544</Distance>
     <TimeAverage>0.037370998322505622</TimeAverage>
+    <AdjacExsis>true</AdjacExsis>
   </AdjacentStations>
   <AdjacentStations>
     <Station1>1514</Station1>
     <Station2>1512</Station2>
     <Distance>1034.11608174677</Distance>
     <TimeAverage>2.3267844517747509</TimeAverage>
+    <AdjacExsis>true</AdjacExsis>
   </AdjacentStations>
   <AdjacentStations>
     <Station1>1512</Station1>
     <Station2>1511</Station2>
     <Distance>2271.65706974387</Distance>
     <TimeAverage>5.1112795197189049</TimeAverage>
+    <AdjacExsis>true</AdjacExsis>
   </AdjacentStations>
   <AdjacentStations>
     <Station1>121</Station1>
     <Station2>123</Station2>
     <Distance>145.638205945867</Distance>
     <TimeAverage>0.32768924027060348</TimeAverage>
+    <AdjacExsis>true</AdjacExsis>
   </AdjacentStations>
   <AdjacentStations>
     <Station1>123</Station1>
     <Station2>122</Station2>
     <Distance>161.658025824811</Distance>
     <TimeAverage>0.36373419544777924</TimeAverage>
+    <AdjacExsis>true</AdjacExsis>
   </AdjacentStations>
   <AdjacentStations>
     <Station1>122</Station1>
     <Station2>1524</Station2>
     <Distance>2957.82843148296</Distance>
     <TimeAverage>6.6551805226418859</TimeAverage>
+    <AdjacExsis>true</AdjacExsis>
   </AdjacentStations>
   <AdjacentStations>
     <Station1>1512</Station1>
     <Station2>1491</Station2>
     <Distance>2604.33240816743</Distance>
     <TimeAverage>5.859806516441882</TimeAverage>
+    <AdjacExsis>true</AdjacExsis>
   </AdjacentStations>
   <AdjacentStations>
     <Station1>119</Station1>
     <Station2>1485</Station2>
     <Distance>5719.48141855948</Distance>
     <TimeAverage>12.868961881377643</TimeAverage>
+    <AdjacExsis>true</AdjacExsis>
   </AdjacentStations>
   <AdjacentStations>
     <Station1>1485</Station1>
     <Station2>1486</Station2>
     <Distance>179.006776536478</Distance>
     <TimeAverage>0.40276927489982445</TimeAverage>
+    <AdjacExsis>true</AdjacExsis>
   </AdjacentStations>
   <AdjacentStations>
     <Station1>1486</Station1>
     <Station2>1487</Station2>
     <Distance>772.225954779688</Distance>
     <TimeAverage>1.7375257735120331</TimeAverage>
+    <AdjacExsis>true</AdjacExsis>
   </AdjacentStations>
   <AdjacentStations>
     <Station1>1487</Station1>
     <Station2>1488</Station2>
     <Distance>1415.66487905204</Distance>
     <TimeAverage>3.1852778306453966</TimeAverage>
+    <AdjacExsis>true</AdjacExsis>
   </AdjacentStations>
   <AdjacentStations>
     <Station1>1488</Station1>
     <Station2>1490</Station2>
     <Distance>445.425376124488</Distance>
     <TimeAverage>1.0022171184512825</TimeAverage>
+    <AdjacExsis>true</AdjacExsis>
   </AdjacentStations>
   <AdjacentStations>
     <Station1>1490</Station1>
     <Station2>1494</Station2>
     <Distance>10374.8817694688</Distance>
     <TimeAverage>23.343717418478988</TimeAverage>
+    <AdjacExsis>true</AdjacExsis>
   </AdjacentStations>
   <AdjacentStations>
     <Station1>1494</Station1>
     <Station2>1492</Station2>
     <Distance>587.350643701609</Distance>
     <TimeAverage>1.3215521638502588</TimeAverage>
+    <AdjacExsis>true</AdjacExsis>
   </AdjacentStations>
   <AdjacentStations>
     <Station1>1492</Station1>
     <Station2>1493</Station2>
     <Distance>361.691515745432</Distance>
     <TimeAverage>0.81381404856770767</TimeAverage>
+    <AdjacExsis>true</AdjacExsis>
   </AdjacentStations>
   <AdjacentStations>
     <Station1>1493</Station1>
     <Station2>1491</Station2>
     <Distance>1144.85124079156</Distance>
     <TimeAverage>2.5759410511915219</TimeAverage>
+    <AdjacExsis>true</AdjacExsis>
   </AdjacentStations>
   <AdjacentStations>
     <Station1>110</Station1>
     <Station2>111</Station2>
     <Distance>195.920342315088</Distance>
     <TimeAverage>0.44082517846073266</TimeAverage>
+    <AdjacExsis>true</AdjacExsis>
   </AdjacentStations>
   <AdjacentStations>
     <Station1>111</Station1>
     <Station2>112</Station2>
     <Distance>50.4574978208662</Distance>
     <TimeAverage>0.11353050540200299</TimeAverage>
+    <AdjacExsis>true</AdjacExsis>
   </AdjacentStations>
   <AdjacentStations>
     <Station1>112</Station1>
     <Station2>113</Station2>
     <Distance>143.276626873244</Distance>
     <TimeAverage>0.32237563422114118</TimeAverage>
+    <AdjacExsis>true</AdjacExsis>
   </AdjacentStations>
   <AdjacentStations>
     <Station1>113</Station1>
     <Station2>115</Station2>
     <Distance>279.425185419296</Distance>
     <TimeAverage>0.62871295432295926</TimeAverage>
+    <AdjacExsis>true</AdjacExsis>
   </AdjacentStations>
   <AdjacentStations>
     <Station1>115</Station1>
     <Station2>116</Station2>
     <Distance>72.2684666055651</Distance>
     <TimeAverage>0.16260567591928066</TimeAverage>
+    <AdjacExsis>true</AdjacExsis>
   </AdjacentStations>
   <AdjacentStations>
     <Station1>116</Station1>
     <Station2>117</Station2>
     <Distance>192.809573417871</Distance>
     <TimeAverage>0.43382587844899428</TimeAverage>
+    <AdjacExsis>true</AdjacExsis>
   </AdjacentStations>
   <AdjacentStations>
     <Station1>117</Station1>
     <Station2>119</Station2>
     <Distance>193.971761810414</Distance>
     <TimeAverage>0.43644082848171628</TimeAverage>
+    <AdjacExsis>true</AdjacExsis>
   </AdjacentStations>
   <AdjacentStations>
     <Station1>97</Station1>
     <Station2>102</Station2>
     <Distance>4739.1072386442</Distance>
     <TimeAverage>10.663097917928631</TimeAverage>
+    <AdjacExsis>true</AdjacExsis>
   </AdjacentStations>
   <AdjacentStations>
     <Station1>102</Station1>
     <Station2>103</Station2>
     <Distance>554.235295622813</Distance>
     <TimeAverage>1.247041885570185</TimeAverage>
+    <AdjacExsis>true</AdjacExsis>
   </AdjacentStations>
   <AdjacentStations>
     <Station1>103</Station1>
     <Station2>105</Station2>
     <Distance>383.45864939499</Distance>
     <TimeAverage>0.86279058904461792</TimeAverage>
+    <AdjacExsis>true</AdjacExsis>
   </AdjacentStations>
   <AdjacentStations>
     <Station1>105</Station1>
     <Station2>106</Station2>
     <Distance>20.551585590077</Distance>
     <TimeAverage>0.046241529992973186</TimeAverage>
+    <AdjacExsis>true</AdjacExsis>
   </AdjacentStations>
   <AdjacentStations>
     <Station1>106</Station1>
     <Station2>108</Station2>
     <Distance>314.882994150425</Distance>
     <TimeAverage>0.70849382177667408</TimeAverage>
+    <AdjacExsis>true</AdjacExsis>
   </AdjacentStations>
   <AdjacentStations>
     <Station1>108</Station1>
     <Station2>109</Station2>
     <Distance>109.450560373063</Distance>
     <TimeAverage>0.24626622350162677</TimeAverage>
+    <AdjacExsis>true</AdjacExsis>
   </AdjacentStations>
   <AdjacentStations>
     <Station1>109</Station1>
     <Station2>110</Station2>
     <Distance>79.9157986778367</Distance>
     <TimeAverage>0.17981234514858407</TimeAverage>
+    <AdjacExsis>trueh</AdjacExsis>
   </AdjacentStations>
   <AdjacentStations>
     <Station1>110</Station1>
     <Station2>112</Station2>
     <Distance>151.091747503085</Distance>
     <TimeAverage>0.3399598314802561</TimeAverage>
+    <AdjacExsis>true</AdjacExsis>
   </AdjacentStations>
   <AdjacentStations>
     <Station1>112</Station1>
     <Station2>111</Station2>
     <Distance>50.4574978208662</Distance>
     <TimeAverage>0.11353050540200299</TimeAverage>
+    <AdjacExsis>true</AdjacExsis>
   </AdjacentStations>
   <AdjacentStations>
     <Station1>112</Station1>
     <Station2>116</Station2>
     <Distance>481.422062665161</Distance>
     <TimeAverage>1.0832104731013434</TimeAverage>
+    <AdjacExsis>true</AdjacExsis>
   </AdjacentStations>
   <AdjacentStations>
     <Station1>95</Station1>
     <Station2>102</Station2>
     <Distance>4852.96580098656</Distance>
     <TimeAverage>10.91928224504221</TimeAverage>
+    <AdjacExsis>true</AdjacExsis>
   </AdjacentStations>
   <AdjacentStations>
     <Station1>1486</Station1>
     <Station2>1488</Station2>
     <Distance>650.976014538566</Distance>
     <TimeAverage>1.4647106798185718</TimeAverage>
+    <AdjacExsis>true</AdjacExsis>
   </AdjacentStations>
 </ArrayOfAdjacentStations>
