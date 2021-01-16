@@ -1364,21 +1364,6 @@ namespace BL
         }
         #endregion
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         #region User
         BO.User userDoBoAdapter(string name)
         {
@@ -1609,6 +1594,19 @@ namespace BL
         }
 
 
+
+        #endregion
+        #region Simulator
+        public void StartSimulator(TimeSpan startTime, int Rate, Action<TimeSpan> updateTime)
+        {
+            
+            ClockS.Instance.ObserverClock += updateTime;
+            ClockS.Instance.Start(startTime, Rate);
+        }
+        public void StopSimulator()
+        {
+            ClockS.Instance.Stop();
+        }
 
         #endregion
 

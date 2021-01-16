@@ -69,5 +69,10 @@ namespace BlAPI
         IEnumerable<BO.User> GetAllUsers();
         bool EmailExsit(string mail);
         #endregion
+        #region Simulator
+        void StartSimulator(TimeSpan startTime, int Rate, Action<TimeSpan> updateTime);
+        void StopSimulator();
+
+        #endregion
     }
 }

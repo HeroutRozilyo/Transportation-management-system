@@ -54,6 +54,7 @@
     <Compile Include="BO\Station.cs" />
     <Compile Include="BO\Trip.cs" />
     <Compile Include="BO\User.cs" />
+    <Compile Include="ClockS.cs" />
     <Compile Include="DeepCopy.cs" />
     <Compile Include="IBL.cs" />
     <Compile Include="factoryBL.cs" />
