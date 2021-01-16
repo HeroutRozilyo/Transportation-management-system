@@ -95,7 +95,7 @@ namespace PLGui
         private void Disengagement_Click(object sender, RoutedEventArgs e)
         {
            
-            LoginWindow wnd = new LoginWindow();
+            LoginWindow wnd = new LoginWindow(bl);
             this.Close();
             wnd.Show();
         }

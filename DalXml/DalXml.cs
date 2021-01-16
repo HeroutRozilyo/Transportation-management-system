@@ -2346,18 +2346,7 @@ namespace DL
             #endregion
 
             XElement ListLineTrip = XMLTools.LoadListFromXMLElement(lineTripPath); //get the data from xml
-            //return (from line in ListLineTrip.Elements()
-            //        where line.Element("KeyId").Value == idline.ToString() && Convert.ToBoolean(line.Element("TripLineExist").Value) == true
-            //        select new DO.LineTrip
-            //        {
-            //            KeyId = int.Parse(line.Element("KeyId").Value),
-            //            StartAt = TimeSpan.Parse(line.Element("StartAt").Value),
-            //            Frequency = Double.Parse(line.Element("Frequency").Value),
-            //            FinishAt = TimeSpan.Parse(line.Element("FinishAt").Value),
-            //            TripLineExist = Convert.ToBoolean(line.Element("TripLineExist").Value),
-
-            //        });//
-
+          
             List<DO.LineTrip> b = new List<LineTrip>();
             foreach( var line in ListLineTrip.Elements())
             {
