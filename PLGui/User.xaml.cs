@@ -66,17 +66,14 @@ namespace PLGui
             foreach (var item in stations1)
             {
                 ComboBoxItem newItem1 = new ComboBoxItem();
-                newItem1.Content = item.Code + "   " +item.Name;
-        
+                newItem1.Content = item.Code + "   " +item.Name;        
                 station1.Items.Add(newItem1);
                 
             }
             foreach (var item in stations2)
             {
-                ComboBoxItem newItem2 = new ComboBoxItem();
-              
-                newItem2.Content = item.Code + "   " + item.Name;
-   
+                ComboBoxItem newItem2 = new ComboBoxItem();             
+                newItem2.Content = item.Code + "   " + item.Name;  
                 station2.Items.Add(newItem2);
             }
 
@@ -119,6 +116,7 @@ namespace PLGui
             int codStation = getNum2(a);
 
             temp2 = bl.GetAllLineIndStation(codStation);
+        
           //  LineInStation2.ItemsSource = temp2;
 
         }
