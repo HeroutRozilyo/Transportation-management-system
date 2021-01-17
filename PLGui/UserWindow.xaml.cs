@@ -24,7 +24,7 @@ namespace PLGui
     {
         private IBL bl;
         private BO.User userNow=new BO.User();
-
+        
        private bool boolStart;
         public bool BoolStart
         {
