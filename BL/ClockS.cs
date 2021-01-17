@@ -35,11 +35,11 @@ namespace BO
             add => observerClock = value;
             remove => observerClock = null;
         }
-        private TimeSpan startTime;
+        public TimeSpan startTime;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        internal void Start(TimeSpan mstartTime,int mrate)
+        public void Start(TimeSpan mstartTime,int mrate)
         {
             startTime = mstartTime;
             sClock = new Clock(startTime);
@@ -47,7 +47,7 @@ namespace BO
             Cancel = false;
             stoper.Restart();
             new Thread(clockThread).Start();
-          ///  TripSimulator.Instance.Start();
+         
 
         }
 
