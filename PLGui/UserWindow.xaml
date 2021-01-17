@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PLGui"
         mc:Ignorable="d"
      
-        Title="UserWindow" WindowState="Maximized"  WindowStartupLocation="CenterScreen" Width="1328.333" Height="686" Closing="Window_Closing">
+        Title="UserWindow" WindowState="Maximized"  WindowStartupLocation="CenterScreen" Width="1328.333" Height="686" >
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="newnewBack.jpg"/>
@@ -37,16 +37,7 @@
         <WrapPanel HorizontalAlignment="Left" Height="475" Margin="15,155,0,0" VerticalAlignment="Top" Width="145">
             <Button x:Name="line" Content=" קווים" HorizontalAlignment="Left" VerticalAlignment="Stretch"  Click="line_Click" Style="{DynamicResource AdminWindow}" Width="145" RenderTransformOrigin="1.623,0.232" Height="65"/>
             <Button x:Name="station" Content=" תחנות" HorizontalAlignment="Left" VerticalAlignment="Stretch" Click="station_Click"  Style="{DynamicResource AdminWindow}"  Width="145" Height="80"/>
-            <Grid Height="315" Width="150">
-                <TextBox x:Name="TimerTextBox" HorizontalAlignment="Left" Height="20" Margin="25,125,0,0" TextWrapping="Wrap" Text="06:00:00" IsEnabled="{Binding BoolStart,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                         
-                    PreviewTextInput="TimerTextBox_PreviewTextInput"     VerticalAlignment="Top" Width="95" FontFamily="Cooper Black" FontSize="14" TextAlignment="Center"/>
-                <TextBox x:Name="rateTextBox" IsEnabled="{Binding BoolStart,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                    PreviewTextInput="rateTextBox_PreviewTextInput"     HorizontalAlignment="Left" Height="20" Margin="45,155,0,0"  TextWrapping="Wrap" Text="60" FontFamily="Cooper Black" FontSize="14" VerticalAlignment="Top" Width="50" TextAlignment="Center"/>
-
-                <Button x:Name="startButton" Content="התחלה" HorizontalAlignment="Left" Margin="40,185,0,0" VerticalAlignment="Top" Width="65" Height="25" Style="{DynamicResource miniButton}" Click="startButton_Click"/>
-                <Label x:Name="label1" Content="X" HorizontalAlignment="Left" Height="25" Margin="95,155,0,0" VerticalAlignment="Top" Width="25" FontFamily="Cooper Black" FontSize="12" RenderTransformOrigin="0.2,0.2"/>
-            </Grid>
+         
         </WrapPanel>
         <Grid Height="40" VerticalAlignment="Top" Width="1199" Margin="115,10,7.333,0">
             <Button x:Name="Disengagement" Content="התנתקות" HorizontalAlignment="Left" Margin="966,2,0,0" VerticalAlignment="Top" ToolTip="יציאה מהחשבון" Width="81" Click="Disengagement_Click" BorderBrush="{x:Null}" Height="31" Background="{x:Null}">

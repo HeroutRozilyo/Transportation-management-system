@@ -20,28 +20,12 @@ namespace PLGui
     /// <summary>
     /// Interaction logic for UserWindow.xaml
     /// </summary>
-    public partial class UserWindow : Window,INotifyPropertyChanged
+    public partial class UserWindow : Window
     {
         private IBL bl;
         private BO.User userNow=new BO.User();
         
-       private bool boolStart;
-        public bool BoolStart
-        {
-            get =>  boolStart;
-            set { boolStart=value;
-                if (PropertyChanged != null)
-                    PropertyChanged(this, new PropertyChangedEventArgs("BoolStart")); ;
-            }
-        }
-
-        BackgroundWorker timerWorker;
-        Thread workerThread;
-        TimeSpan startTimeSimulator;
-        int rate;
-        public event PropertyChangedEventHandler PropertyChanged;
-        public Timer timer = new Timer();
-
+      
         public UserWindow()
         {
             InitializeComponent();
@@ -54,39 +38,9 @@ namespace PLGui
             this.bl = bl;
             userNow = users;
             NameTextBlock.Text = users.UserName;
-            BoolStart = true;
-            timerWorker = new BackgroundWorker();
-
-            timerWorker.DoWork += (s, e) =>
-            {
-                workerThread = Thread.CurrentThread;
-                bl.StartSimulator(startTimeSimulator, rate, (time) => timerWorker.ReportProgress(0, time));
-                while (!timerWorker.CancellationPending) try { Thread.Sleep(1000000); }
-                    catch(ThreadInterruptedException a)
-                    {
-
-                    }
-            };
-            timerWorker.ProgressChanged += timer_ProgressChanged;
-            timerWorker.RunWorkerCompleted += (s, e) =>
-            {
-                BoolStart = true;
-                startButton.Content = "התחלה";
-                bl.StopSimulator();
-            };
-            timerWorker.WorkerReportsProgress = true;
-            timerWorker.WorkerSupportsCancellation = true;
+            
         }
-        /// <summary>
-        /// Responsible for updating the textBox at the updated time
-        /// </summary>
-        private void timer_ProgressChanged(object sender, ProgressChangedEventArgs e)
-        {
-            TimeSpan timeSpan = (TimeSpan)e.UserState;//userState-  member to pass more information back to the UI for updating on a progressChanged call
-            TimerTextBox.Text = String.Format("{0:D2}:{1:D2}:{2:D2}", timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds);
-           
-
-        }
+      
 
         private void Back_Click(object sender, RoutedEventArgs e)
         {
@@ -129,42 +83,5 @@ namespace PLGui
             frame.Navigate(new User());
         }
 
-        private void startButton_Click(object sender, RoutedEventArgs e)
-        {
-            if(BoolStart)
-            {
-                if (!TimeSpan.TryParse(TimerTextBox.Text, out startTimeSimulator) || !int.TryParse(rateTextBox.Text, out rate))
-                {
-                    MessageBox.Show("hh:mm:ss-בבקשה להכניס זמן בתבנית הבאה ","timer",MessageBoxButton.OK, MessageBoxImage.Warning);
-                    return;
-                }
-                timerWorker.RunWorkerAsync();
-                BoolStart = false;
-                startButton.Content = "עצור";
-            }
-            else
-            {
-                timerWorker.CancelAsync();
-                workerThread.Interrupt();
-            }
-        }
-
-        private void TimerTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
-        {
-            e.Handled = !e.Text.Any(x => Char.IsDigit(x) || ':'.Equals(x));
-        }
-
-        private void rateTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
-        {
-            e.Handled = !e.Text.Any(x => Char.IsDigit(x) || '.'.Equals(x));
-        }
-        private void Window_Closing(object sender, CancelEventArgs e)
-        {
-            if (timerWorker.IsBusy)
-            {
-                timerWorker.CancelAsync();
-                workerThread.Interrupt();
-            }
-        }
     }
 }

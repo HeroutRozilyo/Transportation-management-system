@@ -5,28 +5,37 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PLGui"
         mc:Ignorable="d"
-        Title="RealTimeStation" Height="450" Width="800">
+        Title="RealTimeStation" Height="450" Width="800" Closing="Window_Closing">
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="StationBus.jpg" Opacity="0.5"/>
         </Grid.Background>
-        <ListView x:Name="listView" HorizontalAlignment="Left" Height="155" Margin="300,-5,0,0" VerticalAlignment="Top" Width="135"  Background="#FFD9D637" OpacityMask="Black">
+        <ListView x:Name="listView" HorizontalAlignment="Left" Height="155" Margin="10,0,0,0" VerticalAlignment="Top" Width="135"  Background="#FFD9D637" OpacityMask="Black">
             <ListView.View>
                 <GridView>
                     <GridViewColumn  />
                 </GridView>
             </ListView.View>
         </ListView>
-        <ListView x:Name="RealTimeStationLine" HorizontalAlignment="Left" Height="327" VerticalAlignment="Top" Width="405" RenderTransformOrigin="3.635,1.893" Margin="15,30,0,0" Background="#FF2B2727" Foreground="#FFDFE2E9" >
+        <ListView x:Name="RealTimeStationLine" HorizontalAlignment="Left" Height="327" VerticalAlignment="Top" Width="405" RenderTransformOrigin="3.635,1.893" Margin="182,0,0,0" Background="#FF2A2626" Foreground="#FFDFE2E9" IsSynchronizedWithCurrentItem="True" >
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="קו"   DisplayMemberBinding="{Binding NumberLine}" Width="50"/>
-                    <GridViewColumn Header="זמן עד הגעה לתחנה"   DisplayMemberBinding="{Binding FirstStationCode}" Width="150" />
-                    <GridViewColumn Header=" תחנה אחרונה"   DisplayMemberBinding="{Binding LastStationCode}" Width="200"/>
+                    <GridViewColumn Header="קו"   DisplayMemberBinding="{Binding LineNumber}" Width="50"/>
+                    <GridViewColumn Header="זמן עד הגעה לתחנה"   DisplayMemberBinding="{Binding ExpectedTimeArrive}" Width="150" />
+                    <GridViewColumn Header=" תחנה אחרונה"   DisplayMemberBinding="{Binding LastStation}" Width="200"/>
                 </GridView>
             </ListView.View>
         </ListView>
-        <TextBox x:Name="kuku" HorizontalAlignment="Left" Height="40" Margin="476,197,0,0" TextWrapping="Wrap" Text="06:00:00" VerticalAlignment="Top" Width="160"/>
+        <Grid Height="315" Width="150" Margin="643,-110,0.333,215.667">
+            <TextBox x:Name="TimerTextBox" HorizontalAlignment="Left" Height="20" Margin="25,125,0,0" TextWrapping="Wrap" Text="06:00:00" IsEnabled="{Binding BoolStart,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                         
+                    PreviewTextInput="TimerTextBox_PreviewTextInput"     VerticalAlignment="Top" Width="95" FontFamily="Cooper Black" FontSize="14" TextAlignment="Center"/>
+            <TextBox x:Name="rateTextBox" IsEnabled="{Binding BoolStart,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                    PreviewTextInput="rateTextBox_PreviewTextInput"     HorizontalAlignment="Left" Height="20" Margin="45,155,0,0"  TextWrapping="Wrap" Text="60" FontFamily="Cooper Black" FontSize="14" VerticalAlignment="Top" Width="50" TextAlignment="Center"/>
+
+            <Button x:Name="startButton" Content="התחלה" HorizontalAlignment="Left" Margin="40,185,0,0" VerticalAlignment="Top" Width="65" Height="25" Style="{DynamicResource miniButton}" Click="startButton_Click"/>
+            <Label x:Name="label1" Content="X" HorizontalAlignment="Left" Height="25" Margin="95,155,0,0" VerticalAlignment="Top" Width="25" FontFamily="Cooper Black" FontSize="12" RenderTransformOrigin="0.2,0.2"/>
+        </Grid>
 
     </Grid>
 </Window>
