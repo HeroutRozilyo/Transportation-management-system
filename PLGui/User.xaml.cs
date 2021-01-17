@@ -294,8 +294,9 @@ namespace PLGui
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
-            
-            
+
+            RealTimeStation r = new RealTimeStation(bl, stationData1);
+            r.ShowDialog();
                 
 
         }
