@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Linq;
+
 //https://www.gov.il/he/Departments/General/gtfs_general_transit_feed_specifications
 
 namespace DL
@@ -28,8 +29,8 @@ namespace DL
         string linePath = @"LineXml.xml"; //XMLSerializer
         string stationPath = @"StationXml.xml"; //XMLSerializer
         string lineStationPath = @"lineStationXml.xml"; //XMLSerializer
-         string lineTripPath = @"lineTripXml.xml"; //XMLSerializer
-       string adjacentStationsPath = @"AdjacentStationsXml.xml"; //XMLSerializer
+        string lineTripPath = @"lineTripXml.xml"; //XMLSerializer
+        string adjacentStationsPath = @"AdjacentStationsXml.xml"; //XMLSerializer
         string userPath = @"UserXml.xml"; //XMLSerializer
 
 
@@ -147,9 +148,9 @@ namespace DL
         public bool DeleteBus(string licence)
         {
             XElement busRootElem = XMLTools.LoadListFromXMLElement(busPath); //get the data from xml
-            XElement bus= (from b in busRootElem.Elements()
-                           where b.Element("Licence").Value == licence && Convert.ToBoolean(b.Element("BusExist").Value) == true
-                           select b).FirstOrDefault();
+            XElement bus = (from b in busRootElem.Elements()
+                            where b.Element("Licence").Value == licence && Convert.ToBoolean(b.Element("BusExist").Value) == true
+                            select b).FirstOrDefault();
             if (bus != null)
             {
                 bus.Element("BusExist").Value = "false";
@@ -176,7 +177,7 @@ namespace DL
                 findBus.Element("StartingDate").Value = bus.StartingDate.ToString();
                 findBus.Element("Kilometrz").Value = bus.Kilometrz.ToString();
                 findBus.Element("KilometrFromLastTreat").Value = bus.KilometrFromLastTreat.ToString();
-                    findBus.Element("FuellAmount").Value = bus.FuellAmount.ToString();
+                findBus.Element("FuellAmount").Value = bus.FuellAmount.ToString();
                 findBus.Element("StatusBus").Value = bus.StatusBus.ToString();
                 findBus.Element("BusExist").Value = bus.BusExist.ToString();
                 findBus.Element("LastTreatment").Value = bus.LastTreatment.ToString();
@@ -196,23 +197,23 @@ namespace DL
 
         #region Line
 
-      
+
 
         public Line GetLine(int idline)
         {
             XElement lineRootElem = XMLTools.LoadListFromXMLElement(linePath); //get the data from xml
             DO.Line b = (from line in lineRootElem.Elements()
-                        where line.Element("IdNumber").Value == idline.ToString() && Convert.ToBoolean(line.Element("LineExist").Value) == true
-                        select new DO.Line()
-                        {
-                            IdNumber = Convert.ToInt32(line.Element("IdNumber").Value),
-                            NumberLine = Convert.ToInt32(line.Element("NumberLine").Value),
-                            FirstStationCode = Convert.ToInt32(line.Element("FirstStationCode").Value),
-                            LastStationCode = Convert.ToInt32(line.Element("LastStationCode").Value),
-                            Area = (AREA) Enum.Parse(typeof(AREA),line.Element("Area").Value),
-                            LineExist = Convert.ToBoolean(line.Element("LineExist").Value)
+                         where line.Element("IdNumber").Value == idline.ToString() && Convert.ToBoolean(line.Element("LineExist").Value) == true
+                         select new DO.Line()
+                         {
+                             IdNumber = Convert.ToInt32(line.Element("IdNumber").Value),
+                             NumberLine = Convert.ToInt32(line.Element("NumberLine").Value),
+                             FirstStationCode = Convert.ToInt32(line.Element("FirstStationCode").Value),
+                             LastStationCode = Convert.ToInt32(line.Element("LastStationCode").Value),
+                             Area = (AREA)Enum.Parse(typeof(AREA), line.Element("Area").Value),
+                             LineExist = Convert.ToBoolean(line.Element("LineExist").Value)
 
-                        }
+                         }
             ).FirstOrDefault();
 
             if (b == null)
@@ -235,7 +236,7 @@ namespace DL
                        Area = (AREA)Enum.Parse(typeof(AREA), line.Element("Area").Value),
                        LineExist = Convert.ToBoolean(line.Element("LineExist").Value)
 
-                     
+
                    }
                    where linecondition(l1) && Convert.ToBoolean(line.Element("LineExist").Value) == true
                    select l1;
@@ -384,7 +385,7 @@ namespace DL
 
         public int AddLine(Line line)
         {  //eliezer told us that we can do here not checking because check according to idnumber is meaningless
-         
+
             serials = XMLTools.LoadListFromXMLElement(@"serials.xml");
 
             int idLine = int.Parse(serials.Element("LineCounter").Value);
@@ -406,8 +407,8 @@ namespace DL
         {
             XElement lineRootElem = XMLTools.LoadListFromXMLElement(linePath); //get the data from xml
             XElement findLine = (from l in lineRootElem.Elements()
-                                where l.Element("IdNumber").Value == line.IdNumber.ToString() && Convert.ToBoolean(l.Element("LineExist").Value) == true
-                                select l).FirstOrDefault();
+                                 where l.Element("IdNumber").Value == line.IdNumber.ToString() && Convert.ToBoolean(l.Element("LineExist").Value) == true
+                                 select l).FirstOrDefault();
             if (findLine == null) //we not find the bus
                 throw new DO.WrongLicenceException(Convert.ToInt32(line.IdNumber), "קו זה כבר קיים במערכת, באפשרותך לעדכן נתונים עליו במקום המתאים");
             else
@@ -418,7 +419,7 @@ namespace DL
                 findLine.Element("LastStationCode").Value = line.LastStationCode.ToString();
                 findLine.Element("Area").Value = line.Area.ToString();
                 findLine.Element("LineExist").Value = line.LineExist.ToString();
-               
+
 
                 XMLTools.SaveListToXMLElement(lineRootElem, linePath);
 
@@ -431,13 +432,13 @@ namespace DL
         {
             XElement lineRootElem = XMLTools.LoadListFromXMLElement(linePath); //get the data from xml
             XElement line = (from l in lineRootElem.Elements()
-                            where l.Element("IdNumber").Value == idnumber.ToString() && Convert.ToBoolean(l.Element("LineExist").Value) == true
-                            select l).FirstOrDefault();
+                             where l.Element("IdNumber").Value == idnumber.ToString() && Convert.ToBoolean(l.Element("LineExist").Value) == true
+                             select l).FirstOrDefault();
             if (line != null)
             {
                 line.Element("LineExist").Value = "false";
                 XMLTools.SaveListToXMLElement(lineRootElem, linePath);
-                
+
             }
             else
                 throw new DO.WrongLicenceException(idnumber, "הקו המבוקש אינו קיים במערכת");
@@ -463,12 +464,12 @@ namespace DL
                                  Code = Convert.ToInt32(station.Element("Code").Value),
                                  Name = station.Element("Name").Value,
                                  Address = station.Element("Address").Value,
-                                 Latitude= Convert.ToDouble(station.Element("Latitude").Value),
+                                 Latitude = Convert.ToDouble(station.Element("Latitude").Value),
                                  Longtitude = Convert.ToDouble(station.Element("Longtitude").Value),
                                  StationExist = Boolean.Parse(station.Element("StationExist").Value)
 
                              }
-            ) .FirstOrDefault();
+            ).FirstOrDefault();
 
             if (b == null)
                 throw new DO.WrongLicenceException(code, "התחנה המבוקשת לא נמצאת במערכת");
@@ -481,556 +482,556 @@ namespace DL
         {
             #region xml
 
-        //    List<Stations> ListStations1 = new List<Stations>
-        //    {
-        //        #region initialization stations//איתחול תחנות
-        //        new Stations
-        //        {
-        //            Code = 73,
-        //            Name = "שדרות גולדה מאיר/המשורר אצ''ג",
-        //            Address = "שדרות גולדה מאיר ,ירושלים ",
-        //            Latitude=31.825302,
-        //            Longtitude=35.188624,
-        //            StationExist=true,
-
-        //        },
-        //        new Stations
-        //        {
-        //            Code = 76,
-        //            Name = "בית ספר צור באהר בנות/אלמדינה אלמונוורה",
-        //            Address = "רחוב:אל מדינה אל מונאוורה  עיר: ירושלים",
-        //            Latitude=31.738425,
-        //            Longtitude=35.228765,
-        //             StationExist=true,
-        //        },
-        //        new Stations
-        //        {
-        //            Code = 77,
-        //            Name = "בית ספר אבן רשד/אלמדינה אלמונוורה",
-        //            Address = "רחוב:אל מדינה אל מונאוורה  עיר: ירושלים ",
-        //             Latitude=31.738676,
-        //            Longtitude=35.226704,
-
-        //            StationExist=true,
-        //        },
-        //        new Stations
-        //        {
-        //            Code = 78,
-        //            Name = "שרי ישראל/יפו",
-        //            Address = "רחוב:שדרות שרי ישראל 15 עיר: ירושלים",
-        //             Latitude=31.789128,
-        //            Longtitude=35.206146,
-
-        //            StationExist=true,
-        //        },
-        //        new Stations
-        //        {
-        //            Code = 83,
-        //            Name = "בטן אלהווא/חוש אל מרג",
-        //            Address = "רחוב:בטן אל הווא  עיר: ירושלים",
-        //            StationExist=true,
-        //             Latitude=31.766358,
-        //            Longtitude=35.240417,
-
-
-        //        },
-        //        new Stations
-        //        {
-        //            Code = 84,
-        //            Name = "מלכי ישראל/הטורים",
-        //            Address = " רחוב:מלכי ישראל 77 עיר: ירושלים ",
-        //            StationExist=true,
-        //             Latitude=31.790758,
-        //            Longtitude=35.209791,
-
-
-        //        },
-        //        new Stations
-        //        {
-        //            Code = 85,
-        //            Name = "בית ספר לבנים/אלמדארס",
-        //            Address = "רחוב:אלמדארס  עיר: ירושלים",
-        //            StationExist=true,
-        //             Latitude=31.768643,
-        //            Longtitude=35.238509,
-
-
-        //        },
-        //        new Stations
-        //        {
-        //            Code = 86,
-        //            Name = "מגרש כדורגל/אלמדארס",
-        //            Address = "רחוב:אלמדארס  עיר: ירושלים",
-        //            StationExist=true,
-        //             Latitude=31.769899,
-        //            Longtitude=35.23973,
-
-
-        //        },
-        //        new Stations
-        //        {
-        //            Code = 88,
-        //            Name = "בית ספר לבנות/בטן אלהוא",
-        //            Address = " רחוב:בטן אל הווא  עיר: ירושלים",
-        //            StationExist=true,
-        //             Latitude=31.767064,
-        //            Longtitude=35.238443,
-
-
-        //        },
-        //        new Stations
-        //        {
-        //            Code = 89,
-        //            Name = "דרך בית לחם הישה/ואדי קדום",
-        //            Address = " רחוב:דרך בית לחם הישנה  עיר: ירושלים ",
-        //            StationExist=true,
-        //             Latitude=31.765863,
-        //            Longtitude=35.247198,
-
-
-        //        },
-        //        new Stations
-        //        {
-        //            Code = 90,
-        //            Name = "גולדה/הרטום",
-        //            Address = "רחוב:דרך בית לחם הישנה  עיר: ירושלים",
-        //            StationExist=true,
-        //             Latitude=31.799804,
-        //            Longtitude=35.213021,
-
-
-        //        },
-        //        new Stations
-        //        {
-        //            Code = 91,
-        //            Name = "דרך בית לחם הישה/ואדי קדום",
-        //            Address = " רחוב:דרך בית לחם הישנה  עיר: ירושלים ",
-        //            StationExist=true,
-        //             Latitude=31.765717,
-        //            Longtitude=35.247102,
-
-
-        //        },
-        //        new Stations
-        //        {
-        //            Code = 93,
-        //            Name = "חוש סלימה 1",
-        //            Address = " רחוב:דרך בית לחם הישנה  עיר: ירושלים",
-        //            StationExist=true,
-        //             Latitude=31.767265,
-        //            Longtitude=35.246594,
-
-        //        },
-        //        new Stations
-        //        {
-        //            Code = 94,
-        //            Name = "דרך בית לחם הישנה ב",
-        //            Address = " רחוב:דרך בית לחם הישנה  עיר: ירושלים",
-        //            StationExist=true,
-        //            Latitude=31.767084,
-        //            Longtitude=35.246655,
-
-
-        //        },
-        //        new Stations
-        //        {
-        //            Code = 95,
-        //            Name = "דרך בית לחם הישנה א",
-        //            Address = " רחוב:דרך בית לחם הישנה  עיר: ירושלים",
-        //            StationExist=true,
-        //             Latitude=31.768759,
-        //            Longtitude=35.24368
-
-
-
-        //        },
-        //        new Stations
-        //        {
-        //            Code = 97,
-        //            Name = "שכונת בזבז 2",
-        //            Address = " רחוב:דרך בית לחם הישנה  עיר: ירושלים",
-        //            StationExist=true,
-        //             Latitude=31.77002,
-        //            Longtitude=35.24348,
-
-        //        },
-        //        new Stations
-        //        {
-        //            Code = 102,
-        //            Name = "גולדה/שלמה הלוי",
-        //            Address = " רחוב:שדרות גולדה מאיר  עיר: ירושלים",
-        //            StationExist=true,
-        //             Latitude=31.8003,
-        //            Longtitude=35.208257,
-
-
-        //        },
-        //        new Stations
-        //        {
-        //            Code = 103,
-        //            Name = "גולדה/הרטום",
-        //            Address = " רחוב:שדרות גולדה מאיר  עיר: ירושלים",
-        //            StationExist=true,
-        //             Latitude=31.8,
-        //            Longtitude=35.214106,
-
-
-        //        },
-        //        new Stations
-        //        {
-        //            Code = 105,
-        //            Name = "גבעת משה",
-        //            Address = " רחוב:גבעת משה 2 עיר: ירושלים",
-        //            StationExist=true,
-        //             Latitude=31.797708,
-        //            Longtitude=35.217133,
-
-        //        },
-        //        new Stations
-        //        {
-        //            Code = 106,
-        //            Name = "גבעת משה",
-        //            Address = " רחוב:גבעת משה 3 עיר: ירושלים",
-        //            StationExist=true,
-        //             Latitude=31.797535,
-        //            Longtitude=35.217057,
-
-
-        //        },
-        //        //20
-        //        new Stations
-        //        {
-        //            Code = 108,
-        //            Name = "עזרת תורה/עלי הכהן",
-        //            Address = "  רחוב:עזרת תורה 25 עיר: ירושלים",
-        //            StationExist=true,
-        //             Latitude=31.797535,
-        //            Longtitude=35.213728,
-
-
-        //        },
-        //        new Stations
-        //        {
-        //            Code = 109,
-        //            Name = "עזרת תורה/דורש טוב",
-        //            Address = "  רחוב:עזרת תורה 21 עיר: ירושלים ",
-        //            StationExist=true,
-        //             Latitude=31.796818,
-        //            Longtitude=35.212936,
-
-
-        //        },
-        //        new Stations
-        //        {
-        //            Code = 110,
-        //            Name = "עזרת תורה/דורש טוב",
-        //            Address = " רחוב:עזרת תורה 12 עיר: ירושלים",
-        //            StationExist=true,
-        //             Latitude=31.796129,
-        //            Longtitude=35.212698,
-
-
-        //        },
-        //        new Stations
-        //        {
-        //            Code = 111,
-        //            Name = "יעקובזון/עזרת תורה",
-        //            Address = "  רחוב:יעקובזון 1 עיר: ירושלים",
-        //            StationExist=true,
-        //             Latitude=31.794631,
-        //            Longtitude=35.21161,
-
-
-        //        },
-        //        new Stations
-        //        {
-        //            Code = 112,
-        //            Name = "יעקובזון/עזרת תורה",
-        //            Address = " רחוב:יעקובזון  עיר: ירושלים",
-        //            StationExist=true,
-        //             Latitude=31.79508,
-        //            Longtitude=35.211684,
-
-
-        //        },
-        //        //25
-        //        new Stations
-        //        {
-        //            Code = 113,
-        //            Name = "זית רענן/אוהל יהושע",
-        //            Address = "  רחוב:זית רענן 1 עיר: ירושלים",
-        //            StationExist=true,
-        //             Latitude=31.796255,
-        //            Longtitude=35.211065,
-
-
-        //        },
-        //        new Stations
-        //        {
-        //            Code = 115,
-        //            Name = "זית רענן/תורת חסד",
-        //            Address = " רחוב:זית רענן  עיר: ירושלים",
-        //            StationExist=true,
-        //             Latitude=31.798423,
-        //            Longtitude=35.209575,
-
-
-        //        },
-        //        new Stations
-        //        {
-        //            Code = 116,
-        //            Name = "זית רענן/תורת חסד",
-        //            Address = "  רחוב:הרב סורוצקין 48 עיר: ירושלים ",
-        //            StationExist=true,
-        //             Latitude=31.798689,
-        //            Longtitude=35.208878,
-
-
-        //        },
-        //        new Stations
-        //        {
-        //            Code = 117,
-        //            Name = "קרית הילד/סורוצקין",
-        //            Address = "  רחוב:הרב סורוצקין  עיר: ירושלים",
-        //            StationExist=true,
-        //             Latitude=31.799165,
-        //            Longtitude=35.206918,
-
-        //        },
-        //        new Stations
-        //        {
-        //            Code = 119,
-        //            Name = "סורוצקין/שנירר",
-        //            Address = "  רחוב:הרב סורוצקין 31 עיר: ירושלים",
-        //            StationExist=true,
-        //             Latitude=31.797829,
-        //            Longtitude=35.205601,
-
-
-        //        },
-
-        //        //#endregion //30
-        //        new Stations
-        //        {
-        //            Code = 1485,
-        //            Name = "שדרות נווה יעקוב/הרב פרדס ",
-        //            Address = "רחוב: שדרות נווה יעקוב  עיר:ירושלים ",
-        //            StationExist=true,
-        //             Latitude=31.840063,
-        //            Longtitude=35.240062,
-
-
-
-        //        },
-        //        new Stations
-        //        {
-        //            Code = 1486,
-        //            Name = "מרכז קהילתי /שדרות נווה יעקוב",
-        //            Address = "רחוב:שדרות נווה יעקוב ירושלים עיר:ירושלים ",
-        //            StationExist=true,
-        //             Latitude=31.838481,
-        //            Longtitude=35.23972,
-
-
-        //        },
-
-
-        //        new Stations
-        //        {
-        //            Code = 1487,
-        //            Name = " מסוף 700 /שדרות נווה יעקוב ",
-        //            StationExist=true,
-        //    Address = "רחוב:שדרות נווה יעקב 7 עיר: ירושלים  ",
-        //     Latitude=31.837748,
-        //            Longtitude=35.231598,
-
-
-        //        },
-        //        new Stations
-        //        {
-        //            Code = 1488,
-        //            Name = " הרב פרדס/אסטורהב ",
-        //            StationExist=true,
-        //            Address = "רחוב:מעגלות הרב פרדס  עיר: ירושלים רציף  ",
-        //             Latitude=31.840279,
-        //            Longtitude=35.246272,
-
-        //        },
-        //        new Stations
-        //        {
-        //            Code = 1490,
-        //            Name = "הרב פרדס/צוקרמן ",
-        //            Address = "רחוב:מעגלות הרב פרדס 24 עיר: ירושלים   ",
-        //            StationExist=true,
-        //             Latitude=31.843598,
-        //            Longtitude=35.243639,
-
-        //        },
-        //        new Stations
-        //        {
-        //            Code = 1491,
-        //            Name = "ברזיל ",
-        //            Address = "רחוב:ברזיל 14 עיר: ירושלים",
-        //            StationExist=true,
-        //             Latitude=31.766256,
-        //            Longtitude=35.173,
-
-        //        },
-        //        new Stations
-        //        {
-        //            Code = 1492,
-        //            Name = "בית וגן/הרב שאג ",
-        //            Address = "רחוב:בית וגן 61 עיר: ירושלים ",
-        //            StationExist=true,
-        //             Latitude=31.76736,
-        //            Longtitude=35.184771,
-
-        //        },
-        //        new Stations
-        //        {
-        //            Code = 1493,
-        //            Name = "בית וגן/עוזיאל ",
-        //            Address = "רחוב:בית וגן 21 עיר: ירושלים    ",
-        //            StationExist=true,
-        //             Latitude=31.770543,
-        //            Longtitude=35.183999,
-
-        //        },
-        //        new Stations
-        //        {
-        //            Code = 1494,
-        //            Name = " קרית יובל/שמריהו לוין ",
-        //            Address = "רחוב:ארתור הנטקה  עיר: ירושלים    ",
-        //            StationExist=true,
-        //             Latitude=31.768465,
-        //            Longtitude=35.178701,
-
-        //        },
-        //        new Stations
-        //        {
-        //            Code = 1510,
-        //            Name = " קורצ'אק / רינגלבלום ",
-        //            StationExist=true,
-        //            Address = "רחוב:יאנוש קורצ'אק 7 עיר: ירושלים",
-        //             Latitude=31.759534,
-        //            Longtitude=35.173688,
-
-        //        },
-        //        new Stations
-        //        {
-        //            Code = 1511,
-        //            Name = " טהון/גולומב ",
-        //            Address = "רחוב:יעקב טהון  עיר: ירושלים     ",
-        //            StationExist=true,
-        //             Latitude=31.761447,
-        //            Longtitude=35.175929,
-
-        //        },
-        //        new Stations
-        //        {
-        //            Code = 1512,
-        //            Name = "הרב הרצוג/שח''ל ",
-        //            Address = "רחוב:הרב הרצוג  עיר: ירושלים רציף",
-        //            StationExist=true,
-
-        //             Latitude=31.761447,
-        //            Longtitude=35.199936,
-
-        //        },
-        //        new Stations
-        //        {
-        //            Code = 1514,
-        //            Name = "פרץ ברנשטיין/נזר דוד ",
-        //            Address = "רחוב:הרב הרצוג  עיר: ירושלים רציף",
-        //            StationExist=true,
-
-        //             Latitude=31.759186,
-        //            Longtitude=35.189336,
-        //        },
-
-
-        //     new Stations
-        //    {
-        //    Code = 1518,
-        //    Name = "פרץ ברנשטיין/נזר דוד",
-        //    Address = " רחוב:פרץ ברנשטיין 56 עיר: ירושלים ",
-        //    StationExist=true,
-
-        //     Latitude=31.759121,
-        //            Longtitude=35.189178,
-
-        //},
-        //      new Stations
-        //      {
-        //    Code = 1522,
-        //    Name = "מוזיאון ישראל/רופין",
-        //    Address = "  רחוב:דרך רופין  עיר: ירושלים ",
-        //    StationExist=true,
-
-        //     Latitude=31.774484,
-        //            Longtitude=35.204882,
-
-        //        },
-
-        //     new Stations
-        //          {
-        //     Code = 1523,
-        //    Name = "הרצוג/טשרניחובסקי",
-        //    Address = "   רחוב:הרב הרצוג 21  עיר: ירושלים  ",
-        //    StationExist=true,
-
-        //     Latitude=31.769609,
-        //            Longtitude=35.209732,
-
-        //        },
-        //      new Stations
-        //        {
-        //      Code = 1524,
-        //    Name = "רופין/שד' הזז",
-        //    Address = "    רחוב:הרב הרצוג  עיר: ירושלים   ",
-        //    StationExist=true,
-        //     Latitude=31.769652,
-        //            Longtitude=35.208248,
-
-        //         },
-        //        new Stations
-        //        {
-        //            Code = 121,
-        //            Name = "מרכז סולם/סורוצקין ",
-        //            Address = " רחוב:הרב סורוצקין 13 עיר: ירושלים",
-        //            StationExist=true,
-
-        //             Latitude=31.796033,
-        //            Longtitude=35.206094,
-
-        //        },
-        //        new Stations
-        //        {
-        //            Code = 123,
-        //            Name = "אוהל דוד/סורוצקין ",
-        //            Address = "  רחוב:הרב סורוצקין 9 עיר: ירושלים",
-        //            StationExist=true,
-
-        //             Latitude=31.794958,
-        //            Longtitude=35.205216,
-
-        //        },
-        //        new Stations
-        //        {
-        //            Code = 122,
-        //            Name = "מרכז סולם/סורוצקין ",
-        //            Address = "  רחוב:הרב סורוצקין 28 עיר: ירושלים",
-        //            StationExist=true,
-
-        //             Latitude=31.79617,
-        //            Longtitude=35.206158,
-
-        //        }
-
-
-        //        #endregion
-        //    };
-        //    XMLTools.SaveListToXMLSerializer(ListStations1, stationPath);
+            //    List<Stations> ListStations1 = new List<Stations>
+            //    {
+            //        #region initialization stations//איתחול תחנות
+            //        new Stations
+            //        {
+            //            Code = 73,
+            //            Name = "שדרות גולדה מאיר/המשורר אצ''ג",
+            //            Address = "שדרות גולדה מאיר ,ירושלים ",
+            //            Latitude=31.825302,
+            //            Longtitude=35.188624,
+            //            StationExist=true,
+
+            //        },
+            //        new Stations
+            //        {
+            //            Code = 76,
+            //            Name = "בית ספר צור באהר בנות/אלמדינה אלמונוורה",
+            //            Address = "רחוב:אל מדינה אל מונאוורה  עיר: ירושלים",
+            //            Latitude=31.738425,
+            //            Longtitude=35.228765,
+            //             StationExist=true,
+            //        },
+            //        new Stations
+            //        {
+            //            Code = 77,
+            //            Name = "בית ספר אבן רשד/אלמדינה אלמונוורה",
+            //            Address = "רחוב:אל מדינה אל מונאוורה  עיר: ירושלים ",
+            //             Latitude=31.738676,
+            //            Longtitude=35.226704,
+
+            //            StationExist=true,
+            //        },
+            //        new Stations
+            //        {
+            //            Code = 78,
+            //            Name = "שרי ישראל/יפו",
+            //            Address = "רחוב:שדרות שרי ישראל 15 עיר: ירושלים",
+            //             Latitude=31.789128,
+            //            Longtitude=35.206146,
+
+            //            StationExist=true,
+            //        },
+            //        new Stations
+            //        {
+            //            Code = 83,
+            //            Name = "בטן אלהווא/חוש אל מרג",
+            //            Address = "רחוב:בטן אל הווא  עיר: ירושלים",
+            //            StationExist=true,
+            //             Latitude=31.766358,
+            //            Longtitude=35.240417,
+
+
+            //        },
+            //        new Stations
+            //        {
+            //            Code = 84,
+            //            Name = "מלכי ישראל/הטורים",
+            //            Address = " רחוב:מלכי ישראל 77 עיר: ירושלים ",
+            //            StationExist=true,
+            //             Latitude=31.790758,
+            //            Longtitude=35.209791,
+
+
+            //        },
+            //        new Stations
+            //        {
+            //            Code = 85,
+            //            Name = "בית ספר לבנים/אלמדארס",
+            //            Address = "רחוב:אלמדארס  עיר: ירושלים",
+            //            StationExist=true,
+            //             Latitude=31.768643,
+            //            Longtitude=35.238509,
+
+
+            //        },
+            //        new Stations
+            //        {
+            //            Code = 86,
+            //            Name = "מגרש כדורגל/אלמדארס",
+            //            Address = "רחוב:אלמדארס  עיר: ירושלים",
+            //            StationExist=true,
+            //             Latitude=31.769899,
+            //            Longtitude=35.23973,
+
+
+            //        },
+            //        new Stations
+            //        {
+            //            Code = 88,
+            //            Name = "בית ספר לבנות/בטן אלהוא",
+            //            Address = " רחוב:בטן אל הווא  עיר: ירושלים",
+            //            StationExist=true,
+            //             Latitude=31.767064,
+            //            Longtitude=35.238443,
+
+
+            //        },
+            //        new Stations
+            //        {
+            //            Code = 89,
+            //            Name = "דרך בית לחם הישה/ואדי קדום",
+            //            Address = " רחוב:דרך בית לחם הישנה  עיר: ירושלים ",
+            //            StationExist=true,
+            //             Latitude=31.765863,
+            //            Longtitude=35.247198,
+
+
+            //        },
+            //        new Stations
+            //        {
+            //            Code = 90,
+            //            Name = "גולדה/הרטום",
+            //            Address = "רחוב:דרך בית לחם הישנה  עיר: ירושלים",
+            //            StationExist=true,
+            //             Latitude=31.799804,
+            //            Longtitude=35.213021,
+
+
+            //        },
+            //        new Stations
+            //        {
+            //            Code = 91,
+            //            Name = "דרך בית לחם הישה/ואדי קדום",
+            //            Address = " רחוב:דרך בית לחם הישנה  עיר: ירושלים ",
+            //            StationExist=true,
+            //             Latitude=31.765717,
+            //            Longtitude=35.247102,
+
+
+            //        },
+            //        new Stations
+            //        {
+            //            Code = 93,
+            //            Name = "חוש סלימה 1",
+            //            Address = " רחוב:דרך בית לחם הישנה  עיר: ירושלים",
+            //            StationExist=true,
+            //             Latitude=31.767265,
+            //            Longtitude=35.246594,
+
+            //        },
+            //        new Stations
+            //        {
+            //            Code = 94,
+            //            Name = "דרך בית לחם הישנה ב",
+            //            Address = " רחוב:דרך בית לחם הישנה  עיר: ירושלים",
+            //            StationExist=true,
+            //            Latitude=31.767084,
+            //            Longtitude=35.246655,
+
+
+            //        },
+            //        new Stations
+            //        {
+            //            Code = 95,
+            //            Name = "דרך בית לחם הישנה א",
+            //            Address = " רחוב:דרך בית לחם הישנה  עיר: ירושלים",
+            //            StationExist=true,
+            //             Latitude=31.768759,
+            //            Longtitude=35.24368
+
+
+
+            //        },
+            //        new Stations
+            //        {
+            //            Code = 97,
+            //            Name = "שכונת בזבז 2",
+            //            Address = " רחוב:דרך בית לחם הישנה  עיר: ירושלים",
+            //            StationExist=true,
+            //             Latitude=31.77002,
+            //            Longtitude=35.24348,
+
+            //        },
+            //        new Stations
+            //        {
+            //            Code = 102,
+            //            Name = "גולדה/שלמה הלוי",
+            //            Address = " רחוב:שדרות גולדה מאיר  עיר: ירושלים",
+            //            StationExist=true,
+            //             Latitude=31.8003,
+            //            Longtitude=35.208257,
+
+
+            //        },
+            //        new Stations
+            //        {
+            //            Code = 103,
+            //            Name = "גולדה/הרטום",
+            //            Address = " רחוב:שדרות גולדה מאיר  עיר: ירושלים",
+            //            StationExist=true,
+            //             Latitude=31.8,
+            //            Longtitude=35.214106,
+
+
+            //        },
+            //        new Stations
+            //        {
+            //            Code = 105,
+            //            Name = "גבעת משה",
+            //            Address = " רחוב:גבעת משה 2 עיר: ירושלים",
+            //            StationExist=true,
+            //             Latitude=31.797708,
+            //            Longtitude=35.217133,
+
+            //        },
+            //        new Stations
+            //        {
+            //            Code = 106,
+            //            Name = "גבעת משה",
+            //            Address = " רחוב:גבעת משה 3 עיר: ירושלים",
+            //            StationExist=true,
+            //             Latitude=31.797535,
+            //            Longtitude=35.217057,
+
+
+            //        },
+            //        //20
+            //        new Stations
+            //        {
+            //            Code = 108,
+            //            Name = "עזרת תורה/עלי הכהן",
+            //            Address = "  רחוב:עזרת תורה 25 עיר: ירושלים",
+            //            StationExist=true,
+            //             Latitude=31.797535,
+            //            Longtitude=35.213728,
+
+
+            //        },
+            //        new Stations
+            //        {
+            //            Code = 109,
+            //            Name = "עזרת תורה/דורש טוב",
+            //            Address = "  רחוב:עזרת תורה 21 עיר: ירושלים ",
+            //            StationExist=true,
+            //             Latitude=31.796818,
+            //            Longtitude=35.212936,
+
+
+            //        },
+            //        new Stations
+            //        {
+            //            Code = 110,
+            //            Name = "עזרת תורה/דורש טוב",
+            //            Address = " רחוב:עזרת תורה 12 עיר: ירושלים",
+            //            StationExist=true,
+            //             Latitude=31.796129,
+            //            Longtitude=35.212698,
+
+
+            //        },
+            //        new Stations
+            //        {
+            //            Code = 111,
+            //            Name = "יעקובזון/עזרת תורה",
+            //            Address = "  רחוב:יעקובזון 1 עיר: ירושלים",
+            //            StationExist=true,
+            //             Latitude=31.794631,
+            //            Longtitude=35.21161,
+
+
+            //        },
+            //        new Stations
+            //        {
+            //            Code = 112,
+            //            Name = "יעקובזון/עזרת תורה",
+            //            Address = " רחוב:יעקובזון  עיר: ירושלים",
+            //            StationExist=true,
+            //             Latitude=31.79508,
+            //            Longtitude=35.211684,
+
+
+            //        },
+            //        //25
+            //        new Stations
+            //        {
+            //            Code = 113,
+            //            Name = "זית רענן/אוהל יהושע",
+            //            Address = "  רחוב:זית רענן 1 עיר: ירושלים",
+            //            StationExist=true,
+            //             Latitude=31.796255,
+            //            Longtitude=35.211065,
+
+
+            //        },
+            //        new Stations
+            //        {
+            //            Code = 115,
+            //            Name = "זית רענן/תורת חסד",
+            //            Address = " רחוב:זית רענן  עיר: ירושלים",
+            //            StationExist=true,
+            //             Latitude=31.798423,
+            //            Longtitude=35.209575,
+
+
+            //        },
+            //        new Stations
+            //        {
+            //            Code = 116,
+            //            Name = "זית רענן/תורת חסד",
+            //            Address = "  רחוב:הרב סורוצקין 48 עיר: ירושלים ",
+            //            StationExist=true,
+            //             Latitude=31.798689,
+            //            Longtitude=35.208878,
+
+
+            //        },
+            //        new Stations
+            //        {
+            //            Code = 117,
+            //            Name = "קרית הילד/סורוצקין",
+            //            Address = "  רחוב:הרב סורוצקין  עיר: ירושלים",
+            //            StationExist=true,
+            //             Latitude=31.799165,
+            //            Longtitude=35.206918,
+
+            //        },
+            //        new Stations
+            //        {
+            //            Code = 119,
+            //            Name = "סורוצקין/שנירר",
+            //            Address = "  רחוב:הרב סורוצקין 31 עיר: ירושלים",
+            //            StationExist=true,
+            //             Latitude=31.797829,
+            //            Longtitude=35.205601,
+
+
+            //        },
+
+            //        //#endregion //30
+            //        new Stations
+            //        {
+            //            Code = 1485,
+            //            Name = "שדרות נווה יעקוב/הרב פרדס ",
+            //            Address = "רחוב: שדרות נווה יעקוב  עיר:ירושלים ",
+            //            StationExist=true,
+            //             Latitude=31.840063,
+            //            Longtitude=35.240062,
+
+
+
+            //        },
+            //        new Stations
+            //        {
+            //            Code = 1486,
+            //            Name = "מרכז קהילתי /שדרות נווה יעקוב",
+            //            Address = "רחוב:שדרות נווה יעקוב ירושלים עיר:ירושלים ",
+            //            StationExist=true,
+            //             Latitude=31.838481,
+            //            Longtitude=35.23972,
+
+
+            //        },
+
+
+            //        new Stations
+            //        {
+            //            Code = 1487,
+            //            Name = " מסוף 700 /שדרות נווה יעקוב ",
+            //            StationExist=true,
+            //    Address = "רחוב:שדרות נווה יעקב 7 עיר: ירושלים  ",
+            //     Latitude=31.837748,
+            //            Longtitude=35.231598,
+
+
+            //        },
+            //        new Stations
+            //        {
+            //            Code = 1488,
+            //            Name = " הרב פרדס/אסטורהב ",
+            //            StationExist=true,
+            //            Address = "רחוב:מעגלות הרב פרדס  עיר: ירושלים רציף  ",
+            //             Latitude=31.840279,
+            //            Longtitude=35.246272,
+
+            //        },
+            //        new Stations
+            //        {
+            //            Code = 1490,
+            //            Name = "הרב פרדס/צוקרמן ",
+            //            Address = "רחוב:מעגלות הרב פרדס 24 עיר: ירושלים   ",
+            //            StationExist=true,
+            //             Latitude=31.843598,
+            //            Longtitude=35.243639,
+
+            //        },
+            //        new Stations
+            //        {
+            //            Code = 1491,
+            //            Name = "ברזיל ",
+            //            Address = "רחוב:ברזיל 14 עיר: ירושלים",
+            //            StationExist=true,
+            //             Latitude=31.766256,
+            //            Longtitude=35.173,
+
+            //        },
+            //        new Stations
+            //        {
+            //            Code = 1492,
+            //            Name = "בית וגן/הרב שאג ",
+            //            Address = "רחוב:בית וגן 61 עיר: ירושלים ",
+            //            StationExist=true,
+            //             Latitude=31.76736,
+            //            Longtitude=35.184771,
+
+            //        },
+            //        new Stations
+            //        {
+            //            Code = 1493,
+            //            Name = "בית וגן/עוזיאל ",
+            //            Address = "רחוב:בית וגן 21 עיר: ירושלים    ",
+            //            StationExist=true,
+            //             Latitude=31.770543,
+            //            Longtitude=35.183999,
+
+            //        },
+            //        new Stations
+            //        {
+            //            Code = 1494,
+            //            Name = " קרית יובל/שמריהו לוין ",
+            //            Address = "רחוב:ארתור הנטקה  עיר: ירושלים    ",
+            //            StationExist=true,
+            //             Latitude=31.768465,
+            //            Longtitude=35.178701,
+
+            //        },
+            //        new Stations
+            //        {
+            //            Code = 1510,
+            //            Name = " קורצ'אק / רינגלבלום ",
+            //            StationExist=true,
+            //            Address = "רחוב:יאנוש קורצ'אק 7 עיר: ירושלים",
+            //             Latitude=31.759534,
+            //            Longtitude=35.173688,
+
+            //        },
+            //        new Stations
+            //        {
+            //            Code = 1511,
+            //            Name = " טהון/גולומב ",
+            //            Address = "רחוב:יעקב טהון  עיר: ירושלים     ",
+            //            StationExist=true,
+            //             Latitude=31.761447,
+            //            Longtitude=35.175929,
+
+            //        },
+            //        new Stations
+            //        {
+            //            Code = 1512,
+            //            Name = "הרב הרצוג/שח''ל ",
+            //            Address = "רחוב:הרב הרצוג  עיר: ירושלים רציף",
+            //            StationExist=true,
+
+            //             Latitude=31.761447,
+            //            Longtitude=35.199936,
+
+            //        },
+            //        new Stations
+            //        {
+            //            Code = 1514,
+            //            Name = "פרץ ברנשטיין/נזר דוד ",
+            //            Address = "רחוב:הרב הרצוג  עיר: ירושלים רציף",
+            //            StationExist=true,
+
+            //             Latitude=31.759186,
+            //            Longtitude=35.189336,
+            //        },
+
+
+            //     new Stations
+            //    {
+            //    Code = 1518,
+            //    Name = "פרץ ברנשטיין/נזר דוד",
+            //    Address = " רחוב:פרץ ברנשטיין 56 עיר: ירושלים ",
+            //    StationExist=true,
+
+            //     Latitude=31.759121,
+            //            Longtitude=35.189178,
+
+            //},
+            //      new Stations
+            //      {
+            //    Code = 1522,
+            //    Name = "מוזיאון ישראל/רופין",
+            //    Address = "  רחוב:דרך רופין  עיר: ירושלים ",
+            //    StationExist=true,
+
+            //     Latitude=31.774484,
+            //            Longtitude=35.204882,
+
+            //        },
+
+            //     new Stations
+            //          {
+            //     Code = 1523,
+            //    Name = "הרצוג/טשרניחובסקי",
+            //    Address = "   רחוב:הרב הרצוג 21  עיר: ירושלים  ",
+            //    StationExist=true,
+
+            //     Latitude=31.769609,
+            //            Longtitude=35.209732,
+
+            //        },
+            //      new Stations
+            //        {
+            //      Code = 1524,
+            //    Name = "רופין/שד' הזז",
+            //    Address = "    רחוב:הרב הרצוג  עיר: ירושלים   ",
+            //    StationExist=true,
+            //     Latitude=31.769652,
+            //            Longtitude=35.208248,
+
+            //         },
+            //        new Stations
+            //        {
+            //            Code = 121,
+            //            Name = "מרכז סולם/סורוצקין ",
+            //            Address = " רחוב:הרב סורוצקין 13 עיר: ירושלים",
+            //            StationExist=true,
+
+            //             Latitude=31.796033,
+            //            Longtitude=35.206094,
+
+            //        },
+            //        new Stations
+            //        {
+            //            Code = 123,
+            //            Name = "אוהל דוד/סורוצקין ",
+            //            Address = "  רחוב:הרב סורוצקין 9 עיר: ירושלים",
+            //            StationExist=true,
+
+            //             Latitude=31.794958,
+            //            Longtitude=35.205216,
+
+            //        },
+            //        new Stations
+            //        {
+            //            Code = 122,
+            //            Name = "מרכז סולם/סורוצקין ",
+            //            Address = "  רחוב:הרב סורוצקין 28 עיר: ירושלים",
+            //            StationExist=true,
+
+            //             Latitude=31.79617,
+            //            Longtitude=35.206158,
+
+            //        }
+
+
+            //        #endregion
+            //    };
+            //    XMLTools.SaveListToXMLSerializer(ListStations1, stationPath);
             #endregion
             XElement stationRootElem = XMLTools.LoadListFromXMLElement(stationPath); //get the data from xml
 
@@ -1087,14 +1088,14 @@ namespace DL
 
             stationRootElem.Add(stationToAdd);
             XMLTools.SaveListToXMLElement(stationRootElem, stationPath);
- 
+
         }
 
 
         public void DeleteStations(int code)
         {
             List<Stations> ListStation = XMLTools.LoadListFromXMLSerializer<Stations>(stationPath);
-            DO.Stations sta = ListStation.Find(p => p.Code == code&&p.StationExist==true);
+            DO.Stations sta = ListStation.Find(p => p.Code == code && p.StationExist == true);
             if (sta != null)
             {
                 sta.StationExist = false;
@@ -1789,7 +1790,7 @@ namespace DL
             //        PrevStation=112,
             //        NextStation=0,
             //    },
-                
+
             //    //  NumberLine=20
             //    new LineStation
             //    {
@@ -2101,8 +2102,8 @@ namespace DL
 
         public void AddLineStations(LineStation station)
         {
-          List<LineStation> ListLineStation = XMLTools.LoadListFromXMLSerializer<LineStation>(lineStationPath);
-          if(ListLineStation.FirstOrDefault(b => b.StationCode == station.StationCode && b.LineId == station.LineId && b.LineStationExist)!=null)
+            List<LineStation> ListLineStation = XMLTools.LoadListFromXMLSerializer<LineStation>(lineStationPath);
+            if (ListLineStation.FirstOrDefault(b => b.StationCode == station.StationCode && b.LineId == station.LineId && b.LineStationExist) != null)
                 throw new DO.WrongIDExeption(station.StationCode, "התחנה המבוקשת קיימת כבר במערכת");
             ListLineStation.Add(station);
 
@@ -2154,11 +2155,11 @@ namespace DL
         {
             List<LineStation> ListLineStation = XMLTools.LoadListFromXMLSerializer<LineStation>(lineStationPath);
             DO.LineStation station = ListLineStation.FirstOrDefault(b => b.StationCode == linestations.StationCode && b.LineId == linestations.LineId && b.LineStationExist);
-            if(station!=null)
+            if (station != null)
             {
                 ListLineStation.Remove(station);
                 ListLineStation.Add(linestations);
-            }    
+            }
             else
                 throw new DO.WrongIDExeption(linestations.StationCode, "התחנה המבוקשת לא נמצאה במערכת");
             XMLTools.SaveListToXMLSerializer(ListLineStation, lineStationPath);
@@ -2190,28 +2191,28 @@ namespace DL
         #region LineTrip
 
 
-    
+
         public LineTrip GetLineTrip(TimeSpan start, int idline)
 
         {
-          
+
             XElement ListLineTrip = XMLTools.LoadListFromXMLElement(lineTripPath); //get the data from xml
             DO.LineTrip b = (from line in ListLineTrip.Elements()
                              where line.Element("KeyId").Value == idline.ToString() && Convert.ToBoolean(line.Element("TripLineExist").Value) == true
                              select new DO.LineTrip
                              {
-                                 KeyId = int.Parse( line.Element("KeyId").Value),
+                                 KeyId = int.Parse(line.Element("KeyId").Value),
                                  StartAt = TimeSpan.Parse(line.Element("StartAt").Value),
                                  Frequency = Double.Parse(line.Element("Frequency").Value),
                                  FinishAt = TimeSpan.Parse(line.Element("FinishAt").Value),
-                                 TripLineExist = Convert.ToBoolean( line.Element("TripLineExist").Value),
-                               
-        }).FirstOrDefault();
+                                 TripLineExist = Convert.ToBoolean(line.Element("TripLineExist").Value),
+
+                             }).FirstOrDefault();
 
             if (b == null)
                 throw new DO.WrongLineTripExeption(idline, $"{start} לא נמצאו פרטים עבור הקו המבוקש בשעה זו");
-          return b;
-               
+            return b;
+
         }
 
         public IEnumerable<LineTrip> GetAllTripline(int idline)
@@ -2346,11 +2347,11 @@ namespace DL
             #endregion
 
             XElement ListLineTrip = XMLTools.LoadListFromXMLElement(lineTripPath); //get the data from xml
-          
+
             List<DO.LineTrip> b = new List<LineTrip>();
-            foreach( var line in ListLineTrip.Elements())
+            foreach (var line in ListLineTrip.Elements())
             {
-                if(line.Element("KeyId").Value == idline.ToString() && Convert.ToBoolean(line.Element("TripLineExist").Value) == true)
+                if (line.Element("KeyId").Value == idline.ToString() && Convert.ToBoolean(line.Element("TripLineExist").Value) == true)
                 {
                     b.Add(new DO.LineTrip()
                     {
@@ -2386,13 +2387,13 @@ namespace DL
                    }
                    where StationsLinecondition(l1) && Convert.ToBoolean(line.Element("TripLineExist").Value) == true
                    select l1;
-                    
+
 
         }
 
         public void AddLineTrip(LineTrip lineTrip)
         {
- 
+
 
 
             XElement ListLineTrip = XMLTools.LoadListFromXMLElement(lineTripPath); //get the data from xml
@@ -2407,7 +2408,7 @@ namespace DL
         public void DeleteLineTrip(int idline)
         {
             XElement ListLineTrip = XMLTools.LoadListFromXMLElement(lineTripPath);
-           // List<LineTrip> ListLineTrip = XMLTools.LoadListFromXMLSerializer<LineTrip>(lineTripPath);
+            // List<LineTrip> ListLineTrip = XMLTools.LoadListFromXMLSerializer<LineTrip>(lineTripPath);
 
             foreach (var item in ListLineTrip.Elements())
                 if (item.Element("KeyId").Value == idline.ToString())
@@ -2421,7 +2422,7 @@ namespace DL
             XElement ListLineTrip = XMLTools.LoadListFromXMLElement(lineTripPath);
             //List<LineTrip> ListLineTrip = XMLTools.LoadListFromXMLSerializer<LineTrip>(lineTripPath);
             foreach (var item in ListLineTrip.Elements())
-                if (item.Element("KeyId").Value == lineTrip.KeyId.ToString()&& item.Element("StartAt").Value == lineTrip.StartAt.ToString())
+                if (item.Element("KeyId").Value == lineTrip.KeyId.ToString() && item.Element("StartAt").Value == lineTrip.StartAt.ToString())
                     item.Element("TripLineExist").Value = "false";
             XMLTools.SaveListToXMLElement(ListLineTrip, lineTripPath);
             //int index = ListLineTrip.FindIndex(b => b.KeyId == lineTrip.KeyId && b.StartAt == lineTrip.StartAt && b.FinishAt == lineTrip.FinishAt);
@@ -2436,8 +2437,8 @@ namespace DL
         {
             XElement ListLineTrip = XMLTools.LoadListFromXMLElement(lineTripPath); //get the data from xml
             XElement findLine = (from b in ListLineTrip.Elements()
-                                where b.Element("KeyId").Value == lineTrip.KeyId.ToString() && Convert.ToBoolean(b.Element("TripLineExist").Value) == true
-                                select b).FirstOrDefault();
+                                 where b.Element("KeyId").Value == lineTrip.KeyId.ToString() && Convert.ToBoolean(b.Element("TripLineExist").Value) == true
+                                 select b).FirstOrDefault();
 
             if (findLine == null) //we not find the bus
                 throw new DO.WrongLineTripExeption(lineTrip.KeyId, "לא נמצאו זמני נסיעות עבור קו זה");
@@ -2451,7 +2452,7 @@ namespace DL
 
                 XMLTools.SaveListToXMLElement(ListLineTrip, lineTripPath);
             }
-            
+
 
 
 
@@ -2490,7 +2491,7 @@ namespace DL
             //                    Station2= 76,
             //                   Distance=10387.6464817987,
             //                   TimeAverage= ((1.5*10387.6464817987)/speed),//i.5- air to ground
-            
+
             //    },
 
             //                new AdjacentStations
@@ -3133,7 +3134,7 @@ namespace DL
             #endregion
 
             List<AdjacentStations> ListAdjacentStations = XMLTools.LoadListFromXMLSerializer<AdjacentStations>(adjacentStationsPath);
-            DO.AdjacentStations linestations = ListAdjacentStations.Find(b => b.Station1 == Scode1 && b.Station2 == Scode2&&b.AdjacExsis);//|| b.Station1 == Scode2 && b.Station2 == Scode1);
+            DO.AdjacentStations linestations = ListAdjacentStations.Find(b => b.Station1 == Scode1 && b.Station2 == Scode2 && b.AdjacExsis);//|| b.Station1 == Scode2 && b.Station2 == Scode1);
             if (linestations != null)
             {
                 return linestations;
@@ -3146,12 +3147,12 @@ namespace DL
 
         public IEnumerable<AdjacentStations> GetAllAdjacentStations(int stationCode) //return all the AdjacentStations that we have for this station code
         {
-            
+
             List<AdjacentStations> ListAdjacentStations = XMLTools.LoadListFromXMLSerializer<AdjacentStations>(adjacentStationsPath);
 
             return from station in ListAdjacentStations
-                   where ((stationCode == station.Station1 || stationCode == station.Station2)&&station.AdjacExsis)
-                   select station;            
+                   where ((stationCode == station.Station1 || stationCode == station.Station2) && station.AdjacExsis)
+                   select station;
         }
 
         public IEnumerable<AdjacentStations> GetAllAdjacentStationsBy(Predicate<AdjacentStations> StationsLinecondition)
@@ -3160,18 +3161,18 @@ namespace DL
 
 
             return from stations in ListAdjacentStations
-                   where (StationsLinecondition(stations)&&stations.AdjacExsis)
+                   where (StationsLinecondition(stations) && stations.AdjacExsis)
                    select stations;
-            
+
         }
 
 
-    
+
         public void AddLineStations(DO.AdjacentStations adjacentStations)
         {
             List<AdjacentStations> ListAdjacentStations = XMLTools.LoadListFromXMLSerializer<AdjacentStations>(adjacentStationsPath);
 
-            DO.AdjacentStations temp = ListAdjacentStations.Find(b => b.Station1 == adjacentStations.Station1 && b.Station2 == adjacentStations.Station2&&adjacentStations.AdjacExsis);
+            DO.AdjacentStations temp = ListAdjacentStations.Find(b => b.Station1 == adjacentStations.Station1 && b.Station2 == adjacentStations.Station2 && adjacentStations.AdjacExsis);
             if (temp != null)
                 throw new DO.WrongIDExeption(adjacentStations.Station1, " התחנה עוקבת כבר קיימת במערכת");
             ListAdjacentStations.Add(adjacentStations);
@@ -3185,11 +3186,11 @@ namespace DL
         {
             List<AdjacentStations> ListAdjacentStations = XMLTools.LoadListFromXMLSerializer<AdjacentStations>(adjacentStationsPath);
 
-            DO.AdjacentStations stations = ListAdjacentStations.Find(b => b.Station1 == Scode1 && b.Station2 == Scode2&&b.AdjacExsis);
+            DO.AdjacentStations stations = ListAdjacentStations.Find(b => b.Station1 == Scode1 && b.Station2 == Scode2 && b.AdjacExsis);
             if (stations != null)
             {
                 stations.AdjacExsis = false;
-              //  ListAdjacentStations.Remove(stations);
+                //  ListAdjacentStations.Remove(stations);
             }
             else
                 throw new DO.WrongIDExeption(Scode1, "לא נמצאו פרטים עבור התחנה עוקבת המבוקשת");
@@ -3204,7 +3205,7 @@ namespace DL
             List<AdjacentStations> ListAdjacentStations = XMLTools.LoadListFromXMLSerializer<AdjacentStations>(adjacentStationsPath);
 
             var v = from item in ListAdjacentStations
-                    where ((item.Station1 == Scode1 || item.Station2 == Scode1)&&item.AdjacExsis)
+                    where ((item.Station1 == Scode1 || item.Station2 == Scode1) && item.AdjacExsis)
                     select item;
             foreach (DO.AdjacentStations item in v)
             {
@@ -3221,7 +3222,7 @@ namespace DL
         {
             List<AdjacentStations> ListAdjacentStations = XMLTools.LoadListFromXMLSerializer<AdjacentStations>(adjacentStationsPath);
 
-            DO.AdjacentStations station = ListAdjacentStations.Find(b => b.Station1 == adjacentStations.Station1 && b.Station2 == adjacentStations.Station2&&adjacentStations.AdjacExsis);
+            DO.AdjacentStations station = ListAdjacentStations.Find(b => b.Station1 == adjacentStations.Station1 && b.Station2 == adjacentStations.Station2 && adjacentStations.AdjacExsis);
             if (station != null)
             {
                 ListAdjacentStations.Remove(station);
@@ -3239,7 +3240,7 @@ namespace DL
         {
             List<AdjacentStations> ListAdjacentStations = XMLTools.LoadListFromXMLSerializer<AdjacentStations>(adjacentStationsPath);
 
-            DO.AdjacentStations station = ListAdjacentStations.Find(b => b.Station1 == code1 && b.Station2 == code2&&b.AdjacExsis);
+            DO.AdjacentStations station = ListAdjacentStations.Find(b => b.Station1 == code1 && b.Station2 == code2 && b.AdjacExsis);
             if (station != null)
             {
                 ListAdjacentStations.Remove(station);
@@ -3266,7 +3267,7 @@ namespace DL
 
         #region User
 
-      
+
         public DO.User GetUser(string name) //check if the user exsis according to the name
         {
             List<User> ListUsers = new List<User>
@@ -3350,9 +3351,9 @@ namespace DL
             List<User> userStations = XMLTools.LoadListFromXMLSerializer<User>(userPath);
 
             return from u in userStations
-                        where (u.UserExist && userConditions(u))
-                        select u;
-           
+                   where (u.UserExist && userConditions(u))
+                   select u;
+
         }
 
         public void AddUser(DO.User user)
@@ -3412,8 +3413,6 @@ namespace DL
         #endregion User
 
 
-
-     
-
     }
+
 }

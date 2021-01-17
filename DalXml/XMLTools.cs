@@ -32,14 +32,6 @@ namespace DL
             }
         }
 
-        /*
-           public int KeyId { get; set; } //id number line
-        public TimeSpan StartAt { get; set; }
-        public double Frequency { get; set; } //if 0 so its mean single exit 
-        public TimeSpan FinishAt { get; set; } //It is possible to have several end times per hour
-        public bool TripLineExist { get; set; }        
-         
-         */
         public static XElement ToXML(this DO.LineTrip st)
         {
             XElement result = new XElement("LineTrip",
@@ -52,15 +44,6 @@ namespace DL
 
         }
 
-
-        //public static XElement ToXML(this DO.Stations st)
-        //{
-        //    XElement result = new XElement("Stations",
-        //                            new XElement("Code", st.Code),
-        //                            new XElement("Latitude", st.Coordinate.Latitude),
-        //                            new XElement("Longitude", st.Coordinate.Longitude));
-        //    return result;
-        //}
 
         public static XElement LoadListFromXMLElement(string filePath)
         {

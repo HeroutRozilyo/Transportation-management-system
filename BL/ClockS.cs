@@ -5,18 +5,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
+using System.ComponentModel;
 
-namespace BL
+namespace BO
 {
-     internal  class ClockS
+    public  class ClockS: INotifyPropertyChanged
     {
         #region singelton
         static readonly ClockS instance = new ClockS();
         static ClockS() { }
+   
         public static ClockS Instance { get => instance; }
         #endregion
 
-        internal class Clock
+        public class Clock
         {
             public TimeSpan Time;
             internal Clock(TimeSpan time) => Time = time;//constructor
@@ -34,6 +36,9 @@ namespace BL
             remove => observerClock = null;
         }
         private TimeSpan startTime;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
         internal void Start(TimeSpan mstartTime,int mrate)
         {
             startTime = mstartTime;
@@ -57,6 +62,11 @@ namespace BL
             observerClock = null;
         }
         internal void Stop() => Cancel = true;
+
+        public override string ToString()
+        {
+            return sClock.Time.ToString();
+        }
     }
 }
 

@@ -26,6 +26,7 @@
                 </GridView>
             </ListView.View>
         </ListView>
+        <TextBox x:Name="kuku" HorizontalAlignment="Left" Height="40" Margin="476,197,0,0" TextWrapping="Wrap" Text="06:00:00" VerticalAlignment="Top" Width="160"/>
 
     </Grid>
 </Window>
