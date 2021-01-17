@@ -72,6 +72,7 @@ namespace BlAPI
         #region Simulator
         void StartSimulator(TimeSpan startTime, int Rate, Action<TimeSpan> updateTime);
         void StopSimulator();
+        IEnumerable<BO.LineTiming> GetLineStationLineTimer(Station station, TimeSpan timeStart);
 
         #endregion
     }
