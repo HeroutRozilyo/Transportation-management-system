@@ -41,7 +41,7 @@
                     PreviewTextInput="TimerTextBox_PreviewTextInput"     VerticalAlignment="Top" Width="95" FontFamily="Cooper Black" FontSize="14" TextAlignment="Center"/>
                 <TextBox x:Name="rateTextBox"
                     PreviewTextInput="rateTextBox_PreviewTextInput"     HorizontalAlignment="Left" Height="20" Margin="45,155,0,0" IsEnabled="{Binding BoolStart}"  TextWrapping="Wrap" Text="60" FontFamily="Cooper Black" FontSize="14" VerticalAlignment="Top" Width="50" TextAlignment="Center"/>
-                <Button x:Name="startButton" Content="התחלה" HorizontalAlignment="Left" Margin="40,185,0,0" VerticalAlignment="Top" Width="65" Height="25" Style="{DynamicResource miniButton}" Click="startButton_Click"/>
+                <Button x:Name="startButton" Content="התחלה" HorizontalAlignment="Left" Margin="40,185,0,0" VerticalAlignment="Top" Width="65" Height="25" Style="{DynamicResource miniButton}" Click="startButton_Click" />
                 <Label x:Name="label1" Content="X" HorizontalAlignment="Left" Height="25" Margin="95,155,0,0" VerticalAlignment="Top" Width="25" FontFamily="Cooper Black" FontSize="12" RenderTransformOrigin="0.2,0.2"/>
             </Grid>
         </WrapPanel>

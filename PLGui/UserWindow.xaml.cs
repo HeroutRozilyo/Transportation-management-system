@@ -55,7 +55,11 @@ namespace PLGui
             {
                 workerThread = Thread.CurrentThread;
                 bl.StartSimulator(startTimeSimulator, rate, (time) => timerWorker.ReportProgress(0, time));
-                while (!timerWorker.CancellationPending) Thread.Sleep(1000000);
+                while (!timerWorker.CancellationPending)
+                    Thread.Sleep(1000000);
+
+
+
             };
             timerWorker.ProgressChanged += timer_ProgressChanged;
             timerWorker.RunWorkerCompleted += (s, e) =>
@@ -133,8 +137,9 @@ namespace PLGui
             }
             else
             {
-                timerWorker.CancelAsync();
                 workerThread.Interrupt();
+                timerWorker.CancelAsync();
+                
             }
         }
 
