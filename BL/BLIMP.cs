@@ -1620,6 +1620,9 @@ namespace BL
                 foreach (DO.LineTrip lineTrip in lineTrips)//over the line trip of the line
                 {
                     TimeSpan ExitTime = lineTrip.StartAt;
+                    int a = Convert.ToInt32(CalucateTime(lineDoBoAdapter(item.LineId), temp.FirstStationCode, station.Code));
+                    TimeSpan b = new TimeSpan(0, a, 0);
+
                     while (ExitTime <= lineTrip.FinishAt)
                     {
 
@@ -1629,9 +1632,11 @@ namespace BL
                             LineNumber = temp.NumberLine,
                             LastStation = dl.GetStations(temp.LastStationCode).Name,
                             tripStart = TimeSpan.Parse(ExitTime.ToString()),
-                            ExpectedTimeArrive = ExitTime + TimeSpan.Parse(CalucateTime(lineDoBoAdapter(item.LineId), temp.FirstStationCode, station.Code).ToString()) - timeStart,
+                            ExpectedTimeArrive = ExitTime +b -  TimeSpan.Parse(timeStart.ToString().Substring(0, 8)),
 
                         };
+                      
+
                         lineTiming.ExpectedTimeArrive = TimeSpan.Parse(lineTiming.ExpectedTimeArrive.ToString().Substring(0, 8));
                         ExitTime += TimeSpan.FromMinutes(lineTrip.Frequency);
                         if (lineTiming.ExpectedTimeArrive + lineTiming.tripStart >= timeStart)

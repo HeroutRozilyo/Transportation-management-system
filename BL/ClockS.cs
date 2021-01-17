@@ -18,10 +18,12 @@ namespace BO
         public static ClockS Instance { get => instance; }
         #endregion
 
+
         public class Clock
         {
             public TimeSpan Time;
-            internal Clock(TimeSpan time) => Time = time;//constructor
+            public Clock(TimeSpan time) => Time = time;//constructor
+
         }
         internal volatile bool Cancel;
         private volatile Clock sClock = null;
@@ -63,10 +65,7 @@ namespace BO
         }
         internal void Stop() => Cancel = true;
 
-        public override string ToString()
-        {
-            return sClock.Time.ToString();
-        }
+     
     }
 }
 
