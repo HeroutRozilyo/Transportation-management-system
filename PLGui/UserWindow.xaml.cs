@@ -20,23 +20,28 @@ namespace PLGui
     /// <summary>
     /// Interaction logic for UserWindow.xaml
     /// </summary>
-    public partial class UserWindow : Window
+    public partial class UserWindow : Window,INotifyPropertyChanged
     {
         private IBL bl;
         private BO.User userNow=new BO.User();
-        public static readonly DependencyProperty BoolStartProperty = DependencyProperty.Register("BoolStart", typeof(Boolean), typeof(UserWindow));
-        private bool BoolStart
+        
+       private bool boolStart;
+        public bool BoolStart
         {
-            get => (bool)GetValue(BoolStartProperty);
-            set => SetValue(BoolStartProperty, value);
+            get =>  boolStart;
+            set { boolStart=value;
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("BoolStart")); ;
+            }
         }
 
         BackgroundWorker timerWorker;
         Thread workerThread;
         TimeSpan startTimeSimulator;
         int rate;
-       
-        
+        public event PropertyChangedEventHandler PropertyChanged;
+
+
         public UserWindow()
         {
             InitializeComponent();
@@ -44,6 +49,7 @@ namespace PLGui
 
         public UserWindow(IBL bl, BO.User users)
         {
+            this.DataContext = this;
             InitializeComponent();
             this.bl = bl;
             userNow = users;
@@ -55,11 +61,11 @@ namespace PLGui
             {
                 workerThread = Thread.CurrentThread;
                 bl.StartSimulator(startTimeSimulator, rate, (time) => timerWorker.ReportProgress(0, time));
-                while (!timerWorker.CancellationPending)
-                    Thread.Sleep(1000000);
+                while (!timerWorker.CancellationPending) try { Thread.Sleep(1000000); }
+                    catch(ThreadInterruptedException a)
+                    {
 
-
-
+                    }
             };
             timerWorker.ProgressChanged += timer_ProgressChanged;
             timerWorker.RunWorkerCompleted += (s, e) =>
@@ -137,9 +143,8 @@ namespace PLGui
             }
             else
             {
-                workerThread.Interrupt();
                 timerWorker.CancelAsync();
-                
+                workerThread.Interrupt();
             }
         }
 
