@@ -44,7 +44,8 @@ namespace PLGui
         int rate;
         public event PropertyChangedEventHandler PropertyChanged;
         public Timer timer = new Timer();
-        private IEnumerable<LineTiming> lineAtStation;
+        private List<LineTiming> lineAtStation=new List<LineTiming>();
+        private List<int> goodLine = new List<int>();
 
         public RealTimeStation()
         {
@@ -68,6 +69,7 @@ namespace PLGui
             timerWorker.DoWork += (s, e) =>
             {
                 workerThread = Thread.CurrentThread;
+                
                 bl.StartSimulator(startTimeSimulator, rate, (time) => timerWorker.ReportProgress(0, time));
                 while (!timerWorker.CancellationPending) try { Thread.Sleep(1000000); }
                     catch (ThreadInterruptedException a)
@@ -96,8 +98,12 @@ namespace PLGui
             TimeSpan timeSpan = (TimeSpan)e.UserState;//userState-  member to pass more information back to the UI for updating on a progressChanged call
             TimerTextBox.Text = String.Format("{0:D2}:{1:D2}:{2:D2}", timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds);
 
-            lineAtStation = bl.GetLineStationLineTimer(stationData1, timeSpan);
-            RealTimeStationLine.ItemsSource = lineAtStation;
+            lineAtStation = bl.GetLineStationLineTimer(stationData1, timeSpan).ToList();
+            //lineAtStationtiming.Add(lineAtStation[0]);
+           
+           
+            int ListCount = (lineAtStation.Count() > 5) ? 5 : lineAtStation.Count();
+            RealTimeStationLine.ItemsSource = lineAtStation.GetRange(0, ListCount);
         }
 
         private void startButton_Click(object sender, RoutedEventArgs e)
@@ -135,7 +141,9 @@ namespace PLGui
             {
                 timerWorker.CancelAsync();
                 workerThread.Interrupt();
+                workerThread.Abort();
             }
+            
         }
 
     }

@@ -1621,6 +1621,7 @@ namespace BL
                 {
                     TimeSpan ExitTime = lineTrip.StartAt;
                     int a = Convert.ToInt32(CalucateTime(lineDoBoAdapter(item.LineId), temp.FirstStationCode, station.Code));
+                    if (a == 0) continue;
                     TimeSpan b = new TimeSpan(0, a, 0);
 
                     while (ExitTime <= lineTrip.FinishAt)
@@ -1641,6 +1642,7 @@ namespace BL
                         ExitTime += TimeSpan.FromMinutes(lineTrip.Frequency);
                         if (lineTiming.ExpectedTimeArrive + lineTiming.tripStart >= timeStart)
                         {
+
                             lineTimings.Add(lineTiming);
                         }
 
@@ -1648,7 +1650,20 @@ namespace BL
                     }
                 }
             }
-            return lineTimings.OrderBy(b => b.ExpectedTimeArrive);
+           IEnumerable<LineTiming> lineTimings1= lineTimings.OrderBy(b => b.ExpectedTimeArrive);
+            List<LineTiming> toReturn=new List<LineTiming>();
+            List<int> goodLine = new List<int>();
+            foreach (var item in lineTimings1)
+            {
+                int index = goodLine.FindIndex(b => b.ToString() == item.LineId.ToString());
+                if (index == -1)
+                {
+                    toReturn.Add(item);
+                    goodLine.Add(item.LineId);
+                }
+
+            }
+            return toReturn.AsEnumerable();
         }
         #endregion
 
