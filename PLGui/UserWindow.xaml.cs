@@ -40,7 +40,7 @@ namespace PLGui
         TimeSpan startTimeSimulator;
         int rate;
         public event PropertyChangedEventHandler PropertyChanged;
-
+        public Timer timer = new Timer();
 
         public UserWindow()
         {
@@ -84,6 +84,7 @@ namespace PLGui
         {
             TimeSpan timeSpan = (TimeSpan)e.UserState;//userState-  member to pass more information back to the UI for updating on a progressChanged call
             TimerTextBox.Text = String.Format("{0:D2}:{1:D2}:{2:D2}", timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds);
+           
 
         }
 

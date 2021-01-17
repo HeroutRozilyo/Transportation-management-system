@@ -108,6 +108,7 @@
                             </Label>
                         </Grid>
                     </GroupBox>
+                    <Button x:Name="button" Content="הצג תחנה בזמן אמת" Grid.Column="1" HorizontalAlignment="Left" Height="45" Margin="617,261,0,0" VerticalAlignment="Top" Width="155" Style="{DynamicResource miniButton}" Click="button_Click"/>
 
 
 
@@ -172,7 +173,7 @@
                     </GroupBox>
 
                 </Grid>
-                
+
             </TabItem>
         </TabControl>
 

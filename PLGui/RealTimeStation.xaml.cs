@@ -22,6 +22,8 @@ namespace PLGui
         public RealTimeStation()
         {
             InitializeComponent();
+            UserWindow a;
+           
         }
 
        
