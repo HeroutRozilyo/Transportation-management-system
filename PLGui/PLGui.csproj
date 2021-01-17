@@ -79,6 +79,7 @@
       <DependentUpon>LineWindowP.xaml</DependentUpon>
     </Compile>
     <Compile Include="PO\LineStationUI.cs" />
+    <Compile Include="PO\Timer.cs" />
     <Compile Include="RealTimeStation.xaml.cs">
       <DependentUpon>RealTimeStation.xaml</DependentUpon>
     </Compile>
@@ -227,6 +228,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="newnewBack.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="StationBus.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
