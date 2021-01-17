@@ -245,107 +245,107 @@ namespace DL
         public IEnumerable<Line> GetAllLine()
         {
             #region xml
-            //List<Line> ListLine = new List<Line>
-            //{
-            //    #region line
-            //    new Line
-            //    {
-            //    IdNumber = 1,
-            //    NumberLine=10,
-            //    FirstStationCode=73,
-            //    LastStationCode=89,
-            //    Area=DO.AREA.CENTER,
+            List<Line> ListLine = new List<Line>
+            {
+                #region line
+                new Line
+                {
+                IdNumber = 1,
+                NumberLine=10,
+                FirstStationCode=73,
+                LastStationCode=89,
+                Area=DO.AREA.CENTER,
 
-            //    LineExist=true,
-            //    },
+                LineExist=true,
+                },
 
-            //    new Line
-            //    {
-            //    IdNumber = 2,
-            //    NumberLine=27,
-            //    FirstStationCode=85,
-            //    LastStationCode=97,
-            //    Area=DO.AREA.GENERAL,
-            //    LineExist=true,
-            //    },
+                new Line
+                {
+                IdNumber = 2,
+                NumberLine=27,
+                FirstStationCode=85,
+                LastStationCode=97,
+                Area=DO.AREA.GENERAL,
+                LineExist=true,
+                },
 
 
-            //    new Line
-            //    {
-            //    IdNumber =3,
-            //    NumberLine=5,
-            //    FirstStationCode=122,
-            //    LastStationCode=1511,
-            //    Area=DO.AREA.JERUSALEM,
-            //    LineExist=true,
-            //    },
-            //    new Line
-            //    {
-            //    IdNumber = 4,
-            //    NumberLine=6,
-            //    FirstStationCode=121,
-            //    LastStationCode=1491,
-            //    Area=DO.AREA.NORTH,
-            //    LineExist=true,
-            //    },
-            //    new Line
-            //    {
-            //    IdNumber =5,
-            //    NumberLine=33,
-            //    FirstStationCode=119,
-            //    LastStationCode=1491,
-            //    Area=DO.AREA.SOUTH,
-            //    LineExist=true,
-            //    },
-            //    new Line
-            //    {
-            //    IdNumber = 6,
-            //    NumberLine=67,
-            //    FirstStationCode=110,
-            //    LastStationCode=1486,
-            //    Area=DO.AREA.YOSH,
-            //    LineExist=true,
-            //    },
-            //    new Line
-            //    {
-            //    IdNumber = 7,
-            //    NumberLine=24,
-            //    FirstStationCode=97,
-            //    LastStationCode=111,
-            //    Area=DO.AREA.JERUSALEM,
-            //    LineExist=true,
-            //    },
-            //    new Line
-            //    {
-            //    IdNumber = 8,
-            //    NumberLine=20,
-            //    FirstStationCode=102,
-            //    LastStationCode=116,
-            //    Area=DO.AREA.JERUSALEM,
-            //    LineExist=true,
-            //    },
-            //    new Line
-            //    {
-            //    IdNumber = 9,
-            //    NumberLine=27,
-            //    FirstStationCode=85,
-            //    LastStationCode=102,
-            //    Area=DO.AREA.JERUSALEM,
-            //    LineExist=true,
-            //    },
-            //    new Line
-            //    {
-            //    IdNumber =10,
-            //    NumberLine=21,
-            //    FirstStationCode=111,
-            //    LastStationCode=1488,
-            //    Area=DO.AREA.JERUSALEM,
-            //    LineExist=true,
-            //    }
+                new Line
+                {
+                IdNumber =3,
+                NumberLine=5,
+                FirstStationCode=122,
+                LastStationCode=1511,
+                Area=DO.AREA.JERUSALEM,
+                LineExist=true,
+                },
+                new Line
+                {
+                IdNumber = 4,
+                NumberLine=6,
+                FirstStationCode=121,
+                LastStationCode=1491,
+                Area=DO.AREA.NORTH,
+                LineExist=true,
+                },
+                new Line
+                {
+                IdNumber =5,
+                NumberLine=33,
+                FirstStationCode=119,
+                LastStationCode=1491,
+                Area=DO.AREA.SOUTH,
+                LineExist=true,
+                },
+                new Line
+                {
+                IdNumber = 6,
+                NumberLine=67,
+                FirstStationCode=110,
+                LastStationCode=1486,
+                Area=DO.AREA.YOSH,
+                LineExist=true,
+                },
+                new Line
+                {
+                IdNumber = 7,
+                NumberLine=24,
+                FirstStationCode=97,
+                LastStationCode=111,
+                Area=DO.AREA.JERUSALEM,
+                LineExist=true,
+                },
+                new Line
+                {
+                IdNumber = 8,
+                NumberLine=20,
+                FirstStationCode=102,
+                LastStationCode=116,
+                Area=DO.AREA.JERUSALEM,
+                LineExist=true,
+                },
+                new Line
+                {
+                IdNumber = 9,
+                NumberLine=27,
+                FirstStationCode=85,
+                LastStationCode=102,
+                Area=DO.AREA.JERUSALEM,
+                LineExist=true,
+                },
+                new Line
+                {
+                IdNumber =10,
+                NumberLine=21,
+                FirstStationCode=111,
+                LastStationCode=1488,
+                Area=DO.AREA.JERUSALEM,
+                LineExist=true,
+                }
 
-            //    #endregion
-            //};
-            //XMLTools.SaveListToXMLSerializer(ListLine, linePath);
+                #endregion
+            };
+            XMLTools.SaveListToXMLSerializer(ListLine, linePath);
             #endregion
             XElement lineRootElem = XMLTools.LoadListFromXMLElement(linePath); //get the data from xml
 
