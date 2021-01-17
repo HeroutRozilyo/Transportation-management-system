@@ -86,7 +86,7 @@ namespace PLGui
             timerWorker.WorkerSupportsCancellation = true;
 
         }
-
+        //
         /// <summary>
         /// Responsible for updating the textBox at the updated time
         /// </summary>
