@@ -84,7 +84,7 @@ namespace PLGui
             };
             timerWorker.WorkerReportsProgress = true;
             timerWorker.WorkerSupportsCancellation = true;
-
+            //
         }
         //
         /// <summary>
