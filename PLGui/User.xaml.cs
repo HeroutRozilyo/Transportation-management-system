@@ -48,7 +48,7 @@ namespace PLGui
             
             RefreshStation();
             RefreshStationall();
-          
+            realTime.Visibility = Visibility.Hidden;
 
 
 
@@ -113,48 +113,33 @@ namespace PLGui
         {
             string a = station2.SelectedItem.ToString();
     
-            int codStation = getNum2(a);
+            int codStation = getNum1(a);
 
             temp2 = bl.GetAllLineIndStation(codStation);
         
           //  LineInStation2.ItemsSource = temp2;
 
         }
-        private int getNum2(string a)
-        {
-            int b = a.Length;
-            string c = "";
-
-            for (int i = 0; i < b; i++)
-            {
-                if (a.ElementAt(i) <= '9' && a.ElementAt(i) >= '0')
-                    c += a.ElementAt(i);
-            }
-            int codStation = Convert.ToInt32(c);
-            return codStation;
-        }
-
-        private void Grid_Selected(object sender, RoutedEventArgs e)
-        {
-            
-        }
+        
+        
 
 
         private void checkOkey_Click(object sender, RoutedEventArgs e)
         {
+            temp = null;
             int cod1 = getNum1(station1.SelectedItem.ToString());
-            int cod2 = getNum2(station2.SelectedItem.ToString());
-            
-            temp = ConvertList(bl.TravelPath(cod1, cod2));
+            int cod2 = getNum1(station2.SelectedItem.ToString());
+            if(cod1==cod2)
+            {
+                MessageBox.Show("אופס...תחנות המוצא והיעד קרובות מידי", "", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+           else temp = ConvertList(bl.TravelPath(cod1, cod2));
 
             OpsiaLine.ItemsSource = temp;
             
         }
 
-        private void tryoneline_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            
-        }
+      
 
 
 
@@ -200,6 +185,7 @@ namespace PLGui
             add = false;
             var list = (ListView)sender; //to get the line
             stationData1 = list.SelectedItem as BO.Station;
+            realTime.Visibility = Visibility.Visible;
             RefreshLineInStation();
         }
 
@@ -268,6 +254,7 @@ namespace PLGui
             textBoxTextBox.Text = null;
             ListOfStations.SelectedIndex = -1;
             stationData1 = null;
+            realTime.Visibility = Visibility.Hidden;
             RefreshLineInStation();
 
         }
