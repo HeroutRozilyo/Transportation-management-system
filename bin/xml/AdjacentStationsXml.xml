@@ -386,45 +386,31 @@
     <AdjacExsis>true</AdjacExsis>
   </AdjacentStations>
   <AdjacentStations>
-    <Station1>1486</Station1>
-    <Station2>1488</Station2>
-    <Distance>650.976014538566</Distance>
-    <TimeAverage>1.4647106798185718</TimeAverage>
-    <AdjacExsis>true</AdjacExsis>
-  </AdjacentStations>
-  <AdjacentStations>
-    <Station1>73</Station1>
-    <Station2>1524</Station2>
-    <Distance>6465.5169715180955</Distance>
-    <TimeAverage>12.843338766136494</TimeAverage>
+    <Station1>97</Station1>
+    <Station2>122</Station2>
+    <Distance>400</Distance>
+    <TimeAverage>0.900009000090001</TimeAverage>
     <AdjacExsis>true</AdjacExsis>
   </AdjacentStations>
   <AdjacentStations>
     <Station1>1524</Station1>
-    <Station2>73</Station2>
-    <Distance>6465.5169715180955</Distance>
-    <TimeAverage>13.582509388820327</TimeAverage>
+    <Station2>1522</Station2>
+    <Distance>300</Distance>
+    <TimeAverage>0.67500675006750066</TimeAverage>
     <AdjacExsis>true</AdjacExsis>
   </AdjacentStations>
   <AdjacentStations>
-    <Station1>89</Station1>
-    <Station2>91</Station2>
-    <Distance>18.615150883643107</Distance>
-    <TimeAverage>0.042679373828370115</TimeAverage>
+    <Station1>1511</Station1>
+    <Station2>121</Station2>
+    <Distance>100</Distance>
+    <TimeAverage>0.22500225002250024</TimeAverage>
     <AdjacExsis>true</AdjacExsis>
   </AdjacentStations>
   <AdjacentStations>
-    <Station1>94</Station1>
-    <Station2>90</Station2>
-    <Distance>4835.7280664693208</Distance>
-    <TimeAverage>11.345103307616778</TimeAverage>
-    <AdjacExsis>true</AdjacExsis>
-  </AdjacentStations>
-  <AdjacentStations>
-    <Station1>90</Station1>
-    <Station2>95</Station2>
-    <Distance>4511.0355732798416</Distance>
-    <TimeAverage>11.60691202419145</TimeAverage>
+    <Station1>1486</Station1>
+    <Station2>1488</Station2>
+    <Distance>650.976014538566</Distance>
+    <TimeAverage>1.4647106798185718</TimeAverage>
     <AdjacExsis>true</AdjacExsis>
   </AdjacentStations>
 </ArrayOfAdjacentStations>
