@@ -79,12 +79,12 @@ namespace BL
             return v;
         }
 
-        //return all the bus according to their stutus
-        public IEnumerable<BO.Bus> GetBusByStatus(BO.STUTUS stutus)
-        {
-            return from item in dl.GetAllBusesStusus((DO.STUTUS)stutus)
-                   select busDoBoAdapter(item.Licence);
-        }
+        ////return all the bus according to their stutus
+        //public IEnumerable<BO.Bus> GetBusByStatus(BO.STUTUS stutus)
+        //{
+        //    return from item in dl.GetAllBusesStusus((DO.STUTUS)stutus)
+        //           select busDoBoAdapter(item.Licence);
+        //}
 
         //if the licence not goot this func will throw exeption
         public int AddBus(BO.Bus bus)
@@ -232,7 +232,7 @@ namespace BL
             try
             {//
                 lineDO = dl.GetLine(idLine);
-                tempDO = dl.GetAllStationsLine(idLine);
+                tempDO = dl.GetAllLineStationsBy(b=>b.LineId== idLine);
                 tripDO = dl.GetAllTripline(idLine);
             }
             catch (DO.WrongIDExeption ex)
@@ -348,7 +348,7 @@ namespace BL
         {
 
             IEnumerable<BO.Line> help;
-            help = from item in dl.GetAllLinesArea((DO.AREA)area)
+            help = from item in dl.GetAllLineBy(b => b.Area == (DO.AREA)area)
                    select lineDoBoAdapter(item.IdNumber);
 
             return help;
@@ -416,7 +416,7 @@ namespace BL
 
                 //sorted the line station according to their index.
                 IEnumerable<DO.LineStation> tempDO1;
-                tempDO1 = from item in dl.GetAllStationsLine(id)
+                tempDO1 = from item in dl.GetAllLineStationsBy(b=>b.LineId==id)
                           orderby item.LineStationIndex
                           select item;
 
@@ -535,7 +535,7 @@ namespace BL
             {
                 int index = dl.DeleteStationsFromLine(code, idline);
                 IEnumerable<DO.LineStation> tempDO;
-                tempDO = dl.GetAllStationsLine(idline).ToList();
+                tempDO = dl.GetAllLineStationsBy(b=>b.LineId==idline).ToList();
 
                 //when we delete station from the line path we need updat the new adjacte station thet creat and update index stations.
                 int adj1 = -1, adj2 = -1;
@@ -727,7 +727,7 @@ namespace BL
 
             //in order to find the place of this station beffore the diffrences
             IEnumerable<DO.LineStation> OldtationDO;
-            OldtationDO = from st in dl.GetAllStationsLine(line.IdNumber)
+            OldtationDO = from st in dl.GetAllLineStationsBy(b=>b.LineId==line.IdNumber)
                           orderby st.LineStationIndex
                           select st;
 
@@ -892,7 +892,7 @@ namespace BL
                 //creat adjate station if we need
 
                 IEnumerable<DO.LineStation> tempDO2;
-                tempDO2 = from item in dl.GetAllStationsLine(line.IdNumber)      //the new line station
+                tempDO2 = from item in dl.GetAllLineStationsBy(b=>b.LineId==line.IdNumber)      //the new line station
                           orderby item.LineStationIndex
                           select item;
 
@@ -951,7 +951,7 @@ namespace BL
                 dl.UpdateLine(lineDO);
 
                 //for add update on line stations
-                tempDO1 = from item in dl.GetAllStationsLine(line.IdNumber) //the oldest line station
+                tempDO1 = from item in dl.GetAllLineStationsBy(b=>b.LineId==line.IdNumber) //the oldest line station
                           orderby item.LineStationIndex
                           select item;
                 tempDO2 = from item in tempDO //the new line station
@@ -1052,7 +1052,7 @@ namespace BL
             IEnumerable<DO.LineStation> tempDO;
             DO.AdjacentStations adj = new DO.AdjacentStations();
             double sum = 0;
-            tempDO = dl.GetAllStationsLine(lineId);
+            tempDO = dl.GetAllLineStationsBy(b=>b.LineId==lineId);
             var v = from item in tempDO
                     orderby item.LineStationIndex
                     select item;
@@ -1509,7 +1509,7 @@ namespace BL
                 {
                     foreach (var co1 in stationsBO1)//over all the line in the first Station
                     {
-                        var temp = dl.GetAllStationsLine(co1.LineId);//all the staion for this line
+                        var temp = dl.GetAllLineStationsBy(b=>b.LineId==co1.LineId);//all the staion for this line
                         foreach (var te in temp)//over the staion list
                         {
                             var d = dl.GetAllLineStationsBy(b => b.StationCode == te.StationCode);//gets all the line in this staion

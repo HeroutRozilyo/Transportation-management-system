@@ -12,8 +12,8 @@ namespace DALAPI
         #region Bus
         Bus GetBus(string licence); //return the bus exsis according to the licence
         IEnumerable<DO.Bus> GetAllBuses(); //return all the buses that we have
-        IEnumerable<DO.Bus> GetAllBusesBy(Predicate<DO.Bus> buscondition);
-        IEnumerable<DO.Bus> GetAllBusesStusus(DO.STUTUS stusus);
+        IEnumerable<DO.Bus> GetAllBusesBy(Predicate<DO.Bus> buscondition);//return busus by condition
+        //IEnumerable<DO.Bus> GetAllBusesStusus(DO.STUTUS stusus);//get all the buses by stutus
         int AddBus(DO.Bus bus);
         bool DeleteBus(string licence);
         bool UpdateBus(DO.Bus buses);
@@ -21,18 +21,18 @@ namespace DALAPI
         #endregion Bus
 
         #region Line
-        DO.Line GetLine(int idline);
-        int AddLine(DO.Line line);
+        DO.Line GetLine(int idline);//get line by idNumber
         IEnumerable<DO.Line> GetAllLineBy(Predicate<DO.Line> linecondition);//return according to condition and just the working line
         IEnumerable<DO.Line> GetAllLine();//return all the lines in the list
-      //  IEnumerable<object> GetLineFields(Func<int, bool, object> generate);//return all the lines on the country that exsis and withe the sme lineNumber
-        IEnumerable<DO.Line> GetAllLinesArea(DO.AREA area);
+        //IEnumerable<DO.Line> GetAllLinesArea(DO.AREA area);
+
+        int AddLine(DO.Line line);
         void UpdateLine(DO.Line line);
         void DeleteLine(int idnumber);
         #endregion Line
 
         #region Stations
-         DO.Stations GetStations(int code); //check if the Stations exsis according to the code
+        DO.Stations GetStations(int code); //return  the Stations  according to the code
         IEnumerable<DO.Stations> GetAllStations(); //return all the stations that we have
         IEnumerable<DO.Stations> GetAllStationsBy(Predicate<DO.Stations> Stationscondition);
         void AddStations(DO.Stations station);
@@ -47,30 +47,30 @@ namespace DALAPI
         void AddLineTrip(DO.LineTrip lineTrip);
         void UpdatelineTrip(DO.LineTrip lineTrip);
         void DeleteLineTrip(int idline); //when we delete line we need to delete his line trip
-        void DeleteLineTrip1(DO.LineTrip lineTrip);
+        void DeleteLineTrip1(DO.LineTrip lineTrip);//delete specificLineTrip
         #endregion LineTrip
 
         #region LineStation
         LineStation GetLineStation(int Scode, int idline); //return specific stations according to code of the station and line that Passing through it
 
-        IEnumerable<DO.LineStation> GetAllStationsLine(int idline); //return all the stations that we have with the same line
-
         IEnumerable<DO.LineStation> GetAllStationsCode(int code); //return all the stations that we have with the same code
 
-        IEnumerable<DO.LineStation> GetAllLineStationsBy(Predicate<DO.LineStation> StationsLinecondition);
+        IEnumerable<DO.LineStation> GetAllLineStationsBy(Predicate<DO.LineStation> StationsLinecondition);//return all the stationLine that Meet the criteria
 
-       // IEnumerable<DO.LineStation> GetAllLineAt2Stations(int code1, int cod2); //get 2 stations and return all the lines this 2 stations is adjacted at them
+        //IEnumerable<DO.LineStation> GetAllStationsLine(int idline); //return all the stations that we have with the same line
+
+
 
         void AddLineStations(DO.LineStation station);
+        void UpdateLineStations(DO.LineStation linestations);//Update details
 
-        int DeleteStationsFromLine(int Scode, int idline);
+        int DeleteStationsFromLine(int Scode, int idline);//delete specific LineStation
 
-        void DeleteStationsFromLine(int Scode); //we use here at foreach because it more effective.
-        void DeleteStationsOfLine(int idline); //we use here at foreach because it more effective. when we delete line we need delete all his stations
+        void DeleteStationsFromLine(int Scode); ///delete StationLine according lineId(when line delete)
 
-        void UpdateLineStations(DO.LineStation linestations);
+        void DeleteStationsOfLine(int idline); // when we delete line we need delete all his stationLine
 
-        void UpdateLineStationsCode(DO.LineStation linestations, int oldCode);
+        void UpdateLineStationsCode(DO.LineStation linestations, int oldCode);//toUpdate also Code station if he change 
         #endregion LineStation
 
         #region AdjeacentStations
@@ -78,13 +78,13 @@ namespace DALAPI
 
         IEnumerable<DO.AdjacentStations> GetAllAdjacentStations(int stationCode);//return all the AdjacentStations that we have for this station code
 
-        IEnumerable<DO.AdjacentStations> GetAllAdjacentStationsBy(Predicate<DO.AdjacentStations> StationsLinecondition);
+        IEnumerable<DO.AdjacentStations> GetAllAdjacentStationsBy(Predicate<DO.AdjacentStations> StationsLinecondition);//return by condition
 
         void AddLineStations(DO.AdjacentStations adjacentStations);
 
-        void DeleteAdjacentStationse(int Scode1, int Scode2);
+        //void DeleteAdjacentStationse(int Scode1, int Scode2);
 
-        void DeleteAdjacentStationseBStation(int Scode1);
+        void DeleteAdjacentStationseBStation(int Scode1);//if station delete
 
         void UpdateAdjacentStations(DO.AdjacentStations adjacentStations);
 
@@ -97,9 +97,9 @@ namespace DALAPI
 
         IEnumerable<DO.User> GetAlluser();//return all the user that we have
 
-        IEnumerable<DO.User> GetAlluserAdmin(); //return all the user Admin we have;
+        //IEnumerable<DO.User> GetAlluserAdmin(); //return all the user Admin we have;
 
-        IEnumerable<DO.User> GetAlluserNAdmin(); //return all the user not Admin we have
+        //IEnumerable<DO.User> GetAlluserNAdmin(); //return all the user not Admin we have
 
         IEnumerable<DO.User> GetAlluserBy(Predicate<DO.User> userConditions);
 

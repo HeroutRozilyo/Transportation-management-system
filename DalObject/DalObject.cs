@@ -22,8 +22,10 @@ namespace DL
         #endregion
 
         #region Bus
-        
-        public DO.Bus GetBus( string licence) //check if the bus exsis according to the licence
+
+        #region AllGetBus
+
+        public DO.Bus GetBus( string licence) 
         {
             int indexBus = DataSource.ListBus.FindIndex(b => b.Licence == licence);
             if (indexBus != -1 && DataSource.ListBus[indexBus].BusExist)
@@ -34,26 +36,29 @@ namespace DL
                 throw new DO.WrongLicenceException(int.Parse(licence), $"{licence}:מספר רישוי לא תקין");
 
         }
-        public IEnumerable<DO.Bus> GetAllBuses() //return all the buses that we have
+        public IEnumerable<DO.Bus> GetAllBuses() 
         {
             return from bus in DataSource.ListBus
                    where (bus.BusExist == true)
                    select bus.Clone();
         }
-        public IEnumerable<DO.Bus> GetAllBusesStusus(DO.STUTUS stusus) //return all the buses that we have
-        {
-            return from bus in DataSource.ListBus
-                   where(bus.StatusBus==stusus)
-                   select bus.Clone();
-        }
 
-        public IEnumerable<DO.Bus> GetAllBusesBy(Predicate<DO.Bus> buscondition) //איך כותבים??
+        public IEnumerable<DO.Bus> GetAllBusesBy(Predicate<DO.Bus> buscondition)
         {
             var list = from bus in DataSource.ListBus
                        where (bus.BusExist && buscondition(bus))
                        select bus.Clone();
             return list;
         }
+        //public IEnumerable<DO.Bus> GetAllBusesStusus(DO.STUTUS stusus) 
+        //{
+        //    return from bus in DataSource.ListBus
+        //           where(bus.StatusBus==stusus)
+        //           select bus.Clone();
+        //}
+
+
+        #endregion AllGetBus
 
         public int AddBus(DO.Bus bus)
         {
@@ -134,17 +139,13 @@ namespace DL
                    select line.Clone();
         }
 
-        //public IEnumerable<object> GetLineFields(Func<int, bool, object> generate)//return all the lines on the country that exsis and withe the sme lineNumber
+        
+        //public IEnumerable<DO.Line> GetAllLinesArea(DO.AREA area) //return all the buses that we have
         //{
         //    return from line in DataSource.ListLine
-        //           select generate(line.IdNumber, line.LineExist);
+        //           where (line.Area == area&&line.LineExist)
+        //           select line.Clone();
         //}
-        public IEnumerable<DO.Line> GetAllLinesArea(DO.AREA area) //return all the buses that we have
-        {
-            return from line in DataSource.ListLine
-                   where (line.Area == area&&line.LineExist)
-                   select line.Clone();
-        }
 
         public void UpdateLine(DO.Line line)
         {
@@ -246,12 +247,12 @@ namespace DL
 
         }
 
-        public IEnumerable<DO.LineStation> GetAllStationsLine(int idline) //return all the stations that we have with the same line
-        {
-            return from station in DataSource.ListLineStations
-                   where (station.LineId == idline&&station.LineStationExist)
-                   select station.Clone();
-        }
+        //public IEnumerable<DO.LineStation> GetAllStationsLine(int idline) //return all the stations that we have with the same line
+        //{
+        //    return from station in DataSource.ListLineStations
+        //           where (station.LineId == idline&&station.LineStationExist)
+        //           select station.Clone();
+        //}
 
         public IEnumerable<DO.LineStation> GetAllStationsCode(int code) //return all the lines at this station
         {
@@ -268,24 +269,7 @@ namespace DL
             return list;
         }
 
-        //public IEnumerable<DO.LineStation> GetAllLineAt2Stations(int code1, int cod2) //get 2 stations and return all the lines this 2 stations is adjacted at them
-        //{
-        //    IEnumerable<DO.LineStation> lines = GetAllStationsCode(code1); //get all the lines that move at this station
-        //    IEnumerable<DO.LineStation> stations;
-        //    IEnumerable<DO.LineStation> stline = (IEnumerable<DO.LineStation>)new DO.LineStation(); ///???????? ככה כותבים
-
-        //    foreach (var item in lines)
-        //    {
-        //        stations = GetAllStationsLine(item.LineId);  //get all the station of the line that move at station with cod1
-
-        //        //return all the line that move at these 2 stations
-        //        stline = from temp in stations
-        //                 where (temp.StationCode == cod2 &&temp.LineStationIndex-1==item.LineStationIndex )
-        //                 select temp.Clone();
-        //    }
-        //    return stline;
-        //}
-
+     
         public void AddLineStations(DO.LineStation station)
         {
             DO.LineStation temp = DataSource.ListLineStations.Find(b => b.StationCode == station.StationCode && b.LineId == station.LineId && b.LineStationExist);
@@ -294,7 +278,7 @@ namespace DL
             DataSource.ListLineStations.Add(station.Clone());
         }
 
-        public int DeleteStationsFromLine(int Scode, int idline)
+        public int DeleteStationsFromLine(int Scode, int idline)//delete Station from line (spesific)
         {
             DO.LineStation stations = DataSource.ListLineStations.Find(b => b.StationCode == Scode && b.LineId == idline && b.LineStationExist);
             if (stations != null)
@@ -305,7 +289,7 @@ namespace DL
             else
                 throw new DO.WrongIDExeption(Scode, "התחנה המבוקשת לא נמצאה במערכת");//////////////////////////////////////////////////////
         }
-        public void DeleteStationsFromLine(int Scode) //we use here at foreach because it more effective.
+        public void DeleteStationsFromLine(int Scode) //if station delete- we need to delete all the Lineststion
         {
             foreach (DO.LineStation item in DataSource.ListLineStations)
             {
@@ -314,7 +298,7 @@ namespace DL
             }
 
         }
-        public void DeleteStationsOfLine(int idline) //we use here at foreach because it more effective. when we delete line we need delete all his stations
+        public void DeleteStationsOfLine(int idline) //delete StationLine according lineId
         {
             foreach (DO.LineStation item in DataSource.ListLineStations)
             {
@@ -458,16 +442,16 @@ namespace DL
             DataSource.ListAdjacentStations.Add(adjacentStations.Clone());
         }
 
-        public void DeleteAdjacentStationse(int Scode1, int Scode2)
-        {
-            DO.AdjacentStations stations = DataSource.ListAdjacentStations.Find(b => b.Station1 == Scode1 && b.Station2 == Scode2);
-            if (stations != null)
-            {
-                DataSource.ListAdjacentStations.Remove(stations);
-            }
-            else
-                throw new DO.WrongIDExeption(Scode1, "לא נמצאו פרטים עבור התחנה עוקבת המבוקשת");//////////////////////////////////////////////////////
-        }
+        //public void DeleteAdjacentStationse(int Scode1, int Scode2)
+        //{
+        //    DO.AdjacentStations stations = DataSource.ListAdjacentStations.Find(b => b.Station1 == Scode1 && b.Station2 == Scode2);
+        //    if (stations != null)
+        //    {
+        //        DataSource.ListAdjacentStations.Remove(stations);
+        //    }
+        //    else
+        //        throw new DO.WrongIDExeption(Scode1, "לא נמצאו פרטים עבור התחנה עוקבת המבוקשת");//////////////////////////////////////////////////////
+        //}
         public void DeleteAdjacentStationseBStation(int Scode1)////
         {
 
@@ -532,18 +516,18 @@ namespace DL
                    where (user.UserExist)
                    select user.Clone();
         }
-        public IEnumerable<DO.User> GetAlluserAdmin() //return all the user Admin we have
-        {
-            return from user in DataSource.ListUsers
-                   where (user.UserExist&&user.Admin)
-                   select user.Clone();
-        }
-        public IEnumerable<DO.User> GetAlluserNAdmin() //return all the user not Admin we have
-        {
-            return from user in DataSource.ListUsers
-                   where (user.UserExist && !user.Admin)
-                   select user.Clone();
-        }
+        //public IEnumerable<DO.User> GetAlluserAdmin() //return all the user Admin we have
+        //{
+        //    return from user in DataSource.ListUsers
+        //           where (user.UserExist&&user.Admin)
+        //           select user.Clone();
+        //}
+        //public IEnumerable<DO.User> GetAlluserNAdmin() //return all the user not Admin we have
+        //{
+        //    return from user in DataSource.ListUsers
+        //           where (user.UserExist && !user.Admin)
+        //           select user.Clone();
+        //}
 
         public IEnumerable<DO.User> GetAlluserBy(Predicate<DO.User> userConditions) //איך כותבים??
         {
