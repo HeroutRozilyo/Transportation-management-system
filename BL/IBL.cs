@@ -51,6 +51,7 @@ namespace BlAPI
 
         #region Station
         IEnumerable<BO.Station> GetAllStations();
+        IEnumerable<object> GetYellowBoard(Station a);
         void AddStation(BO.Station station);
         void DeleteStation(int code, IEnumerable<LineStation> a);
         void UpdateStation(BO.Station station, int oldCode);

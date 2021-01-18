@@ -51,7 +51,7 @@ namespace PLGui
 
         private void accountDatiels_Click(object sender, RoutedEventArgs e)
         {
-
+            frame.Navigate(new AccountDetails(bl, userNow));
         }
 
         private void contantUs_Click(object sender, RoutedEventArgs e)

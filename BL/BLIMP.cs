@@ -1191,7 +1191,24 @@ namespace BL
             }
         }
 
+        public IEnumerable<object> GetYellowBoard(Station a)
+        {
+            IEnumerable<Line> line = from item in a.LineAtStation
+                                     select GetLineByLine(item.LineId);
 
+            IEnumerable<object> vs = from item in line
+                                     let b1 = GetStationByCode(item.LastStationCode)
+                                     orderby item.NumberLine
+                                    select new
+                                   {
+                                       StationCode = a.Code,
+                                    LineNumber=item.NumberLine,
+                                       Name =b1.Name,
+                                   };
+            return vs;
+
+
+        }
 
 
         /// <summary>

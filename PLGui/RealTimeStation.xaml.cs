@@ -37,6 +37,7 @@ namespace PLGui
         public Timer timer = new Timer();
         private List<LineTiming> lineAtStation = new List<LineTiming>();
         private List<int> goodLine = new List<int>();
+        private IEnumerable<Object> yellowBoard;
 
         public RealTimeStation()
         {
@@ -49,7 +50,9 @@ namespace PLGui
             InitializeComponent();
             this.bl = bl;
             this.stationData1 = stationData1;
-
+            yellowBoard = bl.GetYellowBoard(stationData1);
+            yellow.ItemsSource = yellowBoard;
+            StationCode.Text = stationData1.Code.ToString();
             BoolStart = true;
             timerWorker = new BackgroundWorker();
 
@@ -134,6 +137,7 @@ namespace PLGui
             }
 
         }
+
 
     }
 }

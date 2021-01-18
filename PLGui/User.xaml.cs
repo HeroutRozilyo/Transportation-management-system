@@ -183,8 +183,12 @@ namespace PLGui
             add = false;
             var list = (ListView)sender; //to get the line
             stationData1 = list.SelectedItem as BO.Station;
-            realTime.Visibility = Visibility.Visible;
+           
             RefreshLineInStation();
+            if(codeTextBox.Text!="")
+            {
+                realTime.Visibility = Visibility.Visible;
+            }
         }
 
         private void Search_Click(object sender, RoutedEventArgs e)

@@ -10,14 +10,20 @@
         <Grid.Background>
             <ImageBrush ImageSource="StationBus.jpg" Opacity="0.5"/>
         </Grid.Background>
-        <ListView x:Name="listView" HorizontalAlignment="Left" Height="155" Margin="10,0,0,0" VerticalAlignment="Top" Width="135"  Background="#FFD9D637" OpacityMask="Black">
+        <ListView x:Name="yellow" HorizontalAlignment="Left" Height="165" Margin="30,20,0,0" VerticalAlignment="Top" Width="285"  Background="#FFD9D637" OpacityMask="Black" FontFamily="Segoe UI Semibold" FontSize="14">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn  />
+                    <GridViewColumn Width=" 50"  DisplayMemberBinding="{Binding LineNumber}" >
+                        <Image Source="busYellow.jpg" />
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Name }" Width="230" >
+                        <TextBlock x:Name="StationCode" Text="{Binding Code}" Width="115" Height="25" RenderTransformOrigin="0.511,1.244" FontFamily="Segoe UI Semibold" FontSize="18"/>
+                    </GridViewColumn>
+
                 </GridView>
             </ListView.View>
         </ListView>
-        <ListView x:Name="RealTimeStationLine" HorizontalAlignment="Left" Height="190" VerticalAlignment="Top" Width="408" RenderTransformOrigin="3.635,1.893" Margin="167,45,0,0" Background="#FF2A2626" Foreground="#FFDFE2E9" IsSynchronizedWithCurrentItem="True" >
+        <ListView x:Name="RealTimeStationLine" HorizontalAlignment="Left" Height="190" VerticalAlignment="Top" Width="408" RenderTransformOrigin="3.635,1.893" Margin="355,20,0,0" Background="#FF2A2626" Foreground="#FFDFE2E9" IsSynchronizedWithCurrentItem="True" FontFamily="Segoe UI Semibold" >
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="קו"   DisplayMemberBinding="{Binding LineNumber}" Width="50"/>
@@ -38,15 +44,15 @@
                 </Style>
             </ListView.ItemContainerStyle>
         </ListView>
-        <Grid Height="315" Width="150" Margin="643,-110,0.333,215.667">
-            <TextBox x:Name="TimerTextBox" HorizontalAlignment="Left" Height="20" Margin="25,125,0,0" TextWrapping="Wrap" Text="06:00:00" IsEnabled="{Binding BoolStart,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+        <Grid Margin="312,120,308.333,-29.333">
+            <TextBox x:Name="TimerTextBox" HorizontalAlignment="Left" Height="30" Margin="8,115,0,0" TextWrapping="Wrap" Text="06:00:00" IsEnabled="{Binding BoolStart,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                          
-                    PreviewTextInput="TimerTextBox_PreviewTextInput"     VerticalAlignment="Top" Width="95" FontFamily="Cooper Black" FontSize="14" TextAlignment="Center"/>
+                    PreviewTextInput="TimerTextBox_PreviewTextInput"     VerticalAlignment="Top" Width="125" FontFamily="Cooper Black" FontSize="24" TextAlignment="Center" />
             <TextBox x:Name="rateTextBox" IsEnabled="{Binding BoolStart,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                    PreviewTextInput="rateTextBox_PreviewTextInput"     HorizontalAlignment="Left" Height="20" Margin="45,155,0,0"  TextWrapping="Wrap" Text="60" FontFamily="Cooper Black" FontSize="14" VerticalAlignment="Top" Width="50" TextAlignment="Center"/>
+                    PreviewTextInput="rateTextBox_PreviewTextInput"     HorizontalAlignment="Left" Height="25" Margin="33,149,0,0"  TextWrapping="Wrap" Text="60" FontFamily="Cooper Black" FontSize="24" VerticalAlignment="Top" Width="80" TextAlignment="Center"/>
 
-            <Button x:Name="startButton" Content="התחלה" HorizontalAlignment="Left" Margin="40,185,0,0" VerticalAlignment="Top" Width="65" Height="25" Style="{DynamicResource miniButton}" Click="startButton_Click"/>
-            <Label x:Name="label1" Content="X" HorizontalAlignment="Left" Height="25" Margin="95,155,0,0" VerticalAlignment="Top" Width="25" FontFamily="Cooper Black" FontSize="12" RenderTransformOrigin="0.2,0.2"/>
+            <Button x:Name="startButton" Content="התחלה" HorizontalAlignment="Left" Margin="23,185,0,0" VerticalAlignment="Top" Width="98" Height="35" Style="{DynamicResource miniButton}" Click="startButton_Click" FontSize="20"/>
+            <Label x:Name="label1" Content="X" HorizontalAlignment="Left" Height="30" Margin="113,145,0,0" VerticalAlignment="Top" Width="25" FontFamily="Cooper Black" FontSize="20" RenderTransformOrigin="0.2,0.2"/>
         </Grid>
 
     </Grid>
