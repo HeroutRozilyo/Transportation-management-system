@@ -2569,12 +2569,39 @@ namespace DS
 #endregion LineId9
 
                 #region lineId10
-   
-   
+           new AdjacentStations
+                {
+                    Station1=97,
+                    Station2= 122,
+                   Distance=400,
+                     TimeAverage= ((1.5*400)/speed)
 
-     
 
-    
+
+                },
+                   new AdjacentStations
+                {
+                    Station1=1524,
+                    Station2= 1522,
+                   Distance=300,
+                     TimeAverage= ((1.5*300)/speed)
+
+
+                },
+                           new AdjacentStations
+                {
+                    Station1=1511,
+                    Station2= 121,
+                   Distance=100,
+                     TimeAverage= ((1.5*100)/speed)
+
+
+                },
+
+
+
+
+
 
 
                 new AdjacentStations
