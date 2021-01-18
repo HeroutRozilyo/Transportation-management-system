@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace dotNet5781_01_9647_4789
 {
-      public class Bus
+    public class Bus
     {
         //----------
         // Variable definition
@@ -17,16 +13,16 @@ namespace dotNet5781_01_9647_4789
         private string license;
         private int km;
         private int NewKm;
-        
+
         //------
         // set and get from our variable
-        public DateTime lastTreat { get;  set; }
+        public DateTime lastTreat { get; set; }
         public int Fuel { get; set; }
         public int NEWKm
         {
             get; set;
         }
-        public int Km 
+        public int Km
         {
             get { return km; }
             set
@@ -45,7 +41,7 @@ namespace dotNet5781_01_9647_4789
             {
                 string firstpart, middlepart, endpart;
                 string result;
-                if (license.Length == 7) 
+                if (license.Length == 7)
                 {
                     // xx-xxx-xx
                     firstpart = license.Substring(0, 2);
@@ -89,7 +85,7 @@ namespace dotNet5781_01_9647_4789
             }
             Console.WriteLine("give license number");
             License = Console.ReadLine();
-            
+
         }
         public Bus(Bus a)
         {
@@ -104,7 +100,7 @@ namespace dotNet5781_01_9647_4789
 
         //------------
         ////update the date time after treatment
-        public DateTime Maintenance() 
+        public DateTime Maintenance()
         {
             lastTreat = DateTime.Today;
             return lastTreat;

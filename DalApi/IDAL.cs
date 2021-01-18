@@ -1,9 +1,6 @@
-﻿using System;
+﻿using DO;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DO;
 
 namespace DALAPI
 {
@@ -37,7 +34,7 @@ namespace DALAPI
         IEnumerable<DO.Stations> GetAllStationsBy(Predicate<DO.Stations> Stationscondition);
         void AddStations(DO.Stations station);
         void DeleteStations(int code);
-        void UpdateStations(DO.Stations stations,int oldCode);
+        void UpdateStations(DO.Stations stations, int oldCode);
         #endregion Stations
 
         #region LineTrip
@@ -88,7 +85,7 @@ namespace DALAPI
 
         void UpdateAdjacentStations(DO.AdjacentStations adjacentStations);
 
-        void UpdateAdjacentStations(int code1, int code2, int codeChange,int oldCode); //when we change the number code of the station
+        void UpdateAdjacentStations(int code1, int code2, int codeChange, int oldCode); //when we change the number code of the station
 
         #endregion AdjeacentStations
 

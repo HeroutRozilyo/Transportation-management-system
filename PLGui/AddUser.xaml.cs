@@ -1,18 +1,8 @@
 ﻿using BlAPI;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace PLGui
 {
@@ -25,7 +15,7 @@ namespace PLGui
         IEnumerable<BO.User> allUser;
         string name;
         string pas;
-        bool admin=false;
+        bool admin = false;
 
         public AddUser()
         {
@@ -42,7 +32,7 @@ namespace PLGui
         }
 
 
-         public void refresh()
+        public void refresh()
         {
             allUser = bl.GetAllUsers();
         }
@@ -56,45 +46,45 @@ namespace PLGui
                 string pas2 = passwordBox2.Password;
                 if (pas != pas2)
                 {
-                   MessageBoxResult result= MessageBox.Show(".הכנס סיסמא זהה בשני השדות ונסה שוב", "New User", MessageBoxButton.OKCancel, MessageBoxImage.Error);
-                   switch(result)
+                    MessageBoxResult result = MessageBox.Show(".הכנס סיסמא זהה בשני השדות ונסה שוב", "New User", MessageBoxButton.OKCancel, MessageBoxImage.Error);
+                    switch (result)
                     {
                         case MessageBoxResult.OK:
-                        {
-                           break;
-                        }
+                            {
+                                break;
+                            }
                         case MessageBoxResult.Cancel:
                             {
                                 this.Close();
                                 return;
                             }
-                            
+
                     }
                 }
-                if(check())
+                if (check())
                 {
                     var v = from item in allUser
                             where item.MailAddress == mail
                             select item;
-                    if(v.Count()!=0)
+                    if (v.Count() != 0)
                     {
                         MessageBox.Show(" כתובת  מייל כבר קייימת במערכת, בבקשה הכנס כתובת חדשה ", "שם משתמש", MessageBoxButton.OK, MessageBoxImage.Error);
                         return;
                     }
                 }
-                    
-               
-                
-                    if (admin)
-                        bl.AddUser(name, pas, true,mail);
-                    else
-                        bl.AddUser(name, pas, false, mail);
+
+
+
+                if (admin)
+                    bl.AddUser(name, pas, true, mail);
+                else
+                    bl.AddUser(name, pas, false, mail);
                 MessageBox.Show(" החשבון נוצר בהצלחה ", "שם משתמש", MessageBoxButton.OK, MessageBoxImage.Information);
                 this.DialogResult = true;
-                    this.Close();
-                
+                this.Close();
+
             }
-            catch(BO.BadNameExeption ex)
+            catch (BO.BadNameExeption ex)
             {
                 MessageBox.Show(" שם משתמש קיים במערכת, בבקשה אכנס שם אחר", "שם משתמש", MessageBoxButton.OK, MessageBoxImage.Error);
             }
@@ -109,5 +99,5 @@ namespace PLGui
             return regex.IsMatch(Mail.Text);
         }
     }
-    
+
 }

@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DO
+﻿namespace DO
 {/// <summary>
 /// Entity following stations on the line
 /// </summary>
-    public class AdjacentStations 
+    public class AdjacentStations
     {
         /// <summary>
         /// The first of the following stations-Unique ID Number Part 1

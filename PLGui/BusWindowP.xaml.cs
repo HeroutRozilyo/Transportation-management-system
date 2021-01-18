@@ -3,18 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace PLGui
 {
@@ -71,7 +63,7 @@ namespace PLGui
             send.IsEnabled = true;
             fuel.IsEnabled = true;
             DeleteBus1.IsEnabled = true;
-         
+
 
             ////
         }
@@ -145,15 +137,15 @@ namespace PLGui
                     send.IsEnabled = false;
                     fuel.IsEnabled = false;
                     DeleteBus1.IsEnabled = false;
-                   
+
 
                 }
                 else
                 if (LincestextBox.Text != "" && StartingDate.Text != "")
                 {
                     add = false;
-                     HelpAddBus();
-                   // newbus = GridDataBus.DataContext as BO.Bus;
+                    HelpAddBus();
+                    // newbus = GridDataBus.DataContext as BO.Bus;
                     bl.AddBus(newbus);
                     RefreshDataBus();
                     buses.SelectedIndex = egged.Count() - 1;
@@ -184,7 +176,7 @@ namespace PLGui
             }
 
         }
-   
+
 
 
 
@@ -192,7 +184,7 @@ namespace PLGui
         {
             try
             {
-         
+
 
 
                 if (e.Key == Key.Return && add && LincestextBox.Text != "" && StartingDate.Text != "")  //if enter            
@@ -202,7 +194,7 @@ namespace PLGui
                     fuel.IsEnabled = true;
                     DeleteBus1.IsEnabled = true;
                     AddBus.IsEnabled = true;
-                   add = false;
+                    add = false;
                     HelpAddBus();
                     bl.AddBus(newbus);
                     RefreshDataBus();

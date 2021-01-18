@@ -1,11 +1,9 @@
 ﻿using BlAPI;
-using System;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
-using System.Device.Location;
-using System.Collections.Generic;
 using BO;
+using System;
+using System.Collections.Generic;
+using System.Device.Location;
+using System.Windows;
 
 namespace PLGui
 {
@@ -37,7 +35,7 @@ namespace PLGui
         {
             InitializeComponent();
             this.bl = bl;
-           
+
         }
 
         public AddStation(IEnumerable<LineStation> stationsOfBus, IBL bl)
@@ -48,7 +46,7 @@ namespace PLGui
 
 
 
-        
+
 
         private void helpData()
         {
@@ -57,7 +55,7 @@ namespace PLGui
             toAdd.Coordinate = new GeoCoordinate(double.Parse((latitudeTextBox.Text)), double.Parse(longitudeTextBox.Text));
             toAdd.Name = nameTextBox.Text;
             toAdd.StationExist = true;
-            
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -70,11 +68,11 @@ namespace PLGui
                 this.DialogResult = true;
                 this.Close();
             }
-            catch(BO.BadCoordinateException a)
+            catch (BO.BadCoordinateException a)
             {
                 MessageBox.Show(a.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-         
+
         }
     }
 }

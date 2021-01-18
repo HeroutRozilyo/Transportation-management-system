@@ -1,20 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Threading;
 using System.ComponentModel;
+using System.Diagnostics;
+using System.Threading;
 
 namespace BO
 {
-    public  class ClockS: INotifyPropertyChanged
+    public class ClockS : INotifyPropertyChanged
     {
         #region singelton
         static readonly ClockS instance = new ClockS();
         static ClockS() { }
-   
+
         public static ClockS Instance { get => instance; }
         #endregion
 
@@ -27,12 +23,12 @@ namespace BO
         }
         internal volatile bool Cancel;
         private volatile Clock sClock = null;
-        internal  Clock SClock => sClock;
+        internal Clock SClock => sClock;
         private int rate;
         internal int Rate => rate;
         private Stopwatch stoper = new Stopwatch();
         private Action<TimeSpan> observerClock = null;
-        internal event Action<TimeSpan>ObserverClock
+        internal event Action<TimeSpan> ObserverClock
         {
             add => observerClock = value;
             remove => observerClock = null;
@@ -41,7 +37,7 @@ namespace BO
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public void Start(TimeSpan mstartTime,int mrate)
+        public void Start(TimeSpan mstartTime, int mrate)
         {
             startTime = mstartTime;
             sClock = new Clock(startTime);
@@ -49,7 +45,7 @@ namespace BO
             Cancel = false;
             stoper.Restart();
             new Thread(clockThread).Start();
-         
+
 
         }
 
@@ -65,9 +61,9 @@ namespace BO
         }
         internal void Stop() => Cancel = true;
 
-     
+
     }
 }
 
-    
+
 

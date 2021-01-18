@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BlAPI;
-using DALAPI;
+﻿using BlAPI;
 //using DL;
 using BO;
+using DALAPI;
+using System;
+using System.Collections.Generic;
 using System.Device.Location;
+using System.Linq;
 
 namespace BL
 {
@@ -232,12 +230,12 @@ namespace BL
             try
             {//
                 lineDO = dl.GetLine(idLine);
-                tempDO = dl.GetAllLineStationsBy(b=>b.LineId== idLine);
+                tempDO = dl.GetAllLineStationsBy(b => b.LineId == idLine);
                 tripDO = dl.GetAllTripline(idLine);
             }
             catch (DO.WrongIDExeption ex)
             {
-               throw new BO.BadIdException("מזהה קו לא תקין", ex);            
+                throw new BO.BadIdException("מזהה קו לא תקין", ex);
             }
 
             lineBO.TimeTravel = 0;
@@ -416,7 +414,7 @@ namespace BL
 
                 //sorted the line station according to their index.
                 IEnumerable<DO.LineStation> tempDO1;
-                tempDO1 = from item in dl.GetAllLineStationsBy(b=>b.LineId==id)
+                tempDO1 = from item in dl.GetAllLineStationsBy(b => b.LineId == id)
                           orderby item.LineStationIndex
                           select item;
 
@@ -535,7 +533,7 @@ namespace BL
             {
                 int index = dl.DeleteStationsFromLine(code, idline);
                 IEnumerable<DO.LineStation> tempDO;
-                tempDO = dl.GetAllLineStationsBy(b=>b.LineId==idline).ToList();
+                tempDO = dl.GetAllLineStationsBy(b => b.LineId == idline).ToList();
 
                 //when we delete station from the line path we need updat the new adjacte station thet creat and update index stations.
                 int adj1 = -1, adj2 = -1;
@@ -727,7 +725,7 @@ namespace BL
 
             //in order to find the place of this station beffore the diffrences
             IEnumerable<DO.LineStation> OldtationDO;
-            OldtationDO = from st in dl.GetAllLineStationsBy(b=>b.LineId==line.IdNumber)
+            OldtationDO = from st in dl.GetAllLineStationsBy(b => b.LineId == line.IdNumber)
                           orderby st.LineStationIndex
                           select st;
 
@@ -892,7 +890,7 @@ namespace BL
                 //creat adjate station if we need
 
                 IEnumerable<DO.LineStation> tempDO2;
-                tempDO2 = from item in dl.GetAllLineStationsBy(b=>b.LineId==line.IdNumber)      //the new line station
+                tempDO2 = from item in dl.GetAllLineStationsBy(b => b.LineId == line.IdNumber)      //the new line station
                           orderby item.LineStationIndex
                           select item;
 
@@ -951,7 +949,7 @@ namespace BL
                 dl.UpdateLine(lineDO);
 
                 //for add update on line stations
-                tempDO1 = from item in dl.GetAllLineStationsBy(b=>b.LineId==line.IdNumber) //the oldest line station
+                tempDO1 = from item in dl.GetAllLineStationsBy(b => b.LineId == line.IdNumber) //the oldest line station
                           orderby item.LineStationIndex
                           select item;
                 tempDO2 = from item in tempDO //the new line station
@@ -1052,7 +1050,7 @@ namespace BL
             IEnumerable<DO.LineStation> tempDO;
             DO.AdjacentStations adj = new DO.AdjacentStations();
             double sum = 0;
-            tempDO = dl.GetAllLineStationsBy(b=>b.LineId==lineId);
+            tempDO = dl.GetAllLineStationsBy(b => b.LineId == lineId);
             var v = from item in tempDO
                     orderby item.LineStationIndex
                     select item;
@@ -1108,7 +1106,7 @@ namespace BL
                         select lineDoBoAdapter(s.LineId);
                 return x;
             }
-            catch(BO.BadIdException ex) { }
+            catch (BO.BadIdException ex) { }
             return null;
         }
 
@@ -1509,7 +1507,7 @@ namespace BL
                 {
                     foreach (var co1 in stationsBO1)//over all the line in the first Station
                     {
-                        var temp = dl.GetAllLineStationsBy(b=>b.LineId==co1.LineId);//all the staion for this line
+                        var temp = dl.GetAllLineStationsBy(b => b.LineId == co1.LineId);//all the staion for this line
                         foreach (var te in temp)//over the staion list
                         {
                             var d = dl.GetAllLineStationsBy(b => b.StationCode == te.StationCode);//gets all the line in this staion
@@ -1639,10 +1637,10 @@ namespace BL
                             LineNumber = temp.NumberLine,
                             LastStation = dl.GetStations(temp.LastStationCode).Name,
                             tripStart = TimeSpan.Parse(ExitTime.ToString()),
-                            ExpectedTimeArrive = ExitTime +b -  TimeSpan.Parse(timeStart.ToString().Substring(0, 8)),
+                            ExpectedTimeArrive = ExitTime + b - TimeSpan.Parse(timeStart.ToString().Substring(0, 8)),
 
                         };
-                      
+
 
                         lineTiming.ExpectedTimeArrive = TimeSpan.Parse(lineTiming.ExpectedTimeArrive.ToString().Substring(0, 8));
                         ExitTime += TimeSpan.FromMinutes(lineTrip.Frequency);
@@ -1656,8 +1654,8 @@ namespace BL
                     }
                 }
             }
-           IEnumerable<LineTiming> lineTimings1= lineTimings.OrderBy(b => b.ExpectedTimeArrive);
-            List<LineTiming> toReturn=new List<LineTiming>();
+            IEnumerable<LineTiming> lineTimings1 = lineTimings.OrderBy(b => b.ExpectedTimeArrive);
+            List<LineTiming> toReturn = new List<LineTiming>();
             List<int> goodLine = new List<int>();
             foreach (var item in lineTimings1)
             {

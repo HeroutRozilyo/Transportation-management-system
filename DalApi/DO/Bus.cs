@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DO
 {
@@ -10,7 +6,7 @@ namespace DO
     /// Bus entity - showing the existing buses in the company
     /// </summary>
     public class Bus
-   {
+    {
         /// <summary>
         /// Bus license plate - unique ID number
         /// </summary>

@@ -1,10 +1,6 @@
-﻿using System;
+﻿using DO;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DO;
-using System.Device.Location;
 
 
 namespace DS
@@ -61,7 +57,7 @@ namespace DS
                     Address = "רחוב:אל מדינה אל מונאוורה  עיר: ירושלים ",
                      Latitude=31.738676,
                     Longtitude=35.226704,
-                 
+
                     StationExist=true,
                 },
                 new Stations
@@ -71,7 +67,7 @@ namespace DS
                     Address = "רחוב:שדרות שרי ישראל 15 עיר: ירושלים",
                      Latitude=31.789128,
                     Longtitude=35.206146,
-                  
+
                     StationExist=true,
                 },
                 new Stations
@@ -82,7 +78,7 @@ namespace DS
                     StationExist=true,
                      Latitude=31.766358,
                     Longtitude=35.240417,
-                    
+
 
                 },
                 new Stations
@@ -93,7 +89,7 @@ namespace DS
                     StationExist=true,
                      Latitude=31.790758,
                     Longtitude=35.209791,
-                    
+
 
                 },
                 new Stations
@@ -104,7 +100,7 @@ namespace DS
                     StationExist=true,
                      Latitude=31.768643,
                     Longtitude=35.238509,
-                    
+
 
                 },
                 new Stations
@@ -115,7 +111,7 @@ namespace DS
                     StationExist=true,
                      Latitude=31.769899,
                     Longtitude=35.23973,
-                  
+
 
                 },
                 new Stations
@@ -126,7 +122,7 @@ namespace DS
                     StationExist=true,
                      Latitude=31.767064,
                     Longtitude=35.238443,
-                    
+
 
                 },
                 new Stations
@@ -137,7 +133,7 @@ namespace DS
                     StationExist=true,
                      Latitude=31.765863,
                     Longtitude=35.247198,
-                  
+
 
                 },
                 new Stations
@@ -148,7 +144,7 @@ namespace DS
                     StationExist=true,
                      Latitude=31.799804,
                     Longtitude=35.213021,
-                    
+
 
                 },
                 new Stations
@@ -159,8 +155,8 @@ namespace DS
                     StationExist=true,
                      Latitude=31.765717,
                     Longtitude=35.247102,
-                   
-                    
+
+
                 },
                 new Stations
                 {
@@ -170,7 +166,7 @@ namespace DS
                     StationExist=true,
                      Latitude=31.767265,
                     Longtitude=35.246594,
-                
+
                 },
                 new Stations
                 {
@@ -180,8 +176,8 @@ namespace DS
                     StationExist=true,
                     Latitude=31.767084,
                     Longtitude=35.246655,
-                  
-                   
+
+
                 },
                 new Stations
                 {
@@ -191,7 +187,7 @@ namespace DS
                     StationExist=true,
                      Latitude=31.768759,
                     Longtitude=35.24368
-                    
+
 
 
                 },
@@ -203,7 +199,7 @@ namespace DS
                     StationExist=true,
                      Latitude=31.77002,
                     Longtitude=35.24348,
-                
+
                 },
                 new Stations
                 {
@@ -213,8 +209,8 @@ namespace DS
                     StationExist=true,
                      Latitude=31.8003,
                     Longtitude=35.208257,
-                  
-                    
+
+
                 },
                 new Stations
                 {
@@ -224,8 +220,8 @@ namespace DS
                     StationExist=true,
                      Latitude=31.8,
                     Longtitude=35.214106,
-                  
-                   
+
+
                 },
                 new Stations
                 {
@@ -235,7 +231,7 @@ namespace DS
                     StationExist=true,
                      Latitude=31.797708,
                     Longtitude=35.217133,
-                 
+
                 },
                 new Stations
                 {
@@ -245,8 +241,8 @@ namespace DS
                     StationExist=true,
                      Latitude=31.797535,
                     Longtitude=35.217057,
-                   
-                    
+
+
                 },
                 //20
                 new Stations
@@ -257,8 +253,8 @@ namespace DS
                     StationExist=true,
                      Latitude=31.797535,
                     Longtitude=35.213728,
-                  
-                    
+
+
                 },
                 new Stations
                 {
@@ -268,8 +264,8 @@ namespace DS
                     StationExist=true,
                      Latitude=31.796818,
                     Longtitude=35.212936,
-                   
-                    
+
+
                 },
                 new Stations
                 {
@@ -279,8 +275,8 @@ namespace DS
                     StationExist=true,
                      Latitude=31.796129,
                     Longtitude=35.212698,
-                   
-                    
+
+
                 },
                 new Stations
                 {
@@ -290,8 +286,8 @@ namespace DS
                     StationExist=true,
                      Latitude=31.794631,
                     Longtitude=35.21161,
-                   
-                    
+
+
                 },
                 new Stations
                 {
@@ -301,8 +297,8 @@ namespace DS
                     StationExist=true,
                      Latitude=31.79508,
                     Longtitude=35.211684,
-                  
-                   
+
+
                 },
                 //25
                 new Stations
@@ -313,8 +309,8 @@ namespace DS
                     StationExist=true,
                      Latitude=31.796255,
                     Longtitude=35.211065,
-                  
-                   
+
+
                 },
                 new Stations
                 {
@@ -324,8 +320,8 @@ namespace DS
                     StationExist=true,
                      Latitude=31.798423,
                     Longtitude=35.209575,
-                   
-                    
+
+
                 },
                 new Stations
                 {
@@ -335,8 +331,8 @@ namespace DS
                     StationExist=true,
                      Latitude=31.798689,
                     Longtitude=35.208878,
-                   
-                    
+
+
                 },
                 new Stations
                 {
@@ -346,7 +342,7 @@ namespace DS
                     StationExist=true,
                      Latitude=31.799165,
                     Longtitude=35.206918,
-                   
+
                 },
                 new Stations
                 {
@@ -356,8 +352,8 @@ namespace DS
                     StationExist=true,
                      Latitude=31.797829,
                     Longtitude=35.205601,
-                   
-                    
+
+
                 },
 
                 //#endregion //30
@@ -369,8 +365,8 @@ namespace DS
                     StationExist=true,
                      Latitude=31.840063,
                     Longtitude=35.240062,
-                   
-                    
+
+
 
                 },
                 new Stations
@@ -381,8 +377,8 @@ namespace DS
                     StationExist=true,
                      Latitude=31.838481,
                     Longtitude=35.23972,
-                    
-                   
+
+
                 },
 
 
@@ -394,8 +390,8 @@ namespace DS
             Address = "רחוב:שדרות נווה יעקב 7 עיר: ירושלים  ",
              Latitude=31.837748,
                     Longtitude=35.231598,
-           
-                   
+
+
                 },
                 new Stations
                 {
@@ -405,7 +401,7 @@ namespace DS
                     Address = "רחוב:מעגלות הרב פרדס  עיר: ירושלים רציף  ",
                      Latitude=31.840279,
                     Longtitude=35.246272,
-                    
+
                 },
                 new Stations
                 {
@@ -483,7 +479,7 @@ namespace DS
                     Name = "הרב הרצוג/שח''ל ",
                     Address = "רחוב:הרב הרצוג  עיר: ירושלים רציף",
                     StationExist=true,
-                   
+
                      Latitude=31.761447,
                     Longtitude=35.199936,
 
@@ -494,7 +490,7 @@ namespace DS
                     Name = "פרץ ברנשטיין/נזר דוד ",
                     Address = "רחוב:הרב הרצוג  עיר: ירושלים רציף",
                     StationExist=true,
-                   
+
                      Latitude=31.759186,
                     Longtitude=35.189336,
                 },
@@ -506,7 +502,7 @@ namespace DS
             Name = "פרץ ברנשטיין/נזר דוד",
             Address = " רחוב:פרץ ברנשטיין 56 עיר: ירושלים ",
             StationExist=true,
-           
+
              Latitude=31.759121,
                     Longtitude=35.189178,
 
@@ -517,7 +513,7 @@ namespace DS
             Name = "מוזיאון ישראל/רופין",
             Address = "  רחוב:דרך רופין  עיר: ירושלים ",
             StationExist=true,
-           
+
              Latitude=31.774484,
                     Longtitude=35.204882,
 
@@ -529,7 +525,7 @@ namespace DS
             Name = "הרצוג/טשרניחובסקי",
             Address = "   רחוב:הרב הרצוג 21  עיר: ירושלים  ",
             StationExist=true,
-         
+
              Latitude=31.769609,
                     Longtitude=35.209732,
 
@@ -550,7 +546,7 @@ namespace DS
                     Name = "מרכז סולם/סורוצקין ",
                     Address = " רחוב:הרב סורוצקין 13 עיר: ירושלים",
                     StationExist=true,
-                 
+
                      Latitude=31.796033,
                     Longtitude=35.206094,
 
@@ -561,7 +557,7 @@ namespace DS
                     Name = "אוהל דוד/סורוצקין ",
                     Address = "  רחוב:הרב סורוצקין 9 עיר: ירושלים",
                     StationExist=true,
-                   
+
                      Latitude=31.794958,
                     Longtitude=35.205216,
 
@@ -572,10 +568,10 @@ namespace DS
                     Name = "מרכז סולם/סורוצקין ",
                     Address = "  רחוב:הרב סורוצקין 28 עיר: ירושלים",
                     StationExist=true,
-                   
+
                      Latitude=31.79617,
                     Longtitude=35.206158,
-                    
+
                 }
 
 
@@ -824,7 +820,7 @@ namespace DS
                 FirstStationCode=73,
                 LastStationCode=89,
                 Area=DO.AREA.CENTER,
-                
+
                 LineExist=true,
                 },
 
@@ -837,8 +833,8 @@ namespace DS
                 Area=DO.AREA.GENERAL,
                 LineExist=true,
                 },
-               
-                
+
+
                 new Line
                 {
                 IdNumber = ++DS.Config.idLineCounter,
@@ -1034,7 +1030,7 @@ namespace DS
                  #endregion LineTrip
             };
 
-            
+
             ListUsers = new List<User>
             {
                #region User
@@ -1074,7 +1070,7 @@ namespace DS
                 },
                  #endregion User
             };
-            
+
 
             ListLineStations = new List<LineStation>
             {
@@ -2275,8 +2271,8 @@ namespace DS
 
                 },
 
-      
-    
+
+
                 new AdjacentStations
                 {
                     Station1=1512,

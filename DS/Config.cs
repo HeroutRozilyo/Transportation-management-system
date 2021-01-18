@@ -1,19 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DS
+﻿namespace DS
 {
     public static class Config
     {
         //for Line
-       public static int idLineCounter;
+        public static int idLineCounter;
         //for trip uses
-      public  static int tripUser;
+        public static int tripUser;
         //for bus trip
-      public  static int tripBus ;
+        public static int tripBus;
 
 
         static Config()

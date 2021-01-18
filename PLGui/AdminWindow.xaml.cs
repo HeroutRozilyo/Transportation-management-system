@@ -1,18 +1,7 @@
 ﻿using BlAPI;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace PLGui
 {
@@ -28,7 +17,7 @@ namespace PLGui
         {
             InitializeComponent();
 
-            
+
         }
 
         public AdminWindow(IBL _bl, BO.User users)
@@ -52,10 +41,10 @@ namespace PLGui
 
         private void frame_Navigated(object sender, System.Windows.Navigation.NavigationEventArgs e)
         {
-            
+
         }
         //
-        
+
 
         private void buses_Click(object sender, RoutedEventArgs e)
         {
@@ -69,32 +58,32 @@ namespace PLGui
 
         private void station_Click(object sender, RoutedEventArgs e)
         {
-            frame.Content = (new  StationWindowP(bl));
+            frame.Content = (new StationWindowP(bl));
         }
 
-     
+
 
         private void user_Click_1(object sender, RoutedEventArgs e)
         {
-            UserWindow userWindow = new UserWindow(bl,userNow);
+            UserWindow userWindow = new UserWindow(bl, userNow);
             userWindow.Show();
         }
 
         private void Back_Click(object sender, RoutedEventArgs e)
         {
-            if(frame.CanGoBack)
-            frame.GoBack();
+            if (frame.CanGoBack)
+                frame.GoBack();
         }
 
         private void forward_Click(object sender, RoutedEventArgs e)
         {
-            if(frame.CanGoForward)
-            frame.GoForward();
+            if (frame.CanGoForward)
+                frame.GoForward();
         }
 
         private void Disengagement_Click(object sender, RoutedEventArgs e)
         {
-           
+
             LoginWindow wnd = new LoginWindow(bl);
             this.Close();
             wnd.Show();
@@ -115,7 +104,7 @@ namespace PLGui
             addUser = new AddUser(bl);
 
             bool? result = addUser.ShowDialog();
-            
+
         }
     }
 }

@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace dotNet5781_00_4789_9647
 {
     partial class Program
     {
-   
+
 
         static void Main(string[] args)
         {
@@ -16,9 +12,9 @@ namespace dotNet5781_00_4789_9647
             Welcome9647();
             Console.ReadKey();
 
-            
+
         }
-       private static void Welcome4789()
+        private static void Welcome4789()
         {
             Console.Write("Enter your name: ");
             string name = Console.ReadLine();
@@ -27,5 +23,5 @@ namespace dotNet5781_00_4789_9647
         static partial void Welcome9647();
 
     }
-    
+
 }

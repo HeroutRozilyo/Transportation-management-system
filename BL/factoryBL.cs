@@ -1,9 +1,4 @@
 ﻿using BL;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BlAPI
 {
@@ -11,8 +6,8 @@ namespace BlAPI
     {
         public static IBL GetBl()
         {
-            return   BlImp.Instance;
-     
+            return BlImp.Instance;
+
         }
 
     }

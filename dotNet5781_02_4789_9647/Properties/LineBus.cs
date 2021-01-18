@@ -1,20 +1,16 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Policy;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace dotNet5781_02_4789_9647.Properties
 {
     public class LineBus : BusStation, IComparable<LineBus>
     {
-       private static Random r = new Random();
+        private static Random r = new Random();
 
 
-       private List<BusStation> busstations;  //list that keep all the station that the bus have
-       public List<BusStation> BusStations
+        private List<BusStation> busstations;  //list that keep all the station that the bus have
+        public List<BusStation> BusStations
         {
             get
             {
@@ -23,10 +19,10 @@ namespace dotNet5781_02_4789_9647.Properties
             }
         }
 
-       public int NumberID { get; set; }         //the number line
-       public BusStation FirstStation { get; private set; }         //firststation
-       public BusStation LastStation { get; private set; }       //last station
-       public Zone Zone { get; set; }        //area at the country
+        public int NumberID { get; set; }         //the number line
+        public BusStation FirstStation { get; private set; }         //firststation
+        public BusStation LastStation { get; private set; }       //last station
+        public Zone Zone { get; set; }        //area at the country
 
         //------------------------------
         //constructors 
@@ -50,10 +46,10 @@ namespace dotNet5781_02_4789_9647.Properties
 
         }
 
-       
-        
 
-        public LineBus() :base()        //deafult constructor
+
+
+        public LineBus() : base()        //deafult constructor
         {
             busstations = new List<BusStation>();
             NumberID = 0;
@@ -69,7 +65,7 @@ namespace dotNet5781_02_4789_9647.Properties
             //Console.WriteLine("In this line there are " + busstations.Count + " stations" + ", where you want to add this station? [1-" + (busstations.Count + 1) + "]\n");
             // int index = (int.Parse(Console.ReadLine()) - 1);
 
-            int index = r.Next(1, 2) - 1;      
+            int index = r.Next(1, 2) - 1;
             if (index == 0)     //if we need add the station at the begin
             {
 
@@ -103,19 +99,19 @@ namespace dotNet5781_02_4789_9647.Properties
 
 
         public void addLastAtLineBus(BusStation busStation) //add bus to the last place at the list
-        { 
+        {
             busstations.Add(busStation);
             LastStation = busstations[busstations.Count - 1];
         }
 
-       
+
 
         public void addFirstAtLineBus(BusStation bus) //add bus to the first place at the list
         {
             //its the first station so the distance and the travel time from the prestation is zero
             bus.TravelTime = TimeSpan.Zero;
-            bus.Distance = 0;   
-            
+            bus.Distance = 0;
+
             busstations.Insert(0, bus);
             FirstStation = busstations[0];
             busstations[1].TravelTime = TimeSpan.FromMinutes(Distance / 6000);
@@ -176,7 +172,7 @@ namespace dotNet5781_02_4789_9647.Properties
             busstations[0].Distance = 0;//there are not have station befor
         }
 
-       
+
 
 
         public override string ToString()
@@ -190,7 +186,7 @@ namespace dotNet5781_02_4789_9647.Properties
 
             }
             result += busstations[i].BusStationKey;
-            return "Bus Line: " + NumberID+ " ,Area: " + Zone+ " ,Statins of the bus: " + result;
+            return "Bus Line: " + NumberID + " ,Area: " + Zone + " ,Statins of the bus: " + result;
 
         }
 
@@ -200,9 +196,9 @@ namespace dotNet5781_02_4789_9647.Properties
         {
 
             int i = 0;
-            for (; i < busstations.Count ; i++)
+            for (; i < busstations.Count; i++)
             {
-                if(busstations[i]==bStation)
+                if (busstations[i] == bStation)
                 {
                     return i;
                 }
@@ -252,12 +248,12 @@ namespace dotNet5781_02_4789_9647.Properties
 
         public double distanceBetweenStations(BusStation bStation1, BusStation bStation2)
         {
-            double sum=0;
+            double sum = 0;
             int begin = find(bStation1);
-            int end= find(bStation2);
-            for(int i=begin+1;i<=end;i++)
+            int end = find(bStation2);
+            for (int i = begin + 1; i <= end; i++)
             {
-                sum+=busstations[i].Distance;
+                sum += busstations[i].Distance;
             }
             return sum;
         }
@@ -279,23 +275,23 @@ namespace dotNet5781_02_4789_9647.Properties
         {
             int begin = find(bStation1);
             int end = find(bStation2);
-            LineBus temp=new LineBus();
+            LineBus temp = new LineBus();
             int j = 0;
-            for(int i=begin;i<=end;i++)
+            for (int i = begin; i <= end; i++)
             {
                 temp.busstations.Insert(j, busstations[i]);
 
-                 j++;
+                j++;
             }
 
             temp.NumberID = this.NumberID;
             return temp;
         }
 
-    
+
         public TimeSpan TravelLine(LineBus BLine1)
         {
-           TimeSpan timeSpan = stationTravelTime(BLine1.busstations[0], BLine1.busstations[BLine1.busstations.Count()-1]);
+            TimeSpan timeSpan = stationTravelTime(BLine1.busstations[0], BLine1.busstations[BLine1.busstations.Count() - 1]);
             return timeSpan;
         }
 
@@ -303,8 +299,8 @@ namespace dotNet5781_02_4789_9647.Properties
         {
             int t = this.CompareTo(obj);
             if (t < 0) return obj;
-            else  return this;
-            
+            else return this;
+
         }
 
         public int CompareTo(LineBus obj)

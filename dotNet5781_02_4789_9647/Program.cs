@@ -2,8 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 
 
@@ -19,55 +17,55 @@ namespace dotNet5781_02_4789_9647
 
         static void restertStationn(ref List<BusStation> bStation, ref BusCompany company)
         {
-            for(int i=0;i<40;i++)       //restart stations
+            for (int i = 0; i < 40; i++)       //restart stations
             {
-                string name = string.Format("station " +(i+1)); 
+                string name = string.Format("station " + (i + 1));
                 bStation.Add(new BusStation((i + 1), name));
             }
 
-            for(int i=0;i<10;i++)       //restart 10 lines with first station and last station
+            for (int i = 0; i < 10; i++)       //restart 10 lines with first station and last station
             {
-                company.ComanyBus.Add( new LineBus(bStation[i],bStation[i+1])); //now we restart 10 buses
+                company.ComanyBus.Add(new LineBus(bStation[i], bStation[i + 1])); //now we restart 10 buses
             }
-            for(int k=1;k<=3;k++)       //add stations to the lines
+            for (int k = 1; k <= 3; k++)       //add stations to the lines
             {
-                
-               int j = 10 * k;
+
+                int j = 10 * k;
                 for (int i = 0; i < 10; i++)
                 {
-                
+
                     company.ComanyBus[i].addAtLineBus(bStation[j]);
                     j++;
                 }
             }
-            for(int j=5;j<15;j++) // now will pass at 10 stations more than 1 line bus.
-            { 
-                company.ComanyBus[j-5].addAtLineBus(bStation[j]);
+            for (int j = 5; j < 15; j++) // now will pass at 10 stations more than 1 line bus.
+            {
+                company.ComanyBus[j - 5].addAtLineBus(bStation[j]);
             }
         }
 
         enum options
         {
-            ADD_NEW_LINE=1,ADD_STATION,DELETE_LINE,DELETE_STATION,SEARCH_LINE_AT_STATION,SEARCH_PATH,PRINT_LINES,PRINT_STATIONS,EXIST=-1
+            ADD_NEW_LINE = 1, ADD_STATION, DELETE_LINE, DELETE_STATION, SEARCH_LINE_AT_STATION, SEARCH_PATH, PRINT_LINES, PRINT_STATIONS, EXIST = -1
         }
 
-       static void print_lines(BusCompany egged)        //func that print all the lines that we have
+        static void print_lines(BusCompany egged)        //func that print all the lines that we have
         {
             Console.WriteLine("The lines in our company is: ");
-            for(int i=0;i<egged.ComanyBus.Count();i++)
+            for (int i = 0; i < egged.ComanyBus.Count(); i++)
             {
                 Console.WriteLine(egged.ComanyBus[i].NumberID);
             }
         }
 
 
-        static void print_stations_At_Linee(BusCompany egged,int index)     //print all the station at specific line
+        static void print_stations_At_Linee(BusCompany egged, int index)     //print all the station at specific line
         {
-           
-            for(int i=0;i<egged[index].BusStations.Count;i++)
+
+            for (int i = 0; i < egged[index].BusStations.Count; i++)
             {
                 Console.WriteLine(egged[index].BusStations[i]);
-                
+
             }
 
         }
@@ -86,7 +84,7 @@ namespace dotNet5781_02_4789_9647
 
         static int search(int line, BusCompany egged)       //return the index of the line at the company
         {
-            for(int i=0;i<egged.ComanyBus.Count;i++)
+            for (int i = 0; i < egged.ComanyBus.Count; i++)
             {
                 if (egged[i].NumberID == line)
                     return i;
@@ -108,12 +106,12 @@ namespace dotNet5781_02_4789_9647
         //                Console.WriteLine(egged[i].NumberID);
         //                break;
         //            }
-                    
+
         //        }
         //    }
         //}
 
-        static void time_path(BusCompany egged,int code1,int code2)     //check the travel time between 2 stations. check all the path at the lines that move at those stations
+        static void time_path(BusCompany egged, int code1, int code2)     //check the travel time between 2 stations. check all the path at the lines that move at those stations
         {
             //help variable
 
@@ -130,22 +128,22 @@ namespace dotNet5781_02_4789_9647
 
                 begin = item.find_Station(code1);
                 end = item.find_Station(code2);
-                if (begin!=null&&end!=null)     //if the bus path at those stations
+                if (begin != null && end != null)     //if the bus path at those stations
                 {
-                  if(item.find(begin)<item.find(end))       //check if the staion at the Proper order
+                    if (item.find(begin) < item.find(end))       //check if the staion at the Proper order
                     {
                         b = item.pathbetweenStation(begin, end);        //calucate the time trval between the stations
                         temp.addAtBusConpany(b);        //add this bus to the list that keep the data
                     }
-                  
+
                 }
 
             }
-             temp.sortBus();        //sort the lines that move between these to stations. and sort them according to the travel time between the stations.
-            
-            foreach(LineBus item in temp)
+            temp.sortBus();        //sort the lines that move between these to stations. and sort them according to the travel time between the stations.
+
+            foreach (LineBus item in temp)
             {
-                Console.WriteLine("line number: {0}, travel time between the two stations is: {1} ", item.NumberID , item.TravelLine(item));
+                Console.WriteLine("line number: {0}, travel time between the two stations is: {1} ", item.NumberID, item.TravelLine(item));
             }
 
 
@@ -164,7 +162,7 @@ namespace dotNet5781_02_4789_9647
         //------------------------------------
         //functions of the main
 
-      static  void func_addline(ref BusCompany egged, ref List<BusStation> stations)        //to add line to the companey
+        static void func_addline(ref BusCompany egged, ref List<BusStation> stations)        //to add line to the companey
         {
             Console.WriteLine("Please enter number of the new bus");
             int number = int.Parse(Console.ReadLine());
@@ -183,7 +181,7 @@ namespace dotNet5781_02_4789_9647
 
                 //-----------------------
                 //in order to send 2 Busstation variable
-                
+
                 BusStation temp1 = new BusStation(find_station(stations, code1));
                 temp1.BusStationKey = code1;
                 BusStation temp2 = new BusStation(find_station(stations, code2));
@@ -196,35 +194,35 @@ namespace dotNet5781_02_4789_9647
         }
         static void func_addstation(ref BusCompany egged, ref List<BusStation> stations)        //func to add station to line
         {
-           
 
 
-                Console.WriteLine("Please enter number of the bus");
-                print_lines(egged);
-                int number = int.Parse(Console.ReadLine());
-                Console.WriteLine("Please enter code station");
-                int code = int.Parse(Console.ReadLine());
-                string name = "station" + code;
 
-                if (egged.findLine_BusConpany(number))     //if the line exsis
+            Console.WriteLine("Please enter number of the bus");
+            print_lines(egged);
+            int number = int.Parse(Console.ReadLine());
+            Console.WriteLine("Please enter code station");
+            int code = int.Parse(Console.ReadLine());
+            string name = "station" + code;
+
+            if (egged.findLine_BusConpany(number))     //if the line exsis
+            {
+
+                BusStation temp = new BusStation(code, name);
+                int index = search(number, egged);       //find the index of the line
+                bool flag = egged[index].findStion(code);       //find if the line have this atation
+                if (!flag)      //if not have this station
                 {
-
-                    BusStation temp = new BusStation(code, name);
-                    int index = search(number, egged);       //find the index of the line
-                    bool flag = egged[index].findStion(code);       //find if the line have this atation
-                    if (!flag)      //if not have this station
-                    {
-                        egged[index].addAtLineBus(temp);        //add
-                    }
-                    else
-                    { throw new ArgumentException(string.Format("The station is allready exsis  {0}  in this line", temp)); }
-
+                    egged[index].addAtLineBus(temp);        //add
                 }
-
                 else
-                { throw new ArgumentException(string.Format("ERROR! The line {0} is not exsis", number)); }
-            
-         //
+                { throw new ArgumentException(string.Format("The station is allready exsis  {0}  in this line", temp)); }
+
+            }
+
+            else
+            { throw new ArgumentException(string.Format("ERROR! The line {0} is not exsis", number)); }
+
+            //
 
 
 
@@ -239,9 +237,9 @@ namespace dotNet5781_02_4789_9647
 
             BusCompany egged = new BusCompany();
             List<BusStation> stations = new List<BusStation>();
-            restertStationn(ref stations,ref egged);
+            restertStationn(ref stations, ref egged);
 
-       
+
             int choice;
             do
             {
@@ -256,9 +254,9 @@ namespace dotNet5781_02_4789_9647
                         {
                             try
                             {
-                                func_addline(ref egged,ref stations);
+                                func_addline(ref egged, ref stations);
                             }
-                            catch(Exception ex)
+                            catch (Exception ex)
                             {
                                 Console.WriteLine(ex.Message);
                             }
@@ -408,7 +406,8 @@ namespace dotNet5781_02_4789_9647
                     case (int)options.EXIST:
                         {
                             Console.WriteLine("BYE");
-                        }break;
+                        }
+                        break;
                     default:
                         Console.WriteLine("ERROE!");
                         break;
@@ -416,7 +415,7 @@ namespace dotNet5781_02_4789_9647
 
 
 
-            } while (choice != (int)options.EXIST) ; 
+            } while (choice != (int)options.EXIST);
 
 
         }

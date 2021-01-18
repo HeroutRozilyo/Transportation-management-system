@@ -1,17 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 
 namespace doNet5781_03B_4789_9647
@@ -19,23 +9,23 @@ namespace doNet5781_03B_4789_9647
     /// <summary>
     /// Interaction logic for ListDrivers.xaml
     /// </summary>
-    
+
     public partial class ListDrivers : Window
     {
-        private ObservableCollection<Drivers> driverBus= new ObservableCollection<Drivers>() ;
+        private ObservableCollection<Drivers> driverBus = new ObservableCollection<Drivers>();
 
         private ObservableCollection<Bus> buses = new ObservableCollection<Bus>();
-      
+
 
         public ListDrivers() //defult constructor
         {
-            InitializeComponent();        
+            InitializeComponent();
             allDriver.Items.Refresh();
 
         }
 
 
-        public ListDrivers(ObservableCollection<Drivers> drivers ,ObservableCollection<Bus>egged)  //constructor that get the list of driver and the list of buses
+        public ListDrivers(ObservableCollection<Drivers> drivers, ObservableCollection<Bus> egged)  //constructor that get the list of driver and the list of buses
         {
             InitializeComponent();
             allDriver.ItemsSource = drivers;
@@ -54,11 +44,11 @@ namespace doNet5781_03B_4789_9647
 
         public void check()//find who the drivers for each bus
         {
-            
-            for(int i=0;i<buses.Count;i++)
+
+            for (int i = 0; i < buses.Count; i++)
             {
                 allDriver.Items.Refresh();
-                for (int j=0;j<driverBus.Count;j++)
+                for (int j = 0; j < driverBus.Count; j++)
                 {
                     allDriver.Items.Refresh();
                     if (buses[i].NameDriver == driverBus[j].Name1)
@@ -67,9 +57,9 @@ namespace doNet5781_03B_4789_9647
 
                         int num = buses[i].TimeToEndWork;
                         driverBus[j].help(num);
-                         
-                        
-                      
+
+
+
                         allDriver.Items.Refresh();
                     }
                 }
@@ -90,7 +80,7 @@ namespace doNet5781_03B_4789_9647
         private void TakeAbreak_Click(object sender, RoutedEventArgs e) //send the driver to break
         {
             ((sender as Button).DataContext as Drivers).TakeBreak();
-           
+
             allDriver.Items.Refresh();
         }
 
@@ -99,7 +89,7 @@ namespace doNet5781_03B_4789_9647
 
             try
             {
-                 Add_driver wnd = new Add_driver();
+                Add_driver wnd = new Add_driver();
 
 
                 bool? result = wnd.ShowDialog();
@@ -108,14 +98,14 @@ namespace doNet5781_03B_4789_9647
 
                     int a = wnd.driver.Id;
 
-                    if (!findriverID(driverBus,a)) //find if the ID already exsis
+                    if (!findriverID(driverBus, a)) //find if the ID already exsis
                     {
                         driverBus.Add(wnd.driver);
                         allDriver.Items.Refresh();
                     }
 
                     this.allDriver.Items.Refresh();
-                    
+
                 }
                 allDriver.Items.Refresh();
             }
@@ -135,7 +125,7 @@ namespace doNet5781_03B_4789_9647
         private void close_Click(object sender, RoutedEventArgs e) //close the window
         {
             Visibility = Visibility.Hidden;
-            
+
             this.Close();
 
         }
@@ -149,13 +139,13 @@ namespace doNet5781_03B_4789_9647
             {
                 if (driver[i].Id == num)
                     throw new ArgumentException(String.Format("{0} Number Id allready exsis", num));
-              
+
             }
-            
+
             return false;
-           
-                
-            
+
+
+
         }
 
         private void allDriver_SelectionChanged_1(object sender, SelectionChangedEventArgs e)

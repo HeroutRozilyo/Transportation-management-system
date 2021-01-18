@@ -1,19 +1,5 @@
 ﻿using BlAPI;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace PLGui
 {
@@ -23,9 +9,9 @@ namespace PLGui
     public partial class UserWindow : Window
     {
         private IBL bl;
-        private BO.User userNow=new BO.User();
-        
-      
+        private BO.User userNow = new BO.User();
+
+
         public UserWindow()
         {
             InitializeComponent();
@@ -38,13 +24,13 @@ namespace PLGui
             this.bl = bl;
             userNow = users;
             NameTextBlock.Text = users.UserName;
-            
+
         }
-      
+
 
         private void Back_Click(object sender, RoutedEventArgs e)
         {
-            if(frame.CanGoBack)
+            if (frame.CanGoBack)
             {
                 frame.GoBack();
             }

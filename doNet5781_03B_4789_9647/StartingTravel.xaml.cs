@@ -1,16 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 
 namespace doNet5781_03B_4789_9647
@@ -22,16 +14,16 @@ namespace doNet5781_03B_4789_9647
     {
         Bus temp = new Bus();
         Random r = new Random();
-      
+
         public StartingTravel()
         {
             InitializeComponent();
         }
-        
+
 
         //func that enable to insert onlly digite to text lable 
         private void TextBox_OnlyNumbers_PreviewKeyDown(object sender, KeyEventArgs e)
-        { 
+        {
             TextBox text = sender as TextBox;
             if (text == null) return;
             if (e == null) return;
@@ -43,7 +35,7 @@ namespace doNet5781_03B_4789_9647
             //allow list of system keys 
             if (e.Key == Key.Escape || e.Key == Key.Back || e.Key == Key.Delete ||
                 e.Key == Key.CapsLock || e.Key == Key.LeftShift || e.Key == Key.Home
-             || e.Key == Key.End || e.Key == Key.Insert || e.Key == Key.Down || e.Key == Key.Right||e.Key== Key.OemPeriod)
+             || e.Key == Key.End || e.Key == Key.Insert || e.Key == Key.Down || e.Key == Key.Right || e.Key == Key.OemPeriod)
                 return;
 
             char c = (char)KeyInterop.VirtualKeyFromKey(e.Key);
@@ -55,7 +47,7 @@ namespace doNet5781_03B_4789_9647
             if (Char.IsDigit(c))
                 if (!(Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightAlt)))
                     return; //let this key be written inside the textbox
-            
+
             //forbid letters and signs (#,$, %, ...)
             e.Handled = true; //ignore this key. mark event as handled, will not be routed to other controls
             return;
@@ -69,7 +61,7 @@ namespace doNet5781_03B_4789_9647
         }
 
 
-   
+
         //when the customer do enter so he finish to insert new data and we come here
         private void OnKeyDownHandler(object sender, KeyEventArgs e)
         {
@@ -77,15 +69,15 @@ namespace doNet5781_03B_4789_9647
             if (e.Key == Key.Return)  //if enter       
             {
                 bool thereAreDigit = false;
-                for(int i=0;i< (numOfKm.Text.Count());i++)
+                for (int i = 0; i < (numOfKm.Text.Count()); i++)
                 {
                     if (char.IsDigit(numOfKm.Text[i]))
                     {
                         thereAreDigit = true;
                         break;
                     }
-                }    
-                if(thereAreDigit)
+                }
+                if (thereAreDigit)
                 {
                     double a = double.Parse(numOfKm.Text); //change the value of the new km to be number
 
@@ -109,7 +101,7 @@ namespace doNet5781_03B_4789_9647
                         if (temp.Fuel - a <= 0)
                         {
                             MessageBox.Show("There is not enough fuel of the bus for this travel ", "ERROR FUEL", MessageBoxButton.OK, MessageBoxImage.Information);
-                           
+
                         }
                         if (temp.newKm_from_LastTreatment + a > 20000)
                         {
@@ -124,10 +116,10 @@ namespace doNet5781_03B_4789_9647
                 }
                 else MessageBox.Show("please enter Km \n to cancle pick ביטול", "ERROR KM", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
                 this.Close();
-            
 
 
-           }
+
+            }
 
         }
 

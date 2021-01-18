@@ -1,13 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Serialization;
-using System.Xml.Linq;
 using System.IO;
-using DALAPI;
-using System.Xml;
+using System.Xml.Linq;
+using System.Xml.Serialization;
 
 namespace DL
 {
@@ -40,7 +35,7 @@ namespace DL
         {
             XElement result = new XElement("LineTrip",
                               new XElement("KeyId", st.KeyId),
-                              new XElement("Frequency",  st.Frequency),
+                              new XElement("Frequency", st.Frequency),
                               new XElement("StartAt", st.StartAt.ToString()),
                               new XElement("FinishAt", st.FinishAt.ToString()),
                               new XElement("TripLineExist", st.TripLineExist));

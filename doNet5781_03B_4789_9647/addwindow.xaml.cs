@@ -1,17 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using System.Resources;
 
 
 namespace doNet5781_03B_4789_9647
@@ -74,7 +64,7 @@ namespace doNet5781_03B_4789_9647
         }
 
 
-      
+
         //func that enable insert onlly number to the text lable.
         private void licenseTextBox_PreviewKeyDown(object sender, KeyEventArgs e)
         {
@@ -112,7 +102,7 @@ namespace doNet5781_03B_4789_9647
 
         }
     }
-    
+
 }
 
 

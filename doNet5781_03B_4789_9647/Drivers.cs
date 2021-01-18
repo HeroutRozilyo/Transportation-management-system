@@ -1,15 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
-using System.Windows.Media;
-using System.Threading;
 using System.ComponentModel;
-using System.Windows;
-using System.Diagnostics;
-using Prometheus;
+using System.Threading;
 
 namespace doNet5781_03B_4789_9647
 {
@@ -20,7 +11,7 @@ namespace doNet5781_03B_4789_9647
         /// </summary>
         /// 
         BackgroundWorker worker = new BackgroundWorker();
-        
+
 
         static Random r = new Random();
 
@@ -61,7 +52,8 @@ namespace doNet5781_03B_4789_9647
         {
             get { return name; }
             set
-            { name = value;
+            {
+                name = value;
                 if (PropertyChanged != null)
                     PropertyChanged(this, new PropertyChangedEventArgs("Name1"));
             }
@@ -209,15 +201,15 @@ namespace doNet5781_03B_4789_9647
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-         int timeToEndWork;
+        int timeToEndWork;
         public int TimeToEndWork
         {
             get { return timeToEndWork; }
             set { timeToEndWork = 0; }
         }
-    
 
-       
+
+
 
         public bool isTimerRun;
 
@@ -289,7 +281,7 @@ namespace doNet5781_03B_4789_9647
         private void Worker_DoWork(object sender, DoWorkEventArgs e)
         {
 
-            
+
             int length = (int)e.Argument;
             timeToEndWork = length;
             isTimerRun = true;
@@ -300,8 +292,8 @@ namespace doNet5781_03B_4789_9647
             {
 
                 Thread.Sleep(1000);
-                if(length!=0)
-                worker.ReportProgress(i * 100 / length);
+                if (length != 0)
+                    worker.ReportProgress(i * 100 / length);
 
             }
         }
@@ -321,7 +313,7 @@ namespace doNet5781_03B_4789_9647
 
             isTimerRun = false;
             enable = true;
-             work = 0;
+            work = 0;
             Time_left = "";
             timeToEndWork = 0;
             //
@@ -343,7 +335,7 @@ namespace doNet5781_03B_4789_9647
                 StringTraveling = "Available for travel";
 
         }
-     
+
 
 
 
@@ -359,4 +351,4 @@ namespace doNet5781_03B_4789_9647
 
 }
 
-    
+

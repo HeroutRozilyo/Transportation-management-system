@@ -3,19 +3,10 @@ using BO;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace PLGui
 {
@@ -44,12 +35,12 @@ namespace PLGui
         int rate;
         public event PropertyChangedEventHandler PropertyChanged;
         public Timer timer = new Timer();
-        private List<LineTiming> lineAtStation=new List<LineTiming>();
+        private List<LineTiming> lineAtStation = new List<LineTiming>();
         private List<int> goodLine = new List<int>();
 
         public RealTimeStation()
         {
-          InitializeComponent();
+            InitializeComponent();
         }
 
         public RealTimeStation(IBL bl, Station stationData1)
@@ -59,9 +50,9 @@ namespace PLGui
             this.bl = bl;
             this.stationData1 = stationData1;
 
-           
 
-          
+
+
 
             BoolStart = true;
             timerWorker = new BackgroundWorker();
@@ -69,7 +60,7 @@ namespace PLGui
             timerWorker.DoWork += (s, e) =>
             {
                 workerThread = Thread.CurrentThread;
-                
+
                 bl.StartSimulator(startTimeSimulator, rate, (time) => timerWorker.ReportProgress(0, time));
                 while (!timerWorker.CancellationPending) try { Thread.Sleep(1000000); }
                     catch (ThreadInterruptedException a)
@@ -94,16 +85,17 @@ namespace PLGui
         /// </summary>
         private void timer_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-          
+
             TimeSpan timeSpan = (TimeSpan)e.UserState;//userState-  member to pass more information back to the UI for updating on a progressChanged call
             TimerTextBox.Text = String.Format("{0:D2}:{1:D2}:{2:D2}", timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds);
 
             lineAtStation = bl.GetLineStationLineTimer(stationData1, timeSpan).ToList();
             //lineAtStationtiming.Add(lineAtStation[0]);
-           
-           
+
+
             int ListCount = (lineAtStation.Count() > 5) ? 5 : lineAtStation.Count();
             RealTimeStationLine.ItemsSource = lineAtStation.GetRange(0, ListCount);
+
         }
 
         private void startButton_Click(object sender, RoutedEventArgs e)
@@ -139,11 +131,12 @@ namespace PLGui
         {
             if (timerWorker.IsBusy)
             {
+                workerThread.Abort();
                 timerWorker.CancelAsync();
                 workerThread.Interrupt();
-                workerThread.Abort();
+                bl.StopSimulator();
             }
-            
+
         }
 
     }

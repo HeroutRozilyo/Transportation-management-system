@@ -3,17 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace PLGui
 {
@@ -27,7 +19,7 @@ namespace PLGui
 
         private ObservableCollection<BO.Line> egged = new ObservableCollection<BO.Line>();
         private ObservableCollection<object> lineStationOfLine = new ObservableCollection<object>();
-        private ObservableCollection<BO.Line> GENERAL= new ObservableCollection<BO.Line>();
+        private ObservableCollection<BO.Line> GENERAL = new ObservableCollection<BO.Line>();
         private ObservableCollection<BO.Line> SOUTH = new ObservableCollection<BO.Line>();
         private ObservableCollection<BO.Line> CENTER = new ObservableCollection<BO.Line>();
         private ObservableCollection<BO.Line> JERUSALEM = new ObservableCollection<BO.Line>();
@@ -67,7 +59,7 @@ namespace PLGui
 
         private void RefreshLine()
         {
-         
+
             switch (area)
             {
                 case BO.AREA.CENTER:
@@ -101,7 +93,7 @@ namespace PLGui
                         break;
                     }
             }
-                    ListOfLine.ItemsSource = egged;
+            ListOfLine.ItemsSource = egged;
             ListOfLine.Items.Refresh();
 
 
@@ -157,20 +149,20 @@ namespace PLGui
                 if (group.Key == BO.AREA.YOSH)
                     foreach (var line in group)
                         YOSH.Add(line);
-                
-               
+
+
             }
         }
 
         private void comboBoxArea_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-           
+
             listArea();
-             area = (BO.AREA)(comboBoxArea.SelectedItem);
+            area = (BO.AREA)(comboBoxArea.SelectedItem);
 
             RefreshLine();
             RefreshStationListView();
-           
+
         }
 
         private void ListOfLine_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -194,7 +186,7 @@ namespace PLGui
                             var fxElt = sender as FrameworkElement; //get the licence of the bus to refulling. 
                             BO.Line lineToDelete = fxElt.DataContext as BO.Line;
                             bl.DeleteLine(lineToDelete.IdNumber);
-                          
+
                             line = null;
                             listArea();
                             RefreshLine();
@@ -244,13 +236,13 @@ namespace PLGui
             {
                 if (line != null)
                     bl.UpdateLine(line);
-                comboBoxArea.SelectedItem=line.Area;
+                comboBoxArea.SelectedItem = line.Area;
                 ListOfLine.SelectedItem = line;
-               
+
 
                 RefreshLine();
                 RefreshStationListView();
-               
+
                 // comboBoxArea.SelectedIndex = index;
 
 
@@ -265,22 +257,22 @@ namespace PLGui
 
         private void DeleteStationLine_Click(object sender, RoutedEventArgs e)
         {
-          
+
             var fxElt = sender as FrameworkElement; //get the licence of the bus to refulling. 
             String ToDel = fxElt.DataContext.ToString();
             convertFromObbject(ToDel);
             //  BO.LineStation station=  
             bl.DeleteStation(line.IdNumber, TempLineStation.StationCode);
 
-    
 
 
-        
-            
+
+
+
 
 
             RefreshStationListView();
-       
+
         }
         BO.LineStation TempLineStation = new BO.LineStation();
         private void convertFromObbject(string StationLineData)
@@ -320,7 +312,7 @@ namespace PLGui
         {
             AddLine addStationTotheLine = new AddLine(line, bl);
             bool? result = addStationTotheLine.ShowDialog();
-            if (result ==true)
+            if (result == true)
             {
                 RefreshStationListView();
             }
@@ -341,7 +333,7 @@ namespace PLGui
         {
 
             System.Windows.Data.CollectionViewSource lineTripViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("lineTripViewSource")));
-         
+
         }
 
         private void tripLineExistCheckBox_Checked(object sender, RoutedEventArgs e)
@@ -351,7 +343,7 @@ namespace PLGui
 
                 if (finishAtTextBox.Text != "" && frequencyTextBox.Text != "" && frequencyTextBox.Text != "" && startAtTextBox.Text != "")
                 {
-                   
+
                     MessageBoxResult result = MessageBox.Show("?לשמור שינויים ", "הודעת מערכת", MessageBoxButton.YesNo, MessageBoxImage.Question);
                     switch (result)
                     {
@@ -362,7 +354,7 @@ namespace PLGui
                                 addLineTrip = NewLooz.DataContext as BO.LineTrip;
                                 addLineTrip.KeyId = line.IdNumber;
                                 if (addLineTrip.Frequency == 0) addLineTrip.FinishAt = addLineTrip.StartAt;
-                                    if (addLineTrip.FinishAt < addLineTrip.StartAt)
+                                if (addLineTrip.FinishAt < addLineTrip.StartAt)
                                 {
                                     int hour = 24 + addLineTrip.FinishAt.Hours;
                                     TimeSpan toChange = new TimeSpan(hour, 0, 0);
@@ -398,7 +390,7 @@ namespace PLGui
                 }
                 else
                 {
-                    MessageBoxResult result = MessageBox.Show("אנא מלא את כל השדות", "הודעת מערכת" , MessageBoxButton.OKCancel, MessageBoxImage.Error);
+                    MessageBoxResult result = MessageBox.Show("אנא מלא את כל השדות", "הודעת מערכת", MessageBoxButton.OKCancel, MessageBoxImage.Error);
                     switch (result)
                     {
                         case MessageBoxResult.OK:
@@ -423,7 +415,7 @@ namespace PLGui
                 NewLooz.DataContext = null;
                 NewLooz.Visibility = Visibility.Hidden;
                 Looz.Visibility = Visibility.Visible;
-             
+
                 RefreshStationListView();
 
 
@@ -435,7 +427,7 @@ namespace PLGui
             AddSchedules.Visibility = Visibility.Visible;
             NewLooz.Visibility = Visibility.Hidden;
             cancleTripLineAdd.IsChecked = false;
-           RefreshStationListView();
+            RefreshStationListView();
         }
 
         BO.LineTrip thisLooz = new BO.LineTrip();
@@ -454,7 +446,7 @@ namespace PLGui
             NewLooz.DataContext = thisLooz;
 
             NewLooz.Visibility = Visibility.Visible;
-           
+
 
         }
 
@@ -494,10 +486,10 @@ namespace PLGui
         {
             e.Handled = !e.Text.Any(x => Char.IsDigit(x) || ':'.Equals(x));
         }
-      
+
         private void AreaTextBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            
+
         }
     }
 }

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BO
 {
@@ -11,7 +7,7 @@ namespace BO
     {
         public int ID;
         public BadBusLicenceException() : base() { }
-        public BadBusLicenceException(string message,int licence) : base(message) => ID = licence;
+        public BadBusLicenceException(string message, int licence) : base(message) => ID = licence;
         public BadBusLicenceException(string message, Exception innerException) :
             base(message, innerException) => ID = ((DO.WrongLicenceException)innerException).Licence;
         public override string ToString() => base.ToString() + $",{ID} מספר רישוי שגוי   ";
@@ -34,9 +30,9 @@ namespace BO
         public int cordinate;
         public string cordinateS;
         public BadCoordinateException() : base() { }
-        public BadCoordinateException(string geo, string v) : base() =>cordinateS=geo;
+        public BadCoordinateException(string geo, string v) : base() => cordinateS = geo;
         public BadCoordinateException(int geo, string messege) : base(messege) => cordinate = geo;
-        public BadCoordinateException(int geo,int a, string messege) : base(messege) => cordinate = geo;
+        public BadCoordinateException(int geo, int a, string messege) : base(messege) => cordinate = geo;
         public BadCoordinateException(int geo, string messege, Exception innerException) : base(messege, innerException) => cordinate = geo;
         public override string ToString()
         {
@@ -60,7 +56,7 @@ namespace BO
     {
         public string NAME;
         public BadNameExeption() : base() { }
-        public BadNameExeption(string message, string name) : base(message) => NAME =name ;
+        public BadNameExeption(string message, string name) : base(message) => NAME = name;
         public BadNameExeption(string message, Exception innerException) :
             base(message, innerException) => NAME = ((DO.WrongNameExeption)innerException).Name;
         public override string ToString() => base.ToString() + $",{NAME}  שם משתמש לא חוקי ";

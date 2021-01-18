@@ -1,14 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
-using System.Windows.Media;
-using System.Threading;
 using System.ComponentModel;
-using System.Windows;
-using System.Diagnostics;
+using System.Threading;
 
 
 namespace doNet5781_03B_4789_9647
@@ -185,7 +177,7 @@ namespace doNet5781_03B_4789_9647
             }
         }
 
-   
+
 
 
 
@@ -245,7 +237,7 @@ namespace doNet5781_03B_4789_9647
         /// <summary>
         /// help method to our variebls
         /// </summary>
-            
+
         public DateTime Last_tratment() //update to the current date
         {
             lastTreat = DateTime.Today;
@@ -278,8 +270,8 @@ namespace doNet5781_03B_4789_9647
                 return Status.READY_TO_TRAVEL;
             }
             else return Status.Unfit;
-        }           
-    
+        }
+
         public string fuelString() //return the fuel of bus at string, in order to show that at main window.
         {
             string str = " ";
@@ -319,7 +311,7 @@ namespace doNet5781_03B_4789_9647
             worker.RunWorkerAsync(12);
 
             status = (Status)2;
-           
+
 
 
             Fuel = FULLTANK;
@@ -349,7 +341,7 @@ namespace doNet5781_03B_4789_9647
                     Fuel -= kmTravel;
                     km += kmTravel;
                     status = (Status)1;
-                 
+
                     return true;
                 }
                 else //if he cant take this travel
@@ -453,7 +445,7 @@ namespace doNet5781_03B_4789_9647
 
             }
 
-        }     
+        }
 
         private void Worker_DoWork(object sender, DoWorkEventArgs e)
         {
@@ -464,7 +456,7 @@ namespace doNet5781_03B_4789_9647
 
             visible = "Visible";
 
-            for (int i = 1; i <= (length+1); i++)
+            for (int i = 1; i <= (length + 1); i++)
             {
 
                 Thread.Sleep(1000);
@@ -478,7 +470,7 @@ namespace doNet5781_03B_4789_9647
             work = (int)e.ProgressPercentage;
             Time_left = timeToEndWork + "s";
             timeToEndWork--;
-           
+
 
 
         }

@@ -1,9 +1,7 @@
-﻿using System;
+﻿using BO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BO;
 
 
 
@@ -13,7 +11,7 @@ namespace BlAPI
     {
         #region Bus
         IEnumerable<BO.Bus> GetAllBus();
-      //  IEnumerable<BO.Bus> GetBusByline(int line);
+        //  IEnumerable<BO.Bus> GetBusByline(int line);
         //IEnumerable<BO.Bus> GetBusByStatus(BO.STUTUS stutus);
         int AddBus(BO.Bus bus);
         bool DeleteBus(string licence);
@@ -29,8 +27,8 @@ namespace BlAPI
         IEnumerable<IGrouping<BO.AREA, BO.Line>> GetLinesByAreaG();
         BO.Line GetLineByLine(int lineid);//return line
         int AddLine(BO.Line line);
-         IEnumerable<BO.Line> GetLineByLineCode(int LineCodeCode);
-       
+        IEnumerable<BO.Line> GetLineByLineCode(int LineCodeCode);
+
         //  IEnumerable<BO.LineStation> AddStationLine(BO.LineStation station); //we add station to the bus travel
 
         void DeleteLine(int idLine);
@@ -41,10 +39,10 @@ namespace BlAPI
         double CalucateTravel(int lineId); //return the sum of time travel
         IEnumerable<object> DetailsOfStation(IEnumerable<LineStation> lineStations); //creat a new object in order to return all data on station
         void UpdateLineStationForIndexChange(BO.Line line);
-         bool UpdateLineStation(BO.Line line);
+        bool UpdateLineStation(BO.Line line);
         //IEnumerable<BO.LineStation> UpdateLineStation(BO.Line line);
 
-       bool UpdateLineTrip(int oldTripLineIndex, BO.LineTrip newLineTrip);
+        bool UpdateLineTrip(int oldTripLineIndex, BO.LineTrip newLineTrip);
 
         void DeleteLineTrip(BO.LineTrip toDel);
         IEnumerable<BO.Line> GetAllLineIndStation(int StationCode);

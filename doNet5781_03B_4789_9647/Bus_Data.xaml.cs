@@ -1,16 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+﻿using System.Windows;
 
 namespace doNet5781_03B_4789_9647
 {
@@ -20,8 +8,8 @@ namespace doNet5781_03B_4789_9647
     public partial class Bus_Data : Window
     {
         public Bus temp = new Bus();
-     
-    
+
+
         public Bus_Data(Bus v) //constructor that get bus to show
         {
             InitializeComponent();
@@ -34,12 +22,12 @@ namespace doNet5781_03B_4789_9647
             InitializeComponent();
 
             this.DataContext = item;
-      
+
         }
 
 
         private void treat_Click(object sender, RoutedEventArgs e) //send the bus to treatment
-        {         
+        {
             (this.DataContext as Bus).treatment();
             this.Close();
         }

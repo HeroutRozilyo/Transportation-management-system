@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BO
+﻿namespace BO
 {
     public class LineStation
     {
@@ -18,7 +12,7 @@ namespace BO
         public double DistanceFromNext { get; set; }
         public double TimeAverageFromNext { get; set; }
 
-   
+
 
     }
 }

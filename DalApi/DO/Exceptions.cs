@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DO
 {
@@ -21,7 +17,7 @@ namespace DO
     }
 
     [Serializable]
-    public class WrongIDExeption:Exception //when the id number is wrong.. use at line, station, trip,linestation..
+    public class WrongIDExeption : Exception //when the id number is wrong.. use at line, station, trip,linestation..
     {
         public int ID;
         public WrongIDExeption() : base() { }
@@ -37,7 +33,7 @@ namespace DO
     }
 
     [Serializable]
-    public class WrongNameExeption :Exception //if name user wrong
+    public class WrongNameExeption : Exception //if name user wrong
     {
         public string Name;
         public WrongNameExeption() : base() { }
@@ -65,8 +61,8 @@ namespace DO
             return base.ToString() + $"{ID} מצטערים, לא נמצאו זמני נסיעה עבור ";
         }
 
-     
-       
+
+
 
     }
     public class XMLFileLoadCreateException : Exception

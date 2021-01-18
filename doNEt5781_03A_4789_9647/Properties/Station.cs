@@ -1,19 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Dynamic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace dotNet5781_02_4789_9647.Properties
 {
-   
+
     /// Staion for bus
     public class Station
     {
         //-----------------------------
         // static variable
-        
+
         private static Random r = new Random();
 
         private const int MAXDIGITS = 1000000;
@@ -26,7 +22,7 @@ namespace dotNet5781_02_4789_9647.Properties
         private int busStationKey;      //code to the station
 
         ///  place to the station
-        private double latitude; 
+        private double latitude;
         private double longitude;
 
         public String Address { get; set; }      //name station
@@ -42,7 +38,7 @@ namespace dotNet5781_02_4789_9647.Properties
             busStationKey = 0;
         }
 
-        public Station(int id,string name)      //constructor
+        public Station(int id, string name)      //constructor
         {
             Latitude = r.NextDouble() * (33.3 - 31) + 31; // in israel territory
             Longitude = r.NextDouble() * (35.5 - 34.3) + 34.3; // in israel territory
@@ -52,7 +48,7 @@ namespace dotNet5781_02_4789_9647.Properties
             numberofstation.Add(busStationKey);
         }
 
-    
+
         /// key value should  be unique and max 6 digits
         public int BusStationKey
         {
@@ -60,14 +56,14 @@ namespace dotNet5781_02_4789_9647.Properties
 
             set
             {
-          
+
                 if (value <= 0 && value >= MAXDIGITS)       //if the code to the station no okey
                 {
                     throw new ArgumentException(
                        String.Format("{0} is not a valid key number", value));
                 }
-                
-                if (numberofstation.Contains(value)) 
+
+                if (numberofstation.Contains(value))
                 {
                     busStationKey = value;
 
@@ -81,7 +77,7 @@ namespace dotNet5781_02_4789_9647.Properties
                     numberofstation.Add(BusStationKey);
                 }
 
-               
+
             }
         }
 
@@ -123,10 +119,10 @@ namespace dotNet5781_02_4789_9647.Properties
         public override string ToString()
         {
             String result = " ";//Bus Station Code: " + busStationKey;
-             result += String.Format(" {0}°{1} {2}°{3}",
-                Math.Abs(Latitude), (Latitude > 0) ? "N" : "S",
-                Math.Abs(Longitude), (Longitude > 0) ? "E" : "W");
-          // result += "\n \t Address of The Station: " + Address;
+            result += String.Format(" {0}°{1} {2}°{3}",
+               Math.Abs(Latitude), (Latitude > 0) ? "N" : "S",
+               Math.Abs(Longitude), (Longitude > 0) ? "E" : "W");
+            // result += "\n \t Address of The Station: " + Address;
             return result;
         }
     }

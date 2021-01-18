@@ -2,11 +2,7 @@
 using DO;
 using System;
 using System.Collections.Generic;
-using System.Device.Location;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml;
 using System.Xml.Linq;
 
 //https://www.gov.il/he/Departments/General/gtfs_general_transit_feed_specifications
@@ -62,7 +58,7 @@ namespace DL
                     throw new DO.WrongLicenceException(Convert.ToInt32(licence), "האוטובוס המבוקש לא נמצא במערכת");
                 return b;
             }
-            catch(DO.XMLFileLoadCreateException ex) { string a = ""; a += ex; }
+            catch (DO.XMLFileLoadCreateException ex) { string a = ""; a += ex; }
 
             return null;
         }
@@ -499,7 +495,7 @@ namespace DL
                 }
             }
             catch (DO.XMLFileLoadCreateException ex) { string a = ""; a += ex; }
-       
+
 
         }
 
@@ -524,7 +520,7 @@ namespace DL
 
             }
             catch (DO.XMLFileLoadCreateException ex) { string a = ""; a += ex; }
-            
+
 
         }
 
@@ -2254,7 +2250,7 @@ namespace DL
                 XMLTools.SaveListToXMLSerializer(ListLineStation, lineStationPath);
             }
             catch (DO.XMLFileLoadCreateException ex) { string a = ""; a += ex; }
-            
+
         }
 
         public int DeleteStationsFromLine(int Scode, int idline)
@@ -2293,7 +2289,7 @@ namespace DL
                 XMLTools.SaveListToXMLSerializer(ListLineStation, lineStationPath);
             }
             catch (DO.XMLFileLoadCreateException ex) { string a = ""; a += ex; }
-        
+
         }
 
         public void DeleteStationsOfLine(int idline)
@@ -2313,7 +2309,7 @@ namespace DL
                 XMLTools.SaveListToXMLSerializer(ListLineStation, lineStationPath);
             }
             catch (DO.XMLFileLoadCreateException ex) { string a = ""; a += ex; }
-    
+
         }
 
 
@@ -2335,7 +2331,7 @@ namespace DL
                 XMLTools.SaveListToXMLSerializer(ListLineStation, lineStationPath);
             }
             catch (DO.XMLFileLoadCreateException ex) { string a = ""; a += ex; }
-         
+
 
         }
 
@@ -2357,7 +2353,7 @@ namespace DL
                 XMLTools.SaveListToXMLSerializer(ListLineStation, lineStationPath);
             }
             catch (DO.XMLFileLoadCreateException ex) { string a = ""; a += ex; }
-  
+
 
 
 
@@ -2594,7 +2590,7 @@ namespace DL
                 XMLTools.SaveListToXMLElement(ListLineTrip, lineTripPath);
             }
             catch (DO.XMLFileLoadCreateException ex) { string a = ""; a += ex; }
-       
+
 
         }
 
@@ -2614,7 +2610,7 @@ namespace DL
                 XMLTools.SaveListToXMLElement(ListLineTrip, lineTripPath);
             }
             catch (DO.XMLFileLoadCreateException ex) { string a = ""; a += ex; }
-        }  
+        }
 
         public void DeleteLineTrip1(LineTrip lineTrip)
         {
@@ -2635,7 +2631,7 @@ namespace DL
                 XMLTools.SaveListToXMLElement(ListLineTrip, lineTripPath);
             }
             catch (DO.XMLFileLoadCreateException ex) { string a = ""; a += ex; }
-         
+
 
         }
 
@@ -3426,7 +3422,7 @@ namespace DL
                 XMLTools.SaveListToXMLSerializer(ListAdjacentStations, adjacentStationsPath);
             }
             catch (DO.XMLFileLoadCreateException ex) { string a = ""; a += ex; }
-   
+
 
         }
 
@@ -3451,7 +3447,7 @@ namespace DL
                 XMLTools.SaveListToXMLSerializer(ListAdjacentStations, adjacentStationsPath);
             }
             catch (DO.XMLFileLoadCreateException ex) { string a = ""; a += ex; }
-    
+
         }
 
         public void UpdateAdjacentStations(DO.AdjacentStations adjacentStations)
@@ -3474,7 +3470,7 @@ namespace DL
                 XMLTools.SaveListToXMLSerializer(ListAdjacentStations, adjacentStationsPath);
             }
             catch (DO.XMLFileLoadCreateException ex) { string a = ""; a += ex; }
-      
+
         }
 
 
@@ -3501,7 +3497,7 @@ namespace DL
                 XMLTools.SaveListToXMLSerializer(ListAdjacentStations, adjacentStationsPath);
             }
             catch (DO.XMLFileLoadCreateException ex) { string a = ""; a += ex; }
-    
+
         }
 
 

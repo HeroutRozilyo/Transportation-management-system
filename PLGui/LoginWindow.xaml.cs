@@ -1,20 +1,8 @@
 ﻿using BlAPI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using System.Net;
 using System.Net.Mail;
 using System.Text.RegularExpressions;
+using System.Windows;
 
 namespace PLGui
 {
@@ -55,13 +43,13 @@ namespace PLGui
                     bool ex = bl.findUser(users);
                     if (ex)
                     {
-                        AdminWindow wnd = new AdminWindow(bl,users);
+                        AdminWindow wnd = new AdminWindow(bl, users);
                         wnd.Show();
 
                     }
                     else
                     {
-                        UserWindow wnd = new UserWindow(bl,users);
+                        UserWindow wnd = new UserWindow(bl, users);
                         wnd.Show();
                     }
 
@@ -73,8 +61,8 @@ namespace PLGui
                 MessageBox.Show(a.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-    
-       
+
+
 
         private void forgetPassword_Click(object sender, RoutedEventArgs e)
         {
@@ -83,11 +71,11 @@ namespace PLGui
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
-            if(check())
+            if (check())
             {
                 try
                 {
-                   
+
                     BO.User user = new BO.User();
                     user = bl.getUserByEmail(emailTextBOx.Text);
                     using (MailMessage mail = new MailMessage())
@@ -95,10 +83,10 @@ namespace PLGui
                         mail.From = new MailAddress("projectdh209@gmail.com");
                         mail.To.Add(user.MailAddress);
                         mail.Subject = "שחזור סיסמא";
-                        mail.Body =string.Format("Your Password is-{0}",user.Password);
+                        mail.Body = string.Format("Your Password is-{0}", user.Password);
                         mail.IsBodyHtml = true;
-                       
-                       
+
+
 
                         using (SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587))
                         {
@@ -112,7 +100,7 @@ namespace PLGui
                 catch (SmtpFailedRecipientException ex)
                 {
                     MessageBox.Show(ex.Message, "שגיאת מייל", MessageBoxButton.OK);
-                   
+
                 }
                 catch (SmtpException ex)
                 {
@@ -120,7 +108,7 @@ namespace PLGui
                 }
                 passEmail.Visibility = Visibility.Hidden;
 
-               
+
             }
             else MessageBox.Show("הכנס כתובת אימייל תיקנית", "שגיאת מייל", MessageBoxButton.OK);
 

@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Threading;
-
-using DALAPI;
+﻿using DALAPI;
 //using DO;
 using DS;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 
 namespace DL
@@ -25,7 +21,7 @@ namespace DL
 
         #region AllGetBus
 
-        public DO.Bus GetBus( string licence) 
+        public DO.Bus GetBus(string licence)
         {
             int indexBus = DataSource.ListBus.FindIndex(b => b.Licence == licence);
             if (indexBus != -1 && DataSource.ListBus[indexBus].BusExist)
@@ -36,7 +32,7 @@ namespace DL
                 throw new DO.WrongLicenceException(int.Parse(licence), $"{licence}:מספר רישוי לא תקין");
 
         }
-        public IEnumerable<DO.Bus> GetAllBuses() 
+        public IEnumerable<DO.Bus> GetAllBuses()
         {
             return from bus in DataSource.ListBus
                    where (bus.BusExist == true)
@@ -69,15 +65,15 @@ namespace DL
             return 1;
         }
 
-   
+
         public bool DeleteBus(string licence)
         {
-           int indexOfBus = DataSource.ListBus.FindIndex(b => b.Licence == licence);
-            if (indexOfBus!=-1&& DataSource.ListBus[indexOfBus].BusExist)
+            int indexOfBus = DataSource.ListBus.FindIndex(b => b.Licence == licence);
+            if (indexOfBus != -1 && DataSource.ListBus[indexOfBus].BusExist)
             {
                 // bus.BusExsis = false;
                 DataSource.ListBus[indexOfBus].BusExist = false;
-                
+
                 return true;
             }
             else
@@ -86,13 +82,13 @@ namespace DL
         public bool UpdateBus(DO.Bus bus)
         {
             int indexOftheBUs = DataSource.ListBus.FindIndex(b => b.Licence == bus.Licence);
-            if (indexOftheBUs != -1&&DataSource.ListBus[indexOftheBUs].BusExist)
+            if (indexOftheBUs != -1 && DataSource.ListBus[indexOftheBUs].BusExist)
             {
                 DataSource.ListBus[indexOftheBUs] = bus;
 
-           //     DataSource.ListBus.Remove(bus);
-           //    buses.BusExsis = true;
-           //   DataSource.ListBus.Add(buses.Clone());
+                //     DataSource.ListBus.Remove(bus);
+                //    buses.BusExsis = true;
+                //   DataSource.ListBus.Add(buses.Clone());
                 return true;
             }
             else
@@ -119,12 +115,12 @@ namespace DL
         {
             //eliezer told us that we can do here checking because check according to idnumber is meaningless
             line.IdNumber = ++DS.Config.idLineCounter;
-          
+
             DataSource.ListLine.Add(line.Clone());
             return line.IdNumber;
 
         }
-        
+
         public IEnumerable<DO.Line> GetAllLineBy(Predicate<DO.Line> linecondition)//return according to condition and just the working line
         {
             var list = from line in DataSource.ListLine
@@ -139,7 +135,7 @@ namespace DL
                    select line.Clone();
         }
 
-        
+
         //public IEnumerable<DO.Line> GetAllLinesArea(DO.AREA area) //return all the buses that we have
         //{
         //    return from line in DataSource.ListLine
@@ -220,7 +216,7 @@ namespace DL
                 throw new DO.WrongIDExeption(code, "התחנה לא קיימת במערכת");//////////////////////////////////////////////////////
         }
 
-        public void UpdateStations(DO.Stations stations1,int OldCode)
+        public void UpdateStations(DO.Stations stations1, int OldCode)
         {
             DO.Stations station = DataSource.ListStations.Find(b => b.Code == OldCode && b.StationExist);
             if (station != null)
@@ -269,7 +265,7 @@ namespace DL
             return list;
         }
 
-     
+
         public void AddLineStations(DO.LineStation station)
         {
             DO.LineStation temp = DataSource.ListLineStations.Find(b => b.StationCode == station.StationCode && b.LineId == station.LineId && b.LineStationExist);
@@ -308,11 +304,11 @@ namespace DL
 
         }
 
-        
+
         //
         public void UpdateLineStations(DO.LineStation linestations)
         {
-            DO.LineStation station = DataSource.ListLineStations.Find(b => b.StationCode == linestations.StationCode && b.LineId == linestations.LineId && b.LineStationExist);           
+            DO.LineStation station = DataSource.ListLineStations.Find(b => b.StationCode == linestations.StationCode && b.LineId == linestations.LineId && b.LineStationExist);
             if (station != null)
             {
                 DataSource.ListLineStations.Remove(station);
@@ -321,7 +317,7 @@ namespace DL
             else
                 throw new DO.WrongIDExeption(linestations.StationCode, "מצטערים! לא נמצאו פרטים על התחנה המבוקשת");///////////////////////////////////////////////////////
         }
-        public void UpdateLineStationsCode(DO.LineStation linestations,int oldCode)
+        public void UpdateLineStationsCode(DO.LineStation linestations, int oldCode)
         {
             DO.LineStation station = DataSource.ListLineStations.Find(b => b.StationCode == linestations.StationCode && b.LineId == linestations.LineId && b.LineStationExist);
             if (station != null)
@@ -341,7 +337,7 @@ namespace DL
 
         public DO.LineTrip GetLineTrip(TimeSpan start, int idline) //return specific linetrip according to start time and id line 
         {
-            DO.LineTrip linetrip = DataSource.ListLineTrip.Find(b => b.KeyId == idline && b.StartAt == start&&b.TripLineExist==true);
+            DO.LineTrip linetrip = DataSource.ListLineTrip.Find(b => b.KeyId == idline && b.StartAt == start && b.TripLineExist == true);
             if (linetrip != null)
             {
                 return linetrip.Clone();
@@ -354,7 +350,7 @@ namespace DL
         public IEnumerable<DO.LineTrip> GetAllTripline(int idline) //return all the lineTrip of specific line
         {
             return from linetrip in DataSource.ListLineTrip
-                   where (linetrip.KeyId == idline&&linetrip.TripLineExist == true)
+                   where (linetrip.KeyId == idline && linetrip.TripLineExist == true)
                    select linetrip.Clone();
         }
 
@@ -362,7 +358,7 @@ namespace DL
         public IEnumerable<DO.LineTrip> GetAllLineTripsBy(Predicate<DO.LineTrip> StationsLinecondition)
         {
             var list = from linetrip in DataSource.ListLineTrip
-                       where (StationsLinecondition(linetrip)&&linetrip.TripLineExist == true)
+                       where (StationsLinecondition(linetrip) && linetrip.TripLineExist == true)
                        select linetrip.Clone();
             return list;
         }
@@ -380,15 +376,15 @@ namespace DL
         }
         public void DeleteLineTrip1(DO.LineTrip lineTrip) //when we delete line we need to delete his line trip
         {
-          int index= DataSource.ListLineTrip.FindIndex(b => b.KeyId == lineTrip.KeyId && b.StartAt == lineTrip.StartAt && b.FinishAt == lineTrip.FinishAt);
+            int index = DataSource.ListLineTrip.FindIndex(b => b.KeyId == lineTrip.KeyId && b.StartAt == lineTrip.StartAt && b.FinishAt == lineTrip.FinishAt);
             DataSource.ListLineTrip[index].TripLineExist = false;
-        
+
         }
 
 
         public void UpdatelineTrip(DO.LineTrip lineTrip)
         {
-            DO.LineTrip station = DataSource.ListLineTrip.Find(b => b.KeyId == lineTrip.KeyId && lineTrip.StartAt == b.StartAt&&lineTrip.TripLineExist == true);
+            DO.LineTrip station = DataSource.ListLineTrip.Find(b => b.KeyId == lineTrip.KeyId && lineTrip.StartAt == b.StartAt && lineTrip.TripLineExist == true);
             if (station != null)
             {
                 DataSource.ListLineTrip.Remove(station);
@@ -417,9 +413,9 @@ namespace DL
 
         public IEnumerable<DO.AdjacentStations> GetAllAdjacentStations(int stationCode) //return all the AdjacentStations that we have for this station code
         {
-            var v =from station in DataSource.ListAdjacentStations
-                   where (stationCode == station.Station1|| stationCode == station.Station2)
-                   select station.Clone();
+            var v = from station in DataSource.ListAdjacentStations
+                    where (stationCode == station.Station1 || stationCode == station.Station2)
+                    select station.Clone();
             return v;
         }
 
@@ -479,7 +475,7 @@ namespace DL
         }
 
 
-        public void UpdateAdjacentStations(int code1,int code2,int codeChange, int oldCode)
+        public void UpdateAdjacentStations(int code1, int code2, int codeChange, int oldCode)
         {
             DO.AdjacentStations station = DataSource.ListAdjacentStations.Find(b => b.Station1 == code1 && b.Station2 == code2);
             if (station != null)
@@ -532,8 +528,8 @@ namespace DL
         public IEnumerable<DO.User> GetAlluserBy(Predicate<DO.User> userConditions) //איך כותבים??
         {
             var users = from u in DataSource.ListUsers
-                       where (u.UserExist && userConditions(u))
-                       select u.Clone();
+                        where (u.UserExist && userConditions(u))
+                        select u.Clone();
             return users;
         }
 
@@ -543,7 +539,7 @@ namespace DL
                 throw new DO.WrongNameExeption(user.UserName, "שם משתמש כבר קיים במערכת, בבקשה הכנס שם אחר");/////////////////////////////////////////////////////////////////
             DataSource.ListUsers.Add(user.Clone());
         }
-       public DO.User getUserBy(Predicate<DO.User> userConditions)
+        public DO.User getUserBy(Predicate<DO.User> userConditions)
         {
             var users = from u in DataSource.ListUsers
                         where (u.UserExist && userConditions(u))
@@ -580,11 +576,11 @@ namespace DL
 
         #region Trip
 
- 
+
 
         public DO.Trip GetTrip(int id) //check if the Trip exsis according to the id
         {
-            DO.Trip trip = DataSource.ListTrip.Find(b => b.Id == id&&b.TripExist);
+            DO.Trip trip = DataSource.ListTrip.Find(b => b.Id == id && b.TripExist);
             if (trip != null)
             {
                 return trip.Clone();
@@ -602,7 +598,7 @@ namespace DL
         public IEnumerable<DO.Trip> GetAllTripLine(int line) //return all the trip that we have in thid line
         {
             return from trip in DataSource.ListTrip
-                   where (trip.TripExist&&trip.LineId==line)
+                   where (trip.TripExist && trip.LineId == line)
                    select trip.Clone();
         }
 
@@ -638,7 +634,7 @@ namespace DL
 
         public void UpdateStations(DO.Trip trip)
         {
-            DO.Trip t = DataSource.ListTrip.Find(b => b.Id== trip.Id && b.TripExist);
+            DO.Trip t = DataSource.ListTrip.Find(b => b.Id == trip.Id && b.TripExist);
             if (t != null)
             {
                 DataSource.ListTrip.Remove(t);

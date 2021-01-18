@@ -4,17 +4,9 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Device.Location;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace PLGui
 {
@@ -74,7 +66,7 @@ namespace PLGui
             add = false;
             var list = (ListView)sender; //to get the line
             stationData = list.SelectedItem as BO.Station;
-           
+
             RefreshLineInStation();
 
         }
@@ -118,13 +110,13 @@ namespace PLGui
 
 
             LineInStation.ItemsSource = temp;
-            
+
             updateTS.Visibility = Visibility.Hidden;
 
         }
         private void BeforAfter()
         {
-            foreach(BO.AdjacentStations item in stationData.StationAdjacent)
+            foreach (BO.AdjacentStations item in stationData.StationAdjacent)
             {
                 if (item.Station1 == stationData.Code)
                 {
@@ -139,10 +131,10 @@ namespace PLGui
         {
             if (e.Key == Key.Return)
             {
-                
+
                 TextBox text = sender as TextBox;
-                int lineSteation = int.Parse(text.Text) ;
-               BO.Station SearchResult= bl.GetStationByCode(lineSteation);
+                int lineSteation = int.Parse(text.Text);
+                BO.Station SearchResult = bl.GetStationByCode(lineSteation);
                 if (SearchResult != null)
                 {
                     ObservableCollection<BO.Station> a = new ObservableCollection<BO.Station>();
@@ -155,10 +147,10 @@ namespace PLGui
                     ListOfStations.ItemsSource = stations;
                     NotExist.Visibility = Visibility.Visible;
                 }
-               
+
 
             }
-            if(e.Key==Key.Back)
+            if (e.Key == Key.Back)
             {
                 NotExist.Visibility = Visibility.Hidden;
                 ListOfStations.ItemsSource = stations;
@@ -170,8 +162,8 @@ namespace PLGui
             e.Handled = !e.Text.Any(x => Char.IsDigit(x));
         }
 
-      
-        
+
+
 
         private void textBoxTextBox_GotFocus(object sender, RoutedEventArgs e)
         {
@@ -220,7 +212,7 @@ namespace PLGui
                 }
 
 
-                }
+            }
             catch (BO.BadCoordinateException a)
             {
                 MessageBox.Show(a.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -244,15 +236,15 @@ namespace PLGui
         {
             try
             {
-              
-                
-                    MessageBoxResult result = MessageBox.Show("?האם למחוק תחנה זו\n פעולה זו בלתי הפיכה", "Update", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+
+                MessageBoxResult result = MessageBox.Show("?האם למחוק תחנה זו\n פעולה זו בלתי הפיכה", "Update", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
                 switch (result)
                 {
                     case MessageBoxResult.Yes:
                         {
-                            bl.DeleteStation(oldCode,stationData.LineAtStation);
+                            bl.DeleteStation(oldCode, stationData.LineAtStation);
                             stationData = null;
                             RefreshStation();
                             RefreshLineInStation();
@@ -266,11 +258,11 @@ namespace PLGui
                 }
 
 
-                }
+            }
             catch (BO.BadCoordinateException a)
             {
                 MessageBox.Show(a.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
-               
+
             }
         }
         bool add = false;
@@ -280,15 +272,15 @@ namespace PLGui
             {
 
                 ListOfStations.SelectedIndex = -1;
-                 stationData = null;
+                stationData = null;
                 temp = null;
                 stationExistCheckBox.Visibility = Visibility.Visible;
                 Sexist.Visibility = Visibility.Visible;
                 add = true;
                 RefreshLineInStation();
-                
+
             }
-            
+
 
 
 
@@ -301,14 +293,14 @@ namespace PLGui
             addStation.Coordinate = new GeoCoordinate(double.Parse((latitudeTextBox.Text)), double.Parse(longitudeTextBox.Text));
             addStation.Name = nameTextBox.Text;
             addStation.StationExist = (bool)stationExistCheckBox.IsChecked;
-          
+
         }
 
         private void stationExistCheckBox_Checked(object sender, RoutedEventArgs e)
         {
             try
             {
-                
+
                 if (add == true)
                 {
                     MessageBoxResult result = MessageBox.Show("?האם לשמור שינויים", "Update", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
@@ -338,7 +330,7 @@ namespace PLGui
                             {
                                 StationDataGrid.DataContext = new BO.Station();
                                 stationExistCheckBox.IsChecked = false;
-                              
+
                                 stationExistCheckBox.Visibility = Visibility.Hidden;
                                 Sexist.Visibility = Visibility.Hidden;
                                 add = false;
@@ -346,10 +338,10 @@ namespace PLGui
 
                             }
                     }
-                    }
+                }
 
             }
-            catch(BO.BadCoordinateException a)
+            catch (BO.BadCoordinateException a)
             {
                 MessageBox.Show(a.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
                 Sexist.Visibility = Visibility.Visible;
@@ -357,7 +349,7 @@ namespace PLGui
                 stationExistCheckBox.IsChecked = false;
                 add = true;
             }
-            catch(BO.BadIdException a)
+            catch (BO.BadIdException a)
             {
                 MessageBox.Show(a.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
                 Sexist.Visibility = Visibility.Visible;
@@ -365,14 +357,14 @@ namespace PLGui
                 stationExistCheckBox.IsChecked = false;
                 add = true;
             }
-            
+
 
 
         }
 
         private void codeTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            e.Handled = !e.Text.Any(x => Char.IsDigit(x) );
+            e.Handled = !e.Text.Any(x => Char.IsDigit(x));
         }
 
         private void longitudeTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
@@ -383,7 +375,7 @@ namespace PLGui
         private void latitudeTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             e.Handled = !e.Text.Any(x => Char.IsDigit(x) || '.'.Equals(x));
-           
+
         }
 
         private void UpdataDT_Click(object sender, RoutedEventArgs e)
@@ -421,15 +413,15 @@ namespace PLGui
                         }
                     case MessageBoxResult.Cancel:
                         {
-                            
+
                             okeyUpdate.IsChecked = false;
                             updateTS.Visibility = Visibility.Hidden;
                             break;
                             //
                         }
                 }
-                }
-            catch(BO.BadIdException a)
+            }
+            catch (BO.BadIdException a)
             {
                 MessageBox.Show(a.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
                 updateTS.Visibility = Visibility.Visible;
@@ -437,7 +429,7 @@ namespace PLGui
             }
         }
 
-        
+
 
         private void timeAverageTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {

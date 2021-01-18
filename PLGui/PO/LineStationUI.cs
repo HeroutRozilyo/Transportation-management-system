@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Device.Location;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PL
+﻿namespace PL
 {
-   public class LineStationUI
+    public class LineStationUI
     {
 
         public int StationCode { get; set; }

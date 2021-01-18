@@ -1,37 +1,25 @@
-﻿
-using dotNet5781_02_4789_9647;
-using dotNet5781_02_4789_9647.Properties;
+﻿using dotNet5781_02_4789_9647.Properties;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace doNEt5781_03A_4789_9647
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-     
+
     public partial class MainWindow : Window
     {
-   
+
         private static Random r = new Random(DateTime.Now.Second); //static random
         BusCompany egged; //company of the bus
-      List<BusStation> stations; /// <summary>
-      /// list of station
-      /// </summary>
+        List<BusStation> stations; /// <summary>
+                                   /// list of station
+                                   /// </summary>
 
-      private LineBus currentDisplayBusLine = new LineBus(); // a varieble that get a line from the compay bus.
+        private LineBus currentDisplayBusLine = new LineBus(); // a varieble that get a line from the compay bus.
         public MainWindow()
         {
             egged = new BusCompany();
@@ -63,7 +51,7 @@ namespace doNEt5781_03A_4789_9647
 
             InitializeComponent();
             initComboBox();
-         
+
 
         }
         /// <summary>
@@ -75,18 +63,18 @@ namespace doNEt5781_03A_4789_9647
             cbBusLines.DisplayMemberPath = " NumberID ";
             cbBusLines.SelectedIndex = 0;
             ShowBusLine(((LineBus)cbBusLines.SelectedItem).NumberID);
-            
+
         }
 
         private void tbArea_TextChanged(object sender, TextChangedEventArgs e)
         {
-           
+
         }
 
         /// <summary>
         /// help func to show data on specific line
         /// </summary>
-       
+
         private void cbBusLines_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ShowBusLine((cbBusLines.SelectedValue as LineBus).NumberID);
@@ -95,14 +83,14 @@ namespace doNEt5781_03A_4789_9647
         /// <summary>
         /// to print a data on line incordding to his numberID
         /// </summary>
-  
+
         private void ShowBusLine(int index)
         {
             currentDisplayBusLine = egged[index];
             UpGrid.DataContext = currentDisplayBusLine;
             lbBusLineStations.DataContext = currentDisplayBusLine.BusStations;
 
-            
+
         }
 
         private void lbBusLineStations_SelectionChanged(object sender, SelectionChangedEventArgs e)

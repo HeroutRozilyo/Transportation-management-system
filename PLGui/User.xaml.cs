@@ -3,17 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 
 //...
@@ -45,7 +37,7 @@ namespace PLGui
         public User()
         {
             InitializeComponent();
-            
+
             RefreshStation();
             RefreshStationall();
             realTime.Visibility = Visibility.Hidden;
@@ -61,19 +53,19 @@ namespace PLGui
 
         private void RefreshStation()
         {
-          stations1 = ConvertList(bl.GetAllStations());//to make ObservableCollection
-            stations2= ConvertList(bl.GetAllStations());
+            stations1 = ConvertList(bl.GetAllStations());//to make ObservableCollection
+            stations2 = ConvertList(bl.GetAllStations());
             foreach (var item in stations1)
             {
                 ComboBoxItem newItem1 = new ComboBoxItem();
-                newItem1.Content = item.Code + "   " +item.Name;        
+                newItem1.Content = item.Code + "   " + item.Name;
                 station1.Items.Add(newItem1);
-                
+
             }
             foreach (var item in stations2)
             {
-                ComboBoxItem newItem2 = new ComboBoxItem();             
-                newItem2.Content = item.Code + "   " + item.Name;  
+                ComboBoxItem newItem2 = new ComboBoxItem();
+                newItem2.Content = item.Code + "   " + item.Name;
                 station2.Items.Add(newItem2);
             }
 
@@ -83,20 +75,20 @@ namespace PLGui
 
 
         }
-   
+
         private void station1_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            string a= station1.SelectedItem.ToString();
+            string a = station1.SelectedItem.ToString();
 
             int codStation = getNum1(a);
 
             temp1 = bl.GetAllLineIndStation(codStation);
-           // LineInStation1.ItemsSource = temp1;
+            // LineInStation1.ItemsSource = temp1;
 
         }
         private int getNum1(string a)
         {
-            
+
             int b = a.Length;
             string c = "";
 
@@ -112,16 +104,16 @@ namespace PLGui
         private void station2_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             string a = station2.SelectedItem.ToString();
-    
+
             int codStation = getNum1(a);
 
             temp2 = bl.GetAllLineIndStation(codStation);
-        
-          //  LineInStation2.ItemsSource = temp2;
+
+            //  LineInStation2.ItemsSource = temp2;
 
         }
-        
-        
+
+
 
 
         private void checkOkey_Click(object sender, RoutedEventArgs e)
@@ -129,17 +121,17 @@ namespace PLGui
             temp = null;
             int cod1 = getNum1(station1.SelectedItem.ToString());
             int cod2 = getNum1(station2.SelectedItem.ToString());
-            if(cod1==cod2)
+            if (cod1 == cod2)
             {
                 MessageBox.Show("אופס...תחנות המוצא והיעד קרובות מידי", "", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-           else temp = ConvertList(bl.TravelPath(cod1, cod2));
+            else temp = ConvertList(bl.TravelPath(cod1, cod2));
 
             OpsiaLine.ItemsSource = temp;
-            
+
         }
 
-      
+
 
 
 
@@ -155,7 +147,7 @@ namespace PLGui
         private void RefreshStationall()
         {
             stations = ConvertList(bl.GetAllStations());//to make ObservableCollection
-            ListOfStations.ItemsSource = stations;    
+            ListOfStations.ItemsSource = stations;
         }
 
         public void RefreshLineInStation()
@@ -175,17 +167,17 @@ namespace PLGui
                     oldCode = stationData1.Code;
                     lineStation = bl.GetAllLineIndStation(stationData1.Code);
                 }
-                catch(BO.BadIdException ex)
+                catch (BO.BadIdException ex)
                 {
 
                 }
-   
+
 
             }
             LineInStation.ItemsSource = lineStation;
 
         }
-      
+
         private void ListOfStations_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             add = false;
@@ -241,7 +233,7 @@ namespace PLGui
             }
             if (e.Key == Key.Back)
             {
-               // NotExist.Visibility = Visibility.Hidden;
+                // NotExist.Visibility = Visibility.Hidden;
                 ListOfStations.ItemsSource = stations;
             }
         }
@@ -264,7 +256,7 @@ namespace PLGui
             RefreshLineInStation();
 
         }
-       string numberText;
+        string numberText;
 
         private void textBoxTextBox_LostFocus(object sender, RoutedEventArgs e)
         {
@@ -281,14 +273,14 @@ namespace PLGui
 
         }
 
-       
+
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
 
             RealTimeStation r = new RealTimeStation(bl, stationData1);
             r.ShowDialog();
-                
+
 
         }
     }

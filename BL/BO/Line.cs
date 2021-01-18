@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace BO
 {
@@ -17,6 +13,6 @@ namespace BO
         public IEnumerable<LineStation> StationsOfBus { get; set; }
         public IEnumerable<LineTrip> TimeLineTrip { get; set; }
         public double TimeTravel { get; set; }
-        
+
     }
 }
