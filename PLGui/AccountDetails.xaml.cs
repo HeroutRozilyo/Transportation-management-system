@@ -33,11 +33,12 @@ namespace PLGui
         {
             this.bl = bl;
             this.userNow = userNow;
+            ChangePasswordGrid.Visibility = Visibility.Hidden;
         }
 
         private void ChangePass_Click(object sender, RoutedEventArgs e)
         {
-
+            ChangePasswordGrid.Visibility = Visibility.Visible;
         }
 
         private void ChangeMail_Click(object sender, RoutedEventArgs e)
@@ -47,6 +48,33 @@ namespace PLGui
 
         private void SavaPass_Click(object sender, RoutedEventArgs e)
         {
+            
+            string pas = passwordTextBox.Password;
+            string pas2 = passwordBox2.Password;
+            if(pas!=pas2)
+            {
+                MessageBoxResult result = MessageBox.Show(".הכנס סיסמא זהה בשני השדות ונסה שוב", "New User", MessageBoxButton.OKCancel, MessageBoxImage.Error);
+                switch (result)
+                {
+                    case MessageBoxResult.OK:
+                        {
+                            return;
+                        }
+                    case MessageBoxResult.Cancel:
+                        {
+                            ChangePasswordGrid.Visibility = Visibility.Hidden;
+                            return;
+                        }
+
+                }
+
+            }
+            else
+            {
+                userNow.Password = pas;
+                //bl.use
+            }
+            ChangePasswordGrid.Visibility = Visibility.Hidden;
 
         }
     }
