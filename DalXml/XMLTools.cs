@@ -19,6 +19,7 @@ namespace DL
             if (!Directory.Exists(dir))
                 Directory.CreateDirectory(dir);
         }
+
         #region SaveLoadWithXElement
         public static void SaveListToXMLElement(XElement rootElem, string filePath)
         {
@@ -32,6 +33,9 @@ namespace DL
             }
         }
 
+        /// <summary>
+        /// in order to turn into creat Xelement we need creat one. for line trip func
+        /// </summary>
         public static XElement ToXML(this DO.LineTrip st)
         {
             XElement result = new XElement("LineTrip",

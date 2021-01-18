@@ -237,7 +237,7 @@ namespace BL
             }
             catch (DO.WrongIDExeption ex)
             {
-                throw new BO.BadIdException("מזהה קו לא תקין", ex);
+               throw new BO.BadIdException("מזהה קו לא תקין", ex);            
             }
 
             lineBO.TimeTravel = 0;
@@ -1097,13 +1097,19 @@ namespace BL
         /// <returns></returns>
         public IEnumerable<BO.Line> GetAllLineIndStation(int StationCode)
         {
-            IEnumerable<DO.LineStation> v = from item in dl.GetAllLineStationsBy(b => b.StationCode == StationCode)
-                                            select item;
+            try
+            {
 
-            var x = from s in v
-                    select lineDoBoAdapter(s.LineId);
-            return x;
 
+                IEnumerable<DO.LineStation> v = from item in dl.GetAllLineStationsBy(b => b.StationCode == StationCode)
+                                                select item;
+
+                var x = from s in v
+                        select lineDoBoAdapter(s.LineId);
+                return x;
+            }
+            catch(BO.BadIdException ex) { }
+            return null;
         }
 
 

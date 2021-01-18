@@ -5,14 +5,14 @@
     <Frequency>19</Frequency>
     <StartAt>06:00:00</StartAt>
     <FinishAt>23:59:59</FinishAt>
-    <TripLineExist>true</TripLineExist>
+    <TripLineExist>false</TripLineExist>
   </LineTrip>
   <LineTrip>
     <KeyId>2</KeyId>
     <Frequency>13</Frequency>
     <StartAt>06:00:00</StartAt>
     <FinishAt>1.00:00:00</FinishAt>
-    <TripLineExist>true</TripLineExist>
+    <TripLineExist>false</TripLineExist>
   </LineTrip>
   <LineTrip>
     <KeyId>3</KeyId>
@@ -96,6 +96,13 @@
     <Frequency>40</Frequency>
     <StartAt>06:00:00</StartAt>
     <FinishAt>23:59:59</FinishAt>
+    <TripLineExist>true</TripLineExist>
+  </LineTrip>
+  <LineTrip>
+    <KeyId>2</KeyId>
+    <Frequency>30</Frequency>
+    <StartAt>08:00:00</StartAt>
+    <FinishAt>20:00:00</FinishAt>
     <TripLineExist>true</TripLineExist>
   </LineTrip>
 </lineTripXml.xml>

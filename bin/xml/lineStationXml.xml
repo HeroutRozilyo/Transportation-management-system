@@ -116,7 +116,7 @@
     <LineId>3</LineId>
     <StationCode>122</StationCode>
     <LineStationIndex>1</LineStationIndex>
-    <LineStationExist>true</LineStationExist>
+    <LineStationExist>false</LineStationExist>
     <PrevStation>0</PrevStation>
     <NextStation>123</NextStation>
   </LineStation>
@@ -124,7 +124,7 @@
     <LineId>3</LineId>
     <StationCode>123</StationCode>
     <LineStationIndex>2</LineStationIndex>
-    <LineStationExist>true</LineStationExist>
+    <LineStationExist>false</LineStationExist>
     <PrevStation>122</PrevStation>
     <NextStation>121</NextStation>
   </LineStation>
@@ -132,7 +132,7 @@
     <LineId>3</LineId>
     <StationCode>121</StationCode>
     <LineStationIndex>3</LineStationIndex>
-    <LineStationExist>true</LineStationExist>
+    <LineStationExist>false</LineStationExist>
     <PrevStation>123</PrevStation>
     <NextStation>1524</NextStation>
   </LineStation>
@@ -140,7 +140,7 @@
     <LineId>3</LineId>
     <StationCode>1524</StationCode>
     <LineStationIndex>4</LineStationIndex>
-    <LineStationExist>true</LineStationExist>
+    <LineStationExist>false</LineStationExist>
     <PrevStation>121</PrevStation>
     <NextStation>1523</NextStation>
   </LineStation>
@@ -148,7 +148,7 @@
     <LineId>3</LineId>
     <StationCode>1523</StationCode>
     <LineStationIndex>5</LineStationIndex>
-    <LineStationExist>true</LineStationExist>
+    <LineStationExist>false</LineStationExist>
     <PrevStation>1524</PrevStation>
     <NextStation>1522</NextStation>
   </LineStation>
@@ -156,7 +156,7 @@
     <LineId>3</LineId>
     <StationCode>1522</StationCode>
     <LineStationIndex>6</LineStationIndex>
-    <LineStationExist>true</LineStationExist>
+    <LineStationExist>false</LineStationExist>
     <PrevStation>1523</PrevStation>
     <NextStation>1518</NextStation>
   </LineStation>
@@ -164,7 +164,7 @@
     <LineId>3</LineId>
     <StationCode>1518</StationCode>
     <LineStationIndex>7</LineStationIndex>
-    <LineStationExist>true</LineStationExist>
+    <LineStationExist>false</LineStationExist>
     <PrevStation>1522</PrevStation>
     <NextStation>1514</NextStation>
   </LineStation>
@@ -172,7 +172,7 @@
     <LineId>3</LineId>
     <StationCode>1514</StationCode>
     <LineStationIndex>8</LineStationIndex>
-    <LineStationExist>true</LineStationExist>
+    <LineStationExist>false</LineStationExist>
     <PrevStation>1518</PrevStation>
     <NextStation>1512</NextStation>
   </LineStation>
@@ -180,7 +180,7 @@
     <LineId>3</LineId>
     <StationCode>1512</StationCode>
     <LineStationIndex>9</LineStationIndex>
-    <LineStationExist>true</LineStationExist>
+    <LineStationExist>false</LineStationExist>
     <PrevStation>1514</PrevStation>
     <NextStation>1511</NextStation>
   </LineStation>
@@ -188,7 +188,7 @@
     <LineId>3</LineId>
     <StationCode>1511</StationCode>
     <LineStationIndex>10</LineStationIndex>
-    <LineStationExist>true</LineStationExist>
+    <LineStationExist>false</LineStationExist>
     <PrevStation>1512</PrevStation>
     <NextStation>0</NextStation>
   </LineStation>
@@ -752,22 +752,8 @@
     <PrevStation>1486</PrevStation>
     <NextStation>0</NextStation>
   </LineStation>
-  <LineStation>
-    <LineId>17</LineId>
-    <StationCode>1524</StationCode>
-    <LineStationIndex>1</LineStationIndex>
-    <LineStationExist>true</LineStationExist>
-    <PrevStation>0</PrevStation>
-    <NextStation>73</NextStation>
-  </LineStation>
-  <LineStation>
-    <LineId>17</LineId>
-    <StationCode>73</StationCode>
-    <LineStationIndex>2</LineStationIndex>
-    <LineStationExist>true</LineStationExist>
-    <PrevStation>1524</PrevStation>
-    <NextStation>0</NextStation>
-  </LineStation>
+
+
   <LineStation>
     <LineId>2</LineId>
     <StationCode>89</StationCode>

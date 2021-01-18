@@ -168,12 +168,18 @@ namespace PLGui
             lineStation = null;
             if (stationData1 != null)
             {
-                oldCode = stationData1.Code;
-                lineStation = bl.GetAllLineIndStation(stationData1.Code);
+                try
+                {
 
-                //  BeforAfter();
-                //Befor.ItemsSource = beforAdj;
-                //After.ItemsSource = afterAdj;
+
+                    oldCode = stationData1.Code;
+                    lineStation = bl.GetAllLineIndStation(stationData1.Code);
+                }
+                catch(BO.BadIdException ex)
+                {
+
+                }
+   
 
             }
             LineInStation.ItemsSource = lineStation;
