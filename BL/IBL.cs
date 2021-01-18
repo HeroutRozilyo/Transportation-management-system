@@ -67,6 +67,8 @@ namespace BlAPI
         BO.User getUserByEmail(string email);
         IEnumerable<BO.User> GetAllUsers();
         bool EmailExsit(string mail);
+        void DeleteUser(User user);
+        void UpdateUser(User user);
         #endregion
         #region Simulator
         void StartSimulator(TimeSpan startTime, int Rate, Action<TimeSpan> updateTime);

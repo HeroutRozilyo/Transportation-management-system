@@ -569,7 +569,7 @@ namespace DL
                 DataSource.ListUsers.Add(user.Clone());
             }
             else
-                throw new DO.WrongNameExeption(user.UserName, "לא נמצאו פרטים במערכת עבור שם זה");///////////////////////////////////////////////////////
+                throw new DO.WrongNameExeption(user.UserName, "לא נמצאו פרטים במערכת עבור משתמש זה");///////////////////////////////////////////////////////
         }
 
         #endregion User

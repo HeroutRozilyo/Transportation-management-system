@@ -1418,6 +1418,31 @@ namespace BL
                     select (BO.User)us.CopyPropertiesToNew(typeof(BO.User));
             return v;
         }
+        public void UpdateUser(User user)
+        {
+            try
+            {
+                DO.User a = new DO.User();
+                user.CopyPropertiesTo(a);
+                dl.UpdateUser(a);
+            }
+            catch(DO.WrongNameExeption ex)
+            {
+                throw new BO.BadNameExeption(user.UserName, "לא נמצאו פרטים במערכת עבור משתמש זה");
+            }
+        }
+        public void DeleteUser(User user)
+        {
+          
+            try
+            {
+                dl.DeleteUser(user.UserName);
+            }
+            catch (DO.WrongNameExeption ex)
+            {
+                throw new BO.BadNameExeption(user.UserName, "לא נמצאו פרטים במערכת עבור משתמש זה");
+            }
+        }
         public bool EmailExsit(string mail)
         {
             var v = getUserByEmail(mail);
