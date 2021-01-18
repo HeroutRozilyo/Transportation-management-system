@@ -59,7 +59,7 @@ namespace BO
             }
             observerClock = null;
         }
-        internal void Stop() => Cancel = true;
+        internal void Stop() { Cancel = true; }
 
 
     }

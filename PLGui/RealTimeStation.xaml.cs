@@ -50,10 +50,6 @@ namespace PLGui
             this.bl = bl;
             this.stationData1 = stationData1;
 
-
-
-
-
             BoolStart = true;
             timerWorker = new BackgroundWorker();
 
