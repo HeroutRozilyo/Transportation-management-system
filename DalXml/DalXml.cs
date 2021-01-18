@@ -28,8 +28,6 @@ namespace DL
         string lineTripPath = @"lineTripXml.xml"; //XMLSerializer
         string adjacentStationsPath = @"AdjacentStationsXml.xml"; //XMLSerializer
         string userPath = @"UserXml.xml"; //XMLSerializer
-
-
         #endregion
 
 
@@ -1262,6 +1260,42 @@ namespace DL
 
         public IEnumerable<LineStation> GetAllStationsLine(int idline)
         {
+    
+            try
+            {
+
+
+                List<LineStation> ListLineStation = XMLTools.LoadListFromXMLSerializer<LineStation>(lineStationPath);
+
+                return from station in ListLineStation
+                       where (station.LineId == idline && station.LineStationExist)
+                       select station;
+            }
+            catch (DO.XMLFileLoadCreateException ex) { string a = ""; a += ex; }
+            return null;
+        }
+
+
+
+        public IEnumerable<LineStation> GetAllStationsCode(int code)
+        {
+            try
+            {
+
+
+                List<LineStation> ListLineStation = XMLTools.LoadListFromXMLSerializer<LineStation>(lineStationPath);
+
+                return from station in ListLineStation
+                       where (station.StationCode == code)
+                       select station;
+            }
+            catch (DO.XMLFileLoadCreateException ex) { string a = ""; a += ex; }
+            return null;
+        }
+
+        public IEnumerable<LineStation> GetAllLineStationsBy(Predicate<LineStation> StationsLinecondition)
+        {
+
             #region
 
             //List<LineStation> ListLineStations = new List<LineStation>
@@ -2189,43 +2223,9 @@ namespace DL
             
 
             //};
-        
-        //XMLTools.SaveListToXMLSerializer(ListLineStations, lineStationPath);
+
+            //XMLTools.SaveListToXMLSerializer(ListLineStations, lineStationPath);
             #endregion
-            try
-            {
-
-
-                List<LineStation> ListLineStation = XMLTools.LoadListFromXMLSerializer<LineStation>(lineStationPath);
-
-                return from station in ListLineStation
-                       where (station.LineId == idline && station.LineStationExist)
-                       select station;
-            }
-            catch (DO.XMLFileLoadCreateException ex) { string a = ""; a += ex; }
-            return null;
-        }
-
-
-
-        public IEnumerable<LineStation> GetAllStationsCode(int code)
-        {
-            try
-            {
-
-
-                List<LineStation> ListLineStation = XMLTools.LoadListFromXMLSerializer<LineStation>(lineStationPath);
-
-                return from station in ListLineStation
-                       where (station.StationCode == code)
-                       select station;
-            }
-            catch (DO.XMLFileLoadCreateException ex) { string a = ""; a += ex; }
-            return null;
-        }
-
-        public IEnumerable<LineStation> GetAllLineStationsBy(Predicate<LineStation> StationsLinecondition)
-        {
             try
             {
                 List<LineStation> ListLineStation = XMLTools.LoadListFromXMLSerializer<LineStation>(lineStationPath);
