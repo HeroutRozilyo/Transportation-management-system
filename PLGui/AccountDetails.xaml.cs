@@ -136,48 +136,82 @@ namespace PLGui
         private void ChangeMailButton_Click(object sender, RoutedEventArgs e)
         {
             string newMail = Mail.Text;
-            if (check())
+            if (newMail.Count() != 0)
             {
-                if (newMail == userNow.MailAddress)
+                if (check())
                 {
-
-                    MessageBoxResult result = MessageBox.Show("על הכתובת אימייל האחדשה להיות שונה מהכתובת במערכת", "", MessageBoxButton.OKCancel, MessageBoxImage.Error);
-                    switch (result)
+                    if (newMail == userNow.MailAddress)
                     {
-                        case MessageBoxResult.OK:
-                            {
-                                return;
-                            }
-                        case MessageBoxResult.Cancel:
-                            {
-                                ChangePasswordGrid.Visibility = Visibility.Hidden;
-                                ChangePass.IsEnabled = true;
-                                return;
-                            }
+
+                        MessageBoxResult result = MessageBox.Show("על הכתובת אימייל האחדשה להיות שונה מהכתובת במערכת", "", MessageBoxButton.OKCancel, MessageBoxImage.Error);
+                        switch (result)
+                        {
+                            case MessageBoxResult.OK:
+                                {
+                                    return;
+                                }
+                            case MessageBoxResult.Cancel:
+                                {
+                                    ChangePasswordGrid.Visibility = Visibility.Hidden;
+                                    ChangePass.IsEnabled = true;
+                                    return;
+                                }
+
+                        }
 
                     }
+                    else
+                    {
+                        var v = from item in allUser
+                                where item.MailAddress == newMail
+                                select item;
+                        if (v.Count() != 0)
+                        {
 
+
+                            MessageBoxResult result = MessageBox.Show(" כתובת  מייל כבר קייימת במערכת, בבקשה הכנס כתובת חדשה", "", MessageBoxButton.OKCancel, MessageBoxImage.Error);
+                            switch (result)
+                            {
+                                case MessageBoxResult.OK:
+                                    {
+                                        return;
+                                    }
+                                case MessageBoxResult.Cancel:
+                                    {
+                                        ChangePasswordGrid.Visibility = Visibility.Hidden;
+                                        ChangePass.IsEnabled = true;
+                                        return;
+                                    }
+                            }
+
+                            userNow.MailAddress = newMail;
+                            bl.UpdateUser(userNow);
+                            MessageBox.Show("!כתובת המייל עודכנה בהצלחה", "סיסמה", MessageBoxButton.OK, MessageBoxImage.Information);
+                        }
+
+                    }
                 }
-                else
+                ChangeMailGrid.Visibility = Visibility.Hidden;
+                mailAddressTextBlock.Text = userNow.MailAddress;
+                ChangePass.IsEnabled = true;
+            }
+            else
+            {
+                MessageBoxResult result = MessageBox.Show(" הכנס כתובת מייל חדשה", "", MessageBoxButton.OKCancel, MessageBoxImage.Error);
+                switch (result)
                 {
-                    var v = from item in allUser
-                            where item.MailAddress == newMail
-                            select item;
-                    if (v.Count() != 0)
-                    {
-                        MessageBox.Show(" כתובת  מייל כבר קייימת במערכת, בבקשה הכנס כתובת חדשה ", "שם משתמש", MessageBoxButton.OK, MessageBoxImage.Error);
-                        return;
-                    }
-
-                    userNow.MailAddress = newMail;
-                    bl.UpdateUser(userNow);
-                    MessageBox.Show("!כתובת המייל עודכנה בהצלחה", "סיסמה", MessageBoxButton.OK, MessageBoxImage.Information);
-
+                    case MessageBoxResult.OK:
+                        {
+                            return;
+                        }
+                    case MessageBoxResult.Cancel:
+                        {
+                            ChangePasswordGrid.Visibility = Visibility.Hidden;
+                            ChangePass.IsEnabled = true;
+                            return;
+                        }
                 }
             }
-            ChangeMailGrid.Visibility = Visibility.Hidden;
-            mailAddressTextBlock.Text = userNow.MailAddress;
-            ChangePass.IsEnabled = true;
 
 
         }

@@ -5,26 +5,30 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PLGui"
         mc:Ignorable="d"
-        Title="Login" Height="450" Width="800" FontSize="14">
-    <Grid>
+        Title="Login" Height="355.833" Width="800" FontSize="14" WindowStartupLocation="CenterScreen">
+    <Grid Margin="0,0,0.333,0" Height="406" VerticalAlignment="Top">
         <Grid.Background>
             <ImageBrush ImageSource="newnewBack.jpg"/>
         </Grid.Background>
         <Label Content="התחברות למערכת" FontSize="25" HorizontalAlignment="Center" Margin="294,5,268.333,364.667" Width="231" Style="{DynamicResource Label}"/>
         <Separator Margin="-15,21,-26.667,364.667" Background="#FF221B1B" Padding="10,10,11,16" BorderThickness="10,0,23,0" ClipToBounds="True" HorizontalAlignment="Right" Width="835"/>
-        <Label Content=":שם משתמש" Margin="475,83,213.333,302.667" Style="{DynamicResource Label}"></Label>
-        <TextBox Name="txtUserName" Margin="165,80,333.333,310.667"></TextBox>
-        <Label Content=":סיסמא" Margin="475,136,233.333,244.667" Style="{DynamicResource Label}"></Label>
-        <PasswordBox Name="txtPassword"   Margin="165,130,330.333,255.667"></PasswordBox>
-        <Button Name="btnSubmit" Style="{DynamicResource LoginButton}" Content="כניסה" Click="Click_Submit" Margin="60,190,563.333,185.667"/>
+        <Label Content=":שם משתמש" Margin="475,83,203,296" Style="{DynamicResource Label}" FontSize="16"></Label>
+        <TextBox Name="txtUserName" Margin="245,85,321,301"></TextBox>
+        <Label Content=":סיסמא" Margin="475,136,233.333,244.667" Style="{DynamicResource Label}" FontSize="16"></Label>
+        <PasswordBox Name="txtPassword"   Margin="245,140,321,246"></PasswordBox>
+        <Button Name="btnSubmit" Style="{DynamicResource LoginButton}" Content="כניסה" Click="Click_Submit" Margin="105,200,593.333,185.667" FontSize="12"/>
 
 
 
-        <Button x:Name="forgetPassword" Content="שכחתי&#xA; סיסמא" HorizontalAlignment="Left" Margin="105,240,0,140.667" Width="95" Click="forgetPassword_Click"  Style="{DynamicResource AdminWindow}" RenderTransformOrigin="0.8,-0.806"/>
-        <GroupBox x:Name="passEmail"  Style="{DynamicResource allGrpuoBox}" Header="הכנס כתובת מייל לשחזור סיסמא" HorizontalAlignment="Left" Height="215" Margin="320,190,0,0" VerticalAlignment="Top" Width="440">
-            <Grid HorizontalAlignment="Left" Height="175" Margin="114,30,0,0" VerticalAlignment="Top" Width="460">
-                <TextBox x:Name="emailTextBOx" Height="30" Margin="30,40,280,0" TextWrapping="Wrap" Text="xxx@xxx.xxx" VerticalAlignment="Top"/>
-                <Button x:Name="button" Style="{DynamicResource AdminWindow}" Content="שלח אימייל" HorizontalAlignment="Left" Height="25" Margin="60,85,0,0" VerticalAlignment="Top" Width="95" Click="button_Click" RenderTransformOrigin="1.712,0.787"/>
+        <Button x:Name="forgetPassword" Content="שכחתי&#xA; סיסמא" HorizontalAlignment="Left" Margin="15,55,0,316" Width="95" Click="forgetPassword_Click"  Style="{DynamicResource AdminWindow}" RenderTransformOrigin="0.8,-0.806" FontSize="12"/>
+        <GroupBox x:Name="passEmail"  Style="{DynamicResource allGrpuoBox}" Header="הכנס כתובת מייל לשחזור סיסמא" HorizontalAlignment="Left" Height="110" Margin="345,195,0,0" VerticalAlignment="Top" Width="325">
+            <Grid HorizontalAlignment="Left" Height="125" Margin="45,-25,0,-10.667" VerticalAlignment="Top" Width="265">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="4*"/>
+                    <ColumnDefinition Width="19*"/>
+                </Grid.ColumnDefinitions>
+                <TextBox x:Name="emailTextBOx" Height="30" Margin="19,40,0,0" TextWrapping="Wrap" Text="xxx@xxx.xxx" VerticalAlignment="Top" HorizontalAlignment="Left" Width="165" Grid.ColumnSpan="2"/>
+                <Button x:Name="button" Style="{DynamicResource AdminWindow}" Content="שלח אימייל" HorizontalAlignment="Left" Height="25" Margin="60,85,0,0" VerticalAlignment="Top" Width="95" Click="button_Click" RenderTransformOrigin="1.712,0.787" Grid.ColumnSpan="2"/>
             </Grid>
         </GroupBox>
     </Grid>

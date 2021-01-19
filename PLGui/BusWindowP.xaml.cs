@@ -36,6 +36,9 @@ namespace PLGui
             RefreshDataBus();
             StatusComboBox.ItemsSource = Enum.GetValues(typeof(BO.STUTUS));
             buses.IsReadOnly = true;
+          
+            this.DataContext = newbus = new BO.Bus();
+            
             buses.ItemsSource = egged;
             buses.SelectedIndex = 0;
             StartingDate.DisplayDateEnd = DateTime.Today;
@@ -144,8 +147,9 @@ namespace PLGui
                 if (LincestextBox.Text != "" && StartingDate.Text != "")
                 {
                     add = false;
+                    
                     HelpAddBus();
-                    // newbus = GridDataBus.DataContext as BO.Bus;
+                 
                     bl.AddBus(newbus);
                     RefreshDataBus();
                     buses.SelectedIndex = egged.Count() - 1;

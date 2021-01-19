@@ -14,7 +14,7 @@
     </Page.Resources>
 
     <Grid Margin="10,15,-10,-15">
-        <Button x:Name="ChangeMail" Content="שינוי כתובת מייל" HorizontalAlignment="Left" Margin="421,190,0,0" VerticalAlignment="Top" Width="105" Height="35" Click="ChangeMail_Click"  Style="{DynamicResource AdminWindow}" FontSize="12"/>
+        <Button x:Name="ChangeMail" Content="שינוי כתובת מייל" HorizontalAlignment="Left" Margin="400,266,0,0" VerticalAlignment="Top" Width="105" Height="35" Click="ChangeMail_Click"  Style="{DynamicResource AdminWindow}" FontSize="12" RenderTransformOrigin="0.368,2.571"/>
         <Grid x:Name="ChangePasswordGrid" VerticalAlignment="Top" Margin="15,325,0,0" HorizontalAlignment="Left" DataContext="{StaticResource userViewSource}" Width="605" Height="110">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" MinHeight="60"/>
@@ -48,25 +48,25 @@
             <TextBox x:Name="Mail" Width="215" VerticalAlignment="Center" Text="{Binding MailAddress, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="15,31,0,3" Height="28" HorizontalAlignment="Left" Grid.Column="1" />
             <Button x:Name="ChangeMailButton" Content="אישור" HorizontalAlignment="Left" Margin="85,41,0,0" VerticalAlignment="Top" Width="75"   Style="{DynamicResource miniButton}" Click="ChangeMailButton_Click" Grid.ColumnSpan="2"/>
         </Grid>
-        <Button x:Name="ChangePass" Content="שינוי סיסמא" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Margin="199,190,0,0" Height="35" Click="ChangePass_Click"   Style="{DynamicResource AdminWindow}" FontSize="12" />
-        <GroupBox x:Name="det" Header="פרטי חשבון" HorizontalAlignment="Left" Height="120" Margin="185,65,0,0" VerticalAlignment="Top" Width="330" Style="{DynamicResource allGrpuoBox}" >
-            <Grid x:Name="UserDatGrid" VerticalAlignment="Top" Margin="20,20,0,0" HorizontalAlignment="Left" DataContext="{StaticResource userViewSource}" Height="75" Width="275">
+        <Button x:Name="ChangePass" Content="שינוי סיסמא" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Margin="155,266,0,0" Height="35" Click="ChangePass_Click"   Style="{DynamicResource AdminWindow}" FontSize="12" />
+        <GroupBox x:Name="det" Header="פרטי חשבון" HorizontalAlignment="Left" Height="155" Margin="150,105,0,0" VerticalAlignment="Top" Width="355" Style="{DynamicResource allGrpuoBox}" >
+            <Grid x:Name="UserDatGrid" VerticalAlignment="Top" Margin="0,20,0,0" HorizontalAlignment="Left" DataContext="{StaticResource userViewSource}" Height="100" Width="335">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto" MinHeight="50.667"/>
+                    <RowDefinition Height="Auto" MinHeight="49.333"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="179.333"/>
-                    <ColumnDefinition Width="1.333"/>
-                    <ColumnDefinition Width="Auto" MinWidth="93.333"/>
+                    <ColumnDefinition Width="218.667"/>
+                    <ColumnDefinition Width="0"/>
+                    <ColumnDefinition Width="Auto" MinWidth="116"/>
                 </Grid.ColumnDefinitions>
-                <Label VerticalAlignment="Center" Grid.Row="0" Margin="2.333,4,0,6" HorizontalAlignment="Left" Grid.Column="2" Content=":כתובת מייל" RenderTransformOrigin="1.215,0.731" Height="26" Width="84"/>
-                <TextBlock x:Name="mailAddressTextBlock" VerticalAlignment="Center" Text="{Binding MailAddress}" Grid.Row="0" Margin="5,10,0,10" HorizontalAlignment="Left" RenderTransformOrigin="-2.153,0.458" Width="164" Height="16"/>
-                <Label VerticalAlignment="Center" Grid.Row="1" Margin="2.333,9,0,3.667" HorizontalAlignment="Left" Grid.Column="2" Content=":שם משתמש" Width="80" Height="26"/>
-                <TextBlock x:Name="userNameTextBlock" VerticalAlignment="Center" Grid.Row="1" Margin="6,13,0,9.667" HorizontalAlignment="Left" Width="168" Height="16" TextAlignment="Right"><Run FlowDirection="RightToLeft" Text="{Binding UserName}"/></TextBlock>
+                <Label VerticalAlignment="Center" Grid.Row="0" Margin="1.333,12,0,12.667" HorizontalAlignment="Left" Grid.Column="2" Content=":כתובת מייל" RenderTransformOrigin="1.215,0.731" Height="26" Width="105" FontSize="14"/>
+                <TextBlock x:Name="mailAddressTextBlock" VerticalAlignment="Center" Text="{Binding MailAddress}" Grid.Row="0" Margin="5,18,0,10.667" HorizontalAlignment="Left" RenderTransformOrigin="-2.153,0.458" Width="214" Height="22" FontSize="14" Grid.ColumnSpan="3"/>
+                <Label VerticalAlignment="Center" Grid.Row="1" Margin="1.333,14.333,-0.333,1" HorizontalAlignment="Left" Grid.Column="2" Content=":שם משתמש" Width="115" Height="34" FontSize="14"/>
+                <TextBlock x:Name="userNameTextBlock" VerticalAlignment="Center" Grid.Row="1" Margin="6,18.333,0,11" HorizontalAlignment="Left" Width="213" Height="20" TextAlignment="Right" FontSize="14" Grid.ColumnSpan="3"><Run FlowDirection="RightToLeft" Text="{Binding UserName}"/></TextBlock>
             </Grid>
         </GroupBox>
-        <Rectangle HorizontalAlignment="Left" Height="450" Margin="0,35,0,-35" Stroke="Black" VerticalAlignment="Top" Width="640" OpacityMask="#FF1B0E0E"/>
+        <Rectangle HorizontalAlignment="Left" Height="450" Margin="15,10,0,-10" Stroke="#FF638BB7" VerticalAlignment="Top" Width="640" OpacityMask="#FF1B0E0E"/>
 
     </Grid>
 </Page>

@@ -10,7 +10,7 @@
         <Grid.Background>
             <ImageBrush ImageSource="StationBus.jpg" Opacity="0.5"/>
         </Grid.Background>
-        <ListView x:Name="yellow" HorizontalAlignment="Left" Height="165" Margin="30,20,0,0" VerticalAlignment="Top" Width="285"  Background="#FFD9D637" OpacityMask="Black" FontFamily="Segoe UI Semibold" FontSize="14">
+        <ListView x:Name="yellow" HorizontalAlignment="Left" Height="165" Margin="30,20,0,0" VerticalAlignment="Top" Width="290"  Background="#FFD9D637" OpacityMask="Black" FontFamily="Segoe UI Semibold" FontSize="14">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Width=" 50"  DisplayMemberBinding="{Binding LineNumber}" >
