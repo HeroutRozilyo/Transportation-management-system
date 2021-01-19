@@ -84,7 +84,7 @@ namespace PLGui
         private void Disengagement_Click(object sender, RoutedEventArgs e)
         {
 
-            LoginWindow wnd = new LoginWindow(bl);
+            MainWindow wnd = new MainWindow();
             this.Close();
             wnd.Show();
         }
@@ -96,7 +96,7 @@ namespace PLGui
 
         private void accountDatiels_Click(object sender, RoutedEventArgs e)
         {
-
+            frame.Content = (new AccountDetails(bl,userNow));
         }
 
         private void AddManeger_Click(object sender, RoutedEventArgs e)

@@ -38,7 +38,10 @@ namespace PLGui
 
         private void Disengagement_Click(object sender, RoutedEventArgs e)
         {
-
+            MainWindow a = new MainWindow();
+            a.Show();
+            this.Close();
+          
         }
 
         private void forward_Click(object sender, RoutedEventArgs e)

@@ -1424,6 +1424,7 @@ namespace BL
             {
                 DO.User a = new DO.User();
                 user.CopyPropertiesTo(a);
+                a.UserExist = true;
                 dl.UpdateUser(a);
             }
             catch(DO.WrongNameExeption ex)
@@ -1450,15 +1451,15 @@ namespace BL
                 return true;
             return false;
         }
-        public bool findUser(BO.User a)
+        public User findUser(BO.User a)
         {
             try
             {
                 User specUser = new User();
                 (dl.GetUser(a.UserName)).CopyPropertiesTo(specUser);
-                if (specUser.UserName != "" && specUser.Password == a.Password)
+                if (  specUser.Password == a.Password)
                 {
-                    return specUser.Admin;
+                    return specUser;
                 }
                 else throw new BO.BadNameExeption("אחד הנתונים שגויים", a.UserName);
             }

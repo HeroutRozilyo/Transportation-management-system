@@ -40,16 +40,16 @@ namespace PLGui
                     BO.User users = new BO.User();
                     users.UserName = txtUserName.Text;
                     users.Password = txtPassword.Password;
-                    bool ex = bl.findUser(users);
-                    if (ex)
+                   BO.User ex = bl.findUser(users);
+                    if (ex.Admin)
                     {
-                        AdminWindow wnd = new AdminWindow(bl, users);
+                        AdminWindow wnd = new AdminWindow(bl, ex);
                         wnd.Show();
 
                     }
                     else
                     {
-                        UserWindow wnd = new UserWindow(bl, users);
+                        UserWindow wnd = new UserWindow(bl, ex);
                         wnd.Show();
                     }
 
@@ -83,7 +83,7 @@ namespace PLGui
                         mail.From = new MailAddress("projectdh209@gmail.com");
                         mail.To.Add(user.MailAddress);
                         mail.Subject = "שחזור סיסמא";
-                        mail.Body = string.Format("Your Password is-{0}", user.Password);
+                        mail.Body = string.Format("Hello {0} ,your Password to GMG system is- {1} .It is recommended that you change your password the next time you log in. Good Day!", user.UserName,user.Password);
                         mail.IsBodyHtml = true;
 
 

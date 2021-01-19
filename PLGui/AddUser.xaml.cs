@@ -51,7 +51,7 @@ namespace PLGui
                     {
                         case MessageBoxResult.OK:
                             {
-                                break;
+                                return;
                             }
                         case MessageBoxResult.Cancel:
                             {
@@ -61,27 +61,52 @@ namespace PLGui
 
                     }
                 }
-                if (check())
+                if (pas.Count()>=8)
                 {
-                    var v = from item in allUser
-                            where item.MailAddress == mail
-                            select item;
-                    if (v.Count() != 0)
+                    if (check())
                     {
-                        MessageBox.Show(" כתובת  מייל כבר קייימת במערכת, בבקשה הכנס כתובת חדשה ", "שם משתמש", MessageBoxButton.OK, MessageBoxImage.Error);
-                        return;
+                        var v = from item in allUser
+                                where item.MailAddress == mail
+                                select item;
+                        if (v.Count() != 0)
+                        {
+                            MessageBox.Show(" כתובת  מייל כבר קייימת במערכת, בבקשה הכנס כתובת חדשה ", "שם משתמש", MessageBoxButton.OK, MessageBoxImage.Error);
+                            return;
+                        }
                     }
+                    else
+                    {
+                        MessageBoxResult result = MessageBox.Show(".הכנס כתובת אימייל תקינה ונסה שוב ", "New User", MessageBoxButton.OKCancel, MessageBoxImage.Error);
+                        switch (result)
+                        {
+                            case MessageBoxResult.OK:
+                                {
+                                    return;
+                                }
+                            case MessageBoxResult.Cancel:
+                                {
+                                    this.Close();
+                                    return;
+                                }
+
+                        }
+                    }
+
+
+
+
+                    if (admin)
+                        bl.AddUser(name, pas, true, mail);
+                    else
+                        bl.AddUser(name, pas, false, mail);
+                    MessageBox.Show(" החשבון נוצר בהצלחה ", "שם משתמש", MessageBoxButton.OK, MessageBoxImage.Information);
+                    this.DialogResult = true;
+                    this.Close();
                 }
-
-
-
-                if (admin)
-                    bl.AddUser(name, pas, true, mail);
                 else
-                    bl.AddUser(name, pas, false, mail);
-                MessageBox.Show(" החשבון נוצר בהצלחה ", "שם משתמש", MessageBoxButton.OK, MessageBoxImage.Information);
-                this.DialogResult = true;
-                this.Close();
+                {
+                    MessageBox.Show("  על הסיסמא להכיל לפחות 8 תווים", "", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
 
             }
             catch (BO.BadNameExeption ex)
