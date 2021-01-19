@@ -1380,6 +1380,11 @@ namespace BL
         #endregion
 
         #region User
+
+        #region get
+        /// <summary>
+        ///  return user from DO to BO
+        /// </summary>
         BO.User userDoBoAdapter(string name)
         {
             BO.User userBO = new BO.User();
@@ -1399,12 +1404,18 @@ namespace BL
 
             return userBO;
         }
+
+        /// <summary>
+        /// return specific user by his email. the email is uniqe 
+        /// </summary>
         public BO.User getUserByEmail(string email)
         {
             BO.User temp = new User();
             dl.getUserBy(b => b.MailAddress == email).CopyPropertiesTo(temp);
             return temp;
         }
+
+
         public IEnumerable<BO.User> GetAllUsers()
         {
             var v = from us in dl.GetAlluser()
@@ -1412,39 +1423,11 @@ namespace BL
                     select (BO.User)us.CopyPropertiesToNew(typeof(BO.User));
             return v;
         }
-        public void UpdateUser(User user)
-        {
-            try
-            {
-                DO.User a = new DO.User();
-                user.CopyPropertiesTo(a);
-                a.UserExist = true;
-                dl.UpdateUser(a);
-            }
-            catch (DO.WrongNameExeption ex)
-            {
-                throw new BO.BadNameExeption(user.UserName, "לא נמצאו פרטים במערכת עבור משתמש זה");
-            }
-        }
-        public void DeleteUser(User user)
-        {
 
-            try
-            {
-                dl.DeleteUser(user.UserName);
-            }
-            catch (DO.WrongNameExeption ex)
-            {
-                throw new BO.BadNameExeption(user.UserName, "לא נמצאו פרטים במערכת עבור משתמש זה");
-            }
-        }
-        public bool EmailExsit(string mail)
-        {
-            var v = getUserByEmail(mail);
-            if (v != null)
-                return true;
-            return false;
-        }
+
+        /// <summary>
+        /// return user
+        /// </summary>
         public User findUser(BO.User a)
         {
             try
@@ -1464,6 +1447,52 @@ namespace BL
         }
 
 
+        #endregion
+
+        #region update
+        /// <summary>
+        /// update data user like email or name... 
+        /// </summary>
+        public void UpdateUser(User user)
+        {
+            try
+            {
+                DO.User a = new DO.User();
+                user.CopyPropertiesTo(a);
+                a.UserExist = true;
+                dl.UpdateUser(a);
+            }
+            catch (DO.WrongNameExeption ex)
+            {
+                throw new BO.BadNameExeption(user.UserName, "לא נמצאו פרטים במערכת עבור משתמש זה");
+            }
+        }
+        #endregion
+
+        #region delete
+        public void DeleteUser(User user)
+        {
+
+            try
+            {
+                dl.DeleteUser(user.UserName);
+            }
+            catch (DO.WrongNameExeption ex)
+            {
+                throw new BO.BadNameExeption(user.UserName, "לא נמצאו פרטים במערכת עבור משתמש זה");
+            }
+        }
+
+        #endregion
+
+        
+        public bool EmailExsit(string mail)
+        {
+            var v = getUserByEmail(mail);
+            if (v != null)
+                return true;
+            return false;
+        }
 
         ///// <summary>
         ///// calucate time travel between 2 stations
@@ -1471,7 +1500,6 @@ namespace BL
         ///// <param name="line"></the line that travel between these 2 stations>
         ///// <param name="cod1"></station 1>
         ///// <param name="cod2"></staton 2>
-        ///// <returns></returns>
         public double CalucateTime(BO.Line line, int cod1, int cod2)
         {
             double time = 0;
@@ -1484,7 +1512,6 @@ namespace BL
             }
             return time;
         }
-
 
         //    /// <summary>
         //    /// find path between 2 stations. we enable to return path onlly if we need travel with one line or 2, more is a ling long algoritem
@@ -1612,9 +1639,11 @@ namespace BL
             }
         }
 
+        #region add
         public void AddUser(string name, string pas, bool admin, string email)
         {
             DO.User userDO = new DO.User();
+            //create user DO to add
             userDO.UserName = name;
             userDO.Admin = admin;
             userDO.Password = pas;
@@ -1633,13 +1662,10 @@ namespace BL
 
             IEnumerable<DO.User> users = dl.GetAlluser();
         }
-
-
-
         #endregion
 
 
-
+        #endregion
 
 
         #region Simulator
@@ -1655,7 +1681,12 @@ namespace BL
         }
 
         #endregion
+
+
         #region LineTiming
+        /// <summary>
+        ///  at this func we calucate the arrival ime to specific station. when the line that move at the station arrival. we return the all timing of arrival
+        /// </summary>
         public IEnumerable<BO.LineTiming> GetLineStationLineTimer(Station station, TimeSpan timeStart)
         {
             List<BO.LineTiming> lineTimings = new List<BO.LineTiming>();
@@ -1666,12 +1697,14 @@ namespace BL
                 foreach (DO.LineTrip lineTrip in lineTrips)//over the line trip of the line
                 {
                     TimeSpan ExitTime = lineTrip.StartAt;
-                    int a = Convert.ToInt32(CalucateTime(lineDoBoAdapter(item.LineId), temp.FirstStationCode, station.Code));
-                    if (a == 0) continue;
-                    TimeSpan b = new TimeSpan(0, a, 0);
+                    int a = Convert.ToInt32(CalucateTime(lineDoBoAdapter(item.LineId), temp.FirstStationCode, station.Code)); //have the time travel between the station in minuts
+                    TimeSpan b;
+                    if (a == 0) //its mean that this station is the first station of the line travel
+                        b = new TimeSpan(0, 0, 0); 
+                    else
+                        b = new TimeSpan(0, a, 0);
 
-                   
-                    while (ExitTime <= lineTrip.FinishAt)
+                    while (ExitTime <= lineTrip.FinishAt) //if the current time is smaller then end of the line trip time so add to the list to return
                     {
 
                         BO.LineTiming lineTiming = new BO.LineTiming()
@@ -1697,6 +1730,8 @@ namespace BL
                     }
                 }
             }
+
+            // we want to return onlly the first arrivle time of the line to the station. 
             IEnumerable<LineTiming> lineTimings1 = lineTimings.OrderBy(b => b.ExpectedTimeArrive);
             List<LineTiming> toReturn = new List<LineTiming>();
             List<int> goodLine = new List<int>();
