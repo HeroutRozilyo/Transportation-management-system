@@ -16,7 +16,7 @@
         <TextBox Name="txtUserName" Margin="245,85,321,301"></TextBox>
         <Label Content=":סיסמא" Margin="475,136,233.333,244.667" Style="{DynamicResource Label}" FontSize="16"></Label>
         <PasswordBox Name="txtPassword"   Margin="245,140,321,246"></PasswordBox>
-        <Button Name="btnSubmit" Style="{DynamicResource LoginButton}" Content="כניסה" Click="Click_Submit" Margin="105,200,593.333,185.667" FontSize="12"/>
+        <Button Name="btnSubmit" Style="{DynamicResource LoginButton}" Content="כניסה" Click="Click_Submit" Margin="135,175,563,201" FontSize="12"/>
 
 
 

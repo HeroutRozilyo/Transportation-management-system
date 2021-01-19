@@ -156,7 +156,7 @@ namespace PLGui
             string newMail = Mail.Text;
             if (newMail.Count() != 0)
             {
-                if (check())
+                if (check())//To check if the Mail Address proper
                 {
                     if (newMail == userNow.MailAddress)
                     {
@@ -233,11 +233,13 @@ namespace PLGui
 
 
         }
+        #endregion
+
+        #region More Func
         public bool check()
-        //הפונקציה בודקת את נכונות הפרטים שהמשתמש הכניס למערכת
-        {//בדיקה למייל
-            Regex regex = new Regex(@"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$");
+        {     Regex regex = new Regex(@"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$");
             return regex.IsMatch(Mail.Text);
         }
+        #endregion
     }
 }

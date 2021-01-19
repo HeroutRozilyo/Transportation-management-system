@@ -11,10 +11,11 @@ using System.Windows.Input;
 namespace PLGui
 {
     /// <summary>
-    /// Interaction logic for AddLine.xaml
+    /// Add New lIne Window
     /// </summary>
     public partial class AddLine : Window
     {
+        #region reset
         private IBL bl;
         private ObservableCollection<BO.Station> GetStations = new ObservableCollection<BO.Station>();
         private ObservableCollection<BO.Station> allStations = new ObservableCollection<BO.Station>();
@@ -25,7 +26,12 @@ namespace PLGui
         int keepLineID = 0;
         BO.Line newLine = new BO.Line();
         private BO.Line line;
+        #endregion
 
+        #region to return
+        /// <summary>
+        /// to Return the new Line and is Station List  to LineWindow
+        /// </summary>
         public BO.Line NewLine
         {
 
@@ -35,6 +41,7 @@ namespace PLGui
             }
 
         }
+
         public List<BO.LineStation> StationList
         {
 
@@ -44,16 +51,18 @@ namespace PLGui
             }
 
         }
+        #endregion
 
+        #region Constructors
+        [Obsolete("not using",true)]
         public AddLine()
         {
             InitializeComponent();
         }
-        public ObservableCollection<T> ConvertList<T>(IEnumerable<T> listFromBO)
-        {
-            return new ObservableCollection<T>(listFromBO);
-        }
-
+       
+        /// <summary>
+        /// for new Line
+        /// </summary>
         public AddLine(IBL bl)
         {
             InitializeComponent();
@@ -73,7 +82,10 @@ namespace PLGui
 
 
         }
-
+       
+    /// <summary>
+    /// for update line Station
+    /// </summary>
         public AddLine(BO.Line line, IBL bl)
         {
             InitializeComponent();
@@ -88,6 +100,11 @@ namespace PLGui
             orderGrid();
             RefreshStation();
 
+        }
+        #endregion
+        public ObservableCollection<T> ConvertList<T>(IEnumerable<T> listFromBO)
+        {
+            return new ObservableCollection<T>(listFromBO);
         }
 
         private void orderGrid()
