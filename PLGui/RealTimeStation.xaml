@@ -23,7 +23,7 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <ListView x:Name="RealTimeStationLine" HorizontalAlignment="Left" Height="190" VerticalAlignment="Top" Width="408" RenderTransformOrigin="3.635,1.893" Margin="355,20,0,0" Background="#FF2A2626" Foreground="#FFDFE2E9" IsSynchronizedWithCurrentItem="True" FontFamily="Segoe UI Semibold" >
+        <ListView x:Name="RealTimeStationLine" HorizontalAlignment="Left" Height="190" VerticalAlignment="Top" Width="415" RenderTransformOrigin="3.635,1.893" Margin="355,20,0,0" Background="#FF2A2626" Foreground="#FFDFE2E9" IsSynchronizedWithCurrentItem="True" FontFamily="Segoe UI Semibold" >
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="קו"   DisplayMemberBinding="{Binding LineNumber}" Width="50"/>

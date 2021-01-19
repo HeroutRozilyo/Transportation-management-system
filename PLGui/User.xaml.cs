@@ -143,7 +143,7 @@ namespace PLGui
         private ObservableCollection<BO.Station> stations = new ObservableCollection<BO.Station>();
         private IEnumerable<BO.Line> lineStation;
         int oldCode;
-        bool add = false;
+        private bool add = false;
         private void RefreshStationall()
         {
             stations = ConvertList(bl.GetAllStations());//to make ObservableCollection
@@ -167,7 +167,7 @@ namespace PLGui
                     oldCode = stationData1.Code;
                     lineStation = bl.GetAllLineIndStation(stationData1.Code);
                 }
-                catch (BO.BadIdException ex)
+                catch (BO.BadIdException )
                 {
 
                 }

@@ -34,7 +34,6 @@ namespace PLGui
         TimeSpan startTimeSimulator;
         int rate;
         public event PropertyChangedEventHandler PropertyChanged;
-        public Timer timer = new Timer();
         private List<LineTiming> lineAtStation = new List<LineTiming>();
         private List<int> goodLine = new List<int>();
         private IEnumerable<Object> yellowBoard;
@@ -62,7 +61,7 @@ namespace PLGui
 
                 bl.StartSimulator(startTimeSimulator, rate, (time) => timerWorker.ReportProgress(0, time));
                 while (!timerWorker.CancellationPending) try { Thread.Sleep(1000000); }
-                    catch (ThreadInterruptedException a)
+                    catch (ThreadInterruptedException )
                     {
 
                     }

@@ -5,7 +5,7 @@ using System.Threading;
 
 namespace BO
 {
-    public class ClockS : INotifyPropertyChanged
+    public class ClockS 
     {
         #region singelton
         static readonly ClockS instance = new ClockS();
@@ -35,7 +35,7 @@ namespace BO
         }
         public TimeSpan startTime;
 
-        public event PropertyChangedEventHandler PropertyChanged;
+       
 
         public void Start(TimeSpan mstartTime, int mrate)
         {
