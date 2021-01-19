@@ -1277,7 +1277,7 @@ namespace DL
 
 
 
-        public IEnumerable<LineStation> GetAllStationsCode(int code)
+        public IEnumerable<LineStation> GetAllStationsCodeline(int code)
         {
             try
             {

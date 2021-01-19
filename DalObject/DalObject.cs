@@ -19,7 +19,7 @@ namespace DL
 
         #region Bus
 
-        #region AllGetBus
+        #region get
 
         public DO.Bus GetBus(string licence)
         {
@@ -56,6 +56,7 @@ namespace DL
 
         #endregion AllGetBus
 
+        #region add
         public int AddBus(DO.Bus bus)
         {
             if (DataSource.ListBus.FirstOrDefault(b => b.Licence == bus.Licence) != null) //if != null its means that this licence is allready exsis
@@ -65,7 +66,9 @@ namespace DL
             return 1;
         }
 
+        #endregion
 
+        #region delete
         public bool DeleteBus(string licence)
         {
             int indexOfBus = DataSource.ListBus.FindIndex(b => b.Licence == licence);
@@ -79,6 +82,9 @@ namespace DL
             else
                 throw new DO.WrongLicenceException(int.Parse(licence), "מספר הרישוי לא קיים במערכת");
         }
+        #endregion
+
+        #region update
         public bool UpdateBus(DO.Bus bus)
         {
             int indexOftheBUs = DataSource.ListBus.FindIndex(b => b.Licence == bus.Licence);
@@ -94,13 +100,15 @@ namespace DL
             else
                 throw new DO.WrongLicenceException(int.Parse(bus.Licence), "מספר הרישוי לא קיים במערכת");
         }
-
+        #endregion
 
 
 
         #endregion Bus
 
         #region Line
+
+        #region get
         public DO.Line GetLine(int idline)
         {
             DO.Line line = DataSource.ListLine.Find(l => l.IdNumber == idline);
@@ -110,17 +118,6 @@ namespace DL
                 throw new DO.WrongIDExeption(idline, " הקו לא קיים במערכת ");
 
         }
-
-        public int AddLine(DO.Line line)
-        {
-            //eliezer told us that we can do here checking because check according to idnumber is meaningless
-            line.IdNumber = ++DS.Config.idLineCounter;
-
-            DataSource.ListLine.Add(line.Clone());
-            return line.IdNumber;
-
-        }
-
         public IEnumerable<DO.Line> GetAllLineBy(Predicate<DO.Line> linecondition)//return according to condition and just the working line
         {
             var list = from line in DataSource.ListLine
@@ -134,6 +131,20 @@ namespace DL
                    where line.LineExist
                    select line.Clone();
         }
+        #endregion
+
+        #region add
+        public int AddLine(DO.Line line)
+        {
+            //eliezer told us that we can do here checking because check according to idnumber is meaningless
+            line.IdNumber = ++DS.Config.idLineCounter;
+
+            DataSource.ListLine.Add(line.Clone());
+            return line.IdNumber;
+
+        }
+        #endregion
+
 
 
         //public IEnumerable<DO.Line> GetAllLinesArea(DO.AREA area) //return all the buses that we have
@@ -143,6 +154,7 @@ namespace DL
         //           select line.Clone();
         //}
 
+        #region update
         public void UpdateLine(DO.Line line)
         {
             DO.Line tempLine = DataSource.ListLine.Find(b => b.IdNumber == line.IdNumber && b.LineExist == true);
@@ -154,9 +166,9 @@ namespace DL
             else
                 throw new DO.WrongIDExeption(line.IdNumber, " הקו לא קיין במערכת ");
         }
+        #endregion
 
-
-
+        #region delete
         public void DeleteLine(int idnumber)
         {
 
@@ -164,11 +176,14 @@ namespace DL
             LineToDelete.LineExist = false;
 
         }
+        #endregion
 
         #endregion Line
 
-        //
+
         #region Stations
+
+        #region get
         public DO.Stations GetStations(int code) //check if the Stations exsis according to the code
         {
             DO.Stations stations = DataSource.ListStations.Find(b => b.Code == code && b.StationExist);
@@ -194,7 +209,9 @@ namespace DL
                        select stations.Clone();
             return list;
         }
+        #endregion
 
+        #region add
         public void AddStations(DO.Stations station)
         {
             if (DataSource.ListStations.FirstOrDefault(b => b.Code == station.Code) != null) //if != null its means that this licence is allready exsis
@@ -202,8 +219,9 @@ namespace DL
             station.StationExist = true;
             DataSource.ListStations.Add(station.Clone());
         }
+        #endregion
 
-
+        #region delete
         public void DeleteStations(int code)
         {
             DO.Stations stations = DataSource.ListStations.Find(b => b.Code == code && b.StationExist);
@@ -215,7 +233,9 @@ namespace DL
             else
                 throw new DO.WrongIDExeption(code, "התחנה לא קיימת במערכת");//////////////////////////////////////////////////////
         }
+        #endregion
 
+        #region update
         public void UpdateStations(DO.Stations stations1, int OldCode)
         {
             DO.Stations station = DataSource.ListStations.Find(b => b.Code == OldCode && b.StationExist);
@@ -227,10 +247,11 @@ namespace DL
             else
                 throw new DO.WrongIDExeption(OldCode, "התחנה לא קיימת במערכת");///////////////////////////////////////////////////////
         }
-
+        #endregion
         #endregion Stations
 
         #region LineStation
+        #region get
         public DO.LineStation GetLineStation(int Scode, int idline) //return specific stations according to code of the station and line that Passing through it
         {
             DO.LineStation linestations = DataSource.ListLineStations.Find(b => b.StationCode == Scode && b.LineId == idline && b.LineStationExist == true);
@@ -250,12 +271,12 @@ namespace DL
         //           select station.Clone();
         //}
 
-        public IEnumerable<DO.LineStation> GetAllStationsCode(int code) //return all the lines at this station
-        {
-            return from station in DataSource.ListLineStations
-                   where (station.StationCode == code)
-                   select station.Clone();
-        }
+        //public IEnumerable<DO.LineStation> GetAllStationsCodeline(int code) //return all the lines at this station
+        //{
+        //    return from station in DataSource.ListLineStations
+        //           where (station.StationCode == code)
+        //           select station.Clone();
+        //}
 
         public IEnumerable<DO.LineStation> GetAllLineStationsBy(Predicate<DO.LineStation> StationsLinecondition)
         {
@@ -264,8 +285,9 @@ namespace DL
                        select stations.Clone();
             return list;
         }
+        #endregion
 
-
+        #region add
         public void AddLineStations(DO.LineStation station)
         {
             DO.LineStation temp = DataSource.ListLineStations.Find(b => b.StationCode == station.StationCode && b.LineId == station.LineId && b.LineStationExist);
@@ -273,7 +295,9 @@ namespace DL
                 throw new DO.WrongIDExeption(station.StationCode, "  מצטערים! קוד התחנה קיים כבר במערכת");/////////////////////////////////////////////////////////////////
             DataSource.ListLineStations.Add(station.Clone());
         }
+        #endregion
 
+        #region delete
         public int DeleteStationsFromLine(int Scode, int idline)//delete Station from line (spesific)
         {
             DO.LineStation stations = DataSource.ListLineStations.Find(b => b.StationCode == Scode && b.LineId == idline && b.LineStationExist);
@@ -304,9 +328,10 @@ namespace DL
 
         }
 
+        #endregion
 
-        //
-        public void UpdateLineStations(DO.LineStation linestations)
+        #region update
+        public void UpdateLineStations(DO.LineStation linestations) //when we delete station we need delete all the line station with the same code. we use at this func
         {
             DO.LineStation station = DataSource.ListLineStations.Find(b => b.StationCode == linestations.StationCode && b.LineId == linestations.LineId && b.LineStationExist);
             if (station != null)
@@ -317,7 +342,7 @@ namespace DL
             else
                 throw new DO.WrongIDExeption(linestations.StationCode, "מצטערים! לא נמצאו פרטים על התחנה המבוקשת");///////////////////////////////////////////////////////
         }
-        public void UpdateLineStationsCode(DO.LineStation linestations, int oldCode)
+        public void UpdateLineStationsCode(DO.LineStation linestations, int oldCode) //if the maneger change the identity code of the station we needto get the old code to find the line station and update all of them 
         {
             DO.LineStation station = DataSource.ListLineStations.Find(b => b.StationCode == linestations.StationCode && b.LineId == linestations.LineId && b.LineStationExist);
             if (station != null)
@@ -329,12 +354,12 @@ namespace DL
             else
                 throw new DO.WrongIDExeption(linestations.StationCode, "לא קיים פרטים במערכת על התחנה המבוקשת או שאחד מהנתוונים שהכנסת שגוי");///////////////////////////////////////////////////////
         }
-
+        #endregion
 
         #endregion LineStation
 
         #region LineTrip
-
+        #region get
         public DO.LineTrip GetLineTrip(TimeSpan start, int idline) //return specific linetrip according to start time and id line 
         {
             DO.LineTrip linetrip = DataSource.ListLineTrip.Find(b => b.KeyId == idline && b.StartAt == start && b.TripLineExist == true);
@@ -347,12 +372,12 @@ namespace DL
 
         }
 
-        public IEnumerable<DO.LineTrip> GetAllTripline(int idline) //return all the lineTrip of specific line
-        {
-            return from linetrip in DataSource.ListLineTrip
-                   where (linetrip.KeyId == idline && linetrip.TripLineExist == true)
-                   select linetrip.Clone();
-        }
+        //public IEnumerable<DO.LineTrip> GetAllTripline(int idline) //return all the lineTrip of specific line
+        //{
+        //    return from linetrip in DataSource.ListLineTrip
+        //           where (linetrip.KeyId == idline && linetrip.TripLineExist == true)
+        //           select linetrip.Clone();
+        //}
 
 
         public IEnumerable<DO.LineTrip> GetAllLineTripsBy(Predicate<DO.LineTrip> StationsLinecondition)
@@ -362,26 +387,31 @@ namespace DL
                        select linetrip.Clone();
             return list;
         }
+        #endregion
 
+        #region add
         public void AddLineTrip(DO.LineTrip lineTrip)
         {
             DataSource.ListLineTrip.Add(lineTrip.Clone());
         }
+        #endregion
 
+        #region delete
         public void DeleteLineTrip(int idline) //when we delete line we need to delete his line trip
         {
             foreach (var item in DataSource.ListLineTrip)
                 if (item.KeyId == idline)
                     item.TripLineExist = false;
         }
-        public void DeleteLineTrip1(DO.LineTrip lineTrip) //when we delete line we need to delete his line trip
+        public void DeleteLineTrip1(DO.LineTrip lineTrip) //when we want to delete specific line trip from line 
         {
             int index = DataSource.ListLineTrip.FindIndex(b => b.KeyId == lineTrip.KeyId && b.StartAt == lineTrip.StartAt && b.FinishAt == lineTrip.FinishAt);
             DataSource.ListLineTrip[index].TripLineExist = false;
 
         }
+        #endregion
 
-
+        #region update
         public void UpdatelineTrip(DO.LineTrip lineTrip)
         {
             DO.LineTrip station = DataSource.ListLineTrip.Find(b => b.KeyId == lineTrip.KeyId && lineTrip.StartAt == b.StartAt && lineTrip.TripLineExist == true);
@@ -393,12 +423,12 @@ namespace DL
             else
                 throw new DO.WrongLineTripExeption(lineTrip.KeyId, "לא נמצאו זמני נסיעות עבור קו זה");///////////////////////////////////////////////////////
         }
-
+        #endregion
 
         #endregion LineTrip
 
         #region AdjacentStations
-
+        #region get
         public DO.AdjacentStations GetAdjacentStations(int Scode1, int Scode2) //return specific AdjacentStations
         {
             DO.AdjacentStations linestations = DataSource.ListAdjacentStations.Find(b => b.Station1 == Scode1 && b.Station2 == Scode2);//|| b.Station1 == Scode2 && b.Station2 == Scode1);
@@ -411,16 +441,13 @@ namespace DL
 
         }
 
-        public IEnumerable<DO.AdjacentStations> GetAllAdjacentStations(int stationCode) //return all the AdjacentStations that we have for this station code
-        {
-            var v = from station in DataSource.ListAdjacentStations
-                    where (stationCode == station.Station1 || stationCode == station.Station2)
-                    select station.Clone();
-            return v;
-        }
-
-
-
+        //public IEnumerable<DO.AdjacentStations> GetAllAdjacentStations(int stationCode) //return all the AdjacentStations that we have for this station code
+        //{
+        //    var v = from station in DataSource.ListAdjacentStations
+        //            where (stationCode == station.Station1 || stationCode == station.Station2)
+        //            select station.Clone();
+        //    return v;
+        //}
 
         public IEnumerable<DO.AdjacentStations> GetAllAdjacentStationsBy(Predicate<DO.AdjacentStations> StationsLinecondition)
         {
@@ -429,7 +456,9 @@ namespace DL
                        select stations.Clone();
             return list;
         }
+        #endregion
 
+        #region add
         public void AddLineStations(DO.AdjacentStations adjacentStations)
         {
             DO.AdjacentStations temp = DataSource.ListAdjacentStations.Find(b => b.Station1 == adjacentStations.Station1 && b.Station2 == adjacentStations.Station2);
@@ -437,18 +466,11 @@ namespace DL
                 throw new DO.WrongIDExeption(adjacentStations.Station1, " התחנה עוקבת כבר קיימת במערכת");/////////////////////////////////////////////////////////////////
             DataSource.ListAdjacentStations.Add(adjacentStations.Clone());
         }
+        #endregion
 
-        //public void DeleteAdjacentStationse(int Scode1, int Scode2)
-        //{
-        //    DO.AdjacentStations stations = DataSource.ListAdjacentStations.Find(b => b.Station1 == Scode1 && b.Station2 == Scode2);
-        //    if (stations != null)
-        //    {
-        //        DataSource.ListAdjacentStations.Remove(stations);
-        //    }
-        //    else
-        //        throw new DO.WrongIDExeption(Scode1, "לא נמצאו פרטים עבור התחנה עוקבת המבוקשת");//////////////////////////////////////////////////////
-        //}
-        public void DeleteAdjacentStationseBStation(int Scode1)////
+        #region delete
+
+        public void DeleteAdjacentStationseBStation(int Scode1)// if we delete station we need to delete all the adjacte station with the station we delete
         {
 
             var v = from item in DataSource.ListAdjacentStations
@@ -461,8 +483,10 @@ namespace DL
 
 
         }
+        #endregion
 
-        public void UpdateAdjacentStations(DO.AdjacentStations adjacentStations)
+        #region update
+        public void UpdateAdjacentStations(DO.AdjacentStations adjacentStations) //if the maneger change data and we need  update
         {
             DO.AdjacentStations station = DataSource.ListAdjacentStations.Find(b => b.Station1 == adjacentStations.Station1 && b.Station2 == adjacentStations.Station2);
             if (station != null)
@@ -473,9 +497,8 @@ namespace DL
             else
                 throw new DO.WrongIDExeption(adjacentStations.Station1, "לא נמצאו פרטים עבור התחנה עוקבת המבוקשת");///////////////////////////////////////////////////////
         }
-
-
-        public void UpdateAdjacentStations(int code1, int code2, int codeChange, int oldCode)
+        public void UpdateAdjacentStations(int code1, int code2, int codeChange, int oldCode) //if we change the number identity of the station we need update the adjace station at the change
+         // so we get here the old code on the from the station that change and the new code. In addition we get the 2 code of the station(prev one) to find the station to update   
         {
             DO.AdjacentStations station = DataSource.ListAdjacentStations.Find(b => b.Station1 == code1 && b.Station2 == code2);
             if (station != null)
@@ -491,10 +514,13 @@ namespace DL
             else
                 throw new DO.WrongIDExeption(code1, "לא נמצאו פרטים עבור התחנה עוקבת המבוקשת");///////////////////////////////////////////////////////
         }
+        #endregion
+
         #endregion AdjacentStations
 
         #region User
 
+        #region get
         public DO.User GetUser(string name) //check if the user exsis according to the name
         {
             DO.User user = DataSource.ListUsers.Find(b => b.UserName == name && b.UserExist);
@@ -525,19 +551,12 @@ namespace DL
         //           select user.Clone();
         //}
 
-        public IEnumerable<DO.User> GetAlluserBy(Predicate<DO.User> userConditions) //איך כותבים??
+        public IEnumerable<DO.User> GetAlluserBy(Predicate<DO.User> userConditions) 
         {
             var users = from u in DataSource.ListUsers
                         where (u.UserExist && userConditions(u))
                         select u.Clone();
             return users;
-        }
-
-        public void AddUser(DO.User user)
-        {
-            if (DataSource.ListUsers.FirstOrDefault(b => b.UserName == user.UserName) != null) //if != null its means that this name is allready exsis
-                throw new DO.WrongNameExeption(user.UserName, "שם משתמש כבר קיים במערכת, בבקשה הכנס שם אחר");/////////////////////////////////////////////////////////////////
-            DataSource.ListUsers.Add(user.Clone());
         }
         public DO.User getUserBy(Predicate<DO.User> userConditions)
         {
@@ -546,8 +565,18 @@ namespace DL
                         select u.Clone();
             return users.ElementAt(0);
         }
+        #endregion
 
+        #region add
+        public void AddUser(DO.User user)
+        {
+            if (DataSource.ListUsers.FirstOrDefault(b => b.UserName == user.UserName) != null) //if != null its means that this name is allready exsis
+                throw new DO.WrongNameExeption(user.UserName, "שם משתמש כבר קיים במערכת, בבקשה הכנס שם אחר");/////////////////////////////////////////////////////////////////
+            DataSource.ListUsers.Add(user.Clone());
+        }
+        #endregion
 
+        #region delete
         public void DeleteUser(string name)
         {
             DO.User userDelete = DataSource.ListUsers.Find(b => b.UserName == name && b.UserExist);
@@ -560,6 +589,10 @@ namespace DL
                 throw new DO.WrongNameExeption(name, "לא נמצאו פרטים במערכת עבור משתמש זה");//////////////////////////////////////////////////////
         }
 
+        #endregion
+
+
+        #region update
         public void UpdateUser(DO.User user)
         {
             DO.User u = DataSource.ListUsers.Find(b => b.UserName == user.UserName && b.UserExist);
@@ -571,8 +604,12 @@ namespace DL
             else
                 throw new DO.WrongNameExeption(user.UserName, "לא נמצאו פרטים במערכת עבור משתמש זה");///////////////////////////////////////////////////////
         }
+        #endregion
 
         #endregion User
+
+
+
 
         #region Trip
 
