@@ -13,7 +13,7 @@ using System.Windows.Input;
 namespace PLGui
 {
     /// <summary>
-    /// Interaction logic for User.xaml
+    /// Interaction logic for User.xaml. when we search on path between 2 stations
     /// </summary>
     public partial class User : Page
     {
@@ -33,46 +33,49 @@ namespace PLGui
 
 
 
-
+        /// <summary>
+        /// defult constructor
+        /// </summary>
         public User()
         {
             InitializeComponent();
 
-            RefreshStation();
+            //to unsert data to the window
+            RefreshStation(); 
             RefreshStationall();
             realTime.Visibility = Visibility.Hidden;
 
-
-
         }
 
+        /// <summary>
+        /// convert the ienumerable from BO to be a collection observer
+        /// </summary>
         public ObservableCollection<T> ConvertList<T>(IEnumerable<T> listFromBO)
         {
             return new ObservableCollection<T>(listFromBO);
         }
 
+        /// <summary>
+        /// refresh the window of station
+        /// </summary>
         private void RefreshStation()
         {
+            //we need 2 list in order to do the 2 combobox not to depent
             stations1 = ConvertList(bl.GetAllStations());//to make ObservableCollection
             stations2 = ConvertList(bl.GetAllStations());
-            foreach (var item in stations1)
+            foreach (var item in stations1)//creat the first combobox
             {
                 ComboBoxItem newItem1 = new ComboBoxItem();
                 newItem1.Content = item.Code + "   " + item.Name;
                 station1.Items.Add(newItem1);
 
             }
-            foreach (var item in stations2)
+            foreach (var item in stations2)//creat the secont combobox
             {
                 ComboBoxItem newItem2 = new ComboBoxItem();
                 newItem2.Content = item.Code + "   " + item.Name;
                 station2.Items.Add(newItem2);
             }
-
-
-
-
-
 
         }
 
