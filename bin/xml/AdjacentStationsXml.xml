@@ -50,20 +50,6 @@
     <AdjacExsis>true</AdjacExsis>
   </AdjacentStations>
   <AdjacentStations>
-    <Station1>86</Station1>
-    <Station2>88</Station2>
-    <Distance>338.193775824042</Distance>
-    <TimeAverage>0.760943605040145</TimeAverage>
-    <AdjacExsis>true</AdjacExsis>
-  </AdjacentStations>
-  <AdjacentStations>
-    <Station1>88</Station1>
-    <Station2>89</Station2>
-    <Distance>839.108713036705</Distance>
-    <TimeAverage>1.888013484467431</TimeAverage>
-    <AdjacExsis>true</AdjacExsis>
-  </AdjacentStations>
-  <AdjacentStations>
     <Station1>89</Station1>
     <Station2>90</Station2>
     <Distance>4972.12709975181</Distance>
@@ -411,6 +397,20 @@
     <Station2>1488</Station2>
     <Distance>650.976014538566</Distance>
     <TimeAverage>1.4647106798185718</TimeAverage>
+    <AdjacExsis>true</AdjacExsis>
+  </AdjacentStations>
+  <AdjacentStations>
+    <Station1>88</Station1>
+    <Station2>89</Station2>
+    <Distance>839.108713036705</Distance>
+    <TimeAverage>10</TimeAverage>
+    <AdjacExsis>true</AdjacExsis>
+  </AdjacentStations>
+  <AdjacentStations>
+    <Station1>86</Station1>
+    <Station2>88</Station2>
+    <Distance>70</Distance>
+    <TimeAverage>0.760943605040145</TimeAverage>
     <AdjacExsis>true</AdjacExsis>
   </AdjacentStations>
 </ArrayOfAdjacentStations>
