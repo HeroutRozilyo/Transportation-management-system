@@ -21,12 +21,14 @@ namespace BL
         #endregion
 
         #region Bus
+
         int MaxkM = 20000;
+
+        #region get
         /// <summary>
         ///  return the busBO according to licence
         /// </summary>
         /// <param name="licence_"=id number>
-        /// <returns></returns>
         BO.Bus busDoBoAdapter(string licence_)
         {
             string licence = (licence_).Replace("-", "");
@@ -45,7 +47,7 @@ namespace BL
             busDO.CopyPropertiesTo(busBO);
             busBO.BusExsis = true;
 
-
+            //check if the licence is correct
             string firstpart, middlepart, endpart, result;
             if (licence_.Length == 7)
             {
@@ -85,6 +87,9 @@ namespace BL
         //}
 
         //if the licence not goot this func will throw exeption
+        #endregion
+
+        #region add
         public int AddBus(BO.Bus bus)
         {
             bool okey = checkLicence(bus);
@@ -107,16 +112,9 @@ namespace BL
             }
             return 1;
         }
+        #endregion
 
-        public STUTUS checkingStatus(Bus bus)//return the current status of this bus
-        {
-            DateTime a = bus.LastTreatment ;
-            if (bus.FuellAmount != 0 && bus.KilometrFromLastTreat < MaxkM && a.AddYears(1) >= DateTime.Today)
-            {
-                return STUTUS.READT_TO_TRAVEL;
-            }
-            else return STUTUS.INVALID;
-        }
+        #region delete
         //delete bus according to his licence
         public bool DeleteBus(string licence_)
         {
@@ -133,7 +131,9 @@ namespace BL
             }
             return true;
         }
+        #endregion
 
+        #region update
         //updat bus
         public BO.Bus UpdateBus(BO.Bus bus)
         {
@@ -154,7 +154,9 @@ namespace BL
             IEnumerable<DO.Bus> temp = dl.GetAllBuses();
             return bus;
         }
+        #endregion
 
+        #region check
         //check if the new licence that the passenger enter is valid
         bool checkLicence(BO.Bus bus)
         {
@@ -183,8 +185,18 @@ namespace BL
                 throw new BO.BadBusLicenceException("מספר הרישוי שהוכנס אינו חוקי, בבקשה אכנס מספר רישוי בעל 7 או 8 ספרות בהתאם לשנת הייצור", Convert.ToInt32(licence));
         }
 
+        public STUTUS checkingStatus(Bus bus)//return the current status of this bus
+        {
+            DateTime a = bus.LastTreatment;
+            if (bus.FuellAmount != 0 && bus.KilometrFromLastTreat < MaxkM && a.AddYears(1) >= DateTime.Today)
+            {
+                return STUTUS.READT_TO_TRAVEL;
+            }
+            else return STUTUS.INVALID;
+        }
+        #endregion
 
-
+        #region treatfunc
         //update the new fuel
         public BO.Bus Refuelling(BO.Bus bus)
         {
@@ -217,12 +229,14 @@ namespace BL
 
             return bus;
         }
-
+        #endregion
 
 
         #endregion
 
         #region Line
+
+        #region GetLine
         /// <summary>
         ///  return the line according his id number
         /// </summary>
@@ -297,16 +311,14 @@ namespace BL
             }
             lineBO.StationsOfBus = lineStations.AsEnumerable();
 
-
+            //insert line trip data to the line
             lineBO.TimeLineTrip = from st in tripDO
                                   select (BO.LineTrip)st.CopyPropertiesToNew(typeof(BO.LineTrip));
             lineBO.TimeTravel = CalucateTravel(idLine);
 
             return lineBO;
         }
-
-
-        #region GetLine
+     
         //return all the lines that working 
         public IEnumerable<BO.Line> GetAllLine()
         {
@@ -381,6 +393,25 @@ namespace BL
                    orderby item.LineStationIndex
                    select item;
 
+        }
+
+        /// <summary>
+        /// return all the line at the station
+        /// </summary>
+        public IEnumerable<BO.Line> GetAllLineIndStation(int StationCode)
+        {
+            try
+            {
+
+                IEnumerable<DO.LineStation> v = from item in dl.GetAllLineStationsBy(b => b.StationCode == StationCode)
+                                                select item;
+
+                var x = from s in v
+                        select lineDoBoAdapter(s.LineId);
+                return x;
+            }
+            catch (BO.BadIdException) { }
+            return null;
         }
 
         #endregion
@@ -1003,6 +1034,7 @@ namespace BL
 
         #endregion
 
+        #region adjactstation
         /// <summary>
         /// creat a adjacted station according to 2 code station
         /// we calucate the time travel between the station according to random num between 1-1.5 and speed a minute that 
@@ -1044,7 +1076,30 @@ namespace BL
 
         }
 
+        /// <summary>
+        /// update adjacted station
+        /// </summary>
+        public void AddAdjactStation(BO.LineStation line)
+        {
+            DO.AdjacentStations stations = new DO.AdjacentStations();
+            stations.Station1 = line.StationCode;
+            stations.Station2 = line.NextStation;
+            stations.Distance = line.DistanceFromNext;
+            stations.TimeAverage = line.TimeAverageFromNext;
 
+            try
+            {
+                dl.UpdateAdjacentStations(stations);
+            }
+            catch (DO.WrongIDExeption ex)
+            {
+                throw new BO.BadIdException("בעיה", ex);
+            }
+
+        }
+
+        #endregion
+      
         /// <summary>
         /// calucate the sum of all the travel. move at the list of line station and sum time travel
         /// </summary>
@@ -1068,46 +1123,7 @@ namespace BL
 
         }
 
-        /// <summary>
-        /// update adjacted station
-        /// </summary>
-        public void AddAdjactStation(BO.LineStation line)
-        {
-            DO.AdjacentStations stations = new DO.AdjacentStations();
-            stations.Station1 = line.StationCode;
-            stations.Station2 = line.NextStation;
-            stations.Distance = line.DistanceFromNext;
-            stations.TimeAverage = line.TimeAverageFromNext;
 
-            try
-            {
-                dl.UpdateAdjacentStations(stations);
-            }
-            catch (DO.WrongIDExeption ex)
-            {
-                throw new BO.BadIdException("בעיה", ex);
-            }
-
-        }
-
-        /// <summary>
-        /// return all the line at the station
-        /// </summary>
-        public IEnumerable<BO.Line> GetAllLineIndStation(int StationCode)
-        {
-            try
-            {
-
-                IEnumerable<DO.LineStation> v = from item in dl.GetAllLineStationsBy(b => b.StationCode == StationCode)
-                                                select item;
-
-                var x = from s in v
-                        select lineDoBoAdapter(s.LineId);
-                return x;
-            }
-            catch (BO.BadIdException ) { }
-            return null;
-        }
 
 
         #endregion
@@ -1115,6 +1131,7 @@ namespace BL
 
         #region Station
 
+        #region get
         // return the station from dl according to code
         BO.Station stationDoBoAdapter(int code)
         {
@@ -1210,8 +1227,9 @@ namespace BL
 
 
         }
+        #endregion
 
-
+        #region add
         /// <summary>
         /// add new station.find if we have this code station and if yes so throw
         /// </summary>
@@ -1241,12 +1259,12 @@ namespace BL
                 throw new BO.BadIdException("מזהה קו לא חוקי", ex);
             }
         }
+        #endregion
 
-
+        #region delete
         /// <summary>
         /// when we delete station we delete all the appirence of this station
         /// </summary>
-
         public void DeleteStation(int code, IEnumerable<LineStation> a)
         {
             try
@@ -1265,12 +1283,13 @@ namespace BL
                 throw new BO.BadIdException("קוד התחנה המבוקש לא נמצא במערכת כדי למוחקו", ex);
             }
         }
+        #endregion
 
+        #region update
         /// <summary>
         /// update date station. he can change all the data. if he change the cod of the station so we need go to all 
         /// the place that we keep data on this station and update them
         /// </summary>
-    
         public void UpdateStation(BO.Station station, int oldCode)
         {
             int newCode = station.Code;
@@ -1386,6 +1405,7 @@ namespace BL
             }
 
         }
+        #endregion
         #endregion
 
         #region User

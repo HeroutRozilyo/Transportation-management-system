@@ -8,15 +8,14 @@ using System.Windows.Controls;
 using System.Windows.Input;
 
 
-//...
-
 namespace PLGui
 {
     /// <summary>
-    /// Interaction logic for User.xaml
+    /// Interaction logic for User.xaml. when we search on path between 2 stations
     /// </summary>
     public partial class User : Page
     {
+        #region varieble
         IBL bl = factoryBL.GetBl();
         private ObservableCollection<Object> temp = new ObservableCollection<Object>();
         private ObservableCollection<BO.Line> line1 = new ObservableCollection<BO.Line>();
@@ -30,52 +29,36 @@ namespace PLGui
 
         private ObservableCollection<BO.Station> stations1 = new ObservableCollection<BO.Station>();
         private ObservableCollection<BO.Station> stations2 = new ObservableCollection<BO.Station>();
+        #endregion
 
-
-
-
+        #region constructor
+        /// <summary>
+        /// defult constructor
+        /// </summary>
         public User()
         {
             InitializeComponent();
 
-            RefreshStation();
+            //to unsert data to the window
+            RefreshStation(); 
             RefreshStationall();
             realTime.Visibility = Visibility.Hidden;
 
-
-
         }
+        #endregion
 
+        /// <summary>
+        /// convert the ienumerable from BO to be a collection observer
+        /// </summary>
         public ObservableCollection<T> ConvertList<T>(IEnumerable<T> listFromBO)
         {
             return new ObservableCollection<T>(listFromBO);
         }
 
-        private void RefreshStation()
-        {
-            stations1 = ConvertList(bl.GetAllStations());//to make ObservableCollection
-            stations2 = ConvertList(bl.GetAllStations());
-            foreach (var item in stations1)
-            {
-                ComboBoxItem newItem1 = new ComboBoxItem();
-                newItem1.Content = item.Code + "   " + item.Name;
-                station1.Items.Add(newItem1);
-
-            }
-            foreach (var item in stations2)
-            {
-                ComboBoxItem newItem2 = new ComboBoxItem();
-                newItem2.Content = item.Code + "   " + item.Name;
-                station2.Items.Add(newItem2);
-            }
-
-
-
-
-
-
-        }
-
+        #region comboboxChoos
+        /// <summary>
+        /// to get station1
+        /// </summary>
         private void station1_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             string a = station1.SelectedItem.ToString();
@@ -86,6 +69,25 @@ namespace PLGui
             // LineInStation1.ItemsSource = temp1;
 
         }
+
+        /// <summary>
+        /// get station2
+        /// </summary>
+        private void station2_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string a = station2.SelectedItem.ToString();
+
+            int codStation = getNum1(a);
+
+            temp2 = bl.GetAllLineIndStation(codStation);
+
+            //  LineInStation2.ItemsSource = temp2;
+
+        }
+
+        /// <summary>
+        /// to take out the number of the station from the string
+        /// </summary>
         private int getNum1(string a)
         {
 
@@ -100,22 +102,13 @@ namespace PLGui
             int codStation = Convert.ToInt32(c);
             return codStation;
         }
-
-        private void station2_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            string a = station2.SelectedItem.ToString();
-
-            int codStation = getNum1(a);
-
-            temp2 = bl.GetAllLineIndStation(codStation);
-
-            //  LineInStation2.ItemsSource = temp2;
-
-        }
+        #endregion
 
 
-
-
+        #region button
+        /// <summary>
+        /// if the station is diffrent go to find travel
+        /// </summary>
         private void checkOkey_Click(object sender, RoutedEventArgs e)
         {
             temp = null;
@@ -131,29 +124,78 @@ namespace PLGui
 
         }
 
+        /// <summary>
+        /// to start simulation
+        /// </summary>
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+
+            RealTimeStation r = new RealTimeStation(bl, stationData1);
+            r.ShowDialog();
 
 
+        }
 
 
+        /// <summary>
+        /// search after station
+        /// </summary>
+        private void Search_Click(object sender, RoutedEventArgs e)
+        {
+            if (numberText != null)
+            {
+                int Sera = Convert.ToInt32(numberText);
+                BO.Station SearchResult = bl.GetStationByCode(Sera);
+                if (SearchResult != null)
+                {
+                    ObservableCollection<BO.Station> a = new ObservableCollection<BO.Station>();
+                    a.Add(SearchResult);
+                    ListOfStations.ItemsSource = a;
 
+                }
+                else
+                {
+                    ListOfStations.ItemsSource = stations;
+                    //NotExist.Visibility = Visibility.Visible;
+                }
+            }
+        }
 
+        private void ListOfStations_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            add = false;
+            var list = (ListView)sender; //to get the line
+            stationData1 = list.SelectedItem as BO.Station;
 
+            RefreshLineInStation();
+            if (codeTextBox.Text != "")
+            {
+                realTime.Visibility = Visibility.Visible;
+            }
+        }
 
+        #endregion
+
+        #region refresh
 
         private ObservableCollection<BO.Station> stations = new ObservableCollection<BO.Station>();
         private IEnumerable<BO.Line> lineStation;
         int oldCode;
         private bool add = false;
+        /// <summary>
+        /// refresh station lust
+        /// </summary>
         private void RefreshStationall()
         {
             stations = ConvertList(bl.GetAllStations());//to make ObservableCollection
             ListOfStations.ItemsSource = stations;
         }
 
+        /// <summary>
+        /// refresh the line at the station
+        /// </summary>
         public void RefreshLineInStation()
         {
-            // beforAdj.Clear();
-            // afterAdj.Clear();
 
             StationDataGrid.DataContext = stationData1;
 
@@ -178,43 +220,40 @@ namespace PLGui
 
         }
 
-        private void ListOfStations_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        /// <summary>
+        /// refresh the window of station
+        /// </summary>
+        private void RefreshStation()
         {
-            add = false;
-            var list = (ListView)sender; //to get the line
-            stationData1 = list.SelectedItem as BO.Station;
-           
-            RefreshLineInStation();
-            if(codeTextBox.Text!="")
+            //we need 2 list in order to do the 2 combobox not to depent
+            stations1 = ConvertList(bl.GetAllStations());//to make ObservableCollection
+            stations2 = ConvertList(bl.GetAllStations());
+            foreach (var item in stations1)//creat the first combobox
             {
-                realTime.Visibility = Visibility.Visible;
+                ComboBoxItem newItem1 = new ComboBoxItem();
+                newItem1.Content = item.Code + "   " + item.Name;
+                station1.Items.Add(newItem1);
+
             }
+            foreach (var item in stations2)//creat the secont combobox
+            {
+                ComboBoxItem newItem2 = new ComboBoxItem();
+                newItem2.Content = item.Code + "   " + item.Name;
+                station2.Items.Add(newItem2);
+            }
+
         }
 
-        private void Search_Click(object sender, RoutedEventArgs e)
-        {
-            if (numberText != null)
-            {
-                int Sera = Convert.ToInt32(numberText);
-                BO.Station SearchResult = bl.GetStationByCode(Sera);
-                if (SearchResult != null)
-                {
-                    ObservableCollection<BO.Station> a = new ObservableCollection<BO.Station>();
-                    a.Add(SearchResult);
-                    ListOfStations.ItemsSource = a;
+        #endregion
 
-                }
-                else
-                {
-                    ListOfStations.ItemsSource = stations;
-                    //NotExist.Visibility = Visibility.Visible;
-                }
-            }
-        }
 
+        #region textboxInput
+        /// <summary>
+        /// textbox search input.  
+        /// </summary>
         private void textBoxTextBox_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Return)
+            if (e.Key == Key.Return) //when enter
             {
 
                 TextBox text = sender as TextBox;
@@ -269,23 +308,10 @@ namespace PLGui
             textBoxTextBox.Text = "Search Station here....";
         }
 
+        #endregion
 
 
-
-        private void ListOfStations_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
-
-
-        private void button_Click(object sender, RoutedEventArgs e)
-        {
-
-            RealTimeStation r = new RealTimeStation(bl, stationData1);
-            r.ShowDialog();
-
-
-        }
+  ///////////////
+   
     }
 }

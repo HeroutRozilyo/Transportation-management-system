@@ -56,7 +56,7 @@ namespace PLGui
             ChangePasswordGrid.Visibility = Visibility.Visible;
             ChangeMail.IsEnabled = false;
         }
-
+        #endregion
         /// <summary>
         /// To change Mail Address
         /// </summary>
