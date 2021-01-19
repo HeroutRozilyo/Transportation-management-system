@@ -1471,7 +1471,7 @@ namespace BL
                 a.UserExist = true;
                 dl.UpdateUser(a);
             }
-            catch (DO.WrongNameExeption ex)
+            catch (DO.WrongNameExeption )
             {
                 throw new BO.BadNameExeption(user.UserName, "לא נמצאו פרטים במערכת עבור משתמש זה");
             }
@@ -1486,7 +1486,7 @@ namespace BL
             {
                 dl.DeleteUser(user.UserName);
             }
-            catch (DO.WrongNameExeption ex)
+            catch (DO.WrongNameExeption )
             {
                 throw new BO.BadNameExeption(user.UserName, "לא נמצאו פרטים במערכת עבור משתמש זה");
             }

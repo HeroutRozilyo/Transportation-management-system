@@ -81,8 +81,6 @@
     <Compile Include="LineWindowP.xaml.cs">
       <DependentUpon>LineWindowP.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PO\LineStationUI.cs" />
-    <Compile Include="PO\Timer.cs" />
     <Compile Include="RealTimeStation.xaml.cs">
       <DependentUpon>RealTimeStation.xaml</DependentUpon>
     </Compile>

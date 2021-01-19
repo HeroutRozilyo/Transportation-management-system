@@ -18,7 +18,7 @@ namespace BO
     {
         public int ID;
         public BadIdException() : base() { }
-        public BadIdException(string message, int id) : base() => ID = id;
+        public BadIdException(string message, int id) : base(message) => ID = id;
         public BadIdException(string message, Exception innerException) :
             base(message, innerException) => ID = ((DO.WrongIDExeption)innerException).ID;
         public override string ToString() => base.ToString() + $",  {ID} מצטערים! המספר זיהוי שגוי";
@@ -30,7 +30,7 @@ namespace BO
         public int cordinate;
         public string cordinateS;
         public BadCoordinateException() : base() { }
-        public BadCoordinateException(string geo, string v) : base() => cordinateS = geo;
+        public BadCoordinateException(string geo, string v) : base(geo) => cordinateS = geo;
         public BadCoordinateException(int geo, string messege) : base(messege) => cordinate = geo;
         public BadCoordinateException(int geo, int a, string messege) : base(messege) => cordinate = geo;
         public BadCoordinateException(int geo, string messege, Exception innerException) : base(messege, innerException) => cordinate = geo;

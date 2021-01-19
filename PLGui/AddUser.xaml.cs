@@ -109,7 +109,7 @@ namespace PLGui
                 }
 
             }
-            catch (BO.BadNameExeption ex)
+            catch (BO.BadNameExeption )
             {
                 MessageBox.Show(" שם משתמש קיים במערכת, בבקשה אכנס שם אחר", "שם משתמש", MessageBoxButton.OK, MessageBoxImage.Error);
             }
