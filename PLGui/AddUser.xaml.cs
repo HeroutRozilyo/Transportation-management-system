@@ -11,18 +11,30 @@ namespace PLGui
     /// </summary>
     public partial class AddUser : Window
     {
+        #region reset
         IBL bl = factoryBL.GetBl();
         IEnumerable<BO.User> allUser;
         string name;
         string pas;
-        bool admin = false;
+        bool admin;
+        #endregion
 
+        #region constructors
+        /// <summary>
+        /// For new  Regular user
+        /// </summary>
         public AddUser()
         {
             InitializeComponent();
+            admin = false;
             refresh();
+           
         }
 
+        /// <summary>
+        /// For new Admin User
+        /// </summary>
+        /// <param name="bll"></param>
         public AddUser(IBL bll)
         {
             InitializeComponent();
@@ -31,11 +43,20 @@ namespace PLGui
             refresh();
         }
 
+        #endregion constructors
 
+        #region Refresh
         public void refresh()
         {
             allUser = bl.GetAllUsers();
         }
+        #endregion
+
+
+        #region Buttons Click
+        /// <summary>
+        /// to Add the new User
+        /// </summary>
         private void okey_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -61,7 +82,7 @@ namespace PLGui
 
                     }
                 }
-                if (pas.Count()>=8)
+                if (pas.Count()>=8)//min Lengthto password
                 {
                     if (check())
                     {
@@ -91,14 +112,9 @@ namespace PLGui
 
                         }
                     }
-
-
-
-
-                    if (admin)
-                        bl.AddUser(name, pas, true, mail);
-                    else
-                        bl.AddUser(name, pas, false, mail);
+                 
+                        bl.AddUser(name, pas, admin, mail);
+                    
                     MessageBox.Show(" החשבון נוצר בהצלחה ", "שם משתמש", MessageBoxButton.OK, MessageBoxImage.Information);
                     this.DialogResult = true;
                     this.Close();
@@ -116,13 +132,16 @@ namespace PLGui
             refresh();
 
         }
+        #endregion
 
+        #region moreFunc
         public bool check()
         //הפונקציה בודקת את נכונות הפרטים שהמשתמש הכניס למערכת
         {//בדיקה למייל
             Regex regex = new Regex(@"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$");
             return regex.IsMatch(Mail.Text);
         }
+        #endregion
     }
 
 }

@@ -22,14 +22,19 @@ namespace PLGui
     /// </summary>
     public partial class AccountDetails : Page
     {
+        #region reset
         private IBL bl;
         private BO.User userNow;
-
+        IEnumerable<BO.User> allUser;
+        #endregion
+        #region constructors
+        [Obsolete("not use", true)]
         public AccountDetails()
         {
             InitializeComponent();
         }
-        IEnumerable<BO.User> allUser;
+
+
         public AccountDetails(IBL bl, BO.User userNow)
         {
             InitializeComponent();
@@ -40,22 +45,32 @@ namespace PLGui
             allUser = bl.GetAllUsers();
             UserDatGrid.DataContext = userNow;
         }
+        #endregion
 
+        #region ButtonClick
+        /// <summary>
+        /// To Change Password
+        /// </summary>
         private void ChangePass_Click(object sender, RoutedEventArgs e)
         {
             ChangePasswordGrid.Visibility = Visibility.Visible;
-            ChangeMail.IsEnabled =false;
+            ChangeMail.IsEnabled = false;
         }
 
+        /// <summary>
+        /// To change Mail Address
+        /// </summary>
         private void ChangeMail_Click(object sender, RoutedEventArgs e)
         {
             ChangeMailGrid.Visibility = Visibility.Visible;
             ChangePass.IsEnabled = false;
         }
-
+        /// <summary>
+        /// To Save the New Password
+        /// </summary>
         private void SavaPass_Click(object sender, RoutedEventArgs e)
         {
-            
+
             string pas = passwordTextBox.Password;
             string pas2 = passwordBox2.Password;
 
@@ -80,7 +95,7 @@ namespace PLGui
             }
             else
             {
-                if (pas.Count() >= 8)
+                if (pas.Count() >= 8)//Min lentgh for Password
                 {
                     if (pas != userNow.Password)
                     {
@@ -133,6 +148,9 @@ namespace PLGui
 
         }
 
+        /// <summary>
+        /// To Save the new Email Address
+        /// </summary>
         private void ChangeMailButton_Click(object sender, RoutedEventArgs e)
         {
             string newMail = Mail.Text;

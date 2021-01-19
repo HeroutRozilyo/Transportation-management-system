@@ -28,7 +28,7 @@
                     <ColumnDefinition Width="19*"/>
                 </Grid.ColumnDefinitions>
                 <TextBox x:Name="emailTextBOx" Height="30" Margin="19,40,0,0" TextWrapping="Wrap" Text="xxx@xxx.xxx" VerticalAlignment="Top" HorizontalAlignment="Left" Width="165" Grid.ColumnSpan="2"/>
-                <Button x:Name="button" Style="{DynamicResource AdminWindow}" Content="שלח אימייל" HorizontalAlignment="Left" Height="25" Margin="60,85,0,0" VerticalAlignment="Top" Width="95" Click="button_Click" RenderTransformOrigin="1.712,0.787" Grid.ColumnSpan="2"/>
+                <Button x:Name="SendMail" Style="{DynamicResource AdminWindow}" Content="שלח אימייל" HorizontalAlignment="Left" Height="25" Margin="60,85,0,0" VerticalAlignment="Top" Width="95" Click="SendMail_Click" RenderTransformOrigin="1.712,0.787" Grid.ColumnSpan="2"/>
             </Grid>
         </GroupBox>
     </Grid>

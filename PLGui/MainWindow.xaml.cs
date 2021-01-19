@@ -4,17 +4,17 @@ using System.Windows;
 namespace PLGui
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Main screen - Login / new user
     /// </summary>
     public partial class MainWindow : Window
     {
         IBL bl = factoryBL.GetBl();
         LoginWindow wnd;
         AddUser addUser;
+
         public MainWindow()
         {
             IBL bl = factoryBL.GetBl();
-            //           AdminWindow wnd;
 
             InitializeComponent();
 
@@ -23,10 +23,7 @@ namespace PLGui
 
         private void Login_Click(object sender, RoutedEventArgs e)
         {
-            // You do not need to log in to this stage yet so we will go straight to the admin window
             wnd = new LoginWindow(bl);
-
-
             wnd.Show();
             this.Close();
 
@@ -34,7 +31,7 @@ namespace PLGui
 
         private void NewUser_Click(object sender, RoutedEventArgs e)
         {
-            //  MessageBox.Show("This feature is not valid for this step", "Soon...", MessageBoxButton.OK, MessageBoxImage.Information);
+           
             addUser = new AddUser();
 
             bool? result = addUser.ShowDialog();
