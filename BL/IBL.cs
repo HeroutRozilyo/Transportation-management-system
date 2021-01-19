@@ -18,6 +18,7 @@ namespace BlAPI
         BO.Bus UpdateBus(BO.Bus bus);
         BO.Bus Refuelling(BO.Bus bus);
         BO.Bus treatment(BO.Bus bus);
+        STUTUS checkingStatus(Bus bus);
         #endregion
 
         #region Line

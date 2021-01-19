@@ -134,7 +134,8 @@ namespace PLGui
                 if (!add)
                 {
                     RefreshDataBus();
-
+                    LabelStatus.Visibility = Visibility.Hidden;
+                    StatusComboBox.Visibility = Visibility.Hidden;
                     add = true;
                     Update2.IsEnabled = false;
                     send.IsEnabled = false;
@@ -153,7 +154,8 @@ namespace PLGui
                     bl.AddBus(newbus);
                     RefreshDataBus();
                     buses.SelectedIndex = egged.Count() - 1;
-
+                    LabelStatus.Visibility = Visibility.Visible;
+                    StatusComboBox.Visibility = Visibility.Visible;
                     MessageBox.Show("האוטובוס נוסף בהצלחה למערכת", "Success Message", MessageBoxButton.OK, MessageBoxImage.Asterisk);
 
                 }
@@ -203,6 +205,8 @@ namespace PLGui
                     bl.AddBus(newbus);
                     RefreshDataBus();
                     buses.SelectedIndex = egged.Count() - 1;
+                    LabelStatus.Visibility = Visibility.Visible;
+                    StatusComboBox.Visibility = Visibility.Visible;
                     MessageBox.Show("האוטובוס נוסף בהצלחה למירכת", "Success Message", MessageBoxButton.OK, MessageBoxImage.Asterisk);
                 }
                 if (e.Key == Key.Return && add && (LincestextBox == null || StartingDate.Text == ""))
@@ -308,7 +312,7 @@ namespace PLGui
                 newbus.LastTreatment = DateTime.Parse(lastTreatmentTextBox.Text);
                 newbus.Licence = LincestextBox.Text;
                 newbus.StartingDate = DateTime.Parse(StartingDate.Text);
-                newbus.StatusBus = (BO.STUTUS)StatusComboBox.SelectedIndex;
+ 
                 if (NewKmTextboBox.Text == "") NewKmTextboBox.Text = "0";
                 newbus.KilometrFromLastTreat = double.Parse(NewKmTextboBox.Text);
                 newbus.BusExsis = true;

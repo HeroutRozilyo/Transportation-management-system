@@ -21,7 +21,7 @@ namespace BL
         #endregion
 
         #region Bus
-
+        int MaxkM = 20000;
         /// <summary>
         ///  return the busBO according to licence
         /// </summary>
@@ -91,7 +91,7 @@ namespace BL
 
             DO.Bus busDO = new DO.Bus();
             bus.BusExsis = true;
-            bus.StatusBus = STUTUS.READT_TO_TRAVEL;
+            bus.StatusBus = checkingStatus(bus);
             string te = bus.Licence.Replace("-", "");
             busDO.Licence = te;
             busDO = (DO.Bus)bus.CopyPropertiesToNew(typeof(DO.Bus));
@@ -108,6 +108,15 @@ namespace BL
             return 1;
         }
 
+        public STUTUS checkingStatus(Bus bus)//return the current status of this bus
+        {
+            DateTime a = bus.LastTreatment ;
+            if (bus.FuellAmount != 0 && bus.KilometrFromLastTreat < MaxkM && a.AddYears(1) >= DateTime.Today)
+            {
+                return STUTUS.READT_TO_TRAVEL;
+            }
+            else return STUTUS.INVALID;
+        }
         //delete bus according to his licence
         public bool DeleteBus(string licence_)
         {

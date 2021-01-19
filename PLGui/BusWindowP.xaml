@@ -93,13 +93,13 @@
                 <Label Content=":כמות דלק" Grid.Column="3" HorizontalAlignment="Left" Margin="5.333,4.667,0,11.333" Grid.Row="3" VerticalAlignment="Center" Height="26" Width="80"/>
                 <TextBox x:Name="FuelTextBox" HorizontalAlignment="Left" Height="24" Margin="38,6.667,0,11.333" Grid.Row="3" Text="{Binding FuellAmount, Mode=Default, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" PreviewTextInput="KmtextBox_PreviewTextInput" Grid.ColumnSpan="3"/>
 
-                <Label Content=":סטטוס" Grid.Column="3" HorizontalAlignment="Left" Margin="0.333,8.667,0,8.667" Grid.Row="6" VerticalAlignment="Center" Height="26" Width="55" RenderTransformOrigin="-0.667,1.167"/>
-                <ComboBox x:Name="StatusComboBox" Grid.Column="1"  SelectedItem="{Binding StatusBus, Mode=Default}" HorizontalAlignment="Left" Height="22"  Margin="37,12.667,0,8.667" Grid.Row="6" VerticalAlignment="Center" Width="120" Grid.ColumnSpan="2"/>
+                <Label Name="LabelStatus" Content=":סטטוס" Grid.Column="3" HorizontalAlignment="Left" Margin="6,14,0,10" Grid.Row="8" VerticalAlignment="Center" Height="26" Width="55" RenderTransformOrigin="-0.667,1.167"/>
+                <ComboBox x:Name="StatusComboBox" Grid.Column="1"  SelectedItem="{Binding StatusBus, Mode=Default}" HorizontalAlignment="Left" Height="22"  Margin="39,15,0,13" Grid.Row="8" VerticalAlignment="Center" Width="120" Grid.ColumnSpan="3"/>
 
                 <Label Content=":תאריך טיפול אחרון" Grid.Column="3" HorizontalAlignment="Right" Margin="0,10.333,46.333,5" Grid.Row="7" VerticalAlignment="Center" Grid.ColumnSpan="2" Height="26" Width="118" />
                 <DatePicker x:Name="lastTreatmentTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="24" Margin="39,10.333,0,7" Grid.Row="7"  VerticalAlignment="Center" Width="120" SelectedDate="{Binding LastTreatment, Mode=Default, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.ColumnSpan="3"  />
-                <Label Content=":סה&quot;כ ק&quot;מ מהטיפול האחרון" Grid.Column="2" HorizontalAlignment="Left" Margin="87.333,13,0,11" Grid.Row="8" VerticalAlignment="Center" Grid.ColumnSpan="3" Height="26" Width="170"/>
-                <TextBox x:Name="NewKmTextboBox" Grid.Column="1" Text="{Binding KilometrFromLastTreat, Mode=Default}" HorizontalAlignment="Left" Height="24"  Margin="38,14,0,12" Grid.Row="8" VerticalAlignment="Center"  Width="120" Grid.ColumnSpan="2" TextChanged="NewKmTextboBox_TextChanged" PreviewTextInput="KmtextBox_PreviewTextInput" RenderTransformOrigin="-0.358,0.681"/>
+                <Label Content=":סה&quot;כ ק&quot;מ מהטיפול האחרון" Grid.Column="3" HorizontalAlignment="Left" Margin="1,9.667,-3.667,7.667" Grid.Row="6" VerticalAlignment="Center" Grid.ColumnSpan="2" Height="26" Width="170"/>
+                <TextBox x:Name="NewKmTextboBox" Grid.Column="1" Text="{Binding KilometrFromLastTreat, Mode=Default}" HorizontalAlignment="Left" Height="24"  Margin="39,10.667,0,8.667" Grid.Row="6" VerticalAlignment="Center"  Width="120" Grid.ColumnSpan="3" TextChanged="NewKmTextboBox_TextChanged" PreviewTextInput="KmtextBox_PreviewTextInput" RenderTransformOrigin="-0.358,0.681"/>
             </Grid>
         </GroupBox>
 
