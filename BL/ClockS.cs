@@ -16,10 +16,11 @@ namespace BO
 
         #region clock
         /// <summary>
-        /// inner clock. in order to prevenr bother at the clock work
+        /// inner clock. in order to prevenr bother at the clock work,Prevent disruptions to the clock
         /// </summary>
         public class Clock
         {
+
             public TimeSpan Time;
             public Clock(TimeSpan time) => Time = time;//constructor
 
@@ -27,14 +28,36 @@ namespace BO
         #endregion
 
         #region varieble
-        internal volatile bool Cancel;
-        private volatile Clock sClock = null;
-        internal Clock SClock => sClock;
+        /// <summary>
+        /// the Rate of the clock
+        /// </summary>
         private int rate;
         internal int Rate => rate;
+        /// <summary>
+        /// The watch itself - with a soft stop
+        /// </summary>
+        private volatile Clock sClock = null;
+        internal Clock SClock => sClock;
+
+        /// <summary>
+        /// Runs the process itself
+        /// </summary>
         private Stopwatch stoper = new Stopwatch();
+
+        /// <summary>
+        /// An action record that communicates with the delagete in the ui layer
+        /// </summary>
         private Action<TimeSpan> observerClock = null;
+
+        /// <summary>
+        /// the start time of the clock
+        /// </summary>
         public TimeSpan startTime;
+
+        /// <summary>
+        /// Stop the clock - soft stop
+        /// </summary>
+        internal volatile bool Cancel;
         #endregion
 
         /// <summary>
@@ -57,8 +80,8 @@ namespace BO
             sClock = new Clock(startTime);
             rate = mrate;
             Cancel = false;
-            stoper.Restart();
-            new Thread(clockThread).Start();
+            stoper.Restart();// start the action
+            new Thread(clockThread).Start();//start the theard
 
 
         }

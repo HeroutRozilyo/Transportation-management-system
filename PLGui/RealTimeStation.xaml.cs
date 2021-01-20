@@ -65,7 +65,6 @@ namespace PLGui
             timerWorker.DoWork += (s, e) =>
             {
                 workerThread = Thread.CurrentThread;
-
                 bl.StartSimulator(startTimeSimulator, rate, (time) => timerWorker.ReportProgress(0, time));
                 while (!timerWorker.CancellationPending)
                     try { Thread.Sleep(1000000); }
@@ -94,10 +93,7 @@ namespace PLGui
 
             TimeSpan timeSpan = (TimeSpan)e.UserState;//userState-  member to pass more information back to the UI for updating on a progressChanged call
             TimerTextBox.Text = String.Format("{0:D2}:{1:D2}:{2:D2}", timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds);
-
             lineAtStation = bl.GetLineStationLineTimer(stationData1, timeSpan).ToList(); //all the frequency line arrivle 
-
-
             int ListCount = (lineAtStation.Count() > 5) ? 5 : lineAtStation.Count(); //the first five line
             RealTimeStationLine.ItemsSource = lineAtStation.GetRange(0, ListCount);
 

@@ -60,7 +60,6 @@ namespace PLGui
         /// <summary>
         /// To change Mail Address
         /// </summary>
-
         private void ChangeMail_Click(object sender, RoutedEventArgs e)
         {
             ChangeMailGrid.Visibility = Visibility.Visible;
@@ -148,6 +147,7 @@ namespace PLGui
             }
 
         }
+      
 
         /// <summary>
         /// To Save the new Email Address
@@ -234,6 +234,7 @@ namespace PLGui
 
 
         }
+        #endregion
 
         #region More Func
         public bool check()

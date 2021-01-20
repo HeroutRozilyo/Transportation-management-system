@@ -1699,17 +1699,22 @@ namespace BL
 
 
         #region Simulator
+        /// <summary>
+        /// start the clock (connect between ui and ClockS
+        /// </summary> 
         public void StartSimulator(TimeSpan startTime, int Rate, Action<TimeSpan> updateTime)
         {
-
             ClockS.Instance.ObserverClock += updateTime;
             ClockS.Instance.Start(startTime, Rate);
         }
+
+        /// <summary>
+        /// stop the clock (connect between ui and ClockS
+        /// </summary> 
         public void StopSimulator()
         {
             ClockS.Instance.Stop();
         }
-
         #endregion
 
 
