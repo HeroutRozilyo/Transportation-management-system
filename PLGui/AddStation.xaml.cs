@@ -12,10 +12,13 @@ namespace PLGui
     /// </summary>
     public partial class AddStation : Window
     {
+        #region reset
         private IBL bl;
         public BO.Station toAdd = new BO.Station();
         private IEnumerable<LineStation> stationsOfBus;
+        #endregion
 
+        #region To return
         public BO.Station NewStation
         {
 
@@ -25,7 +28,10 @@ namespace PLGui
             }
 
         }
+        #endregion
 
+        #region constructors
+        [Obsolete("not using",true)]
         public AddStation()
         {
             InitializeComponent();
@@ -37,34 +43,19 @@ namespace PLGui
             this.bl = bl;
 
         }
+        #endregion
 
-        public AddStation(IEnumerable<LineStation> stationsOfBus, IBL bl)
-        {
-            this.stationsOfBus = stationsOfBus;
-            this.bl = bl;
-        }
-
-
-
-
-
-        private void helpData()
-        {
-            toAdd.Address = addressTextBox.Text;
-            toAdd.Code = Convert.ToInt32(codeTextBox.Text);
-            toAdd.Coordinate = new GeoCoordinate(double.Parse((latitudeTextBox.Text)), double.Parse(longitudeTextBox.Text));
-            toAdd.Name = nameTextBox.Text;
-            toAdd.StationExist = true;
-
-        }
-
+        #region Button click
+        /// <summary>
+        /// to add the station to the system
+        /// </summary>
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             try
             {
                 helpData();
                 bl.AddStation(toAdd);
-                MessageBox.Show("האוטובוס נוסף בהצלחה למערכת", "Success Message", MessageBoxButton.OK, MessageBoxImage.Asterisk);
+                MessageBox.Show("התחנה נוספה בהצלחה למערכת", "Success Message", MessageBoxButton.OK, MessageBoxImage.Asterisk);
                 this.DialogResult = true;
                 this.Close();
             }
@@ -74,5 +65,23 @@ namespace PLGui
             }
 
         }
+
+
+        #endregion
+
+        #region More func
+        /// <summary>
+        /// to take of the data from the textBoxs
+        /// </summary>
+        private void helpData()
+        {
+            toAdd.Address = addressTextBox.Text;
+            toAdd.Code = Convert.ToInt32(codeTextBox.Text);
+            toAdd.Coordinate = new GeoCoordinate(double.Parse((latitudeTextBox.Text)), double.Parse(longitudeTextBox.Text));
+            toAdd.Name = nameTextBox.Text;
+            toAdd.StationExist = true;
+
+        }
+        #endregion
     }
 }

@@ -17,8 +17,8 @@ namespace PLGui
     {
         #region reset
         private IBL bl;
-        private ObservableCollection<BO.Station> GetStations = new ObservableCollection<BO.Station>();
-        private ObservableCollection<BO.Station> allStations = new ObservableCollection<BO.Station>();
+        private ObservableCollection<BO.Station> GetStations = new ObservableCollection<BO.Station>();//list that change
+        private ObservableCollection<BO.Station> allStations = new ObservableCollection<BO.Station>();// list that not change
         private ObservableCollection<BO.LineStation> GetLineStations = new ObservableCollection<BO.LineStation>();
         BO.LineStation convertStation = new BO.LineStation();
         static int add;
@@ -102,18 +102,22 @@ namespace PLGui
 
         }
         #endregion
-        public ObservableCollection<T> ConvertList<T>(IEnumerable<T> listFromBO)
-        {
-            return new ObservableCollection<T>(listFromBO);
-        }
+       
 
+
+        #region UpdateStationLine
+        /// <summary>
+        /// Arranges the two listView according to the stations that already exist in the above line
+        /// </summary>
         private void orderGrid()
         {
+            //select the Station that That I have in line as line stations////
             IEnumerable<Station> stations = from item in allStations
                                             from linestation in line.StationsOfBus
                                             where linestation.StationCode == item.Code
                                             orderby linestation.LineStationIndex
                                             select item;
+            /////over the list of station- to add Station to the LineStation ListView and remove from the Station ListView////
             foreach (BO.Station stat in stations)
             {
                 foreach (BO.LineStation lins in line.StationsOfBus)
@@ -122,7 +126,7 @@ namespace PLGui
                     {
                         convertStation = lins;
                         add++;
-                        addTOListLineStation(stat);
+                        addToListLineStation(stat);
                     }
 
 
@@ -131,9 +135,24 @@ namespace PLGui
             keepLineID = line.StationsOfBus.ElementAt(0).LineId;
         }
 
+
+        private void addToListLineStation(BO.Station ToAdd)
+        {
+            convertStation.LineStationExist = true;
+            GetLineStations.Add(convertStation);
+            Station check = GetStations.ToList().Find(b => b.StationExist && b.Code == ToAdd.Code);
+            GetStations.Remove(check);
+            RefreshLineStation();
+            RefreshStation();
+        }
+        #endregion
+        #region refresh
+        /// <summary>
+        /// refresh to the data in the listView of station 
+        /// </summary>
         private void RefreshStation()
         {
-            InitializeComponent();
+         
             Station.ItemsSource = GetStations;
             Station.Items.Refresh();
             if (LineNumber.Text != "" && AreaComboBox.SelectedIndex != -1 && GetLineStations.Count() >= 2)
@@ -143,20 +162,31 @@ namespace PLGui
             else FinishAddLine.IsEnabled = false;
 
         }
+        /// <summary>
+        ///  refresh to the data in the listView of station of the line
+        /// </summary>
         private void RefreshLineStation()
         {
             StationOfTheLine.ItemsSource = GetLineStations;
             StationOfTheLine.Items.Refresh();
 
         }
+        #endregion
+
+        #region Button Click
+
+        /// <summary>
+        ///  Delete a station from the line
+        /// </summary>
         private void CancelStation_Click(object sender, RoutedEventArgs e)
         {
             try
             {
 
-                var fxElt = sender as FrameworkElement; //get the licence of the bus to refulling. 
-                BO.LineStation ToAdd = fxElt.DataContext as BO.LineStation;
-                int index = ToAdd.LineStationIndex;
+                var fxElt = sender as FrameworkElement; //get the Station from the listView 
+                BO.LineStation toRemove = fxElt.DataContext as BO.LineStation;
+                int index = toRemove.LineStationIndex;
+                //////Arrange the list of line stations according to the indexes, station before and after instead of the deleted station//////////////////////////////////////////////////
                 if (index < GetLineStations.Count())
                 {
                     for (int i = GetLineStations.Count() - 1; i > index - 1; i--)
@@ -164,28 +194,28 @@ namespace PLGui
                         GetLineStations[i].LineStationIndex--;
                     }
                 }
-                if (ToAdd.NextStation != 0 && ToAdd.PrevStation != 0)
+                if (toRemove.NextStation != 0 && toRemove.PrevStation != 0)
                 {
-                    BO.LineStation station1 = GetLineStations.ToList().Find(b => b.StationCode == ToAdd.NextStation);
-                    BO.LineStation station2 = GetLineStations.ToList().Find(b => b.StationCode == ToAdd.PrevStation);
+                    BO.LineStation station1 = GetLineStations.ToList().Find(b => b.StationCode == toRemove.NextStation);
+                    BO.LineStation station2 = GetLineStations.ToList().Find(b => b.StationCode == toRemove.PrevStation);
                     station2.NextStation = station1.StationCode;
                     station1.PrevStation = station2.StationCode;
                 }
-                if (ToAdd.NextStation != 0 && ToAdd.PrevStation == 0)
+                if (toRemove.NextStation != 0 && toRemove.PrevStation == 0)
                 {
-                    BO.LineStation station1 = GetLineStations.ToList().Find(b => b.StationCode == ToAdd.NextStation);
+                    BO.LineStation station1 = GetLineStations.ToList().Find(b => b.StationCode == toRemove.NextStation);
                     station1.PrevStation = 0;
                 }
-                if (ToAdd.NextStation == 0 && ToAdd.PrevStation != 0)
+                if (toRemove.NextStation == 0 && toRemove.PrevStation != 0)
                 {
-                    BO.LineStation station1 = GetLineStations.ToList().Find(b => b.StationCode == ToAdd.PrevStation);
+                    BO.LineStation station1 = GetLineStations.ToList().Find(b => b.StationCode == toRemove.PrevStation);
                     station1.NextStation = 0;
                 }
 
-
-                BO.Station station = allStations.ToList().Find(b => b.Code == ToAdd.StationCode);
+                ///// Add the station back to the full list of stations///////////////////////
+                BO.Station station = allStations.ToList().Find(b => b.Code == toRemove.StationCode);
                 GetStations.Add(station);
-                GetLineStations.Remove(ToAdd);
+                GetLineStations.Remove(toRemove);
                 add--;
                 RefreshLineStation();
                 RefreshStation();
@@ -207,19 +237,21 @@ namespace PLGui
 
 
 
-
+        /// <summary>
+        /// Add Station to the line
+        /// </summary>
         private void AddStation_Click(object sender, RoutedEventArgs e)
         {
             try
             {
                 convertStation = new BO.LineStation();
                 add++;
-                var fxElt = sender as FrameworkElement; //get the licence of the bus to refulling. 
+                var fxElt = sender as FrameworkElement; //get the Station from the listView
                 BO.Station ToAdd = fxElt.DataContext as BO.Station;
                 convertStation.StationCode = ToAdd.Code;
                 convertStation.LineStationIndex = add;
 
-
+                ///convert from Station to LineStation///////////
 
                 if (add > 1)
                 {
@@ -234,7 +266,7 @@ namespace PLGui
                 }
 
 
-                addTOListLineStation(ToAdd);
+                addToListLineStation(ToAdd);
 
 
 
@@ -246,30 +278,16 @@ namespace PLGui
             }
 
         }
-
-        private void addTOListLineStation(BO.Station ToAdd)
-        {
-            convertStation.LineStationExist = true;
-            GetLineStations.Add(convertStation);
-            Station check = GetStations.ToList().Find(b => b.StationExist && b.Code == ToAdd.Code);
-            GetStations.Remove(check);
-            RefreshLineStation();
-            RefreshStation();
-        }
-
-        private void AreaComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            RefreshStation();
-        }
-
-
-
+    
+        /// <summary>
+        /// add the line to the System
+        /// </summary>
         private void FinishAddLine_Click(object sender, RoutedEventArgs e)
         {
             try
             {
 
-                MessageBoxResult result = MessageBox.Show("אתה בטוח שברצונך להוסיף קו זה", "add messege", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                MessageBoxResult result = MessageBox.Show("אתה בטוח שברצונך לשמור קו זה", "add messege", MessageBoxButton.YesNo, MessageBoxImage.Question);
                 switch (result)
                 {
                     case MessageBoxResult.Yes:
@@ -289,7 +307,7 @@ namespace PLGui
 
 
 
-                            MessageBox.Show("הקו הוסף בהצלחה למערכת", "Success Message", MessageBoxButton.OK, MessageBoxImage.Asterisk);
+                            MessageBox.Show("הקו נשמר בהצלחה למערכת", "Success Message", MessageBoxButton.OK, MessageBoxImage.Asterisk);
                             this.DialogResult = true;
                             this.Close();
                             return;
@@ -313,63 +331,9 @@ namespace PLGui
 
         }
 
-        private void LineNumber_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            RefreshStation();
-        }
-
-        private void LineNumber_PreviewKeyDown(object sender, KeyEventArgs e)
-        {
-
-            TextBox text = sender as TextBox;
-            if (text == null) return;
-            if (e == null) return;
-
-            //allow get out of the text box
-            if (e.Key == Key.Enter || e.Key == Key.Return || e.Key == Key.Tab)
-                return;
-
-            //allow list of system keys 
-            if (e.Key == Key.Escape || e.Key == Key.Back || e.Key == Key.Delete ||
-                e.Key == Key.CapsLock || e.Key == Key.LeftShift || e.Key == Key.Home
-             || e.Key == Key.End || e.Key == Key.Insert || e.Key == Key.Down || e.Key == Key.Right)
-                return;
-
-            char c = (char)KeyInterop.VirtualKeyFromKey(e.Key);
-
-            //allow control system keys
-            if (Char.IsControl(c)) return;
-
-            //allow digits (without Shift or Alt)
-            if (Char.IsDigit(c))
-                if (!(Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightAlt)))
-                    return; //let this key be written inside the textbox
-
-            //forbid letters and signs (#,$, %, ...)
-            e.Handled = true; //ignore this key. mark event as handled, will not be routed to other controls
-            return;
-        }
-
-
-
-        private void AddNewStation_Click(object sender, RoutedEventArgs e)
-        {
-
-
-
-            AddStation addStation = new AddStation(bl);
-
-            bool? result = addStation.ShowDialog();
-
-            if (result != null)
-            {
-                GetStations = ConvertList(bl.GetAllStations());
-                RefreshStation();
-
-            }
-
-        }
-
+        /// <summary>
+        /// update Line detiales
+        /// </summary>
         private void updataStationLine_Click(object sender, RoutedEventArgs e)
         {
 
@@ -390,11 +354,6 @@ namespace PLGui
 
                             this.DialogResult = true;
                             this.Close();
-
-
-
-
-                            //             RefreshLineStation();
                             return;
                         }
                     case MessageBoxResult.No:
@@ -416,10 +375,35 @@ namespace PLGui
             }
         }
 
+        /// <summary>
+        /// To add a station the not exsit
+        /// </summary>
+        private void AddNewStation_Click(object sender, RoutedEventArgs e)
+        {
+            AddStation addStation = new AddStation(bl);
+
+            bool? result = addStation.ShowDialog();
+
+            if (result != null)
+            {
+                GetStations = ConvertList(bl.GetAllStations());
+                RefreshStation();
+
+            }
+
+        }
+        #endregion
+
+        #region More Func
         private void LineNumber_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             e.Handled = !e.Text.Any(x => Char.IsDigit(x));
         }
+        public ObservableCollection<T> ConvertList<T>(IEnumerable<T> listFromBO)
+        {
+            return new ObservableCollection<T>(listFromBO);
+        }
+        #endregion
     }
 }
 

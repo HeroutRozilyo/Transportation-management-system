@@ -15,16 +15,21 @@ namespace PLGui
     /// </summary>
     public partial class StationWindowP : Page
     {
+        #region reset
         private IBL bl;
         IEnumerable<BO.Line> temp;
         private ObservableCollection<BO.Station> stations = new ObservableCollection<BO.Station>();
         int oldCode;
+        bool add = false;
         BO.Station addStation = new BO.Station();
         BO.Station stationData = new BO.Station();
         ObservableCollection<BO.AdjacentStations> beforAdj = new ObservableCollection<BO.AdjacentStations>();
         ObservableCollection<BO.AdjacentStations> afterAdj = new ObservableCollection<BO.AdjacentStations>();
+        string numberText;
+        #endregion
 
-
+        #region constructor
+        [Obsolete("not using", true)]
         public StationWindowP()
         {
             InitializeComponent();
@@ -40,63 +45,29 @@ namespace PLGui
 
 
         }
+        #endregion
 
-        public ObservableCollection<T> ConvertList<T>(IEnumerable<T> listFromBO)
-        {
-            return new ObservableCollection<T>(listFromBO);
-        }
-
+        #region refresh
+        /// <summary>
+        /// refresh List View Station
+        /// </summary>
         private void RefreshStation()
         {
             stations = ConvertList(bl.GetAllStations());//to make ObservableCollection
             ListOfStations.ItemsSource = stations;
-            // NOLine.Visibility = Visibility.Hidden;
-            // LineInStation.Visibility = Visibility.Visible;
             stationExistCheckBox.Visibility = Visibility.Hidden;
             Sexist.Visibility = Visibility.Hidden;
 
-
-
-
-
         }
 
-        private void ListOfStations_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            add = false;
-            var list = (ListView)sender; //to get the line
-            stationData = list.SelectedItem as BO.Station;
-
-            RefreshLineInStation();
-
-        }
-
-        private void Search_Click(object sender, RoutedEventArgs e)
-        {
-            if (numberText != null)
-            {
-                int Sera = Convert.ToInt32(numberText);
-                BO.Station SearchResult = bl.GetStationByCode(Sera);
-                if (SearchResult != null)
-                {
-                    ObservableCollection<BO.Station> a = new ObservableCollection<BO.Station>();
-                    a.Add(SearchResult);
-                    ListOfStations.ItemsSource = a;
-
-                }
-                else
-                {
-                    ListOfStations.ItemsSource = stations;
-                    NotExist.Visibility = Visibility.Visible;
-                }
-            }
-        }
+        /// <summary>
+        /// refresh data on the Station
+        /// </summary>
         public void RefreshLineInStation()
         {
             beforAdj.Clear();
             afterAdj.Clear();
             StationDataGrid.DataContext = stationData;
-
             temp = null;
             if (stationData != null)
             {
@@ -105,28 +76,40 @@ namespace PLGui
                 BeforAfter();
                 Befor.ItemsSource = beforAdj;
                 After.ItemsSource = afterAdj;
-                //
             }
 
-
             LineInStation.ItemsSource = temp;
-
             updateTS.Visibility = Visibility.Hidden;
 
         }
-        private void BeforAfter()
+        #endregion
+
+        #region Button Click thd doubleClick
+        private void ListOfStations_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            foreach (BO.AdjacentStations item in stationData.StationAdjacent)
+            add = false;
+            var list = (ListView)sender; //to get the station
+            stationData = list.SelectedItem as BO.Station;
+            RefreshLineInStation();
+
+        }
+
+        /// <summary>
+        /// to do the search od the station
+        /// </summary>
+        private void Search_Click(object sender, RoutedEventArgs e)
+        {
+            if (numberText != null)
             {
-                if (item.Station1 == stationData.Code)
-                {
-                    afterAdj.Add(item);
-                }
-                else beforAdj.Add(item);
+                int StationNum = Convert.ToInt32(numberText);
+                helpSearch(StationNum);
+
             }
         }
 
-
+        /// <summary>
+        /// do the search by enter
+        /// </summary>
         private void textBoxTextBox_PreviewKeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Return)
@@ -134,20 +117,7 @@ namespace PLGui
 
                 TextBox text = sender as TextBox;
                 int lineSteation = int.Parse(text.Text);
-                BO.Station SearchResult = bl.GetStationByCode(lineSteation);
-                if (SearchResult != null)
-                {
-                    ObservableCollection<BO.Station> a = new ObservableCollection<BO.Station>();
-                    a.Add(SearchResult);
-                    ListOfStations.ItemsSource = a;
-
-                }
-                else
-                {
-                    ListOfStations.ItemsSource = stations;
-                    NotExist.Visibility = Visibility.Visible;
-                }
-
+                helpSearch(lineSteation);
 
             }
             if (e.Key == Key.Back)
@@ -157,36 +127,66 @@ namespace PLGui
             }
         }
 
-        private void textBoxTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+
+        /// <summary>
+        /// to start update time and distance betweenStation
+        /// </summary>
+        private void UpdataDT_Click(object sender, RoutedEventArgs e)
         {
-            e.Handled = !e.Text.Any(x => Char.IsDigit(x));
+            updateTS.Visibility = Visibility.Visible;
+            var list = sender as FrameworkElement; //to get the line
+            BO.AdjacentStations tem = list.DataContext as BO.AdjacentStations;
+            updateTS.DataContext = tem;
         }
 
-
-
-
-        private void textBoxTextBox_GotFocus(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// save the change of the detials of Consecutive stations
+        /// </summary>
+        private void okeyUpdate_Checked(object sender, RoutedEventArgs e)
         {
-            ListOfStations.ItemsSource = stations;
-            textBoxTextBox.Text = null;
-            ListOfStations.SelectedIndex = -1;
-            stationData = null;
-            RefreshLineInStation();
+            try
+            {
 
+                MessageBoxResult result = MessageBox.Show("?האם לשמור שינויים", "Update", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
+
+                switch (result)
+                {
+                    case MessageBoxResult.Yes:
+                        {
+                            BO.AdjacentStations a = updateTS.DataContext as BO.AdjacentStations;
+
+                            bl.UpdateAdjac(a);
+                            okeyUpdate.IsChecked = true;
+                            updateTS.Visibility = Visibility.Hidden;
+                            break;
+                        }
+                    case MessageBoxResult.No:
+                        {
+
+                            okeyUpdate.IsChecked = false;
+
+                            break;
+                        }
+                    case MessageBoxResult.Cancel:
+                        {
+
+                            okeyUpdate.IsChecked = false;
+                            updateTS.Visibility = Visibility.Hidden;
+                            break;
+                        }
+                }
+            }
+            catch (BO.BadIdException a)
+            {
+                MessageBox.Show(a.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                updateTS.Visibility = Visibility.Visible;
+                okeyUpdate.IsChecked = false;
+            }
         }
-        string numberText;
-        private void textBoxTextBox_LostFocus(object sender, RoutedEventArgs e)
-        {
-            if (textBoxTextBox.Text != "Search Station here...." && textBoxTextBox.Text != "")
-                numberText = textBoxTextBox.Text;
-            textBoxTextBox.Text = "Search Station here....";//
-        }
 
-        private void stationDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
+        /// <summary>
+        /// update data of station
+        /// </summary>
         private void UpdateStation_Click(object sender, RoutedEventArgs e)//////////
         {
             try
@@ -232,12 +232,13 @@ namespace PLGui
 
         }
 
+        /// <summary>
+        /// Delate Station from the System
+        /// </summary>
         private void DeleteStations_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-
-
                 MessageBoxResult result = MessageBox.Show("?האם למחוק תחנה זו\n פעולה זו בלתי הפיכה", "Update", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
                 switch (result)
@@ -265,7 +266,10 @@ namespace PLGui
 
             }
         }
-        bool add = false;
+
+        /// <summary>
+        /// Add new station to the line
+        /// </summary>
         private void AddStation_Click(object sender, RoutedEventArgs e)
         {
             if (!add)
@@ -281,27 +285,17 @@ namespace PLGui
 
             }
 
-
-
-
         }
 
-        private void helpaAddStation()
-        {
-            addStation.Address = addressTextBox.Text;
-            addStation.Code = Convert.ToInt32(codeTextBox.Text);
-            addStation.Coordinate = new GeoCoordinate(double.Parse((latitudeTextBox.Text)), double.Parse(longitudeTextBox.Text));
-            addStation.Name = nameTextBox.Text;
-            addStation.StationExist = (bool)stationExistCheckBox.IsChecked;
-
-        }
-
+        /// <summary>
+        /// Add finally station to the system
+        /// </summary>
         private void stationExistCheckBox_Checked(object sender, RoutedEventArgs e)
         {
             try
             {
 
-                if (add == true)
+                if (add)
                 {
                     MessageBoxResult result = MessageBox.Show("?האם לשמור שינויים", "Update", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
 
@@ -310,8 +304,6 @@ namespace PLGui
                         case MessageBoxResult.Yes:
                             {
                                 helpaAddStation();
-                                //addStation = StationDataGrid.DataContext as BO.Station;
-
                                 stationExistCheckBox.Visibility = Visibility.Hidden;
                                 Sexist.Visibility = Visibility.Hidden;
                                 bl.AddStation(addStation);
@@ -361,7 +353,87 @@ namespace PLGui
 
 
         }
+        #endregion
 
+        #region fucos searchTextBox
+        private void textBoxTextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            ListOfStations.ItemsSource = stations;
+            textBoxTextBox.Text = null;
+            ListOfStations.SelectedIndex = -1;
+            stationData = null;
+            RefreshLineInStation();
+
+        }
+
+        private void textBoxTextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (textBoxTextBox.Text != "Search Station here...." && textBoxTextBox.Text != "")
+                numberText = textBoxTextBox.Text;
+            textBoxTextBox.Text = "Search Station here....";//
+        }
+        #endregion
+
+        #region More func
+        public ObservableCollection<T> ConvertList<T>(IEnumerable<T> listFromBO)
+        {
+            return new ObservableCollection<T>(listFromBO);
+        }
+
+        /// <summary>
+        /// Divides the list of consecutive stations of the line into a list of stations before and after the current station
+        /// </summary>
+        private void BeforAfter()
+        {
+            foreach (BO.AdjacentStations item in stationData.StationAdjacent)
+            {
+                if (item.Station1 == stationData.Code)
+                {
+                    afterAdj.Add(item);
+                }
+                else beforAdj.Add(item);
+            }
+        }
+
+        private void textBoxTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !e.Text.Any(x => Char.IsDigit(x));
+        }
+
+        /// <summary>
+        /// Does the actual search
+        /// </summary>
+        /// <param name="numStation"></param>
+        public void helpSearch(int numStation)
+        {
+            BO.Station SearchResult = bl.GetStationByCode(numStation);
+            if (SearchResult != null)
+            {
+                ObservableCollection<BO.Station> a = new ObservableCollection<BO.Station>();
+                a.Add(SearchResult);
+                ListOfStations.ItemsSource = a;
+
+            }
+            else
+            {
+                ListOfStations.ItemsSource = stations;
+                NotExist.Visibility = Visibility.Visible;
+            }
+        }
+
+        /// <summary>
+        /// to make all the textBox to station
+        /// </summary>
+        private void helpaAddStation()
+        {
+            addStation.Address = addressTextBox.Text;
+            addStation.Code = Convert.ToInt32(codeTextBox.Text);
+            addStation.Coordinate = new GeoCoordinate(double.Parse((latitudeTextBox.Text)), double.Parse(longitudeTextBox.Text));
+            addStation.Name = nameTextBox.Text;
+            addStation.StationExist = (bool)stationExistCheckBox.IsChecked;
+
+        }
+      
         private void codeTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             e.Handled = !e.Text.Any(x => Char.IsDigit(x));
@@ -378,67 +450,11 @@ namespace PLGui
 
         }
 
-        private void UpdataDT_Click(object sender, RoutedEventArgs e)
-        {
-            updateTS.Visibility = Visibility.Visible;
-            var list = sender as FrameworkElement; //to get the line
-            BO.AdjacentStations tem = list.DataContext as BO.AdjacentStations;
-            updateTS.DataContext = tem;
-        }
-
-        private void okeyUpdate_Checked(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-
-                MessageBoxResult result = MessageBox.Show("?האם לשמור שינויים", "Update", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
-
-                switch (result)
-                {
-                    case MessageBoxResult.Yes:
-                        {
-                            BO.AdjacentStations a = updateTS.DataContext as BO.AdjacentStations;
-
-                            bl.UpdateAdjac(a);
-                            okeyUpdate.IsChecked = true;
-                            updateTS.Visibility = Visibility.Hidden;
-                            break;
-                        }
-                    case MessageBoxResult.No:
-                        {
-
-                            okeyUpdate.IsChecked = false;
-
-                            break;
-                        }
-                    case MessageBoxResult.Cancel:
-                        {
-
-                            okeyUpdate.IsChecked = false;
-                            updateTS.Visibility = Visibility.Hidden;
-                            break;
-                            //
-                        }
-                }
-            }
-            catch (BO.BadIdException a)
-            {
-                MessageBox.Show(a.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
-                updateTS.Visibility = Visibility.Visible;
-                okeyUpdate.IsChecked = false;
-            }
-        }
-
-
-
         private void timeAverageTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             e.Handled = !e.Text.Any(x => Char.IsDigit(x) || '.'.Equals(x));
         }
 
-        private void ListOfStations_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
+        #endregion
     }
 }

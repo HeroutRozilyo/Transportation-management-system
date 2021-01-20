@@ -74,7 +74,7 @@
                 </Grid.RowDefinitions>
                 <Label Content=":מספר קו" Grid.Column="1" HorizontalAlignment="Left" Margin="11.333,5,0,10.333" Grid.Row="0" VerticalAlignment="Center" Height="26" Width="79"/>
                 <Label Content=":אזור" Grid.Column="1" HorizontalAlignment="Left" Margin="14,10.667,0,4.667" Grid.Row="1" VerticalAlignment="Center" Width="55" Height="26"/>
-                <ComboBox x:Name="AreaUpdateLineTextBox" HorizontalAlignment="Left" SelectionChanged="AreaTextBox_SelectionChanged" Height="24" Margin="7,9.667,0,7.667"   Text="{Binding Area, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="78" Grid.Row="1"/>
+                <ComboBox x:Name="AreaUpdateLineTextBox" HorizontalAlignment="Left"  Height="24" Margin="7,9.667,0,7.667"   Text="{Binding Area, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="78" Grid.Row="1"/>
                 <Label Content=":(זמן נסיעה (דקות" Grid.Column="1" HorizontalAlignment="Left" Margin="10,7.333,0,9.333" Grid.Row="2" VerticalAlignment="Center" Width="108" Height="26"/>
                 <TextBlock x:Name="TimeTravlTextBox" Text="{Binding TimeTravel}" HorizontalAlignment="Left" Height="26"  Margin="0,9.333,0,7.333" Grid.Row="2" VerticalAlignment="Center" Width="88"/>
                 <TextBox x:Name="LineNumber" HorizontalAlignment="Left" Height="23" Margin="5,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" Text="{Binding NumberLine}"/>

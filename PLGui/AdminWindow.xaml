@@ -10,7 +10,7 @@
         <Grid.Background>
             <ImageBrush ImageSource="Back.jpg" Opacity="0.5"/>
         </Grid.Background>
-        <Frame x:Name="frame"   Content="" HorizontalAlignment="Left" Margin="160,35,0,1" VerticalAlignment="Stretch" Width="1150" Navigated="frame_Navigated" NavigationUIVisibility="Hidden" BorderThickness="1" >
+        <Frame x:Name="frame"   Content="" HorizontalAlignment="Left" Margin="160,35,0,1" VerticalAlignment="Stretch" Width="1150"  NavigationUIVisibility="Hidden" BorderThickness="1" >
             <Frame.Background>
                 <ImageBrush ImageSource="GMG.png" Opacity="0.1"/>
             </Frame.Background>
