@@ -15,7 +15,19 @@ namespace DO
             return base.ToString() + $",{Licence} מספר רישוי לא תקין";
         }
     }
-
+    [Serializable]
+    public class WrongKMException : Exception //when licence is wrong 
+    {
+        public int Licence;
+        public WrongKMException() : base() { }
+        public WrongKMException(int licence) : base() => Licence = licence;
+        public WrongKMException(int licence, string messege) : base(messege) => Licence = licence;
+        public WrongKMException(int licence, string messege, Exception innerException) : base(messege, innerException) => Licence = licence;
+        public override string ToString()
+        {
+            return base.ToString() + $", אינו תקין{Licence} מספר קילומטרים לאוטובוס ";
+        }
+    }
     [Serializable]
     public class WrongIDExeption : Exception //when the id number is wrong.. use at line, station, trip,linestation..
     {

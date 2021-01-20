@@ -84,6 +84,9 @@
     <Compile Include="RealTimeStation.xaml.cs">
       <DependentUpon>RealTimeStation.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SendToTrip.xaml.cs">
+      <DependentUpon>SendToTrip.xaml</DependentUpon>
+    </Compile>
     <Compile Include="StationWindowP.xaml.cs">
       <DependentUpon>StationWindowP.xaml</DependentUpon>
     </Compile>
@@ -158,6 +161,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="SendToTrip.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="StationWindowP.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -212,10 +219,7 @@
       <Name>BL</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="BusWindow\" />
-    <Folder Include="LineWindow\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="GMG.png" />
   </ItemGroup>

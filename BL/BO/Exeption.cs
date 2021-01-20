@@ -13,6 +13,18 @@ namespace BO
         public override string ToString() => base.ToString() + $",{ID} מספר רישוי שגוי   ";
     }
 
+
+    [Serializable]
+    public class BadBusLKMException : Exception
+    {
+        public int Linces;
+        public BadBusLKMException() : base() { }
+        public BadBusLKMException(string message, int licence) : base(message) => Linces = licence;
+        public BadBusLKMException(string message, Exception innerException) :
+            base(message, innerException) => Linces = ((DO.WrongKMException)innerException).Licence;
+        public override string ToString() => base.ToString() + $",{Linces} מספר רישוי שגוי   ";
+    }
+
     [Serializable]
     public class BadIdException : Exception
     {

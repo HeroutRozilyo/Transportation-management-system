@@ -9,13 +9,13 @@
       Title="busTry">
 
     <Grid x:Name="busesData" Margin="0,0,-35,-10.333"  >
-        <ComboBox x:Name="buses" HorizontalAlignment="Left" Margin="390,30,0,0" VerticalAlignment="Top" Width="147" ItemsSource="{Binding}" DisplayMemberPath="Licence" SelectedValuePath="Licence"  SelectionChanged="buses_SelectionChanged" FontSize="13" FontFamily="Copperplate Gothic Bold" Height="35"  />
+        <ComboBox x:Name="buses" HorizontalAlignment="Left" Margin="418,30,0,0" VerticalAlignment="Top" Width="147" ItemsSource="{Binding}" DisplayMemberPath="Licence" SelectedValuePath="Licence"  SelectionChanged="buses_SelectionChanged" FontSize="13" FontFamily="Copperplate Gothic Bold" Height="35"  />
 
 
 
 
 
-        <Label x:Name="Select" Content="בחר מספר רישוי" HorizontalAlignment="Left" Margin="540,35,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.868,0.436" FontSize="13" FontFamily="Copperplate Gothic Bold"/>
+        <Label x:Name="Select" Content="בחר מספר רישוי" HorizontalAlignment="Left" Margin="576,35,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.868,0.436" FontSize="13" FontFamily="Copperplate Gothic Bold"/>
 
         <GridSplitter x:Name="gridSplitter" HorizontalAlignment="Left" MinHeight="505" Margin="524,0,0,0" VerticalAlignment="Top" Width="0" RenderTransformOrigin="0.5,0.5" BorderBrush="#FF1D1515" Background="#FF221717">
             <GridSplitter.RenderTransform>
@@ -49,20 +49,18 @@
                 <ColumnDefinition Width="5*"/>
                 <ColumnDefinition Width="10*"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="send" Content="שליחה לטיפול" HorizontalAlignment="Right" Margin="0,-4,4.667,0" VerticalAlignment="Top"  Height="70" Width="185" Click="Treatment_Click"  IsEnabled="{Binding enable}"   TextOptions.TextFormattingMode="Display" TextOptions.TextHintingMode="Fixed" Grid.ColumnSpan="6"  Style="{DynamicResource AdminWindow}"/>
 
 
             <Button x:Name="Update2" Content="עדכון פרטי&#xD;&#xA; האוטובוס" HorizontalAlignment="Right" Margin="0,80,4.333,0" VerticalAlignment="Top" Click="Update_Click"  Height="70" Width="185" Grid.ColumnSpan="6" Style="{DynamicResource AdminWindow}"/>
 
 
-            <Button x:Name="DeleteBus1" Content="מחיקת אוטובוס " HorizontalAlignment="Right" Margin="0,246,4.333,0" VerticalAlignment="Top"  Click="DeleteBus_Click"  Height="70" Width="185" RenderTransformOrigin="0.217,0.5" Grid.ColumnSpan="6" Style="{DynamicResource AdminWindow}" />
+            <Button x:Name="DeleteBus1" Content="מחיקת אוטובוס " HorizontalAlignment="Right" Margin="0,176,4.667,0" VerticalAlignment="Top"  Click="DeleteBus_Click"  Height="70" Width="185" RenderTransformOrigin="0.217,0.5" Grid.ColumnSpan="6" Style="{DynamicResource AdminWindow}" />
 
 
-            <Button x:Name="AddBus" Content="הוספת אוטובוס &#xD;&#xA;          חדש" HorizontalAlignment="Right" Margin="0,330,4.333,0" VerticalAlignment="Top"  Click="AddBus_Click"   Height="70" Width="185" Grid.ColumnSpan="6" Style="{DynamicResource AdminWindow}"/>
-            <Button x:Name="fuel" Content="שליחה לתדלוק"  Margin="0,161,4.333,0" VerticalAlignment="Top"  Click="RefulingClick"   HorizontalAlignment="Right" FontFamily="Segoe Print" FontSize="14" FontWeight="Bold"  Height="70" Width="185" RenderTransformOrigin="0.057,0.571" Grid.ColumnSpan="6"  Style="{DynamicResource AdminWindow}"/>
+            <Button x:Name="AddBus" Content="הוספת אוטובוס &#xD;&#xA;          חדש" HorizontalAlignment="Right" Margin="0,276,4.667,0" VerticalAlignment="Top"  Click="AddBus_Click"   Height="70" Width="185" Grid.ColumnSpan="6" Style="{DynamicResource AdminWindow}"/>
 
         </Grid>
-        <GroupBox x:Name="groupBox" Header="פרטי האטובוס" HorizontalAlignment="Left" Height="405" Margin="265,85,0,0" VerticalAlignment="Top" Width="375" Style="{DynamicResource allGrpuoBox}">
+        <GroupBox x:Name="groupBox" Header="פרטי האטובוס" HorizontalAlignment="Left" Height="405" Margin="339,85,0,0" VerticalAlignment="Top" Width="375" Style="{DynamicResource allGrpuoBox}">
             <Grid x:Name="GridDataBus" DataContext="{Binding}"  HorizontalAlignment="Left" Margin="40,24,0,40.667" VerticalAlignment="Stretch" Height="320" Width="325" PreviewKeyDown="Window_PreviewKeyDown" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
@@ -102,7 +100,11 @@
                 <TextBox x:Name="NewKmTextboBox" Grid.Column="1" Text="{Binding KilometrFromLastTreat, Mode=Default}" HorizontalAlignment="Left" Height="24"  Margin="39,10.667,0,8.667" Grid.Row="6" VerticalAlignment="Center"  Width="120" Grid.ColumnSpan="3" PreviewTextInput="KmtextBox_PreviewTextInput" RenderTransformOrigin="-0.358,0.681"/>
             </Grid>
         </GroupBox>
-
+        <Grid HorizontalAlignment="Left" Height="120" Margin="145,490,0,-65" VerticalAlignment="Top" Width="715">
+            <Button x:Name="fuel" Content="שליחה לתדלוק"  Margin="0,25,40,0" VerticalAlignment="Top"  Click="RefulingClick"   HorizontalAlignment="Right" FontFamily="Segoe Print" FontSize="14" FontWeight="Bold"  Height="70" Width="185" RenderTransformOrigin="0.057,0.571"  Style="{DynamicResource AdminWindow}"/>
+            <Button x:Name="send" Content="שליחה לטיפול" HorizontalAlignment="Right" Margin="0,25,245,0" VerticalAlignment="Top"  Height="70" Width="185" Click="Treatment_Click"  IsEnabled="{Binding enable}"   TextOptions.TextFormattingMode="Display" TextOptions.TextHintingMode="Fixed"  Style="{DynamicResource AdminWindow}"/>
+            <Button x:Name="sendTrip" Content="שליחה לנסיעה" HorizontalAlignment="Left" Margin="78,25,0,0" VerticalAlignment="Top" Click="sendTrip_Click"  Style="{DynamicResource AdminWindow}" Height="70" Width="185"/>
+        </Grid>
 
 
 
