@@ -79,14 +79,7 @@ namespace BL
             return v;
         }
 
-        ////return all the bus according to their stutus
-        //public IEnumerable<BO.Bus> GetBusByStatus(BO.STUTUS stutus)
-        //{
-        //    return from item in dl.GetAllBusesStusus((DO.STUTUS)stutus)
-        //           select busDoBoAdapter(item.Licence);
-        //}
-
-        //if the licence not goot this func will throw exeption
+       
         #endregion
 
         #region add

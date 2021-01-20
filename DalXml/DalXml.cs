@@ -1260,7 +1260,7 @@ namespace DL
 
         public IEnumerable<LineStation> GetAllStationsLine(int idline)
         {
-    
+
             try
             {
 
@@ -1941,7 +1941,7 @@ namespace DL
             //        PrevStation = 112,
             //        NextStation = 0,
             //    },
-                
+
             //    //  NumberLine=20
             //    new LineStation
             //    {
@@ -2218,9 +2218,9 @@ namespace DL
             //        NextStation = 0,
             //    },
 
-             #endregion
+            #endregion
 
-            
+
 
             //};
 
@@ -2674,687 +2674,687 @@ namespace DL
 
         public AdjacentStations GetAdjacentStations(int Scode1, int Scode2)
         {
-        //   double speed = 666.66;//m/s- 50 km/h
+            //   double speed = 666.66;//m/s- 50 km/h
             #region
-//            List<AdjacentStations> ListAdjacentStations1 = new List<AdjacentStations>
-//                      {
-
-//            #region AdjacentStations  
-//            #region lineId1
-//            new AdjacentStations
-//            {
-//                Station1 = 73,
-//                Station2 = 76,
-//                Distance = 10387.6464817987,
-//                TimeAverage = ((1.5 * 10387.6464817987) / speed),//i.5- air to ground
-//                AdjacExsis=true,
-//            },
+            //            List<AdjacentStations> ListAdjacentStations1 = new List<AdjacentStations>
+            //                      {
+
+            //            #region AdjacentStations  
+            //            #region lineId1
+            //            new AdjacentStations
+            //            {
+            //                Station1 = 73,
+            //                Station2 = 76,
+            //                Distance = 10387.6464817987,
+            //                TimeAverage = ((1.5 * 10387.6464817987) / speed),//i.5- air to ground
+            //                AdjacExsis=true,
+            //            },
 
-//                new AdjacentStations
-//                {
-//                    Station1 = 76,
-//                    Station2 = 77,
-//                    Distance = 197.059830127369,
-//                    TimeAverage = ((1.5 * 197.059830127369) / speed),
-//                                    AdjacExsis=true,
+            //                new AdjacentStations
+            //                {
+            //                    Station1 = 76,
+            //                    Station2 = 77,
+            //                    Distance = 197.059830127369,
+            //                    TimeAverage = ((1.5 * 197.059830127369) / speed),
+            //                                    AdjacExsis=true,
 
 
-//                },
+            //                },
 
-//                new AdjacentStations
-//                {
-//                    Station1 = 77,
-//                    Station2 = 78,
-//                    Distance = 5942.26478400092,
-//                    TimeAverage = ((1.5 * 5942.26478400092) / speed),
-//                                    AdjacExsis=true,
+            //                new AdjacentStations
+            //                {
+            //                    Station1 = 77,
+            //                    Station2 = 78,
+            //                    Distance = 5942.26478400092,
+            //                    TimeAverage = ((1.5 * 5942.26478400092) / speed),
+            //                                    AdjacExsis=true,
 
 
-//                },
+            //                },
 
-//                new AdjacentStations
-//                {
-//                    Station1 = 78,
-//                    Station2 = 83,
-//                    Distance = 4115.12303761144,
-//                    TimeAverage = ((1.5 * 4115.12303761144) / speed),
-//                                    AdjacExsis=true,
+            //                new AdjacentStations
+            //                {
+            //                    Station1 = 78,
+            //                    Station2 = 83,
+            //                    Distance = 4115.12303761144,
+            //                    TimeAverage = ((1.5 * 4115.12303761144) / speed),
+            //                                    AdjacExsis=true,
 
 
-//                },
+            //                },
 
-//                new AdjacentStations
-//                {
-//                    Station1 = 83,
-//                    Station2 = 84,
-//                    Distance = 3971.03321849724,
-//                    TimeAverage = ((1.5 * 3971.03321849724) / speed),
+            //                new AdjacentStations
+            //                {
+            //                    Station1 = 83,
+            //                    Station2 = 84,
+            //                    Distance = 3971.03321849724,
+            //                    TimeAverage = ((1.5 * 3971.03321849724) / speed),
 
-//                                    AdjacExsis=true,
+            //                                    AdjacExsis=true,
 
-//                },
+            //                },
 
-//                new AdjacentStations
-//                {
-//                    Station1 = 84,
-//                    Station2 = 85,
-//                    Distance = 3665.92895953549,
-//                    TimeAverage = ((1.5 * 3665.92895953549) / speed),
-//                                    AdjacExsis=true,
+            //                new AdjacentStations
+            //                {
+            //                    Station1 = 84,
+            //                    Station2 = 85,
+            //                    Distance = 3665.92895953549,
+            //                    TimeAverage = ((1.5 * 3665.92895953549) / speed),
+            //                                    AdjacExsis=true,
 
 
-//                },
+            //                },
 
-//                new AdjacentStations
-//                {
-//                    Station1 = 85,
-//                    Station2 = 86,
-//                    Distance = 181.343172558381,
-//                    TimeAverage = ((1.5 * 181.343172558381) / speed),
-//                                    AdjacExsis=true,
+            //                new AdjacentStations
+            //                {
+            //                    Station1 = 85,
+            //                    Station2 = 86,
+            //                    Distance = 181.343172558381,
+            //                    TimeAverage = ((1.5 * 181.343172558381) / speed),
+            //                                    AdjacExsis=true,
 
 
-//                },
-//                new AdjacentStations
-//                {
-//                    Station1 = 86,
-//                    Station2 = 88,
-//                    Distance = 338.193775824042,
-//                    TimeAverage = ((1.5 * 338.193775824042) / speed),
-//                                    AdjacExsis=true,
+            //                },
+            //                new AdjacentStations
+            //                {
+            //                    Station1 = 86,
+            //                    Station2 = 88,
+            //                    Distance = 338.193775824042,
+            //                    TimeAverage = ((1.5 * 338.193775824042) / speed),
+            //                                    AdjacExsis=true,
 
 
-//                },
-//                new AdjacentStations
-//                {                AdjacExsis=true,
+            //                },
+            //                new AdjacentStations
+            //                {                AdjacExsis=true,
 
-//                    Station1 = 88,
-//                    Station2 = 89,
-//                    Distance = 839.108713036705,
-//                    TimeAverage = ((1.5 * 839.108713036705) / speed)
+            //                    Station1 = 88,
+            //                    Station2 = 89,
+            //                    Distance = 839.108713036705,
+            //                    TimeAverage = ((1.5 * 839.108713036705) / speed)
 
 
-//                },
-//#endregion LineId1
-                
-//                #region lineId2
+            //                },
+            //#endregion LineId1
 
+            //                #region lineId2
 
 
-        
 
-//                new AdjacentStations
-//                {                AdjacExsis=true,
 
-//                    Station1 = 89,
-//                    Station2 = 90,
-//                    Distance = 4972.12709975181,
-//                    TimeAverage = ((1.5 * 4972.12709975181) / speed)
 
+            //                new AdjacentStations
+            //                {                AdjacExsis=true,
 
-//                },
+            //                    Station1 = 89,
+            //                    Station2 = 90,
+            //                    Distance = 4972.12709975181,
+            //                    TimeAverage = ((1.5 * 4972.12709975181) / speed)
 
-//                new AdjacentStations
-//                {                AdjacExsis=true,
 
-//                    Station1 = 90,
-//                    Station2 = 91,
-//                    Distance = 4978.59764273959,
-//                    TimeAverage = ((1.5 * 4978.59764273959) / speed)
+            //                },
 
+            //                new AdjacentStations
+            //                {                AdjacExsis=true,
 
-//                },
+            //                    Station1 = 90,
+            //                    Station2 = 91,
+            //                    Distance = 4978.59764273959,
+            //                    TimeAverage = ((1.5 * 4978.59764273959) / speed)
 
-//                new AdjacentStations
-//                {                AdjacExsis=true,
 
-//                    Station1 = 91,
-//                    Station2 = 93,
-//                    Distance = 178.858161402408,
-//                    TimeAverage = ((1.5 * 178.858161402408) / speed)
+            //                },
 
+            //                new AdjacentStations
+            //                {                AdjacExsis=true,
 
-//                },
+            //                    Station1 = 91,
+            //                    Station2 = 93,
+            //                    Distance = 178.858161402408,
+            //                    TimeAverage = ((1.5 * 178.858161402408) / speed)
 
-//                new AdjacentStations
-//                {                AdjacExsis=true,
 
-//                    Station1 = 93,
-//                    Station2 = 94,
-//                    Distance = 20.9542368918975,
-//                    TimeAverage = ((1.5 * 20.9542368918975) / speed)
+            //                },
 
+            //                new AdjacentStations
+            //                {                AdjacExsis=true,
 
-//                },
-//                new AdjacentStations
-//                {                AdjacExsis=true,
+            //                    Station1 = 93,
+            //                    Station2 = 94,
+            //                    Distance = 20.9542368918975,
+            //                    TimeAverage = ((1.5 * 20.9542368918975) / speed)
 
-//                    Station1 = 94,
-//                    Station2 = 95,
-//                    Distance = 337.617552547299,
-//                    TimeAverage = ((1.5 * 337.617552547299) / speed)
 
+            //                },
+            //                new AdjacentStations
+            //                {                AdjacExsis=true,
 
-//                },
-//                new AdjacentStations
-//                {                AdjacExsis=true,
+            //                    Station1 = 94,
+            //                    Station2 = 95,
+            //                    Distance = 337.617552547299,
+            //                    TimeAverage = ((1.5 * 337.617552547299) / speed)
 
-//                    Station1 = 95,
-//                    Station2 = 97,
-//                    Distance = 141.607925499495,
-//                    TimeAverage = ((1.5 * 141.607925499495) / speed)
 
+            //                },
+            //                new AdjacentStations
+            //                {                AdjacExsis=true,
 
-//                },
-//#endregion LineId2
+            //                    Station1 = 95,
+            //                    Station2 = 97,
+            //                    Distance = 141.607925499495,
+            //                    TimeAverage = ((1.5 * 141.607925499495) / speed)
 
-//                #region lineId3 
-//                new AdjacentStations
-//                {                AdjacExsis=true,
 
-//                    Station1 = 122,
-//                    Station2 = 123,
-//                    Distance = 161.658025824811,
-//                    TimeAverage = ((1.5 * 161.658025824811) / speed)
-//                },
+            //                },
+            //#endregion LineId2
 
-//                new AdjacentStations
-//                {                AdjacExsis=true,
+            //                #region lineId3 
+            //                new AdjacentStations
+            //                {                AdjacExsis=true,
 
-//                    Station1 = 123,
-//                    Station2 = 121,
-//                    Distance = 145.638205945867,
-//                    TimeAverage = ((1.5 * 145.638205945867) / speed)
+            //                    Station1 = 122,
+            //                    Station2 = 123,
+            //                    Distance = 161.658025824811,
+            //                    TimeAverage = ((1.5 * 161.658025824811) / speed)
+            //                },
 
+            //                new AdjacentStations
+            //                {                AdjacExsis=true,
 
-//                },
+            //                    Station1 = 123,
+            //                    Station2 = 121,
+            //                    Distance = 145.638205945867,
+            //                    TimeAverage = ((1.5 * 145.638205945867) / speed)
 
-//                new AdjacentStations
-//                {                AdjacExsis=true,
 
-//                    Station1 = 121,
-//                    Station2 = 1524,
-//                    Distance = 2943.02888382813,
-//                    TimeAverage = ((1.5 * 2943.02888382813) / speed)
+            //                },
 
+            //                new AdjacentStations
+            //                {                AdjacExsis=true,
 
-//                },
+            //                    Station1 = 121,
+            //                    Station2 = 1524,
+            //                    Distance = 2943.02888382813,
+            //                    TimeAverage = ((1.5 * 2943.02888382813) / speed)
 
-//                new AdjacentStations
-//                {                AdjacExsis=true,
 
-//                    Station1 = 1524,
-//                    Station2 = 1523,
-//                    Distance = 140.492280736979,
-//                    TimeAverage = ((1.5 * 140.492280736979) / speed)
+            //                },
 
+            //                new AdjacentStations
+            //                {                AdjacExsis=true,
 
-//                },
+            //                    Station1 = 1524,
+            //                    Station2 = 1523,
+            //                    Distance = 140.492280736979,
+            //                    TimeAverage = ((1.5 * 140.492280736979) / speed)
 
-//                new AdjacentStations
-//                {                AdjacExsis=true,
 
-//                    Station1 = 1523,
-//                    Station2 = 1522,
-//                    Distance = 710.578511572254,
-//                    TimeAverage = ((1.5 * 710.578511572254) / speed)
+            //                },
 
+            //                new AdjacentStations
+            //                {                AdjacExsis=true,
 
-//                },
+            //                    Station1 = 1523,
+            //                    Station2 = 1522,
+            //                    Distance = 710.578511572254,
+            //                    TimeAverage = ((1.5 * 710.578511572254) / speed)
 
-//                new AdjacentStations
-//                {                AdjacExsis=true,
 
-//                    Station1 = 1522,
-//                    Station2 = 1518,
-//                    Distance = 2265.21319232095,
-//                    TimeAverage = ((1.5 * 2265.21319232095) / speed)
+            //                },
 
+            //                new AdjacentStations
+            //                {                AdjacExsis=true,
 
-//                },
+            //                    Station1 = 1522,
+            //                    Station2 = 1518,
+            //                    Distance = 2265.21319232095,
+            //                    TimeAverage = ((1.5 * 2265.21319232095) / speed)
 
-//                new AdjacentStations
-//                {                AdjacExsis=true,
 
-//                    Station1 = 1518,
-//                    Station2 = 1514,
-//                    Distance = 16.6091664944544,
-//                    TimeAverage = ((1.5 * 16.6091664944544) / speed)
+            //                },
 
+            //                new AdjacentStations
+            //                {                AdjacExsis=true,
 
-//                },
-//                new AdjacentStations
-//                {                AdjacExsis=true,
+            //                    Station1 = 1518,
+            //                    Station2 = 1514,
+            //                    Distance = 16.6091664944544,
+            //                    TimeAverage = ((1.5 * 16.6091664944544) / speed)
 
-//                    Station1 = 1514,
-//                    Station2 = 1512,
-//                    Distance = 1034.11608174677,
-//                    TimeAverage = ((1.5 * 1034.11608174677) / speed)
 
+            //                },
+            //                new AdjacentStations
+            //                {                AdjacExsis=true,
 
-//                },
-//                new AdjacentStations
-//                {                AdjacExsis=true,
+            //                    Station1 = 1514,
+            //                    Station2 = 1512,
+            //                    Distance = 1034.11608174677,
+            //                    TimeAverage = ((1.5 * 1034.11608174677) / speed)
 
-//                    Station1 = 1512,
-//                    Station2 = 1511,
-//                    Distance = 2271.65706974387,
-//                    TimeAverage = ((1.5 * 2271.65706974387) / speed)
 
+            //                },
+            //                new AdjacentStations
+            //                {                AdjacExsis=true,
 
-//                },
-//#endregion LineId3
+            //                    Station1 = 1512,
+            //                    Station2 = 1511,
+            //                    Distance = 2271.65706974387,
+            //                    TimeAverage = ((1.5 * 2271.65706974387) / speed)
 
-//                #region lineId4
-//                new AdjacentStations
-//                {                AdjacExsis=true,
 
-//                    Station1 = 121,
-//                    Station2 = 123,
-//                    Distance = 145.638205945867,
-//                    TimeAverage = ((1.5 * 145.638205945867) / speed)
-//                },
+            //                },
+            //#endregion LineId3
 
-//                new AdjacentStations
-//                {                AdjacExsis=true,
+            //                #region lineId4
+            //                new AdjacentStations
+            //                {                AdjacExsis=true,
 
-//                    Station1 = 123,
-//                    Station2 = 122,
-//                    Distance = 161.658025824811,
-//                    TimeAverage = ((1.5 * 161.658025824811) / speed)
+            //                    Station1 = 121,
+            //                    Station2 = 123,
+            //                    Distance = 145.638205945867,
+            //                    TimeAverage = ((1.5 * 145.638205945867) / speed)
+            //                },
 
+            //                new AdjacentStations
+            //                {                AdjacExsis=true,
 
-//                },
+            //                    Station1 = 123,
+            //                    Station2 = 122,
+            //                    Distance = 161.658025824811,
+            //                    TimeAverage = ((1.5 * 161.658025824811) / speed)
 
-//                new AdjacentStations
-//                {                AdjacExsis=true,
 
-//                    Station1 = 122,
-//                    Station2 = 1524,
-//                    Distance = 2957.82843148296,
-//                    TimeAverage = ((1.5 * 2957.82843148296) / speed)
+            //                },
 
+            //                new AdjacentStations
+            //                {                AdjacExsis=true,
 
-//                },
+            //                    Station1 = 122,
+            //                    Station2 = 1524,
+            //                    Distance = 2957.82843148296,
+            //                    TimeAverage = ((1.5 * 2957.82843148296) / speed)
 
 
+            //                },
 
-//                new AdjacentStations
-//                {                AdjacExsis=true,
 
-//                    Station1 = 1512,
-//                    Station2 = 1491,
-//                    Distance = 2604.33240816743,
-//                    TimeAverage = ((1.5 * 2604.33240816743) / speed)
 
+            //                new AdjacentStations
+            //                {                AdjacExsis=true,
 
-//                },
-//#endregion LineId4
+            //                    Station1 = 1512,
+            //                    Station2 = 1491,
+            //                    Distance = 2604.33240816743,
+            //                    TimeAverage = ((1.5 * 2604.33240816743) / speed)
 
-//                #region lineId5
-//                new AdjacentStations
-//                {                AdjacExsis=true,
 
-//                    Station1 = 119,
-//                    Station2 = 1485,
-//                    Distance = 5719.48141855948,
-//                    TimeAverage = ((1.5 * 5719.48141855948) / speed)
-//                },
+            //                },
+            //#endregion LineId4
 
-//                new AdjacentStations
-//                {                AdjacExsis=true,
+            //                #region lineId5
+            //                new AdjacentStations
+            //                {                AdjacExsis=true,
 
-//                    Station1 = 1485,
-//                    Station2 = 1486,
-//                    Distance = 179.006776536478,
-//                    TimeAverage = ((1.5 * 179.006776536478) / speed)
+            //                    Station1 = 119,
+            //                    Station2 = 1485,
+            //                    Distance = 5719.48141855948,
+            //                    TimeAverage = ((1.5 * 5719.48141855948) / speed)
+            //                },
 
+            //                new AdjacentStations
+            //                {                AdjacExsis=true,
 
-//                },
+            //                    Station1 = 1485,
+            //                    Station2 = 1486,
+            //                    Distance = 179.006776536478,
+            //                    TimeAverage = ((1.5 * 179.006776536478) / speed)
 
-//                new AdjacentStations
-//                {                AdjacExsis=true,
 
-//                    Station1 = 1486,
-//                    Station2 = 1487,
-//                    Distance = 772.225954779688,
-//                    TimeAverage = ((1.5 * 772.225954779688) / speed)
+            //                },
 
+            //                new AdjacentStations
+            //                {                AdjacExsis=true,
 
-//                },
+            //                    Station1 = 1486,
+            //                    Station2 = 1487,
+            //                    Distance = 772.225954779688,
+            //                    TimeAverage = ((1.5 * 772.225954779688) / speed)
 
-//                new AdjacentStations
-//                {                AdjacExsis=true,
 
-//                    Station1 = 1487,
-//                    Station2 = 1488,
-//                    Distance = 1415.66487905204,
-//                    TimeAverage = ((1.5 * 1415.66487905204) / speed)
+            //                },
 
+            //                new AdjacentStations
+            //                {                AdjacExsis=true,
 
-//                },
+            //                    Station1 = 1487,
+            //                    Station2 = 1488,
+            //                    Distance = 1415.66487905204,
+            //                    TimeAverage = ((1.5 * 1415.66487905204) / speed)
 
-//                new AdjacentStations
-//                {                AdjacExsis=true,
 
-//                    Station1 = 1488,
-//                    Station2 = 1490,
-//                    Distance = 445.425376124488,
-//                    TimeAverage = ((1.5 * 445.425376124488) / speed)
+            //                },
 
+            //                new AdjacentStations
+            //                {                AdjacExsis=true,
 
-//                },
+            //                    Station1 = 1488,
+            //                    Station2 = 1490,
+            //                    Distance = 445.425376124488,
+            //                    TimeAverage = ((1.5 * 445.425376124488) / speed)
 
-//                new AdjacentStations
-//                {                AdjacExsis=true,
 
-//                    Station1 = 1490,
-//                    Station2 = 1494,
-//                    Distance = 10374.8817694688,
-//                    TimeAverage = ((1.5 * 10374.8817694688) / speed)
+            //                },
 
+            //                new AdjacentStations
+            //                {                AdjacExsis=true,
 
-//                },
+            //                    Station1 = 1490,
+            //                    Station2 = 1494,
+            //                    Distance = 10374.8817694688,
+            //                    TimeAverage = ((1.5 * 10374.8817694688) / speed)
 
-//                new AdjacentStations
-//                {                AdjacExsis=true,
 
-//                    Station1 = 1494,
-//                    Station2 = 1492,
-//                    Distance = 587.350643701609,
-//                    TimeAverage = ((1.5 * 587.350643701609) / speed)
+            //                },
 
+            //                new AdjacentStations
+            //                {                AdjacExsis=true,
 
-//                },
-//                new AdjacentStations
-//                {                AdjacExsis=true,
+            //                    Station1 = 1494,
+            //                    Station2 = 1492,
+            //                    Distance = 587.350643701609,
+            //                    TimeAverage = ((1.5 * 587.350643701609) / speed)
 
-//                    Station1 = 1492,
-//                    Station2 = 1493,
-//                    Distance = 361.691515745432,
-//                    TimeAverage = ((1.5 * 361.691515745432) / speed)
 
+            //                },
+            //                new AdjacentStations
+            //                {                AdjacExsis=true,
 
-//                },
-//                new AdjacentStations
-//                {                AdjacExsis=true,
+            //                    Station1 = 1492,
+            //                    Station2 = 1493,
+            //                    Distance = 361.691515745432,
+            //                    TimeAverage = ((1.5 * 361.691515745432) / speed)
 
-//                    Station1 = 1493,
-//                    Station2 = 1491,
-//                    Distance = 1144.85124079156,
-//                    TimeAverage = ((1.5 * 1144.85124079156) / speed)
 
+            //                },
+            //                new AdjacentStations
+            //                {                AdjacExsis=true,
 
-//                },
-//#endregion LineId5
+            //                    Station1 = 1493,
+            //                    Station2 = 1491,
+            //                    Distance = 1144.85124079156,
+            //                    TimeAverage = ((1.5 * 1144.85124079156) / speed)
 
-//                #region lineId6
-//                new AdjacentStations
-//                {                AdjacExsis=true,
 
-//                    Station1 = 110,
-//                    Station2 = 111,
-//                    Distance = 195.920342315088,
-//                    TimeAverage = ((1.5 * 195.920342315088) / speed)
-//                },
+            //                },
+            //#endregion LineId5
 
-//                new AdjacentStations
-//                {                AdjacExsis=true,
+            //                #region lineId6
+            //                new AdjacentStations
+            //                {                AdjacExsis=true,
 
-//                    Station1 = 111,
-//                    Station2 = 112,
-//                    Distance = 50.4574978208662,
-//                    TimeAverage = ((1.5 * 50.4574978208662) / speed)
+            //                    Station1 = 110,
+            //                    Station2 = 111,
+            //                    Distance = 195.920342315088,
+            //                    TimeAverage = ((1.5 * 195.920342315088) / speed)
+            //                },
 
+            //                new AdjacentStations
+            //                {                AdjacExsis=true,
 
-//                },
+            //                    Station1 = 111,
+            //                    Station2 = 112,
+            //                    Distance = 50.4574978208662,
+            //                    TimeAverage = ((1.5 * 50.4574978208662) / speed)
 
-//                new AdjacentStations
-//                {                AdjacExsis=true,
 
-//                    Station1 = 112,
-//                    Station2 = 113,
-//                    Distance = 143.276626873244,
-//                    TimeAverage = ((1.5 * 143.276626873244) / speed)
+            //                },
 
+            //                new AdjacentStations
+            //                {                AdjacExsis=true,
 
-//                },
+            //                    Station1 = 112,
+            //                    Station2 = 113,
+            //                    Distance = 143.276626873244,
+            //                    TimeAverage = ((1.5 * 143.276626873244) / speed)
 
-//                new AdjacentStations
-//                {                AdjacExsis=true,
 
-//                    Station1 = 113,
-//                    Station2 = 115,
-//                    Distance = 279.425185419296,
-//                    TimeAverage = ((1.5 * 279.425185419296) / speed)
+            //                },
 
+            //                new AdjacentStations
+            //                {                AdjacExsis=true,
 
-//                },
+            //                    Station1 = 113,
+            //                    Station2 = 115,
+            //                    Distance = 279.425185419296,
+            //                    TimeAverage = ((1.5 * 279.425185419296) / speed)
 
-//                new AdjacentStations
-//                {                AdjacExsis=true,
 
-//                    Station1 = 115,
-//                    Station2 = 116,
-//                    Distance = 72.2684666055651,
-//                    TimeAverage = ((1.5 * 72.2684666055651) / speed)
+            //                },
 
+            //                new AdjacentStations
+            //                {                AdjacExsis=true,
 
-//                },
+            //                    Station1 = 115,
+            //                    Station2 = 116,
+            //                    Distance = 72.2684666055651,
+            //                    TimeAverage = ((1.5 * 72.2684666055651) / speed)
 
-//                new AdjacentStations
-//                {                AdjacExsis=true,
 
-//                    Station1 = 116,
-//                    Station2 = 117,
-//                    Distance = 192.809573417871,
-//                    TimeAverage = ((1.5 * 192.809573417871) / speed)
+            //                },
 
+            //                new AdjacentStations
+            //                {                AdjacExsis=true,
 
-//                },
+            //                    Station1 = 116,
+            //                    Station2 = 117,
+            //                    Distance = 192.809573417871,
+            //                    TimeAverage = ((1.5 * 192.809573417871) / speed)
 
-//                new AdjacentStations
-//                {                AdjacExsis=true,
 
-//                    Station1 = 117,
-//                    Station2 = 119,
-//                    Distance = 193.971761810414,
-//                    TimeAverage = ((1.5 * 193.971761810414) / speed)
+            //                },
 
+            //                new AdjacentStations
+            //                {                AdjacExsis=true,
 
-//                },
-  
+            //                    Station1 = 117,
+            //                    Station2 = 119,
+            //                    Distance = 193.971761810414,
+            //                    TimeAverage = ((1.5 * 193.971761810414) / speed)
 
-//#endregion LineId6
 
-//                #region lineId7
-//                new AdjacentStations
-//                {                AdjacExsis=true,
+            //                },
 
-//                    Station1 = 97,
-//                    Station2 = 102,
-//                    Distance = 4739.1072386442,
-//                    TimeAverage = ((1.5 * 4739.1072386442) / speed)
-//                },
 
-//                new AdjacentStations
-//                {                AdjacExsis=true,
+            //#endregion LineId6
 
-//                    Station1 = 102,
-//                    Station2 = 103,
-//                    Distance = 554.235295622813,
-//                    TimeAverage = ((1.5 * 554.235295622813) / speed)
+            //                #region lineId7
+            //                new AdjacentStations
+            //                {                AdjacExsis=true,
 
+            //                    Station1 = 97,
+            //                    Station2 = 102,
+            //                    Distance = 4739.1072386442,
+            //                    TimeAverage = ((1.5 * 4739.1072386442) / speed)
+            //                },
 
-//                },
+            //                new AdjacentStations
+            //                {                AdjacExsis=true,
 
-//                new AdjacentStations
-//                {                AdjacExsis=true,
+            //                    Station1 = 102,
+            //                    Station2 = 103,
+            //                    Distance = 554.235295622813,
+            //                    TimeAverage = ((1.5 * 554.235295622813) / speed)
 
-//                    Station1 = 103,
-//                    Station2 = 105,
-//                    Distance = 383.45864939499,
-//                    TimeAverage = ((1.5 * 383.45864939499) / speed)
 
-//                },
+            //                },
 
-//                new AdjacentStations
-//                {                AdjacExsis=true,
+            //                new AdjacentStations
+            //                {                AdjacExsis=true,
 
-//                    Station1 = 105,
-//                    Station2 = 106,
-//                    Distance = 20.551585590077,
-//                    TimeAverage = ((1.5 * 20.551585590077) / speed)
+            //                    Station1 = 103,
+            //                    Station2 = 105,
+            //                    Distance = 383.45864939499,
+            //                    TimeAverage = ((1.5 * 383.45864939499) / speed)
 
+            //                },
 
-//                },
+            //                new AdjacentStations
+            //                {                AdjacExsis=true,
 
-//                new AdjacentStations
-//                {                AdjacExsis=true,
+            //                    Station1 = 105,
+            //                    Station2 = 106,
+            //                    Distance = 20.551585590077,
+            //                    TimeAverage = ((1.5 * 20.551585590077) / speed)
 
-//                    Station1 = 106,
-//                    Station2 = 108,
-//                    Distance = 314.882994150425,
-//                    TimeAverage = ((1.5 * 314.882994150425) / speed)
 
+            //                },
 
-//                },
+            //                new AdjacentStations
+            //                {                AdjacExsis=true,
 
-//                new AdjacentStations
-//                {                AdjacExsis=true,
+            //                    Station1 = 106,
+            //                    Station2 = 108,
+            //                    Distance = 314.882994150425,
+            //                    TimeAverage = ((1.5 * 314.882994150425) / speed)
 
-//                    Station1 = 108,
-//                    Station2 = 109,
-//                    Distance = 109.450560373063,
-//                    TimeAverage = ((1.5 * 109.450560373063) / speed)
 
+            //                },
 
-//                },
+            //                new AdjacentStations
+            //                {                AdjacExsis=true,
 
-//                new AdjacentStations
-//                {                AdjacExsis=true,
+            //                    Station1 = 108,
+            //                    Station2 = 109,
+            //                    Distance = 109.450560373063,
+            //                    TimeAverage = ((1.5 * 109.450560373063) / speed)
 
-//                    Station1 = 109,
-//                    Station2 = 110,
-//                    Distance = 79.9157986778367,
-//                    TimeAverage = ((1.5 * 79.9157986778367) / speed)
 
-//                },
-//                new AdjacentStations
-//                {                AdjacExsis=true,
+            //                },
 
-//                    Station1 = 110,
-//                    Station2 = 112,
-//                    Distance = 151.091747503085,
-//                    TimeAverage = ((1.5 * 151.091747503085) / speed)
+            //                new AdjacentStations
+            //                {                AdjacExsis=true,
 
+            //                    Station1 = 109,
+            //                    Station2 = 110,
+            //                    Distance = 79.9157986778367,
+            //                    TimeAverage = ((1.5 * 79.9157986778367) / speed)
 
-//                },
-//                new AdjacentStations
-//                {                AdjacExsis=true,
+            //                },
+            //                new AdjacentStations
+            //                {                AdjacExsis=true,
 
-//                    Station1 = 112,
-//                    Station2 = 111,
-//                    Distance = 50.4574978208662,
-//                    TimeAverage = ((1.5 * 50.4574978208662) / speed)
+            //                    Station1 = 110,
+            //                    Station2 = 112,
+            //                    Distance = 151.091747503085,
+            //                    TimeAverage = ((1.5 * 151.091747503085) / speed)
 
 
-//                },
-//#endregion LineId7
+            //                },
+            //                new AdjacentStations
+            //                {                AdjacExsis=true,
 
-//                #region lineId8
-   
-         
+            //                    Station1 = 112,
+            //                    Station2 = 111,
+            //                    Distance = 50.4574978208662,
+            //                    TimeAverage = ((1.5 * 50.4574978208662) / speed)
 
-      
-             
-           
 
-       
-//                new AdjacentStations
-//                {                AdjacExsis=true,
+            //                },
+            //#endregion LineId7
 
-//                    Station1 = 112,
-//                    Station2 = 116,
-//                    Distance = 481.422062665161,
-//                    TimeAverage = ((1.5 * 481.422062665161) / speed)
+            //                #region lineId8
 
 
-//                },
-//#endregion LineId8
 
-//                #region lineId9
-          
-      
 
-      
-        
-   
-//                new AdjacentStations
-//                {                AdjacExsis=true,
 
-//                    Station1 = 95,
-//                    Station2 = 102,
-//                    Distance = 4852.96580098656,
-//                    TimeAverage = ((1.5 * 4852.96580098656) / speed)
 
 
-//                },
-//#endregion LineId9
 
-//                #region lineId10
-//           new AdjacentStations
-//           {                AdjacExsis=true,
+            //                new AdjacentStations
+            //                {                AdjacExsis=true,
 
-//               Station1 = 97,
-//               Station2 = 122,
-//               Distance = 400,
-//               TimeAverage = ((1.5 * 400) / speed)
+            //                    Station1 = 112,
+            //                    Station2 = 116,
+            //                    Distance = 481.422062665161,
+            //                    TimeAverage = ((1.5 * 481.422062665161) / speed)
 
 
+            //                },
+            //#endregion LineId8
 
-//           },
-//                   new AdjacentStations
-//                   {                AdjacExsis=true,
+            //                #region lineId9
 
-//                       Station1 = 1524,
-//                       Station2 = 1522,
-//                       Distance = 300,
-//                       TimeAverage = ((1.5 * 300) / speed)
 
 
-//                   },
-//                           new AdjacentStations
-//                           {                AdjacExsis=true,
 
-//                               Station1 = 1511,
-//                               Station2 = 121,
-//                               Distance = 100,
-//                               TimeAverage = ((1.5 * 100) / speed)
 
 
-//                           },
+            //                new AdjacentStations
+            //                {                AdjacExsis=true,
 
+            //                    Station1 = 95,
+            //                    Station2 = 102,
+            //                    Distance = 4852.96580098656,
+            //                    TimeAverage = ((1.5 * 4852.96580098656) / speed)
 
 
+            //                },
+            //#endregion LineId9
 
+            //                #region lineId10
+            //           new AdjacentStations
+            //           {                AdjacExsis=true,
 
+            //               Station1 = 97,
+            //               Station2 = 122,
+            //               Distance = 400,
+            //               TimeAverage = ((1.5 * 400) / speed)
 
 
-//                new AdjacentStations
-//                {                AdjacExsis=true,
 
-//                    Station1 = 1486,
-//                    Station2 = 1488,
-//                    Distance = 650.976014538566,
-//                    TimeAverage = ((1.5 * 650.976014538566) / speed)
+            //           },
+            //                   new AdjacentStations
+            //                   {                AdjacExsis=true,
 
+            //                       Station1 = 1524,
+            //                       Station2 = 1522,
+            //                       Distance = 300,
+            //                       TimeAverage = ((1.5 * 300) / speed)
 
-//                },
-//#endregion LineId10
-//            };
-//            #endregion AdjacentStations
-//            XMLTools.SaveListToXMLSerializer(ListAdjacentStations1, adjacentStationsPath);
+
+            //                   },
+            //                           new AdjacentStations
+            //                           {                AdjacExsis=true,
+
+            //                               Station1 = 1511,
+            //                               Station2 = 121,
+            //                               Distance = 100,
+            //                               TimeAverage = ((1.5 * 100) / speed)
+
+
+            //                           },
+
+
+
+
+
+
+
+            //                new AdjacentStations
+            //                {                AdjacExsis=true,
+
+            //                    Station1 = 1486,
+            //                    Station2 = 1488,
+            //                    Distance = 650.976014538566,
+            //                    TimeAverage = ((1.5 * 650.976014538566) / speed)
+
+
+            //                },
+            //#endregion LineId10
+            //            };
+            //            #endregion AdjacentStations
+            //            XMLTools.SaveListToXMLSerializer(ListAdjacentStations1, adjacentStationsPath);
 
             #endregion
 

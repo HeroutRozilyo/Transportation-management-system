@@ -5,7 +5,7 @@ using System.Threading;
 
 namespace BO
 {
-    public class ClockS 
+    public class ClockS
     {
         #region singelton
         static readonly ClockS instance = new ClockS();
@@ -68,9 +68,9 @@ namespace BO
             add => observerClock = value;
             remove => observerClock = null;
         }
-     
 
-       
+
+
         /// <summary>
         /// start the work of the clock
         /// </summary>
@@ -98,6 +98,8 @@ namespace BO
                 Thread.Sleep(100);
             }
             observerClock = null;
+
+
         }
         internal void Stop() { Cancel = true; }
 
