@@ -47,13 +47,6 @@ namespace PLGui
         }
         #endregion
 
-        /// <summary>
-        /// convert the ienumerable from BO to be a collection observer
-        /// </summary>
-        public ObservableCollection<T> ConvertList<T>(IEnumerable<T> listFromBO)
-        {
-            return new ObservableCollection<T>(listFromBO);
-        }
 
         #region comboboxChoos
         /// <summary>
@@ -311,7 +304,16 @@ namespace PLGui
         #endregion
 
 
-  ///////////////
-   
+        #region moreFunc
+
+        /// <summary>
+        /// convert the ienumerable from BO to be a collection observer
+        /// </summary>
+        public ObservableCollection<T> ConvertList<T>(IEnumerable<T> listFromBO)
+        {
+            return new ObservableCollection<T>(listFromBO);
+        }
+        #endregion
+
     }
 }

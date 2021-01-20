@@ -1,17 +1,20 @@
 ﻿using BlAPI;
 using System.Windows;
-
+using System;
 namespace PLGui
 {
     /// <summary>
-    /// Interaction logic for UserWindow.xaml
+    /// the main window of the user
     /// </summary>
     public partial class UserWindow : Window
     {
+        #region varieble
         private IBL bl;
         private BO.User userNow = new BO.User();
+        #endregion
 
-
+        #region constructor
+        [Obsolete("not use",true)]
         public UserWindow()
         {
             InitializeComponent();
@@ -19,15 +22,19 @@ namespace PLGui
 
         public UserWindow(IBL bl, BO.User users)
         {
-            this.DataContext = this;
             InitializeComponent();
+            this.DataContext = this;        
             this.bl = bl;
             userNow = users;
             NameTextBlock.Text = users.UserName;
 
         }
+        #endregion
 
-
+        #region button
+        /// <summary>
+        /// go back to the preview page
+        /// </summary>
         private void Back_Click(object sender, RoutedEventArgs e)
         {
             if (frame.CanGoBack)
@@ -36,6 +43,9 @@ namespace PLGui
             }
         }
 
+        /// <summary>
+        /// to go out from user accont to the main window
+        /// </summary>
         private void Disengagement_Click(object sender, RoutedEventArgs e)
         {
             MainWindow a = new MainWindow();
@@ -44,6 +54,9 @@ namespace PLGui
           
         }
 
+        /// <summary>
+        /// to go forward
+        /// </summary>
         private void forward_Click(object sender, RoutedEventArgs e)
         {
             if (frame.CanGoForward)
@@ -52,6 +65,9 @@ namespace PLGui
             }
         }
 
+        /// <summary>
+        /// details of the user
+        /// </summary>
         private void accountDatiels_Click(object sender, RoutedEventArgs e)
         {
             frame.Navigate(new AccountDetails(bl, userNow));
@@ -59,7 +75,7 @@ namespace PLGui
 
         private void contantUs_Click(object sender, RoutedEventArgs e)
         {
-
+            MessageBox.Show("מצטערים, יישום זה עדיין לא זמין למשתמש", "בבניה", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         private void line_Click(object sender, RoutedEventArgs e)
@@ -71,6 +87,6 @@ namespace PLGui
         {
             frame.Navigate(new User());
         }
-
+        #endregion
     }
 }

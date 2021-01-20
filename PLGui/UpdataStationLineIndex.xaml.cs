@@ -4,25 +4,19 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System;
 
 namespace PLGui
 {
     /// <summary>
-    /// Interaction logic for UpdataStationLineIndex.xaml
+    /// to enable to the maneger choose the new index to the station
     /// </summary>
     public partial class UpdataStationLineIndex : Window
     {
+        #region varieble
         private IBL bl;
         private BO.Line line;
         private BO.LineStation temp;
-
-        //
-        public UpdataStationLineIndex()
-        {
-            InitializeComponent();
-        }
-
-
 
         public BO.Line NewLine
         {
@@ -30,6 +24,20 @@ namespace PLGui
 
         }
         IEnumerable<int> numberIndex;
+        #endregion
+
+        #region constructor
+        [Obsolete("not use", true)]
+        public UpdataStationLineIndex()
+        {
+            InitializeComponent();
+        }
+
+
+
+        /// <summary>
+        /// get the line station to upadate at her the index
+        /// </summary>
         public UpdataStationLineIndex(BO.Line line, BO.LineStation ToUpdate, IBL bl)
         {
             InitializeComponent();
@@ -41,27 +49,25 @@ namespace PLGui
             numberIndex = from item in line.StationsOfBus
                           select item.LineStationIndex;
             IndexCOmboBox.ItemsSource = Convert<int>(numberIndex);
-
-
-
-
-
-
-
-
-
-
         }
+        #endregion
+
+        #region moreFunc
         public ObservableCollection<T> Convert<T>(IEnumerable<T> listFromBO)
         {
             return new ObservableCollection<T>(listFromBO);
         }
+        #endregion
 
+        #region combobox
+        /// <summary>
+        /// to get the new index that the maneger choose and update the list line station
+        /// </summary>
         private void IndexCOmboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             try
             {
-                MessageBoxResult result = MessageBox.Show("Are you sure you want to save the changes?", "Updata Index Station Message", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                MessageBoxResult result = MessageBox.Show("האם אתה בטוח שאתה רוצה לשנות את המיקום של התחנה? פעולה זו בלתי הפיכה", "Updata Index Station Message", MessageBoxButton.YesNo, MessageBoxImage.Question);
                 switch (result)
                 {
                     case MessageBoxResult.Yes:
@@ -83,7 +89,7 @@ namespace PLGui
                             this.DialogResult = true;
 
                             this.Close();
-                            break;//
+                            break;
                         }
                     case MessageBoxResult.No:
                         {
@@ -98,9 +104,7 @@ namespace PLGui
             }
 
         }
-
-
-
+        #endregion
 
     }
 }

@@ -351,6 +351,7 @@ namespace BL
                        group line by line.Area into g
                        select g;
             return list;
+     
         }
 
 

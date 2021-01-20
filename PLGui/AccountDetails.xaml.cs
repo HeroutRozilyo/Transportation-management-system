@@ -233,7 +233,6 @@ namespace PLGui
 
 
         }
-        #endregion
 
         #region More Func
         public bool check()
