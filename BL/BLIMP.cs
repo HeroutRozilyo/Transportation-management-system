@@ -22,7 +22,8 @@ namespace BL
 
         #region Bus
 
-        int MaxkM = 20000;
+      const  int MaxkM = 20000;
+        const double fuelPerKm = 0.3;
 
         #region get
         /// <summary>
@@ -169,7 +170,7 @@ namespace BL
         }
 
         //check if the licence number is valid
-        bool checkLicence(string licences)
+         bool checkLicence(string licences)
         {
             string licence = licences.Replace("-", "");
             if (licence.Length == 7 || licence.Length == 8)
@@ -187,6 +188,25 @@ namespace BL
             }
             else return STUTUS.INVALID;
         }
+
+        public bool sendTotrip(BO.Bus bus,double km)
+        {
+            
+            if(bus.KilometrFromLastTreat+km< MaxkM &&bus.FuellAmount-(km*fuelPerKm)>0&&bus.LastTreatment.AddYears(1)<DateTime.Today)
+            {
+                bus.Kilometrz += km;
+                bus.KilometrFromLastTreat += km;
+                bus.FuellAmount -= km * fuelPerKm;
+                UpdateBus(bus);
+                return true;
+            }
+            else
+            {
+                throw new BadBusLKMException();
+            }
+           
+        }
+     
         #endregion
 
         #region treatfunc

@@ -19,6 +19,8 @@ namespace BlAPI
         BO.Bus Refuelling(BO.Bus bus);
         BO.Bus treatment(BO.Bus bus);
         STUTUS checkingStatus(Bus bus);
+        bool sendTotrip(BO.Bus bus, double km);
+        
         #endregion
 
         #region Line

@@ -62,26 +62,16 @@ namespace PLGui
             //simulator clock make the BackgroundWorker
             BoolStart = true;
             timerWorker = new BackgroundWorker();
-            timerWorker.DoWork += (s, e) =>
-            {
-                workerThread = Thread.CurrentThread;
-                bl.StartSimulator(startTimeSimulator, rate, (time) => timerWorker.ReportProgress(0, time));
-                while (!timerWorker.CancellationPending)
-                    try { Thread.Sleep(1000000); }
-                    catch (ThreadInterruptedException) { }
-                    
-            };
+            timerWorker.DoWork += timerWorkerr_DoWork;
+            timerWorker.RunWorkerCompleted += timerWorker_RunWorkerCompleted;
+           
             timerWorker.ProgressChanged += timer_ProgressChanged;
-            timerWorker.RunWorkerCompleted += (s, e) =>
-            {
-                BoolStart = true;
-                startButton.Content = "התחלה";
-                bl.StopSimulator();
-            };
             timerWorker.WorkerReportsProgress = true;
             timerWorker.WorkerSupportsCancellation = true;
             
         }
+
+        
         #endregion
 
         #region simulator
@@ -120,6 +110,22 @@ namespace PLGui
                 timerWorker.CancelAsync();
                 workerThread.Interrupt();
             }
+        }
+
+        private void timerWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            BoolStart = true;
+            startButton.Content = "התחלה";
+            bl.StopSimulator();
+        }
+
+        private void timerWorkerr_DoWork(object sender, DoWorkEventArgs e)
+        {
+            workerThread = Thread.CurrentThread;
+            bl.StartSimulator(startTimeSimulator, rate, (time) => timerWorker.ReportProgress(0, time));
+            while (!timerWorker.CancellationPending)
+                try { Thread.Sleep(1000000); }
+                catch (ThreadInterruptedException) { }
         }
         #endregion
 

@@ -2,8 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -21,6 +23,7 @@ namespace PLGui
         private ObservableCollection<BO.Bus> egged = new ObservableCollection<BO.Bus>();
         private List<BO.Bus> temp = new List<BO.Bus>();
         public bool add = false;
+        int index;
         #endregion
 
         #region constructors
@@ -34,20 +37,20 @@ namespace PLGui
         {
             InitializeComponent();
             bl = _bl;
-
+            LincestextBox.IsReadOnly = true;
             RefreshDataBus();
             StatusComboBox.ItemsSource = Enum.GetValues(typeof(BO.STUTUS));
-            buses.IsReadOnly = true;
-          
+           
             this.DataContext = newbus = new BO.Bus();
-            
-            buses.ItemsSource = egged;
+           
+        buses.ItemsSource = egged;
             buses.SelectedIndex = 0;
             StartingDate.DisplayDateEnd = DateTime.Today;
             lastTreatmentTextBox.DisplayDateStart = DateTime.Today.AddYears(-3);
             lastTreatmentTextBox.DisplayDateEnd = DateTime.Today;
 
         }
+
         #endregion
 
         #region refresh and ComboBox
@@ -73,10 +76,6 @@ namespace PLGui
 
             egged = Convert<BO.Bus>(bl.GetAllBus());//to make ObservableCollection
             buses.ItemsSource = egged;
-
-
-
-
 
         }
         #endregion
@@ -147,6 +146,8 @@ namespace PLGui
                     send.IsEnabled = false;
                     fuel.IsEnabled = false;
                     DeleteBus1.IsEnabled = false;
+                    LincestextBox.IsReadOnly = false;
+                    sendTrip.IsEnabled = false;
 
 
                 }
@@ -160,6 +161,8 @@ namespace PLGui
                     buses.SelectedIndex = egged.Count() - 1;
                     LabelStatus.Visibility = Visibility.Visible;
                     StatusComboBox.Visibility = Visibility.Visible;
+                    LincestextBox.IsReadOnly = true;
+                    sendTrip.IsEnabled = true;
                     MessageBox.Show("האוטובוס נוסף בהצלחה למערכת", "Success Message", MessageBoxButton.OK, MessageBoxImage.Asterisk);
 
                 }
@@ -215,6 +218,8 @@ namespace PLGui
                     buses.SelectedIndex = egged.Count() - 1;
                     LabelStatus.Visibility = Visibility.Visible;
                     StatusComboBox.Visibility = Visibility.Visible;
+                    LincestextBox.IsReadOnly = false;
+                    sendTrip.IsEnabled = false;
                     MessageBox.Show("האוטובוס נוסף בהצלחה למירכת", "Success Message", MessageBoxButton.OK, MessageBoxImage.Asterisk);
                 }
                 if (e.Key == Key.Return && add && (LincestextBox == null || StartingDate.Text == ""))
@@ -287,6 +292,23 @@ namespace PLGui
 
         }
 
+        /// <summary>
+        /// send Bus to trip
+        /// </summary>
+        private void sendTrip_Click(object sender, RoutedEventArgs e)
+        {
+            index = buses.SelectedIndex;
+            SendToTrip wnd = new SendToTrip(bl, bus);
+            bool? result = wnd.ShowDialog();
+            if (result == true)
+            {
+                RefreshDataBus();
+                buses.SelectedIndex = index;
+                double km = wnd.Km;
+              
+
+            }
+        }
         #endregion
 
         #region More func
@@ -304,6 +326,7 @@ namespace PLGui
         {
             foreach (var ch in e.Text)
             {
+
                 if (!((Char.IsDigit(ch) || ch.Equals('.'))))
                 {
                     e.Handled = true;
@@ -312,6 +335,8 @@ namespace PLGui
                 }
             }
         }
+
+      
 
         /// <summary>
         /// to take out the detials from the TextBoxs
