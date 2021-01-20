@@ -170,7 +170,7 @@
 
             <TextBox x:Name="textBoxTextBox" HorizontalAlignment="Left" Height="25" Margin="65,74,0,0" TextWrapping="Wrap" Text="...הקלד מספר קו כאן" PreviewKeyDown="textBoxTextBox_PreviewKeyDown" VerticalAlignment="Top" Width="140" PreviewTextInput="textBoxTextBox_PreviewTextInput" 
            GotFocus="textBoxTextBox_GotFocus" LostFocus="textBoxTextBox_LostFocus" FontSize="13" FontFamily="Copperplate Gothic Bold" Grid.ColumnSpan="2"/>
-            <ListView x:Name="ListOfStations" HorizontalAlignment="Left" Height="474" Margin="30,100,-50,-44" VerticalAlignment="Top" Width="260" PreviewMouseDoubleClick="ListOfStations_PreviewMouseDoubleClick" Style="{DynamicResource allListView}" SelectionChanged="ListOfStations_SelectionChanged" Grid.ColumnSpan="2"  >
+            <ListView x:Name="ListOfStations" HorizontalAlignment="Left" Height="474" Margin="30,100,-50,-44" VerticalAlignment="Top" Width="260" PreviewMouseDoubleClick="ListOfStations_PreviewMouseDoubleClick" Style="{DynamicResource allListView}"  Grid.ColumnSpan="2"  >
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="קוד" Width="65"  DisplayMemberBinding="{Binding Code}"/>

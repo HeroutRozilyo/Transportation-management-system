@@ -15,14 +15,16 @@ namespace PLGui
     /// </summary>
     public partial class BusWindowP : Page
     {
-
+        #region reset
         private IBL bl;
         private BO.Bus bus, newbus;
         private ObservableCollection<BO.Bus> egged = new ObservableCollection<BO.Bus>();
         private List<BO.Bus> temp = new List<BO.Bus>();
         public bool add = false;
+        #endregion
 
-
+        #region constructors
+        [Obsolete("not using",true)]
         public BusWindowP()
         {
             InitializeComponent();
@@ -45,16 +47,10 @@ namespace PLGui
             lastTreatmentTextBox.DisplayDateStart = DateTime.Today.AddYears(-3);
             lastTreatmentTextBox.DisplayDateEnd = DateTime.Today;
 
-
-
-
         }
+        #endregion
 
-        public ObservableCollection<T> Convert<T>(IEnumerable<T> listFromBO)
-        {
-            return new ObservableCollection<T>(listFromBO);
-        }
-
+        #region refresh and ComboBox
         private void buses_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
@@ -83,8 +79,13 @@ namespace PLGui
 
 
         }
+        #endregion
 
+        #region Button Click
 
+        /// <summary>
+        /// to send Bus to refuling
+        /// </summary>
         private void RefulingClick(object sender, RoutedEventArgs e)
         {
             bus = (buses.SelectedItem as BO.Bus);
@@ -105,6 +106,9 @@ namespace PLGui
 
         }
 
+        /// <summary>
+        /// To send Bus to treatment
+        /// </summary>
         private void Treatment_Click(object sender, RoutedEventArgs e)
         {
             bus = (buses.SelectedItem as BO.Bus);
@@ -117,7 +121,6 @@ namespace PLGui
                     lastTreatmentTextBox.SelectedDate = bus.LastTreatment;
                     NewKmTextboBox.Text = bus.KilometrFromLastTreat.ToString();
 
-
                 }
                 catch (BO.BadBusLicenceException a)
                 {
@@ -127,11 +130,14 @@ namespace PLGui
             }
         }
 
+        /// <summary>
+        /// Add Bus to the system
+        /// </summary>
         private void AddBus_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                if (!add)
+                if (!add)//if it's the first time that the user click the button
                 {
                     RefreshDataBus();
                     LabelStatus.Visibility = Visibility.Hidden;
@@ -144,13 +150,11 @@ namespace PLGui
 
 
                 }
-                else
+                else//to finally add the bus
                 if (LincestextBox.Text != "" && StartingDate.Text != "")
                 {
                     add = false;
-                    
                     HelpAddBus();
-                 
                     bl.AddBus(newbus);
                     RefreshDataBus();
                     buses.SelectedIndex = egged.Count() - 1;
@@ -185,7 +189,11 @@ namespace PLGui
 
 
 
-
+        /// <summary>
+        /// for add bus by Enter
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Window_PreviewKeyDown(object sender, KeyEventArgs e)
         {
             try
@@ -193,7 +201,7 @@ namespace PLGui
 
 
 
-                if (e.Key == Key.Return && add && LincestextBox.Text != "" && StartingDate.Text != "")  //if enter            
+                if (e.Key == Key.Return && add && LincestextBox.Text != "" && StartingDate.Text != "" )  //if enter            
                 {
                     Update2.IsEnabled = true;
                     send.IsEnabled = true;
@@ -230,14 +238,18 @@ namespace PLGui
             }
         }
 
+        /// <summary>
+        /// to update the detiales of the bus in the system
+        /// </summary>
         private void Update_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                if (bus != null)
+                if (bus != null&&LincestextBox.Text != "" && StartingDate.Text != "")
                 {
+                    HelpAddBus();
                     bus.BusExsis = true;
-                    bl.UpdateBus(bus);
+                    bl.UpdateBus(newbus);
 
                 }
                 int index = buses.SelectedIndex;
@@ -254,17 +266,11 @@ namespace PLGui
 
         }
 
-        private void NewKmTextboBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
-        private void button_Click(object sender, RoutedEventArgs e)
-        {
-
-
-        }
-
+       /// <summary>
+       /// to delete bus from the station
+       /// </summary>
+       /// <param name="sender"></param>
+       /// <param name="e"></param>
         private void DeleteBus_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -281,7 +287,13 @@ namespace PLGui
 
         }
 
+        #endregion
 
+        #region More func
+        public ObservableCollection<T> Convert<T>(IEnumerable<T> listFromBO)
+        {
+            return new ObservableCollection<T>(listFromBO);
+        }
         private void LincestextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             Regex regex = new Regex("[^0-9]+");
@@ -301,6 +313,9 @@ namespace PLGui
             }
         }
 
+        /// <summary>
+        /// to take out the detials from the TextBoxs
+        /// </summary>
         public void HelpAddBus()
         {
             try
@@ -325,6 +340,7 @@ namespace PLGui
             }
 
         }
+        #endregion
     }
 }
 

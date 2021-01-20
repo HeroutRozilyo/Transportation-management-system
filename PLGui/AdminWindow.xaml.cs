@@ -10,9 +10,14 @@ namespace PLGui
     /// </summary>
     public partial class AdminWindow : Window
     {
+        #region reset
         private IBL bl;
         private AddUser addUser;
         private BO.User userNow = new BO.User();
+        #endregion
+
+        #region constructor
+        [Obsolete("not using",true)]
         public AdminWindow()
         {
             InitializeComponent();
@@ -27,25 +32,9 @@ namespace PLGui
             this.bl = _bl;
             NameTextBlock.Text = userNow.UserName;
         }
+        #endregion
 
-        public AdminWindow(IBL bl)
-        {
-            InitializeComponent();
-            this.bl = bl;
-        }
-
-        private void AdminWindow_Closing(object sender, CancelEventArgs e)
-        {
-            Environment.Exit(Environment.ExitCode);
-        }
-
-        private void frame_Navigated(object sender, System.Windows.Navigation.NavigationEventArgs e)
-        {
-
-        }
-        //
-
-
+        #region Button click
         private void buses_Click(object sender, RoutedEventArgs e)
         {
             frame.Content = (new BusWindowP(bl));
@@ -60,8 +49,6 @@ namespace PLGui
         {
             frame.Content = (new StationWindowP(bl));
         }
-
-
 
         private void user_Click_1(object sender, RoutedEventArgs e)
         {
@@ -91,7 +78,7 @@ namespace PLGui
 
         private void contantUs_Click(object sender, RoutedEventArgs e)
         {
-
+            MessageBox.Show(":)מצטערים, חלון בבנייה! נתראה בהמשך", "", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         private void accountDatiels_Click(object sender, RoutedEventArgs e)
@@ -106,5 +93,13 @@ namespace PLGui
             bool? result = addUser.ShowDialog();
 
         }
+        #endregion
+
+        #region More func
+        private void AdminWindow_Closing(object sender, CancelEventArgs e)
+        {
+            Environment.Exit(Environment.ExitCode);
+        }
+        #endregion
     }
 }

@@ -99,7 +99,7 @@
                 <Label Content=":תאריך טיפול אחרון" Grid.Column="3" HorizontalAlignment="Right" Margin="0,10.333,46.333,5" Grid.Row="7" VerticalAlignment="Center" Grid.ColumnSpan="2" Height="26" Width="118" />
                 <DatePicker x:Name="lastTreatmentTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="24" Margin="39,10.333,0,7" Grid.Row="7"  VerticalAlignment="Center" Width="120" SelectedDate="{Binding LastTreatment, Mode=Default, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.ColumnSpan="3"  />
                 <Label Content=":סה&quot;כ ק&quot;מ מהטיפול האחרון" Grid.Column="3" HorizontalAlignment="Left" Margin="1,9.667,-3.667,7.667" Grid.Row="6" VerticalAlignment="Center" Grid.ColumnSpan="2" Height="26" Width="170"/>
-                <TextBox x:Name="NewKmTextboBox" Grid.Column="1" Text="{Binding KilometrFromLastTreat, Mode=Default}" HorizontalAlignment="Left" Height="24"  Margin="39,10.667,0,8.667" Grid.Row="6" VerticalAlignment="Center"  Width="120" Grid.ColumnSpan="3" TextChanged="NewKmTextboBox_TextChanged" PreviewTextInput="KmtextBox_PreviewTextInput" RenderTransformOrigin="-0.358,0.681"/>
+                <TextBox x:Name="NewKmTextboBox" Grid.Column="1" Text="{Binding KilometrFromLastTreat, Mode=Default}" HorizontalAlignment="Left" Height="24"  Margin="39,10.667,0,8.667" Grid.Row="6" VerticalAlignment="Center"  Width="120" Grid.ColumnSpan="3" PreviewTextInput="KmtextBox_PreviewTextInput" RenderTransformOrigin="-0.358,0.681"/>
             </Grid>
         </GroupBox>
 
