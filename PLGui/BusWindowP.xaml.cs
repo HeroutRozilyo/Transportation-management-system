@@ -37,11 +37,10 @@ namespace PLGui
         {
             InitializeComponent();
             bl = _bl;
-
+            LincestextBox.IsReadOnly = true;
             RefreshDataBus();
             StatusComboBox.ItemsSource = Enum.GetValues(typeof(BO.STUTUS));
-            buses.IsReadOnly = true;
-          
+           
             this.DataContext = newbus = new BO.Bus();
            
         buses.ItemsSource = egged;
@@ -147,6 +146,8 @@ namespace PLGui
                     send.IsEnabled = false;
                     fuel.IsEnabled = false;
                     DeleteBus1.IsEnabled = false;
+                    LincestextBox.IsReadOnly = false;
+                    sendTrip.IsEnabled = false;
 
 
                 }
@@ -160,6 +161,8 @@ namespace PLGui
                     buses.SelectedIndex = egged.Count() - 1;
                     LabelStatus.Visibility = Visibility.Visible;
                     StatusComboBox.Visibility = Visibility.Visible;
+                    LincestextBox.IsReadOnly = true;
+                    sendTrip.IsEnabled = true;
                     MessageBox.Show("האוטובוס נוסף בהצלחה למערכת", "Success Message", MessageBoxButton.OK, MessageBoxImage.Asterisk);
 
                 }
@@ -215,6 +218,8 @@ namespace PLGui
                     buses.SelectedIndex = egged.Count() - 1;
                     LabelStatus.Visibility = Visibility.Visible;
                     StatusComboBox.Visibility = Visibility.Visible;
+                    LincestextBox.IsReadOnly = false;
+                    sendTrip.IsEnabled = false;
                     MessageBox.Show("האוטובוס נוסף בהצלחה למירכת", "Success Message", MessageBoxButton.OK, MessageBoxImage.Asterisk);
                 }
                 if (e.Key == Key.Return && add && (LincestextBox == null || StartingDate.Text == ""))
