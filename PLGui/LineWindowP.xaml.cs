@@ -147,7 +147,7 @@ namespace PLGui
         {
             listArea();
             area = (BO.AREA)(comboBoxArea.SelectedItem);
-            RefreshLine();
+           
             RefreshStationListView();
 
         }
@@ -283,7 +283,7 @@ namespace PLGui
                             bl.DeleteLine(lineToDelete.IdNumber);
                             line = null;
                             listArea();
-                            RefreshLine();
+                         
                             RefreshStationListView();
                             MessageBox.Show("הקו נמחק בהצלחה", "Success Message", MessageBoxButton.OK, MessageBoxImage.Asterisk);
                             break;
@@ -316,10 +316,10 @@ namespace PLGui
                 BO.Line newline = addline.NewLine;
                 line = newline;
                 listArea();
+
                 RefreshStationListView();
                 comboBoxArea.SelectedItem = newline.Area;
-                RefreshLine();
-
+                
 
 
 
@@ -336,7 +336,7 @@ namespace PLGui
                     bl.UpdateLine(line);
                 comboBoxArea.SelectedItem = line.Area;
                 ListOfLine.SelectedItem = line;
-                RefreshLine();
+                listArea();
                 RefreshStationListView();
 
                 MessageBox.Show("פרטי הקו נשמרו בהצלחה", "Success Message", MessageBoxButton.OK, MessageBoxImage.Asterisk);
@@ -486,7 +486,7 @@ namespace PLGui
                     foreach (var line in group)
                         YOSH.Add(line);
 
-
+                RefreshLine();
             }
         }
 

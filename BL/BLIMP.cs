@@ -463,8 +463,9 @@ namespace BL
                         catch (DO.WrongIDExeption ex) { string a = ""; a += ex; }
                     }
                     else
+                    {
                         throw new BO.BadIdException("מצטערים, לא הצלחנו להוסיף את הקו המבוקש למערכת", lineDO.NumberLine);
-
+                    }
                 }
 
 
@@ -1088,7 +1089,7 @@ namespace BL
             catch (DO.WrongIDExeption ex)
             {
                 string a = ""; a += ex;
-                dl.UpdateAdjacentStations(adjacent);
+
 
             }
             return false;
@@ -1329,29 +1330,19 @@ namespace BL
                         throw new BO.BadIdException("קוד תחנה כבר קיים במערכת ", station.Code);
                     IEnumerable<DO.LineStation> list = from item in dl.GetAllLineStationsBy(b=>b.StationCode==oldCode)
                                                        select item;
-                    List<DO.LineStation> s = new List<DO.LineStation>();
-                    foreach (var l in list)
-                    {
-                        s.Add(l);
-                    }
+                    List<DO.LineStation> lineStations = list.ToList();
 
-                    for (int i = 0; i < s.Count() ; i++) //we need update all the line station bus at the new code
+                    for (int i = 0; i < lineStations.Count(); i++) //we need update all the line station bus at the new code
                     {
 
-                        dl.UpdateLineStationsCode(s.ElementAt(i), newCode); 
+                        dl.UpdateLineStationsCode(lineStations.ElementAt(i), newCode); 
                     }
 
 
                 }
 
                 adjacentStations = dl.GetAllAdjacentStationsBy(b=>b.Station1==oldCode||b.Station2==oldCode); //get all adjacted stations with this code station
-                List<DO.AdjacentStations> t = new List<DO.AdjacentStations>();
-                foreach (var A in adjacentStations)
-                {
-                    t.Add(A);
-                }
-
-
+                List<DO.AdjacentStations> adjacents = adjacentStations.ToList();
                 //--------------
                 //if he change the coordinate so we need update
                 station.CopyPropertiesTo(stationDO);
@@ -1365,34 +1356,37 @@ namespace BL
                     if (newCode != oldCode) //if we change the code we need update the adjace station
                     {
 
-                        for (int i = 0; i < t.Count(); i++)
-                            dl.UpdateAdjacentStations(t.ElementAt(i).Station1, t.ElementAt(i).Station2, newCode, oldCode);
+                        for (int i = 0; i < adjacents.Count(); i++)
+                            dl.UpdateAdjacentStations(adjacents.ElementAt(i).Station1, adjacents.ElementAt(i).Station2, newCode, oldCode);
                     }
 
                     //if we change the place of tje station we need to ask to insert again data on distance and time travel
                     if (stationOldDO.Latitude != station.Coordinate.Latitude || stationOldDO.Longtitude != station.Coordinate.Longitude) 
                     {
-                        adjacentStations = dl.GetAllAdjacentStationsBy(b=>b.Station1== newCode || b.Station2== newCode);
-                        foreach (var item in adjacentStations)
+                        adjacentStations = dl.GetAllAdjacentStationsBy(b=>b.Station1 == station.Code|| b.Station2 == station.Code);
+                        adjacents = adjacentStations.ToList();
+                        for(int i=0;i< adjacents.Count();i++)
                         {
-                            if (item.Station1 == newCode) //if this station is the first station
+                            if (adjacents.ElementAt(i).Station1 == station.Code) //if this station is the first station
                             {
-                               // stationOldDO = dl.GetStations(item.Station2);
-
-                                adjacent.Station1 = newCode;
-                                adjacent.Station2 = item.Station2;
+                                stationOldDO = dl.GetStations(adjacents.ElementAt(i).Station2);
+                                adjacents.ElementAt(i).AdjacExsis = false;
+                                dl.UpdateAdjacentStations(adjacents.ElementAt(i));
+                                adjacent.Station1 = station.Code;
+                                adjacent.Station2 = stationOldDO.Code;
 
                             }
                             else
                             {
-                                //stationOldDO = dl.GetStations(item.Station1);
-
-                                adjacent.Station1 = item.Station1;
-                                adjacent.Station2 = newCode;
+                                stationOldDO = dl.GetStations(adjacents.ElementAt(i).Station1);
+                                adjacents.ElementAt(i).AdjacExsis = false;
+                                dl.UpdateAdjacentStations(adjacents.ElementAt(i));
+                                adjacent.Station1 = stationOldDO.Code;
+                                adjacent.Station2 = station.Code;
 
                             }
                             CreatAdjStations(adjacent.Station1, adjacent.Station2);
-                          //  adjactToChange.Add(adjacent);
+                          
 
 
 
