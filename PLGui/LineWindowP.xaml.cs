@@ -145,8 +145,9 @@ namespace PLGui
         #region Data selection
         private void comboBoxArea_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            listArea();
             area = (BO.AREA)(comboBoxArea.SelectedItem);
+            listArea();
+           
            
             RefreshStationListView();
 
