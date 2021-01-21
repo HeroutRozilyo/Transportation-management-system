@@ -219,7 +219,9 @@
       <Name>BL</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="deleteAccount.jpg" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="GMG.png" />
   </ItemGroup>

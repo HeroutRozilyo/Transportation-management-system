@@ -242,5 +242,40 @@ namespace PLGui
             return regex.IsMatch(Mail.Text);
         }
         #endregion
-    }
+
+        private void Ellipse_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show("?האם אתה בטוח שברצונך למחוק את החשבון", "", MessageBoxButton.OKCancel, MessageBoxImage.Question);
+            switch (result)
+            {
+                case MessageBoxResult.OK:
+                    {
+                        bl.DeleteUser(userNow);
+                        MessageBox.Show("!חשבונך נמחק בהצלחה, נשמח לראות אותך איתנו כאן שוב", "", MessageBoxButton.OK, MessageBoxImage.Information);
+                        if (userNow.Admin)
+                        {
+                            var window = (AdminWindow)Application.Current.MainWindow;
+                            MainWindow main = new MainWindow();
+                            main.Show();
+                            window.Close();
+                          
+                        }
+                        else
+                        {
+                            var window = (UserWindow)Application.Current.MainWindow;
+                            MainWindow main = new MainWindow();
+                            main.Show();
+                            window.Close();
+                        }
+                        
+                        return;
+                    }
+                case MessageBoxResult.Cancel:
+                    {
+                        
+                        return;
+                    }
+
+            }
+        }  }
 }

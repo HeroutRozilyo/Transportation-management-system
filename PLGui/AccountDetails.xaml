@@ -13,7 +13,7 @@
         <CollectionViewSource x:Key="userViewSource" d:DesignSource="{d:DesignInstance {x:Type BO:User}, CreateList=True}"/>
     </Page.Resources>
 
-    <Grid Margin="10,15,-10,-15">
+    <Grid Margin="120,25,-120,-25">
         <Button x:Name="ChangeMail" Content="שינוי כתובת מייל" HorizontalAlignment="Left" Margin="400,266,0,0" VerticalAlignment="Top" Width="105" Height="35" Click="ChangeMail_Click"  Style="{DynamicResource AdminWindow}" FontSize="12" RenderTransformOrigin="0.368,2.571"/>
         <Grid x:Name="ChangePasswordGrid" VerticalAlignment="Top" Margin="15,325,0,0" HorizontalAlignment="Left" DataContext="{StaticResource userViewSource}" Width="605" Height="110">
             <Grid.RowDefinitions>
@@ -66,7 +66,13 @@
                 <TextBlock x:Name="userNameTextBlock" VerticalAlignment="Center" Grid.Row="1" Margin="6,18.333,0,11" HorizontalAlignment="Left" Width="213" Height="20" TextAlignment="Right" FontSize="14" Grid.ColumnSpan="3"><Run FlowDirection="RightToLeft" Text="{Binding UserName}"/></TextBlock>
             </Grid>
         </GroupBox>
-        <Rectangle HorizontalAlignment="Left" Height="450" Margin="15,10,0,-10" Stroke="#FF638BB7" VerticalAlignment="Top" Width="640" OpacityMask="#FF1B0E0E"/>
+        <Rectangle HorizontalAlignment="Left" Height="450" Stroke="#FF638BB7" VerticalAlignment="Top" Width="640" OpacityMask="#FF1B0E0E"/>
+        <Ellipse HorizontalAlignment="Left" Height="65" Margin="40,45,0,0" Stroke="Black" VerticalAlignment="Top" Width="65" MouseDown="Ellipse_MouseDown">
+            <Ellipse.Fill>
+                <ImageBrush ImageSource="deleteAccount.jpg"/>
+            </Ellipse.Fill>
+
+        </Ellipse>
 
     </Grid>
 </Page>
