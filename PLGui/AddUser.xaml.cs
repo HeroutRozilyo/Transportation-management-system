@@ -59,7 +59,7 @@ namespace PLGui
         }
         #endregion
 
-
+        
         #region Buttons Click
         /// <summary>
         /// to Add the new User
