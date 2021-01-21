@@ -590,7 +590,7 @@ namespace DS
                     KilometrFromLastTreat=2000,
                     FuellAmount=200,
                     StatusBus=DO.STUTUS.READT_TO_TRAVEL,
-                    LastTreatment=new DateTime(2013, 02, 05),
+                    LastTreatment=new DateTime(2020,12,12),
                     BusExist=true
                 },
 
@@ -998,8 +998,8 @@ namespace DS
                 new LineTrip
                 {
                  KeyId=8,
-                 StartAt=new TimeSpan(01,00,00),
-                 FinishAt=new TimeSpan(06,00,00),
+                 StartAt=new TimeSpan(06,00,00),
+                 FinishAt=new TimeSpan(12,00,00),
                  TripLineExist=true,
                  Frequency=60,
                  },
