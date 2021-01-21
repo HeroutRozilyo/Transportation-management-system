@@ -69,7 +69,7 @@
                 <Label Content=":קו רוחב" Grid.Column="1" HorizontalAlignment="Left" Margin="24.667,4,0,2" Grid.Row="3" VerticalAlignment="Center" Height="26" Width="55"/>
                 <TextBox x:Name="latitudeTextBox" HorizontalAlignment="Left" Height="24" Margin="8,4,0,4" Grid.Row="3" Text="{Binding Coordinate.Latitude, Mode=OneWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" PreviewTextInput="latitudeTextBox_PreviewTextInput"/>
                 <Label Content=":קו אורך" Grid.Column="1" HorizontalAlignment="Left" Margin="24.667,1,0,5" Grid.Row="4" VerticalAlignment="Center" Height="26" Width="66"/>
-                <TextBox x:Name="longitudeTextBox" HorizontalAlignment="Left" Height="24" Margin="3,3,0,5" Grid.Row="4" Text="{Binding Coordinate.Longitude, Mode=OneWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" PreviewTextInput="longitudeTextBox_PreviewTextInput"/>
+                <TextBox x:Name="longitudeTextBox" HorizontalAlignment="Left" Height="24" Margin="8,3,0,5" Grid.Row="4" Text="{Binding Coordinate.Longitude, Mode=OneWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" PreviewTextInput="longitudeTextBox_PreviewTextInput"/>
             </Grid>
         </GroupBox>
         <GroupBox x:Name="AdjStation" Header="תחנות עוקבות" HorizontalAlignment="Left" Height="325" Margin="240,115,0,-34.667" VerticalAlignment="Top" Width="584" Grid.Row="1" Style="{DynamicResource allGrpuoBox}" >

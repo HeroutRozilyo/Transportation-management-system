@@ -418,8 +418,6 @@ namespace DL
         {
             try
             {
-
-
                 XElement lineRootElem = XMLTools.LoadListFromXMLElement(linePath); //get the data from xml
 
                 return (from line in lineRootElem.Elements()
@@ -442,27 +440,33 @@ namespace DL
         public int AddLine(Line line)
         {  //eliezer told us that we can do here not checking because check according to idnumber is meaningless
 
+
+
             try
             {
-
-
                 serials = XMLTools.LoadListFromXMLElement(@"serials.xml");
-
                 int idLine = int.Parse(serials.Element("LineCounter").Value);
-
                 serials.Element("LineCounter").Value = (++idLine).ToString();
 
-                List<Line> lines = XMLTools.LoadListFromXMLSerializer<Line>(linePath);
-                line.IdNumber = idLine;
+                XElement lineRootElem = XMLTools.LoadListFromXMLElement(linePath);
+           
 
-                lines.Add(line);
-                XMLTools.SaveListToXMLSerializer(lines, linePath);
 
+                XElement lineToAdd = new XElement("Line",
+                       new XElement("NumberLine", line.NumberLine),
+                       new XElement("FirstStationCode", line.FirstStationCode),
+                       new XElement("LastStationCode", line.LastStationCode),
+                       new XElement("LineExist", line.LineExist),
+                       new XElement("IdNumber", idLine),
+                       new XElement("Area", line.Area.ToString()));
+
+                lineRootElem.Add(lineToAdd);
+                XMLTools.SaveListToXMLElement(lineRootElem, linePath);
                 XMLTools.SaveListToXMLElement(serials, @"serials.xml");
 
                 return idLine;
             }
-            catch (DO.XMLFileLoadCreateException ex) { string a = ""; a += ex; }
+            catch (DO.XMLFileLoadCreateException ) { }
             return -1;
         }
 

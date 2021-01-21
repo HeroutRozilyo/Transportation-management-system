@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <ArrayOfStations xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Stations>
     <Code>73</Code>
@@ -46,7 +46,7 @@
     <Latitude>31.790758</Latitude>
     <Longtitude>35.209791</Longtitude>
     <Address> רחוב:מלכי ישראל 77 עיר: ירושלים </Address>
-    <StationExist>true</StationExist>
+    <StationExist>false</StationExist>
   </Stations>
   <Stations>
     <Code>85</Code>
@@ -398,6 +398,30 @@
     <Latitude>31.79617</Latitude>
     <Longtitude>35.206158</Longtitude>
     <Address>  רחוב:הרב סורוצקין 28 עיר: ירושלים</Address>
+    <StationExist>true</StationExist>
+  </Stations>
+  <Stations>
+    <Code>12</Code>
+    <Name>aa</Name>
+    <Address>aa</Address>
+    <Latitude>34.9</Latitude>
+    <Longtitude>32.9</Longtitude>
+    <StationExist>true</StationExist>
+  </Stations>
+  <Stations>
+    <Code>100</Code>
+    <Name>aaa</Name>
+    <Address>aaa</Address>
+    <Latitude>34.9</Latitude>
+    <Longtitude>32.9</Longtitude>
+    <StationExist>true</StationExist>
+  </Stations>
+  <Stations>
+    <Code>200</Code>
+    <Name>aaa</Name>
+    <Address>aaa</Address>
+    <Latitude>34.9</Latitude>
+    <Longtitude>32.9</Longtitude>
     <StationExist>true</StationExist>
   </Stations>
 </ArrayOfStations>

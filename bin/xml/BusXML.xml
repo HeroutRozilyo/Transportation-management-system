@@ -22,13 +22,13 @@
   </Bus>
   <Bus>
     <Licence>12345678</Licence>
-    <StartingDate>2019-02-05T00:00:00</StartingDate>
+    <StartingDate>05/02/2019 00:00:00</StartingDate>
     <Kilometrz>10000</Kilometrz>
     <KilometrFromLastTreat>10000</KilometrFromLastTreat>
     <FuellAmount>340</FuellAmount>
-    <StatusBus>READT_TO_TRAVEL</StatusBus>
-    <BusExist>true</BusExist>
-    <LastTreatment>0001-01-01T00:00:00</LastTreatment>
+    <StatusBus>IN_TRAVELING</StatusBus>
+    <BusExist>True</BusExist>
+    <LastTreatment>01/01/0001 00:00:00</LastTreatment>
   </Bus>
   <Bus>
     <Licence>5267408</Licence>
@@ -122,13 +122,13 @@
   </Bus>
   <Bus>
     <Licence>89712365</Licence>
-    <StartingDate>2020-03-15T00:00:00</StartingDate>
+    <StartingDate>15/03/2020 00:00:00</StartingDate>
     <Kilometrz>100000</Kilometrz>
-    <KilometrFromLastTreat>15000</KilometrFromLastTreat>
-    <FuellAmount>900</FuellAmount>
-    <StatusBus>READT_TO_TRAVEL</StatusBus>
-    <BusExist>true</BusExist>
-    <LastTreatment>0001-01-01T00:00:00</LastTreatment>
+    <KilometrFromLastTreat>0</KilometrFromLastTreat>
+    <FuellAmount>1200</FuellAmount>
+    <StatusBus>REFULLING</StatusBus>
+    <BusExist>True</BusExist>
+    <LastTreatment>21/01/2021 00:00:00</LastTreatment>
   </Bus>
   <Bus>
     <Licence>1778328</Licence>
@@ -197,7 +197,7 @@
     <KilometrFromLastTreat>15000</KilometrFromLastTreat>
     <FuellAmount>900</FuellAmount>
     <StatusBus>READT_TO_TRAVEL</StatusBus>
-    <BusExist>true</BusExist>
+    <BusExist>false</BusExist>
     <LastTreatment>0001-01-01T00:00:00</LastTreatment>
   </Bus>
   <Bus>

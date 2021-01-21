@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <ArrayOfLine xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Line>
     <IdNumber>1</IdNumber>
@@ -14,7 +14,7 @@
     <FirstStationCode>85</FirstStationCode>
     <LastStationCode>97</LastStationCode>
     <Area>GENERAL</Area>
-    <LineExist>true</LineExist>
+    <LineExist>false</LineExist>
   </Line>
   <Line>
     <IdNumber>3</IdNumber>
@@ -77,7 +77,15 @@
     <NumberLine>21</NumberLine>
     <FirstStationCode>111</FirstStationCode>
     <LastStationCode>1488</LastStationCode>
-    <Area>JERUSALEM</Area>
+    <Area>NORTH</Area>
     <LineExist>true</LineExist>
+  </Line>
+  <Line>
+    <NumberLine>23</NumberLine>
+    <FirstStationCode>77</FirstStationCode>
+    <LastStationCode>86</LastStationCode>
+    <LineExist>true</LineExist>
+    <IdNumber>13</IdNumber>
+    <Area>GENERAL</Area>
   </Line>
 </ArrayOfLine>

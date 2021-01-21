@@ -385,13 +385,16 @@ namespace PLGui
         /// </summary>
         private void BeforAfter()
         {
-            foreach (BO.AdjacentStations item in stationData.StationAdjacent)
+            if (stationData.StationAdjacent != null)
             {
-                if (item.Station1 == stationData.Code)
+                foreach (BO.AdjacentStations item in stationData.StationAdjacent)
                 {
-                    afterAdj.Add(item);
+                    if (item.Station1 == stationData.Code)
+                    {
+                        afterAdj.Add(item);
+                    }
+                    else beforAdj.Add(item);
                 }
-                else beforAdj.Add(item);
             }
         }
 

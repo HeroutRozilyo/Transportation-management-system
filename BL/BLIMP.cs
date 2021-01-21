@@ -453,12 +453,17 @@ namespace BL
                 id = dl.AddLine(lineDO);
                 foreach (var item in tempDO)
                 {
-                    item.LineId = id;
-                    try //in case that the we have 2 same station in mistake.
+                    if (id != -1)
                     {
-                        dl.AddLineStations(item);
+                        item.LineId = id;
+                        try //in case that the we have 2 same station in mistake.
+                        {
+                            dl.AddLineStations(item);
+                        }
+                        catch (DO.WrongIDExeption ex) { string a = ""; a += ex; }
                     }
-                    catch (DO.WrongIDExeption ex) { string a = ""; a += ex; }
+                    else
+                        throw new BO.BadIdException("מצטערים, לא הצלחנו להוסיף את הקו המבוקש למערכת", lineDO.NumberLine);
 
                 }
 
@@ -1083,7 +1088,7 @@ namespace BL
             catch (DO.WrongIDExeption ex)
             {
                 string a = ""; a += ex;
-
+                dl.UpdateAdjacentStations(adjacent);
 
             }
             return false;
@@ -1324,17 +1329,28 @@ namespace BL
                         throw new BO.BadIdException("קוד תחנה כבר קיים במערכת ", station.Code);
                     IEnumerable<DO.LineStation> list = from item in dl.GetAllLineStationsBy(b=>b.StationCode==oldCode)
                                                        select item;
+                    List<DO.LineStation> s = new List<DO.LineStation>();
+                    foreach (var l in list)
+                    {
+                        s.Add(l);
+                    }
 
-                    for (int i = 0; i < list.Count() + 1; i++) //we need update all the line station bus at the new code
+                    for (int i = 0; i < s.Count() ; i++) //we need update all the line station bus at the new code
                     {
 
-                        dl.UpdateLineStationsCode(list.ElementAt(i), newCode); 
+                        dl.UpdateLineStationsCode(s.ElementAt(i), newCode); 
                     }
 
 
                 }
 
                 adjacentStations = dl.GetAllAdjacentStationsBy(b=>b.Station1==oldCode||b.Station2==oldCode); //get all adjacted stations with this code station
+                List<DO.AdjacentStations> t = new List<DO.AdjacentStations>();
+                foreach (var A in adjacentStations)
+                {
+                    t.Add(A);
+                }
+
 
                 //--------------
                 //if he change the coordinate so we need update
@@ -1349,30 +1365,30 @@ namespace BL
                     if (newCode != oldCode) //if we change the code we need update the adjace station
                     {
 
-                        for (int i = 0; i < adjacentStations.Count(); i++)
-                            dl.UpdateAdjacentStations(adjacentStations.ElementAt(i).Station1, adjacentStations.ElementAt(i).Station2, newCode, oldCode);
+                        for (int i = 0; i < t.Count(); i++)
+                            dl.UpdateAdjacentStations(t.ElementAt(i).Station1, t.ElementAt(i).Station2, newCode, oldCode);
                     }
 
                     //if we change the place of tje station we need to ask to insert again data on distance and time travel
-                    if (stationOldDO.Latitude != station.Coordinate.Latitude && stationOldDO.Longtitude != station.Coordinate.Longitude) 
+                    if (stationOldDO.Latitude != station.Coordinate.Latitude || stationOldDO.Longtitude != station.Coordinate.Longitude) 
                     {
-                        adjacentStations = dl.GetAllAdjacentStationsBy(b=>b.Station1==oldCode||b.Station2==oldCode);
+                        adjacentStations = dl.GetAllAdjacentStationsBy(b=>b.Station1== newCode || b.Station2== newCode);
                         foreach (var item in adjacentStations)
                         {
-                            if (item.Station1 == oldCode) //if this station is the first station
+                            if (item.Station1 == newCode) //if this station is the first station
                             {
-                                stationOldDO = dl.GetStations(item.Station2);
+                               // stationOldDO = dl.GetStations(item.Station2);
 
-                                adjacent.Station1 = oldCode;
-                                adjacent.Station2 = stationOldDO.Code;
+                                adjacent.Station1 = newCode;
+                                adjacent.Station2 = item.Station2;
 
                             }
                             else
                             {
-                                stationOldDO = dl.GetStations(item.Station1);
+                                //stationOldDO = dl.GetStations(item.Station1);
 
-                                adjacent.Station1 = stationOldDO.Code;
-                                adjacent.Station2 = oldCode;
+                                adjacent.Station1 = item.Station1;
+                                adjacent.Station2 = newCode;
 
                             }
                             CreatAdjStations(adjacent.Station1, adjacent.Station2);
