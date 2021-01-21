@@ -22,7 +22,7 @@ namespace BL
 
         #region Bus
 
-      const  int MaxkM = 20000;
+        const int MaxkM = 20000;
         const double fuelPerKm = 0.3;
 
         #region get
@@ -90,7 +90,7 @@ namespace BL
 
         }
 
-       
+
         #endregion
 
         #region add
@@ -180,7 +180,7 @@ namespace BL
         }
 
         //check if the licence number is valid
-         bool checkLicence(string licences)
+        bool checkLicence(string licences)
         {
             string licence = licences.Replace("-", "");
             if (licence.Length == 7 || licence.Length == 8)
@@ -199,10 +199,10 @@ namespace BL
             else return STUTUS.INVALID;
         }
 
-        public bool sendTotrip(BO.Bus bus,double km)
+        public bool sendTotrip(BO.Bus bus, double km)
         {
-            
-            if(bus.KilometrFromLastTreat+km< MaxkM &&bus.FuellAmount-(km*fuelPerKm)>0&&bus.LastTreatment.AddYears(1)<DateTime.Today)
+
+            if (bus.KilometrFromLastTreat + km < MaxkM && bus.FuellAmount - (km * fuelPerKm) > 0 && bus.LastTreatment.AddYears(1) < DateTime.Today)
             {
                 bus.Kilometrz += km;
                 bus.KilometrFromLastTreat += km;
@@ -214,9 +214,9 @@ namespace BL
             {
                 throw new BadBusLKMException();
             }
-           
+
         }
-     
+
         #endregion
 
         #region treatfunc
@@ -274,7 +274,7 @@ namespace BL
         /// <summary>
         ///  return the line according his id number
         /// </summary>
-        BO.Line lineDoBoAdapter(int idLine) 
+        BO.Line lineDoBoAdapter(int idLine)
         {
             BO.Line lineBO = new BO.Line();
             DO.Line lineDO;
@@ -286,7 +286,7 @@ namespace BL
             {
                 lineDO = dl.GetLine(idLine);
                 tempDO = dl.GetAllLineStationsBy(b => b.LineId == idLine);
-                tripDO = dl.GetAllLineTripsBy(l=>l.KeyId==idLine);
+                tripDO = dl.GetAllLineTripsBy(l => l.KeyId == idLine);
             }
             catch (DO.WrongIDExeption ex)
             {
@@ -347,11 +347,11 @@ namespace BL
                 lineBO.StationsOfBus = lineStations.AsEnumerable();
 
             }
-            catch (DO.WrongIDExeption ex) 
+            catch (DO.WrongIDExeption ex)
             {
-                throw new BO.BadIdException("אחד מפרטי הקו שגוי",idLine);
+                throw new BO.BadIdException("אחד מפרטי הקו שגוי", idLine);
             }
-            
+
 
             //insert line trip data to the line
             lineBO.TimeLineTrip = from st in tripDO
@@ -360,7 +360,7 @@ namespace BL
 
             return lineBO;
         }
-     
+
         //return all the lines that working 
         public IEnumerable<BO.Line> GetAllLine()
         {
@@ -417,7 +417,7 @@ namespace BL
                        group line by line.Area into g
                        select g;
             return list;
-     
+
         }
 
 
@@ -469,7 +469,7 @@ namespace BL
                         LineStationExist = itemLineStation.LineStationExist,
                         Name = itemStation.Name,
                         Address = itemStation.Address,
-                       
+
                     };
             return from item in v
                    orderby item.LineStationIndex
@@ -496,7 +496,7 @@ namespace BL
             {
                 throw new BO.BadIdException("אחד מפרטי הקו שגוי", ex);
             }
-           
+
         }
 
         #endregion
@@ -565,7 +565,7 @@ namespace BL
             {
                 throw new BO.BadIdException("מזהה קו לא תקין או שקיים כבר במערכת", ex);
             }
-            
+
             return id;
         }
 
@@ -582,7 +582,7 @@ namespace BL
                 DO.LineTrip temp = new DO.LineTrip();
                 bool toAdd = false;
                 IEnumerable<DO.LineTrip> tripDO1;
-                tripDO1 = from item in dl.GetAllLineTripsBy(l=>l.KeyId==line.KeyId) //the oldest line trip
+                tripDO1 = from item in dl.GetAllLineTripsBy(l => l.KeyId == line.KeyId) //the oldest line trip
                           orderby item.StartAt
                           select item;
 
@@ -654,7 +654,7 @@ namespace BL
         }
 
         //delete station from the line travel (specific)
-        public void DeleteStation(int idline, int code) 
+        public void DeleteStation(int idline, int code)
         {
             try
             {
@@ -719,7 +719,7 @@ namespace BL
         /// update time at specific line trip
         /// </summary>
         /// <param name="oldTripLineIndex=we get from UI the place at the list of the line trip that we want to update>
-        
+
         public bool UpdateLineTrip(int oldTripLineIndex, BO.LineTrip newLineTrip)
         {
             try
@@ -729,7 +729,7 @@ namespace BL
                 bool toAdd = true;
                 IEnumerable<DO.LineTrip> tripDO1;
 
-                tripDO1 = from item in dl.GetAllLineTripsBy(l=>l.KeyId==newLineTrip.KeyId) //the oldest line trip
+                tripDO1 = from item in dl.GetAllLineTripsBy(l => l.KeyId == newLineTrip.KeyId) //the oldest line trip
                           orderby item.StartAt
                           select item;
 
@@ -960,7 +960,7 @@ namespace BL
                             tempDO2.ElementAt(i).NextStation = 0;
                             dl.UpdateLineStations(tempDO2.ElementAt(i));
                         }
-                        else 
+                        else
                         {
                             tempDO2.ElementAt(i).PrevStation = tempDO2.ElementAt(i - 1).StationCode;
                             tempDO2.ElementAt(i).NextStation = tempDO2.ElementAt(i + 1).StationCode;
@@ -1016,7 +1016,7 @@ namespace BL
 
                 return true;
             }
-            catch (DO.WrongIDExeption ex)
+            catch (DO.WrongIDExeption ex) //we dont throw exeption from here because this func help to another function. if return from here false they will sometimes throw
             {
                 string a = ""; a += ex;
 
@@ -1049,27 +1049,36 @@ namespace BL
         }
 
         #endregion
-      
+
         /// <summary>
         /// calucate the sum of all the travel. move at the list of line station and sum time travel
         /// </summary>
         public double CalucateTravel(int lineId)
         {
-            IEnumerable<DO.LineStation> tempDO;
-            DO.AdjacentStations adj = new DO.AdjacentStations();
-            double sum = 0;
-            tempDO = dl.GetAllLineStationsBy(b => b.LineId == lineId);
-            var v = from item in tempDO
-                    orderby item.LineStationIndex
-                    select item;
-            for (int i = 0; i < (tempDO.Count() - 1); i++)
+            try
             {
-                adj = dl.GetAdjacentStations(v.ElementAt(i).StationCode, v.ElementAt((i + 1)).StationCode);
-                sum += adj.TimeAverage;
+
+
+                IEnumerable<DO.LineStation> tempDO;
+                DO.AdjacentStations adj = new DO.AdjacentStations();
+                double sum = 0;
+                tempDO = dl.GetAllLineStationsBy(b => b.LineId == lineId);
+                var v = from item in tempDO
+                        orderby item.LineStationIndex
+                        select item;
+                for (int i = 0; i < (tempDO.Count() - 1); i++)
+                {
+                    adj = dl.GetAdjacentStations(v.ElementAt(i).StationCode, v.ElementAt((i + 1)).StationCode);
+                    sum += adj.TimeAverage;
+
+                }
+                return sum;
 
             }
-
-            return sum;
+            catch (DO.WrongIDExeption ex)
+            {
+                throw new BO.BadIdException("לא נמצאו נתונים עבור כל מסלולו הקו כדי לבצע את פעולה זו", ex);
+            }
 
         }
 
@@ -1093,8 +1102,8 @@ namespace BL
             try
             {
                 stationDO = dl.GetStations(code);
-                tempDO = dl.GetAllLineStationsBy(b=>b.StationCode==code);
-                adjactDO = dl.GetAllAdjacentStationsBy(b=>b.Station1==code||b.Station2==code);
+                tempDO = dl.GetAllLineStationsBy(b => b.StationCode == code);
+                adjactDO = dl.GetAllAdjacentStationsBy(b => b.Station1 == code || b.Station2 == code);
             }
             catch (DO.WrongIDExeption ex)
             {
@@ -1126,14 +1135,7 @@ namespace BL
                 var v = from item in dl.GetAllStations()
                         orderby item.Code
                         select stationDoBoAdapter(item.Code);
-                //foreach (var temp in v)
-                //{
-                //    temp.LineAtStation = from st in dl.GetAllLineStationsBy(b => b.StationCode == temp.Code)
-                //                         select (BO.LineStation)st.CopyPropertiesToNew(typeof(BO.LineStation));
-                //    temp.StationAdjacent = from ad in dl.GetAllAdjacentStationsBy(b => b.Station1 == temp.Code || b.Station2 == temp.Code)
-                //                           select (BO.AdjacentStations)ad.CopyPropertiesToNew(typeof(BO.AdjacentStations));
 
-                //}
                 return v;
 
             }
@@ -1153,27 +1155,38 @@ namespace BL
             }
             catch (BO.BadIdException ex)
             {
-                string a = ""; a += ex;
-                return null;
+
+                throw new BO.BadIdException("מזהה תחנה לא חוקי", ex);
+                //string a = ""; a += ex;
+                //return null;
             }
         }
 
         //return object ienumerable for the yello board at real time sinulation
         public IEnumerable<object> GetYellowBoard(Station a)
         {
-            IEnumerable<Line> line = from item in a.LineAtStation
-                                     select GetLineByLine(item.LineId);
+            try
+            {
+                IEnumerable<Line> line = from item in a.LineAtStation
+                                         select GetLineByLine(item.LineId);
 
-            IEnumerable<object> vs = from item in line
-                                     let b1 = GetStationByCode(item.LastStationCode)
-                                     orderby item.NumberLine
-                                    select new
-                                   {
-                                       StationCode = a.Code,
-                                    LineNumber=item.NumberLine,
-                                       Name =b1.Name,
-                                   };
-            return vs;
+                IEnumerable<object> vs = from item in line
+                                         let b1 = GetStationByCode(item.LastStationCode)
+                                         orderby item.NumberLine
+                                         select new
+                                         {
+                                             StationCode = a.Code,
+                                             LineNumber = item.NumberLine,
+                                             Name = b1.Name,
+                                         };
+                return vs;
+            }
+            catch (BO.BadIdException ex)
+            {
+
+                throw new BO.BadIdException("מזהה תחנה לא חוקי", ex);
+
+            }
 
 
         }
@@ -1258,20 +1271,20 @@ namespace BL
                             select item;
                     if (a.ToList().Count() != 0)
                         throw new BO.BadIdException("קוד תחנה כבר קיים במערכת ", station.Code);
-                    IEnumerable<DO.LineStation> list = from item in dl.GetAllLineStationsBy(b=>b.StationCode==oldCode)
+                    IEnumerable<DO.LineStation> list = from item in dl.GetAllLineStationsBy(b => b.StationCode == oldCode)
                                                        select item;
                     List<DO.LineStation> lineStations = list.ToList();
 
                     for (int i = 0; i < lineStations.Count(); i++) //we need update all the line station bus at the new code
                     {
 
-                        dl.UpdateLineStationsCode(lineStations.ElementAt(i), newCode); 
+                        dl.UpdateLineStationsCode(lineStations.ElementAt(i), newCode);
                     }
 
 
                 }
 
-                adjacentStations = dl.GetAllAdjacentStationsBy(b=>b.Station1==oldCode||b.Station2==oldCode); //get all adjacted stations with this code station
+                adjacentStations = dl.GetAllAdjacentStationsBy(b => b.Station1 == oldCode || b.Station2 == oldCode); //get all adjacted stations with this code station
                 List<DO.AdjacentStations> adjacents = adjacentStations.ToList();
                 //--------------
                 //if he change the coordinate so we need update
@@ -1282,7 +1295,7 @@ namespace BL
                 if (station.Coordinate.Latitude >= 29.3 && station.Coordinate.Latitude <= 33.5 && station.Coordinate.Longitude >= 33.7 && station.Coordinate.Longitude <= 36.3)
                 {
                     stationOldDO = dl.GetStations(oldCode);
-                    dl.UpdateStations(stationDO, oldCode); 
+                    dl.UpdateStations(stationDO, oldCode);
                     if (newCode != oldCode) //if we change the code we need update the adjace station
                     {
 
@@ -1291,11 +1304,11 @@ namespace BL
                     }
 
                     //if we change the place of tje station we need to ask to insert again data on distance and time travel
-                    if (stationOldDO.Latitude != station.Coordinate.Latitude || stationOldDO.Longtitude != station.Coordinate.Longitude) 
+                    if (stationOldDO.Latitude != station.Coordinate.Latitude || stationOldDO.Longtitude != station.Coordinate.Longitude)
                     {
-                        adjacentStations = dl.GetAllAdjacentStationsBy(b=>b.Station1 == station.Code|| b.Station2 == station.Code);
+                        adjacentStations = dl.GetAllAdjacentStationsBy(b => b.Station1 == station.Code || b.Station2 == station.Code);
                         adjacents = adjacentStations.ToList();
-                        for(int i=0;i< adjacents.Count();i++)
+                        for (int i = 0; i < adjacents.Count(); i++)
                         {
                             if (adjacents.ElementAt(i).Station1 == station.Code) //if this station is the first station
                             {
@@ -1316,7 +1329,7 @@ namespace BL
 
                             }
                             CreatAdjStations(adjacent.Station1, adjacent.Station2);
-                          
+
 
 
 
@@ -1393,9 +1406,18 @@ namespace BL
         /// </summary>
         public BO.User getUserByEmail(string email)
         {
-            BO.User temp = new User();
-            dl.getUserBy(b => b.MailAddress == email).CopyPropertiesTo(temp);
-            return temp;
+            try
+            {
+
+
+                BO.User temp = new User();
+                dl.getUserBy(b => b.MailAddress == email).CopyPropertiesTo(temp);
+                return temp;
+            }
+            catch (DO.WrongNameExeption ew)
+            {
+                throw new BO.BadNameExeption("מצטערים, חשבון אימייל לא נמצא", ew);
+            }
         }
 
 
@@ -1445,7 +1467,7 @@ namespace BL
                 a.UserExist = true;
                 dl.UpdateUser(a);
             }
-            catch (DO.WrongNameExeption )
+            catch (DO.WrongNameExeption)
             {
                 throw new BO.BadNameExeption(user.UserName, "לא נמצאו פרטים במערכת עבור משתמש זה");
             }
@@ -1460,7 +1482,7 @@ namespace BL
             {
                 dl.DeleteUser(user.UserName);
             }
-            catch (DO.WrongNameExeption )
+            catch (DO.WrongNameExeption)
             {
                 throw new BO.BadNameExeption(user.UserName, "לא נמצאו פרטים במערכת עבור משתמש זה");
             }
@@ -1468,13 +1490,21 @@ namespace BL
 
         #endregion
 
-        
+
         public bool EmailExsit(string mail)
         {
-            var v = getUserByEmail(mail);
-            if (v != null)
-                return true;
-            return false;
+            try
+            {
+                var v = getUserByEmail(mail);
+                if (v != null)
+                    return true;
+                return false;
+            }
+            catch (DO.WrongNameExeption)
+            {
+                throw new BO.BadNameExeption(mail, "לא נמצאו פרטים במערכת עבור משתמש זה");
+            }
+
         }
 
         ///// <summary>
@@ -1626,6 +1656,7 @@ namespace BL
         public void AddUser(string name, string pas, bool admin, string email)
         {
             DO.User userDO = new DO.User();
+
             //create user DO to add
             userDO.UserName = name;
             userDO.Admin = admin;
@@ -1677,64 +1708,74 @@ namespace BL
         /// </summary>
         public IEnumerable<BO.LineTiming> GetLineStationLineTimer(Station station, TimeSpan timeStart)
         {
-            List<BO.LineTiming> lineTimings = new List<BO.LineTiming>();
-            foreach (var item in station.LineAtStation)//over the line in this station
+            try
             {
-                IEnumerable<DO.LineTrip> lineTrips = dl.GetAllLineTripsBy(b => b.KeyId == item.LineId);
-                DO.Line temp = dl.GetLine(item.LineId);
-                foreach (DO.LineTrip lineTrip in lineTrips)//over the line trip of the line
+
+
+                List<BO.LineTiming> lineTimings = new List<BO.LineTiming>();
+                foreach (var item in station.LineAtStation)//over the line in this station
                 {
-                    TimeSpan ExitTime = lineTrip.StartAt;
-                    int a = Convert.ToInt32(CalucateTime(lineDoBoAdapter(item.LineId), temp.FirstStationCode, station.Code)); //have the time travel between the station in minuts
-                    TimeSpan b;
-                    if (a == 0) //its mean that this station is the first station of the line travel
-                        b = new TimeSpan(0, 0, 0); 
-                    else
-                        b = new TimeSpan(0, a, 0);
-
-                    while (ExitTime <= lineTrip.FinishAt) //if the current time is smaller then end of the line trip time so add to the list to return
+                    IEnumerable<DO.LineTrip> lineTrips = dl.GetAllLineTripsBy(b => b.KeyId == item.LineId);
+                    DO.Line temp = dl.GetLine(item.LineId);
+                    foreach (DO.LineTrip lineTrip in lineTrips)//over the line trip of the line
                     {
+                        TimeSpan ExitTime = lineTrip.StartAt;
+                        int a = Convert.ToInt32(CalucateTime(lineDoBoAdapter(item.LineId), temp.FirstStationCode, station.Code)); //have the time travel between the station in minuts
+                        TimeSpan b;
+                        if (a == 0) //its mean that this station is the first station of the line travel
+                            b = new TimeSpan(0, 0, 0);
+                        else
+                            b = new TimeSpan(0, a, 0);
 
-                        BO.LineTiming lineTiming = new BO.LineTiming()
-                        {
-                            LineId = item.LineId,
-                            LineNumber = temp.NumberLine,
-                            LastStation = dl.GetStations(temp.LastStationCode).Name,
-                            tripStart = TimeSpan.Parse(ExitTime.ToString()),
-                            ExpectedTimeArrive = ExitTime + b - TimeSpan.Parse(timeStart.ToString().Substring(0, 8)),
-
-                        };
-                  
-
-                        lineTiming.ExpectedTimeArrive = TimeSpan.Parse(lineTiming.ExpectedTimeArrive.ToString().Substring(0, 8));
-                        ExitTime += TimeSpan.FromMinutes(lineTrip.Frequency);
-                        if (lineTiming.ExpectedTimeArrive + lineTiming.tripStart >= timeStart)
+                        while (ExitTime <= lineTrip.FinishAt) //if the current time is smaller then end of the line trip time so add to the list to return
                         {
 
-                            lineTimings.Add(lineTiming);
+                            BO.LineTiming lineTiming = new BO.LineTiming()
+                            {
+                                LineId = item.LineId,
+                                LineNumber = temp.NumberLine,
+                                LastStation = dl.GetStations(temp.LastStationCode).Name,
+                                tripStart = TimeSpan.Parse(ExitTime.ToString()),
+                                ExpectedTimeArrive = ExitTime + b - TimeSpan.Parse(timeStart.ToString().Substring(0, 8)),
+
+                            };
+
+
+                            lineTiming.ExpectedTimeArrive = TimeSpan.Parse(lineTiming.ExpectedTimeArrive.ToString().Substring(0, 8));
+                            ExitTime += TimeSpan.FromMinutes(lineTrip.Frequency);
+                            if (lineTiming.ExpectedTimeArrive + lineTiming.tripStart >= timeStart)
+                            {
+
+                                lineTimings.Add(lineTiming);
+                            }
+
+
                         }
-
-
                     }
                 }
-            }
 
-            // we want to return onlly the first arrivle time of the line to the station. 
-            IEnumerable<LineTiming> lineTimings1 = lineTimings.OrderBy(b => b.ExpectedTimeArrive);
-            List<LineTiming> toReturn = new List<LineTiming>();
-            List<int> goodLine = new List<int>();
-            foreach (var item in lineTimings1)
-            {
-                int index = goodLine.FindIndex(b => b.ToString() == item.LineId.ToString());
-                if (index == -1)
+                // we want to return onlly the first arrivle time of the line to the station. 
+                IEnumerable<LineTiming> lineTimings1 = lineTimings.OrderBy(b => b.ExpectedTimeArrive);
+                List<LineTiming> toReturn = new List<LineTiming>();
+                List<int> goodLine = new List<int>();
+                foreach (var item in lineTimings1)
                 {
-                    toReturn.Add(item);
-                    goodLine.Add(item.LineId);
-                }
+                    int index = goodLine.FindIndex(b => b.ToString() == item.LineId.ToString());
+                    if (index == -1)
+                    {
+                        toReturn.Add(item);
+                        goodLine.Add(item.LineId);
+                    }
 
+                }
+                return toReturn.AsEnumerable();
             }
-            return toReturn.AsEnumerable();
+            catch (DO.WrongIDExeption ew)
+            {
+                throw new BO.BadIdException("חסרים נתונים במערכת עבור חלק מהתחנות", ew);
+            }
         }
+
         #endregion
 
 
