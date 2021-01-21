@@ -280,10 +280,14 @@ namespace PLGui
         {
             try
             {
-                if (bus != null)
-                    bl.DeleteBus(bus.Licence);
-                RefreshDataBus();
-                buses.SelectedIndex = 0;
+               
+                
+                    if (bus != null)
+                        bl.DeleteBus(bus.Licence);
+                    RefreshDataBus();
+                    buses.SelectedIndex = 0;
+                
+                
             }
             catch (BO.BadBusLicenceException a)
             {

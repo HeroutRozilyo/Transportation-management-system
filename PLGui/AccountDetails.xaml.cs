@@ -56,7 +56,7 @@ namespace PLGui
             ChangePasswordGrid.Visibility = Visibility.Visible;
             ChangeMail.IsEnabled = false;
         }
-       
+
         /// <summary>
         /// To change Mail Address
         /// </summary>
@@ -99,10 +99,19 @@ namespace PLGui
                 {
                     if (pas != userNow.Password)
                     {
-                        userNow.Password = pas;
-                        bl.UpdateUser(userNow);
-                        MessageBox.Show("!הסיסמה עודכנה בהצלחה", "סיסמה", MessageBoxButton.OK, MessageBoxImage.Information);
+                        try
+                        {
+                            userNow.Password = pas;
+                            bl.UpdateUser(userNow);
+                            MessageBox.Show("!הסיסמה עודכנה בהצלחה", "סיסמה", MessageBoxButton.OK, MessageBoxImage.Information);
+                        }
+                        catch (BO.BadNameExeption a)
+                        {
+                            MessageBox.Show(a.Message, "סיסמה", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+
                     }
+
                     else
                     {
                         MessageBoxResult result = MessageBox.Show("על הסיסמא החדשה להיות שונה מהסיסמא האחרונה", "סיסמה", MessageBoxButton.OKCancel, MessageBoxImage.Error);
@@ -147,7 +156,7 @@ namespace PLGui
             }
 
         }
-      
+
 
         /// <summary>
         /// To Save the new Email Address
@@ -204,8 +213,15 @@ namespace PLGui
                             }
 
                             userNow.MailAddress = newMail;
-                            bl.UpdateUser(userNow);
-                            MessageBox.Show("!כתובת המייל עודכנה בהצלחה", "סיסמה", MessageBoxButton.OK, MessageBoxImage.Information);
+                            try
+                            {
+                                bl.UpdateUser(userNow);
+                                MessageBox.Show("!כתובת המייל עודכנה בהצלחה", "סיסמה", MessageBoxButton.OK, MessageBoxImage.Information);
+                            }
+                            catch (BO.BadNameExeption a)
+                            {
+                                MessageBox.Show(a.Message, "", MessageBoxButton.OK, MessageBoxImage.Error);
+                            }
                         }
 
                     }
@@ -234,15 +250,6 @@ namespace PLGui
 
 
         }
-        #endregion
-
-        #region More Func
-        public bool check()
-        {     Regex regex = new Regex(@"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$");
-            return regex.IsMatch(Mail.Text);
-        }
-        #endregion
-
         private void Ellipse_MouseDown(object sender, MouseButtonEventArgs e)
         {
             MessageBoxResult result = MessageBox.Show("?האם אתה בטוח שברצונך למחוק את החשבון", "", MessageBoxButton.OKCancel, MessageBoxImage.Question);
@@ -250,48 +257,69 @@ namespace PLGui
             {
                 case MessageBoxResult.OK:
                     {
-                        bl.DeleteUser(userNow);
-                        MessageBox.Show("!חשבונך נמחק בהצלחה, נשמח לראות אותך איתנו כאן שוב", "", MessageBoxButton.OK, MessageBoxImage.Information);
-                        if (userNow.Admin)
+                        try
                         {
-                            WindowCollection window = Application.Current.Windows;
-                            int i = 0;
-                            for( ;i< window.Count;i++)
+                            bl.DeleteUser(userNow);
+                            MessageBox.Show("!חשבונך נמחק בהצלחה, נשמח לראות אותך איתנו כאן שוב", "", MessageBoxButton.OK, MessageBoxImage.Information);
+                            if (userNow.Admin)
                             {
-                                if (window[i].Title== "AdminWindow")
-                                    break;
+                                WindowCollection window = Application.Current.Windows;
+                                int i = 0;
+                                for (; i < window.Count; i++)
+                                {
+                                    if (window[i].Title == "AdminWindow")
+                                        break;
+                                }
+
+
+                                MainWindow main = new MainWindow();
+                                main.Show();
+                                window[i].Close();
+
+
+                            }
+                            else
+                            {
+                                WindowCollection window = Application.Current.Windows;
+                                int i = 0;
+                                for (; i < window.Count; i++)
+                                {
+                                    if (window[i].Title == "UserWindow")
+                                        break;
+                                }
+                                MainWindow main = new MainWindow();
+                                main.Show();
+                                window[i].Close();
+
                             }
 
 
-                            MainWindow main = new MainWindow();
-                            main.Show();
-                            window[i].Close();
-                           
-                          
                         }
-                        else
+                        catch (BO.BadNameExeption a)
                         {
-                            WindowCollection window = Application.Current.Windows;
-                            int i = 0;
-                            for (; i < window.Count; i++)
-                            {
-                                if (window[i].Title == "UserWindow")
-                                    break;
-                            }
-                            MainWindow main = new MainWindow();
-                            main.Show();
-                            window[i].Close();
-                            
+                            MessageBox.Show(a.Message, "", MessageBoxButton.OK, MessageBoxImage.Error);
                         }
-                        
                         return;
                     }
                 case MessageBoxResult.Cancel:
                     {
-                        
+
                         return;
                     }
 
             }
-        }  }
+        }
+
+        #endregion
+
+        #region More Func
+        public bool check()
+        {
+            Regex regex = new Regex(@"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$");
+            return regex.IsMatch(Mail.Text);
+        }
+        #endregion
+
+
+    }
 }

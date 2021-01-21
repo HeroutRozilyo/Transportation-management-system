@@ -41,14 +41,21 @@ namespace PLGui
 
         public LineWindowP(IBL bl)
         {
-            InitializeComponent();
-            this.bl = bl;
-            comboBoxArea.ItemsSource = Enum.GetValues(typeof(BO.AREA));
-            AreaUpdateLineTextBox.ItemsSource = Enum.GetValues(typeof(BO.AREA));
-            StationLineList.ItemsSource = lineStationOfLine;
-            NewLooz.Visibility = Visibility.Hidden;
-            NewLooz.DataContext = new BO.LineTrip();
-            comboBoxArea.SelectedIndex = 0;
+            try
+            {
+                InitializeComponent();
+                this.bl = bl;
+                comboBoxArea.ItemsSource = Enum.GetValues(typeof(BO.AREA));
+                AreaUpdateLineTextBox.ItemsSource = Enum.GetValues(typeof(BO.AREA));
+                StationLineList.ItemsSource = lineStationOfLine;
+                NewLooz.Visibility = Visibility.Hidden;
+                NewLooz.DataContext = new BO.LineTrip();
+                comboBoxArea.SelectedIndex = 0;
+            }
+            catch (BO.BadIdException a)
+            {
+                MessageBox.Show(a.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
 
 
 
@@ -57,7 +64,7 @@ namespace PLGui
         }
         #endregion
 
-        
+
         #region refresh
         /// <summary>
         /// to set new Area Line in the ListView Line/>
@@ -111,13 +118,20 @@ namespace PLGui
         {
             if (line != null)
             {
-                line = bl.GetLineByLine(line.IdNumber);
-                lineStationOfLine = Convert(bl.DetailsOfStation(line.StationsOfBus));
-                AreaUpdateLineTextBox.SelectedItem = line.Area;
-                Looz.ItemsSource = line.TimeLineTrip;
-                ListOfLine.SelectedIndex = egged.ToList().FindIndex(b => b.IdNumber == line.IdNumber);
-                Looz.Items.Refresh();
-                NewLooz.DataContext = new BO.LineTrip();
+                try
+                {
+                    line = bl.GetLineByLine(line.IdNumber);
+                    lineStationOfLine = Convert(bl.DetailsOfStation(line.StationsOfBus));
+                    AreaUpdateLineTextBox.SelectedItem = line.Area;
+                    Looz.ItemsSource = line.TimeLineTrip;
+                    ListOfLine.SelectedIndex = egged.ToList().FindIndex(b => b.IdNumber == line.IdNumber);
+                    Looz.Items.Refresh();
+                    NewLooz.DataContext = new BO.LineTrip();
+                }
+                catch (BO.BadIdException a)
+                {
+                    MessageBox.Show(a.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
             else
             {
@@ -137,18 +151,15 @@ namespace PLGui
         }
         #endregion
 
-        /// <summary>
-        /// To get Line by grouping
-        /// </summary>
-      
 
         #region Data selection
         private void comboBoxArea_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            line = null;
             area = (BO.AREA)(comboBoxArea.SelectedItem);
             listArea();
-           
-           
+
+
             RefreshStationListView();
 
         }
@@ -191,8 +202,14 @@ namespace PLGui
                                 }
                                 if (!isUpdateLooz)
                                 {
-
-                                    bl.AddOneTripLine(addLineTrip);
+                                    try
+                                    {
+                                        bl.AddOneTripLine(addLineTrip);
+                                    }
+                                    catch (BO.BadIdException a)
+                                    {
+                                        MessageBox.Show(a.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                                    }
 
                                 }
                                 else
@@ -238,7 +255,7 @@ namespace PLGui
 
                 }
             }
-            catch (BO.BadLineTripExeption a)//
+            catch (BO.BadLineTripExeption a)
             {
                 MessageBox.Show(a.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
                 NewLooz.DataContext = null;
@@ -284,7 +301,7 @@ namespace PLGui
                             bl.DeleteLine(lineToDelete.IdNumber);
                             line = null;
                             listArea();
-                         
+
                             RefreshStationListView();
                             MessageBox.Show("הקו נמחק בהצלחה", "Success Message", MessageBoxButton.OK, MessageBoxImage.Asterisk);
                             break;
@@ -320,7 +337,7 @@ namespace PLGui
 
                 RefreshStationListView();
                 comboBoxArea.SelectedItem = newline.Area;
-                
+
 
 
 
@@ -373,17 +390,24 @@ namespace PLGui
         /// </summary>
         private void UpdataLineStation_Click(object sender, RoutedEventArgs e)
         {
-            var fxElt = sender as FrameworkElement; 
+            var fxElt = sender as FrameworkElement;
             string StationLineData = fxElt.DataContext.ToString();
             convertFromObbject(StationLineData);//to TempLineStation
             UpdataStationLineIndex updataStationLineIndex = new UpdataStationLineIndex(line, TempLineStation, bl);
             bool? result = updataStationLineIndex.ShowDialog();
             if (result == true)
             {
-                BO.Line newline = updataStationLineIndex.NewLine;
-                line = bl.GetLineByLine(newline.IdNumber);
-                RefreshStationListView();
-                comboBoxArea.SelectedItem = newline.Area;
+                try
+                {
+                    BO.Line newline = updataStationLineIndex.NewLine;
+                    line = bl.GetLineByLine(newline.IdNumber);
+                    RefreshStationListView();
+                    comboBoxArea.SelectedItem = newline.Area;
+                }
+                catch (BO.BadIdException a)
+                {
+                    MessageBox.Show(a.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
 
             }
 
@@ -447,12 +471,19 @@ namespace PLGui
             {
                 case MessageBoxResult.Yes:
                     {
-                        Button toconvert = sender as Button;
-                        thisLooz = toconvert.DataContext as BO.LineTrip;
-                        bl.DeleteLineTrip(thisLooz);
-                        RefreshLine();
-                        RefreshStationListView();
-                        MessageBox.Show("לוח הזמנים נמחק בהצלחה", "הודעת מערכת", MessageBoxButton.OK, MessageBoxImage.Information);
+                        try
+                        {
+                            Button toconvert = sender as Button;
+                            thisLooz = toconvert.DataContext as BO.LineTrip;
+                            bl.DeleteLineTrip(thisLooz);
+                            RefreshLine();
+                            RefreshStationListView();
+                            MessageBox.Show("לוח הזמנים נמחק בהצלחה", "הודעת מערכת", MessageBoxButton.OK, MessageBoxImage.Information);
+                        }
+                        catch (BO.BadIdException a)
+                        {
+                            MessageBox.Show(a.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
                         break;
                     }
                 case MessageBoxResult.No:
@@ -465,31 +496,39 @@ namespace PLGui
         #region More func
         private void listArea()
         {
-            CENTER.Clear(); GENERAL.Clear(); NORTH.Clear(); SOUTH.Clear(); YOSH.Clear(); JERUSALEM.Clear();
-            foreach (var group in bl.GetLinesByAreaG())
+            try
             {
-                if (group.Key == BO.AREA.CENTER)
-                    foreach (var line in group)
-                        CENTER.Add(line);
-                if (group.Key == BO.AREA.GENERAL)
-                    foreach (var line in group)
-                        GENERAL.Add(line);
-                if (group.Key == BO.AREA.JERUSALEM)
-                    foreach (var line in group)
-                        JERUSALEM.Add(line);
-                if (group.Key == BO.AREA.NORTH)
-                    foreach (var line in group)
-                        NORTH.Add(line);
-                if (group.Key == BO.AREA.SOUTH)
-                    foreach (var line in group)
-                        SOUTH.Add(line);
-                if (group.Key == BO.AREA.YOSH)
-                    foreach (var line in group)
-                        YOSH.Add(line);
+                CENTER.Clear(); GENERAL.Clear(); NORTH.Clear(); SOUTH.Clear(); YOSH.Clear(); JERUSALEM.Clear();
+                foreach (var group in bl.GetLinesByAreaG())
+                {
+                    if (group.Key == BO.AREA.CENTER)
+                        foreach (var line in group)
+                            CENTER.Add(line);
+                    if (group.Key == BO.AREA.GENERAL)
+                        foreach (var line in group)
+                            GENERAL.Add(line);
+                    if (group.Key == BO.AREA.JERUSALEM)
+                        foreach (var line in group)
+                            JERUSALEM.Add(line);
+                    if (group.Key == BO.AREA.NORTH)
+                        foreach (var line in group)
+                            NORTH.Add(line);
+                    if (group.Key == BO.AREA.SOUTH)
+                        foreach (var line in group)
+                            SOUTH.Add(line);
+                    if (group.Key == BO.AREA.YOSH)
+                        foreach (var line in group)
+                            YOSH.Add(line);
 
-                RefreshLine();
+                    RefreshLine();
+                }
+            }
+            catch (BO.BadIdException a)
+            {
+                MessageBox.Show(a.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
 
         /// <summary>
         /// Except from Object the details related to us to lineStation

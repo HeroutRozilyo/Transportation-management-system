@@ -42,9 +42,15 @@ namespace PLGui
         {
             if (line != null)
             {
-
-                Looz.ItemsSource = line.TimeLineTrip;
-                lineStationOfLine = ConvertList(bl.DetailsOfStation(line.StationsOfBus));
+                try
+                {
+                    Looz.ItemsSource = line.TimeLineTrip;
+                    lineStationOfLine = ConvertList(bl.DetailsOfStation(line.StationsOfBus));
+                }
+                catch (BO.BadIdException a)
+                {
+                    MessageBox.Show(a.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
 
             }
             else
@@ -143,24 +149,30 @@ namespace PLGui
         public void SearchHelp(int numberLine)
         {
 
-
-            searchResult = bl.GetLineByLineCode(numberLine);
-            if (searchResult.Count() > 0)
+            try
             {
-                NotExist.Visibility = Visibility.Hidden;
-                numberLineSearchRes.ItemsSource = searchResult;
+                searchResult = bl.GetLineByLineCode(numberLine);
+                if (searchResult.Count() > 0)
+                {
+                    NotExist.Visibility = Visibility.Hidden;
+                    numberLineSearchRes.ItemsSource = searchResult;
 
-                CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(numberLineSearchRes.ItemsSource);
-                PropertyGroupDescription groupDescription = new PropertyGroupDescription("Area");
-                view.GroupDescriptions.Add(groupDescription);
+                    CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(numberLineSearchRes.ItemsSource);
+                    PropertyGroupDescription groupDescription = new PropertyGroupDescription("Area");
+                    view.GroupDescriptions.Add(groupDescription);
 
 
+                }
+                else
+                {
+
+                    numberLineSearchRes.ItemsSource = searchResult;
+                    NotExist.Visibility = Visibility.Visible;
+                }
             }
-            else
+            catch (BO.BadIdException a)
             {
-
-                numberLineSearchRes.ItemsSource = searchResult;
-                NotExist.Visibility = Visibility.Visible;
+                MessageBox.Show(a.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
         #endregion
