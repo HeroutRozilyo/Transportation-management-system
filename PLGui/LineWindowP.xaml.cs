@@ -118,7 +118,7 @@ namespace PLGui
         {
             if (line != null)
             {
-                try
+                try//
                 {
                     line = bl.GetLineByLine(line.IdNumber);
                     lineStationOfLine = Convert(bl.DetailsOfStation(line.StationsOfBus));
