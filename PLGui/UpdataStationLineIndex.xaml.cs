@@ -74,11 +74,30 @@ namespace PLGui
                         {
                             BO.LineStation change = line.StationsOfBus.ToList().Find(b => b.LineStationIndex == temp.LineStationIndex && b.StationCode == b.StationCode);
                             List<BO.LineStation> help = line.StationsOfBus.ToList();
-                            help.RemoveAt(help.FindIndex(b => b.LineStationIndex == temp.LineStationIndex && b.StationCode == b.StationCode));
+
+                            int index = help.FindIndex(b => b.LineStationIndex == temp.LineStationIndex && b.StationCode == b.StationCode);
+                            help.RemoveAt(index);
+                            //  help.RemoveAt(help.FindIndex(b => b.LineStationIndex == temp.LineStationIndex && b.StationCode == b.StationCode));
+                            if (change.LineStationIndex < IndexCOmboBox.SelectedIndex + 1)
+                            {
+                                change.LineStationExist = false;
+                            }
+                            else
+                            {
+                                BO.LineStation change1= help.Find(b => b.LineStationIndex == IndexCOmboBox.SelectedIndex + 1 && b.StationCode != change.StationCode);
+                                help.Remove(change1);
+                                change1.LineStationIndex = change1.LineStationIndex+1;
+                                help.Add(change1);
+
+                            }
                             change.LineStationIndex = IndexCOmboBox.SelectedIndex + 1;
+                          
+
                             help.Add(change);
 
                             line.StationsOfBus = from item in help
+                                                 orderby item.LineStationIndex
+                                           
                                                  select item;
 
                             bl.UpdateLineStationForIndexChange(line);
