@@ -37,7 +37,7 @@ namespace DS
                     Name = "שדרות גולדה מאיר/המשורר אצ''ג",
                     Address = "שדרות גולדה מאיר ,ירושלים ",
                     Latitude=31.825302,
-                    Longtitude=35.188624,
+                    Longtitude=35.1624,
                     StationExist=true,
 
                 },
@@ -2008,6 +2008,7 @@ namespace DS
                     Station2= 76,
                    Distance=10387.6464817987,
                    TimeAverage= ((1.5*10387.6464817987)/speed),//i.5- air to ground
+                   AdjacExsis=true,
                 },
 
                 new AdjacentStations
@@ -2015,7 +2016,8 @@ namespace DS
                     Station1=76,
                     Station2= 77,
                    Distance=197.059830127369,
-                  TimeAverage= ((1.5*197.059830127369)/speed)
+                  TimeAverage= ((1.5*197.059830127369)/speed),
+                   AdjacExsis=true,
 
 
                 },
@@ -2025,13 +2027,15 @@ namespace DS
                     Station1=77,
                     Station2= 78,
                    Distance=5942.26478400092,
-                    TimeAverage= ((1.5*5942.26478400092)/speed)
+                    TimeAverage= ((1.5*5942.26478400092)/speed),
+                     AdjacExsis=true,
 
 
                 },
 
                 new AdjacentStations
                 {
+                     AdjacExsis=true,
                     Station1=78,
                     Station2= 83,
                    Distance=4115.12303761144,
@@ -2045,7 +2049,8 @@ namespace DS
                     Station1=83,
                     Station2= 84,
                    Distance=3971.03321849724,
-                    TimeAverage=((1.5*3971.03321849724)/speed)
+                    TimeAverage=((1.5*3971.03321849724)/speed),
+                     AdjacExsis=true,
 
 
                 },
@@ -2055,7 +2060,8 @@ namespace DS
                     Station1=84,
                     Station2= 85,
                    Distance=3665.92895953549,
-                    TimeAverage=((1.5*3665.92895953549)/speed)
+                    AdjacExsis=true,
+                    TimeAverage=((1.5*3665.92895953549)/speed),
 
 
                 },
@@ -2065,6 +2071,7 @@ namespace DS
                     Station1=85,
                     Station2= 86,
                    Distance=181.343172558381,
+                    AdjacExsis=true,
                    TimeAverage= ((1.5*181.343172558381)/speed)
 
 
@@ -2074,6 +2081,7 @@ namespace DS
                     Station1=86,
                     Station2= 88,
                    Distance=338.193775824042,
+                    AdjacExsis=true,
                    TimeAverage= ((1.5*338.193775824042)/speed)
 
 
@@ -2083,6 +2091,7 @@ namespace DS
                     Station1=88,
                     Station2= 89,
                    Distance=839.108713036705,
+                    AdjacExsis=true,
                     TimeAverage= ((1.5*839.108713036705)/speed)
 
 
@@ -2097,6 +2106,7 @@ namespace DS
 
                 new AdjacentStations
                 {
+                     AdjacExsis=true,
                     Station1=89,
                     Station2= 90,
                    Distance=4972.12709975181,
@@ -2107,6 +2117,7 @@ namespace DS
 
                 new AdjacentStations
                 {
+                     AdjacExsis=true,
                     Station1=90,
                     Station2= 91,
                    Distance=4978.59764273959,
@@ -2117,6 +2128,7 @@ namespace DS
 
                 new AdjacentStations
                 {
+                     AdjacExsis=true,
                     Station1=91,
                     Station2= 93,
                    Distance=178.858161402408,
@@ -2127,6 +2139,7 @@ namespace DS
 
                 new AdjacentStations
                 {
+                     AdjacExsis=true,
                     Station1=93,
                     Station2= 94,
                    Distance=20.9542368918975,
@@ -2136,6 +2149,7 @@ namespace DS
                 },
                 new AdjacentStations
                 {
+                     AdjacExsis=true,
                     Station1=94,
                     Station2= 95,
                    Distance=337.617552547299,
@@ -2145,6 +2159,7 @@ namespace DS
                 },
                 new AdjacentStations
                 {
+                     AdjacExsis=true,
                     Station1=95,
                     Station2= 97,
                    Distance=141.607925499495,
@@ -2158,6 +2173,7 @@ namespace DS
                 new AdjacentStations
                 {
                     Station1=122,
+                     AdjacExsis=true,
                     Station2= 123,
                    Distance=161.658025824811,
                     TimeAverage= ((1.5*161.658025824811)/speed)
@@ -2165,6 +2181,7 @@ namespace DS
 
                 new AdjacentStations
                 {
+                     AdjacExsis=true,
                     Station1=123,
                     Station2= 121,
                    Distance=145.638205945867,
@@ -2175,6 +2192,7 @@ namespace DS
 
                 new AdjacentStations
                 {
+                     AdjacExsis=true,
                     Station1=121,
                     Station2= 1524,
                    Distance=2943.02888382813,
@@ -2185,6 +2203,7 @@ namespace DS
 
                 new AdjacentStations
                 {
+                     AdjacExsis=true,
                     Station1=1524,
                     Station2= 1523,
                    Distance=140.492280736979,
@@ -2195,6 +2214,7 @@ namespace DS
 
                 new AdjacentStations
                 {
+                     AdjacExsis=true,
                     Station1=1523,
                     Station2= 1522,
                    Distance=710.578511572254,
@@ -2205,6 +2225,7 @@ namespace DS
 
                 new AdjacentStations
                 {
+                     AdjacExsis=true,
                     Station1=1522,
                     Station2= 1518,
                    Distance=2265.21319232095,
@@ -2215,6 +2236,7 @@ namespace DS
 
                 new AdjacentStations
                 {
+                     AdjacExsis=true,
                     Station1=1518,
                     Station2= 1514,
                    Distance=16.6091664944544,
@@ -2224,6 +2246,7 @@ namespace DS
                 },
                 new AdjacentStations
                 {
+                     AdjacExsis=true,
                     Station1=1514,
                     Station2= 1512,
                    Distance=1034.11608174677,
@@ -2233,6 +2256,7 @@ namespace DS
                 },
                 new AdjacentStations
                 {
+                     AdjacExsis=true,
                     Station1=1512,
                     Station2= 1511,
                    Distance=2271.65706974387,
@@ -2245,6 +2269,7 @@ namespace DS
                 #region lineId4
                 new AdjacentStations
                 {
+                     AdjacExsis=true,
                     Station1=121,
                     Station2= 123,
                    Distance=145.638205945867,
@@ -2253,6 +2278,7 @@ namespace DS
 
                 new AdjacentStations
                 {
+                     AdjacExsis=true,
                     Station1=123,
                     Station2= 122,
                    Distance=161.658025824811,
@@ -2263,6 +2289,7 @@ namespace DS
 
                 new AdjacentStations
                 {
+                     AdjacExsis=true,
                     Station1=122,
                     Station2= 1524,
                    Distance=2957.82843148296,
@@ -2275,6 +2302,7 @@ namespace DS
 
                 new AdjacentStations
                 {
+                     AdjacExsis=true,
                     Station1=1512,
                     Station2= 1491,
                    Distance=2604.33240816743,
@@ -2287,6 +2315,7 @@ namespace DS
                 #region lineId5
                 new AdjacentStations
                 {
+                     AdjacExsis=true,
                     Station1=119,
                     Station2= 1485,
                    Distance=5719.48141855948,
@@ -2295,6 +2324,7 @@ namespace DS
 
                 new AdjacentStations
                 {
+                     AdjacExsis=true,
                     Station1=1485,
                     Station2= 1486,
                    Distance=179.006776536478,
@@ -2305,6 +2335,7 @@ namespace DS
 
                 new AdjacentStations
                 {
+                     AdjacExsis=true,
                     Station1=1486,
                     Station2= 1487,
                    Distance=772.225954779688,
@@ -2315,6 +2346,7 @@ namespace DS
 
                 new AdjacentStations
                 {
+                     AdjacExsis=true,
                     Station1=1487,
                     Station2= 1488,
                    Distance=1415.66487905204,
@@ -2325,6 +2357,7 @@ namespace DS
 
                 new AdjacentStations
                 {
+                     AdjacExsis=true,
                     Station1=1488,
                     Station2= 1490,
                    Distance=445.425376124488,
@@ -2335,6 +2368,7 @@ namespace DS
 
                 new AdjacentStations
                 {
+                     AdjacExsis=true,
                     Station1=1490,
                     Station2= 1494,
                    Distance=10374.8817694688,
@@ -2345,6 +2379,7 @@ namespace DS
 
                 new AdjacentStations
                 {
+                     AdjacExsis=true,
                     Station1=1494,
                     Station2= 1492,
                    Distance=587.350643701609,
@@ -2354,6 +2389,7 @@ namespace DS
                 },
                 new AdjacentStations
                 {
+                     AdjacExsis=true,
                     Station1=1492,
                     Station2= 1493,
                    Distance=361.691515745432,
@@ -2363,6 +2399,7 @@ namespace DS
                 },
                 new AdjacentStations
                 {
+                     AdjacExsis=true,
                     Station1=1493,
                     Station2= 1491,
                    Distance=1144.85124079156,
@@ -2375,6 +2412,7 @@ namespace DS
                 #region lineId6
                 new AdjacentStations
                 {
+                     AdjacExsis=true,
                     Station1=110,
                     Station2= 111,
                    Distance=195.920342315088,
@@ -2383,6 +2421,7 @@ namespace DS
 
                 new AdjacentStations
                 {
+                     AdjacExsis=true,
                     Station1=111,
                     Station2= 112,
                     Distance=50.4574978208662,
@@ -2393,6 +2432,7 @@ namespace DS
 
                 new AdjacentStations
                 {
+                     AdjacExsis=true,
                     Station1=112,
                     Station2= 113,
                    Distance=143.276626873244,
@@ -2403,6 +2443,7 @@ namespace DS
 
                 new AdjacentStations
                 {
+                     AdjacExsis=true,
                     Station1=113,
                     Station2= 115,
                     Distance=279.425185419296,
@@ -2413,6 +2454,7 @@ namespace DS
 
                 new AdjacentStations
                 {
+                     AdjacExsis=true,
                     Station1=115,
                     Station2= 116,
                    Distance=72.2684666055651,
@@ -2423,6 +2465,7 @@ namespace DS
 
                 new AdjacentStations
                 {
+                     AdjacExsis=true,
                     Station1=116,
                     Station2= 117,
                    Distance=192.809573417871,
@@ -2433,6 +2476,7 @@ namespace DS
 
                 new AdjacentStations
                 {
+                     AdjacExsis=true,
                     Station1=117,
                     Station2= 119,
                    Distance=193.971761810414,
@@ -2447,6 +2491,7 @@ namespace DS
                 #region lineId7
                 new AdjacentStations
                 {
+                     AdjacExsis=true,
                     Station1=97,
                     Station2= 102,
                    Distance=4739.1072386442,
@@ -2455,6 +2500,7 @@ namespace DS
 
                 new AdjacentStations
                 {
+                     AdjacExsis=true,
                     Station1=102,
                     Station2= 103,
                    Distance=554.235295622813,
@@ -2465,6 +2511,7 @@ namespace DS
 
                 new AdjacentStations
                 {
+                     AdjacExsis=true,
                     Station1=103,
                     Station2= 105,
                    Distance=383.45864939499,
@@ -2474,6 +2521,7 @@ namespace DS
 
                 new AdjacentStations
                 {
+                     AdjacExsis=true,
                     Station1=105,
                     Station2= 106,
                    Distance=20.551585590077,
@@ -2484,6 +2532,7 @@ namespace DS
 
                 new AdjacentStations
                 {
+                     AdjacExsis=true,
                     Station1=106,
                     Station2= 108,
                    Distance=314.882994150425,
@@ -2494,6 +2543,7 @@ namespace DS
 
                 new AdjacentStations
                 {
+                     AdjacExsis=true,
                     Station1=108,
                     Station2= 109,
                    Distance=109.450560373063,
@@ -2504,6 +2554,7 @@ namespace DS
 
                 new AdjacentStations
                 {
+                     AdjacExsis=true,
                     Station1=109,
                     Station2= 110,
                    Distance=79.9157986778367,
@@ -2512,6 +2563,7 @@ namespace DS
                 },
                 new AdjacentStations
                 {
+                     AdjacExsis=true,
                     Station1=110,
                     Station2= 112,
                    Distance=151.091747503085,
@@ -2521,6 +2573,7 @@ namespace DS
                 },
                 new AdjacentStations
                 {
+                     AdjacExsis=true,
                     Station1=112,
                     Station2= 111,
                    Distance=50.4574978208662,
@@ -2533,14 +2586,10 @@ namespace DS
                 #region lineId8
    
          
-
-      
-             
-           
-
        
                 new AdjacentStations
                 {
+                     AdjacExsis=true,
                     Station1=112,
                     Station2= 116,
                    Distance=481.422062665161,
@@ -2559,6 +2608,7 @@ namespace DS
    
                 new AdjacentStations
                 {
+                     AdjacExsis=true,
                     Station1=95,
                     Station2= 102,
                    Distance=4852.96580098656,
@@ -2571,6 +2621,7 @@ namespace DS
                 #region lineId10
            new AdjacentStations
                 {
+                AdjacExsis=true,
                     Station1=97,
                     Station2= 122,
                    Distance=400,
@@ -2581,6 +2632,7 @@ namespace DS
                 },
                    new AdjacentStations
                 {
+                        AdjacExsis=true,
                     Station1=1524,
                     Station2= 1522,
                    Distance=300,
@@ -2590,6 +2642,7 @@ namespace DS
                 },
                            new AdjacentStations
                 {
+                                AdjacExsis=true,
                     Station1=1511,
                     Station2= 121,
                    Distance=100,
@@ -2606,6 +2659,7 @@ namespace DS
 
                 new AdjacentStations
                 {
+                     AdjacExsis=true,
                     Station1=1486,
                     Station2= 1488,
                    Distance=650.976014538566,

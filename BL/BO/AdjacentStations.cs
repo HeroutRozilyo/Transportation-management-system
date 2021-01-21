@@ -24,5 +24,8 @@
         /// the time travel between the station. calucate by the distance * random number between 1-1.5 mult the average fast
         /// </summary>
         public double TimeAverage { get; set; }
+        /// Bool variable if the tracking station does exist in the system
+        /// </summary>
+        public bool AdjacExsis { get; set; }
     }
 }

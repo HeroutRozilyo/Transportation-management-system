@@ -264,19 +264,6 @@ namespace DL
 
         }
 
-        //public IEnumerable<DO.LineStation> GetAllStationsLine(int idline) //return all the stations that we have with the same line
-        //{
-        //    return from station in DataSource.ListLineStations
-        //           where (station.LineId == idline&&station.LineStationExist)
-        //           select station.Clone();
-        //}
-
-        //public IEnumerable<DO.LineStation> GetAllStationsCodeline(int code) //return all the lines at this station
-        //{
-        //    return from station in DataSource.ListLineStations
-        //           where (station.StationCode == code)
-        //           select station.Clone();
-        //}
 
         public IEnumerable<DO.LineStation> GetAllLineStationsBy(Predicate<DO.LineStation> StationsLinecondition)
         {
@@ -431,7 +418,7 @@ namespace DL
         #region get
         public DO.AdjacentStations GetAdjacentStations(int Scode1, int Scode2) //return specific AdjacentStations
         {
-            DO.AdjacentStations linestations = DataSource.ListAdjacentStations.Find(b => b.Station1 == Scode1 && b.Station2 == Scode2);//|| b.Station1 == Scode2 && b.Station2 == Scode1);
+            DO.AdjacentStations linestations = DataSource.ListAdjacentStations.Find(b => b.Station1 == Scode1 && b.Station2 == Scode2&&b.AdjacExsis);
             if (linestations != null)
             {
                 return linestations.Clone();
@@ -441,18 +428,12 @@ namespace DL
 
         }
 
-        //public IEnumerable<DO.AdjacentStations> GetAllAdjacentStations(int stationCode) //return all the AdjacentStations that we have for this station code
-        //{
-        //    var v = from station in DataSource.ListAdjacentStations
-        //            where (stationCode == station.Station1 || stationCode == station.Station2)
-        //            select station.Clone();
-        //    return v;
-        //}
+      
 
         public IEnumerable<DO.AdjacentStations> GetAllAdjacentStationsBy(Predicate<DO.AdjacentStations> StationsLinecondition)
         {
             var list = from stations in DataSource.ListAdjacentStations
-                       where (StationsLinecondition(stations))
+                       where (StationsLinecondition(stations)&&stations.AdjacExsis)
                        select stations.Clone();
             return list;
         }
@@ -461,7 +442,7 @@ namespace DL
         #region add
         public void AddLineStations(DO.AdjacentStations adjacentStations)
         {
-            DO.AdjacentStations temp = DataSource.ListAdjacentStations.Find(b => b.Station1 == adjacentStations.Station1 && b.Station2 == adjacentStations.Station2);
+            DO.AdjacentStations temp = DataSource.ListAdjacentStations.Find(b => b.Station1 == adjacentStations.Station1 && b.Station2 == adjacentStations.Station2 &&b.AdjacExsis);
             if (temp != null)
                 throw new DO.WrongIDExeption(adjacentStations.Station1, " התחנה עוקבת כבר קיימת במערכת");/////////////////////////////////////////////////////////////////
             DataSource.ListAdjacentStations.Add(adjacentStations.Clone());
@@ -474,7 +455,7 @@ namespace DL
         {
 
             var v = from item in DataSource.ListAdjacentStations
-                    where (item.Station1 == Scode1 || item.Station2 == Scode1)
+                    where ((item.Station1 == Scode1 || item.Station2 == Scode1)&&item.AdjacExsis)
                     select item.Clone();
             foreach (DO.AdjacentStations item in v)
             {
@@ -488,7 +469,7 @@ namespace DL
         #region update
         public void UpdateAdjacentStations(DO.AdjacentStations adjacentStations) //if the maneger change data and we need  update
         {
-            DO.AdjacentStations station = DataSource.ListAdjacentStations.Find(b => b.Station1 == adjacentStations.Station1 && b.Station2 == adjacentStations.Station2);
+            DO.AdjacentStations station = DataSource.ListAdjacentStations.Find(b => b.Station1 == adjacentStations.Station1 && b.Station2 == adjacentStations.Station2&&b.AdjacExsis);
             if (station != null)
             {
                 DataSource.ListAdjacentStations.Remove(station);
@@ -500,7 +481,7 @@ namespace DL
         public void UpdateAdjacentStations(int code1, int code2, int codeChange, int oldCode) //if we change the number identity of the station we need update the adjace station at the change
          // so we get here the old code on the from the station that change and the new code. In addition we get the 2 code of the station(prev one) to find the station to update   
         {
-            DO.AdjacentStations station = DataSource.ListAdjacentStations.Find(b => b.Station1 == code1 && b.Station2 == code2);
+            DO.AdjacentStations station = DataSource.ListAdjacentStations.Find(b => b.Station1 == code1 && b.Station2 == code2&&b.AdjacExsis);
             if (station != null)
             {
                 DataSource.ListAdjacentStations.Remove(station);

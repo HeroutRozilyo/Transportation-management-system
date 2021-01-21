@@ -26,6 +26,7 @@ namespace PLGui
         ObservableCollection<BO.AdjacentStations> beforAdj = new ObservableCollection<BO.AdjacentStations>();
         ObservableCollection<BO.AdjacentStations> afterAdj = new ObservableCollection<BO.AdjacentStations>();
         string numberText;
+        int CodeNumber;
         #endregion
 
         #region constructor
@@ -67,6 +68,7 @@ namespace PLGui
         {
             beforAdj.Clear();
             afterAdj.Clear();
+            stationData = bl.GetStationByCode(CodeNumber);
             StationDataGrid.DataContext = stationData;
             temp = null;
             if (stationData != null)
@@ -90,6 +92,7 @@ namespace PLGui
             add = false;
             var list = (ListView)sender; //to get the station
             stationData = list.SelectedItem as BO.Station;
+            CodeNumber = stationData.Code;
             RefreshLineInStation();
 
         }
@@ -154,7 +157,14 @@ namespace PLGui
                     case MessageBoxResult.Yes:
                         {
                             BO.AdjacentStations a = updateTS.DataContext as BO.AdjacentStations;
+                            if(a.TimeAverage==0||a.Distance==0)
+                            {
+                                MessageBox.Show("הערכים בשדות אלו לא יכולים להיות 0","ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                                okeyUpdate.IsChecked = false;
+                                RefreshLineInStation();
+                                return;
 
+                            }
                             bl.UpdateAdjac(a);
                             okeyUpdate.IsChecked = true;
                             updateTS.Visibility = Visibility.Hidden;
@@ -164,6 +174,7 @@ namespace PLGui
                         {
 
                             okeyUpdate.IsChecked = false;
+                            
 
                             break;
                         }
@@ -172,6 +183,7 @@ namespace PLGui
 
                             okeyUpdate.IsChecked = false;
                             updateTS.Visibility = Visibility.Hidden;
+                            RefreshLineInStation();
                             break;
                         }
                 }
@@ -181,6 +193,7 @@ namespace PLGui
                 MessageBox.Show(a.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
                 updateTS.Visibility = Visibility.Visible;
                 okeyUpdate.IsChecked = false;
+                RefreshLineInStation();
             }
         }
 
@@ -198,10 +211,13 @@ namespace PLGui
                     case MessageBoxResult.Yes:
                         {
                             helpaAddStation();
-
                             bl.UpdateStation(addStation, oldCode);
+                            CodeNumber = addStation.Code;
                             RefreshStation();
                             RefreshLineInStation();
+
+
+                            ListOfStations.SelectedIndex = stations.ToList().FindIndex(b=>b.Code==stationData.Code);
                             break;
                         }
                     case MessageBoxResult.No:
@@ -385,6 +401,7 @@ namespace PLGui
         /// </summary>
         private void BeforAfter()
         {
+            if(stationData.StationAdjacent!=null)
             foreach (BO.AdjacentStations item in stationData.StationAdjacent)
             {
                 if (item.Station1 == stationData.Code)

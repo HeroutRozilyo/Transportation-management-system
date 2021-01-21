@@ -19,10 +19,10 @@
             <RowDefinition Height="27*"/>
         </Grid.RowDefinitions>
         <GroupBox x:Name="groupBox" Header="פרטי התחנה" HorizontalAlignment="Left" Height="245" Margin="245,20,0,0" VerticalAlignment="Top" Width="320" Grid.RowSpan="2" Style="{DynamicResource allGrpuoBox}">
-            <Grid x:Name="StationDataGrid" HorizontalAlignment="Left" Margin="56,23,0,0" VerticalAlignment="Top" >
+            <Grid x:Name="StationDataGrid" HorizontalAlignment="Left" Margin="25,23,-4,0" VerticalAlignment="Top" Width="287" >
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" MinWidth="133.333"/>
-                    <ColumnDefinition Width="Auto" MinWidth="122.667"/>
+                    <ColumnDefinition Width="Auto" MinWidth="172.667"/>
+                    <ColumnDefinition Width="Auto" MinWidth="114"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -32,14 +32,14 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <Label Content=":כתובת" Grid.Column="1" HorizontalAlignment="Left" Margin="29.667,3,0,3" Grid.Row="1" VerticalAlignment="Center" Height="26" Width="55"/>
-                <TextBox x:Name="addressTextBox" HorizontalAlignment="Left" Height="24" Margin="8,3,0,5" Grid.Row="1" Text="{Binding Address, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-                <Label Content=":קוד תחנה" Grid.Column="1" HorizontalAlignment="Left" Margin="19.667,0,0,6" VerticalAlignment="Center" Height="26" Width="75"/>
-                <TextBox x:Name="codeTextBox" HorizontalAlignment="Left" Height="24" Margin="8,5,0,3" Text="{Binding Code, Mode=OneWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" PreviewTextInput="codeTextBox_PreviewTextInput"/>
-                <Label Content=":שם תחנה" Grid.Column="1" HorizontalAlignment="Left" Margin="24.667,1,0,5" Grid.Row="2" VerticalAlignment="Center" Height="26" Width="70"/>
-                <TextBox x:Name="nameTextBox" HorizontalAlignment="Left" Height="24" Margin="8,6,0,2" Grid.Row="2" Text="{Binding Name, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" RenderTransformOrigin="0.458,0.222"/>
-                <Label  Name="Sexist" Content="הוספה" Grid.Column="1" HorizontalAlignment="Left" Margin="29.667,4,0,2" Grid.Row="5" VerticalAlignment="Center" Height="26" Width="45" RenderTransformOrigin="1.452,0.679"/>
-                <CheckBox x:Name="stationExistCheckBox" Content="" HorizontalAlignment="Left" IsChecked="{Binding StationExist, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="108,9,0,7" Grid.Row="5" VerticalAlignment="Center" Checked="stationExistCheckBox_Checked" Height="16" Width="21" RenderTransformOrigin="-0.857,0.771">
+                <Label Content=":כתובת" Grid.Column="1" HorizontalAlignment="Left" Margin="29.333,3,0,3" Grid.Row="1" VerticalAlignment="Center" Height="26" Width="55"/>
+                <TextBox x:Name="addressTextBox" HorizontalAlignment="Left" Height="24" Margin="-2,5,0,3" Grid.Row="1" Text="{Binding Address, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="174"/>
+                <Label Content=":קוד תחנה" Grid.Column="1" HorizontalAlignment="Left" Margin="19.333,0,0,6" VerticalAlignment="Center" Height="26" Width="75"/>
+                <TextBox x:Name="codeTextBox" HorizontalAlignment="Left" Height="24" Margin="53,4,0,4" Text="{Binding Code, Mode=OneWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" PreviewTextInput="codeTextBox_PreviewTextInput" Grid.ColumnSpan="2"/>
+                <Label Content=":שם תחנה" Grid.Column="1" HorizontalAlignment="Left" Margin="24.333,1,0,5" Grid.Row="2" VerticalAlignment="Center" Height="26" Width="70"/>
+                <TextBox x:Name="nameTextBox" HorizontalAlignment="Left" Height="24" Margin="-2,4,0,4" Grid.Row="2" Text="{Binding Name, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="174" RenderTransformOrigin="0.458,0.222"/>
+                <Label  Name="Sexist" Content="הוספה" HorizontalAlignment="Left" Margin="95,4,0,2" Grid.Row="5" VerticalAlignment="Center" Height="26" Width="45" RenderTransformOrigin="1.452,0.679"/>
+                <CheckBox x:Name="stationExistCheckBox" Content="" HorizontalAlignment="Left" IsChecked="{Binding StationExist, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="78,7,0,9" Grid.Row="5" VerticalAlignment="Center" Checked="stationExistCheckBox_Checked" Height="16" Width="21" RenderTransformOrigin="-0.857,0.771">
                     <CheckBox.Style>
                         <Style>
                             <Style.Triggers>
@@ -66,10 +66,10 @@
                 </CheckBox>
 
 
-                <Label Content=":קו רוחב" Grid.Column="1" HorizontalAlignment="Left" Margin="24.667,4,0,2" Grid.Row="3" VerticalAlignment="Center" Height="26" Width="55"/>
-                <TextBox x:Name="latitudeTextBox" HorizontalAlignment="Left" Height="24" Margin="8,4,0,4" Grid.Row="3" Text="{Binding Coordinate.Latitude, Mode=OneWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" PreviewTextInput="latitudeTextBox_PreviewTextInput"/>
-                <Label Content=":קו אורך" Grid.Column="1" HorizontalAlignment="Left" Margin="24.667,1,0,5" Grid.Row="4" VerticalAlignment="Center" Height="26" Width="66"/>
-                <TextBox x:Name="longitudeTextBox" HorizontalAlignment="Left" Height="24" Margin="3,3,0,5" Grid.Row="4" Text="{Binding Coordinate.Longitude, Mode=OneWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" PreviewTextInput="longitudeTextBox_PreviewTextInput"/>
+                <Label Content=":קו רוחב" Grid.Column="1" HorizontalAlignment="Left" Margin="24.333,4,0,2" Grid.Row="3" VerticalAlignment="Center" Height="26" Width="55"/>
+                <TextBox x:Name="latitudeTextBox" HorizontalAlignment="Left" Height="24" Margin="38,2,0,6" Grid.Row="3" Text="{Binding Coordinate.Latitude, Mode=OneWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="135" PreviewTextInput="latitudeTextBox_PreviewTextInput" Grid.ColumnSpan="2"/>
+                <Label Content=":קו אורך" Grid.Column="1" HorizontalAlignment="Left" Margin="24.333,1,0,5" Grid.Row="4" VerticalAlignment="Center" Height="26" Width="66"/>
+                <TextBox x:Name="longitudeTextBox" HorizontalAlignment="Left" Height="24" Margin="38,5,0,3" Grid.Row="4" Text="{Binding Coordinate.Longitude, Mode=OneWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="135" PreviewTextInput="longitudeTextBox_PreviewTextInput" Grid.ColumnSpan="2"/>
             </Grid>
         </GroupBox>
         <GroupBox x:Name="AdjStation" Header="תחנות עוקבות" HorizontalAlignment="Left" Height="325" Margin="240,115,0,-34.667" VerticalAlignment="Top" Width="584" Grid.Row="1" Style="{DynamicResource allGrpuoBox}" >
@@ -79,7 +79,7 @@
                     <ColumnDefinition Width="540*"/>
                     <ColumnDefinition Width="9*"/>
                 </Grid.ColumnDefinitions>
-                <ListView x:Name="Befor" Height="150" Margin="244,27,21,0" VerticalAlignment="Top" Grid.Column="1">
+                <ListView x:Name="Befor" Height="150" Margin="234.667,27,16.333,0" VerticalAlignment="Top" Grid.Column="1">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="מספר תחנה"  Width="70" DisplayMemberBinding="{Binding Station1}"/>
@@ -96,7 +96,7 @@
                         </GridView>
                     </ListView.View>
                 </ListView>
-                <ListView x:Name="After" Height="150" Margin="4,27,301,0" VerticalAlignment="Top" Grid.ColumnSpan="2">
+                <ListView x:Name="After" Height="150" Margin="-19,27,310.333,0" VerticalAlignment="Top" Grid.ColumnSpan="2">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="מספר תחנה"  Width="70" DisplayMemberBinding="{Binding Station2}"/>
@@ -131,11 +131,11 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <Label Content=":מרחק" Grid.Column="2" HorizontalAlignment="Left" Margin="9,4.333,0,2.333" Grid.Row="1" VerticalAlignment="Center" Height="26" Width="58"/>
-                    <TextBox x:Name="distanceTextBox" HorizontalAlignment="Left" Height="24" Margin="24,5.333,0,3.333" Grid.Row="1" Text="{Binding Distance, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="101" Grid.ColumnSpan="2" PreviewTextInput="timeAverageTextBox_PreviewTextInput"/>
+                    <TextBox x:Name="distanceTextBox" HorizontalAlignment="Left" Height="24" Margin="26,4.333,0,4.333" Grid.Row="1" Text="{Binding Distance, Mode=Default, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="101" Grid.ColumnSpan="3" PreviewTextInput="timeAverageTextBox_PreviewTextInput"/>
                     <Label Content=":תחנה 1" Grid.Column="2" HorizontalAlignment="Left" Margin="2,7,0,32.333" VerticalAlignment="Center" Height="26" Width="59" Grid.RowSpan="2"/>
-                    <TextBlock x:Name="station1TextBlock" HorizontalAlignment="Left" Margin="36.667,16,0,0.667" Text="{Binding Station1}" VerticalAlignment="Center" Height="16" Width="22" Grid.Column="1"/>
+                    <TextBlock x:Name="station1TextBlock" HorizontalAlignment="Left" Margin="39.667,11,0,5.667" Text="{Binding Station1}" VerticalAlignment="Center" Height="16" Width="22" Grid.Column="1" Grid.ColumnSpan="2" TextAlignment="Center"/>
                     <Label Content=":תחנה 2" Grid.Column="4" Margin="0,7,12,0" VerticalAlignment="Top" Height="26" RenderTransformOrigin="1.401,0.308" Grid.RowSpan="2"/>
-                    <TextBlock x:Name="station2TextBlock" Grid.Column="3" HorizontalAlignment="Left" Margin="93.667,8,0,0" Text="{Binding Station2}" VerticalAlignment="Top" Height="23" Width="32" RenderTransformOrigin="1.479,0.638"/>
+                    <TextBlock x:Name="station2TextBlock" Grid.Column="3" HorizontalAlignment="Left" Margin="99.667,12,0,0" Text="{Binding Station2}" VerticalAlignment="Top" Height="23" Width="32" RenderTransformOrigin="1.479,0.638" TextAlignment="Center" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
                     <Label Content=":זמן נסיעה ממוצע" Grid.Column="4" HorizontalAlignment="Left" Margin="3,4.333,0,2.333" Grid.Row="1" VerticalAlignment="Center" Height="26" Width="105"/>
                     <TextBox x:Name="timeAverageTextBox" Grid.Column="3" HorizontalAlignment="Left" Height="24" Margin="26.667,5.333,0,3.333" Grid.Row="1" Text="{Binding TimeAverage, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="101" PreviewTextInput="timeAverageTextBox_PreviewTextInput"/>
                     <CheckBox x:Name="okeyUpdate" Content="אישור" Grid.Column="5" HorizontalAlignment="Left" Margin="5,24,0,0" VerticalAlignment="Top" Width="20" Height="16" Checked="okeyUpdate_Checked" Grid.RowSpan="2"/>
