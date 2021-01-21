@@ -504,18 +504,7 @@ namespace DL
                    where (user.UserExist)
                    select user.Clone();
         }
-        //public IEnumerable<DO.User> GetAlluserAdmin() //return all the user Admin we have
-        //{
-        //    return from user in DataSource.ListUsers
-        //           where (user.UserExist&&user.Admin)
-        //           select user.Clone();
-        //}
-        //public IEnumerable<DO.User> GetAlluserNAdmin() //return all the user not Admin we have
-        //{
-        //    return from user in DataSource.ListUsers
-        //           where (user.UserExist && !user.Admin)
-        //           select user.Clone();
-        //}
+
 
         public IEnumerable<DO.User> GetAlluserBy(Predicate<DO.User> userConditions) 
         {
@@ -529,7 +518,10 @@ namespace DL
             var users = from u in DataSource.ListUsers
                         where (u.UserExist && userConditions(u))
                         select u.Clone();
-            return users.ElementAt(0);
+            if (users.Count() > 0)
+                return users.ElementAt(0);
+            else
+                throw new DO.WrongNameExeption();
         }
         #endregion
 
