@@ -165,7 +165,7 @@ namespace PLGui
                                 return;
 
                             }
-                            bl.UpdateAdjac(a);//
+                            bl.UpdateAdjac(a);
                             okeyUpdate.IsChecked = true;
                             updateTS.Visibility = Visibility.Hidden;
                             break;
