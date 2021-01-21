@@ -761,6 +761,10 @@ namespace BL
         }
 
 
+
+
+
+
         /// <summary>
         /// if we change index of the line station at the list so we need update all the data at the station that affect from this
         /// </summary>
@@ -773,209 +777,57 @@ namespace BL
             lineStationDO = from st in line.StationsOfBus// רשימת הליין תורגמה לדו                  
                             select (DO.LineStation)st.CopyPropertiesToNew(typeof(DO.LineStation));
 
+            //////////////////////////////////////////////////////////////////////////////
+            DO.LineStation toSend111 = new DO.LineStation();
+            List<DO.LineStation> lineStationDO1=new List<DO.LineStation>();
+            DO.LineStation k111;
 
-            int place = line.StationsOfBus.Count() - 1; //the place of the station that we change her index
-            int indexChange = line.StationsOfBus.ElementAt(place).LineStationIndex; //the place of where we want to insert the station
-
-            DO.LineStation lineDOPlace = new DO.LineStation();
-
-            //in order to find the place of this station beffore the diffrences
-            IEnumerable<DO.LineStation> OldtationDO;
-            OldtationDO = from st in dl.GetAllLineStationsBy(b => b.LineId == line.IdNumber)
-                          orderby st.LineStationIndex
-                          select st;
-
-            //keep the specific line station the old one
-            IEnumerable<DO.LineStation> a = from v in OldtationDO
-                                            let cod = line.StationsOfBus.ElementAt(place).StationCode
-                                            where v.StationCode == cod
-                                            select v;
-            int oldPlaceIndex = a.ElementAt(0).LineStationIndex - 1;
-
-            try
+            for (int i=0;i< lineStationDO.Count();i++)
             {
-                DO.LineStation toSend = new DO.LineStation();
-                DO.LineStation toSendTo = new DO.LineStation();
-                if (oldPlaceIndex < indexChange)     //if the new place is bigger then the old place
-                {
-                    for (int i = oldPlaceIndex; i < indexChange - 1; i++) //we move at the list from the index that change until the new index in order to
-                        //update all the index that change- index++
-                    {
-                        toSend = lineStationDO.ElementAt(i); //heep the current station data
-                        toSend.LineStationIndex--;
+                k111 = new DO.LineStation()
+                { 
+                    LineStationIndex= i+1,
+                    LineId= lineStationDO.ElementAt(i).LineId,
+                    LineStationExist=true,
+                    NextStation= lineStationDO.ElementAt(i).NextStation,
+                    PrevStation= lineStationDO.ElementAt(i).PrevStation,
+                    StationCode= lineStationDO.ElementAt(i).StationCode
 
-                        if (i == oldPlaceIndex) //if this is the okd place of the station we need to update the prev and next fields of the sation befor and after the station we change
-                        {
+                };
 
-                            if (i == 0) //if we change the first station
-                            {
-                                toSend.PrevStation = 0;
-                                toSend.NextStation = lineStationDO.ElementAt(i + 1).StationCode;
-                                dl.UpdateLineStations(toSend);
-                            }
-                            else //update the station befor and the station after
-                            {
-                                toSendTo = lineStationDO.ElementAt(i - 1);
-                                toSend.PrevStation = a.ElementAt(0).PrevStation;
-                                toSendTo.NextStation = lineStationDO.ElementAt(i).StationCode;
-                                toSendTo.NextStation = toSend.StationCode;
-                                dl.UpdateLineStations(toSendTo);
-
-                                dl.UpdateLineStations(toSend);
-                            }
-
-                        }
-                        else //if this is not the index of the station we change so only update the index linestation
-                        {
-                            if (i == indexChange - 2) //if this is the station befor the new place of the station so we need update the field next at this station
-                            {
-                                toSendTo = lineStationDO.ElementAt(place);
-
-                                toSend.NextStation = a.ElementAt(0).StationCode;
-
-                                toSendTo.PrevStation = lineStationDO.ElementAt(indexChange - 2).StationCode;
-
-
-                            }
-                            dl.UpdateLineStations(toSend);
-                        }
-
-
-                    }
-
-                     
-                    // update the station that change and the station that become after her
-                    if (indexChange == lineStationDO.Count()) //if we need update the last item
-                    {
-                        toSendTo = a.ElementAt(0);
-                        toSendTo.LineStationIndex = indexChange;
-                        toSendTo.PrevStation = a.ElementAt(0).NextStation;
-                        toSendTo.NextStation = 0;
-                        dl.UpdateLineStations(toSendTo);
-                    }
-                    else //if this is not the last station indew new place change
-                    {
-                        
-                        toSend = lineStationDO.ElementAt(place - 1);
-                        toSend.PrevStation = lineStationDO.ElementAt(place).StationCode;
-                        dl.UpdateLineStations(toSend);
-
-
-                        toSendTo.StationCode = lineStationDO.ElementAt(place).StationCode;
-                        toSendTo.NextStation = lineStationDO.ElementAt(indexChange - 1).StationCode;
-                        toSendTo.PrevStation = lineStationDO.ElementAt(indexChange - 2).StationCode;
-                        toSendTo.LineStationIndex = indexChange;
-
-                        dl.UpdateLineStations(toSendTo);
-
-
-
-
-                    }
-                }
-
-                else //if the new place smaller then the old place 
-                {
-                    for (int i = indexChange - 1; i < oldPlaceIndex; i++) 
-                    {
-                        toSend = lineStationDO.ElementAt(i);
-                        toSend.LineStationIndex++;
-                        if (i == indexChange - 1) 
-                        {
-
-                            if (i == 0)
-                            {
-                                toSendTo = lineStationDO.ElementAt(place);
-                                toSendTo.PrevStation = 0;
-                                toSendTo.NextStation = toSend.StationCode;
-
-                                toSend.PrevStation = lineStationDO.ElementAt(place).StationCode;
-                                dl.UpdateLineStations(toSendTo);
-
-                            }
-                            else
-                            {
-                                toSendTo = lineStationDO.ElementAt(place);
-                                toSendTo.PrevStation = lineStationDO.ElementAt(i - 1).StationCode;
-                                toSendTo.NextStation = lineStationDO.ElementAt(i).StationCode;
-                                toSend.PrevStation = a.ElementAt(0).StationCode;
-                                dl.UpdateLineStations(toSendTo);
-                                // dl.UpdateLineStations(toSend);
-                                toSendTo = lineStationDO.ElementAt(i - 1);
-                                toSendTo.NextStation = a.ElementAt(0).StationCode;
-                                dl.UpdateLineStations(toSendTo);
-                                dl.UpdateLineStations(toSend);
-                            }
-
-
-                        }
-                        else
-                        {
-                            if (i == oldPlaceIndex - 1)
-                            {
-                                if (oldPlaceIndex == lineStationDO.Count() - 1)
-                                {
-
-                                    toSend.NextStation = 0;
-
-                                }
-                                else
-                                {
-                                    toSendTo = lineStationDO.ElementAt(i + 1);
-                                    toSendTo.PrevStation = lineStationDO.ElementAt(i).StationCode;
-
-                                    toSend.NextStation = lineStationDO.ElementAt(i + 1).StationCode;
-
-                                    dl.UpdateLineStations(toSendTo);
-                                }
-
-                            }
-
-                            dl.UpdateLineStations(toSend);
-
-                            toSendTo = lineStationDO.ElementAt(oldPlaceIndex - 1);
-                            toSendTo.NextStation = lineStationDO.ElementAt(oldPlaceIndex).StationCode;
-                            toSendTo.LineStationIndex = oldPlaceIndex + 1;
-
-                            dl.UpdateLineStations(toSendTo);
-                        }
-
-
-                    }
-
-                }
-
-
-                //-------------------
-                //creat adjate station if we need
-
-                IEnumerable<DO.LineStation> tempDO2;
-                tempDO2 = from item in dl.GetAllLineStationsBy(b => b.LineId == line.IdNumber)      //the new line station
-                          orderby item.LineStationIndex
-                          select item;
-
-
-                bool exsit = true;
-                try
-                {
-                    for (int i = 0; i < tempDO2.Count() - 1; i++)   //move on the line station list send 2 adj station to creat if they not exsis yet.
-                    {
-                        exsit = CreatAdjStations(tempDO2.ElementAt(i).StationCode, tempDO2.ElementAt(i + 1).StationCode);
-
-                    }
-                }
-                catch (DO.WrongIDExeption x)
-                {
-                    string o = ""; o += x;
-                }
-
-
+                lineStationDO1.Add(k111);
             }
-            catch (DO.WrongIDExeption ex)
+            int size = lineStationDO1.Count();
+            for (int i=0;i < size; i++)
             {
-                throw new BO.BadIdException("מזהה קו לא תקין", ex);
-            }
+                k111 = lineStationDO1.ElementAt(i);
 
+                if (i == 0)
+                {
+                    k111.PrevStation = 0;
+                    k111.NextStation = lineStationDO1.ElementAt(i+1).StationCode;
+                }
+                if(i == size-1)
+                {
+                    k111.PrevStation = lineStationDO1.ElementAt(i - 1).StationCode;
+                    k111.NextStation = 0;
+                }
+                if(i!=0&&i!=size-1)
+                {
+                    k111.PrevStation = lineStationDO1.ElementAt(i - 1).StationCode;
+                    k111.NextStation = lineStationDO1.ElementAt(i + 1).StationCode;
+                }
+
+                dl.UpdateLineStations(k111);
+                if (i != size - 1)
+                {
+                    try
+                    {
+                        bool exsit111 = CreatAdjStations(lineStationDO1.ElementAt(i).StationCode, lineStationDO1.ElementAt(i + 1).StationCode);
+                    }
+                    catch (DO.WrongIDExeption) { }
+                }
+            }
 
 
         }
