@@ -254,18 +254,34 @@ namespace PLGui
                         MessageBox.Show("!חשבונך נמחק בהצלחה, נשמח לראות אותך איתנו כאן שוב", "", MessageBoxButton.OK, MessageBoxImage.Information);
                         if (userNow.Admin)
                         {
-                            var window = (AdminWindow)Application.Current.MainWindow;
+                            WindowCollection window = Application.Current.Windows;
+                            int i = 0;
+                            for( ;i< window.Count;i++)
+                            {
+                                if (window[i].Title== "AdminWindow")
+                                    break;
+                            }
+
+
                             MainWindow main = new MainWindow();
                             main.Show();
-                            window.Close();
+                            window[i].Close();
+                           
                           
                         }
                         else
                         {
-                            var window = (UserWindow)Application.Current.MainWindow;
+                            WindowCollection window = Application.Current.Windows;
+                            int i = 0;
+                            for (; i < window.Count; i++)
+                            {
+                                if (window[i].Title == "UserWindow")
+                                    break;
+                            }
                             MainWindow main = new MainWindow();
                             main.Show();
-                            window.Close();
+                            window[i].Close();
+                            
                         }
                         
                         return;

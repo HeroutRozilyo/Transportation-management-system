@@ -237,7 +237,7 @@ namespace PLGui
 
                 }
             }
-            catch (BO.BadIdException a)
+            catch (BO.BadLineTripExeption a)
             {
                 MessageBox.Show(a.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
                 NewLooz.DataContext = null;
