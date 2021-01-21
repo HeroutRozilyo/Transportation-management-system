@@ -46,12 +46,6 @@ namespace DL
                        select bus.Clone();
             return list;
         }
-        //public IEnumerable<DO.Bus> GetAllBusesStusus(DO.STUTUS stusus) 
-        //{
-        //    return from bus in DataSource.ListBus
-        //           where(bus.StatusBus==stusus)
-        //           select bus.Clone();
-        //}
 
 
         #endregion AllGetBus
@@ -92,9 +86,7 @@ namespace DL
             {
                 DataSource.ListBus[indexOftheBUs] = bus;
 
-                //     DataSource.ListBus.Remove(bus);
-                //    buses.BusExsis = true;
-                //   DataSource.ListBus.Add(buses.Clone());
+            
                 return true;
             }
             else
@@ -146,13 +138,6 @@ namespace DL
         #endregion
 
 
-
-        //public IEnumerable<DO.Line> GetAllLinesArea(DO.AREA area) //return all the buses that we have
-        //{
-        //    return from line in DataSource.ListLine
-        //           where (line.Area == area&&line.LineExist)
-        //           select line.Clone();
-        //}
 
         #region update
         public void UpdateLine(DO.Line line)

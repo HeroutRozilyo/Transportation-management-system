@@ -75,9 +75,19 @@ namespace BL
         //return all the buses that working 
         public IEnumerable<BO.Bus> GetAllBus()
         {
-            var v = from item in dl.GetAllBuses()
-                    select busDoBoAdapter(item.Licence);
-            return v;
+            try
+            {
+                var v = from item in dl.GetAllBuses()
+                        select busDoBoAdapter(item.Licence);
+                return v;
+            }
+            catch (DO.WrongLicenceException ex)
+            {
+                throw new BO.BadBusLicenceException("מספר רישוי לא חוקי", ex);
+            }
+
+
+
         }
 
        
@@ -213,34 +223,45 @@ namespace BL
         //update the new fuel
         public BO.Bus Refuelling(BO.Bus bus)
         {
-            //  worker.RunWorkerAsync(12);
+            try
+            {
+                bus.StatusBus = (STUTUS)2;
+                bus.FuellAmount = 1200;
 
-            bus.StatusBus = (STUTUS)2;
-            bus.FuellAmount = 1200;
-
-            UpdateBus(bus);
-            return bus;
+                UpdateBus(bus);
+                return bus;
+            }
+            catch (DO.WrongLicenceException ex)
+            {
+                throw new BO.BadBusLicenceException("מספר רישוי  לא נמצא במערכת", ex);
+            }
         }
 
         /// func that do treatment to the bus
         public BO.Bus treatment(BO.Bus bus)
         {
-
-
-
-            bus.StatusBus = (STUTUS)3;
-            bus.LastTreatment = DateTime.Today;
-
-
-
-            bus.KilometrFromLastTreat = 0;
-            if (bus.FuellAmount <= 1200)
+            try
             {
-                bus.FuellAmount = 1200;
-            }
-            UpdateBus(bus);
 
-            return bus;
+
+                bus.StatusBus = (STUTUS)3;
+                bus.LastTreatment = DateTime.Today;
+
+
+
+                bus.KilometrFromLastTreat = 0;
+                if (bus.FuellAmount <= 1200)
+                {
+                    bus.FuellAmount = 1200;
+                }
+                UpdateBus(bus);
+
+                return bus;
+            }
+            catch (DO.WrongLicenceException ex)
+            {
+                throw new BO.BadBusLicenceException("מספר רישוי  לא נמצא במערכת", ex);
+            }
         }
         #endregion
 
@@ -281,48 +302,56 @@ namespace BL
 
             //-----------------------------
             //creat BO line station. first we insert the data t list ant calucate the time and distane ans after make to ienumerable
-
-            List<LineStation> lineStations = new List<LineStation>();
-            LineStation line = new LineStation();
-            int code1, code2 = 0;
-            bool timtum = false;
-            for (int i = 0; i < tempDO.Count() - 1; i++)
+            try
             {
-                timtum = true;
-                code1 = tempDO1.ElementAt(i).StationCode;
-                code2 = tempDO1.ElementAt(i + 1).StationCode;
-                adj = dl.GetAdjacentStations(code1, code2);
-
-                line = new LineStation()
+                List<LineStation> lineStations = new List<LineStation>();
+                LineStation line = new LineStation();
+                int code1, code2 = 0;
+                bool timtum = false;
+                for (int i = 0; i < tempDO.Count() - 1; i++)
                 {
-                    LineId = tempDO1.ElementAt(i).LineId,
-                    LineStationIndex = tempDO1.ElementAt(i).LineStationIndex,
-                    LineStationExist = tempDO1.ElementAt(i).LineStationExist,
-                    NextStation = tempDO1.ElementAt(i).NextStation,
-                    PrevStation = tempDO1.ElementAt(i).PrevStation,
-                    StationCode = tempDO1.ElementAt(i).StationCode,
-                    DistanceFromNext = adj.Distance,
-                    TimeAverageFromNext = Convert.ToDouble(adj.TimeAverage),
-                };
-                lineStations.Add(line);
+                    timtum = true;
+                    code1 = tempDO1.ElementAt(i).StationCode;
+                    code2 = tempDO1.ElementAt(i + 1).StationCode;
+                    adj = dl.GetAdjacentStations(code1, code2);
+
+                    line = new LineStation()
+                    {
+                        LineId = tempDO1.ElementAt(i).LineId,
+                        LineStationIndex = tempDO1.ElementAt(i).LineStationIndex,
+                        LineStationExist = tempDO1.ElementAt(i).LineStationExist,
+                        NextStation = tempDO1.ElementAt(i).NextStation,
+                        PrevStation = tempDO1.ElementAt(i).PrevStation,
+                        StationCode = tempDO1.ElementAt(i).StationCode,
+                        DistanceFromNext = adj.Distance,
+                        TimeAverageFromNext = Convert.ToDouble(adj.TimeAverage),
+                    };
+                    lineStations.Add(line);
+
+                }
+                if (timtum)
+                {
+                    line = new LineStation()  //restart the last linebus
+                    {
+                        LineId = tempDO1.ElementAt(tempDO.Count() - 1).LineId,
+                        LineStationIndex = tempDO1.ElementAt(tempDO.Count() - 1).LineStationIndex,
+                        LineStationExist = tempDO1.ElementAt(tempDO.Count() - 1).LineStationExist,
+                        NextStation = tempDO1.ElementAt(tempDO.Count() - 1).NextStation,
+                        PrevStation = tempDO1.ElementAt(tempDO.Count() - 1).PrevStation,
+                        StationCode = tempDO1.ElementAt(tempDO.Count() - 1).StationCode,
+                        DistanceFromNext = 0,
+                        TimeAverageFromNext = 0,
+                    };
+                    lineStations.Add(line);
+                }
+                lineBO.StationsOfBus = lineStations.AsEnumerable();
 
             }
-            if (timtum)
+            catch (DO.WrongIDExeption ex) 
             {
-                line = new LineStation()  //restart the last linebus
-                {
-                    LineId = tempDO1.ElementAt(tempDO.Count() - 1).LineId,
-                    LineStationIndex = tempDO1.ElementAt(tempDO.Count() - 1).LineStationIndex,
-                    LineStationExist = tempDO1.ElementAt(tempDO.Count() - 1).LineStationExist,
-                    NextStation = tempDO1.ElementAt(tempDO.Count() - 1).NextStation,
-                    PrevStation = tempDO1.ElementAt(tempDO.Count() - 1).PrevStation,
-                    StationCode = tempDO1.ElementAt(tempDO.Count() - 1).StationCode,
-                    DistanceFromNext = 0,
-                    TimeAverageFromNext = 0,
-                };
-                lineStations.Add(line);
+                throw new BO.BadIdException("אחד מפרטי הקו שגוי",idLine);
             }
-            lineBO.StationsOfBus = lineStations.AsEnumerable();
+            
 
             //insert line trip data to the line
             lineBO.TimeLineTrip = from st in tripDO
@@ -335,28 +364,52 @@ namespace BL
         //return all the lines that working 
         public IEnumerable<BO.Line> GetAllLine()
         {
-            var v = from item in dl.GetAllLine()
-                    select lineDoBoAdapter(item.IdNumber);
+            try
+            {
+                var v = from item in dl.GetAllLine()
+                        select lineDoBoAdapter(item.IdNumber);
 
-            return v;
+                return v;
+            }
+            catch (DO.WrongIDExeption ex)
+            {
+                throw new BO.BadIdException("אחד מפרטי הקו שגוי", ex);
+            }
+
 
         }
         //return all the lines according to predicate
         public IEnumerable<BO.Line> GetLineBy(int stationCode)
         {
-            var v = from item in dl.GetAllLineBy(x => x.FirstStationCode == stationCode)
-                    select lineDoBoAdapter(item.IdNumber);
+            try
+            {
+                var v = from item in dl.GetAllLineBy(x => x.FirstStationCode == stationCode)
+                        select lineDoBoAdapter(item.IdNumber);
 
-            return v;
+                return v;
+            }
+            catch (DO.WrongIDExeption ex)
+            {
+                throw new BO.BadIdException("אחד מפרטי הקו שגוי", ex);
+            }
+
         }
 
         //return all the lines according to predicate
         public IEnumerable<BO.Line> GetLineByLineCode(int LineCodeCode)
         {
-            var v = from item in dl.GetAllLineBy(x => x.NumberLine == LineCodeCode)
-                    select lineDoBoAdapter(item.IdNumber);
+            try
+            {
+                var v = from item in dl.GetAllLineBy(x => x.NumberLine == LineCodeCode)
+                        select lineDoBoAdapter(item.IdNumber);
 
-            return v;
+                return v;
+            }
+            catch (DO.WrongIDExeption ex)
+            {
+                throw new BO.BadIdException("אחד מפרטי הקו שגוי", ex);
+            }
+
         }
         public IEnumerable<IGrouping<BO.AREA, BO.Line>> GetLinesByAreaG()
         {
@@ -371,19 +424,34 @@ namespace BL
         //return all the lines according to predicate
         public BO.Line GetLineByLine(int lineid)
         {
-            Line line = lineDoBoAdapter(lineid);
+            try
+            {
+                Line line = lineDoBoAdapter(lineid);
 
-            return line;
+                return line;
+            }
+            catch (DO.WrongIDExeption ex)
+            {
+                throw new BO.BadIdException("אחד מפרטי הקו שגוי", ex);
+            }
+
         }
         //return all the line according to their area
         public IEnumerable<BO.Line> GetLineByArea(BO.AREA area)
         {
+            try
+            {
+                IEnumerable<BO.Line> help;
+                help = from item in dl.GetAllLineBy(b => b.Area == (DO.AREA)area)
+                       select lineDoBoAdapter(item.IdNumber);
 
-            IEnumerable<BO.Line> help;
-            help = from item in dl.GetAllLineBy(b => b.Area == (DO.AREA)area)
-                   select lineDoBoAdapter(item.IdNumber);
+                return help;
+            }
+            catch (DO.WrongIDExeption ex)
+            {
+                throw new BO.BadIdException("אחד מפרטי הקו שגוי", ex);
+            }
 
-            return help;
         }
 
         /// <summary>
@@ -401,7 +469,7 @@ namespace BL
                         LineStationExist = itemLineStation.LineStationExist,
                         Name = itemStation.Name,
                         Address = itemStation.Address,
-                        //Coordinate = itemStation.Coordinate,
+                       
                     };
             return from item in v
                    orderby item.LineStationIndex
@@ -424,8 +492,11 @@ namespace BL
                         select lineDoBoAdapter(s.LineId);
                 return x;
             }
-            catch (BO.BadIdException) { }
-            return null;
+            catch (DO.WrongIDExeption ex)
+            {
+                throw new BO.BadIdException("אחד מפרטי הקו שגוי", ex);
+            }
+           
         }
 
         #endregion
@@ -494,7 +565,7 @@ namespace BL
             {
                 throw new BO.BadIdException("מזהה קו לא תקין או שקיים כבר במערכת", ex);
             }
-            //return adja.AsEnumerable();
+            
             return id;
         }
 
@@ -771,62 +842,69 @@ namespace BL
         /// <param name="line"></param>
         public void UpdateLineStationForIndexChange(BO.Line line)
         {
-
-            //keep the list of station
-            IEnumerable<DO.LineStation> lineStationDO;
-            lineStationDO = from st in line.StationsOfBus// רשימת הליין תורגמה לדו                  
-                            select (DO.LineStation)st.CopyPropertiesToNew(typeof(DO.LineStation));
-
-            //////////////////////////////////////////////////////////////////////////////
-            DO.LineStation toSend111 = new DO.LineStation();
-            List<DO.LineStation> lineStationDO1=new List<DO.LineStation>();
-            DO.LineStation k111;
-
-            for (int i=0;i< lineStationDO.Count();i++)
+            try
             {
-                k111 = new DO.LineStation()
-                { 
-                    LineStationIndex= i+1,
-                    LineId= lineStationDO.ElementAt(i).LineId,
-                    LineStationExist=true,
-                    NextStation= lineStationDO.ElementAt(i).NextStation,
-                    PrevStation= lineStationDO.ElementAt(i).PrevStation,
-                    StationCode= lineStationDO.ElementAt(i).StationCode
 
-                };
+                //keep the list of station
+                IEnumerable<DO.LineStation> lineStationDO;
+                lineStationDO = from st in line.StationsOfBus// רשימת הליין תורגמה לדו                  
+                                select (DO.LineStation)st.CopyPropertiesToNew(typeof(DO.LineStation));
 
-                lineStationDO1.Add(k111);
-            }
-            int size = lineStationDO1.Count();
-            for (int i=0;i < size; i++)
-            {
-                k111 = lineStationDO1.ElementAt(i);
 
-                if (i == 0)
-                {
-                    k111.PrevStation = 0;
-                    k111.NextStation = lineStationDO1.ElementAt(i+1).StationCode;
-                }
-                if(i == size-1)
-                {
-                    k111.PrevStation = lineStationDO1.ElementAt(i - 1).StationCode;
-                    k111.NextStation = 0;
-                }
-                if(i!=0&&i!=size-1)
-                {
-                    k111.PrevStation = lineStationDO1.ElementAt(i - 1).StationCode;
-                    k111.NextStation = lineStationDO1.ElementAt(i + 1).StationCode;
-                }
+                DO.LineStation toSend111 = new DO.LineStation();
+                List<DO.LineStation> lineStationDO1 = new List<DO.LineStation>();
+                DO.LineStation k111;
 
-                dl.UpdateLineStations(k111);
-                if (i != size - 1)
+                for (int i = 0; i < lineStationDO.Count(); i++)
                 {
-                    try
+                    k111 = new DO.LineStation()
                     {
-                        bool exsit111 = CreatAdjStations(lineStationDO1.ElementAt(i).StationCode, lineStationDO1.ElementAt(i + 1).StationCode);
-                    }
-                    catch (DO.WrongIDExeption) { }
+                        LineStationIndex = i + 1,
+                        LineId = lineStationDO.ElementAt(i).LineId,
+                        LineStationExist = true,
+                        NextStation = lineStationDO.ElementAt(i).NextStation,
+                        PrevStation = lineStationDO.ElementAt(i).PrevStation,
+                        StationCode = lineStationDO.ElementAt(i).StationCode
+
+                    };
+
+                    lineStationDO1.Add(k111);
                 }
+                int size = lineStationDO1.Count();
+                for (int i = 0; i < size; i++)
+                {
+                    k111 = lineStationDO1.ElementAt(i);
+
+                    if (i == 0)
+                    {
+                        k111.PrevStation = 0;
+                        k111.NextStation = lineStationDO1.ElementAt(i + 1).StationCode;
+                    }
+                    if (i == size - 1)
+                    {
+                        k111.PrevStation = lineStationDO1.ElementAt(i - 1).StationCode;
+                        k111.NextStation = 0;
+                    }
+                    if (i != 0 && i != size - 1)
+                    {
+                        k111.PrevStation = lineStationDO1.ElementAt(i - 1).StationCode;
+                        k111.NextStation = lineStationDO1.ElementAt(i + 1).StationCode;
+                    }
+
+                    dl.UpdateLineStations(k111);
+                    if (i != size - 1)
+                    {
+                        try
+                        {
+                            bool exsit111 = CreatAdjStations(lineStationDO1.ElementAt(i).StationCode, lineStationDO1.ElementAt(i + 1).StationCode);
+                        }
+                        catch (DO.WrongIDExeption) { }
+                    }
+                }
+            }
+            catch (DO.WrongIDExeption ex)
+            {
+                throw new BO.BadIdException("מזהה קו לא תקין", ex);
             }
 
 
