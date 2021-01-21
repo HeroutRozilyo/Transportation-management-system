@@ -54,12 +54,12 @@ namespace PLGui
         #endregion
 
         #region Constructors
-        [Obsolete("not using",true)]
+        [Obsolete("not using", true)]
         public AddLine()
         {
             InitializeComponent();
         }
-       
+
         /// <summary>
         /// for new Line
         /// </summary>
@@ -67,42 +67,55 @@ namespace PLGui
         {
             InitializeComponent();
             this.bl = bl;
-
-            GetStations = ConvertList(bl.GetAllStations());
-            allStations = ConvertList(bl.GetAllStations());
-            RefreshStation();
-            RefreshLineStation();
-            add = 0;
-            AreaComboBox.ItemsSource = Enum.GetValues(typeof(BO.AREA));
-            this.DataContext = newLine;
-            GridDataLine.Visibility = Visibility.Visible;
-            FinishAddLine.Visibility = Visibility.Visible;
-            updataStationLine.Visibility = Visibility.Hidden;
+            try
+            {
+                GetStations = ConvertList(bl.GetAllStations());
+                allStations = ConvertList(bl.GetAllStations());
+                RefreshStation();
+                RefreshLineStation();
+                add = 0;
+                AreaComboBox.ItemsSource = Enum.GetValues(typeof(BO.AREA));
+                this.DataContext = newLine;
+                GridDataLine.Visibility = Visibility.Visible;
+                FinishAddLine.Visibility = Visibility.Visible;
+                updataStationLine.Visibility = Visibility.Hidden;
+            }
+            catch (BO.BadIdException a)
+            {
+                MessageBox.Show(a.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
 
 
 
         }
-       
-    /// <summary>
-    /// for update line Station
-    /// </summary>
+
+        /// <summary>
+        /// for update line Station
+        /// </summary>
         public AddLine(BO.Line line, IBL bl)
         {
-            InitializeComponent();
-            this.line = line;
-            this.bl = bl;
-            GridDataLine.Visibility = Visibility.Hidden;
-            FinishAddLine.Visibility = Visibility.Hidden;
-            GetStations = ConvertList(bl.GetAllStations());
-            allStations = ConvertList(bl.GetAllStations());
-            updataStationLine.Visibility = Visibility.Visible;
-            add = 0;
-            orderGrid();
-            RefreshStation();
+            try
+            {
+                InitializeComponent();
+                this.line = line;
+                this.bl = bl;
+                GridDataLine.Visibility = Visibility.Hidden;
+                FinishAddLine.Visibility = Visibility.Hidden;
+                GetStations = ConvertList(bl.GetAllStations());
+                allStations = ConvertList(bl.GetAllStations());
+                updataStationLine.Visibility = Visibility.Visible;
+                add = 0;
+                orderGrid();
+                RefreshStation();
+            }
+            catch (BO.BadIdException a)
+            {
+                MessageBox.Show(a.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
 
         }
         #endregion
-       
+
 
 
         #region UpdateStationLine
@@ -152,7 +165,7 @@ namespace PLGui
         /// </summary>
         private void RefreshStation()
         {
-         
+
             Station.ItemsSource = GetStations;
             Station.Items.Refresh();
             if (LineNumber.Text != "" && AreaComboBox.SelectedIndex != -1 && GetLineStations.Count() >= 2)
@@ -278,7 +291,7 @@ namespace PLGui
             }
 
         }
-    
+
         /// <summary>
         /// add the line to the System
         /// </summary>
@@ -292,28 +305,35 @@ namespace PLGui
                 {
                     case MessageBoxResult.Yes:
                         {
-                            newLine = GridDataLine.DataContext as BO.Line;
+                            try
+                            {
+                                newLine = GridDataLine.DataContext as BO.Line;
 
-                            newLine.StationsOfBus = GetLineStations;
+                                newLine.StationsOfBus = GetLineStations;
 
-                            newLine.FirstStationCode = GetLineStations.ToList().ElementAt(0).StationCode;
-                            newLine.LastStationCode = GetLineStations.ToList().ElementAt(GetLineStations.Count() - 1).StationCode;
-                            newLine.LineExist = true;
-
-
-                            int idnumber = bl.AddLine(newLine);
-                            idLineFromDS = idnumber;
-                            newLine.IdNumber = idnumber;
+                                newLine.FirstStationCode = GetLineStations.ToList().ElementAt(0).StationCode;
+                                newLine.LastStationCode = GetLineStations.ToList().ElementAt(GetLineStations.Count() - 1).StationCode;
+                                newLine.LineExist = true;
 
 
+                                int idnumber = bl.AddLine(newLine);
+                                idLineFromDS = idnumber;
+                                newLine.IdNumber = idnumber;
 
-                            MessageBox.Show("הקו נשמר בהצלחה למערכת", "Success Message", MessageBoxButton.OK, MessageBoxImage.Asterisk);
-                            this.DialogResult = true;
-                            this.Close();
+
+
+                                MessageBox.Show("הקו נשמר בהצלחה למערכת", "Success Message", MessageBoxButton.OK, MessageBoxImage.Asterisk);
+                                this.DialogResult = true;
+                                this.Close();
+
+                            }
+                            catch (BO.BadIdException a)
+                            {
+                                MessageBox.Show(a.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                            }
+
+
                             return;
-
-
-
                         }
                     case MessageBoxResult.No:
                         {
@@ -344,16 +364,23 @@ namespace PLGui
                 {
                     case MessageBoxResult.Yes:
                         {
-                            line.StationsOfBus = GetLineStations;
-                            foreach (var item in line.StationsOfBus)
+                            try
                             {
-                                item.LineId = line.IdNumber;
+                                line.StationsOfBus = GetLineStations;
+                                foreach (var item in line.StationsOfBus)
+                                {
+                                    item.LineId = line.IdNumber;
+                                }
+
+                                bool a = bl.UpdateLineStation(line);
+
+                                this.DialogResult = true;
+                                this.Close();
                             }
-
-                            bool a = bl.UpdateLineStation(line);
-
-                            this.DialogResult = true;
-                            this.Close();
+                            catch (BO.BadIdException a)
+                            {
+                                MessageBox.Show(a.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                            }
                             return;
                         }
                     case MessageBoxResult.No:
@@ -386,8 +413,15 @@ namespace PLGui
 
             if (result != null)
             {
-                GetStations = ConvertList(bl.GetAllStations());
-                RefreshStation();
+                try
+                {
+                    GetStations = ConvertList(bl.GetAllStations());
+                    RefreshStation();
+                }
+                catch (BO.BadIdException a)
+                {
+                    MessageBox.Show(a.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
 
             }
 

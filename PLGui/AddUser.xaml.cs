@@ -28,7 +28,7 @@ namespace PLGui
             InitializeComponent();
             admin = false;
             refresh();
-           
+
         }
 
         /// <summary>
@@ -48,7 +48,14 @@ namespace PLGui
         #region Refresh
         public void refresh()
         {
-            allUser = bl.GetAllUsers();
+            try
+            {
+                allUser = bl.GetAllUsers();
+            }
+            catch (BO.BadNameExeption a)
+            {
+                MessageBox.Show(a.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
         #endregion
 
@@ -82,7 +89,7 @@ namespace PLGui
 
                     }
                 }
-                if (pas.Count()>=8)//min Lengthto password
+                if (pas.Count() >= 8)//min Lengthto password
                 {
                     if (check())
                     {
@@ -112,9 +119,9 @@ namespace PLGui
 
                         }
                     }
-                 
-                        bl.AddUser(name, pas, admin, mail);
-                    
+
+                    bl.AddUser(name, pas, admin, mail);
+
                     MessageBox.Show(" החשבון נוצר בהצלחה ", "שם משתמש", MessageBoxButton.OK, MessageBoxImage.Information);
                     this.DialogResult = true;
                     this.Close();
@@ -125,7 +132,7 @@ namespace PLGui
                 }
 
             }
-            catch (BO.BadNameExeption )
+            catch (BO.BadNameExeption)
             {
                 MessageBox.Show(" שם משתמש קיים במערכת, בבקשה אכנס שם אחר", "שם משתמש", MessageBoxButton.OK, MessageBoxImage.Error);
             }

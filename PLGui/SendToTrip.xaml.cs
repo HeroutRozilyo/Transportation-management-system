@@ -59,7 +59,7 @@ namespace PLGui
                         }
                         else this.DialogResult = false;
                     }
-                    catch(BO.BadBusLKMException a)
+                    catch(BO.BadBusLKMException )
                     {
                         MessageBox.Show( "האוטובוס לא יכול לבצע את הנסיעה המבוקשת","",MessageBoxButton.OK, MessageBoxImage.Error);
                     }

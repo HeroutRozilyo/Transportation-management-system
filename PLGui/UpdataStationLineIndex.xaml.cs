@@ -77,7 +77,7 @@ namespace PLGui
 
                             int index = help.FindIndex(b => b.LineStationIndex == temp.LineStationIndex && b.StationCode == b.StationCode);
                             help.RemoveAt(index);
-                            //  help.RemoveAt(help.FindIndex(b => b.LineStationIndex == temp.LineStationIndex && b.StationCode == b.StationCode));
+                            
                             if (change.LineStationIndex < IndexCOmboBox.SelectedIndex + 1)
                             {
                                 change.LineStationExist = false;

@@ -37,35 +37,14 @@
         <WrapPanel HorizontalAlignment="Left" Height="475" Margin="15,155,0,0" VerticalAlignment="Top" Width="145">
             <Button x:Name="line" Content=" קווים" HorizontalAlignment="Left" VerticalAlignment="Stretch"  Click="line_Click" Style="{DynamicResource AdminWindow}" Width="145" RenderTransformOrigin="1.623,0.232" Height="65"/>
             <Button x:Name="station" Content=" תחנות" HorizontalAlignment="Left" VerticalAlignment="Stretch" Click="station_Click"  Style="{DynamicResource AdminWindow}"  Width="145" Height="80"/>
-         
+
         </WrapPanel>
         <Grid Height="40" VerticalAlignment="Top" Width="1199" Margin="115,10,7.333,0">
-            <Button x:Name="Disengagement" Content="התנתקות" HorizontalAlignment="Left" Margin="966,2,0,0" VerticalAlignment="Top" ToolTip="יציאה מהחשבון" Width="81" Click="Disengagement_Click" BorderBrush="{x:Null}" Height="31" Background="{x:Null}">
-                <Button.Foreground>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="Black" Offset="0"/>
-                        <GradientStop Color="White" Offset="1"/>
-                    </LinearGradientBrush>
-                </Button.Foreground>
-            </Button>
-            <Button x:Name="accountDatiels" Content="פרטי חשבון" HorizontalAlignment="Left" Margin="880,2,0,0" VerticalAlignment="Top" ToolTip="פרטי חשבון" Width="81" Click="accountDatiels_Click" BorderBrush="{x:Null}" Height="31" Background="{x:Null}">
-                <Button.Foreground>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="Black" Offset="0"/>
-                        <GradientStop Color="White" Offset="1"/>
-                    </LinearGradientBrush>
-                </Button.Foreground>
-            </Button>
-            <Button x:Name="contantUs" Content="צור קשר" HorizontalAlignment="Left" Margin="1046,1,0,0" VerticalAlignment="Top" ToolTip=" נתקלת בבעיה? פנה אלינו" Width="81" Click="contantUs_Click" BorderBrush="{x:Null}" Height="31" Background="{x:Null}" FlowDirection="RightToLeft">
-                <Button.Foreground>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="Black" Offset="0"/>
-                        <GradientStop Color="White" Offset="1"/>
-                    </LinearGradientBrush>
-                </Button.Foreground>
-            </Button>
-            <Label x:Name="label" Content="ברוך הבא " HorizontalAlignment="Left" Margin="635,9,0,0" VerticalAlignment="Top" Height="31" Width="80"/>
-            <TextBlock x:Name="NameTextBlock" HorizontalAlignment="Left" Height="25" Margin="529,15,0,0" TextWrapping="Wrap" Text="{Binding UserName}" VerticalAlignment="Top" Width="105"/>
+            <Button x:Name="Disengagement" Content="התנתקות" HorizontalAlignment="Left" Margin="966,2,0,0" VerticalAlignment="Top" ToolTip="יציאה מהחשבון" Width="81" Click="Disengagement_Click" BorderBrush="{x:Null}" Height="31" Background="{x:Null}" Foreground="Black" FontFamily="Cooper Black"/>
+            <Button x:Name="accountDatiels" Content="פרטי חשבון" HorizontalAlignment="Left" Margin="880,2,0,0" VerticalAlignment="Top" ToolTip="פרטי חשבון" Width="81" Click="accountDatiels_Click" BorderBrush="{x:Null}" Height="31" Background="{x:Null}" Foreground="Black" FontFamily="Cooper Black"/>
+            <Button x:Name="contantUs" Content="צור קשר" HorizontalAlignment="Left" Margin="1046,1,0,0" VerticalAlignment="Top" ToolTip=" נתקלת בבעיה? פנה אלינו" Width="81" Click="contantUs_Click" BorderBrush="{x:Null}" Height="31" Background="{x:Null}" FlowDirection="RightToLeft" FontFamily="Cooper Black" Foreground="Black"/>
+            <Label x:Name="label" Content="ברוך הבא " HorizontalAlignment="Left" Margin="635,9,0,0" VerticalAlignment="Top" Height="31" Width="80" FontFamily="Cooper Black" FontSize="16"/>
+            <TextBlock x:Name="NameTextBlock" HorizontalAlignment="Left" Height="25" Margin="530,14,0,0" TextWrapping="Wrap" Text="{Binding UserName}" VerticalAlignment="Top" Width="105" FontFamily="Cooper Black" FontSize="16"/>
         </Grid>
     </Grid>
 </Window>
