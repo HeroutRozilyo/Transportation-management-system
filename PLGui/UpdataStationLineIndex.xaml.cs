@@ -84,20 +84,20 @@ namespace PLGui
                             }
                             else
                             {
-                                BO.LineStation change1= help.Find(b => b.LineStationIndex == IndexCOmboBox.SelectedIndex + 1 && b.StationCode != change.StationCode);
+                                BO.LineStation change1 = help.Find(b => b.LineStationIndex == IndexCOmboBox.SelectedIndex + 1 && b.StationCode != change.StationCode);
                                 help.Remove(change1);
-                                change1.LineStationIndex = change1.LineStationIndex+1;
+                                change1.LineStationIndex = change1.LineStationIndex + 1;
                                 help.Add(change1);
 
                             }
                             change.LineStationIndex = IndexCOmboBox.SelectedIndex + 1;
-                          
+
 
                             help.Add(change);
 
                             line.StationsOfBus = from item in help
                                                  orderby item.LineStationIndex
-                                           
+
                                                  select item;
 
                             bl.UpdateLineStationForIndexChange(line);

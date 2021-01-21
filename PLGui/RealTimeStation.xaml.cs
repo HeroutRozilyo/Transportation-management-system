@@ -50,25 +50,31 @@ namespace PLGui
         //stationData1=the station that the user choose
         public RealTimeStation(IBL bl, Station stationData1)
         {
-            this.DataContext = this;
-            InitializeComponent();
-            this.bl = bl;
-            this.stationData1 = stationData1;
+            try
+            {
+                this.DataContext = this;
+                InitializeComponent();
+                this.bl = bl;
+                this.stationData1 = stationData1;
 
-            yellowBoard = bl.GetYellowBoard(stationData1);
-            yellow.ItemsSource = yellowBoard;
-            StationCode.Text = stationData1.Code.ToString();
+                yellowBoard = bl.GetYellowBoard(stationData1);
+                yellow.ItemsSource = yellowBoard;
+                StationCode.Text = stationData1.Code.ToString();
 
-            //simulator clock make the BackgroundWorker
-            BoolStart = true;
-            timerWorker = new BackgroundWorker();
-            timerWorker.DoWork += timerWorkerr_DoWork;
-            timerWorker.RunWorkerCompleted += timerWorker_RunWorkerCompleted;
-           
-            timerWorker.ProgressChanged += timer_ProgressChanged;
-            timerWorker.WorkerReportsProgress = true;
-            timerWorker.WorkerSupportsCancellation = true;
-            
+                //simulator clock make the BackgroundWorker
+                BoolStart = true;
+                timerWorker = new BackgroundWorker();
+                timerWorker.DoWork += timerWorkerr_DoWork;
+                timerWorker.RunWorkerCompleted += timerWorker_RunWorkerCompleted;
+
+                timerWorker.ProgressChanged += timer_ProgressChanged;
+                timerWorker.WorkerReportsProgress = true;
+                timerWorker.WorkerSupportsCancellation = true;
+            }
+            catch(BO.BadIdException ex)
+            {
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         
@@ -80,12 +86,18 @@ namespace PLGui
         /// </summary>
         private void timer_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-
-            TimeSpan timeSpan = (TimeSpan)e.UserState;//userState-  member to pass more information back to the UI for updating on a progressChanged call
-            TimerTextBox.Text = String.Format("{0:D2}:{1:D2}:{2:D2}", timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds);
-            lineAtStation = bl.GetLineStationLineTimer(stationData1, timeSpan).ToList(); //all the frequency line arrivle 
-            int ListCount = (lineAtStation.Count() > 5) ? 5 : lineAtStation.Count(); //the first five line
-            RealTimeStationLine.ItemsSource = lineAtStation.GetRange(0, ListCount);
+            try
+            {
+                TimeSpan timeSpan = (TimeSpan)e.UserState;//userState-  member to pass more information back to the UI for updating on a progressChanged call
+                TimerTextBox.Text = String.Format("{0:D2}:{1:D2}:{2:D2}", timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds);
+                lineAtStation = bl.GetLineStationLineTimer(stationData1, timeSpan).ToList(); //all the frequency line arrivle 
+                int ListCount = (lineAtStation.Count() > 5) ? 5 : lineAtStation.Count(); //the first five line
+                RealTimeStationLine.ItemsSource = lineAtStation.GetRange(0, ListCount);
+            }
+            catch (BO.BadIdException ex)
+            {
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
 
         }
 

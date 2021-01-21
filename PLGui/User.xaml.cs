@@ -40,7 +40,7 @@ namespace PLGui
             InitializeComponent();
 
             //to unsert data to the window
-            RefreshStation(); 
+            RefreshStation();
             RefreshStationall();
             realTime.Visibility = Visibility.Hidden;
 
@@ -54,12 +54,18 @@ namespace PLGui
         /// </summary>
         private void station1_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            string a = station1.SelectedItem.ToString();
+            try
+            {
+                string a = station1.SelectedItem.ToString();
+                int codStation = getNum1(a);
+                temp1 = bl.GetAllLineIndStation(codStation);
+            }
+            catch (BO.BadIdException ex)
+            {
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
 
-            int codStation = getNum1(a);
 
-            temp1 = bl.GetAllLineIndStation(codStation);
-            // LineInStation1.ItemsSource = temp1;
 
         }
 
@@ -68,14 +74,16 @@ namespace PLGui
         /// </summary>
         private void station2_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            string a = station2.SelectedItem.ToString();
-
-            int codStation = getNum1(a);
-
-            temp2 = bl.GetAllLineIndStation(codStation);
-
-            //  LineInStation2.ItemsSource = temp2;
-
+            try
+            {
+                string a = station2.SelectedItem.ToString();
+                int codStation = getNum1(a);
+                temp2 = bl.GetAllLineIndStation(codStation);
+            }
+            catch (BO.BadIdException ex)
+            {
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         /// <summary>
@@ -104,16 +112,23 @@ namespace PLGui
         /// </summary>
         private void checkOkey_Click(object sender, RoutedEventArgs e)
         {
-            temp = null;
-            int cod1 = getNum1(station1.SelectedItem.ToString());
-            int cod2 = getNum1(station2.SelectedItem.ToString());
-            if (cod1 == cod2)
+            try
             {
-                MessageBox.Show("אופס...תחנות המוצא והיעד קרובות מידי", "", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            else temp = ConvertList(bl.TravelPath(cod1, cod2));
+                temp = null;
+                int cod1 = getNum1(station1.SelectedItem.ToString());
+                int cod2 = getNum1(station2.SelectedItem.ToString());
+                if (cod1 == cod2)
+                {
+                    MessageBox.Show("אופס...תחנות המוצא והיעד קרובות מידי", "", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                else temp = ConvertList(bl.TravelPath(cod1, cod2));
 
-            OpsiaLine.ItemsSource = temp;
+                OpsiaLine.ItemsSource = temp;
+            }
+            catch (BO.BadIdException ex)
+            {
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
 
         }
 
@@ -135,23 +150,31 @@ namespace PLGui
         /// </summary>
         private void Search_Click(object sender, RoutedEventArgs e)
         {
-            if (numberText != null)
+            try
             {
-                int Sera = Convert.ToInt32(numberText);
-                BO.Station SearchResult = bl.GetStationByCode(Sera);
-                if (SearchResult != null)
+                if (numberText != null)
                 {
-                    ObservableCollection<BO.Station> a = new ObservableCollection<BO.Station>();
-                    a.Add(SearchResult);
-                    ListOfStations.ItemsSource = a;
+                    int Sera = Convert.ToInt32(numberText);
+                    BO.Station SearchResult = bl.GetStationByCode(Sera);
+                    if (SearchResult != null)
+                    {
+                        ObservableCollection<BO.Station> a = new ObservableCollection<BO.Station>();
+                        a.Add(SearchResult);
+                        ListOfStations.ItemsSource = a;
 
-                }
-                else
-                {
-                    ListOfStations.ItemsSource = stations;
-                    //NotExist.Visibility = Visibility.Visible;
+                    }
+                    else
+                    {
+                        ListOfStations.ItemsSource = stations;
+
+                    }
                 }
             }
+            catch (BO.BadIdException ex)
+            {
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
         }
 
         private void ListOfStations_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -175,6 +198,7 @@ namespace PLGui
         private IEnumerable<BO.Line> lineStation;
         int oldCode;
         private bool add = false;
+
         /// <summary>
         /// refresh station lust
         /// </summary>
@@ -197,14 +221,12 @@ namespace PLGui
             {
                 try
                 {
-
-
                     oldCode = stationData1.Code;
                     lineStation = bl.GetAllLineIndStation(stationData1.Code);
                 }
-                catch (BO.BadIdException )
+                catch (BO.BadIdException ex)
                 {
-
+                    MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
 
 
@@ -246,32 +268,40 @@ namespace PLGui
         /// </summary>
         private void textBoxTextBox_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Return) //when enter
+            try
             {
-
-                TextBox text = sender as TextBox;
-                int lineSteation = int.Parse(text.Text);
-                BO.Station SearchResult = bl.GetStationByCode(lineSteation);
-                if (SearchResult != null)
+                if (e.Key == Key.Return) //when enter
                 {
-                    ObservableCollection<BO.Station> a = new ObservableCollection<BO.Station>();
-                    a.Add(SearchResult);
-                    ListOfStations.ItemsSource = a;
+
+                    TextBox text = sender as TextBox;
+                    int lineSteation = int.Parse(text.Text);
+                    BO.Station SearchResult = bl.GetStationByCode(lineSteation);
+                    if (SearchResult != null)
+                    {
+                        ObservableCollection<BO.Station> a = new ObservableCollection<BO.Station>();
+                        a.Add(SearchResult);
+                        ListOfStations.ItemsSource = a;
+
+                    }
+                    else
+                    {
+                        ListOfStations.ItemsSource = stations;
+                        //NotExist.Visibility = Visibility.Visible;
+                    }
+
 
                 }
-                else
+                if (e.Key == Key.Back)
                 {
+                    // NotExist.Visibility = Visibility.Hidden;
                     ListOfStations.ItemsSource = stations;
-                    //NotExist.Visibility = Visibility.Visible;
                 }
-
-
             }
-            if (e.Key == Key.Back)
+            catch (BO.BadIdException ex)
             {
-                // NotExist.Visibility = Visibility.Hidden;
-                ListOfStations.ItemsSource = stations;
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+
         }
 
         private void textBoxTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)

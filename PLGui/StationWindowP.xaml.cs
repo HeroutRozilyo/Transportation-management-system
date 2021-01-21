@@ -54,6 +54,8 @@ namespace PLGui
         /// </summary>
         private void RefreshStation()
         {
+
+
             stations = ConvertList(bl.GetAllStations());//to make ObservableCollection
             ListOfStations.ItemsSource = stations;
             stationExistCheckBox.Visibility = Visibility.Hidden;
@@ -66,23 +68,30 @@ namespace PLGui
         /// </summary>
         public void RefreshLineInStation()
         {
-            beforAdj.Clear();
-            afterAdj.Clear();
-            stationData = bl.GetStationByCode(CodeNumber);
-            StationDataGrid.DataContext = stationData;
-            temp = null;
-            if (stationData != null)
+            try
             {
-                oldCode = stationData.Code;
-                temp = bl.GetAllLineIndStation(stationData.Code);
-                BeforAfter();
-                Befor.ItemsSource = beforAdj;
-                After.ItemsSource = afterAdj;
+                beforAdj.Clear();
+                afterAdj.Clear();
+                stationData = bl.GetStationByCode(CodeNumber);
+                StationDataGrid.DataContext = stationData;
+                temp = null;
+                if (stationData != null)
+                {
+                    oldCode = stationData.Code;
+                    temp = bl.GetAllLineIndStation(stationData.Code);
+                    BeforAfter();
+                    Befor.ItemsSource = beforAdj;
+                    After.ItemsSource = afterAdj;
+                }
+
+                LineInStation.ItemsSource = temp;
+                updateTS.Visibility = Visibility.Hidden;
             }
+            catch (BO.BadIdException ex)
+            {
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
 
-            LineInStation.ItemsSource = temp;
-            updateTS.Visibility = Visibility.Hidden;
-
+            }
         }
         #endregion
 
@@ -157,9 +166,9 @@ namespace PLGui
                     case MessageBoxResult.Yes:
                         {
                             BO.AdjacentStations a = updateTS.DataContext as BO.AdjacentStations;
-                            if(a.TimeAverage==0||a.Distance==0)
+                            if (a.TimeAverage == 0 || a.Distance == 0)
                             {
-                                MessageBox.Show("הערכים בשדות אלו לא יכולים להיות 0","ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                                MessageBox.Show("הערכים בשדות אלו לא יכולים להיות 0", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
                                 okeyUpdate.IsChecked = false;
                                 RefreshLineInStation();
                                 return;
@@ -174,7 +183,7 @@ namespace PLGui
                         {
 
                             okeyUpdate.IsChecked = false;
-                            
+
 
                             break;
                         }
@@ -217,7 +226,7 @@ namespace PLGui
                             RefreshLineInStation();
 
 
-                            ListOfStations.SelectedIndex = stations.ToList().FindIndex(b=>b.Code==stationData.Code);
+                            ListOfStations.SelectedIndex = stations.ToList().FindIndex(b => b.Code == stationData.Code);
                             break;
                         }
                     case MessageBoxResult.No:
@@ -279,8 +288,13 @@ namespace PLGui
             catch (BO.BadCoordinateException a)
             {
                 MessageBox.Show(a.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (BO.BadIdException a)
+            {
+                MessageBox.Show(a.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
 
             }
+
         }
 
         /// <summary>
@@ -386,7 +400,7 @@ namespace PLGui
         {
             if (textBoxTextBox.Text != "Search Station here...." && textBoxTextBox.Text != "")
                 numberText = textBoxTextBox.Text;
-            textBoxTextBox.Text = "Search Station here....";//
+            textBoxTextBox.Text = "Search Station here....";
         }
         #endregion
 
@@ -401,15 +415,15 @@ namespace PLGui
         /// </summary>
         private void BeforAfter()
         {
-            if(stationData.StationAdjacent!=null)
-            foreach (BO.AdjacentStations item in stationData.StationAdjacent)
-            {
-                if (item.Station1 == stationData.Code)
+            if (stationData.StationAdjacent != null)
+                foreach (BO.AdjacentStations item in stationData.StationAdjacent)
                 {
-                    afterAdj.Add(item);
+                    if (item.Station1 == stationData.Code)
+                    {
+                        afterAdj.Add(item);
+                    }
+                    else beforAdj.Add(item);
                 }
-                else beforAdj.Add(item);
-            }
         }
 
         private void textBoxTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
@@ -423,18 +437,26 @@ namespace PLGui
         /// <param name="numStation"></param>
         public void helpSearch(int numStation)
         {
-            BO.Station SearchResult = bl.GetStationByCode(numStation);
-            if (SearchResult != null)
+            try
             {
-                ObservableCollection<BO.Station> a = new ObservableCollection<BO.Station>();
-                a.Add(SearchResult);
-                ListOfStations.ItemsSource = a;
+                BO.Station SearchResult = bl.GetStationByCode(numStation);
+                if (SearchResult != null)
+                {
+                    ObservableCollection<BO.Station> a = new ObservableCollection<BO.Station>();
+                    a.Add(SearchResult);
+                    ListOfStations.ItemsSource = a;
 
+                }
+                else
+                {
+                    ListOfStations.ItemsSource = stations;
+                    NotExist.Visibility = Visibility.Visible;
+                }
             }
-            else
+            catch (BO.BadIdException a)
             {
-                ListOfStations.ItemsSource = stations;
-                NotExist.Visibility = Visibility.Visible;
+                MessageBox.Show(a.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+
             }
         }
 
@@ -450,7 +472,7 @@ namespace PLGui
             addStation.StationExist = (bool)stationExistCheckBox.IsChecked;
 
         }
-      
+
         private void codeTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             e.Handled = !e.Text.Any(x => Char.IsDigit(x));
